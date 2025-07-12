@@ -144,31 +144,18 @@
   <!--PRUEBA-->
 
   <style>
-    .movie .nuevo-tag {
+    .movie .recien-tag {
   position: absolute;
-  bottom: 55px;
+  top: 45px;
   left: 5px;
-  right: 5px;
-  background: rgb(36, 32, 255);
+  background: #00c853; /* verde fuerte */
   color: white;
   font-weight: bold;
-  font-size: 0.6rem;
-  padding: 2px 4px;
+  font-size: 0.65rem;
+  padding: 2px 6px;
   border-radius: 3px;
   z-index: 3;
   pointer-events: none;
-  max-width: calc(100% - 10px); /* se adapta al ancho disponible */
-  box-sizing: border-box;
-  text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-@media (max-width: 400px) {
-  .movie .nuevo-tag {
-    font-size: 0.5rem;
-  }
 }
 
 
@@ -270,10 +257,10 @@
       <span class="lock-icon">🔒</span>
       <p>La Leyenda de Ochi</p>
     </div>
-    <div class="movie locked" data-titulo="nonnas" data-genero="comedia" data-anio="2025" data-html="../View Peliculas/Nonnas (2025).html" data-fecha="2025-07-11">
+    <div class="movie locked" data-titulo="Nonnas" data-genero="" data-anio="2025" data-html="" data-fecha="2025-07-11">
       <span class="tag">Pelicula</span>
       <span class="year-tag">2025</span>
-      <img src="https://image.tmdb.org/t/p/w300/6YsEHhqgT6c8nJlS1TL1Zyrxwgw.jpg">
+      <img src="https://image.tmdb.org/t/p/w300/">
       <span class="lock-icon">🔒</span>
       <p>Nonnas</p>
     </div>
@@ -428,9 +415,14 @@
       const diasDiferencia = (hoy - fechaCreacion) / (1000 * 60 * 60 * 24);
       if (diasDiferencia <= 5) {
         const nuevo = document.createElement("span");
-        nuevo.className = "nuevo-tag";
-        nuevo.textContent = "Nuevo agregado";
-        peli.appendChild(nuevo);
+nuevo.className = "nuevo-tag";
+nuevo.textContent = "Nuevo agregado";
+peli.appendChild(nuevo);
+
+const recien = document.createElement("span");
+recien.className = "recien-tag";
+recien.textContent = "Recién agregado";
+peli.appendChild(recien);
       }
     }
   });
