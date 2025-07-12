@@ -429,5 +429,20 @@
     }, 10000);
     });
   </script>
+
+
+  <!--ESTO HACE QUE AL RETROCEDER SE VUELVA AL INDEX Y NO A LA ANTERIOR PAGINA-->
+  
+  <script>
+  if (performance && performance.navigation && performance.navigation.type === 2) {
+    window.location.href = '../index.html'; // si viene por back button
+  }
+
+  history.pushState(null, null, location.href);
+  window.onpopstate = () => {
+    location.href = '../index.html';
+  };
+</script>
+
 </body>
 </html>
