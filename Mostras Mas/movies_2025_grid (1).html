@@ -148,7 +148,7 @@
   position: absolute;
   top: 160px;
   left: 5px;
-  background: #00c853; /* verde fuerte */
+  background: rgb(255, 32, 143); /* verde rosa */
   color: white;
   font-weight: bold;
   font-size: 0.65rem;
@@ -413,7 +413,7 @@
       const fechaCreacion = new Date(fecha);
       const hoy = new Date();
       const diasDiferencia = (hoy - fechaCreacion) / (1000 * 60 * 60 * 24);
-      if (diasDiferencia <= 5) {
+      if (diasDiferencia <= 5) { /*aca cuenta los dias que se mostrara "recien agregados*/
         const recien = document.createElement("span");
         recien.className = "recien-tag";
         recien.textContent = "Recién agregado";
