@@ -146,7 +146,7 @@
   <style>
     .movie .nuevo-tag {
   position: absolute;
-  bottom: 55px; /* ← Subimos la etiqueta */
+  bottom: 55px;
   left: 5px;
   background: rgb(36, 32, 255);
   color: white;
@@ -156,7 +156,12 @@
   border-radius: 3px;
   z-index: 3;
   pointer-events: none;
+  max-width: 90%; /* ← adapta al ancho del contenedor */
+  white-space: nowrap; /* evita múltiples líneas */
+  overflow: hidden;
+  text-overflow: ellipsis; /* muestra "..." si el texto es largo */
 }
+
 
   </style>
 </head>
@@ -256,12 +261,12 @@
       <span class="lock-icon">🔒</span>
       <p>La Leyenda de Ochi</p>
     </div>
-    <div class="movie locked" data-titulo="" data-genero="" data-anio="2025" data-html="" data-fecha="2025-07-11">
+    <div class="movie locked" data-titulo="nonnas" data-genero="comedia" data-anio="2025" data-html="../View Peliculas/Nonnas (2025).html" data-fecha="2025-07-11">
       <span class="tag">Pelicula</span>
       <span class="year-tag">2025</span>
-      <img src="https://image.tmdb.org/t/p/w300/">
+      <img src="https://image.tmdb.org/t/p/w300/6YsEHhqgT6c8nJlS1TL1Zyrxwgw.jpg">
       <span class="lock-icon">🔒</span>
-      <p></p>
+      <p>Nonnas</p>
     </div>
     <div class="movie locked" data-titulo="" data-genero="" data-anio="2025" data-html="" data-fecha="2025-07-11">
       <span class="tag">Pelicula</span>
