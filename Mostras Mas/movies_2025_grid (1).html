@@ -148,6 +148,7 @@
   position: absolute;
   bottom: 55px;
   left: 5px;
+  right: 5px;
   background: rgb(36, 32, 255);
   color: white;
   font-weight: bold;
@@ -156,12 +157,18 @@
   border-radius: 3px;
   z-index: 3;
   pointer-events: none;
-
-  max-width: 90%; /* ← se adapta al ancho de la caja */
-  white-space: nowrap; /* evita que se parta en múltiples líneas */
-  overflow: hidden;
-  text-overflow: ellipsis; /* muestra puntos suspensivos si no entra */
+  max-width: calc(100% - 10px); /* se adapta al ancho disponible */
   box-sizing: border-box;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 400px) {
+  .movie .nuevo-tag {
+    font-size: 0.5rem;
+  }
 }
 
 
