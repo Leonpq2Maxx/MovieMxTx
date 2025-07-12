@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2025 Movie</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      background: #0c0c0c;
+      color: white;
+    }
+    header {
+      background: #161616;
+      padding: 15px;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+      position: relative;
+    }
+    .back {
+      color: white;
+      text-decoration: none;
+      font-size: 1.5rem;
+      position: absolute;
+      left: 10px;
+      top: 15px;
+    }
+    h1 {
+      margin: 0;
+    }
+    .search-box {
+      padding: 10px;
+      text-align: center;
+    }
+    .search-box input {
+      width: 90%;
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      font-size: 1rem;
+      background: #1c1c1c;
+      color: white;
+    }
+    .movie-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      padding: 10px;
+    }
+    .movie {
+      background: #1c1c1c;
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    .movie img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: brightness(1);
+      position: relative;
+      z-index: 1;
+    }
+    .movie.locked img {
+      filter: brightness(0.5);
+    }
+    .movie .tag,
+    .movie .year-tag,
+    .movie .lock-icon {
+      position: absolute;
+      z-index: 2;
+      background: rgb(255, 32, 143);
+      color: white;
+      padding: 2px 6px;
+      font-size: 0.7rem;
+      border-radius: 3px;
+      font-weight: bold;
+    }
+    .movie .tag {
+      top: 5px;
+      left: 5px;
+    }
+    .movie .year-tag {
+      top: 25px;
+      left: 5px;
+    }
+    .movie .lock-icon {
+      top: 5px;
+      right: 5px;
+      animation: bounce 1s infinite;
+      font-size: 1.2rem;
+      background: none;
+      padding: 0;
+    }
+    .movie p {
+      margin: 8px;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="#" class="back">&#x276E;</a>
+    <h1>2025 Movie</h1>
+  </header>
+
+  <div class="search-box">
+    <input type="text" id="search-input" placeholder="Buscar por nombre, género o año..." oninput="filtrarPeliculas()">
+  </div>
+
+  <div class="movie-grid" id="movie-grid">
+    <div class="movie" data-titulo="capitan america" data-genero="marvel" data-anio="2025" data-html="">
+      <span class="tag">Pelicula</span>
+      <span class="year-tag">2025</span>
+      <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
+      <p>capitan america</p>
+    </div>
+    <div class="movie" data-titulo="seven veils" data-genero="drama" data-anio="2025" data-html="seven-veils.html">
+      <span class="tag">Pelicula</span>
+      <span class="year-tag">2025</span>
+      <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
+      <p>Seven Veils</p>
+    </div>
+    <div class="movie locked" data-titulo="madea" data-genero="comedia" data-anio="2025" data-html="">
+      <span class="tag">Pelicula</span>
+      <span class="year-tag">2025</span>
+      <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
+      <span class="lock-icon">🔒</span>
+      <p>Madea's Destination</p>
+    </div>
+    <div class="movie" data-titulo="los aitas" data-genero="comedia" data-anio="2025" data-html="los-aitas.html">
+      <span class="tag">Serie</span>
+      <span class="year-tag">2025</span>
+      <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
+      <p>Los aitas</p>
+    </div>
+    <div class="movie" data-titulo="un año y un día" data-genero="romance" data-anio="2025" data-html="un-ano.html">
+      <span class="tag">Pelicula</span>
+      <span class="year-tag">2025</span>
+      <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
+      <p>Un año y un día</p>
+    </div>
+    <div class="movie" data-titulo="zombies 4" data-genero="fantasía" data-anio="2025" data-html="zombies4.html">
+      <span class="tag">Serie</span>
+      <span class="year-tag">2025</span>
+      <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
+      <p>Zombies 4: El origen de los</p>
+    </div>
+    <div class="movie" data-titulo="almost cops" data-genero="acción" data-anio="2025" data-html="cops.html">
+      <span class="tag">Pelicula</span>
+      <span class="year-tag">2025</span>
+      <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
+      <p>Almost cops</p>
+    </div>
+    <div class="movie" data-titulo="alguien así" data-genero="romance" data-anio="2025" data-html="alguien.html">
+      <span class="tag">Pelicula</span>
+      <span class="year-tag">2025</span>
+      <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
+      <p>Alguien así</p>
+    </div>
+    <div class="movie" data-titulo="white trash" data-genero="drama" data-anio="2025" data-html="">
+      <span class="tag">Pelicula</span>
+      <span class="year-tag">2025</span>
+      <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
+      <p>White Trash</p>
+    </div>
+  </div>
+
+  <script>
+  function filtrarPeliculas() {
+    const texto = document.getElementById("search-input").value.toLowerCase();
+    const peliculas = document.querySelectorAll(".movie");
+    peliculas.forEach(peli => {
+      const titulo = peli.dataset.titulo || "";
+      const genero = peli.dataset.genero || "";
+      const anio = peli.dataset.anio || "";
+      const visible = titulo.includes(texto) || genero.includes(texto) || anio.includes(texto);
+      peli.style.display = visible ? "block" : "none";
+    });
+  }
+
+  document.querySelectorAll(".movie").forEach(peli => {
+    const htmlFile = peli.dataset.html;
+    if (htmlFile && htmlFile.trim() !== "") {
+      peli.classList.remove("locked");
+      const lockIcon = peli.querySelector(".lock-icon");
+      if (lockIcon) lockIcon.remove();
+    }
+  });
+</script>
+
+</body>
+</html>
