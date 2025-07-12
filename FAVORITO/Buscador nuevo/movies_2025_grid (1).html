@@ -146,7 +146,7 @@
   <style>
     .movie .nuevo-tag {
   position: absolute;
-  bottom: 55px; /* ← Subimos la etiqueta */
+  bottom: 50px; /* ← Subimos la etiqueta */
   left: 5px;
   background: rgb(36, 32, 255);
   color: white;
@@ -162,9 +162,8 @@
 </head>
 <body>
   <header>
-  <h1>2025 Movie <span id="contador" style="font-size: 1.0rem; font-weight: normal; color: #bbb;"></span></h1>
-</header>
-
+    <h1>2025 Movie</h1>
+  </header>
 
   <div class="search-box">
   <input type="text" id="search-input" placeholder="Buscar por nombre, género o año..." oninput="filtrarPeliculas()">
@@ -404,7 +403,7 @@
 </script>
 
 
-<!--ESTO ES SI SE AGREGO UNA NUEVA PELICULA SE MOSTRARA ESTE MENSAJE "Nuevo agregado"-->
+<!--PRUEBA-->
 <script>
   document.querySelectorAll(".movie").forEach(peli => {
     const fecha = peli.dataset.fecha;
@@ -421,31 +420,6 @@
     }
   });
 </script>
-
-<script>
-  function actualizarContadorPeliculas() {
-    const peliculasVisibles = document.querySelectorAll(".movie-grid .movie:not([style*='display: none'])").length;
-    const contador = document.getElementById("contador");
-    if (contador) {
-      contador.textContent = `(${peliculasVisibles})`;
-    }
-  }
-
-  // Llama a la función al cargar la página
-  window.addEventListener("DOMContentLoaded", () => {
-    actualizarContadorPeliculas();
-  });
-
-  // También al filtrar películas
-  const input = document.getElementById("search-input");
-  if (input) {
-    input.addEventListener("input", () => {
-      filtrarPeliculas();
-      actualizarContadorPeliculas();
-    });
-  }
-</script>
-
 
 
 </body>
