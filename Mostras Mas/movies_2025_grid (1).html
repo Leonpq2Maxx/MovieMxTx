@@ -114,6 +114,50 @@
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-5px); }
     }
+
+    .movie-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      padding: 10px;
+    }
+
+    @media (orientation: landscape) {
+      .movie-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .movie img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      display: block;
+      filter: brightness(1);
+      position: relative;
+      z-index: 1;
+    }
+
+  </style>
+
+  <!--PRUEBA-->
+
+  <style>
+    .movie .nuevo-tag {
+  position: absolute;
+  bottom: 50px; /* ← Subimos la etiqueta */
+  left: 5px;
+  background: rgb(36, 32, 255);
+  color: white;
+  font-weight: bold;
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: 3px;
+  z-index: 3;
+  pointer-events: none;
+}
+
   </style>
 </head>
 <body>
@@ -127,7 +171,7 @@
 
 <style>
   input::placeholder {
-    background: linear-gradient(90deg, #ff0000, #ff00d9, #0400ff, #ff0090, #ff0000);
+    background: linear-gradient(90deg, #ff0000, #018dff, #ff00d9, #018dff, #ff0090, #ff0000);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: bold;
@@ -141,17 +185,19 @@
 </style>
 
   <div class="movie-grid" id="movie-grid">
-    <div class="movie" data-titulo="capitan america" data-genero="marvel" data-anio="2025" data-html="../View Peliculas/¡A Ganar! (2018).html">
+    <div class="movie locked" data-titulo="madea" data-genero="comedia" data-anio="2025" data-html="" data-fecha="2025-07-11">
       <span class="tag">Pelicula</span>
       <span class="year-tag">2025</span>
       <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
-      <p>capitan america</p>
+      <span class="lock-icon">🔒</span>
+      <p>Madea's Destination</p>
     </div>
-    <div class="movie" data-titulo="seven veils" data-genero="drama" data-anio="2025" data-html="seven-veils.html">
+    <div class="movie locked" data-titulo="madea" data-genero="comedia" data-anio="2025" data-html="">
       <span class="tag">Pelicula</span>
       <span class="year-tag">2025</span>
       <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
-      <p>Seven Veils</p>
+      <span class="lock-icon">🔒</span>
+      <p>Madea's Destination</p>
     </div>
     <div class="movie locked" data-titulo="madea" data-genero="comedia" data-anio="2025" data-html="">
       <span class="tag">Pelicula</span>
@@ -167,131 +213,145 @@
       <span class="lock-icon">🔒</span>
       <p>Madea's Destination</p>
     </div>
-    <div class="movie" data-titulo="los aitas" data-genero="comedia" data-anio="2025" data-html="los-aitas.html">
-      <span class="tag">Serie</span>
-      <span class="year-tag">2025</span>
-      <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
-      <p>Los aitas</p>
-    </div>
-    <div class="movie" data-titulo="un año y un día" data-genero="romance" data-anio="2025" data-html="un-ano.html">
+    <div class="movie locked" data-titulo="madea" data-genero="comedia" data-anio="2025" data-html="">
       <span class="tag">Pelicula</span>
       <span class="year-tag">2025</span>
       <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
-      <p>Un año y un día</p>
+      <span class="lock-icon">🔒</span>
+      <p>Madea's Destination</p>
     </div>
-    <div class="movie" data-titulo="zombies 4" data-genero="fantasía" data-anio="2025" data-html="zombies4.html">
-      <span class="tag">Serie</span>
-      <span class="year-tag">2025</span>
-      <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
-      <p>Zombies 4: El origen de los</p>
-    </div>
-    <div class="movie" data-titulo="almost cops" data-genero="acción" data-anio="2025" data-html="cops.html">
+    <div class="movie locked" data-titulo="madea" data-genero="comedia" data-anio="2025" data-html="">
       <span class="tag">Pelicula</span>
       <span class="year-tag">2025</span>
       <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
-      <p>Almost cops</p>
+      <span class="lock-icon">🔒</span>
+      <p>Madea's Destination</p>
     </div>
-    <div class="movie" data-titulo="alguien así" data-genero="romance" data-anio="2025" data-html="alguien.html">
+    <div class="movie locked" data-titulo="madea" data-genero="comedia" data-anio="2025" data-html="">
       <span class="tag">Pelicula</span>
       <span class="year-tag">2025</span>
       <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
-      <p>Alguien así</p>
+      <span class="lock-icon">🔒</span>
+      <p>Madea's Destination</p>
     </div>
-    <div class="movie" data-titulo="white trash" data-genero="drama" data-anio="2025" data-html="">
+    <div class="movie locked" data-titulo="madea" data-genero="comedia" data-anio="2025" data-html="">
       <span class="tag">Pelicula</span>
       <span class="year-tag">2025</span>
       <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
-      <p>White Trash</p>
+      <span class="lock-icon">🔒</span>
+      <p>Madea's Destination</p>
     </div>
-    <div class="movie" data-titulo="white trash" data-genero="drama" data-anio="2025" data-html="">
+    <div class="movie locked" data-titulo="madea" data-genero="comedia" data-anio="2025" data-html="">
       <span class="tag">Pelicula</span>
       <span class="year-tag">2025</span>
       <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
-      <p>White Trash</p>
+      <span class="lock-icon">🔒</span>
+      <p>Madea's Destination</p>
     </div>
-    <div class="movie" data-titulo="white trash" data-genero="drama" data-anio="2025" data-html="">
+    <div class="movie locked" data-titulo="madea" data-genero="comedia" data-anio="2025" data-html="">
       <span class="tag">Pelicula</span>
       <span class="year-tag">2025</span>
       <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
-      <p>White Trash</p>
+      <span class="lock-icon">🔒</span>
+      <p>Madea's Destination</p>
     </div>
-    <div class="movie" data-titulo="white trash" data-genero="drama" data-anio="2025" data-html="">
+    <div class="movie locked" data-titulo="madea" data-genero="comedia" data-anio="2025" data-html="">
       <span class="tag">Pelicula</span>
       <span class="year-tag">2025</span>
       <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
-      <p>White Trash</p>
+      <span class="lock-icon">🔒</span>
+      <p>Madea's Destination</p>
     </div>
-    <div class="movie" data-titulo="white trash" data-genero="drama" data-anio="2025" data-html="">
+    <div class="movie locked" data-titulo="madea" data-genero="comedia" data-anio="2025" data-html="">
       <span class="tag">Pelicula</span>
       <span class="year-tag">2025</span>
       <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
-      <p>White Trash</p>
+      <span class="lock-icon">🔒</span>
+      <p>Madea's Destination</p>
     </div>
-    <div class="movie" data-titulo="white trash" data-genero="drama" data-anio="2025" data-html="">
+    <div class="movie locked" data-titulo="madea" data-genero="comedia" data-anio="2025" data-html="">
       <span class="tag">Pelicula</span>
       <span class="year-tag">2025</span>
       <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
-      <p>White Trash</p>
+      <span class="lock-icon">🔒</span>
+      <p>Madea's Destination</p>
     </div>
-    <div class="movie" data-titulo="white trash" data-genero="drama" data-anio="2025" data-html="">
+    <div class="movie locked" data-titulo="madea" data-genero="comedia" data-anio="2025" data-html="">
       <span class="tag">Pelicula</span>
       <span class="year-tag">2025</span>
       <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
-      <p>White Trash</p>
+      <span class="lock-icon">🔒</span>
+      <p>Madea's Destination</p>
     </div>
-    <div class="movie" data-titulo="white trash" data-genero="drama" data-anio="2025" data-html="">
+    <div class="movie locked" data-titulo="madea" data-genero="comedia" data-anio="2025" data-html="">
       <span class="tag">Pelicula</span>
       <span class="year-tag">2025</span>
       <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
-      <p>White Trash</p>
+      <span class="lock-icon">🔒</span>
+      <p>Madea's Destination</p>
     </div>
-    <div class="movie" data-titulo="white trash" data-genero="drama" data-anio="2025" data-html="">
+    <div class="movie locked" data-titulo="madea" data-genero="comedia" data-anio="2025" data-html="">
       <span class="tag">Pelicula</span>
       <span class="year-tag">2025</span>
       <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
-      <p>White Trash</p>
+      <span class="lock-icon">🔒</span>
+      <p>Madea's Destination</p>
     </div>
-    <div class="movie" data-titulo="white trash" data-genero="drama" data-anio="2025" data-html="">
+    <div class="movie locked" data-titulo="madea" data-genero="comedia" data-anio="2025" data-html="">
       <span class="tag">Pelicula</span>
       <span class="year-tag">2025</span>
       <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
-      <p>White Trash</p>
+      <span class="lock-icon">🔒</span>
+      <p>Madea's Destination</p>
     </div>
-    <div class="movie" data-titulo="white trash" data-genero="drama" data-anio="2025" data-html="">
+    <div class="movie locked" data-titulo="madea" data-genero="comedia" data-anio="2025" data-html="">
       <span class="tag">Pelicula</span>
       <span class="year-tag">2025</span>
       <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
-      <p>White Trash</p>
+      <span class="lock-icon">🔒</span>
+      <p>Madea's Destination</p>
     </div>
-    <div class="movie" data-titulo="white trash" data-genero="drama" data-anio="2025" data-html="">
+    <div class="movie locked" data-titulo="madea" data-genero="comedia" data-anio="2025" data-html="">
       <span class="tag">Pelicula</span>
       <span class="year-tag">2025</span>
       <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
-      <p>White Trash</p>
+      <span class="lock-icon">🔒</span>
+      <p>Madea's Destination</p>
     </div>
-    <div class="movie" data-titulo="white trash" data-genero="drama" data-anio="2025" data-html="">
+    <div class="movie locked" data-titulo="madea" data-genero="comedia" data-anio="2025" data-html="">
       <span class="tag">Pelicula</span>
       <span class="year-tag">2025</span>
       <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
-      <p>White Trash</p>
+      <span class="lock-icon">🔒</span>
+      <p>Madea's Destination</p>
     </div>
-    <div class="movie" data-titulo="white trash" data-genero="drama" data-anio="2025" data-html="">
+    <div class="movie locked" data-titulo="madea" data-genero="comedia" data-anio="2025" data-html="">
       <span class="tag">Pelicula</span>
       <span class="year-tag">2025</span>
       <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
-      <p>White Trash</p>
+      <span class="lock-icon">🔒</span>
+      <p>Madea's Destination</p>
     </div>
-    <div class="movie" data-titulo="white trash" data-genero="drama" data-anio="2025" data-html="">
+    <div class="movie locked" data-titulo="madea" data-genero="comedia" data-anio="2025" data-html="">
       <span class="tag">Pelicula</span>
       <span class="year-tag">2025</span>
       <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
-      <p>White Trash</p>
+      <span class="lock-icon">🔒</span>
+      <p>Madea's Destination</p>
     </div>
-    <div class="movie" data-titulo="white trash" data-genero="drama" data-anio="2025" data-html="../View Peliculas/60 Minutos (2024).html">
+    <div class="movie locked" data-titulo="madea" data-genero="comedia" data-anio="2025" data-html="">
       <span class="tag">Pelicula</span>
       <span class="year-tag">2025</span>
       <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
-      <p>White Trash</p>
+      <span class="lock-icon">🔒</span>
+      <p>Madea's Destination</p>
+    </div>
+    <div class="movie locked" data-titulo="madea" data-genero="comedia" data-anio="2025" data-html="">
+      <span class="tag">Pelicula</span>
+      <span class="year-tag">2025</span>
+      <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
+      <span class="lock-icon">🔒</span>
+      <p>Madea's Destination</p>
     </div>
   </div>
 
@@ -342,6 +402,24 @@
   });
 </script>
 
+
+<!--PRUEBA-->
+<script>
+  document.querySelectorAll(".movie").forEach(peli => {
+    const fecha = peli.dataset.fecha;
+    if (fecha) {
+      const fechaCreacion = new Date(fecha);
+      const hoy = new Date();
+      const diasDiferencia = (hoy - fechaCreacion) / (1000 * 60 * 60 * 24);
+      if (diasDiferencia <= 5) {
+        const nuevo = document.createElement("span");
+        nuevo.className = "nuevo-tag";
+        nuevo.textContent = "Nuevo agregado";
+        peli.appendChild(nuevo);
+      }
+    }
+  });
+</script>
 
 
 </body>
