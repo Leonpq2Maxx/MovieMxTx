@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>2025 Movie</title>
-  <style>
+   <style>
     body {
       font-family: sans-serif;
       margin: 0;
@@ -15,7 +15,7 @@
       background: #161616;
       padding: 15px;
       text-align: center;
-      font-size: 1.2rem;
+      font-size: 1rem;
       font-weight: bold;
       position: relative;
     }
@@ -29,6 +29,7 @@
     }
     h1 {
       margin: 0;
+      font-size: 1rem;
     }
     .search-box {
       padding: 10px;
@@ -73,12 +74,15 @@
     .movie .lock-icon {
       position: absolute;
       z-index: 2;
-      background: rgb(255, 32, 143);
       color: white;
+      font-weight: bold;
+    }
+    .movie .tag,
+    .movie .year-tag {
+      background: rgb(255, 32, 143);
       padding: 2px 6px;
       font-size: 0.7rem;
       border-radius: 3px;
-      font-weight: bold;
     }
     .movie .tag {
       top: 5px;
@@ -91,10 +95,15 @@
     .movie .lock-icon {
       top: 5px;
       right: 5px;
+      width: 30px;
+      height: 30px;
+      background: rgba(0,0,0,0.6);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       animation: bounce 1s infinite;
-      font-size: 1.2rem;
-      background: none;
-      padding: 0;
+      font-size: 1.1rem;
     }
     .movie p {
       margin: 8px;
@@ -109,16 +118,30 @@
 </head>
 <body>
   <header>
-    <a href="#" class="back">&#x276E;</a>
     <h1>2025 Movie</h1>
   </header>
 
   <div class="search-box">
-    <input type="text" id="search-input" placeholder="Buscar por nombre, género o año..." oninput="filtrarPeliculas()">
-  </div>
+  <input type="text" id="search-input" placeholder="Buscar por nombre, género o año..." oninput="filtrarPeliculas()">
+</div>
+
+<style>
+  input::placeholder {
+    background: linear-gradient(90deg, #ff0000, #ff00d9, #0400ff, #ff0090, #ff0000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+    animation: animateText 5s linear infinite;
+  }
+
+  @keyframes animateText {
+    0% { background-position: 0% }
+    100% { background-position: 200% }
+  }
+</style>
 
   <div class="movie-grid" id="movie-grid">
-    <div class="movie" data-titulo="capitan america" data-genero="marvel" data-anio="2025" data-html="">
+    <div class="movie" data-titulo="capitan america" data-genero="marvel" data-anio="2025" data-html="../View Peliculas/¡A Ganar! (2018).html">
       <span class="tag">Pelicula</span>
       <span class="year-tag">2025</span>
       <img src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg">
@@ -176,27 +199,27 @@
   </div>
 
   <script>
-  function filtrarPeliculas() {
-    const texto = document.getElementById("search-input").value.toLowerCase();
-    const peliculas = document.querySelectorAll(".movie");
-    peliculas.forEach(peli => {
-      const titulo = peli.dataset.titulo || "";
-      const genero = peli.dataset.genero || "";
-      const anio = peli.dataset.anio || "";
-      const visible = titulo.includes(texto) || genero.includes(texto) || anio.includes(texto);
-      peli.style.display = visible ? "block" : "none";
-    });
-  }
-
-  document.querySelectorAll(".movie").forEach(peli => {
-    const htmlFile = peli.dataset.html;
-    if (htmlFile && htmlFile.trim() !== "") {
-      peli.classList.remove("locked");
-      const lockIcon = peli.querySelector(".lock-icon");
-      if (lockIcon) lockIcon.remove();
+    function filtrarPeliculas() {
+      const texto = document.getElementById("search-input").value.toLowerCase();
+      const peliculas = document.querySelectorAll(".movie");
+      peliculas.forEach(peli => {
+        const titulo = peli.dataset.titulo || "";
+        const genero = peli.dataset.genero || "";
+        const anio = peli.dataset.anio || "";
+        const visible = titulo.includes(texto) || genero.includes(texto) || anio.includes(texto);
+        peli.style.display = visible ? "block" : "none";
+      });
     }
-  });
-</script>
+
+    document.querySelectorAll(".movie").forEach(peli => {
+      const htmlFile = peli.dataset.html;
+      if (htmlFile && htmlFile.trim() !== "") {
+        peli.classList.remove("locked");
+        const lockIcon = peli.querySelector(".lock-icon");
+        if (lockIcon) lockIcon.remove();
+      }
+    });
+  </script>
 
 </body>
 </html>
