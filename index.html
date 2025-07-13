@@ -309,6 +309,47 @@ i {
 
 
 </style>
+<style>
+.xplus {
+  position: relative;
+  display: inline-block;
+}
+.lock-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 4px 6px;
+  border-radius: 5px;
+  font-size: 14px;
+  z-index: 5;
+  display: none;
+}
+</style>
+<style>
+.lock-icon {
+  font-size: 28px;
+  display: inline-block;
+  transition: transform 0.5s ease, color 0.5s ease;
+  animation: bounceIn 1s ease;
+  color: gray;
+}
+
+.lock-icon.open {
+  content: '🔓';
+  transform: rotate(15deg);
+  color: green;
+}
+
+@keyframes bounceIn {
+  0%   { transform: scale(0.3); opacity: 0; }
+  50%  { transform: scale(1.05); opacity: 1; }
+  70%  { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+</style>
+
 </head>
 <body class="oneGrd MN-2 mobS hdMn bD onIndx onHm" id="mainCont">
 <script>/*<![CDATA[*/ (localStorage.getItem('mode')) === 'darkmode' ? document.querySelector('#mainCont').classList.add('drK') : document.querySelector('#mainCont').classList.remove('drK') /*]]>*/</script>
@@ -410,41 +451,138 @@ i {
 </div></div></div></div>
 <label class="fCls" for="offNav"></label>
 </div>
+<!--MENU SUPERIOR-->
+<div class="top-scroll-menu">
+<a class="menu-item" href="#">2025</a>
+<a class="menu-item" href="#">2024</a>
+<a class="menu-item" href="#">Peliculas</a>
+<a class="menu-item" href="#">Series</a>
+<a class="menu-item" href="#">Pronto</a>
+<a class="menu-item" href="#">Trailers</a>
+<a class="menu-item" href="#">Populares</a>
+</div>
+<!--MENU SUPERIOR COLORES Y-->
+<style>
+.top-scroll-menu {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  gap: 10px;
+  padding: 10px 15px;
+  background-color: var(--top-scroll-bg, #ffffff);
+  border-bottom: 1px solid var(--contentL);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Enlaces */
+.menu-item {
+  color: var(--top-scroll-color, #000);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background-color: transparent;
+  transition: background 0.3s, color 0.3s;
+}
+
+.menu-item:hover {
+  background-color: rgba(255, 0, 0, 0.05);
+}
+
+
+/* Modo oscuro */
+.drK .top-scroll-menu {
+  background-color: #121212;
+}
+
+.drK .menu-item {
+  color: #ffffff;
+}
+
+.drK .menu-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.menu-item.active {
+    background-color: #00cfff !important; /* Celeste */
+    color: white !important;
+    border: 1px solid red !important; /* Mantiene borde rubio */
+}
+
+
+</style>
+<!--SCRIPT QUE HACE FUNCIONAR AL INTERACTUAR CON EL MENU-->
+<script>
+document.querySelectorAll('.menu-item').forEach(function(item) {
+    item.addEventListener('click', function() {
+        // Eliminar clase activa de todos
+        document.querySelectorAll('.menu-item').forEach(function(el) {
+            el.classList.remove('active');
+        });
+
+        // Activar el que se clickea
+        this.classList.add('active');
+    });
+});
+
+</script>
+<!--esto hace que desaparezca al interactuar con la pagina-->
+<script>
+let timeout;
+
+document.querySelectorAll('.menu-item').forEach(function(item) {
+    item.addEventListener('click', function() {
+        // Eliminar clase activa de todos
+        document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
+
+        // Activar el clickeado
+        this.classList.add('active');
+
+        // Limpiar timeout previo
+        clearTimeout(timeout);
+
+        // Desactivar después de 2 segundos
+        timeout = setTimeout(() => {
+            this.classList.remove('active');
+        }, 2000); // 2000 ms = 2 segundos
+    });
+});
+</script>
+<br/>
 <div class="carousel">
 <button class="prev">❮</button>
 <div class="carousel-track-container">
-<ul class="carousel-track">
-  <li class="slide current-slide">
-    <a href="View Peliculas/La vieja guardia 2 (2025).html">
-      <img alt="" src="https://image.tmdb.org/t/p/w780/f8FaWGOR1k7MiOOybNPbnxCRfYx.jpg" loading="lazy"/>
-    </a>
-  </li>
-  <li class="slide">
-    <a href="View Peliculas/Thunderbolts (2025).html">
-      <img alt="" src="https://image.tmdb.org/t/p/w780/ffQJClNiOpoc0ywxBgY6y1vBuxC.jpg" loading="lazy"/>
-    </a>
-  </li>
-  <li class="slide">
-    <a href="View Peliculas/Echo Valley (2025).html">
-      <img alt="" src="https://image.tmdb.org/t/p/w780/idYQ9ZdXIDsZwNiDtT7DGCBwUrR.jpg" loading="lazy"/>
-    </a>
-  </li>
-  <li class="slide">
-    <a href="View Peliculas/Destino Final Lazos De Sangre (2025).html">
-      <img alt="" src="https://image.tmdb.org/t/p/w780/kuse5h6YOQk5bpYEtnjgwGnk9dX.jpg" loading="lazy"/>
-    </a>
-  </li>
-  <li class="slide">
-    <a href="View Series/El Juego Del Calamar (2021).html">
-      <img alt="" src="https://image.tmdb.org/t/p/w780/g8ycl0j14uesH7CgqQfEyVPOLNz.jpg" loading="lazy"/>
-    </a>
-  </li>
-  <li class="slide">
-    <a href="View Series/Naruto Shippuden (2007).html">
-      <img alt="" src="https://image.tmdb.org/t/p/w780/v1ncLO2S1i2ryr1LzGCiTnN0597.jpg" loading="lazy"/>
-    </a>
-  </li>
-</ul>
+  <ul class="carousel-track">
+    <li class="slide current-slide">
+      <a href="#">
+        <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w780/f8FaWGOR1k7MiOOybNPbnxCRfYx.jpg"/>
+      </a>
+    </li>
+    <li class="slide">
+      <a href="View Peliculas/Thunderbolts (2025).html">
+        <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w780/ffQJClNiOpoc0ywxBgY6y1vBuxC.jpg"/>
+      </a>
+    </li>
+    <li class="slide">
+      <a href="View Peliculas/Echo Valley (2025).html">
+        <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w780/idYQ9ZdXIDsZwNiDtT7DGCBwUrR.jpg"/>
+      </a>
+    </li>
+    <li class="slide">
+      <a href="View Peliculas/Destino Final Lazos De Sangre (2025).html">
+        <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w780/kuse5h6YOQk5bpYEtnjgwGnk9dX.jpg"/>
+      </a>
+    </li>
+    <li class="slide">
+      <a href="View Series/El Juego Del Calamar (2021).html">
+        <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w780/g8ycl0j14uesH7CgqQfEyVPOLNz.jpg"/>
+      </a>
+    </li>
+    <li class="slide">
+      <a href="View Series/Naruto Shippuden (2007).html">
+        <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w780/v1ncLO2S1i2ryr1LzGCiTnN0597.jpg"/>
+      </a>
+    </li>
+  </ul>
 </div><div class="slider-dots" id="sliderDots"><span class="dot active" data-index="0"></span><span class="dot" data-index="1"></span><span class="dot" data-index="2"></span><span class="dot" data-index="3"></span><span class="dot" data-index="4"></span><span class="dot" data-index="5"></span></div>
 <button class="next">❯</button>
 </div>
@@ -491,15 +629,15 @@ i {
     transform: scale(1);
   }
 
-}
-
-.slider-dots.hidden {
+  .slider-dots.hidden {
   opacity: 0;
   pointer-events: none;
 }
 
-</style>
+}
 
+
+</style>
 <script>
   const sliderDots = document.getElementById("sliderDots");
   const navToggle = document.getElementById("offNav");
@@ -515,7 +653,6 @@ i {
   navToggle.addEventListener("change", updateDotsVisibility);
   updateDotsVisibility(); // correr al cargar
 </script>
-
 <style>
   .carousel {
   position: relative;
@@ -564,108 +701,211 @@ button.prev { left: 10px; }
 button.next { right: 10px; }
 
 </style>
+<!--CANDADO DE IMAGEN CUANDO NO PONGAS EL ENLACE ESTE NO SE QUITARA, CUANDO LO PONGAS ESTA DESAPARECERA (CSS)-->
+<style>
+  .xplus {
+  position: relative;
+  display: inline-block;
+}
 
+.lock-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  padding: 4px 6px;
+  border-radius: 5px;
+  font-size: 14px;
+  z-index: 5;
+  display: none; /* Oculto por defecto */
+}
 
-<br/><br/>
+</style>
+<!--FUNCIONAMIENTO DEL CANDADO NO BORRAR-->
+<script>
+document.querySelectorAll('.card-link').forEach(link => {
+  const realHref = link.getAttribute('href');
+  const dataHref = link.getAttribute('data-href');
 
+  if (!dataHref || dataHref.trim() === "") {
+    // No hay HTML cargado aún
+    link.querySelector('.lock-icon').style.display = 'block';
+    link.setAttribute('href', 'javascript:void(0);'); // evita redirección
+    link.style.pointerEvents = 'none'; // no clickeable
+    link.style.opacity = '0.5'; // visual desactivado
+  } else {
+    // HTML cargado
+    link.setAttribute('href', dataHref);
+  }
+});
+</script>
+<script>
+  window.addEventListener("load", function () {
+    const candado = document.getElementById("candado");
+
+    // Simulamos carga o validación
+    setTimeout(() => {
+      if (candado) {
+        candado.textContent = "🔓"; // cambia el ícono
+        candado.classList.remove("cerrado");
+        candado.classList.add("abierto");
+      }
+    }, 2000); // Espera 2 segundos antes de "abrir"
+  });
+</script>
+
+<br><br/>
 <div class="poster">
   <h4 class="alignleft">Nuevas</h4><a href="Mostras Mas/Series Agregadas.html"><h4 class="alignright">Ver Todo</h4></a></div>
   <br/>
   <div class="scrollmenu">
-    <a href="View Peliculas/Thunderbolts (2025).html">
+
+    <a class="card-link" data-href="View Peliculas/Thunderbolts (2025).html">
       <div class="xplus">
-        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/hBH50Mkcrc4m8x73CovLmY7vBx1.jpg">
-          <i>Thunderbolts*</i>
-        </img>
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/hBH50Mkcrc4m8x73CovLmY7vBx1.jpg"/>
+        <i>Thunderbolts*</i>
+        <span class="lock-icon">🔒</span>
       </div>
     </a>
-    <a href="View Peliculas/Echo Valley (2025).html">
+    <a class="card-link" data-href="View Peliculas/Echo Valley (2025).html">
       <div class="xplus">
-        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/1E4WCgTodyS7zo8pSp1gZlPO0th.jpg">
-          <i>Echo Valley</i>
-        </img>
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/1E4WCgTodyS7zo8pSp1gZlPO0th.jpg"/>
+        <i>Echo Valley</i>
+        <span class="lock-icon">🔒</span>
       </div>
     </a>
-    <a href="View Peliculas/1978 (2025).html">
+    <a class="card-link" data-href="View Peliculas/1978 (2025).html">
       <div class="xplus">
-        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/iyKixwGhGRas1ppAih8E7SG5QDZ.jpg">
-          <i>1978</i>
-        </img>
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/iyKixwGhGRas1ppAih8E7SG5QDZ.jpg"/>
+        <i>1978</i>
+        <span class="lock-icon">🔒</span>
       </div>
     </a>
-    <a href="View Series/The Walking Dead The ones two live (2024).HTML">
+    <a class="card-link" data-href="">
       <div class="xplus">
-        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/yft2a3vnCblf6wmF6gTqgdKZUMi.jpg">
-          <i>The Walking Dead: The...</i>
-        </img>
+        <img alt="" class="xaviec" loading="lazy" src="https://raw.githubusercontent.com/Leonpq2Maxx/MovieTx/refs/heads/MovieTx/img%20poster/Agregar%20peliculas.gif"/>
+        <i>Proxima</i>
+        <span class="lock-icon">🔒</span>
       </div>
     </a>
-    <a href="#">
+    <a class="card-link" data-href="">
       <div class="xplus">
-        <img alt="" class="xaviec" loading="lazy" src="https://raw.githubusercontent.com/Leonpq2Maxx/MovieTx/refs/heads/MovieTx/img%20poster/Agregar%20peliculas.gif">
-          <i>Proxima</i>
-        </img>
+        <img alt="" class="xaviec" loading="lazy" src="https://raw.githubusercontent.com/Leonpq2Maxx/MovieTx/refs/heads/MovieTx/img%20poster/Agregar%20peliculas.gif"/>
+        <i>Proxima</i>
+        <span class="lock-icon">🔒</span>
       </div>
     </a>
-    <a href="#">
+    <a class="card-link" data-href="">
       <div class="xplus">
-        <img alt="" class="xaviec" loading="lazy" src="https://raw.githubusercontent.com/Leonpq2Maxx/MovieTx/refs/heads/MovieTx/img%20poster/Agregar%20peliculas.gif">
-          <i>Proxima</i>
-        </img>
+        <img class="xaviec" loading="lazy" src="https://raw.githubusercontent.com/Leonpq2Maxx/MovieTx/refs/heads/MovieTx/img%20poster/Agregar%20peliculas.gif">
+        <i>Proxima</i>
+        <span class="lock-icon">🔒</span>
       </div>
     </a>
-    <a href="#">
-      <div class="xplus">
-        <img class="xaviec" loading="lazy" src="https://raw.githubusercontent.com/Leonpq2Maxx/MovieTx/refs/heads/MovieTx/img%20poster/Agregar%20peliculas.gif"/>
-          <i>Proxima</i>
-        </img>
-      </div>
-    </a>
+  </div>
 </div>
 
 
 <br/><br/>
 
+
 <div class="poster">
-<h4 class="alignleft">Series 2025</h4><a href="Mostras Mas/Series Agregadas.html"><h4 class="alignright">Ver Todo</h4></a></div>
-<br/>
-<div class="scrollmenu">
-<a href="View Series/El Juego Del Calamar (2021).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/xNvlt4jn2KbuKJoZ9UiVpm7lYjr.jpg"/>
-<i>El juego Del calamar</i>
-</div>
-</a>
-<a href="View Series/Una buena familia americana (2025).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/aIAdaQ0R9G75h3iCckaoxQrHRH.jpg"/>
-<i>Una buena familia...</i>
-</div>
-</a>
-<a href="View Series/Dragon Ball Daima (2025).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/uJw6nLCzQ8SftuCUJQNXTrvjlm4.jpg"/>
-<i>Dragon ball daima</i>
-</div>
-</a>
-<a href="View Series/Genesis (2021).HTML">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/8hUZa9LzC4vyQiwX8KadKLIBXWg.jpg"/>
-<i>Genesis</i>
-</div>
-</a>
-<a href="View Series/Naruto Shippuden (2007).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/3V7kzJX7hvF0H9CDJsgcWKXTSsR.jpg"/>
-<i>Naruto Shippuden</i>
-</div>
-</a>
-<a href="View Series/The Walking Dead (2010).HTML">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/uYFK6OpX4HseiMPKYPznVXPwZX9.jpg"/>
-<i>The walking dead</i>
-</div>
-</a>
+  <h4 class="alignleft">Series 2025</h4><a href="Mostras Mas/Series Agregadas.html"><h4 class="alignright">Ver Todo</h4></a></div>
+  <br/>
+  <div class="scrollmenu">
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/rKPONjvDSn63blDzYrPOWvjWLoy.jpg"/>
+        <i>Chespirito: Sin querer...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="View Series/El Juego Del Calamar (2021).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/xNvlt4jn2KbuKJoZ9UiVpm7lYjr.jpg"/>
+        <i>El juego Del calamar</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="View Series/Una buena familia americana (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/aIAdaQ0R9G75h3iCckaoxQrHRH.jpg"/>
+        <i>Una buena familia...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/aUQKIpZZ31KWbpdHMCmaV76u78T.jpg"/>
+        <i>The Last of Us</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/cZdsqlIqhRbYNo8ttxb2ThC09Wa.jpg"/>
+        <i>Adolescencia</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="View Series/Dragon Ball Daima (2025).html href=">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/uJw6nLCzQ8SftuCUJQNXTrvjlm4.jpg"/>
+        <i>Dragon ball daima</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/yft2a3vnCblf6wmF6gTqgdKZUMi.jpg"/>
+        <i>The Walking Dead: The...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/nbkbguUUNWQZygVJKjODyELBQk9.jpg"/>
+        <i>Agatha, ¿quién si no?</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/hEb0uSHvhSwsMMRUGUttxqtHKnZ.jpg"/>
+        <i>Bruja Escarlata y Vi...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/8hUZa9LzC4vyQiwX8KadKLIBXWg.jpg"/>
+        <i>Genesis</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/3V7kzJX7hvF0H9CDJsgcWKXTSsR.jpg"/>
+        <i>Naruto Shippuden</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/uYFK6OpX4HseiMPKYPznVXPwZX9.jpg"/>
+        <i>The walking dead</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/spMIIipBp3sz24zIG1oXgGFfcNZ.jpg"/>
+        <i>Moisés y los Diez Man...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+  </div>
 </div>
 <br/><br/>
 <div class="poster">
@@ -825,7 +1065,7 @@ button.next { right: 10px; }
 </div>
 <br/><br/>
 <div class="poster">
-<h4 class="alignleft">Peliculas <br/>Agregadas</h4><a href="Mostras Mas/movies_2025_grid (1).html"><h4 class="alignright">Ver Todo</h4></a></div>
+<h4 class="alignleft">Peliculas <br/>Agregadas</h4><a href="Mostras Mas/Peliculas Agregadas.html"><h4 class="alignright">Ver Todo</h4></a></div>
 <br/>
 <div class="scrollmenu">
 <a href="View Peliculas/Thunderbolts (2025).html">
@@ -1825,78 +2065,96 @@ button.next { right: 10px; }
 </div>
 </a>
 </div>
+
+
 <br/>
+
+
 <div class="poster">
-<h4 class="alignleft">Disney</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
-<br/>
-<div class="scrollmenu">
-<a href="View Peliculas/Blancanieves (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/7FZhpH4YasGdvY4FUGQJhCusLeg.jpg"/>
-<i>Blancanieves</i>
+  <h4 class="alignleft">Disney</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
+  <br/>
+  <div class="scrollmenu">
+
+    <a class="card-link" data-href="View Peliculas/Blancanieves (2025).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/7FZhpH4YasGdvY4FUGQJhCusLeg.jpg"/>
+        <i>Blancanieves</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w500/9NXAlFEE7WDssbXSMgdacsUD58Y.jpg"/>
+        <i>Pitter Pan y Wendy</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="View Peliculas/Peter Pan (1953).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/tDvGRWSdqT31ADijJf9OhbTbQ77.jpg"/>
+        <i>Peter pan</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="View Peliculas/Toy Story 4 (2019).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/pTTYykZZwYhj9qpAqiFxtUAamLI.jpg"/>
+        <i>Toy Story 4</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/vHbizQYlkL8MwtOdsdWaPuR5N5w.jpg"/>
+        <i>La dama y el vaga....</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="View Peliculas/Encanto (2021).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/ybXzCBc9x9bcM1ukmwhErutRiLO.jpg"/>
+        <i>Encanto</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/fuKMIP50VbVwZWFuO49iqvMk9v0.jpg"/>
+        <i>Sin subir</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/90Shq6yU7vqXskmZbX2AEf57ddy.jpg"/>
+        <i>Sin subir</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="View Peliculas/Tierra de osos (2003).html" href="">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/xoEY7339ewJ4jvDZZqM3FKVJb8r.jpg"/>
+        <i>Tierra de osos</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/6ZXiWy6NSgBTDP4yAd5eWTBZg9z.jpg"/>
+        <i>Sin subir</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="View Peliculas/Tierra de osos 2 (2006).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLgjEU_SHjJm5fYdH8BKEwBqKKleQiUceU-A&amp;s"/>
+        <i>Tierra de osos 2</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+  </div>
 </div>
-</a>
-<a href="go:PeterPan23">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w500/9NXAlFEE7WDssbXSMgdacsUD58Y.jpg"/>
-<i>Pitter Pan y Wendy</i>
-</div>
-</a>
-<a href="View Peliculas/Peter Pan (1953).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/tDvGRWSdqT31ADijJf9OhbTbQ77.jpg"/>
-<i>Peter pan</i>
-</div>
-</a>
-<a href="View Peliculas/Toy Story 4 (2019).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/pTTYykZZwYhj9qpAqiFxtUAamLI.jpg"/>
-<i>Toy Story 4</i>
-</div>
-</a>
-<a href="#">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/vHbizQYlkL8MwtOdsdWaPuR5N5w.jpg"/>
-<i>La dama y el vaga....</i>
-</div>
-</a>
-<a href="View Peliculas/Encanto (2021).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/ybXzCBc9x9bcM1ukmwhErutRiLO.jpg"/>
-<i>Encanto</i>
-</div>
-</a>
-<a href="#">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/fuKMIP50VbVwZWFuO49iqvMk9v0.jpg"/>
-<i>Sin subir</i>
-</div>
-</a>
-<a href="#">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/90Shq6yU7vqXskmZbX2AEf57ddy.jpg"/>
-<i>Sin subir</i>
-</div>
-</a>
-<a href="View Peliculas/Tierra de osos (2003).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/xoEY7339ewJ4jvDZZqM3FKVJb8r.jpg"/>
-<i>Tierra de osos</i>
-</div>
-</a>
-<a href="">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/6ZXiWy6NSgBTDP4yAd5eWTBZg9z.jpg"/>
-<i>Sin subir</i>
-</div>
-</a>
-<a href="View Peliculas/Tierra de osos 2 (2006).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLgjEU_SHjJm5fYdH8BKEwBqKKleQiUceU-A&amp;s"/>
-<i>Tierra de osos 2</i>
-</div>
-</a>
-</div>
+
 <br/>
 <div class="poster">
 <h4 class="alignleft">Guerra</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
@@ -2501,5 +2759,31 @@ document.querySelector('.carousel').addEventListener('mouseleave', startAutoplay
 window.addEventListener('resize', updateSlider);
 updateSlider();
 startAutoplay();
-</script></body>
+</script></br><script>
+document.querySelectorAll('.card-link').forEach(link => {
+  const dataHref = link.getAttribute('data-href');
+  if (!dataHref || dataHref.trim() === "") {
+    const lock = link.querySelector('.lock-icon');
+    if (lock) lock.style.display = 'block';
+    link.setAttribute('href', 'javascript:void(0);');
+    link.style.pointerEvents = 'none';
+    link.style.opacity = '0.5';
+  } else {
+    link.setAttribute('href', dataHref);
+  }
+});
+</script>
+<script>
+  window.addEventListener("load", function () {
+    setTimeout(() => {
+      const lock = document.querySelector(".lock-icon");
+      if (lock) {
+        lock.textContent = "🔓";
+        lock.classList.add("open");
+      }
+    }, 2000);
+  });
+</script>
+
+</body>
 </html>
