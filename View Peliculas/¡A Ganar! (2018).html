@@ -1,13 +1,14 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>MovieTx - Reproductor</title>
-  <link href="https://fonts.googleapis.com/css2?family=PT+Sans&amp;family=Roboto&amp;display=swap" rel="stylesheet"/>
-  <link href="https://cdn.jsdelivr.net/gh/CDNSFree2/Plyr/plyr.css" rel="stylesheet"/>
-  <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet"/>
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MovieTx - Reproductor</title>
+<link href="https://fonts.googleapis.com/css2?family=PT+Sans&amp;family=Roboto&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/gh/CDNSFree2/Plyr/plyr.css" rel="stylesheet"/>
+<link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet"/>
+<style>
     :root {
       --plyr-color-main: #ff0000;
       --plyr-video-control-color:rgb(255, 255, 255);
@@ -185,54 +186,45 @@
     }
 
   </style>
-
-<!-- Google Cast SDK -->
-<script type="text/javascript" src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
-
+<!-- Chromecast SDK -->
+<script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1" type="text/javascript"></script>
 </head>
-
 <body ondragstart="return false;" ondrop="return false;">
-  
-  <div class="player">
-    <video class="vid1 js-player" loading="lazy" controls poster="https://image.tmdb.org/t/p/w780/zwfec4vK1EvkQapE5wcYrB1BHov.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
-      <source src="https://dl.dropbox.com/scl/fi/0prsz81yb8pv74njs8d0j/The.miracle.season.2018.1080p-dual-lat-cinecalidad.to.mp4?rlkey=g97lmjjkt9ekh8stxzh6ci8g8&amp;st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
-    </video>
-  </div>
-
-  <div id="resume-msg">✅ Reanudando donde lo dejaste: ¡A GANAR!</div>
-
-  <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>2018</span> <!--Aca va el año de estreno de pelicula-->
-    <i class="fal fa-clock"></i><span>1h 41min</span> <!--aca va cuanto dura-->
-    <i class="fal fa-thumbs-up"></i><span>72%</span> <!--aca va la calificacion-->
-    <div class="hd-tag">
-      <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <rect width="24" height="24" rx="4" fill="white" />
-        <text x="4" y="17" fill="black" font-size="12" font-family="Arial, sans-serif" font-style="italic" font-weight="bold">HD</text>
-      </svg>
-      <span>1080P</span>
-    </div>
-    <span>🇲🇽</span>
-  </div>
-  
-  <div class="titulo">
-    <h3>¡A GANAR!</h3>
-    <br/>
-    <h4>Género: Drama</h4>
-  </div>
-  
-  <div class="sinopsis">
-    <h4>
+<div class="player">
+<video class="vid1 js-player" controls="" loading="lazy" poster="https://image.tmdb.org/t/p/w780/zwfec4vK1EvkQapE5wcYrB1BHov.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+<source src="https://dl.dropbox.com/scl/fi/0prsz81yb8pv74njs8d0j/The.miracle.season.2018.1080p-dual-lat-cinecalidad.to.mp4?rlkey=g97lmjjkt9ekh8stxzh6ci8g8&amp;st=" type="video/mp4"/> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
+</video>
+</div>
+<div id="resume-msg">✅ Reanudando donde lo dejaste: ¡A GANAR!</div>
+<div class="info">
+<i class="fal fa-calendar-alt"></i><span>2018</span> <!--Aca va el año de estreno de pelicula-->
+<i class="fal fa-clock"></i><span>1h 41min</span> <!--aca va cuanto dura-->
+<i class="fal fa-thumbs-up"></i><span>72%</span> <!--aca va la calificacion-->
+<div class="hd-tag">
+<svg height="22" viewbox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+<rect fill="white" height="24" rx="4" width="24"></rect>
+<text fill="black" font-family="Arial, sans-serif" font-size="12" font-style="italic" font-weight="bold" x="4" y="17">HD</text>
+</svg>
+<span>1080P</span>
+</div>
+<span>🇲🇽</span>
+</div>
+<div class="titulo">
+<h3>¡A GANAR!</h3>
+<br/>
+<h4>Género: Drama</h4>
+</div>
+<div class="sinopsis">
+<h4>
       Sinopsis:
     </h4>
-    <p>
+<p>
       Basado en la historia real del equipo de voleibol femenino de West High School. Tras la trágica muerte de la jugadora estrella de la escuela, Caroline 'Line' Found, las jugadores restantes deberán unirse bajo la dirección de su dura entrenadora (Helen Hunt) con la esperanza de ganar el campeonato estatal.
     </p>
-  </div>
-
-  <!-- NO BORRAR ES EL BOTON DEL FAVORITOS -->
-  <div style="text-align: center; margin-top: 15px;">
-    <button id="btn-favorito" style="
+</div>
+<!-- NO BORRAR ES EL BOTON DEL FAVORITOS -->
+<div style="text-align: center; margin-top: 15px;">
+<button id="btn-favorito" style="
       background: #ff4444;
       color: white;
       padding: 10px 16px;
@@ -243,43 +235,40 @@
     ">
       ⭐ Favoritos
     </button>
-  </div>
-
-  <br>
-
-  <div class="recomendaciones">
-    <h4>Podría interesarte:</h4>
-    <br/>
-    <div class="series-grid">
-      <a class="serie" href="Yo, Tonya (2017).html">
-        <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w300/aVWX0t95Igd8kKC3ejmtHCy1vX6.jpg"/>
-        <p>Yo, Tonya</p>
-      </a>
-      <a class="serie" href="Desaparecidos en la noche (2024).html">
-        <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w300/uyEFqfRezkNrxh9Lg8fj8IcbkHx.jpg"/>
-        <p>Desaparecidos en la noche</p>
-      </a>
-      <a class="serie" href="Asesino serial (2024).html">
-        <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w300/gs9GQ9n95BdVE8Uv1ZKNS1bSwCf.jpg"/>
-        <p>Asesino serial</p>
-      </a>
-      <a class="serie" href="Harta (2025).html">
-        <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w300/4d2PJ6QLAVd9w66E918JSWjkgs7.jpg"/>
-        <p>Harta</p>
-      </a>
-      <a class="serie" href="La mitad de Ana (2025).html">
-        <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w300/c24RWnJzwAtWZ039o9u6K7c8jyw.jpg"/>
-        <p>La mitad de Ana</p>
-      </a>
-      <a class="serie" href="El deseo de Ana (2021).html">
-        <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w300/89XUJQYBjlxayW7IBnlNoxn1bPg.jpg"/>
-        <p>El deseo de Ana</p>
-      </a>
-    </div>
-  </div>
-  
-  <!-- ¡¡¡NO BORRAR ESTE SCRIPT ES DE FAVORITOS Y SI LO BORRAN AFECTARAN EL FUNCIONAMIENTO DE REPRODUCTOR Y FAVORITOS!!! -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.6.7/plyr.min.js">
+</div>
+<br/>
+<div class="recomendaciones">
+<h4>Podría interesarte:</h4>
+<br>
+<div class="series-grid">
+<a class="serie" href="Yo, Tonya (2017).html">
+<img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w300/aVWX0t95Igd8kKC3ejmtHCy1vX6.jpg"/>
+<p>Yo, Tonya</p>
+</a>
+<a class="serie" href="Desaparecidos en la noche (2024).html">
+<img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w300/uyEFqfRezkNrxh9Lg8fj8IcbkHx.jpg"/>
+<p>Desaparecidos en la noche</p>
+</a>
+<a class="serie" href="Asesino serial (2024).html">
+<img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w300/gs9GQ9n95BdVE8Uv1ZKNS1bSwCf.jpg"/>
+<p>Asesino serial</p>
+</a>
+<a class="serie" href="Harta (2025).html">
+<img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w300/4d2PJ6QLAVd9w66E918JSWjkgs7.jpg"/>
+<p>Harta</p>
+</a>
+<a class="serie" href="La mitad de Ana (2025).html">
+<img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w300/c24RWnJzwAtWZ039o9u6K7c8jyw.jpg"/>
+<p>La mitad de Ana</p>
+</a>
+<a class="serie" href="El deseo de Ana (2021).html">
+<img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w300/89XUJQYBjlxayW7IBnlNoxn1bPg.jpg"/>
+<p>El deseo de Ana</p>
+</a>
+</div>
+</br></div>
+<!-- ¡¡¡NO BORRAR ESTE SCRIPT ES DE FAVORITOS Y SI LO BORRAN AFECTARAN EL FUNCIONAMIENTO DE REPRODUCTOR Y FAVORITOS!!! -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.6.7/plyr.min.js">
     document.getElementById('btn-favorito').addEventListener('click', () => {
 
       let favoritos = JSON.parse(localStorage.getItem('favoritos_detalles') || '[]');
@@ -290,8 +279,7 @@
       window.location.href = "favoritos.html";
     });
   </script>
-  
-  <script>
+<script>
     const videoElement = document.querySelector('.vid1');
     const videoSrc = videoElement.querySelector('source').getAttribute('src');
     const STORAGE_KEY = 'pos_' + videoSrc;
@@ -358,9 +346,8 @@
       window.location.href = "favoritos.html";
     });
   </script>
-
-  <!--Aca va el mensaje que se ha agregado al historial-->
-  <div id="mensaje-confirmacion" style="
+<!--Aca va el mensaje que se ha agregado al historial-->
+<div id="mensaje-confirmacion" style="
     display: none;
     position: fixed;
     bottom: 30px;
@@ -374,9 +361,8 @@
     z-index: 9999;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     transition: opacity 0.5s ease;">
-  </div>
-
-  <script>
+</div>
+<script>
     function mostrarMensaje(texto) {
       const mensaje = document.getElementById('mensaje-confirmacion');
       mensaje.textContent = texto;
@@ -388,8 +374,7 @@
       }, 3000);
     }
   </script>
-  
-  <script>
+<script>
     document.addEventListener('DOMContentLoaded', () => {
       const videoElement = document.querySelector('.vid1');
       if (!videoElement) return;
@@ -433,8 +418,6 @@
     }, 10000);
     });
   </script>
-
-
 <script>
   window['__onGCastApiAvailable'] = function(isAvailable) {
     if (isAvailable) {
@@ -449,21 +432,31 @@
     const castContext = cast.framework.CastContext.getInstance();
     const videoElement = document.querySelector('video');
 
-    if (!videoElement) return;
-
     const castButton = document.querySelector('google-cast-launcher');
     castButton.addEventListener('click', () => {
       const session = castContext.getCurrentSession();
-      if (session) {
+      if (session && videoElement) {
         const mediaInfo = new chrome.cast.media.MediaInfo(videoElement.currentSrc, 'video/mp4');
         const request = new chrome.cast.media.LoadRequest(mediaInfo);
         session.loadMedia(request).then(() => {
           videoElement.pause();
-        }, error => console.error('Error cargando en Cast:', error));
+        }, error => console.error('Error al enviar a Chromecast:', error));
       }
     });
   });
 </script>
-
-</body>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const controls = document.querySelector('.plyr__controls');
+  if (controls && !document.querySelector('#cast-in-controls')) {
+    const castBtn = document.createElement('google-cast-launcher');
+    castBtn.id = 'cast-in-controls';
+    castBtn.style.width = '32px';
+    castBtn.style.height = '32px';
+    castBtn.style.marginLeft = '8px';
+    castBtn.style.cursor = 'pointer';
+    controls.appendChild(castBtn);
+  }
+});
+</script></body>
 </html>
