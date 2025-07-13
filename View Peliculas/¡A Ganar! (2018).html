@@ -239,7 +239,7 @@
 <br/>
 <div class="recomendaciones">
 <h4>Podría interesarte:</h4>
-<br>
+<br/>
 <div class="series-grid">
 <a class="serie" href="Yo, Tonya (2017).html">
 <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w300/aVWX0t95Igd8kKC3ejmtHCy1vX6.jpg"/>
@@ -266,7 +266,7 @@
 <p>El deseo de Ana</p>
 </a>
 </div>
-</br></div>
+</div>
 <!-- ¡¡¡NO BORRAR ESTE SCRIPT ES DE FAVORITOS Y SI LO BORRAN AFECTARAN EL FUNCIONAMIENTO DE REPRODUCTOR Y FAVORITOS!!! -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.6.7/plyr.min.js">
     document.getElementById('btn-favorito').addEventListener('click', () => {
@@ -449,13 +449,20 @@
 document.addEventListener('DOMContentLoaded', () => {
   const controls = document.querySelector('.plyr__controls');
   if (controls && !document.querySelector('#cast-in-controls')) {
+    const wrapper = document.createElement('div');
+    wrapper.id = 'cast-in-controls';
+    wrapper.style.display = 'flex';
+    wrapper.style.alignItems = 'center';
+    wrapper.style.marginLeft = '8px';
+
     const castBtn = document.createElement('google-cast-launcher');
-    castBtn.id = 'cast-in-controls';
-    castBtn.style.width = '32px';
-    castBtn.style.height = '32px';
-    castBtn.style.marginLeft = '8px';
+    castBtn.style.width = '30px';
+    castBtn.style.height = '30px';
+    castBtn.style.filter = 'invert(1)';
     castBtn.style.cursor = 'pointer';
-    controls.appendChild(castBtn);
+
+    wrapper.appendChild(castBtn);
+    controls.appendChild(wrapper);
   }
 });
 </script></body>
