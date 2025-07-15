@@ -355,6 +355,25 @@
     });
   </script>
 
+  <!--OCULTA LOS CONTROLES AL TOCAR Y AL TOCAR REAPARECEN-->
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const videoWrapper = document.querySelector('.plyr'); // contenedor principal
+    const controles = videoWrapper.querySelector('.plyr__controls');
+    let controlesVisibles = true;
+
+    videoWrapper.addEventListener('click', (e) => {
+      // Evitar que se dispare si tocan un botón de control
+      if (e.target.closest('.plyr__controls')) return;
+
+      controlesVisibles = !controlesVisibles;
+      controles.style.display = controlesVisibles ? 'flex' : 'none';
+    });
+  });
+</script>
+
+
   <!--Aca va el mensaje que se ha agregado al historial-->
   <div id="mensaje-confirmacion" style="
     display: none;
@@ -429,69 +448,6 @@
     }, 10000);
     });
   </script>
-
-  <script>
-  const video = document.querySelector('.vid1');
-
-  // Activar pantalla completa del contenedor generado por Plyr
-  function activarPantallaCompleta() {
-    const plyrContainer = video.closest('.player');
-    if (plyrContainer.requestFullscreen) {
-      plyrContainer.requestFullscreen();
-    } else if (plyrContainer.webkitRequestFullscreen) {
-      plyrContainer.webkitRequestFullscreen();
-    } else if (plyrContainer.msRequestFullscreen) {
-      plyrContainer.msRequestFullscreen();
-    }
-  }
-
-  function salirPantallaCompleta() {
-    if (document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-      } else if (document.webkitExitFullscreen) {
-        document.webkitExitFullscreen();
-      } else if (document.msExitFullscreen) {
-        document.msExitFullscreen();
-      }
-    }
-  }
-
-  // Detectar cambios de orientación
-  function manejarOrientacion() {
-    const isLandscape = window.matchMedia("(orientation: landscape)").matches;
-    if (isLandscape) {
-      activarPantallaCompleta();
-    } else {
-      salirPantallaCompleta();
-    }
-  }
-
-  // Evento de cambio de orientación
-  window.addEventListener("orientationchange", () => {
-    setTimeout(manejarOrientacion, 300);
-  });
-
-  // También al cargar (por si ya está en horizontal)
-  document.addEventListener("DOMContentLoaded", () => {
-    manejarOrientacion();
-  });
-</script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-
-    // 👉 Mostrar solo una vez el mensaje de pantalla horizontal
-    if (!localStorage.getItem("instruccion_dada")) {
-      alert("📲 Consejo: gira el móvil a horizontal para ver en pantalla completa");
-      localStorage.setItem("instruccion_dada", "true");
-    }
-
-    // ... tu código que reanuda la película, etc.
-  });
-</script>
-
-
 
 </body>
 </html>
