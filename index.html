@@ -2785,5 +2785,24 @@ document.querySelectorAll('.card-link').forEach(link => {
   });
 </script>
 
+
+<script>
+  const currentVersion = "2.0.2"; // Cambia este valor al lanzar una nueva APK
+
+  fetch("https://leonpq2maxx.github.io/MovieMxTx/version.json")
+    .then(res => res.json())
+    .then(data => {
+      if (data.version !== currentVersion && localStorage.getItem("lastVersion") !== data.version) {
+        localStorage.setItem("lastVersion", data.version);
+        if (confirm(`${data.message}\n¿Quieres actualizar ahora?`)) {
+          window.location.href = data.url;
+        }
+      }
+    })
+    .catch(err => {
+      console.error("Error al verificar actualización:", err);
+    });
+</script>
+
 </body>
 </html>
