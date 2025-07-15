@@ -430,36 +430,46 @@
     });
   </script>
 
-
-<!--GIRO HORIZONTAL PANTALLA COMPLETA-->
-
-<script>
+  <script>
   const video = document.querySelector('.vid1');
+  const plyrPlayer = new Plyr(video);
 
-  // Detecta cambios de orientación
+  function activarPantallaCompleta(videoElement) {
+    if (videoElement.requestFullscreen) {
+      videoElement.requestFullscreen();
+    } else if (videoElement.webkitRequestFullscreen) {
+      videoElement.webkitRequestFullscreen();
+    } else if (videoElement.msRequestFullscreen) {
+      videoElement.msRequestFullscreen();
+    }
+  }
+
+  function salirPantallaCompleta() {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    }
+  }
+
+  // Detectar orientación
   window.addEventListener("orientationchange", () => {
-    const isLandscape = window.matchMedia("(orientation: landscape)").matches;
+    setTimeout(() => {
+      const isLandscape = window.matchMedia("(orientation: landscape)").matches;
+      if (isLandscape) {
+        activarPantallaCompleta(video);
+      } else {
+        salirPantallaCompleta();
+      }
+    }, 300);
+  });
 
-    if (isLandscape) {
-      // Modo horizontal: expandir a pantalla completa
-      if (video.requestFullscreen) {
-        video.requestFullscreen();
-      } else if (video.webkitRequestFullscreen) {
-        video.webkitRequestFullscreen();
-      } else if (video.msRequestFullscreen) {
-        video.msRequestFullscreen();
-      }
-    } else {
-      // Modo vertical: salir del modo pantalla completa
-      if (document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
-        } else if (document.webkitExitFullscreen) {
-          document.webkitExitFullscreen();
-        } else if (document.msExitFullscreen) {
-          document.msExitFullscreen();
-        }
-      }
+  // Si ya está en horizontal al cargar
+  document.addEventListener('DOMContentLoaded', () => {
+    if (window.matchMedia("(orientation: landscape)").matches) {
+      activarPantallaCompleta(video);
     }
   });
 </script>
