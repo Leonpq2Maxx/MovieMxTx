@@ -355,45 +355,6 @@
     });
   </script>
 
-  <!--OCULTA LOS CONTROLES AL TOCAR Y AL TOCAR REAPARECEN-->
-
-  <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const videoElement = document.querySelector('.vid1');
-    const player = document.querySelector('.plyr');
-
-    let controlesVisibles = true;
-
-    // Esperar a que Plyr cargue los controles correctamente
-    const interval = setInterval(() => {
-      const controles = player.querySelector('.plyr__controls');
-
-      if (controles) {
-        clearInterval(interval);
-
-        // Usar touchstart para móviles
-        player.addEventListener('touchstart', (e) => {
-          if (e.target.closest('.plyr__controls')) return;
-
-          controlesVisibles = !controlesVisibles;
-          controles.style.opacity = controlesVisibles ? '1' : '0';
-          controles.style.pointerEvents = controlesVisibles ? 'auto' : 'none';
-        });
-
-        // También para escritorio: click
-        player.addEventListener('click', (e) => {
-          if (e.target.closest('.plyr__controls')) return;
-
-          controlesVisibles = !controlesVisibles;
-          controles.style.opacity = controlesVisibles ? '1' : '0';
-          controles.style.pointerEvents = controlesVisibles ? 'auto' : 'none';
-        });
-      }
-    }, 200);
-  });
-</script>
-
-
   <!--Aca va el mensaje que se ha agregado al historial-->
   <div id="mensaje-confirmacion" style="
     display: none;
@@ -423,6 +384,19 @@
       }, 3000);
     }
   </script>
+
+  <!--RETROCEDER SIN SALTOS BRUSCOS AL INDEX-->
+
+  <script>
+  // Interceptar el botón de atrás
+  window.addEventListener("popstate", function () {
+    window.location.href = "index.html";
+  });
+
+  // Empujar un estado al historial (invisible)
+  history.pushState(null, null, location.href);
+</script>
+
   
   <script>
     document.addEventListener('DOMContentLoaded', () => {
