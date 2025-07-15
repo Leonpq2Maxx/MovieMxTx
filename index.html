@@ -2787,21 +2787,24 @@ document.querySelectorAll('.card-link').forEach(link => {
 
 
 <script>
-  const currentVersion = "1.0.4"; // Cambia este valor al lanzar una nueva APK
+  const currentVersion = '1.0.1'; // Cambia este número en cada nueva subida
 
-  fetch("https://leonpq2maxx.github.io/MovieMxTx/version.json")
-    .then(res => res.json())
-    .then(data => {
-      if (data.version !== currentVersion && localStorage.getItem("lastVersion") !== data.version) {
-        localStorage.setItem("lastVersion", data.version);
-        if (confirm(`${data.message}\n¿Quieres actualizar ahora?`)) {
-          window.location.href = data.url;
-        }
-      }
-    })
-    .catch(err => {
-      console.error("Error al verificar actualización:", err);
-    });
+  const storedVersion = localStorage.getItem('site_version');
+
+  if (storedVersion && storedVersion !== currentVersion) {
+    const updateBanner = document.createElement('div');
+    updateBanner.style = 'position: fixed; bottom: 0; left: 0; right: 0; background: #ff4081; color: white; padding: 15px; text-align: center; z-index: 9999; font-weight: bold;';
+    updateBanner.innerHTML = 'Nueva versión disponible. <button style="margin-left:10px; padding:5px 10px; background:white; color:#ff4081; border:none; border-radius:4px;">Actualizar</button>';
+
+    updateBanner.querySelector('button').onclick = () => {
+      localStorage.setItem('site_version', currentVersion);
+      location.reload(true);
+    };
+
+    document.body.appendChild(updateBanner);
+  } else {
+    localStorage.setItem('site_version', currentVersion);
+  }
 </script>
 
 </body>
