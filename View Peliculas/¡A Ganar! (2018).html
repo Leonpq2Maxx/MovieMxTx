@@ -359,17 +359,37 @@
 
   <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const videoWrapper = document.querySelector('.plyr'); // contenedor principal
-    const controles = videoWrapper.querySelector('.plyr__controls');
+    const videoElement = document.querySelector('.vid1');
+    const player = document.querySelector('.plyr');
+
     let controlesVisibles = true;
 
-    videoWrapper.addEventListener('click', (e) => {
-      // Evitar que se dispare si tocan un botón de control
-      if (e.target.closest('.plyr__controls')) return;
+    // Esperar a que Plyr cargue los controles correctamente
+    const interval = setInterval(() => {
+      const controles = player.querySelector('.plyr__controls');
 
-      controlesVisibles = !controlesVisibles;
-      controles.style.display = controlesVisibles ? 'flex' : 'none';
-    });
+      if (controles) {
+        clearInterval(interval);
+
+        // Usar touchstart para móviles
+        player.addEventListener('touchstart', (e) => {
+          if (e.target.closest('.plyr__controls')) return;
+
+          controlesVisibles = !controlesVisibles;
+          controles.style.opacity = controlesVisibles ? '1' : '0';
+          controles.style.pointerEvents = controlesVisibles ? 'auto' : 'none';
+        });
+
+        // También para escritorio: click
+        player.addEventListener('click', (e) => {
+          if (e.target.closest('.plyr__controls')) return;
+
+          controlesVisibles = !controlesVisibles;
+          controles.style.opacity = controlesVisibles ? '1' : '0';
+          controles.style.pointerEvents = controlesVisibles ? 'auto' : 'none';
+        });
+      }
+    }, 200);
   });
 </script>
 

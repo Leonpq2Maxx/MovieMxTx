@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MovieTx - Reproductor de pelicula</title>
-  <link href="https://fonts.googleapis.com/css2?family=PT+Sans&family=Roboto&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/gh/CDNSFree2/Plyr/plyr.css" rel="stylesheet">
-  <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet">
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>MovieTx - Reproductor</title>
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans&amp;family=Roboto&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/gh/CDNSFree2/Plyr/plyr.css" rel="stylesheet"/>
+  <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet"/>
   <style>
     :root {
       --plyr-color-main: #ff0000;
-      --plyr-video-control-color: #0022ff;
+      --plyr-video-control-color:rgb(255, 255, 255);
     }
     * {
       margin: 0;
@@ -91,11 +91,13 @@
       text-decoration: none;
       color: white;
     }
+
     .serie img {
       width: 100%;
       max-width: 150px;
       border-radius: 10px;
     }
+
     .serie p {
       margin-top: 5px;
     }
@@ -162,13 +164,33 @@
         padding: 8px 16px;
       }
     }
+
+    #genero-texto.colapsado {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ACA ES LA ANIMACION DE FAVORITOS */
+    @keyframes pop {
+      0%   { transform: scale(1); }
+      50%  { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+    
+    #btn-favorito.animado {
+      animation: pop 0.3s ease;
+    }
+
   </style>
 </head>
+
 <body ondragstart="return false;" ondrop="return false;">
-
-
+  
   <div class="player">
-    <video class="vid1 js-player" loading="lazy" controls poster="https://image.tmdb.org/t/p/original/5owIV2sqdfILBKyOOIkLYVqanZp.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+    <video class="vid1 js-player" loading="lazy" controls poster="https://image.tmdb.org/t/p/w780/5owIV2sqdfILBKyOOIkLYVqanZp.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
       <source src="https://dl.dropbox.com/scl/fi/xyj06qjhvdam4dl57a0zz/Yo-tonya-2017.mp4?rlkey=c39mxfwxgb13abc0zcpya9qos&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
@@ -196,11 +218,15 @@
   </div>
 
   <div class="sinopsis">
-    <h4>Sinopsis:</h4>
+    <h4>
+      Sinopsis:
+    </h4>
     <p>
       Tonya Harding fue la primera mujer estadounidense en completar un salto de triple axel en competición en patinaje sobre hielo en 1991. Pero el éxito en el hielo no siempre estuvo acompañado de felicidad en su vida personal.
     </p>
   </div>
+
+  <!-- NO BORRAR ES EL BOTON DEL FAVORITOS -->
   <div style="text-align: center; margin-top: 15px;">
     <button id="btn-favorito" style="
       background: #ff4444;
@@ -215,9 +241,11 @@
     </button>
   </div>
 
+  <br>
+
   <div class="recomendaciones">
     <h4>Podría interesarte:</h4>
-    <br>
+    <br/>
     <div class="series-grid">
       <a href="Todo bien (2024).html" class="serie">
         <img loading="lazy" src="https://image.tmdb.org/t/p/w300/mKdRfCpWkcH0wEEg6yO4a8ES4TX.jpg" alt="">
@@ -245,7 +273,7 @@
       </a>
     </div>
   </div>
-
+  
   <!-- ¡¡¡NO BORRAR ESTE SCRIPT ES DE FAVORITOS Y SI LO BORRAN AFECTARAN EL FUNCIONAMIENTO DE REPRODUCTOR Y FAVORITOS!!! -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.6.7/plyr.min.js">
     document.getElementById('btn-favorito').addEventListener('click', () => {
@@ -401,20 +429,5 @@
     }, 10000);
     });
   </script>
-
-  <script>
-  if (performance && performance.navigation && performance.navigation.type === 2) {
-    window.location.href = '../index.html'; // si viene por back button
-  }
-
-  history.pushState(null, null, location.href);
-  window.onpopstate = () => {
-    location.href = '../index.html';
-  };
-</script>
-
-
-
-
 </body>
 </html>
