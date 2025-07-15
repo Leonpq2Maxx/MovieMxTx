@@ -432,49 +432,65 @@
 
   <script>
   const video = document.querySelector('.vid1');
-  const plyrPlayer = new Plyr(video);
 
+  // Activar pantalla completa del contenedor generado por Plyr
   function activarPantallaCompleta() {
-  const playerContainer = document.querySelector('.plyr'); // El contenedor que Plyr usa internamente
-  if (playerContainer.requestFullscreen) {
-    playerContainer.requestFullscreen();
-  } else if (playerContainer.webkitRequestFullscreen) {
-    playerContainer.webkitRequestFullscreen();
-  } else if (playerContainer.msRequestFullscreen) {
-    playerContainer.msRequestFullscreen();
+    const plyrContainer = video.closest('.player');
+    if (plyrContainer.requestFullscreen) {
+      plyrContainer.requestFullscreen();
+    } else if (plyrContainer.webkitRequestFullscreen) {
+      plyrContainer.webkitRequestFullscreen();
+    } else if (plyrContainer.msRequestFullscreen) {
+      plyrContainer.msRequestFullscreen();
+    }
   }
-}
-
 
   function salirPantallaCompleta() {
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) {
-      document.webkitExitFullscreen();
-    } else if (document.msExitFullscreen) {
-      document.msExitFullscreen();
+    if (document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) {
+        document.msExitFullscreen();
+      }
     }
   }
 
-  // Detectar orientación
+  // Detectar cambios de orientación
+  function manejarOrientacion() {
+    const isLandscape = window.matchMedia("(orientation: landscape)").matches;
+    if (isLandscape) {
+      activarPantallaCompleta();
+    } else {
+      salirPantallaCompleta();
+    }
+  }
+
+  // Evento de cambio de orientación
   window.addEventListener("orientationchange", () => {
-    setTimeout(() => {
-      const isLandscape = window.matchMedia("(orientation: landscape)").matches;
-      if (isLandscape) {
-        activarPantallaCompleta();
-      } else {
-        salirPantallaCompleta();
-      }
-    }, 300);
+    setTimeout(manejarOrientacion, 300);
   });
 
-  // Si ya está en horizontal al cargar
-  document.addEventListener('DOMContentLoaded', () => {
-    if (window.matchMedia("(orientation: landscape)").matches) {
-      activarPantallaCompleta(video);
-    }
+  // También al cargar (por si ya está en horizontal)
+  document.addEventListener("DOMContentLoaded", () => {
+    manejarOrientacion();
   });
 </script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+
+    // 👉 Mostrar solo una vez el mensaje de pantalla horizontal
+    if (!localStorage.getItem("instruccion_dada")) {
+      alert("📲 Consejo: gira el móvil a horizontal para ver en pantalla completa");
+      localStorage.setItem("instruccion_dada", "true");
+    }
+
+    // ... tu código que reanuda la película, etc.
+  });
+</script>
+
 
 
 </body>
