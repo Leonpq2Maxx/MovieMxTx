@@ -434,15 +434,17 @@
   const video = document.querySelector('.vid1');
   const plyrPlayer = new Plyr(video);
 
-  function activarPantallaCompleta(videoElement) {
-    if (videoElement.requestFullscreen) {
-      videoElement.requestFullscreen();
-    } else if (videoElement.webkitRequestFullscreen) {
-      videoElement.webkitRequestFullscreen();
-    } else if (videoElement.msRequestFullscreen) {
-      videoElement.msRequestFullscreen();
-    }
+  function activarPantallaCompleta() {
+  const playerContainer = document.querySelector('.plyr'); // El contenedor que Plyr usa internamente
+  if (playerContainer.requestFullscreen) {
+    playerContainer.requestFullscreen();
+  } else if (playerContainer.webkitRequestFullscreen) {
+    playerContainer.webkitRequestFullscreen();
+  } else if (playerContainer.msRequestFullscreen) {
+    playerContainer.msRequestFullscreen();
   }
+}
+
 
   function salirPantallaCompleta() {
     if (document.exitFullscreen) {
