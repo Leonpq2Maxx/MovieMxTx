@@ -3374,23 +3374,11 @@ function closeModal() {
 }
 
 function denyAccessTemporary() {
-  const expiration = new Date().getTime() + (30 * 1000); /* 30 segundos // 24 horas si es asi "24 * 60 * 60 * 1000" - 1 hora es "1 * 60 * 60 * 1000" y 30 segundos es "(30 * 1000)" */
+  const expiration = new Date().getTime() + (1 * 60 * 60 * 1000); // 24 horas si es asi "24 * 60 * 60 * 1000" - 1 hora es "1 * 60 * 60 * 1000" y 30 segundos es "(30 * 1000)"
   localStorage.setItem('blockedUntil', expiration);
   closeModal();
-  alert('Acceso denegado por 30 segundos.');
+  alert('Acceso denegado por 24 horas.');
 }
-
-
-const blockedUntil = localStorage.getItem('blockedUntil');
-
-if (blockedUntil && Date.now() < blockedUntil) {
-  // todavía está bloqueado
-  alert('Todavía no podés ingresar. Esperá unos segundos.');
-} else {
-  // ya puede intentar de nuevo
-  localStorage.removeItem('blockedUntil'); // opcional, para limpiar
-}
-
 
 function denyAccessPermanently() {
   localStorage.setItem('isBanned', 'true');
