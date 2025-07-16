@@ -3321,13 +3321,28 @@ document.addEventListener("DOMContentLoaded", () => {
 }
 
 input, button, select, textarea {
-    font: inherit;
-    font-size: 100%;
-    color: #000000;
-    line-height: normal;
+  font: inherit;
+  font-size: 100%;
+  color: #000000;
+  line-height: normal;
 }
 
 /*MENSAJE FLOTANTE*/
+
+
+.block-message {
+  position: fixed;
+  top: 20px; /* o bottom: 20px; si quieres que esté abajo */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
 
 .block-modal {
   position: fixed;
