@@ -3375,9 +3375,12 @@ function closeModal() {
 
 function denyAccessTemporary() {
   const expiration = new Date().getTime() + (30 * 1000); // 24 horas si es asi "24 * 60 * 60 * 1000" - 1 hora es "1 * 60 * 60 * 1000" y 30 segundos es "(30 * 1000)"
-  localStorage.setItem('blockedUntil', expiration);
-  closeModal();
-  alert('Acceso denegado por 24 horas.');
+  localStorage.setItem("expira", expiration);
+
+// luego podés verificarlo así:
+if (Date.now() > localStorage.getItem("expira")) {
+  console.log("¡El tiempo se acabó!");
+}
 }
 
 function denyAccessPermanently() {
