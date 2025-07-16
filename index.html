@@ -289,6 +289,8 @@
     /*End Carousel*/
     
 </style>
+
+<!--TAMAÑO DE TEXTO Y CAMBIO DE COLOR-->
 <style>
   .xplus {
     color: var(--headC);
@@ -309,6 +311,81 @@ i {
 
 
 </style>
+
+<!--CANDADO-->
+<style>
+.xplus {
+  position: relative;
+  display: inline-block;
+}
+.lock-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 4px 6px;
+  border-radius: 5px;
+  font-size: 14px;
+  z-index: 5;
+  display: none;
+}
+</style>
+
+<!--CANDADO-->
+<style>
+.lock-icon {
+  font-size: 28px;
+  display: inline-block;
+  transition: transform 0.5s ease, color 0.5s ease;
+  animation: bounceIn 1s ease;
+  color: gray;
+}
+
+.lock-icon.open {
+  content: '🔓';
+  transform: rotate(15deg);
+  color: green;
+}
+
+@keyframes bounceIn {
+  0%   { transform: scale(0.3); opacity: 0; }
+  50%  { transform: scale(1.05); opacity: 1; }
+  70%  { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+</style>
+
+<!--ROBOTE DE CANDADO-->
+<style>
+.lock-icon {
+  display: inline-block;
+  animation: pulse 1s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+</style>
+
+
+<!--REBOTE DE IMAGEN AL SELECCIONAR-->
+<style>
+@keyframes bounce-tap {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.05); }
+  50% { transform: scale(0.95); }
+  75% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+.xplus.tap-animate {
+  animation: bounce-tap 0.5s ease;
+}
+</style>
+
 </head>
 <body class="oneGrd MN-2 mobS hdMn bD onIndx onHm" id="mainCont">
 <script>/*<![CDATA[*/ (localStorage.getItem('mode')) === 'darkmode' ? document.querySelector('#mainCont').classList.add('drK') : document.querySelector('#mainCont').classList.remove('drK') /*]]>*/</script>
@@ -410,43 +487,143 @@ i {
 </div></div></div></div>
 <label class="fCls" for="offNav"></label>
 </div>
+<!--MENU SUPERIOR-->
+<div class="top-scroll-menu">
+<a class="menu-item" href="#">2025</a>
+<a class="menu-item" href="#">2024</a>
+<a class="menu-item" href="#">Peliculas</a>
+<a class="menu-item" href="#">Series</a>
+<a class="menu-item" href="#">Pronto</a>
+<a class="menu-item" href="#">Trailers</a>
+<a class="menu-item" href="#">Populares</a>
+</div>
+<!--MENU SUPERIOR COLORES Y-->
+<style>
+.top-scroll-menu {
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  gap: 10px;
+  padding: 10px 15px;
+  background-color: var(--top-scroll-bg, #ffffff);
+  border-bottom: 1px solid var(--contentL);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Enlaces */
+.menu-item {
+  color: var(--top-scroll-color, #000);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  background-color: transparent;
+  transition: background 0.3s, color 0.3s;
+}
+
+.menu-item:hover {
+  background-color: rgba(255, 0, 0, 0.05);
+}
+
+
+/* Modo oscuro */
+.drK .top-scroll-menu {
+  background-color: #121212;
+}
+
+.drK .menu-item {
+  color: #ffffff;
+}
+
+.drK .menu-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.menu-item.active {
+    background-color: #00cfff !important; /* Celeste */
+    color: white !important;
+    border: 1px solid red !important; /* Mantiene borde rubio */
+}
+
+
+</style>
+<!--SCRIPT QUE HACE FUNCIONAR AL INTERACTUAR CON EL MENU-->
+<script>
+document.querySelectorAll('.menu-item').forEach(function(item) {
+    item.addEventListener('click', function() {
+        // Eliminar clase activa de todos
+        document.querySelectorAll('.menu-item').forEach(function(el) {
+            el.classList.remove('active');
+        });
+
+        // Activar el que se clickea
+        this.classList.add('active');
+    });
+});
+
+</script>
+<!--esto hace que desaparezca al interactuar con la pagina-->
+<script>
+let timeout;
+
+document.querySelectorAll('.menu-item').forEach(function(item) {
+    item.addEventListener('click', function() {
+        // Eliminar clase activa de todos
+        document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
+
+        // Activar el clickeado
+        this.classList.add('active');
+
+        // Limpiar timeout previo
+        clearTimeout(timeout);
+
+        // Desactivar después de 2 segundos
+        timeout = setTimeout(() => {
+            this.classList.remove('active');
+        }, 2000); // 2000 ms = 2 segundos
+    });
+});
+</script>
+
+<br/>
+
 <div class="carousel">
-<button class="prev">❮</button>
-<div class="carousel-track-container">
-<ul class="carousel-track">
-  <li class="slide current-slide">
-    <a href="View Peliculas/La vieja guardia 2 (2025).html">
-      <img alt="" src="https://image.tmdb.org/t/p/w780/f8FaWGOR1k7MiOOybNPbnxCRfYx.jpg" loading="lazy"/>
-    </a>
-  </li>
-  <li class="slide">
-    <a href="View Peliculas/Thunderbolts (2025).html">
-      <img alt="" src="https://image.tmdb.org/t/p/w780/ffQJClNiOpoc0ywxBgY6y1vBuxC.jpg" loading="lazy"/>
-    </a>
-  </li>
-  <li class="slide">
-    <a href="View Peliculas/Echo Valley (2025).html">
-      <img alt="" src="https://image.tmdb.org/t/p/w780/idYQ9ZdXIDsZwNiDtT7DGCBwUrR.jpg" loading="lazy"/>
-    </a>
-  </li>
-  <li class="slide">
-    <a href="View Peliculas/Destino Final Lazos De Sangre (2025).html">
-      <img alt="" src="https://image.tmdb.org/t/p/w780/kuse5h6YOQk5bpYEtnjgwGnk9dX.jpg" loading="lazy"/>
-    </a>
-  </li>
-  <li class="slide">
-    <a href="View Series/El Juego Del Calamar (2021).html">
-      <img alt="" src="https://image.tmdb.org/t/p/w780/g8ycl0j14uesH7CgqQfEyVPOLNz.jpg" loading="lazy"/>
-    </a>
-  </li>
-  <li class="slide">
-    <a href="View Series/Naruto Shippuden (2007).html">
-      <img alt="" src="https://image.tmdb.org/t/p/w780/v1ncLO2S1i2ryr1LzGCiTnN0597.jpg" loading="lazy"/>
-    </a>
-  </li>
-</ul>
-</div><div class="slider-dots" id="sliderDots"><span class="dot active" data-index="0"></span><span class="dot" data-index="1"></span><span class="dot" data-index="2"></span><span class="dot" data-index="3"></span><span class="dot" data-index="4"></span><span class="dot" data-index="5"></span></div>
-<button class="next">❯</button>
+  <button class="prev">❮</button>
+    <div class="carousel-track-container">
+      <ul class="carousel-track">
+        <li class="slide current-slide">
+          <a href="View Peliculas/La vieja guardia 2 (2025).html">
+            <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w780/f8FaWGOR1k7MiOOybNPbnxCRfYx.jpg"/>
+          </a>
+        </li>
+        <li class="slide">
+          <a href="View Peliculas/Thunderbolts (2025).html">
+            <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w780/ffQJClNiOpoc0ywxBgY6y1vBuxC.jpg"/>
+          </a>
+        </li>
+        <li class="slide">
+          <a href="View Peliculas/Echo Valley (2025).html">
+            <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w780/idYQ9ZdXIDsZwNiDtT7DGCBwUrR.jpg"/>
+          </a>
+        </li>
+        <li class="slide">
+          <a href="View Peliculas/Destino Final Lazos De Sangre (2025).html">
+            <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w780/kuse5h6YOQk5bpYEtnjgwGnk9dX.jpg"/>
+          </a>
+        </li>
+        <li class="slide">
+          <a href="View Series/El Juego Del Calamar (2021).html">
+            <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w780/g8ycl0j14uesH7CgqQfEyVPOLNz.jpg"/>
+          </a>
+        </li>
+        <li class="slide">
+          <a href="View Series/Naruto Shippuden (2007).html">
+            <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w780/v1ncLO2S1i2ryr1LzGCiTnN0597.jpg"/>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="slider-dots" id="sliderDots"><span class="dot active" data-index="0"></span><span class="dot" data-index="1"></span><span class="dot" data-index="2"></span><span class="dot" data-index="3"></span><span class="dot" data-index="4"></span><span class="dot" data-index="5"></span></div>
+  <button class="next">❯</button>
 </div>
 </div></div>
 <style>
@@ -491,15 +668,15 @@ i {
     transform: scale(1);
   }
 
-}
-
-.slider-dots.hidden {
+  .slider-dots.hidden {
   opacity: 0;
   pointer-events: none;
 }
 
-</style>
+}
 
+
+</style>
 <script>
   const sliderDots = document.getElementById("sliderDots");
   const navToggle = document.getElementById("offNav");
@@ -515,7 +692,6 @@ i {
   navToggle.addEventListener("change", updateDotsVisibility);
   updateDotsVisibility(); // correr al cargar
 </script>
-
 <style>
   .carousel {
   position: relative;
@@ -564,1754 +740,2318 @@ button.prev { left: 10px; }
 button.next { right: 10px; }
 
 </style>
+<!--CANDADO DE IMAGEN CUANDO NO PONGAS EL ENLACE ESTE NO SE QUITARA, CUANDO LO PONGAS ESTA DESAPARECERA (CSS)-->
+<style>
+  .xplus {
+  position: relative;
+  display: inline-block;
+}
 
+.lock-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  padding: 4px 6px;
+  border-radius: 5px;
+  font-size: 14px;
+  z-index: 5;
+  display: none; /* Oculto por defecto */
+}
 
-<br/><br/>
+</style>
+<!--FUNCIONAMIENTO DEL CANDADO NO BORRAR-->
+<script>
+document.querySelectorAll('.card-link').forEach(link => {
+  const realHref = link.getAttribute('href');
+  const dataHref = link.getAttribute('data-href');
 
+  if (!dataHref || dataHref.trim() === "") {
+    // No hay HTML cargado aún
+    link.querySelector('.lock-icon').style.display = 'block';
+    link.setAttribute('href', 'javascript:void(0);'); // evita redirección
+    link.style.pointerEvents = 'none'; // no clickeable
+    link.style.opacity = '0.5'; // visual desactivado
+  } else {
+    // HTML cargado
+    link.setAttribute('href', dataHref);
+  }
+});
+</script>
+<script>
+  window.addEventListener("load", function () {
+    const candado = document.getElementById("candado");
+
+    // Simulamos carga o validación
+    setTimeout(() => {
+      if (candado) {
+        candado.textContent = "🔓"; // cambia el ícono
+        candado.classList.remove("cerrado");
+        candado.classList.add("abierto");
+      }
+    }, 2000); // Espera 2 segundos antes de "abrir"
+  });
+</script>
+
+<br><br/>
 <div class="poster">
   <h4 class="alignleft">Nuevas</h4><a href="Mostras Mas/Series Agregadas.html"><h4 class="alignright">Ver Todo</h4></a></div>
   <br/>
   <div class="scrollmenu">
-    <a href="View Peliculas/Thunderbolts (2025).html">
+    
+    <a class="card-link" data-href="">
       <div class="xplus">
-        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/hBH50Mkcrc4m8x73CovLmY7vBx1.jpg">
-          <i>Thunderbolts*</i>
-        </img>
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/fTpbUIwdsfyIldzYvzQi2K4Icws.jpg"/>
+        <i>Cómo entrenar a tu...</i>
+        <span class="lock-icon">🔒</span>
       </div>
     </a>
-    <a href="View Peliculas/Echo Valley (2025).html">
+
+    <a class="card-link" data-href="">
       <div class="xplus">
-        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/1E4WCgTodyS7zo8pSp1gZlPO0th.jpg">
-          <i>Echo Valley</i>
-        </img>
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/fBgyUqyu3ioTSQjJJE5RFs2EG3B.jpg"/>
+        <i>M3GAN 2.0</i>
+        <span class="lock-icon">🔒</span>
       </div>
     </a>
-    <a href="View Peliculas/1978 (2025).html">
+
+    <a class="card-link" data-href="">
       <div class="xplus">
-        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/iyKixwGhGRas1ppAih8E7SG5QDZ.jpg">
-          <i>1978</i>
-        </img>
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/5LB5GJzcaEBEb3IhjqnYNsqY5Zs.jpg"/>
+        <i>Karate Kid: Legends</i>
+        <span class="lock-icon">🔒</span>
       </div>
     </a>
-    <a href="View Series/The Walking Dead The ones two live (2024).HTML">
+    
+    <a class="card-link" data-href="View Peliculas/Thunderbolts (2025).html">
       <div class="xplus">
-        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/yft2a3vnCblf6wmF6gTqgdKZUMi.jpg">
-          <i>The Walking Dead: The...</i>
-        </img>
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/hBH50Mkcrc4m8x73CovLmY7vBx1.jpg"/>
+        <i>Thunderbolts*</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/1E4WCgTodyS7zo8pSp1gZlPO0th.jpg"/>
+        <i>Echo Valley</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/1978 (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/iyKixwGhGRas1ppAih8E7SG5QDZ.jpg"/>
+        <i>1978</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a href="#">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://raw.githubusercontent.com/Leonpq2Maxx/MovieTx/refs/heads/MovieTx/img%20poster/Agregar%20peliculas.gif"/>
+        <i>Proxima</i>
       </div>
     </a>
     <a href="#">
       <div class="xplus">
-        <img alt="" class="xaviec" loading="lazy" src="https://raw.githubusercontent.com/Leonpq2Maxx/MovieTx/refs/heads/MovieTx/img%20poster/Agregar%20peliculas.gif">
-          <i>Proxima</i>
-        </img>
+        <img alt="" class="xaviec" loading="lazy" src="https://raw.githubusercontent.com/Leonpq2Maxx/MovieTx/refs/heads/MovieTx/img%20poster/Agregar%20peliculas.gif"/>
+        <i>Proxima</i>
       </div>
     </a>
     <a href="#">
       <div class="xplus">
-        <img alt="" class="xaviec" loading="lazy" src="https://raw.githubusercontent.com/Leonpq2Maxx/MovieTx/refs/heads/MovieTx/img%20poster/Agregar%20peliculas.gif">
-          <i>Proxima</i>
-        </img>
+        <img class="xaviec" loading="lazy" src="https://raw.githubusercontent.com/Leonpq2Maxx/MovieTx/refs/heads/MovieTx/img%20poster/Agregar%20peliculas.gif">
+        <i>Proxima</i>
       </div>
     </a>
-    <a href="#">
-      <div class="xplus">
-        <img class="xaviec" loading="lazy" src="https://raw.githubusercontent.com/Leonpq2Maxx/MovieTx/refs/heads/MovieTx/img%20poster/Agregar%20peliculas.gif"/>
-          <i>Proxima</i>
-        </img>
-      </div>
-    </a>
+  </div>
 </div>
 
 
 <br/><br/>
 
+
 <div class="poster">
-<h4 class="alignleft">Series 2025</h4><a href="Mostras Mas/Series Agregadas.html"><h4 class="alignright">Ver Todo</h4></a></div>
-<br/>
-<div class="scrollmenu">
-<a href="View Series/El Juego Del Calamar (2021).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/xNvlt4jn2KbuKJoZ9UiVpm7lYjr.jpg"/>
-<i>El juego Del calamar</i>
+  <h4 class="alignleft">Series 2025</h4><a href="Mostras Mas/Series Agregadas.html"><h4 class="alignright">Ver Todo</h4></a></div>
+  <br/>
+  <div class="scrollmenu">
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/rKPONjvDSn63blDzYrPOWvjWLoy.jpg"/>
+        <i>Chespirito: Sin querer...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="View Series/El Juego Del Calamar (2021).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/xNvlt4jn2KbuKJoZ9UiVpm7lYjr.jpg"/>
+        <i>El juego Del calamar</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="View Series/Una buena familia americana (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/aIAdaQ0R9G75h3iCckaoxQrHRH.jpg"/>
+        <i>Una buena familia...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/aUQKIpZZ31KWbpdHMCmaV76u78T.jpg"/>
+        <i>The Last of Us</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/cZdsqlIqhRbYNo8ttxb2ThC09Wa.jpg"/>
+        <i>Adolescencia</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="View Series/Dragon Ball Daima (2025).html href=">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/uJw6nLCzQ8SftuCUJQNXTrvjlm4.jpg"/>
+        <i>Dragon ball daima</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/yft2a3vnCblf6wmF6gTqgdKZUMi.jpg"/>
+        <i>The Walking Dead: The...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/nbkbguUUNWQZygVJKjODyELBQk9.jpg"/>
+        <i>Agatha, ¿quién si no?</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/hEb0uSHvhSwsMMRUGUttxqtHKnZ.jpg"/>
+        <i>Bruja Escarlata y Vi...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/8hUZa9LzC4vyQiwX8KadKLIBXWg.jpg"/>
+        <i>Genesis</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/3V7kzJX7hvF0H9CDJsgcWKXTSsR.jpg"/>
+        <i>Naruto Shippuden</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/uYFK6OpX4HseiMPKYPznVXPwZX9.jpg"/>
+        <i>The walking dead</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/spMIIipBp3sz24zIG1oXgGFfcNZ.jpg"/>
+        <i>Moisés y los Diez Man...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+  </div>    
 </div>
-</a>
-<a href="View Series/Una buena familia americana (2025).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/aIAdaQ0R9G75h3iCckaoxQrHRH.jpg"/>
-<i>Una buena familia...</i>
-</div>
-</a>
-<a href="View Series/Dragon Ball Daima (2025).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/uJw6nLCzQ8SftuCUJQNXTrvjlm4.jpg"/>
-<i>Dragon ball daima</i>
-</div>
-</a>
-<a href="View Series/Genesis (2021).HTML">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/8hUZa9LzC4vyQiwX8KadKLIBXWg.jpg"/>
-<i>Genesis</i>
-</div>
-</a>
-<a href="View Series/Naruto Shippuden (2007).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/3V7kzJX7hvF0H9CDJsgcWKXTSsR.jpg"/>
-<i>Naruto Shippuden</i>
-</div>
-</a>
-<a href="View Series/The Walking Dead (2010).HTML">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/uYFK6OpX4HseiMPKYPznVXPwZX9.jpg"/>
-<i>The walking dead</i>
-</div>
-</a>
-</div>
+
 <br/><br/>
+
 <div class="poster">
-<h4 class="alignleft">Recien subidas</h4></div>
-<br/>
-<div class="scrollmenu">
-<a href="View Peliculas/Five night at Freddy´s (2023).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/7BpNtNfxuocYEVREzVMO75hso1l.jpg"/>
-<i>Five Nights at freddy´s</i>
+  <h4 class="alignleft">Recien subidas</h4></div>
+  <br/>
+  <div class="scrollmenu">
+    <a class="card-link" data-href="View Peliculas/Five night at Freddy´s (2023).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/7BpNtNfxuocYEVREzVMO75hso1l.jpg"/>
+        <i>Five Nights at freddy´s</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Terrifier (2013).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/rQR4NQwV9ixWoOHHTJd2Dt0chGc.jpg"/>
+        <i>Terrifier: El inicio</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Terrifier 2 (2022).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/qEAlwXbYk6IHA4ztoS2XFFaa7Xo.jpg"/>
+        <i>Terrifier 2</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Terrifier 3 Payaso (2024).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/63xYQj1BwRFielxsBDXvHIJyXVm.jpg"/>
+        <i>Terrifier 3</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/El guason 2 (2024).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/fCQyAQ2K1N1RM5n79ZyCLRSgZuz.jpg"/>
+        <i>El Guasón 2</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+    <a class="card-link" data-href="View Peliculas/El guason (2019).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/2cta3k9kgsgweUTY2LvMSFjuB6e.jpg"/>
+        <i>El Guasón</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Amateur (2025).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/xzM5pMCIyp8jkGtsFBGcPlRhVBc.jpg"/>
+        <i>El amateur</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/El ladrón de joyas (2025).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/hzuus3qrQct2JeoAs2AGMYzKzjZ.jpg"/>
+        <i>El ladron de joyas</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/El Maravilloso Mago de Oz (2025).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/ruMUv9mtcUoiUWoZmLBBTDbn11J.jpg"/>
+        <i>El maravilloso ma...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Estragos (2025).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/tbsDLmo2Ej8YFM0HKcOGfNMTlyJ.jpg"/>
+        <i>Estragos</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+    <a class="card-link" data-href="View Peliculas/G20 (2025).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/xihssRPgRDZ7xwIjx3xuPTnqPfU.jpg"/>
+        <i>G20</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Novocaine (2025).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/6YbTJhN5GJQOlZ1IyRiCyhKSiJE.jpg"/>
+        <i>Novocaine: Sin dolor</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+    <a class="card-link" data-href="View Peliculas/Pecadores (2025).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/gL6puhup6PXqrKqItWbGA8LF529.jpg"/>
+        <i>Los pecadores</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/La Leyenda de Ochi (2025).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/uyz9qcZdIrUqVrwly3KB5oPUKZO.jpg"/>
+        <i>La leyenda de ochi</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Otro pequeño favor (2025).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/pZr2QCUbsekpiLnZ7788twcLpSn.jpg"/>
+        <i>Otro pequeño favor</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Trollhunters (2021).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/fhhjAX2iDmnZksQWsJ8DdAcDBc5.jpg"/>
+        <i>Trollhunters: El Des...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+  </div>
 </div>
-</a>
-<a href="View Peliculas/Terrifier (2013).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/rQR4NQwV9ixWoOHHTJd2Dt0chGc.jpg"/>
-<i>Terrifier: El inicio</i>
-</div>
-</a>
-<a href="View Peliculas/Terrifier 2 (2022).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/qEAlwXbYk6IHA4ztoS2XFFaa7Xo.jpg"/>
-<i>Terrifier 2</i>
-</div>
-</a>
-<a href="View Peliculas/Terrifier 3 Payaso (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/63xYQj1BwRFielxsBDXvHIJyXVm.jpg"/>
-<i>Terrifier 3</i>
-</div>
-</a>
-<a href="View Peliculas/El guason 2 (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/fCQyAQ2K1N1RM5n79ZyCLRSgZuz.jpg"/>
-<i>El Guasón 2</i>
-</div>
-</a>
-<a href="View Peliculas/El guason (2019).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/2cta3k9kgsgweUTY2LvMSFjuB6e.jpg"/>
-<i>El Guasón</i>
-</div>
-</a>
-<a href="View Peliculas/Amateur (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/xzM5pMCIyp8jkGtsFBGcPlRhVBc.jpg"/>
-<i>El amateur</i>
-</div>
-</a>
-<a href="View Peliculas/El ladrón de joyas (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/hzuus3qrQct2JeoAs2AGMYzKzjZ.jpg"/>
-<i>El ladron de joyas</i>
-</div>
-</a>
-<a href="View Peliculas/El Maravilloso Mago de Oz (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/ruMUv9mtcUoiUWoZmLBBTDbn11J.jpg"/>
-<i>El maravilloso ma...</i>
-</div>
-</a>
-<a href="View Peliculas/Estragos (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/tbsDLmo2Ej8YFM0HKcOGfNMTlyJ.jpg"/>
-<i>Estragos</i>
-</div>
-</a>
-<a href="View Peliculas/G20 (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/xihssRPgRDZ7xwIjx3xuPTnqPfU.jpg"/>
-<i>G20</i>
-</div>
-</a>
-<a href="View Peliculas/Novocaine (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/6YbTJhN5GJQOlZ1IyRiCyhKSiJE.jpg"/>
-<i>Novocaine: Sin dolor</i>
-</div>
-</a>
-<a href="View Peliculas/Pecadores (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/gL6puhup6PXqrKqItWbGA8LF529.jpg"/>
-<i>Los pecadores</i>
-</div>
-</a>
-<a href="View Peliculas/La Leyenda de Ochi (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/uyz9qcZdIrUqVrwly3KB5oPUKZO.jpg"/>
-<i>La leyenda de ochi</i>
-</div>
-</a>
-<a href="View Peliculas/Otro pequeño favor (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/pZr2QCUbsekpiLnZ7788twcLpSn.jpg"/>
-<i>Otro pequeño favor</i>
-</div>
-</a>
-<a href="View Peliculas/Trollhunters (2021).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/fhhjAX2iDmnZksQWsJ8DdAcDBc5.jpg"/>
-<i>Trollhunters: El Des...</i>
-</div>
-</a>
-<a href="View Peliculas/Nonnas (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/6YsEHhqgT6c8nJlS1TL1Zyrxwgw.jpg"/>
-<i>Nonnas</i>
-</div>
-</a>
-<a href="View Peliculas/La rosa de Versalles (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/F4OILPPbBfCYkWoW5be1UZnmJq.jpg"/>
-<i>La rosa de Versalles</i>
-</div>
-</a>
-<a href="View Peliculas/Lo que le falta a esta estrella (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/6AmW8DglQ5VnOfW1lSMSOyfcwmW.jpg"/>
-<i>Lo que le falta a esta...</i>
-</div>
-</a>
-<a href="View Peliculas/Predator Asesino de asesinos (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/qHDsrBZJRx6ZCO4tocFh3gnbosU.jpg"/>
-<i>Predator: Asesino...</i>
-</div>
-</a>
-<a href="View Peliculas/K.O. (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/C4V4XW2igocPP54wqufQKSVQuq.jpg"/>
-<i>K.O</i>
-</div>
-</a>
-<a href="View Peliculas/Viaje de fin de curso Mallorca (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/A8E8EqXqETV8ggPiOkHjaBU8H9N.jpg"/>
-<i>Viaje de fin de curso</i>
-</div>
-</a>
-<a href="View Peliculas/Mi lista de deseos (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/r6K6spYEWf7aDGsY4EdkScZW1Hl.jpg"/>
-<i>Mi lista de deseos</i>
-</div>
-</a>
-<a href="View Peliculas/Terror en el rio (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/kIO7eVOivYH9LptLxdXio5KRor.jpg"/>
-<i>Terror en el rio</i>
-</div>
-</a>
-<a href="">
-<div class="xplus">
-<img class="xaviec" src=""/>
-<i></i>
-</div>
-</a>
-</div>
+
+
 <br/><br/>
+
+
 <div class="poster">
-<h4 class="alignleft">Peliculas <br/>Agregadas</h4><a href="Mostras Mas/movies_2025_grid (1).html"><h4 class="alignright">Ver Todo</h4></a></div>
-<br/>
-<div class="scrollmenu">
-<a href="View Peliculas/Thunderbolts (2025).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/hBH50Mkcrc4m8x73CovLmY7vBx1.jpg"/>
-<i>Thunderbolts*</i>
+  <h4 class="alignleft">Peliculas <br/>Agregadas</h4><a href="Mostras Mas/Peliculas Agregadas.html"><h4 class="alignright">Ver Todo</h4></a></div>
+  <br/>
+  <div class="scrollmenu">
+    
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/fTpbUIwdsfyIldzYvzQi2K4Icws.jpg"/>
+        <i>Cómo entrenar a tu...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/fBgyUqyu3ioTSQjJJE5RFs2EG3B.jpg"/>
+        <i>M3GAN 2.0</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/5LB5GJzcaEBEb3IhjqnYNsqY5Zs.jpg"/>
+        <i>Karate Kid: Legends</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Thunderbolts (2025).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/hBH50Mkcrc4m8x73CovLmY7vBx1.jpg"/>
+        <i>Thunderbolts*</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Echo Valley (2025).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/1E4WCgTodyS7zo8pSp1gZlPO0th.jpg"/>
+        <i>Echo Valley</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+    <a class="card-link" data-href="View Peliculas/1978 (2025).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/iyKixwGhGRas1ppAih8E7SG5QDZ.jpg"/>
+        <i>1978</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Amateur (2025).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/xzM5pMCIyp8jkGtsFBGcPlRhVBc.jpg"/>
+        <i>El amateur</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/El ladrón de joyas (2025).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/hzuus3qrQct2JeoAs2AGMYzKzjZ.jpg"/>
+        <i>El ladron de joyas</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+    <a class="card-link" data-href="View Peliculas/El Maravilloso Mago de Oz (2025).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/ruMUv9mtcUoiUWoZmLBBTDbn11J.jpg"/>
+        <i>El maravilloso ma...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Estragos (2025).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/tbsDLmo2Ej8YFM0HKcOGfNMTlyJ.jpg"/>
+        <i>Estragos</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/G20 (2025).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/xihssRPgRDZ7xwIjx3xuPTnqPfU.jpg"/>
+        <i>G20</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+    <a class="card-link" data-href="View Peliculas/Novocaine (2025).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/6YbTJhN5GJQOlZ1IyRiCyhKSiJE.jpg"/>
+        <i>Novocaine: Sin dolor</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/La Leyenda de Ochi (2025).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/uyz9qcZdIrUqVrwly3KB5oPUKZO.jpg"/>
+        <i>La leyenda de ochi</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Otro pequeño favor (2025).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/pZr2QCUbsekpiLnZ7788twcLpSn.jpg"/>
+        <i>Otro pequeño favor</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+    <a class="card-link" data-href="View Peliculas/Poseída (2025).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/t9MqBGo9BWainDLms66YLiDr5aS.jpg"/>
+        <i>Poseida</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+  </div>
 </div>
-</a>
-<a href="View Peliculas/Echo Valley (2025).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/1E4WCgTodyS7zo8pSp1gZlPO0th.jpg"/>
-<i>Echo Valley</i>
-</div>
-</a>
-<a href="View Peliculas/1978 (2025).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/iyKixwGhGRas1ppAih8E7SG5QDZ.jpg"/>
-<i>1978</i>
-</div>
-</a>
-<a href="View Peliculas/Amateur (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/xzM5pMCIyp8jkGtsFBGcPlRhVBc.jpg"/>
-<i>El amateur</i>
-</div>
-</a>
-<a href="View Peliculas/El ladrón de joyas (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/hzuus3qrQct2JeoAs2AGMYzKzjZ.jpg"/>
-<i>El ladron de joyas</i>
-</div>
-</a>
-<a href="View Peliculas/El Maravilloso Mago de Oz (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/ruMUv9mtcUoiUWoZmLBBTDbn11J.jpg"/>
-<i>El maravilloso ma...</i>
-</div>
-</a>
-<a href="View Peliculas/Estragos (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/tbsDLmo2Ej8YFM0HKcOGfNMTlyJ.jpg"/>
-<i>Estragos</i>
-</div>
-</a>
-<a href="View Peliculas/G20 (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/xihssRPgRDZ7xwIjx3xuPTnqPfU.jpg"/>
-<i>G20</i>
-</div>
-</a>
-<a href="View Peliculas/Novocaine (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/6YbTJhN5GJQOlZ1IyRiCyhKSiJE.jpg"/>
-<i>Novocaine: Sin dolor</i>
-</div>
-</a>
-<a href="View Peliculas/La Leyenda de Ochi (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/uyz9qcZdIrUqVrwly3KB5oPUKZO.jpg"/>
-<i>La leyenda de ochi</i>
-</div>
-</a>
-<a href="View Peliculas/Otro pequeño favor (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/pZr2QCUbsekpiLnZ7788twcLpSn.jpg"/>
-<i>Otro pequeño favor</i>
-</div>
-</a>
-<a href="View Peliculas/Nonnas (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/6YsEHhqgT6c8nJlS1TL1Zyrxwgw.jpg"/>
-<i>Nonnas</i>
-</div>
-</a>
-<a href="View Peliculas/Lo que le falta a esta estrella (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/6AmW8DglQ5VnOfW1lSMSOyfcwmW.jpg"/>
-<i>Lo que le falta a esta...</i>
-</div>
-</a>
-<a href="View Peliculas/K.O. (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/C4V4XW2igocPP54wqufQKSVQuq.jpg"/>
-<i>K.O</i>
-</div>
-</a>
-<a href="View Peliculas/Viaje de fin de curso Mallorca (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/A8E8EqXqETV8ggPiOkHjaBU8H9N.jpg"/>
-<i>Viaje de fin de curso</i>
-</div>
-</a>
-<a href="View Peliculas/Mi lista de deseos (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/r6K6spYEWf7aDGsY4EdkScZW1Hl.jpg"/>
-<i>Mi lista de deseos</i>
-</div>
-</a>
-<a href="View Peliculas/Poseída (2025).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/t9MqBGo9BWainDLms66YLiDr5aS.jpg"/>
-<i>Poseida</i>
-</div>
-</a>
-</div>
+
+
 <br/><br/>
+
+
 <div class="poster">
-<h4 class="alignleft">Peliculas 2025</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
-<br/>
-<div class="scrollmenu">
-<a href="View Peliculas/Thunderbolts (2025).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/hBH50Mkcrc4m8x73CovLmY7vBx1.jpg"/>
-<i>Thunderbolts*</i>
+  <h4 class="alignleft">Peliculas 2025</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
+  <br/>
+  <div class="scrollmenu">
+
+    <a class="card-link" data-href="View Peliculas/Thunderbolts (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/hBH50Mkcrc4m8x73CovLmY7vBx1.jpg"/>
+        <i>Thunderbolts*</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+    <a class="card-link" data-href="View Peliculas/Destino Final Lazos De Sangre (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/pKaSLXmpT6oSRjnnFzGECPt0BRx.jpg"/>
+        <i>Destino Final 6: Lazos...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/1E4WCgTodyS7zo8pSp1gZlPO0th.jpg"/>
+        <i>Echo Valley</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Lilo y Stitch (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/yrZqrGVbmoYZJdncnx60JUhzsGm.jpg"/>
+        <i>Lilo y Stitch</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/1978 (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/iyKixwGhGRas1ppAih8E7SG5QDZ.jpg"/>
+        <i>1978</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Pecadores (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/gL6puhup6PXqrKqItWbGA8LF529.jpg"/>
+        <i>Los pecadores</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/La rosa de Versalles (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/F4OILPPbBfCYkWoW5be1UZnmJq.jpg"/>
+        <i>La rosa de Versalles</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Estragos (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/tbsDLmo2Ej8YFM0HKcOGfNMTlyJ.jpg"/>
+        <i>Estragos</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/K.O. (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/C4V4XW2igocPP54wqufQKSVQuq.jpg"/>
+        <i>K.O</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+    <a class="card-link" data-href="View Peliculas/Harta (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/4d2PJ6QLAVd9w66E918JSWjkgs7.jpg"/>
+        <i>Harta</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Corazón delator (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/5XgEqq8KJVW0R0NhDZCdBV2Pjr0.jpg"/>
+        <i>Corazón delator</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/El último respiro 2025.html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/lhRLEa7xMw8yy4JDTQthQMFij93.jpg"/>
+        <i>El último respiro</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Poseída (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/t9MqBGo9BWainDLms66YLiDr5aS.jpg"/>
+        <i>Poseida</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/La calle del terror La reina del baile (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg"/>
+        <i>La calle del terror: La...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+    <a class="card-link" data-href="View Peliculas/Rehén (2025).HTML">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/oogRn4KOse6OhRUhxvfLiCpz2d5.jpg"/>
+        <i>¡Rehén!</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+    <a class="card-link" data-href="View Peliculas/La viuda negra (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/uuabL0qp3zygLDEjImbPiWR9j2e.jpg"/>
+        <i>La viuda negra</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+  </div>
 </div>
-</a>
-<a href="View Peliculas/Echo Valley (2025).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/1E4WCgTodyS7zo8pSp1gZlPO0th.jpg"/>
-<i>Echo Valley</i>
-</div>
-</a>
-<a href="View Peliculas/1978 (2025).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/iyKixwGhGRas1ppAih8E7SG5QDZ.jpg"/>
-<i>1978</i>
-</div>
-</a>
-<a href="View Peliculas/Pecadores (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/gL6puhup6PXqrKqItWbGA8LF529.jpg"/>
-<i>Los pecadores</i>
-</div>
-</a>
-<a href="View Peliculas/La rosa de Versalles (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/F4OILPPbBfCYkWoW5be1UZnmJq.jpg"/>
-<i>La rosa de Versalles</i>
-</div>
-</a>
-<a href="View Peliculas/Estragos (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/tbsDLmo2Ej8YFM0HKcOGfNMTlyJ.jpg"/>
-<i>Estragos</i>
-</div>
-</a>
-<a href="View Peliculas/K.O. (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/C4V4XW2igocPP54wqufQKSVQuq.jpg"/>
-<i>K.O</i>
-</div>
-</a>
-<a href="View Peliculas/Harta (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/4d2PJ6QLAVd9w66E918JSWjkgs7.jpg"/>
-<i>Harta</i>
-</div>
-</a>
-<a href="View Peliculas/Corazón delator (2025).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/5XgEqq8KJVW0R0NhDZCdBV2Pjr0.jpg"/>
-<i>Corazón delator</i>
-</div>
-</a>
-<a href="View Peliculas/El último respiro 2025.html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/lhRLEa7xMw8yy4JDTQthQMFij93.jpg"/>
-<i>El último respiro</i>
-</div>
-</a>
-<a href="View Peliculas/Poseída (2025).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/t9MqBGo9BWainDLms66YLiDr5aS.jpg"/>
-<i>Poseida</i>
-</div>
-</a>
-<a href="View Peliculas/La calle del terror La reina del baile (2025).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg"/>
-<i>La calle del terror: La...</i>
-</div>
-</a>
-<a href="View Peliculas/Rehén (2025).HTML">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/oogRn4KOse6OhRUhxvfLiCpz2d5.jpg"/>
-<i>¡Rehén!</i>
-</div>
-</a>
-<a href="View Peliculas/La viuda negra (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/uuabL0qp3zygLDEjImbPiWR9j2e.jpg"/>
-<i>La viuda negra</i>
-</div>
-</a>
-<a href="View Peliculas/Pideme lo que quieras (2024).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/5rtaLwyKAjbceww4J1ro8aA8BNB.jpg"/>
-<i>Pídeme lo que quieras</i>
-</div>
-</a>
-<a href="View Peliculas/Contraataque (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/kxnFdLJhi37ZVFDCL1ka0yeQVU5.jpg"/>
-<i>Contraataque</i>
-</div>
-</a>
-<a href="View Peliculas/Lilo y Stitch (2025).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/yrZqrGVbmoYZJdncnx60JUhzsGm.jpg"/>
-<i>Lilo y Stitch</i>
-</div>
-</a>
-<a href="View Peliculas/Destino Final Lazos De Sangre (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/pKaSLXmpT6oSRjnnFzGECPt0BRx.jpg"/>
-<i>Destino Final 6: Lazos...</i>
-</div>
-</a>
-<a href="View Peliculas/Thunderbolts (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/aPVAwfxJc77qGrS2rzhNkJ4VnUB.jpg"/>
-<i>Thunderbolts*</i>
-</div>
-</a>
-</div>
+
+
 <br/><br/>
+
+
 <div class="poster">
-<h4 class="alignleft">Pronto</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
-<br/>
-<div class="scrollmenu">
-<a href="#">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/fbcs5AxrdXwyj1b8bGGMgC9kXrM.jpg"/>
-<i>Gladiador II</i>
+  <h4 class="alignleft">Pronto</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
+  <br/>
+  <div class="scrollmenu">
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/fbcs5AxrdXwyj1b8bGGMgC9kXrM.jpg"/>
+        <i>Gladiador II</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/sO8kPwslPK5iXWDS1RKZvXkO95T.jpg"/>
+        <i>El llanto</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/iCOQUVVaPqRuR3JqF71akguf6Mj.jpg"/>
+        <i>Guerra Civil</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/oV3R0E1GOXVrybojkEDvool22Bi.jpg"/>
+        <i>La niña de la comunión</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/hQpcO9OIGXEZtm7KfUEMtZxXukI.jpg"/>
+        <i>Háblame</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/k6VBhNc66CdGTEdw7sR7GBt7AFY.jpg"/>
+        <i>El hombre lobo</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/o410zKXtZYy2vVBcQJPxzOc9KYc.jpg"/>
+        <i>La huella del mal</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/qDyJuHpn0Sh19fMv52vRTwGBx4g.jpg"/>
+        <i>Pánico en el tren...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/njqLGG2djaHCe4bAG0ZhN9Z4x4t.jpg"/>
+        <i>El contador 2</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/99XUkLH31ArJYf4fqGmu9pmA00u.jpg"/>
+        <i>La partida de go</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/mYK7OYW4w2ZujE8B8GGnVYZWHYD.jpg"/>
+        <i>Rosario: Herencia Mal...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/haOjJGUV00dKlZaJWgjM1UD1cJV.jpg"/>
+        <i>Misión: Imposible...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/3ZMGC839jsKNAweGeQDBZDmu6ka.jpg"/>
+        <i>Mickey 17</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/lpMXvcdOnEg4rvsIjWEImhHI1aH.jpg"/>
+        <i>Algo embarazada</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/2Xkdb7J3juzcLe8IrOheNkDgklZ.jpg"/>
+        <i>Divorcio en negro...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>  
+  </div>
 </div>
-</a>
-<a href="#">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/sO8kPwslPK5iXWDS1RKZvXkO95T.jpg"/>
-<i>El llanto</i>
-</div>
-</a>
-<a href="#">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/iCOQUVVaPqRuR3JqF71akguf6Mj.jpg"/>
-<i>Guerra Civil</i>
-</div>
-</a>
-<a href="">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/oV3R0E1GOXVrybojkEDvool22Bi.jpg"/>
-<i>La niña de la comunión</i>
-</div>
-</a>
-<a href="">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/hQpcO9OIGXEZtm7KfUEMtZxXukI.jpg"/>
-<i>Háblame</i>
-</div>
-</a>
-<a href="">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/yE55btmVfl8Q9uUm61Tj7xVkM44.jpg"/>
-<i>Suky</i>
-</div>
-</a>
-<a href="">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/o5ugZxTNHFFm1gAt4eYJbFVKsBK.jpg"/>
-<i>Reina del Ring</i>
-</div>
-</a>
-<a href="#">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/k6VBhNc66CdGTEdw7sR7GBt7AFY.jpg"/>
-<i>El hombre lobo</i>
-</div>
-</a>
-<a href="">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/o410zKXtZYy2vVBcQJPxzOc9KYc.jpg"/>
-<i>La huella del mal</i>
-</div>
-</a>
-<a href="">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/qVr3H6v4Vb7Mk3zsNxSzarfTp1b.jpg"/>
-<i>El maravilloso Ma...</i>
-</div>
-</a>
-<a href="">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/qDyJuHpn0Sh19fMv52vRTwGBx4g.jpg"/>
-<i>Pánico en el tren...</i>
-</div>
-</a>
-<a href="">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/njqLGG2djaHCe4bAG0ZhN9Z4x4t.jpg"/>
-<i>El contador 2</i>
-</div>
-</a>
-<a href="">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/sT8Z14RDCAd6szzxzWFAU4xcMwg.jpg"/>
-<i>Valiant One</i>
-</div>
-</a>
-<a href="">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/99XUkLH31ArJYf4fqGmu9pmA00u.jpg"/>
-<i>La partida de go</i>
-</div>
-</a>
-<a href="">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/mYK7OYW4w2ZujE8B8GGnVYZWHYD.jpg"/>
-<i>Rosario: Herencia Mal...</i>
-</div>
-</a>
-<a href="">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/haOjJGUV00dKlZaJWgjM1UD1cJV.jpg"/>
-<i>Misión: Imposible...</i>
-</div>
-</a>
-<a href="">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/532tq5d00Xzsl3P1AQ1JdTJQ6S9.jpg"/>
-<i>Deadly Girls Trip</i>
-</div>
-</a>
-<a href="">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/3ZMGC839jsKNAweGeQDBZDmu6ka.jpg"/>
-<i>Mickey 17</i>
-</div>
-</a>
-<a href="">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/lpMXvcdOnEg4rvsIjWEImhHI1aH.jpg"/>
-<i>Algo embarazada</i>
-</div>
-</a>
-<a href="">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/VOMcvBo28KQp3REFJfKnwTEr3G.jpg"/>
-<i>Sugar Baby</i>
-</div>
-</a>
-<a href="">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/2Xkdb7J3juzcLe8IrOheNkDgklZ.jpg"/>
-<i>Divorcio en negro...</i>
-</div>
-</a>
-<a href="">
-<div class="xplus">
-<img class="xaviec" src=""/>
-<i></i>
-</div>
-</a>
-<a href="">
-<div class="xplus">
-<img class="xaviec" src=""/>
-<i></i>
-</div>
-</a>
-</div>
+
+
 <br/><br/>
+
+
 <div class="poster">
-<h4 class="alignleft">Trailers Estreno</h4><a href="Mostras Mas/Trailers.html"><h4 class="alignright">Ver Todo</h4></a></div>
+  <h4 class="alignleft">Trailers Estreno</h4><a href="Mostras Mas/Trailers.html"><h4 class="alignright">Ver Todo</h4></a></div>
+  <br/>
+  <div class="scrollmenu">
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/fTpbUIwdsfyIldzYvzQi2K4Icws.jpg"/>
+        <i>Trailer Cómo entrenar...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/fBgyUqyu3ioTSQjJJE5RFs2EG3B.jpg"/>
+        <i>Trailer M3GAN 2.0</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/5LB5GJzcaEBEb3IhjqnYNsqY5Zs.jpg"/>
+        <i>Trailer Karate Kid...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="Trailers/Trailer El juego del calamar (2021).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/xNvlt4jn2KbuKJoZ9UiVpm7lYjr.jpg"/>
+        <i>El juego Del calamar</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+
+    <a class="card-link" data-href="Trailers/Lilo y Stitch (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/kceHm889ylKW7uTs6mEOYXNeTQ9.jpg"/>
+        <i>Trailer: Lilo y Stitch</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+
+    <a class="card-link" data-href="Trailers/Trailer Destino Final Lazos De Sangre (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/pKaSLXmpT6oSRjnnFzGECPt0BRx.jpg"/>
+        <i>Trailer: Destino Final 6</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+
+    <a class="card-link" data-href="Trailers/El conjuro 4 el culto (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/38eo8njAYnMejGKoYHwvHxibHJZ.jpg"/>
+        <i>Trailer: El conjuro 4</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+
+    <a class="card-link" data-href="Trailers/Trailer La bala perdida (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/bSGXolaGLJZxueTXxEE2WsgEoNh.jpg"/>
+        <i>Trailer: La bala perdida</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/aPVAwfxJc77qGrS2rzhNkJ4VnUB.jpg"/>
+        <i>Trailer: Thunderbolts*</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+  </div>
+</div>
+
+
 <br/>
-<div class="scrollmenu">
-<a href="Trailers/Trailer El juego del calamar (2021).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/xNvlt4jn2KbuKJoZ9UiVpm7lYjr.jpg"/>
-<i>El juego Del calamar</i>
-</div>
-</a>
-<a href="Trailers/Lilo y Stitch (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/kceHm889ylKW7uTs6mEOYXNeTQ9.jpg"/>
-<i>Trailer: Lilo y Stitch</i>
-</div>
-</a>
-<a href="Trailers/Trailer Destino Final Lazos De Sangre (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/pKaSLXmpT6oSRjnnFzGECPt0BRx.jpg"/>
-<i>Trailer: Destino Final 6</i>
-</div>
-</a>
-<a href="Trailers/El conjuro 4 el culto (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/38eo8njAYnMejGKoYHwvHxibHJZ.jpg"/>
-<i>Trailer: El conjuro 4</i>
-</div>
-</a>
-<a href="Trailers/Trailer La bala perdida (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/bSGXolaGLJZxueTXxEE2WsgEoNh.jpg"/>
-<i>Trailer: La bala perdida</i>
-</div>
-</a>
-<a href="Trailers/Thunderbolts (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/aPVAwfxJc77qGrS2rzhNkJ4VnUB.jpg"/>
-<i>Trailer: Thunderbolts*</i>
-</div>
-</a>
-<a href="Trailers/Karol G Mañana fue muy bonito (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/5aXoQYwaQ7JJVUWclHAEXJgiS2M.jpg"/>
-<i>Trailer: Karol G: Ma...</i>
-</div>
-</a>
-<a href="Trailers/Blancanieves (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/7FZhpH4YasGdvY4FUGQJhCusLeg.jpg"/>
-<i>Trailer: Blancanieves</i>
-</div>
-</a>
-<a href="Trailers/Extraterritorial (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/7tWkxxiqraVx1IzYd4DHv6FIvhS.jpg"/>
-<i>Trailer: Extraterritorial</i>
-</div>
-</a>
-<a href="Trailers/Trailer Minecraft (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/bpGgV1GH2XYqZn02WW1C94sMBkQ.jpg"/>
-<i>Trailer: Minecraft</i>
-</div>
-</a>
-<a href="Trailers/Karate Kid Leyendas (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/efNhiZPk71FTYJ30dBkWMfc939D.jpg"/>
-<i>Trailer: Karate Kid 4</i>
-</div>
-</a>
-</div>
-<br/>
+
+
 <div class="poster">
-<h4 class="alignleft">Peliculas 2024</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
+  <h4 class="alignleft">Peliculas 2024</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
+  <br/>
+  <div class="scrollmenu">
+
+    <a class="card-link" data-href="View Peliculas/Azrael (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/62sRNfaCe0GC34N8LhSdb6Sm0Fk.jpg"/>
+        <i>Azrael</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+
+    <a class="card-link" data-href="View Peliculas/El guason 2 (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/fCQyAQ2K1N1RM5n79ZyCLRSgZuz.jpg"/>
+        <i>El Guasón 2</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+
+    <a class="card-link" data-href="View Peliculas/El hoyo 2 (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/jHGgM019xAoy62cKZtDmTxvQlUY.jpg"/>
+        <i>EL HOYO 2</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+
+    <a class="card-link" data-href="View Peliculas/La primera profecia (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/kJkrr39cjRcfz3jR6XcGa8wSkyl.jpg"/>
+        <i>La primera Profecia</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+    
+    <a class="card-link" data-href="View Peliculas/Baki Hanma vs. Kengan Ashura (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/sXybjRq6BsCkWcDBfNphSH9biqn.jpg"/>
+        <i>Baki Hanma vs Ken...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+
+    <a class="card-link" data-href="View Peliculas/Turno nocturno (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/iSSx9Bys64vlOkvkyKXtp19P7Re.jpg"/>
+        <i>Turno nocturno</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+    
+    <a class="card-link" data-href="View Peliculas/Todo bien (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/mKdRfCpWkcH0wEEg6yO4a8ES4TX.jpg"/>
+        <i>¿Todo bien?</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+    
+    <a class="card-link" data-href="View Peliculas/Mufasa El rey león (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/lk4NNdeQrb6zbRSogDSdE6qmjk8.jpg"/>
+        <i>Múfasa: El rey León</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+
+    <a class="card-link" data-href="View Peliculas/Bad Boys 4 Hasta La Muerte.(2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/25PVk2NFoZoCnaqxb4nSQqwxNd7.jpg"/>
+        <i>Bad Boys 4: Hasta...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+    
+    <a class="card-link" data-href="View Peliculas/Moana 2 (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/9yfI8gGG96Dgf9bf7VT3XCRX30T.jpg"/>
+        <i>Moana 2</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+    
+    <a class="card-link" data-href="View Peliculas/Baghead contacto con la muerte (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/5ssaCHmqvTZDVZtcNhNZTzfb7Nj.jpg"/>
+        <i>Baghead: Contacto...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+    
+    <a class="card-link" data-href="View Peliculas/Deadpool y Wolverine (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/hAn57Hu13UU2Klw5wZszNlWngQr.jpg"/>
+        <i>Deadpool y Wolverine</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+
+    <a class="card-link" data-href="View Peliculas/Desaparecidos en la noche (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/uyEFqfRezkNrxh9Lg8fj8IcbkHx.jpg"/>
+        <i>Desaparecidos en...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+
+  </div>
+
+</div>
+
+
 <br/>
-<div class="scrollmenu">
-<a href="View Peliculas/Azrael (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/62sRNfaCe0GC34N8LhSdb6Sm0Fk.jpg"/>
-<i>Azrael</i>
-</div>
-</a>
-<a href="View Peliculas/El guason 2 (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/fCQyAQ2K1N1RM5n79ZyCLRSgZuz.jpg"/>
-<i>El Guasón 2</i>
-</div>
-</a>
-<a href="View Peliculas/El hoyo 2 (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/jHGgM019xAoy62cKZtDmTxvQlUY.jpg"/>
-<i>EL HOYO 2</i>
-</div>
-</a>
-<a href="View Peliculas/La primera profecia (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/kJkrr39cjRcfz3jR6XcGa8wSkyl.jpg"/>
-<i>La primera Profecia</i>
-</div>
-</a>
-<a href="View Peliculas/Baki Hanma vs. Kengan Ashura (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/sXybjRq6BsCkWcDBfNphSH9biqn.jpg"/>
-<i>Baki Hanma vs Ken...</i>
-</div>
-</a>
-<a href="View Peliculas/Turno nocturno (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/iSSx9Bys64vlOkvkyKXtp19P7Re.jpg"/>
-<i>Turno nocturno</i>
-</div>
-</a>
-<a href="View Peliculas/Todo bien (2024).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/mKdRfCpWkcH0wEEg6yO4a8ES4TX.jpg"/>
-<i>¿Todo bien?</i>
-</div>
-</a>
-<a href="View Peliculas/Mufasa El rey león (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/lk4NNdeQrb6zbRSogDSdE6qmjk8.jpg"/>
-<i>Múfasa: El rey León</i>
-</div>
-</a>
-<a href="View Peliculas/Bad Boys 4 Hasta La Muerte.(2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/25PVk2NFoZoCnaqxb4nSQqwxNd7.jpg"/>
-<i>Bad Boys 4: Hasta...</i>
-</div>
-</a>
-<a href="View Peliculas/Moana 2 (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/9yfI8gGG96Dgf9bf7VT3XCRX30T.jpg"/>
-<i>Moana 2</i>
-</div>
-</a>
-<a href="View Peliculas/Baghead contacto con la muerte (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/5ssaCHmqvTZDVZtcNhNZTzfb7Nj.jpg"/>
-<i>Baghead: Contacto...</i>
-</div>
-</a>
-<a href="View Peliculas/Deadpool y Wolverine (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/hAn57Hu13UU2Klw5wZszNlWngQr.jpg"/>
-<i>Deadpool y Wolverine</i>
-</div>
-</a>
-<a href="View Peliculas/Desaparecidos en la noche (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/uyEFqfRezkNrxh9Lg8fj8IcbkHx.jpg"/>
-<i>Desaparecidos en...</i>
-</div>
-</a>
-</div>
-<br/>
+
+
 <div class="poster">
-<a href="#"><h4 class="alignleft"> Acción</h4><h4 class="alignright">Ver Todo</h4></a></div>
+  <a href="#"><h4 class="alignleft"> Acción</h4><h4 class="alignright">Ver Todo</h4></a></div>
+  <br/>
+  <div class="scrollmenu">
+
+    <a class="card-link" data-href="View Peliculas/Novocaine (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/6YbTJhN5GJQOlZ1IyRiCyhKSiJE.jpg"/>
+        <i>Novocaine: Sin dolor</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+    
+    <a class="card-link" data-href="View Peliculas/G20 (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/xihssRPgRDZ7xwIjx3xuPTnqPfU.jpg"/>
+        <i>G20</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+
+    <a class="card-link" data-href="View Peliculas/Pecadores (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/gL6puhup6PXqrKqItWbGA8LF529.jpg"/>
+        <i>Los pecadores</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+    
+    <a class="card-link" data-href="View Peliculas/K.O. (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/C4V4XW2igocPP54wqufQKSVQuq.jpg"/>
+        <i>K.O</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+    
+    <a class="card-link" data-href="View Peliculas/Alarum Código Letal (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/d3QFYKpEY2LSSTh70C227Z2mlwB.jpg"/>
+        <i>Código letal</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+    
+    <a class="card-link" data-href="View Peliculas/La fuente de la eterna juventud (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/nJ9qnZLhmj6wD3NgOe6lKoXJQMx.jpg"/>
+        <i>La fuente de la ju...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+
+    <a class="card-link" data-href="View Peliculas/Karate Kid 4 (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/qU6SAj6arAaEgnrtn4WgIL2l3LS.jpg"/>
+        <i>Karate Kid 4: Legends</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+    
+    <a class="card-link" data-href="View Peliculas/Bala perdida 3 (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/bSGXolaGLJZxueTXxEE2WsgEoNh.jpg"/>
+        <i>Bala perdida 3</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+    
+    <a class="card-link" data-href="View Peliculas/Extraterritorial (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/7tWkxxiqraVx1IzYd4DHv6FIvhS.jpg"/>
+        <i>Extraterritorial</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+    
+    <a class="card-link" data-href="View Peliculas/Bad Boys 4 Hasta La Muerte.(2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/25PVk2NFoZoCnaqxb4nSQqwxNd7.jpg"/>
+        <i>Bad Boys 4: Hasta la...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+    
+    <a class="card-link" data-href="View Peliculas/Detonante (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/mOXgCNK2PKf7xlpsZzybMscFsqm.jpg"/>
+        <i>Detonantes</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+
+    <a class="card-link" data-href="View Peliculas/El Planeta De Los Simios 4 (2024).htm">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/8lfjj21m4vsFbuVrx8y49WNdHR0.jpg"/>
+        <i>El planeta de los...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+    
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/kdefKfrKIqwfwUWuPmTY4fMEr1Q.jpg"/>
+        <i>El duro</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+
+    <a class="card-link" data-href="View Peliculas/60 Minutos (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/cND79ZWPFINDtkA8uwmQo1gnPPE.jpg"/>
+        <i>60 Minutos</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a> 
+    
+    <a class="card-link" data-href="View Peliculas/Uncharted (2022).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/77dlklwA1VJOLCqIhhmkmS39BLH.jpg"/>
+        <i>Uncharted: Fuera del...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+     
+  </div>
+</div>
+
+
 <br/>
-<div class="scrollmenu">
-<a href="View Peliculas/Novocaine (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/6YbTJhN5GJQOlZ1IyRiCyhKSiJE.jpg"/>
-<i>Novocaine: Sin dolor</i>
-</div>
-</a>
-<a href="View Peliculas/G20 (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/xihssRPgRDZ7xwIjx3xuPTnqPfU.jpg"/>
-<i>G20</i>
-</div>
-</a>
-<a href="View Peliculas/Pecadores (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/gL6puhup6PXqrKqItWbGA8LF529.jpg"/>
-<i>Los pecadores</i>
-</div>
-</a>
-<a href="View Peliculas/K.O. (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/C4V4XW2igocPP54wqufQKSVQuq.jpg"/>
-<i>K.O</i>
-</div>
-</a>
-<a href="View Peliculas/Alarum Código Letal (2025).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/d3QFYKpEY2LSSTh70C227Z2mlwB.jpg"/>
-<i>Código letal</i>
-</div>
-</a>
-<a href="View Peliculas/La fuente de la eterna juventud (2025).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/nJ9qnZLhmj6wD3NgOe6lKoXJQMx.jpg"/>
-<i>La fuente de la ju...</i>
-</div>
-</a>
-<a href="View Peliculas/Karate Kid 4 (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/qU6SAj6arAaEgnrtn4WgIL2l3LS.jpg"/>
-<i>Karate Kid 4: Legends</i>
-</div>
-</a>
-<a href="View Peliculas/Bala perdida 3 (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/bSGXolaGLJZxueTXxEE2WsgEoNh.jpg"/>
-<i>Bala perdida 3</i>
-</div>
-</a>
-<a href="View Peliculas/Extraterritorial (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/7tWkxxiqraVx1IzYd4DHv6FIvhS.jpg"/>
-<i>Extraterritorial</i>
-</div>
-</a>
-<a href="View Peliculas/Bad Boys 4 Hasta La Muerte.(2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/25PVk2NFoZoCnaqxb4nSQqwxNd7.jpg"/>
-<i>Bad Boys 4: Hasta la...</i>
-</div>
-</a>
-<a href="View Peliculas/Detonante (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/mOXgCNK2PKf7xlpsZzybMscFsqm.jpg"/>
-<i>Detonante</i>
-</div>
-</a>
-<a href="View Peliculas/El Planeta De Los Simios 4 (2024).htm">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/8lfjj21m4vsFbuVrx8y49WNdHR0.jpg"/>
-<i>El planeta de los...</i>
-</div>
-</a>
-<a href="#">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/kdefKfrKIqwfwUWuPmTY4fMEr1Q.jpg"/>
-<i>El duro</i>
-</div>
-</a>
-<a href="View Peliculas/60 Minutos (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/cND79ZWPFINDtkA8uwmQo1gnPPE.jpg"/>
-<i>60 Minutos</i>
-</div>
-</a>
-<a href="View Peliculas/Uncharted (2022).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/77dlklwA1VJOLCqIhhmkmS39BLH.jpg"/>
-<i>Uncharted: Fuera del...</i>
-</div>
-</a>
-</div>
-<br/>
+
+
 <div class="poster">
-<h4 class="alignleft">Artes-Marciales</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
+  <h4 class="alignleft">Artes-Marciales</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
+  <br/>
+  <div class="scrollmenu">
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/w77jjsOaMHFurNdKqgpJIAJkE3E.jpg"/>
+        <i>Su ultimmo combate</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/60 Minutos (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/cND79ZWPFINDtkA8uwmQo1gnPPE.jpg"/>
+        <i>60 Minutos</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/kdefKfrKIqwfwUWuPmTY4fMEr1Q.jpg"/>
+        <i>El duro</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/cvsXj3I9Q2iyyIo95AecSd1tad7.jpg"/>
+        <i>Creed 3</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Rendirse Jamas 1.html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/nas9XShlxUZrNZCyBdf4AAXpRiq.jpg"/>
+        <i>Rendirse jamas</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Invicto VI (2016).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/7pheng7VQANWXePPBQuLgHuKTns.jpg"/>
+        <i>Invicto IV</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+  
+  </div>
+</div>
+
+
 <br/>
-<div class="scrollmenu">
-<a href="#">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/w77jjsOaMHFurNdKqgpJIAJkE3E.jpg"/>
-<i>Sin subir</i>
-</div>
-</a>
-<a href="View Peliculas/60 Minutos (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/cND79ZWPFINDtkA8uwmQo1gnPPE.jpg"/>
-<i>60 Minutos</i>
-</div>
-</a>
-<a href="#">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/kdefKfrKIqwfwUWuPmTY4fMEr1Q.jpg"/>
-<i>Sin subir</i>
-</div>
-</a>
-<a href="go:creed3">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/cvsXj3I9Q2iyyIo95AecSd1tad7.jpg"/>
-<i>Sin subir</i>
-</div>
-</a>
-<a href="View Peliculas/Rendirse Jamas 1.html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/nas9XShlxUZrNZCyBdf4AAXpRiq.jpg"/>
-<i>Rendirse jamas</i>
-</div>
-</a>
-<a href="View Peliculas/Invicto VI (2016).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/7pheng7VQANWXePPBQuLgHuKTns.jpg"/>
-<i>Invicto IV</i>
-</div>
-</a>
-</div>
-<br/>
+
+
 <div class="poster">
-<h4 class="alignleft">Animacion</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
+  <h4 class="alignleft">Animacion</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
+  <br/>
+  <div class="scrollmenu">
+
+    <a class="card-link" data-href="View Peliculas/Trollhunters (2021).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/fhhjAX2iDmnZksQWsJ8DdAcDBc5.jpg"/>
+        <i>Trollhunters: El des...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/La rosa de Versalles (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/F4OILPPbBfCYkWoW5be1UZnmJq.jpg"/>
+        <i>La rosa de Versalles</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Lo que le falta a esta estrella (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/6AmW8DglQ5VnOfW1lSMSOyfcwmW.jpg"/>
+        <i>Lo que le falta a esta...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Predator Asesino de asesinos (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/qHDsrBZJRx6ZCO4tocFh3gnbosU.jpg"/>
+        <i>predator: Asesino...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Lilo y Stitch (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/kceHm889ylKW7uTs6mEOYXNeTQ9.jpg"/>
+        <i>Lilo y Stitch</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Sonic 3 La Peliculas (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/j1O319PWd4OdrpqPY4uzFNh2JC.jpg"/>
+        <i>Sonic 3: La Pelicula</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Mufasa El rey león (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/lk4NNdeQrb6zbRSogDSdE6qmjk8.jpg"/>
+        <i>Múfasa: El rey León</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Kung Fu panda 4 (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/xHeK1mttldtCEyWbPZbo9bSKUqd.jpg"/>
+        <i>Kung fu panda 4</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Moana 2 (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/9yfI8gGG96Dgf9bf7VT3XCRX30T.jpg"/>
+        <i>Moana 2</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Intensamente 2.html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/4HEJdpcmTGm3BWWic31G4aCnuC6.jpg"/>
+        <i>Intensamente 2</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+    <a class="card-link" data-href="View Peliculas/Turbo (2013).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/rJPEcuMyjjKd9Tg3mO1K4a9iAi9.jpg"/>
+        <i>Turbo</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+  
+  </div>
+</div>
+
+
 <br/>
-<div class="scrollmenu">
-<a href="View Peliculas/Trollhunters (2021).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/fhhjAX2iDmnZksQWsJ8DdAcDBc5.jpg"/>
-<i>Trollhunters: El des...</i>
-</div>
-</a>
-<a href="View Peliculas/La rosa de Versalles (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/F4OILPPbBfCYkWoW5be1UZnmJq.jpg"/>
-<i>La rosa de Versalles</i>
-</div>
-</a>
-<a href="View Peliculas/Lo que le falta a esta estrella (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/6AmW8DglQ5VnOfW1lSMSOyfcwmW.jpg"/>
-<i>Lo que le falta a esta...</i>
-</div>
-</a>
-<a href="View Peliculas/Predator Asesino de asesinos (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/qHDsrBZJRx6ZCO4tocFh3gnbosU.jpg"/>
-<i>Predator: Asesino...</i>
-</div>
-</a>
-<a href="View Peliculas/Lilo y Stitch (2025).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/kceHm889ylKW7uTs6mEOYXNeTQ9.jpg"/>
-<i>Lilo y Stitch</i>
-</div>
-</a>
-<a href="View Peliculas/Sonic 3 La Peliculas (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/j1O319PWd4OdrpqPY4uzFNh2JC.jpg"/>
-<i>Sonic 3: La Pelicula</i>
-</div>
-</a>
-<a href="View Peliculas/Mufasa El rey león (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/lk4NNdeQrb6zbRSogDSdE6qmjk8.jpg"/>
-<i>Múfasa: El rey León</i>
-</div>
-</a>
-<a href="View Peliculas/Kung Fu panda 4 (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/xHeK1mttldtCEyWbPZbo9bSKUqd.jpg"/>
-<i>Kung fu panda 4</i>
-</div>
-</a>
-<a href="View Peliculas/Moana 2 (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/9yfI8gGG96Dgf9bf7VT3XCRX30T.jpg"/>
-<i>Moana 2</i>
-</div>
-</a>
-<a href="View Peliculas/Intensamente 2.html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/4HEJdpcmTGm3BWWic31G4aCnuC6.jpg"/>
-<i>Intensamente 2</i>
-</div>
-</a>
-<a href="View Peliculas/Turbo (2013).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/rJPEcuMyjjKd9Tg3mO1K4a9iAi9.jpg"/>
-<i>Turbo</i>
-</div>
-</a>
-</div>
-<br/>
+
+
 <div class="poster">
-<h4 class="alignleft">Anime Peliculas</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
+  <h4 class="alignleft">Anime Peliculas</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
+  <br/>
+  <div class="scrollmenu">
+
+    <a class="card-link" data-href="View Peliculas/Baki Hanma vs. Kengan Ashura (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/sXybjRq6BsCkWcDBfNphSH9biqn.jpg"/>
+        <i>Baki Hanma vs Ken...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/by5ZMxYI4RD4CzKMJhX6X74JhFl.jpg"/>
+        <i>Los siete pecados: El...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+    <a class="card-link" data-href="View Peliculas/Boruto 2015.html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/t9F4Yzi8rZO8Rn55ceyQPAofrI9.jpg"/>
+        <i>Boruto: La pelicula</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Dragon Ball Super Broly.html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/5vx8zZ7fDsA8KMO6fiVs3pZmNWQ.jpg"/>
+        <i>Dragon ball super: Broly</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Dragon Ball Super Super Hero (2022).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/amSIghYUItDQBlVm8TyFK7YaBje.jpg"/>
+        <i>Dragon ball super: Hero</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Dragon Ball Z La resurreccion de Freezer (2015).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/6QUqAk7quyFIOZoFJmRp14eiorv.jpg"/>
+        <i>Dragon ball z: La...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Dragon Ball Z La Batalla De Los Dioses.html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/cIyPFIeSKNTiWU9Zny0c0IVPQRY.jpg"/>
+        <i>Dragon ball z: La...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Steven Universe (2019).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/iVa7A7priXkDMspXAIFVsHbL016.jpg"/>
+        <i>Steven Universe</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+
 <br/>
-<div class="scrollmenu">
-<a href="View Peliculas/Baki Hanma vs. Kengan Ashura (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/sXybjRq6BsCkWcDBfNphSH9biqn.jpg"/>
-<i>Baki Hanma vs Ken...</i>
-</div>
-</a>
-<a href="go:El rencor2">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/by5ZMxYI4RD4CzKMJhX6X74JhFl.jpg"/>
-<i>Los siete pecados: El...</i>
-</div>
-</a>
-<a href="View Peliculas/Boruto 2015.html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/t9F4Yzi8rZO8Rn55ceyQPAofrI9.jpg"/>
-<i>Boruto: La pelicula</i>
-</div>
-</a>
-<a href="View Peliculas/Dragon Ball Super Broly.html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/5vx8zZ7fDsA8KMO6fiVs3pZmNWQ.jpg"/>
-<i>Dragon ball super: Broly</i>
-</div>
-</a>
-<a href="View Peliculas/Dragon Ball Super Super Hero (2022).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/amSIghYUItDQBlVm8TyFK7YaBje.jpg"/>
-<i>Dragon ball super: Hero</i>
-</div>
-</a>
-<a href="View Peliculas/Dragon Ball Z La resurreccion de Freezer (2015).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/6QUqAk7quyFIOZoFJmRp14eiorv.jpg"/>
-<i>Dragon ball z: La...</i>
-</div>
-</a>
-<a href="View Peliculas/Dragon Ball Z La Batalla De Los Dioses.html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/cIyPFIeSKNTiWU9Zny0c0IVPQRY.jpg"/>
-<i>Dragon ball z: La...</i>
-</div>
-</a>
-<a href="View Peliculas/Steven Universe (2019).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/iVa7A7priXkDMspXAIFVsHbL016.jpg"/>
-<i>Steven Universe</i>
-</div>
-</a>
-</div>
-<br/>
+
+
 <div class="poster">
-<h4 class="alignleft">Comedia</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
+  <h4 class="alignleft">Comedia</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
+  <br/>
+  <div class="scrollmenu">
+
+    <a class="card-link" data-href="View Peliculas/La rosa de Versalles (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/6YsEHhqgT6c8nJlS1TL1Zyrxwgw.jpg"/>
+        <i>Nonnas</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Viaje de fin de curso Mallorca (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/A8E8EqXqETV8ggPiOkHjaBU8H9N.jpg"/>
+        <i>Viaje de fin de curso</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/jCerTXgMp5iiSoJofwkKskp2w45.jpg"/>
+        <i>Chicas malas</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+    <a class="card-link" data-href="View Peliculas/Ricky Stanicky El impostor (2024) .html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/oJQdLfrpl4CQsHAKIxd3DJqYTVq.jpg"/>
+        <i>Rick Stanicky: El im...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Diario de mi vagina (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/hyFKdAN5Dl93mt2JHfcfvIyf38g.jpg"/>
+        <i>Diario de mi vagina</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+    <a class="card-link" data-href="View Peliculas/Barbie (2023).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/iuFNMS8U5cb6xfzi51Dbkovj7vM.jpg"/>
+        <i>Barbie</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/j741ip55NOzabrllOXHJv2vpag7.jpg"/>
+        <i>¡Hasta la madre!</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/mNkAOFyb4TV2gTSc92jx2O9evtj.jpg"/>
+        <i>Doblemente embarazo 2</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/liLN69YgoovHVgmlHJ876PKi5Yi.jpg"/>
+        <i>Ghosted</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Mi abuelo es un peligro (2016).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/7r9pn1g3lY95DjiwzxpmNqlJzeO.jpg"/>
+        <i>Mi abuelo es un peligro</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Donde esta el fantasma (2013).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/pAVGfrADDvKMgoZnJLSCiLBCCiG.jpg"/>
+        <i>¿Donde esta el fantasma?</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+
 <br/>
-<div class="scrollmenu">
-<a href="View Peliculas/La rosa de Versalles (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/6YsEHhqgT6c8nJlS1TL1Zyrxwgw.jpg"/>
-<i>Nonnas</i>
+
+
+<div class="poster">
+  <h4 class="alignleft">Crimen</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
+  <br/>
+  <div class="scrollmenu">
+
+    <a class="card-link" data-href="View Peliculas/Rehén (2025).HTML">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/oogRn4KOse6OhRUhxvfLiCpz2d5.jpg"/>
+        <i>¡Rehén!</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/El guason 2 (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/fCQyAQ2K1N1RM5n79ZyCLRSgZuz.jpg"/>
+        <i>El Guasón 2</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Asesino serial (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/gs9GQ9n95BdVE8Uv1ZKNS1bSwCf.jpg"/>
+        <i>Asesino serial</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Mara (2018).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/gQDmXAef1Oc1SXci5mui2x5DJwt.jpg"/>
+        <i>Mara</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/5wY5mqmwIu5XOhDBhoBY9SStjR8.jpg"/>
+        <i>Tiempos de huracan</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/El guason (2019).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/2cta3k9kgsgweUTY2LvMSFjuB6e.jpg"/>
+        <i>El Guasón</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+  </div>
 </div>
-</a>
-<a href="View Peliculas/Viaje de fin de curso Mallorca (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/A8E8EqXqETV8ggPiOkHjaBU8H9N.jpg"/>
-<i>Viaje de fin de curso</i>
+
+
+<br/>
+
+
+<div class="poster">
+  <h4 class="alignleft">Deporte</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
+  <br/>
+  <div class="scrollmenu">
+
+    <a class="card-link" data-href="View Peliculas/¡A Ganar! (2018).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/6GVYL9K2IBFrfIqwwFqMPu5DdC5.jpg"/>
+        <i>¡A Ganar!</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/aVWX0t95Igd8kKC3ejmtHCy1vX6.jpg"/>
+        <i>Yo, Tonya</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+  </div>
 </div>
-</a>
-<a href="View Peliculas/Ricky Stanicky El impostor (2024) .html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w500/oJQdLfrpl4CQsHAKIxd3DJqYTVq.jpg"/>
-<i>Rick Stanicky: El im...</i>
+
+
+<br/>
+
+
+<div class="poster">
+  <h4 class="alignleft">Drama</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
+  <br/>
+  <div class="scrollmenu">
+
+    <a class="card-link" data-href="View Peliculas/El Maravilloso Mago de Oz (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/ruMUv9mtcUoiUWoZmLBBTDbn11J.jpg"/>
+        <i>El maravilloso ma...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Harta (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/4d2PJ6QLAVd9w66E918JSWjkgs7.jpg"/>
+        <i>Harta</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+    <a class="card-link" data-href="View Peliculas/Rehén (2025).HTML">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/oogRn4KOse6OhRUhxvfLiCpz2d5.jpg"/>
+        <i>¡Rehén!</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Tierra Baja (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/7c6HPcnw0oaO8H2vBwSLqTtFYx9.jpg"/>
+        <i>Tierra Baja</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+    <a class="card-link" data-href="View Peliculas/La evaluación (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/rCGwGWI4a2EaNQCyTe4vDfoiMtk.jpg"/>
+        <i>La evaluación</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Mala influencia (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/oogmlZekRCHP0JDhHKDZIyDIfpP.jpg"/>
+        <i>Mala influencia</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Desaparecidos en la noche (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/uyEFqfRezkNrxh9Lg8fj8IcbkHx.jpg"/>
+        <i>Desaparecidos en...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Todo bien (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/mKdRfCpWkcH0wEEg6yO4a8ES4TX.jpg"/>
+        <i>¿Todo bien?</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+    <a class="card-link" data-href="View Peliculas/La joven y el mar (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/n3KE8fbiOCr6qktIpE52wWErBMi.jpg"/>
+        <i>La joven y el mar</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Miller's Girl (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/qz7BADRc32DYQCmgooJwI8UWRRC.jpg"/>
+        <i>Miller's Girl</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Nahir (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/w4TcFexTfo5X7NkvNSeTrRSu9Sj.jpg"/>
+        <i>Nahir</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/cCHhhS8mYPlp4AQUSpdiZPGOiwR.jpg"/>
+        <i>Gran turismo</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+  
+  </div>
 </div>
-</a>
-<a href="View Peliculas/Diario de mi vagina (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w500/hyFKdAN5Dl93mt2JHfcfvIyf38g.jpg"/>
-<i>Diario de mi vagina</i>
+
+
+<br/>
+
+
+<div class="poster">
+  <h4 class="alignleft">Disney</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
+  <br/>
+  <div class="scrollmenu">
+
+    <a class="card-link" data-href="View Peliculas/Blancanieves (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/7FZhpH4YasGdvY4FUGQJhCusLeg.jpg"/>
+        <i>Blancanieves</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/9NXAlFEE7WDssbXSMgdacsUD58Y.jpg"/>
+        <i>Pitter pan y Wendy</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+    <a class="card-link" data-href="View Peliculas/Peter Pan (1953).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/tDvGRWSdqT31ADijJf9OhbTbQ77.jpg"/>
+        <i>Peter pan</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Toy Story 4 (2019).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/pTTYykZZwYhj9qpAqiFxtUAamLI.jpg"/>
+        <i>Toy Story 4</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/vHbizQYlkL8MwtOdsdWaPuR5N5w.jpg"/>
+        <i>La dama y el vaga...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Encanto (2021).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/ybXzCBc9x9bcM1ukmwhErutRiLO.jpg"/>
+        <i>Encanto</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/fuKMIP50VbVwZWFuO49iqvMk9v0.jpg"/>
+        <i>La dama y el vaga..</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/90Shq6yU7vqXskmZbX2AEf57ddy.jpg"/>
+        <i>Bambi</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Tierra de osos (2003).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/xoEY7339ewJ4jvDZZqM3FKVJb8r.jpg"/>
+        <i>Tierra de osos</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/6ZXiWy6NSgBTDP4yAd5eWTBZg9z.jpg"/>
+        <i>La aristogatos</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+    <a class="card-link" data-href="View Peliculas/Tierra de osos 2 (2006).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/"/>
+        <i>Tierra de osos 2</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+  
+  </div>
 </div>
-</a>
-<a href="View Peliculas/Barbie (2023).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w500/iuFNMS8U5cb6xfzi51Dbkovj7vM.jpg"/>
-<i>Barbie</i>
+
+
+<br/>
+
+
+<div class="poster">
+  <h4 class="alignleft">Guerra</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
+  <br/>
+  <div class="scrollmenu">
+
+    <a class="card-link" data-href="View Peliculas/Contraataque (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/kxnFdLJhi37ZVFDCL1ka0yeQVU5.jpg"/>
+        <i>Contraataque</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Warfare. Tiempo de guerra (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/fkVpNJugieKeTu7Se8uQRqRag2M.jpg"/>
+        <i>Tiempo de guerra</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Heroico (2023).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/tRD18JW9iKqmwkQKvzPYDQetRoI.jpg"/>
+        <i>Heroico</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/zoo5k1Rsx4Bel0ng9G8yRwku2ND.jpg"/>
+        <i>Napoleon</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Corazones de acero (2016).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/kbtH5G8L8REzy72LkLmKYoBVaGv.jpg"/>
+        <i>Corazones de...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/v5ZCVgxlFmlpFnR9DWVUkOVw4hW.jpg"/>
+        <i>Hasta el ultimo...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/dqu7nUtKTLdpM7DaJvD4zcSXhn1.jpg"/>
+        <i>Malditos bastar...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/aMbZHpLbZfRqjMnGb7LJCjBaGdU.jpg"/>
+        <i>El francotirador</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+  </div>
 </div>
-</a>
-<a href="h">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/jCerTXgMp5iiSoJofwkKskp2w45.jpg"/>
-<i>Sin subir</i>
+
+
+<br/>
+
+
+<div class="poster">
+  <h4 class="alignleft">Heroes</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
+  <br/>
+  <div class="scrollmenu">
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/hBH50Mkcrc4m8x73CovLmY7vBx1.jpg"/>
+        <i>Thunderbolts*</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Capitan america el nuevo mundo (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/pVMSRyAiye7gZ8NtuCt1qgbspY9.jpg"/>
+        <i>Capitan America: El...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Deadpool y Wolverine (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/hAn57Hu13UU2Klw5wZszNlWngQr.jpg"/>
+        <i>Deadpool y Wolverine</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/tvl0OXmNQtLrPk7fJ8UHvLrD37R.jpg"/>
+        <i>Viuda negra</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Thor 4 Amor y Trueno (2022).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/pASJkJfb5tPXn3AW2aAFLMn6Afu.jpg"/>
+        <i>Thor 4: Amor y trueno</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Doctor Strange en el multiverso de la locura (2022).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/xu0RftYPT4crY4ZSf9SMa5UM8dr.jpg"/>
+        <i>Doctor Strange: Mul...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Spider-Man 3 Sin camino a casa (2021).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/rkLhaNa37IwzWis8rzWMAYTCdIK.jpg"/>
+        <i>Spider-Man 3: Sin cami...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Los vengadores endgame (2019).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/br6krBFpaYmCSglLBWRuhui7tPc.jpg"/>
+        <i>Avengers: Endgame</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/zdZ2ZykDKGkUuGgOszqrt1fn3cx.jpg"/>
+        <i>Doctor Strange</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+  </div>
 </div>
-</a>
-<a href="#">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w500/j741ip55NOzabrllOXHJv2vpag7.jpg"/>
-<i>Sin subir</i>
+
+
+<br/>
+
+
+<div class="poster">
+  <h4 class="alignleft">Musica</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
+  <br/>
+  <div class="scrollmenu">
+
+    <a class="card-link" data-href="View Peliculas/Banger (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/x2pegSby27ebOwW361GJb1aKcxa.jpg"/>
+        <i>Banger</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Karol G Mañana fue muy bonito (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/5aXoQYwaQ7JJVUWclHAEXJgiS2M.jpg"/>
+        <i>Karol G</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-adulto="true" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://cinepelayo.com/wp-content/uploads/2025/01/cartel-cantar-desnuda.jpg"/>
+        <i>Cantar desnuda</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Freestyle (2023).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/8jwbiJB8Am1N9OsqaJs9vrGerlG.jpg"/>
+        <i>Freestyle</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/CATO (2021).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/lTCsGvAjqBbqp7T5ziK28SeDfVT.jpg"/>
+        <i>CATO</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+  </div>
 </div>
-</a>
-<a href="#">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/mNkAOFyb4TV2gTSc92jx2O9evtj.jpg"/>
-<i>Sin subir</i>
+
+
+<br/>
+
+
+<div class="poster">
+  <h4 class="alignleft">Romance</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
+  <br/>
+  <div class="scrollmenu">
+
+    <a class="card-link" data-href="View Peliculas/Mi lista de deseos (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/r6K6spYEWf7aDGsY4EdkScZW1Hl.jpg"/>
+        <i>Mi lista de deseos</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Corazón delator (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/5XgEqq8KJVW0R0NhDZCdBV2Pjr0.jpg"/>
+        <i>Corazón delator</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Tierra Baja (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/7c6HPcnw0oaO8H2vBwSLqTtFYx9.jpg"/>
+        <i>Tierra Baja</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Pideme lo que quieras (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/5rtaLwyKAjbceww4J1ro8aA8BNB.jpg"/>
+        <i>Pídeme lo que quieras</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Almas marcadas Rule + Shaw (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/6rFgrN5k4c1HrVoyr0zNDdH4bK5.jpg"/>
+        <i>Almas Marcadas</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Mala influencia (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/oogmlZekRCHP0JDhHKDZIyDIfpP.jpg"/>
+        <i>Mala Influencia</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Anora (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/tZCrWnyN4zEtJiFem5TFoYT8nxI.jpg"/>
+        <i>Anora</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Suggar Baby (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/uLbDZIDAbN6SIiBr7Z2eMZ9212S.jpg"/>
+        <i>Suggar Baby</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+    <a class="card-link" data-href="View Peliculas/Desafiante Rivales (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/Aiqfn4XtXUPr7QNsDsAKNQ1aOKV.jpg"/>
+        <i>Desafiante Rivales</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/After 1 Aquí empieza todo (2019).HTML">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/5kZxlS9vLExy3hZA5GfNFg8oJgZ.jpg"/>
+        <i>After: Aqui empieza...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Eva (2021).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/bXZ3j3kQgCRZj7KD4Q5F9m5ABaQ.jpg"/>
+        <i>Eva</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/jz8T3hrU6GuMqSuQ4Rbd4MJUeaq.jpg"/>
+        <i>365 Dias</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+  
+  </div>
 </div>
-</a>
-<a href="#">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w500/liLN69YgoovHVgmlHJ876PKi5Yi.jpg"/>
-<i>Sin subir</i>
+
+
+<br/>
+
+
+<div class="poster">
+  <h4 class="alignleft">Suspenso</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
+  <br/>
+  <div class="scrollmenu">
+
+    <a class="card-link" data-href="View Peliculas/Amateur (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/xzM5pMCIyp8jkGtsFBGcPlRhVBc.jpg"/>
+        <i>El amateur</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Estragos (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/tbsDLmo2Ej8YFM0HKcOGfNMTlyJ.jpg"/>
+        <i>Estragos</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/El ladrón de joyas (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/hzuus3qrQct2JeoAs2AGMYzKzjZ.jpg"/>
+        <i>El ladron de joyas</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Otro pequeño favor (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/pZr2QCUbsekpiLnZ7788twcLpSn.jpg"/>
+        <i>Otro pequeño favor</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/La viuda negra (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/uuabL0qp3zygLDEjImbPiWR9j2e.jpg"/>
+        <i>La viuda negra</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/El último respiro 2025.html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/lhRLEa7xMw8yy4JDTQthQMFij93.jpg"/>
+        <i>El último respiro</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Contraataque (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/kxnFdLJhi37ZVFDCL1ka0yeQVU5.jpg"/>
+        <i>Contraataque</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+  </div>
 </div>
-</a>
-<a href="View Peliculas/Mi abuelo es un peligro (2016).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/7r9pn1g3lY95DjiwzxpmNqlJzeO.jpg"/>
-<i>Mi abuelo es un peligro</i>
+
+<br/>
+
+
+<div class="poster">
+  <h4 class="alignleft">Terror</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
+  <br/>
+  <div class="scrollmenu">
+
+    <a class="card-link" data-href="">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/gL6puhup6PXqrKqItWbGA8LF529.jpg"/>
+        <i>Los pecadores</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Poseída (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/t9MqBGo9BWainDLms66YLiDr5aS.jpg"/>
+        <i>Poseida</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+    <a class="card-link" data-href="View Peliculas/La calle del terror La reina del baile (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg"/>
+        <i>La calle del terror: La...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Until Dawn Noche de terror (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/vAYTXSUnQjmTFcm97BhROQav1wF.jpg"/>
+        <i>Until Dawn: Noche de...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Destino Final Lazos De Sangre (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/pKaSLXmpT6oSRjnnFzGECPt0BRx.jpg"/>
+        <i>Destino Final 6: La...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/La Acompañante (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/nyloao2GWttUvS7KVcEM2eSDwUn.jpg"/>
+        <i>La acompañante</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Presencia (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/8mRO5AdZ4Rn1crgjTHaUnWWhJXB.jpg"/>
+        <i>Presencia</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/El Mono (2025).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/z15wy8YqFG8aCAkDQJKR63nxSmd.jpg"/>
+        <i>El mono</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+    <a class="card-link" data-href="View Peliculas/Terrifier 3 Payaso (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/63xYQj1BwRFielxsBDXvHIJyXVm.jpg"/>
+        <i>Terrifier 3</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Baghead contacto con la muerte (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/5ssaCHmqvTZDVZtcNhNZTzfb7Nj.jpg"/>
+        <i>Baghead: contacto...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+    <a class="card-link" data-href="View Peliculas/Mientras duermes (2011).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/aDi56oSNirZStVwgl8R12nkQrIk.jpg"/>
+        <i>Mientras duermes</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/El hoyo 2 (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/jHGgM019xAoy62cKZtDmTxvQlUY.jpg"/>
+        <i>EL HOYO 2</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Turno nocturno (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/iSSx9Bys64vlOkvkyKXtp19P7Re.jpg"/>
+        <i>Turno nocturno</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Tarot (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/sS9ePS66VV2HMUPk4pyA5qAyhII.jpg"/>
+        <i>Tarot</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/La primera profecia (2024).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/kJkrr39cjRcfz3jR6XcGa8wSkyl.jpg"/>
+        <i>La primera profecia</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Martyrs (2008).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/5kymocKK0SfyEEV0ohNEBz1lxNx.jpg"/>
+        <i>Martyrs</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/Mara (2018).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/gQDmXAef1Oc1SXci5mui2x5DJwt.jpg"/>
+        <i>Mara</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
+    <a class="card-link" data-href="View Peliculas/No estarás sola (2022).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/moBrEYoOxLRc1LsFl8IXeilYwtq.jpg"/>
+        <i>No estaras sola</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+  </div>
 </div>
-</a>
-<a href="View Peliculas/Donde esta el fantasma (2013).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/pAVGfrADDvKMgoZnJLSCiLBCCiG.jpg"/>
-<i>¿Donde esta el fantasma?</i>
+
+
+<br/>
+
+
+<div class="poster">
+  <h4 class="alignleft">Prueba No entrar</h4><a href="m"><h4 class="alignright"></h4></a></div>
+  <br/>
+  <div class="scrollmenu">
+
+    <a class="card-link" data-href="View Series/WandaVision (2021) copy 2.html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="Mostras Mas/Prueba MKV.jpg"/>
+        <i>Prueba</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    
+  </div>
 </div>
-</a>
-</div>
+
 <br/><br/>
-<div class="poster">
-<h4 class="alignleft">Crimen</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
-<br/>
-<div class="scrollmenu">
-<a href="View Peliculas/Rehén (2025).HTML">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/oogRn4KOse6OhRUhxvfLiCpz2d5.jpg"/>
-<i>¡Rehén!</i>
-</div>
-</a>
-<a href="View Peliculas/El guason 2 (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/fCQyAQ2K1N1RM5n79ZyCLRSgZuz.jpg"/>
-<i>El Guasón 2</i>
-</div>
-</a>
-<a href="View Peliculas/Asesino serial (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/gs9GQ9n95BdVE8Uv1ZKNS1bSwCf.jpg"/>
-<i>Asesino serial</i>
-</div>
-</a>
-<a href="View Peliculas/Mara (2018).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/gQDmXAef1Oc1SXci5mui2x5DJwt.jpg"/>
-<i>Mara</i>
-</div>
-</a>
-<a href="go:TempoDH">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/5wY5mqmwIu5XOhDBhoBY9SStjR8.jpg"/>
-<i>Tiempos de huracan</i>
-</div>
-</a>
-<a href="View Peliculas/El guason (2019).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/2cta3k9kgsgweUTY2LvMSFjuB6e.jpg"/>
-<i>El Guasón</i>
-</div>
-</a>
-</div>
-<br/>
-<div class="poster">
-<h4 class="alignleft">Deporte</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
-<br/>
-<div class="scrollmenu">
-<a href="View Peliculas/¡A Ganar! (2018).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/6GVYL9K2IBFrfIqwwFqMPu5DdC5.jpg"/>
-<i>¡A Ganar!</i>
-</div>
-</a>
-<a href="#">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/aVWX0t95Igd8kKC3ejmtHCy1vX6.jpg"/>
-<i>Yo, Tonya</i>
-</div>
-</a>
-</div>
-<br/><br/>
-<div class="poster">
-<h4 class="alignleft">Drama</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
-<br/>
-<div class="scrollmenu">
-<a href="View Peliculas/El Maravilloso Mago de Oz (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/ruMUv9mtcUoiUWoZmLBBTDbn11J.jpg"/>
-<i>El maravilloso ma...</i>
-</div>
-</a>
-<a href="View Peliculas/Harta (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/4d2PJ6QLAVd9w66E918JSWjkgs7.jpg"/>
-<i>Harta</i>
-</div>
-</a>
-<a href="View Peliculas/Rehén (2025).HTML">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/oogRn4KOse6OhRUhxvfLiCpz2d5.jpg"/>
-<i>¡Rehén!</i>
-</div>
-</a>
-<a href="View Peliculas/Tierra Baja (2025).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/7c6HPcnw0oaO8H2vBwSLqTtFYx9.jpg"/>
-<i>Tierra Baja</i>
-</div>
-</a>
-<a href="View Peliculas/La evaluación (2025).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/rCGwGWI4a2EaNQCyTe4vDfoiMtk.jpg"/>
-<i>La evaluación</i>
-</div>
-</a>
-<a href="View Peliculas/Mala influencia (2025).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/oogmlZekRCHP0JDhHKDZIyDIfpP.jpg"/>
-<i>Mala influencia</i>
-</div>
-</a>
-<a href="View Peliculas/Desaparecidos en la noche (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/uyEFqfRezkNrxh9Lg8fj8IcbkHx.jpg"/>
-<i>Desaparecidos en...</i>
-</div>
-</a>
-<a href="View Peliculas/Todo bien (2024).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/mKdRfCpWkcH0wEEg6yO4a8ES4TX.jpg"/>
-<i>¿Todo bien?</i>
-</div>
-</a>
-<a href="View Peliculas/La joven y el mar (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/n3KE8fbiOCr6qktIpE52wWErBMi.jpg"/>
-<i>La joven y el mar</i>
-</div>
-</a>
-<a href="View Peliculas/Miller's Girl (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/qz7BADRc32DYQCmgooJwI8UWRRC.jpg"/>
-<i>Miller's Girl</i>
-</div>
-</a>
-<a href="View Peliculas/Nahir (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/w4TcFexTfo5X7NkvNSeTrRSu9Sj.jpg"/>
-<i>Nahir</i>
-</div>
-</a>
-<a href="#">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/cCHhhS8mYPlp4AQUSpdiZPGOiwR.jpg"/>
-<i>Sin subir</i>
-</div>
-</a>
-</div>
-<br/>
-<div class="poster">
-<h4 class="alignleft">Disney</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
-<br/>
-<div class="scrollmenu">
-<a href="View Peliculas/Blancanieves (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/7FZhpH4YasGdvY4FUGQJhCusLeg.jpg"/>
-<i>Blancanieves</i>
-</div>
-</a>
-<a href="go:PeterPan23">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w500/9NXAlFEE7WDssbXSMgdacsUD58Y.jpg"/>
-<i>Pitter Pan y Wendy</i>
-</div>
-</a>
-<a href="View Peliculas/Peter Pan (1953).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/tDvGRWSdqT31ADijJf9OhbTbQ77.jpg"/>
-<i>Peter pan</i>
-</div>
-</a>
-<a href="View Peliculas/Toy Story 4 (2019).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/pTTYykZZwYhj9qpAqiFxtUAamLI.jpg"/>
-<i>Toy Story 4</i>
-</div>
-</a>
-<a href="#">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/vHbizQYlkL8MwtOdsdWaPuR5N5w.jpg"/>
-<i>La dama y el vaga....</i>
-</div>
-</a>
-<a href="View Peliculas/Encanto (2021).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/ybXzCBc9x9bcM1ukmwhErutRiLO.jpg"/>
-<i>Encanto</i>
-</div>
-</a>
-<a href="#">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/fuKMIP50VbVwZWFuO49iqvMk9v0.jpg"/>
-<i>Sin subir</i>
-</div>
-</a>
-<a href="#">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/90Shq6yU7vqXskmZbX2AEf57ddy.jpg"/>
-<i>Sin subir</i>
-</div>
-</a>
-<a href="View Peliculas/Tierra de osos (2003).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/xoEY7339ewJ4jvDZZqM3FKVJb8r.jpg"/>
-<i>Tierra de osos</i>
-</div>
-</a>
-<a href="">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/6ZXiWy6NSgBTDP4yAd5eWTBZg9z.jpg"/>
-<i>Sin subir</i>
-</div>
-</a>
-<a href="View Peliculas/Tierra de osos 2 (2006).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLgjEU_SHjJm5fYdH8BKEwBqKKleQiUceU-A&amp;s"/>
-<i>Tierra de osos 2</i>
-</div>
-</a>
-</div>
-<br/>
-<div class="poster">
-<h4 class="alignleft">Guerra</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
-<br/>
-<div class="scrollmenu">
-<a href="View Peliculas/Contraataque (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/kxnFdLJhi37ZVFDCL1ka0yeQVU5.jpg"/>
-<i>Contraataque</i>
-</div>
-</a>
-<a href="View Peliculas/Warfare. Tiempo de guerra (2025).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/fkVpNJugieKeTu7Se8uQRqRag2M.jpg"/>
-<i>Tiempo de guerra</i>
-</div>
-</a>
-<a href="View Peliculas/Heroico (2023).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w500/tRD18JW9iKqmwkQKvzPYDQetRoI.jpg"/>
-<i>Heroico</i>
-</div>
-</a>
-<a href="go:Napoleon">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/zoo5k1Rsx4Bel0ng9G8yRwku2ND.jpg"/>
-<i>Napoleon</i>
-</div>
-</a>
-<a href="View Peliculas/Corazones de acero (2016).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/kbtH5G8L8REzy72LkLmKYoBVaGv.jpg"/>
-<i>Corazones de...</i>
-</div>
-</a>
-<a href="#">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/v5ZCVgxlFmlpFnR9DWVUkOVw4hW.jpg"/>
-<i>Sin subir</i>
-</div>
-</a>
-<a href="#">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/dqu7nUtKTLdpM7DaJvD4zcSXhn1.jpg"/>
-<i>Sin subir</i>
-</div>
-</a>
-<a href="#">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/aMbZHpLbZfRqjMnGb7LJCjBaGdU.jpg"/>
-<i>Sin subir</i>
-</div>
-</a>
-<a href="#">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/vTfqiOZ4bZZZpIJp8sXT1UB6QS5.jpg"/>
-<i>Sin subir</i>
-</div>
-</a>
-</div>
-<br/>
-<div class="poster">
-<h4 class="alignleft">Heroes</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
-<br/>
-<div class="scrollmenu">
-<a href="View Peliculas/Thunderbolts (2025).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/hBH50Mkcrc4m8x73CovLmY7vBx1.jpg"/>
-<i>Thunderbolts*</i>
-</div>
-</a>
-<a href="View Peliculas/Capitan america el nuevo mundo (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/pVMSRyAiye7gZ8NtuCt1qgbspY9.jpg"/>
-<i>Capitan America: El...</i>
-</div>
-</a>
-<a href="View Peliculas/Deadpool y Wolverine (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/hAn57Hu13UU2Klw5wZszNlWngQr.jpg"/>
-<i>Deadpool y Wolverine</i>
-</div>
-</a>
-<a href="go:ViudaNegra">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/tvl0OXmNQtLrPk7fJ8UHvLrD37R.jpg"/>
-<i>Viuda negra <br/></i>
-</div>
-</a>
-<a href="View Peliculas/Thor 4 Amor y Trueno (2022).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/pASJkJfb5tPXn3AW2aAFLMn6Afu.jpg"/>
-<i>Thor: Amor y trueno</i>
-</div>
-</a>
-<a href="View Peliculas/Doctor Strange en el multiverso de la locura (2022).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/xu0RftYPT4crY4ZSf9SMa5UM8dr.jpg"/>
-<i>Doctor Strange: Mul...</i>
-</div>
-</a>
-<a href="View Peliculas/Spider-Man 3 Sin camino a casa (2021).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/rkLhaNa37IwzWis8rzWMAYTCdIK.jpg"/>
-<i>Spider-Man 3: Sin cami...</i>
-</div>
-</a>
-<a href="View Peliculas/Los vengadores endgame (2019).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/1ELa9bm6zxIADz8u71VZtvNzx3k.jpg"/>
-<i>Avengers: Endgame</i>
-</div>
-</a>
-<a href="go:DStrange1">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/zdZ2ZykDKGkUuGgOszqrt1fn3cx.jpg"/>
-<i>Doctor Strange</i>
-</div>
-</a>
-</div>
-<br/>
-<div class="poster">
-<h4 class="alignleft">Musica</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
-<br/>
-<div class="scrollmenu">
-<a href="View Peliculas/Banger (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/x2pegSby27ebOwW361GJb1aKcxa.jpg"/>
-<i>Banger</i>
-</div>
-</a>
-<a href="View Peliculas/Karol G Mañana fue muy bonito (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/5aXoQYwaQ7JJVUWclHAEXJgiS2M.jpg"/>
-<i>Karol G</i>
-</div>
-</a>
-<a href="View Peliculas/Freestyle (2023).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/8jwbiJB8Am1N9OsqaJs9vrGerlG.jpg"/>
-<i>Freestyle</i>
-</div>
-</a>
-<a href="View Peliculas/CATO (2021).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/lTCsGvAjqBbqp7T5ziK28SeDfVT.jpg"/>
-<i>CATO</i>
-</div>
-</a>
-</div>
-<br/>
-<div class="poster">
-<h4 class="alignleft">Romance</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
-<br/>
-<div class="scrollmenu">
-<a href="View Peliculas/Mi lista de deseos (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/r6K6spYEWf7aDGsY4EdkScZW1Hl.jpg"/>
-<i>Mi lista de deseos</i>
-</div>
-</a>
-<a href="View Peliculas/Corazón delator (2025).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/5XgEqq8KJVW0R0NhDZCdBV2Pjr0.jpg"/>
-<i>Corazón delator</i>
-</div>
-</a>
-<a href="View Peliculas/Tierra Baja (2025).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/7c6HPcnw0oaO8H2vBwSLqTtFYx9.jpg"/>
-<i>Tierra Baja</i>
-</div>
-</a>
-<a href="View Peliculas/Pideme lo que quieras (2024).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/5rtaLwyKAjbceww4J1ro8aA8BNB.jpg"/>
-<i>Pídeme lo que quieras</i>
-</div>
-</a>
-<a href="View Peliculas/Almas marcadas Rule + Shaw (2025).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/6rFgrN5k4c1HrVoyr0zNDdH4bK5.jpg"/>
-<i>Almas Marcadas</i>
-</div>
-</a>
-<a href="View Peliculas/Mala influencia (2025).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/oogmlZekRCHP0JDhHKDZIyDIfpP.jpg"/>
-<i>Mala Influencia</i>
-</div>
-</a>
-<a href="View Peliculas/Anora (2024).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/tZCrWnyN4zEtJiFem5TFoYT8nxI.jpg"/>
-<i>Anora</i>
-</div>
-</a>
-<a href="View Peliculas/Suggar Baby (2024).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/uLbDZIDAbN6SIiBr7Z2eMZ9212S.jpg"/>
-<i>Suggar Baby</i>
-</div>
-</a>
-<a href="View Peliculas/Desafiante Rivales (2024).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/Aiqfn4XtXUPr7QNsDsAKNQ1aOKV.jpg"/>
-<i>Desafiante Rivales</i>
-</div>
-</a>
-<a href="View Peliculas/After 1 Aquí empieza todo (2019).HTML">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/5kZxlS9vLExy3hZA5GfNFg8oJgZ.jpg"/>
-<i>After: Aqui empieza...</i>
-</div>
-</a>
-<a href="View Peliculas/Eva (2021).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w500/bXZ3j3kQgCRZj7KD4Q5F9m5ABaQ.jpg"/>
-<i>Eva</i>
-</div>
-</a>
-<a href="View Peliculas/365 dias (2020).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/jz8T3hrU6GuMqSuQ4Rbd4MJUeaq.jpg"/>
-<i>365 Dias</i>
-</div>
-</a>
-</div>
-<br/>
-<div class="poster">
-<h4 class="alignleft">Suspenso</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
-<br/>
-<div class="scrollmenu">
-<a href="View Peliculas/Amateur (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/xzM5pMCIyp8jkGtsFBGcPlRhVBc.jpg"/>
-<i>El amateur</i>
-</div>
-</a>
-<a href="View Peliculas/Estragos (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/tbsDLmo2Ej8YFM0HKcOGfNMTlyJ.jpg"/>
-<i>Estragos</i>
-</div>
-</a>
-<a href="View Peliculas/El ladrón de joyas (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/hzuus3qrQct2JeoAs2AGMYzKzjZ.jpg"/>
-<i>El ladron de joyas</i>
-</div>
-</a>
-<a href="View Peliculas/Otro pequeño favor (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/pZr2QCUbsekpiLnZ7788twcLpSn.jpg"/>
-<i>Otro pequeño favor</i>
-</div>
-</a>
-<a href="View Peliculas/La viuda negra (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/uuabL0qp3zygLDEjImbPiWR9j2e.jpg"/>
-<i>La viuda negra</i>
-</div>
-</a>
-<a href="View Peliculas/El último respiro 2025.html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/lhRLEa7xMw8yy4JDTQthQMFij93.jpg"/>
-<i>El último respiro</i>
-</div>
-</a>
-<a href="View Peliculas/Contraataque (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/kxnFdLJhi37ZVFDCL1ka0yeQVU5.jpg"/>
-<i>Contraataque</i>
-</div>
-</a>
-</div>
-<br/><br/>
-<div class="poster">
-<h4 class="alignleft">Terror</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
-<br/>
-<div class="scrollmenu">
-<a href="">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/gL6puhup6PXqrKqItWbGA8LF529.jpg"/>
-<i>Los pecadores</i>
-</div>
-</a>
-<a href="View Peliculas/Poseída (2025).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/t9MqBGo9BWainDLms66YLiDr5aS.jpg"/>
-<i>Poseida</i>
-</div>
-</a>
-<a href="View Peliculas/La calle del terror La reina del baile (2025).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/kYeTcmPmuMvBgmwOdOtR5fUwRuH.jpg"/>
-<i>La calle del terror: La...</i>
-</div>
-</a>
-<a href="View Peliculas/Until Dawn Noche de terror (2025).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/vAYTXSUnQjmTFcm97BhROQav1wF.jpg"/>
-<i>Until Dawn: Noche de...</i>
-</div>
-</a>
-<a href="View Peliculas/Destino Final Lazos De Sangre (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/pKaSLXmpT6oSRjnnFzGECPt0BRx.jpg"/>
-<i>Destino Final 6: La...</i>
-</div>
-</a>
-<a href="View Peliculas/La Acompañante (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/nyloao2GWttUvS7KVcEM2eSDwUn.jpg"/>
-<i>La acompañante</i>
-</div>
-</a>
-<a href="View Peliculas/Presencia (2025).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/8mRO5AdZ4Rn1crgjTHaUnWWhJXB.jpg"/>
-<i>Presencia</i>
-</div>
-</a>
-<a href="View Peliculas/El Mono (2025).html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/z15wy8YqFG8aCAkDQJKR63nxSmd.jpg"/>
-<i>El mono</i>
-</div>
-</a>
-<a href="View Peliculas/Terrifier 3 Payaso (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/63xYQj1BwRFielxsBDXvHIJyXVm.jpg"/>
-<i>Terrifier 3</i>
-</div>
-</a>
-<a href="View Peliculas/Baghead contacto con la muerte (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/5ssaCHmqvTZDVZtcNhNZTzfb7Nj.jpg"/>
-<i>Baghead: contacto...</i>
-</div>
-</a>
-<a href="View Peliculas/Mientras duermes (2011).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/aDi56oSNirZStVwgl8R12nkQrIk.jpg"/>
-<i>Mientras duermes</i>
-</div>
-</a>
-<a href="View Peliculas/El hoyo 2 (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/jHGgM019xAoy62cKZtDmTxvQlUY.jpg"/>
-<i>EL HOYO 2</i>
-</div>
-</a>
-<a href="View Peliculas/Turno nocturno (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/iSSx9Bys64vlOkvkyKXtp19P7Re.jpg"/>
-<i>Turno nocturno</i>
-</div>
-</a>
-<a href="View Peliculas/Tarot (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/sS9ePS66VV2HMUPk4pyA5qAyhII.jpg"/>
-<i>Tarot</i>
-</div>
-</a>
-<a href="View Peliculas/La primera profecia (2024).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/kJkrr39cjRcfz3jR6XcGa8wSkyl.jpg"/>
-<i>La primera profecia</i>
-</div>
-</a>
-<a href="View Peliculas/Martyrs (2008).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/5kymocKK0SfyEEV0ohNEBz1lxNx.jpg"/>
-<i>Martyrs</i>
-</div>
-</a>
-<a href="View Peliculas/Mara (2018).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/gQDmXAef1Oc1SXci5mui2x5DJwt.jpg"/>
-<i>Mara</i>
-</div>
-</a>
-<a href="View Peliculas/No estarás sola (2022).html">
-<div class="xplus">
-<img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/moBrEYoOxLRc1LsFl8IXeilYwtq.jpg"/>
-<i>No estaras sola</i>
-</div>
-</a>
-</div>
-<br/><br/>
-<div class="poster">
-<h4 class="alignleft">Prueba No entrar</h4><a href="m"><h4 class="alignright"></h4></a></div>
-<br/>
-<div class="scrollmenu">
-<a href="View Series/WandaVision (2021) copy 2.html">
-<div class="xplus">
-<img alt="" class="xaviec" loading="lazy" src="Mostras Mas/Prueba MKV.jpg"/>
-<i>Prueba</i>
-</div>
-</a>
-</div>
-<br/><br/>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <script src="https://dl.dropbox.com/s/x2to4fmvv2ftcqn/xscript.js"></script>
+
 <!-- Menú Inferior Fijo -->
+
 <nav class="menu-inferior">
-<a href="index.html"><i class="fas fa-home"></i><span>Inicio</span></a>
-<a href="Menus Peliculas Series/Precio.html"><i class="fas fa-dollar-sign"></i><span>Precio</span></a>
-<a href="View Peliculas/favoritos.html"><i class="fas fa-heart"></i><span>Favoritos</span></a>
-<a href="Buscar/Buscador.html"><i class="fas fa-search"></i><span>Buscar</span></a>
-<a href="Menus Peliculas Series/Compartir.html"><i class="fas fa-share-alt"></i><span>Compartir</span></a>
-<a href="View Peliculas/historial_usuario.html"><i class="fas fa-history"></i><span>Historial</span></a>
+  <a href="#"><i class="fas fa-home"></i><span>Inicio</span></a>
+  <a href="Menus Peliculas Series/Precio.html"><i class="fas fa-dollar-sign"></i><span>Precio</span></a>
+  <a href="View Peliculas/favoritos.html"><i class="fas fa-heart"></i><span>Favoritos</span></a>
+  <a href="Buscar/Buscador.html"><i class="fas fa-search"></i><span>Buscar</span></a>
+  <a href="Menus Peliculas Series/Compartir.html"><i class="fas fa-share-alt"></i><span>Compartir</span></a>
+  <a href="View Peliculas/historial_usuario.html"><i class="fas fa-history"></i><span>Historial</span></a>
 </nav>
+
 <style>
 @media (max-width: 768px) {
   .menu-inferior {
@@ -2501,5 +3241,262 @@ document.querySelector('.carousel').addEventListener('mouseleave', startAutoplay
 window.addEventListener('resize', updateSlider);
 updateSlider();
 startAutoplay();
-</script></body>
+</script></br><script>
+document.querySelectorAll('.card-link').forEach(link => {
+  const dataHref = link.getAttribute('data-href');
+  if (!dataHref || dataHref.trim() === "") {
+    const lock = link.querySelector('.lock-icon');
+    if (lock) lock.style.display = 'block';
+    link.setAttribute('href', 'javascript:void(0);');
+    link.style.pointerEvents = 'none';
+    link.style.opacity = '0.5';
+  } else {
+    link.setAttribute('href', dataHref);
+  }
+});
+</script>
+<script>
+  window.addEventListener("load", function () {
+    setTimeout(() => {
+      const lock = document.querySelector(".lock-icon");
+      if (lock) {
+        lock.textContent = "🔓";
+        lock.classList.add("open");
+      }
+    }, 2000);
+  });
+</script>
+
+<!--REBOTE DE IMAGEN AL SELECCIONAR-->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".card-link .xplus").forEach(el => {
+    el.addEventListener("touchstart", () => {
+      el.classList.remove("tap-animate");
+      void el.offsetWidth;
+      el.classList.add("tap-animate");
+    });
+  });
+});
+</script>
+
+<!--MAYOR DE 18-->
+
+<!-- Modal HTML -->
+<div id="age-modal" style="display: none;" class="modal-backdrop">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h2>¿Eres mayor de edad?</h2>
+    <p>Ingresa tu año de nacimiento:</p>
+    <input type="number" id="birth-year" placeholder="Ej: 2006" />
+    <div class="modal-actions">
+      <button onclick="validateAge()">Sí</button>
+      <button onclick="denyAccessTemporary()">No</button>
+    </div>
+  </div>
+</div>
+
+<div id="block-message" style="display: none;" class="block-modal">
+  <div class="block-content">
+    <button class="block-close" onclick="hideBlockModal()">✕</button>
+    <p>No puedes acceder al contenido +18 por 30 segundos.</p>
+  </div>
+</div>
+
+
+<!-- Estilos del modal -->
+<style>
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.modal-box {
+  background: #00000063;
+  color: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  max-width: 300px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+}
+.modal-actions button {
+  margin: 10px;
+  padding: 8px 15px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background: #cf0b56ff;
+  color: white;
+}
+.modal-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+input, button, select, textarea {
+  font: inherit;
+  font-size: 100%;
+  color: #000000;
+  line-height: normal;
+}
+
+/*MENSAJE FLOTANTE*/
+
+.block-modal {
+  position: fixed;
+  bottom: 70px;
+  right: 55px;
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 15px 20px;
+  border-radius: 12px;
+  z-index: 99999;
+  max-width: 300px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.block-content {
+  position: relative;
+  padding-right: 14px;
+  line-height: 1.6;
+}
+
+.block-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+</style>
+
+<!-- Lógica JS -->
+<script>
+function closeModal() {
+  document.getElementById('age-modal').style.display = 'none';
+}
+
+function showBlockModal() {
+  const modal = document.getElementById('block-message');
+  modal.style.display = 'block';
+  setTimeout(() => {
+    hideBlockModal();
+  }, 30000); // 30 segundos
+}
+
+function hideBlockModal() {
+  const modal = document.getElementById('block-message');
+  modal.style.display = 'none';
+}
+
+function denyAccessPermanently() {
+  localStorage.setItem('isBanned', 'true');
+  closeModal();
+  alert('Acceso bloqueado permanentemente. No puedes acceder al contenido +18.');
+}
+
+function validateAge() {
+  const year = parseInt(document.getElementById('birth-year').value);
+  const currentYear = new Date().getFullYear();
+  const age = currentYear - year;
+
+  if (!year || year > currentYear || year < 1900) {
+    alert("Año inválido.");
+    return;
+  }
+
+  if (age >= 18) {
+    sessionStorage.setItem('isAdultSession', 'true');
+    closeModal();
+    if (window._adultLinkTarget) {
+      window.location.href = window._adultLinkTarget;
+      window._adultLinkTarget = null;
+    }
+  } else {
+    denyAccessPermanently();
+  }
+}
+
+function isBlocked() {
+  const blockedUntil = localStorage.getItem('blockedUntil');
+  return blockedUntil && new Date().getTime() < parseInt(blockedUntil);
+}
+
+function isPermanentlyBanned() {
+  return localStorage.getItem('isBanned') === 'true';
+}
+
+function checkAgeAndRedirect(e, link) {
+  e.preventDefault();
+
+  if (isPermanentlyBanned()) {
+    alert("Has sido bloqueado permanentemente del contenido +18.");
+    return;
+  }
+
+  if (isBlocked()) {
+    showBlockModal(); // << esta línea muestra el nuevo modal
+    return;
+  }
+
+  window._adultLinkTarget = link.getAttribute('href') || link.getAttribute('data-href');
+  sessionStorage.removeItem('isAdultSession');
+  document.getElementById('birth-year').value = "";
+  document.getElementById('age-modal').style.display = 'flex';
+}
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('a[data-adulto="true"]').forEach(link => {
+    link.addEventListener('click', function (e) {
+      checkAgeAndRedirect(e, this);
+    });
+  });
+});
+
+/*Mensaje flotante*/
+
+function showBlockModal() {
+  const modal = document.getElementById('block-message');
+  modal.style.display = 'block';
+
+  setTimeout(() => {
+    modal.style.display = 'none';
+  }, 5000);
+}
+
+function hideBlockModal() {
+  const modal = document.getElementById('block-message');
+  modal.style.display = 'none';
+}
+
+</script>
+
+
+
+
+</body>
 </html>
