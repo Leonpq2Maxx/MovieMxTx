@@ -289,6 +289,8 @@
     /*End Carousel*/
     
 </style>
+
+<!--TAMAÑO DE TEXTO Y CAMBIO DE COLOR-->
 <style>
   .xplus {
     color: var(--headC);
@@ -309,6 +311,8 @@ i {
 
 
 </style>
+
+<!--CANDADO-->
 <style>
 .xplus {
   position: relative;
@@ -327,6 +331,8 @@ i {
   display: none;
 }
 </style>
+
+<!--CANDADO-->
 <style>
 .lock-icon {
   font-size: 28px;
@@ -350,7 +356,7 @@ i {
 }
 </style>
 
-
+<!--ROBOTE DE CANDADO-->
 <style>
 .lock-icon {
   display: inline-block;
@@ -365,16 +371,18 @@ i {
 </style>
 
 
+
 <style>
-@keyframes bounce {
-  0%   { transform: scale(1); }
-  30%  { transform: scale(1.1); }
-  50%  { transform: scale(0.95); }
-  70%  { transform: scale(1.05); }
+@keyframes bounce-tap {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.05); }
+  50% { transform: scale(0.95); }
+  75% { transform: scale(1.02); }
   100% { transform: scale(1); }
 }
-.bounce {
-  animation: bounce 0.6s ease;
+
+.xplus.tap-animate {
+  animation: bounce-tap 0.5s ease;
 }
 </style>
 
@@ -2915,11 +2923,11 @@ document.querySelectorAll('.card-link').forEach(link => {
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll('.movie img').forEach(img => {
-    img.addEventListener('touchstart', () => {
-      img.classList.remove('bounce');
-      void img.offsetWidth;
-      img.classList.add('bounce');
+  document.querySelectorAll(".card-link .xplus").forEach(el => {
+    el.addEventListener("touchstart", () => {
+      el.classList.remove("tap-animate");
+      void el.offsetWidth;
+      el.classList.add("tap-animate");
     });
   });
 });
