@@ -114,7 +114,7 @@
       h2 { font-size: 1.3rem; }
       h3, h4 { font-size: 1.1rem; }
       .info, .sinopsis p, .serie p {
-        font-size: 1rem !important;
+        font-size: 0.80rem !important;
       }
     }
 
@@ -384,19 +384,6 @@
       }, 3000);
     }
   </script>
-
-  <!--RETROCEDER SIN SALTOS BRUSCOS AL INDEX-->
-
-  <script>
-  // Interceptar el botón de atrás
-  window.addEventListener("popstate", function () {
-    window.location.href = "../index.html";
-  });
-
-  // Empujar un estado al historial (invisible)
-  history.pushState(null, null, location.href);
-</script>
-
   
   <script>
     document.addEventListener('DOMContentLoaded', () => {
