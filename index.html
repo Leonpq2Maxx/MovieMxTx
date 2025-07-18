@@ -12,6 +12,15 @@
 <link href="https://fonts.googleapis.com/css2?family=PT+Sans&amp;display=swap" rel="stylesheet"/>
 <link href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" rel="stylesheet"/>
 <style>
+/* Asegura visibilidad del botón +18 */
+#open18Btn {
+  display: block !important;
+  color: red !important;
+}
+.menu-item.visible {
+  display: inline-block !important;
+}
+
     .alignright {
         padding: 5px 10px;
         border-radius: 10px;
@@ -84,6 +93,15 @@
 }
         </style>
 <style>
+/* Asegura visibilidad del botón +18 */
+#open18Btn {
+  display: block !important;
+  color: red !important;
+}
+.menu-item.visible {
+  display: inline-block !important;
+}
+
     /* Variable color */
 :root{
     --headC: #000000 ;
@@ -292,6 +310,15 @@
 
 <!--TAMAÑO DE TEXTO Y CAMBIO DE COLOR-->
 <style>
+/* Asegura visibilidad del botón +18 */
+#open18Btn {
+  display: block !important;
+  color: red !important;
+}
+.menu-item.visible {
+  display: inline-block !important;
+}
+
   .xplus {
     color: var(--headC);
     transition: color 0.3s ease;
@@ -314,6 +341,15 @@ i {
 
 <!--CANDADO-->
 <style>
+/* Asegura visibilidad del botón +18 */
+#open18Btn {
+  display: block !important;
+  color: red !important;
+}
+.menu-item.visible {
+  display: inline-block !important;
+}
+
 .xplus {
   position: relative;
   display: inline-block;
@@ -334,6 +370,15 @@ i {
 
 <!--CANDADO-->
 <style>
+/* Asegura visibilidad del botón +18 */
+#open18Btn {
+  display: block !important;
+  color: red !important;
+}
+.menu-item.visible {
+  display: inline-block !important;
+}
+
 .lock-icon {
   font-size: 28px;
   display: inline-block;
@@ -358,6 +403,15 @@ i {
 
 <!--ROBOTE DE CANDADO-->
 <style>
+/* Asegura visibilidad del botón +18 */
+#open18Btn {
+  display: block !important;
+  color: red !important;
+}
+.menu-item.visible {
+  display: inline-block !important;
+}
+
 .lock-icon {
   display: inline-block;
   animation: pulse 1s infinite ease-in-out;
@@ -373,6 +427,15 @@ i {
 
 <!--REBOTE DE IMAGEN AL SELECCIONAR-->
 <style>
+/* Asegura visibilidad del botón +18 */
+#open18Btn {
+  display: block !important;
+  color: red !important;
+}
+.menu-item.visible {
+  display: inline-block !important;
+}
+
 @keyframes bounce-tap {
   0% { transform: scale(1); }
   25% { transform: scale(1.05); }
@@ -388,7 +451,87 @@ i {
 
 </head>
 <body class="oneGrd MN-2 mobS hdMn bD onIndx onHm" id="mainCont">
-<script>/*<![CDATA[*/ (localStorage.getItem('mode')) === 'darkmode' ? document.querySelector('#mainCont').classList.add('drK') : document.querySelector('#mainCont').classList.remove('drK') /*]]>*/</script>
+
+<script>
+const scriptURL = "https://script.google.com/macros/s/AKfycbyDUIlAWudwKTH1asmwqbmpa2PS91y2VZFY_vMC_jE2rT5cclnRixt1byBfI9vvQd3m/exec";
+
+const modal = document.getElementById("modal18");
+const modalClose = document.getElementById("modalClose18");
+const openBtn = document.getElementById("open18Btn");
+const closeBtn = document.getElementById("close18Btn");
+const menu18 = document.getElementById("menu18Item");
+const submitBtn = document.getElementById("submit18");
+const emailField = document.getElementById("email18");
+const passField = document.getElementById("pass18");
+const msg18 = document.getElementById("msg18");
+const forgotLink = document.getElementById("forgotPass");
+
+openBtn.onclick = () => modal.classList.remove("hidden");
+document.querySelector(".close18").onclick = () => modal.classList.add("hidden");
+document.querySelector(".closeModalClose18").onclick = () => modalClose.classList.add("hidden");
+document.getElementById("cancelClose18").onclick = () => modalClose.classList.add("hidden");
+
+submitBtn.onclick = async () => {
+  const email = emailField.value.trim();
+  const pass = passField.value.trim();
+  msg18.innerText = "";
+  if (!email || !pass) {
+    msg18.innerText = "Completa los campos.";
+    return;
+  }
+  const res = await fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "validar",
+      email: email,
+      password: pass
+    }),
+  });
+  const data = await res.json();
+  if (data.acceso) {
+    modal.classList.add("hidden");
+    localStorage.setItem("acceso18", "1");
+    menu18.classList.add("visible");
+    closeBtn.classList.remove("hidden");
+  } else {
+    msg18.innerText = data.motivo || "Error.";
+  }
+};
+
+window.addEventListener("DOMContentLoaded", () => {
+  if (localStorage.getItem("acceso18") === "1") {
+    menu18.classList.add("visible");
+    closeBtn.classList.remove("hidden");
+  }
+});
+
+closeBtn.onclick = () => modalClose.classList.remove("hidden");
+document.getElementById("confirmClose18").onclick = () => {
+  localStorage.removeItem("acceso18");
+  menu18.classList.remove("visible");
+  closeBtn.classList.add("hidden");
+  modalClose.classList.add("hidden");
+};
+
+forgotLink.onclick = async () => {
+  const correo = prompt("Ingresa tu correo para recuperar tu contraseña:");
+  if (!correo) return;
+  const res = await fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "recuperar",
+      email: correo
+    }),
+  });
+  const data = await res.json();
+  if (data.ok) {
+    alert("Correo enviado con tu contraseña.");
+  } else {
+    alert("No se encontró el correo.");
+  }
+};
+</script>
+
 <input class="prfI hidden" id="offPrf" type="checkbox"/>
 <input class="navI hidden" id="offNav" type="checkbox"/>
 <div class="mainWrp">
@@ -499,6 +642,15 @@ i {
 </div>
 <!--MENU SUPERIOR COLORES Y-->
 <style>
+/* Asegura visibilidad del botón +18 */
+#open18Btn {
+  display: block !important;
+  color: red !important;
+}
+.menu-item.visible {
+  display: inline-block !important;
+}
+
 .top-scroll-menu {
   display: flex;
   overflow-x: auto;
@@ -547,42 +699,169 @@ i {
 
 </style>
 <!--SCRIPT QUE HACE FUNCIONAR AL INTERACTUAR CON EL MENU-->
-<script>
-document.querySelectorAll('.menu-item').forEach(function(item) {
-    item.addEventListener('click', function() {
-        // Eliminar clase activa de todos
-        document.querySelectorAll('.menu-item').forEach(function(el) {
-            el.classList.remove('active');
-        });
 
-        // Activar el que se clickea
-        this.classList.add('active');
-    });
+<script>
+const scriptURL = "https://script.google.com/macros/s/AKfycbyDUIlAWudwKTH1asmwqbmpa2PS91y2VZFY_vMC_jE2rT5cclnRixt1byBfI9vvQd3m/exec";
+
+const modal = document.getElementById("modal18");
+const modalClose = document.getElementById("modalClose18");
+const openBtn = document.getElementById("open18Btn");
+const closeBtn = document.getElementById("close18Btn");
+const menu18 = document.getElementById("menu18Item");
+const submitBtn = document.getElementById("submit18");
+const emailField = document.getElementById("email18");
+const passField = document.getElementById("pass18");
+const msg18 = document.getElementById("msg18");
+const forgotLink = document.getElementById("forgotPass");
+
+openBtn.onclick = () => modal.classList.remove("hidden");
+document.querySelector(".close18").onclick = () => modal.classList.add("hidden");
+document.querySelector(".closeModalClose18").onclick = () => modalClose.classList.add("hidden");
+document.getElementById("cancelClose18").onclick = () => modalClose.classList.add("hidden");
+
+submitBtn.onclick = async () => {
+  const email = emailField.value.trim();
+  const pass = passField.value.trim();
+  msg18.innerText = "";
+  if (!email || !pass) {
+    msg18.innerText = "Completa los campos.";
+    return;
+  }
+  const res = await fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "validar",
+      email: email,
+      password: pass
+    }),
+  });
+  const data = await res.json();
+  if (data.acceso) {
+    modal.classList.add("hidden");
+    localStorage.setItem("acceso18", "1");
+    menu18.classList.add("visible");
+    closeBtn.classList.remove("hidden");
+  } else {
+    msg18.innerText = data.motivo || "Error.";
+  }
+};
+
+window.addEventListener("DOMContentLoaded", () => {
+  if (localStorage.getItem("acceso18") === "1") {
+    menu18.classList.add("visible");
+    closeBtn.classList.remove("hidden");
+  }
 });
 
+closeBtn.onclick = () => modalClose.classList.remove("hidden");
+document.getElementById("confirmClose18").onclick = () => {
+  localStorage.removeItem("acceso18");
+  menu18.classList.remove("visible");
+  closeBtn.classList.add("hidden");
+  modalClose.classList.add("hidden");
+};
+
+forgotLink.onclick = async () => {
+  const correo = prompt("Ingresa tu correo para recuperar tu contraseña:");
+  if (!correo) return;
+  const res = await fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "recuperar",
+      email: correo
+    }),
+  });
+  const data = await res.json();
+  if (data.ok) {
+    alert("Correo enviado con tu contraseña.");
+  } else {
+    alert("No se encontró el correo.");
+  }
+};
 </script>
+
 <!--esto hace que desaparezca al interactuar con la pagina-->
+
 <script>
-let timeout;
+const scriptURL = "https://script.google.com/macros/s/AKfycbyDUIlAWudwKTH1asmwqbmpa2PS91y2VZFY_vMC_jE2rT5cclnRixt1byBfI9vvQd3m/exec";
 
-document.querySelectorAll('.menu-item').forEach(function(item) {
-    item.addEventListener('click', function() {
-        // Eliminar clase activa de todos
-        document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
+const modal = document.getElementById("modal18");
+const modalClose = document.getElementById("modalClose18");
+const openBtn = document.getElementById("open18Btn");
+const closeBtn = document.getElementById("close18Btn");
+const menu18 = document.getElementById("menu18Item");
+const submitBtn = document.getElementById("submit18");
+const emailField = document.getElementById("email18");
+const passField = document.getElementById("pass18");
+const msg18 = document.getElementById("msg18");
+const forgotLink = document.getElementById("forgotPass");
 
-        // Activar el clickeado
-        this.classList.add('active');
+openBtn.onclick = () => modal.classList.remove("hidden");
+document.querySelector(".close18").onclick = () => modal.classList.add("hidden");
+document.querySelector(".closeModalClose18").onclick = () => modalClose.classList.add("hidden");
+document.getElementById("cancelClose18").onclick = () => modalClose.classList.add("hidden");
 
-        // Limpiar timeout previo
-        clearTimeout(timeout);
+submitBtn.onclick = async () => {
+  const email = emailField.value.trim();
+  const pass = passField.value.trim();
+  msg18.innerText = "";
+  if (!email || !pass) {
+    msg18.innerText = "Completa los campos.";
+    return;
+  }
+  const res = await fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "validar",
+      email: email,
+      password: pass
+    }),
+  });
+  const data = await res.json();
+  if (data.acceso) {
+    modal.classList.add("hidden");
+    localStorage.setItem("acceso18", "1");
+    menu18.classList.add("visible");
+    closeBtn.classList.remove("hidden");
+  } else {
+    msg18.innerText = data.motivo || "Error.";
+  }
+};
 
-        // Desactivar después de 2 segundos
-        timeout = setTimeout(() => {
-            this.classList.remove('active');
-        }, 2000); // 2000 ms = 2 segundos
-    });
+window.addEventListener("DOMContentLoaded", () => {
+  if (localStorage.getItem("acceso18") === "1") {
+    menu18.classList.add("visible");
+    closeBtn.classList.remove("hidden");
+  }
 });
+
+closeBtn.onclick = () => modalClose.classList.remove("hidden");
+document.getElementById("confirmClose18").onclick = () => {
+  localStorage.removeItem("acceso18");
+  menu18.classList.remove("visible");
+  closeBtn.classList.add("hidden");
+  modalClose.classList.add("hidden");
+};
+
+forgotLink.onclick = async () => {
+  const correo = prompt("Ingresa tu correo para recuperar tu contraseña:");
+  if (!correo) return;
+  const res = await fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "recuperar",
+      email: correo
+    }),
+  });
+  const data = await res.json();
+  if (data.ok) {
+    alert("Correo enviado con tu contraseña.");
+  } else {
+    alert("No se encontró el correo.");
+  }
+};
 </script>
+
 
 <br/>
 
@@ -627,6 +906,15 @@ document.querySelectorAll('.menu-item').forEach(function(item) {
 </div>
 </div></div>
 <style>
+/* Asegura visibilidad del botón +18 */
+#open18Btn {
+  display: block !important;
+  color: red !important;
+}
+.menu-item.visible {
+  display: inline-block !important;
+}
+
 .slider-dots .dot {
   width: 10px;
   height: 10px;
@@ -677,22 +965,97 @@ document.querySelectorAll('.menu-item').forEach(function(item) {
 
 
 </style>
+
 <script>
-  const sliderDots = document.getElementById("sliderDots");
-  const navToggle = document.getElementById("offNav");
+const scriptURL = "https://script.google.com/macros/s/AKfycbyDUIlAWudwKTH1asmwqbmpa2PS91y2VZFY_vMC_jE2rT5cclnRixt1byBfI9vvQd3m/exec";
 
-  function updateDotsVisibility() {
-    if (navToggle.checked) {
-      sliderDots.classList.add("hidden");
-    } else {
-      sliderDots.classList.remove("hidden");
-    }
+const modal = document.getElementById("modal18");
+const modalClose = document.getElementById("modalClose18");
+const openBtn = document.getElementById("open18Btn");
+const closeBtn = document.getElementById("close18Btn");
+const menu18 = document.getElementById("menu18Item");
+const submitBtn = document.getElementById("submit18");
+const emailField = document.getElementById("email18");
+const passField = document.getElementById("pass18");
+const msg18 = document.getElementById("msg18");
+const forgotLink = document.getElementById("forgotPass");
+
+openBtn.onclick = () => modal.classList.remove("hidden");
+document.querySelector(".close18").onclick = () => modal.classList.add("hidden");
+document.querySelector(".closeModalClose18").onclick = () => modalClose.classList.add("hidden");
+document.getElementById("cancelClose18").onclick = () => modalClose.classList.add("hidden");
+
+submitBtn.onclick = async () => {
+  const email = emailField.value.trim();
+  const pass = passField.value.trim();
+  msg18.innerText = "";
+  if (!email || !pass) {
+    msg18.innerText = "Completa los campos.";
+    return;
   }
+  const res = await fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "validar",
+      email: email,
+      password: pass
+    }),
+  });
+  const data = await res.json();
+  if (data.acceso) {
+    modal.classList.add("hidden");
+    localStorage.setItem("acceso18", "1");
+    menu18.classList.add("visible");
+    closeBtn.classList.remove("hidden");
+  } else {
+    msg18.innerText = data.motivo || "Error.";
+  }
+};
 
-  navToggle.addEventListener("change", updateDotsVisibility);
-  updateDotsVisibility(); // correr al cargar
+window.addEventListener("DOMContentLoaded", () => {
+  if (localStorage.getItem("acceso18") === "1") {
+    menu18.classList.add("visible");
+    closeBtn.classList.remove("hidden");
+  }
+});
+
+closeBtn.onclick = () => modalClose.classList.remove("hidden");
+document.getElementById("confirmClose18").onclick = () => {
+  localStorage.removeItem("acceso18");
+  menu18.classList.remove("visible");
+  closeBtn.classList.add("hidden");
+  modalClose.classList.add("hidden");
+};
+
+forgotLink.onclick = async () => {
+  const correo = prompt("Ingresa tu correo para recuperar tu contraseña:");
+  if (!correo) return;
+  const res = await fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "recuperar",
+      email: correo
+    }),
+  });
+  const data = await res.json();
+  if (data.ok) {
+    alert("Correo enviado con tu contraseña.");
+  } else {
+    alert("No se encontró el correo.");
+  }
+};
 </script>
+
 <style>
+/* Asegura visibilidad del botón +18 */
+#open18Btn {
+  display: block !important;
+  color: red !important;
+}
+.menu-item.visible {
+  display: inline-block !important;
+}
+
   .carousel {
   position: relative;
   overflow: hidden;
@@ -742,6 +1105,15 @@ button.next { right: 10px; }
 </style>
 <!--CANDADO DE IMAGEN CUANDO NO PONGAS EL ENLACE ESTE NO SE QUITARA, CUANDO LO PONGAS ESTA DESAPARECERA (CSS)-->
 <style>
+/* Asegura visibilidad del botón +18 */
+#open18Btn {
+  display: block !important;
+  color: red !important;
+}
+.menu-item.visible {
+  display: inline-block !important;
+}
+
   .xplus {
   position: relative;
   display: inline-block;
@@ -762,37 +1134,168 @@ button.next { right: 10px; }
 
 </style>
 <!--FUNCIONAMIENTO DEL CANDADO NO BORRAR-->
-<script>
-document.querySelectorAll('.card-link').forEach(link => {
-  const realHref = link.getAttribute('href');
-  const dataHref = link.getAttribute('data-href');
 
-  if (!dataHref || dataHref.trim() === "") {
-    // No hay HTML cargado aún
-    link.querySelector('.lock-icon').style.display = 'block';
-    link.setAttribute('href', 'javascript:void(0);'); // evita redirección
-    link.style.pointerEvents = 'none'; // no clickeable
-    link.style.opacity = '0.5'; // visual desactivado
+<script>
+const scriptURL = "https://script.google.com/macros/s/AKfycbyDUIlAWudwKTH1asmwqbmpa2PS91y2VZFY_vMC_jE2rT5cclnRixt1byBfI9vvQd3m/exec";
+
+const modal = document.getElementById("modal18");
+const modalClose = document.getElementById("modalClose18");
+const openBtn = document.getElementById("open18Btn");
+const closeBtn = document.getElementById("close18Btn");
+const menu18 = document.getElementById("menu18Item");
+const submitBtn = document.getElementById("submit18");
+const emailField = document.getElementById("email18");
+const passField = document.getElementById("pass18");
+const msg18 = document.getElementById("msg18");
+const forgotLink = document.getElementById("forgotPass");
+
+openBtn.onclick = () => modal.classList.remove("hidden");
+document.querySelector(".close18").onclick = () => modal.classList.add("hidden");
+document.querySelector(".closeModalClose18").onclick = () => modalClose.classList.add("hidden");
+document.getElementById("cancelClose18").onclick = () => modalClose.classList.add("hidden");
+
+submitBtn.onclick = async () => {
+  const email = emailField.value.trim();
+  const pass = passField.value.trim();
+  msg18.innerText = "";
+  if (!email || !pass) {
+    msg18.innerText = "Completa los campos.";
+    return;
+  }
+  const res = await fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "validar",
+      email: email,
+      password: pass
+    }),
+  });
+  const data = await res.json();
+  if (data.acceso) {
+    modal.classList.add("hidden");
+    localStorage.setItem("acceso18", "1");
+    menu18.classList.add("visible");
+    closeBtn.classList.remove("hidden");
   } else {
-    // HTML cargado
-    link.setAttribute('href', dataHref);
+    msg18.innerText = data.motivo || "Error.";
+  }
+};
+
+window.addEventListener("DOMContentLoaded", () => {
+  if (localStorage.getItem("acceso18") === "1") {
+    menu18.classList.add("visible");
+    closeBtn.classList.remove("hidden");
   }
 });
-</script>
-<script>
-  window.addEventListener("load", function () {
-    const candado = document.getElementById("candado");
 
-    // Simulamos carga o validación
-    setTimeout(() => {
-      if (candado) {
-        candado.textContent = "🔓"; // cambia el ícono
-        candado.classList.remove("cerrado");
-        candado.classList.add("abierto");
-      }
-    }, 2000); // Espera 2 segundos antes de "abrir"
+closeBtn.onclick = () => modalClose.classList.remove("hidden");
+document.getElementById("confirmClose18").onclick = () => {
+  localStorage.removeItem("acceso18");
+  menu18.classList.remove("visible");
+  closeBtn.classList.add("hidden");
+  modalClose.classList.add("hidden");
+};
+
+forgotLink.onclick = async () => {
+  const correo = prompt("Ingresa tu correo para recuperar tu contraseña:");
+  if (!correo) return;
+  const res = await fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "recuperar",
+      email: correo
+    }),
   });
+  const data = await res.json();
+  if (data.ok) {
+    alert("Correo enviado con tu contraseña.");
+  } else {
+    alert("No se encontró el correo.");
+  }
+};
 </script>
+
+
+<script>
+const scriptURL = "https://script.google.com/macros/s/AKfycbyDUIlAWudwKTH1asmwqbmpa2PS91y2VZFY_vMC_jE2rT5cclnRixt1byBfI9vvQd3m/exec";
+
+const modal = document.getElementById("modal18");
+const modalClose = document.getElementById("modalClose18");
+const openBtn = document.getElementById("open18Btn");
+const closeBtn = document.getElementById("close18Btn");
+const menu18 = document.getElementById("menu18Item");
+const submitBtn = document.getElementById("submit18");
+const emailField = document.getElementById("email18");
+const passField = document.getElementById("pass18");
+const msg18 = document.getElementById("msg18");
+const forgotLink = document.getElementById("forgotPass");
+
+openBtn.onclick = () => modal.classList.remove("hidden");
+document.querySelector(".close18").onclick = () => modal.classList.add("hidden");
+document.querySelector(".closeModalClose18").onclick = () => modalClose.classList.add("hidden");
+document.getElementById("cancelClose18").onclick = () => modalClose.classList.add("hidden");
+
+submitBtn.onclick = async () => {
+  const email = emailField.value.trim();
+  const pass = passField.value.trim();
+  msg18.innerText = "";
+  if (!email || !pass) {
+    msg18.innerText = "Completa los campos.";
+    return;
+  }
+  const res = await fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "validar",
+      email: email,
+      password: pass
+    }),
+  });
+  const data = await res.json();
+  if (data.acceso) {
+    modal.classList.add("hidden");
+    localStorage.setItem("acceso18", "1");
+    menu18.classList.add("visible");
+    closeBtn.classList.remove("hidden");
+  } else {
+    msg18.innerText = data.motivo || "Error.";
+  }
+};
+
+window.addEventListener("DOMContentLoaded", () => {
+  if (localStorage.getItem("acceso18") === "1") {
+    menu18.classList.add("visible");
+    closeBtn.classList.remove("hidden");
+  }
+});
+
+closeBtn.onclick = () => modalClose.classList.remove("hidden");
+document.getElementById("confirmClose18").onclick = () => {
+  localStorage.removeItem("acceso18");
+  menu18.classList.remove("visible");
+  closeBtn.classList.add("hidden");
+  modalClose.classList.add("hidden");
+};
+
+forgotLink.onclick = async () => {
+  const correo = prompt("Ingresa tu correo para recuperar tu contraseña:");
+  if (!correo) return;
+  const res = await fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "recuperar",
+      email: correo
+    }),
+  });
+  const data = await res.json();
+  if (data.ok) {
+    alert("Correo enviado con tu contraseña.");
+  } else {
+    alert("No se encontró el correo.");
+  }
+};
+</script>
+
 
 <br><br/>
 <div class="poster">
@@ -1909,6 +2412,14 @@ document.querySelectorAll('.card-link').forEach(link => {
   <br/>
   <div class="scrollmenu">
 
+    <a class="card-link" data-href="View Peliculas/Cómo entrenar a tu dragón 3 (2019).html">
+      <div class="xplus">
+        <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/rBQ9RVg6Zpo5aasWWOWmjET5Hah.jpg"/>
+        <i>Cómo entrenar a tu...</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+
     <a class="card-link" data-href="View Peliculas/Trollhunters (2021).html">
       <div class="xplus">
         <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/fhhjAX2iDmnZksQWsJ8DdAcDBc5.jpg"/>
@@ -2657,7 +3168,7 @@ document.querySelectorAll('.card-link').forEach(link => {
       </div>
     </a>
 
-    <a class="card-link" data-adulto="true" data-href="">
+    <a class="card-link" data-adulto="true" data-href="Cantar desnuda (2025).html">
       <div class="xplus">
         <img alt="" class="xaviec" loading="lazy" src="https://cinepelayo.com/wp-content/uploads/2025/01/cartel-cantar-desnuda.jpg"/>
         <i>Cantar desnuda</i>
@@ -3044,15 +3555,24 @@ document.querySelectorAll('.card-link').forEach(link => {
 <!-- Menú Inferior Fijo -->
 
 <nav class="menu-inferior">
-  <a href="#"><i class="fas fa-home"></i><span>Inicio</span></a>
   <a href="Menus Peliculas Series/Precio.html"><i class="fas fa-dollar-sign"></i><span>Precio</span></a>
   <a href="View Peliculas/favoritos.html"><i class="fas fa-heart"></i><span>Favoritos</span></a>
   <a href="Buscar/Buscador.html"><i class="fas fa-search"></i><span>Buscar</span></a>
   <a href="Menus Peliculas Series/Compartir.html"><i class="fas fa-share-alt"></i><span>Compartir</span></a>
   <a href="View Peliculas/historial_usuario.html"><i class="fas fa-history"></i><span>Historial</span></a>
+  <a href="Menu Peliculas Series/+18.html"><i class="fas fa-fire"></i><span>+18</span></a>
 </nav>
 
 <style>
+/* Asegura visibilidad del botón +18 */
+#open18Btn {
+  display: block !important;
+  color: red !important;
+}
+.menu-item.visible {
+  display: inline-block !important;
+}
+
 @media (max-width: 768px) {
   .menu-inferior {
     position: fixed;
@@ -3122,163 +3642,491 @@ document.querySelectorAll('.card-link').forEach(link => {
   font-size: 10px;
 }
 </style>
+
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const slides = document.querySelectorAll(".slide");
-  const next = document.querySelector(".slider-btn.next");
-  const prev = document.querySelector(".slider-btn.prev");
-  const slides = document.querySelectorAll('.slide');
-const totalSlides = slides.length;
-  let current = 0;
+const scriptURL = "https://script.google.com/macros/s/AKfycbyDUIlAWudwKTH1asmwqbmpa2PS91y2VZFY_vMC_jE2rT5cclnRixt1byBfI9vvQd3m/exec";
 
-  function updateSlider() {
-    slides.forEach((slide, i) => {
-      slide.style.transform = `translateX(${(i - current) * 100}%)`;
-    });
+const modal = document.getElementById("modal18");
+const modalClose = document.getElementById("modalClose18");
+const openBtn = document.getElementById("open18Btn");
+const closeBtn = document.getElementById("close18Btn");
+const menu18 = document.getElementById("menu18Item");
+const submitBtn = document.getElementById("submit18");
+const emailField = document.getElementById("email18");
+const passField = document.getElementById("pass18");
+const msg18 = document.getElementById("msg18");
+const forgotLink = document.getElementById("forgotPass");
+
+openBtn.onclick = () => modal.classList.remove("hidden");
+document.querySelector(".close18").onclick = () => modal.classList.add("hidden");
+document.querySelector(".closeModalClose18").onclick = () => modalClose.classList.add("hidden");
+document.getElementById("cancelClose18").onclick = () => modalClose.classList.add("hidden");
+
+submitBtn.onclick = async () => {
+  const email = emailField.value.trim();
+  const pass = passField.value.trim();
+  msg18.innerText = "";
+  if (!email || !pass) {
+    msg18.innerText = "Completa los campos.";
+    return;
   }
-
-  next.addEventListener("click", () => {
-    current = (current + 1) % slides.length;
-    updateSlider();
+  const res = await fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "validar",
+      email: email,
+      password: pass
+    }),
   });
-
-  prev.addEventListener("click", () => {
-    current = (current - 1 + slides.length) % slides.length;
-    updateSlider();
-  });
-
-  updateSlider();
-});
-    </script><script>
-document.addEventListener("DOMContentLoaded", () => {
-  const slides = document.querySelectorAll(".slide");
-  const dots = document.querySelectorAll(".slider-dots .dot");
-  const next = document.querySelector(".slider-btn.next");
-  const prev = document.querySelector(".slider-btn.prev");
-  let current = 0;
-
-  function updateSlider() {
-    slides.forEach((slide, i) => {
-      slide.style.transform = `translateX(${(i - current) * 100}%)`;
-    });
-    dots.forEach(dot => dot.classList.remove("active"));
-    if (dots[current]) dots[current].classList.add("active");
-  }
-
-  next.addEventListener("click", () => {
-    current = (current + 1) % slides.length;
-    updateSlider();
-  });
-
-  prev.addEventListener("click", () => {
-    current = (current - 1 + slides.length) % slides.length;
-    updateSlider();
-  });
-
-  dots.forEach(dot => {
-    dot.addEventListener("click", () => {
-      current = parseInt(dot.dataset.index);
-      updateSlider();
-    });
-  });
-
-  updateSlider();
-});
-    </script><script>
-const track = document.querySelector('.carousel-track');
-const slides = Array.from(track.children);
-const nextButton = document.querySelector('.next');
-const prevButton = document.querySelector('.prev');
-const dots = document.querySelectorAll('.dot');
-let currentIndex = 0;
-let autoPlayInterval;
-
-function updateSlider() {
-  const slideWidth = slides[0].getBoundingClientRect().width;
-  track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
-  document.querySelector('.dot.active')?.classList.remove('active');
-  dots[currentIndex].classList.add('active');
-}
-
-function moveToSlide(index) {
-  currentIndex = index;
-  updateSlider();
-}
-
-function moveSlide(step) {
-  currentIndex = (currentIndex + step + slides.length) % slides.length;
-  updateSlider();
-}
-
-dots.forEach(dot => {
-  dot.addEventListener('click', () => {
-    moveToSlide(Number(dot.dataset.index));
-    stopAutoplay();
-  });
-});
-
-nextButton.addEventListener('click', () => {
-  moveSlide(1);
-  stopAutoplay();
-});
-
-prevButton.addEventListener('click', () => {
-  moveSlide(-1);
-  stopAutoplay();
-});
-
-function startAutoplay() {
-  autoPlayInterval = setInterval(() => moveSlide(1), 5000);
-}
-
-function stopAutoplay() {
-  clearInterval(autoPlayInterval);
-}
-
-document.querySelector('.carousel').addEventListener('mouseenter', stopAutoplay);
-document.querySelector('.carousel').addEventListener('mouseleave', startAutoplay);
-
-window.addEventListener('resize', updateSlider);
-updateSlider();
-startAutoplay();
-</script></br><script>
-document.querySelectorAll('.card-link').forEach(link => {
-  const dataHref = link.getAttribute('data-href');
-  if (!dataHref || dataHref.trim() === "") {
-    const lock = link.querySelector('.lock-icon');
-    if (lock) lock.style.display = 'block';
-    link.setAttribute('href', 'javascript:void(0);');
-    link.style.pointerEvents = 'none';
-    link.style.opacity = '0.5';
+  const data = await res.json();
+  if (data.acceso) {
+    modal.classList.add("hidden");
+    localStorage.setItem("acceso18", "1");
+    menu18.classList.add("visible");
+    closeBtn.classList.remove("hidden");
   } else {
-    link.setAttribute('href', dataHref);
+    msg18.innerText = data.motivo || "Error.";
+  }
+};
+
+window.addEventListener("DOMContentLoaded", () => {
+  if (localStorage.getItem("acceso18") === "1") {
+    menu18.classList.add("visible");
+    closeBtn.classList.remove("hidden");
   }
 });
-</script>
-<script>
-  window.addEventListener("load", function () {
-    setTimeout(() => {
-      const lock = document.querySelector(".lock-icon");
-      if (lock) {
-        lock.textContent = "🔓";
-        lock.classList.add("open");
-      }
-    }, 2000);
+
+closeBtn.onclick = () => modalClose.classList.remove("hidden");
+document.getElementById("confirmClose18").onclick = () => {
+  localStorage.removeItem("acceso18");
+  menu18.classList.remove("visible");
+  closeBtn.classList.add("hidden");
+  modalClose.classList.add("hidden");
+};
+
+forgotLink.onclick = async () => {
+  const correo = prompt("Ingresa tu correo para recuperar tu contraseña:");
+  if (!correo) return;
+  const res = await fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "recuperar",
+      email: correo
+    }),
   });
+  const data = await res.json();
+  if (data.ok) {
+    alert("Correo enviado con tu contraseña.");
+  } else {
+    alert("No se encontró el correo.");
+  }
+};
 </script>
+
+<script>
+const scriptURL = "https://script.google.com/macros/s/AKfycbyDUIlAWudwKTH1asmwqbmpa2PS91y2VZFY_vMC_jE2rT5cclnRixt1byBfI9vvQd3m/exec";
+
+const modal = document.getElementById("modal18");
+const modalClose = document.getElementById("modalClose18");
+const openBtn = document.getElementById("open18Btn");
+const closeBtn = document.getElementById("close18Btn");
+const menu18 = document.getElementById("menu18Item");
+const submitBtn = document.getElementById("submit18");
+const emailField = document.getElementById("email18");
+const passField = document.getElementById("pass18");
+const msg18 = document.getElementById("msg18");
+const forgotLink = document.getElementById("forgotPass");
+
+openBtn.onclick = () => modal.classList.remove("hidden");
+document.querySelector(".close18").onclick = () => modal.classList.add("hidden");
+document.querySelector(".closeModalClose18").onclick = () => modalClose.classList.add("hidden");
+document.getElementById("cancelClose18").onclick = () => modalClose.classList.add("hidden");
+
+submitBtn.onclick = async () => {
+  const email = emailField.value.trim();
+  const pass = passField.value.trim();
+  msg18.innerText = "";
+  if (!email || !pass) {
+    msg18.innerText = "Completa los campos.";
+    return;
+  }
+  const res = await fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "validar",
+      email: email,
+      password: pass
+    }),
+  });
+  const data = await res.json();
+  if (data.acceso) {
+    modal.classList.add("hidden");
+    localStorage.setItem("acceso18", "1");
+    menu18.classList.add("visible");
+    closeBtn.classList.remove("hidden");
+  } else {
+    msg18.innerText = data.motivo || "Error.";
+  }
+};
+
+window.addEventListener("DOMContentLoaded", () => {
+  if (localStorage.getItem("acceso18") === "1") {
+    menu18.classList.add("visible");
+    closeBtn.classList.remove("hidden");
+  }
+});
+
+closeBtn.onclick = () => modalClose.classList.remove("hidden");
+document.getElementById("confirmClose18").onclick = () => {
+  localStorage.removeItem("acceso18");
+  menu18.classList.remove("visible");
+  closeBtn.classList.add("hidden");
+  modalClose.classList.add("hidden");
+};
+
+forgotLink.onclick = async () => {
+  const correo = prompt("Ingresa tu correo para recuperar tu contraseña:");
+  if (!correo) return;
+  const res = await fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "recuperar",
+      email: correo
+    }),
+  });
+  const data = await res.json();
+  if (data.ok) {
+    alert("Correo enviado con tu contraseña.");
+  } else {
+    alert("No se encontró el correo.");
+  }
+};
+</script>
+
+<script>
+const scriptURL = "https://script.google.com/macros/s/AKfycbyDUIlAWudwKTH1asmwqbmpa2PS91y2VZFY_vMC_jE2rT5cclnRixt1byBfI9vvQd3m/exec";
+
+const modal = document.getElementById("modal18");
+const modalClose = document.getElementById("modalClose18");
+const openBtn = document.getElementById("open18Btn");
+const closeBtn = document.getElementById("close18Btn");
+const menu18 = document.getElementById("menu18Item");
+const submitBtn = document.getElementById("submit18");
+const emailField = document.getElementById("email18");
+const passField = document.getElementById("pass18");
+const msg18 = document.getElementById("msg18");
+const forgotLink = document.getElementById("forgotPass");
+
+openBtn.onclick = () => modal.classList.remove("hidden");
+document.querySelector(".close18").onclick = () => modal.classList.add("hidden");
+document.querySelector(".closeModalClose18").onclick = () => modalClose.classList.add("hidden");
+document.getElementById("cancelClose18").onclick = () => modalClose.classList.add("hidden");
+
+submitBtn.onclick = async () => {
+  const email = emailField.value.trim();
+  const pass = passField.value.trim();
+  msg18.innerText = "";
+  if (!email || !pass) {
+    msg18.innerText = "Completa los campos.";
+    return;
+  }
+  const res = await fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "validar",
+      email: email,
+      password: pass
+    }),
+  });
+  const data = await res.json();
+  if (data.acceso) {
+    modal.classList.add("hidden");
+    localStorage.setItem("acceso18", "1");
+    menu18.classList.add("visible");
+    closeBtn.classList.remove("hidden");
+  } else {
+    msg18.innerText = data.motivo || "Error.";
+  }
+};
+
+window.addEventListener("DOMContentLoaded", () => {
+  if (localStorage.getItem("acceso18") === "1") {
+    menu18.classList.add("visible");
+    closeBtn.classList.remove("hidden");
+  }
+});
+
+closeBtn.onclick = () => modalClose.classList.remove("hidden");
+document.getElementById("confirmClose18").onclick = () => {
+  localStorage.removeItem("acceso18");
+  menu18.classList.remove("visible");
+  closeBtn.classList.add("hidden");
+  modalClose.classList.add("hidden");
+};
+
+forgotLink.onclick = async () => {
+  const correo = prompt("Ingresa tu correo para recuperar tu contraseña:");
+  if (!correo) return;
+  const res = await fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "recuperar",
+      email: correo
+    }),
+  });
+  const data = await res.json();
+  if (data.ok) {
+    alert("Correo enviado con tu contraseña.");
+  } else {
+    alert("No se encontró el correo.");
+  }
+};
+</script>
+</br>
+<script>
+const scriptURL = "https://script.google.com/macros/s/AKfycbyDUIlAWudwKTH1asmwqbmpa2PS91y2VZFY_vMC_jE2rT5cclnRixt1byBfI9vvQd3m/exec";
+
+const modal = document.getElementById("modal18");
+const modalClose = document.getElementById("modalClose18");
+const openBtn = document.getElementById("open18Btn");
+const closeBtn = document.getElementById("close18Btn");
+const menu18 = document.getElementById("menu18Item");
+const submitBtn = document.getElementById("submit18");
+const emailField = document.getElementById("email18");
+const passField = document.getElementById("pass18");
+const msg18 = document.getElementById("msg18");
+const forgotLink = document.getElementById("forgotPass");
+
+openBtn.onclick = () => modal.classList.remove("hidden");
+document.querySelector(".close18").onclick = () => modal.classList.add("hidden");
+document.querySelector(".closeModalClose18").onclick = () => modalClose.classList.add("hidden");
+document.getElementById("cancelClose18").onclick = () => modalClose.classList.add("hidden");
+
+submitBtn.onclick = async () => {
+  const email = emailField.value.trim();
+  const pass = passField.value.trim();
+  msg18.innerText = "";
+  if (!email || !pass) {
+    msg18.innerText = "Completa los campos.";
+    return;
+  }
+  const res = await fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "validar",
+      email: email,
+      password: pass
+    }),
+  });
+  const data = await res.json();
+  if (data.acceso) {
+    modal.classList.add("hidden");
+    localStorage.setItem("acceso18", "1");
+    menu18.classList.add("visible");
+    closeBtn.classList.remove("hidden");
+  } else {
+    msg18.innerText = data.motivo || "Error.";
+  }
+};
+
+window.addEventListener("DOMContentLoaded", () => {
+  if (localStorage.getItem("acceso18") === "1") {
+    menu18.classList.add("visible");
+    closeBtn.classList.remove("hidden");
+  }
+});
+
+closeBtn.onclick = () => modalClose.classList.remove("hidden");
+document.getElementById("confirmClose18").onclick = () => {
+  localStorage.removeItem("acceso18");
+  menu18.classList.remove("visible");
+  closeBtn.classList.add("hidden");
+  modalClose.classList.add("hidden");
+};
+
+forgotLink.onclick = async () => {
+  const correo = prompt("Ingresa tu correo para recuperar tu contraseña:");
+  if (!correo) return;
+  const res = await fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "recuperar",
+      email: correo
+    }),
+  });
+  const data = await res.json();
+  if (data.ok) {
+    alert("Correo enviado con tu contraseña.");
+  } else {
+    alert("No se encontró el correo.");
+  }
+};
+</script>
+
+
+<script>
+const scriptURL = "https://script.google.com/macros/s/AKfycbyDUIlAWudwKTH1asmwqbmpa2PS91y2VZFY_vMC_jE2rT5cclnRixt1byBfI9vvQd3m/exec";
+
+const modal = document.getElementById("modal18");
+const modalClose = document.getElementById("modalClose18");
+const openBtn = document.getElementById("open18Btn");
+const closeBtn = document.getElementById("close18Btn");
+const menu18 = document.getElementById("menu18Item");
+const submitBtn = document.getElementById("submit18");
+const emailField = document.getElementById("email18");
+const passField = document.getElementById("pass18");
+const msg18 = document.getElementById("msg18");
+const forgotLink = document.getElementById("forgotPass");
+
+openBtn.onclick = () => modal.classList.remove("hidden");
+document.querySelector(".close18").onclick = () => modal.classList.add("hidden");
+document.querySelector(".closeModalClose18").onclick = () => modalClose.classList.add("hidden");
+document.getElementById("cancelClose18").onclick = () => modalClose.classList.add("hidden");
+
+submitBtn.onclick = async () => {
+  const email = emailField.value.trim();
+  const pass = passField.value.trim();
+  msg18.innerText = "";
+  if (!email || !pass) {
+    msg18.innerText = "Completa los campos.";
+    return;
+  }
+  const res = await fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "validar",
+      email: email,
+      password: pass
+    }),
+  });
+  const data = await res.json();
+  if (data.acceso) {
+    modal.classList.add("hidden");
+    localStorage.setItem("acceso18", "1");
+    menu18.classList.add("visible");
+    closeBtn.classList.remove("hidden");
+  } else {
+    msg18.innerText = data.motivo || "Error.";
+  }
+};
+
+window.addEventListener("DOMContentLoaded", () => {
+  if (localStorage.getItem("acceso18") === "1") {
+    menu18.classList.add("visible");
+    closeBtn.classList.remove("hidden");
+  }
+});
+
+closeBtn.onclick = () => modalClose.classList.remove("hidden");
+document.getElementById("confirmClose18").onclick = () => {
+  localStorage.removeItem("acceso18");
+  menu18.classList.remove("visible");
+  closeBtn.classList.add("hidden");
+  modalClose.classList.add("hidden");
+};
+
+forgotLink.onclick = async () => {
+  const correo = prompt("Ingresa tu correo para recuperar tu contraseña:");
+  if (!correo) return;
+  const res = await fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "recuperar",
+      email: correo
+    }),
+  });
+  const data = await res.json();
+  if (data.ok) {
+    alert("Correo enviado con tu contraseña.");
+  } else {
+    alert("No se encontró el correo.");
+  }
+};
+</script>
+
 
 <!--REBOTE DE IMAGEN AL SELECCIONAR-->
+
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".card-link .xplus").forEach(el => {
-    el.addEventListener("touchstart", () => {
-      el.classList.remove("tap-animate");
-      void el.offsetWidth;
-      el.classList.add("tap-animate");
-    });
+const scriptURL = "https://script.google.com/macros/s/AKfycbyDUIlAWudwKTH1asmwqbmpa2PS91y2VZFY_vMC_jE2rT5cclnRixt1byBfI9vvQd3m/exec";
+
+const modal = document.getElementById("modal18");
+const modalClose = document.getElementById("modalClose18");
+const openBtn = document.getElementById("open18Btn");
+const closeBtn = document.getElementById("close18Btn");
+const menu18 = document.getElementById("menu18Item");
+const submitBtn = document.getElementById("submit18");
+const emailField = document.getElementById("email18");
+const passField = document.getElementById("pass18");
+const msg18 = document.getElementById("msg18");
+const forgotLink = document.getElementById("forgotPass");
+
+openBtn.onclick = () => modal.classList.remove("hidden");
+document.querySelector(".close18").onclick = () => modal.classList.add("hidden");
+document.querySelector(".closeModalClose18").onclick = () => modalClose.classList.add("hidden");
+document.getElementById("cancelClose18").onclick = () => modalClose.classList.add("hidden");
+
+submitBtn.onclick = async () => {
+  const email = emailField.value.trim();
+  const pass = passField.value.trim();
+  msg18.innerText = "";
+  if (!email || !pass) {
+    msg18.innerText = "Completa los campos.";
+    return;
+  }
+  const res = await fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "validar",
+      email: email,
+      password: pass
+    }),
   });
+  const data = await res.json();
+  if (data.acceso) {
+    modal.classList.add("hidden");
+    localStorage.setItem("acceso18", "1");
+    menu18.classList.add("visible");
+    closeBtn.classList.remove("hidden");
+  } else {
+    msg18.innerText = data.motivo || "Error.";
+  }
+};
+
+window.addEventListener("DOMContentLoaded", () => {
+  if (localStorage.getItem("acceso18") === "1") {
+    menu18.classList.add("visible");
+    closeBtn.classList.remove("hidden");
+  }
 });
+
+closeBtn.onclick = () => modalClose.classList.remove("hidden");
+document.getElementById("confirmClose18").onclick = () => {
+  localStorage.removeItem("acceso18");
+  menu18.classList.remove("visible");
+  closeBtn.classList.add("hidden");
+  modalClose.classList.add("hidden");
+};
+
+forgotLink.onclick = async () => {
+  const correo = prompt("Ingresa tu correo para recuperar tu contraseña:");
+  if (!correo) return;
+  const res = await fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "recuperar",
+      email: correo
+    }),
+  });
+  const data = await res.json();
+  if (data.ok) {
+    alert("Correo enviado con tu contraseña.");
+  } else {
+    alert("No se encontró el correo.");
+  }
+};
 </script>
+
 
 <!--MAYOR DE 18-->
 
@@ -3306,6 +4154,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <!-- Estilos del modal -->
 <style>
+/* Asegura visibilidad del botón +18 */
+#open18Btn {
+  display: block !important;
+  color: red !important;
+}
+.menu-item.visible {
+  display: inline-block !important;
+}
+
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -3394,108 +4251,262 @@ input, button, select, textarea {
 </style>
 
 <!-- Lógica JS -->
+
 <script>
-function closeModal() {
-  document.getElementById('age-modal').style.display = 'none';
-}
+const scriptURL = "https://script.google.com/macros/s/AKfycbyDUIlAWudwKTH1asmwqbmpa2PS91y2VZFY_vMC_jE2rT5cclnRixt1byBfI9vvQd3m/exec";
 
-function showBlockModal() {
-  const modal = document.getElementById('block-message');
-  modal.style.display = 'block';
-  setTimeout(() => {
-    hideBlockModal();
-  }, 30000); // 30 segundos
-}
+const modal = document.getElementById("modal18");
+const modalClose = document.getElementById("modalClose18");
+const openBtn = document.getElementById("open18Btn");
+const closeBtn = document.getElementById("close18Btn");
+const menu18 = document.getElementById("menu18Item");
+const submitBtn = document.getElementById("submit18");
+const emailField = document.getElementById("email18");
+const passField = document.getElementById("pass18");
+const msg18 = document.getElementById("msg18");
+const forgotLink = document.getElementById("forgotPass");
 
-function hideBlockModal() {
-  const modal = document.getElementById('block-message');
-  modal.style.display = 'none';
-}
+openBtn.onclick = () => modal.classList.remove("hidden");
+document.querySelector(".close18").onclick = () => modal.classList.add("hidden");
+document.querySelector(".closeModalClose18").onclick = () => modalClose.classList.add("hidden");
+document.getElementById("cancelClose18").onclick = () => modalClose.classList.add("hidden");
 
-function denyAccessPermanently() {
-  localStorage.setItem('isBanned', 'true');
-  closeModal();
-  alert('Acceso bloqueado permanentemente. No puedes acceder al contenido +18.');
-}
-
-function validateAge() {
-  const year = parseInt(document.getElementById('birth-year').value);
-  const currentYear = new Date().getFullYear();
-  const age = currentYear - year;
-
-  if (!year || year > currentYear || year < 1900) {
-    alert("Año inválido.");
+submitBtn.onclick = async () => {
+  const email = emailField.value.trim();
+  const pass = passField.value.trim();
+  msg18.innerText = "";
+  if (!email || !pass) {
+    msg18.innerText = "Completa los campos.";
     return;
   }
-
-  if (age >= 18) {
-    sessionStorage.setItem('isAdultSession', 'true');
-    closeModal();
-    if (window._adultLinkTarget) {
-      window.location.href = window._adultLinkTarget;
-      window._adultLinkTarget = null;
-    }
-  } else {
-    denyAccessPermanently();
-  }
-}
-
-function isBlocked() {
-  const blockedUntil = localStorage.getItem('blockedUntil');
-  return blockedUntil && new Date().getTime() < parseInt(blockedUntil);
-}
-
-function isPermanentlyBanned() {
-  return localStorage.getItem('isBanned') === 'true';
-}
-
-function checkAgeAndRedirect(e, link) {
-  e.preventDefault();
-
-  if (isPermanentlyBanned()) {
-    alert("Has sido bloqueado permanentemente del contenido +18.");
-    return;
-  }
-
-  if (isBlocked()) {
-    showBlockModal(); // << esta línea muestra el nuevo modal
-    return;
-  }
-
-  window._adultLinkTarget = link.getAttribute('href') || link.getAttribute('data-href');
-  sessionStorage.removeItem('isAdultSession');
-  document.getElementById('birth-year').value = "";
-  document.getElementById('age-modal').style.display = 'flex';
-}
-
-
-document.addEventListener('DOMContentLoaded', function () {
-  document.querySelectorAll('a[data-adulto="true"]').forEach(link => {
-    link.addEventListener('click', function (e) {
-      checkAgeAndRedirect(e, this);
-    });
+  const res = await fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "validar",
+      email: email,
+      password: pass
+    }),
   });
+  const data = await res.json();
+  if (data.acceso) {
+    modal.classList.add("hidden");
+    localStorage.setItem("acceso18", "1");
+    menu18.classList.add("visible");
+    closeBtn.classList.remove("hidden");
+  } else {
+    msg18.innerText = data.motivo || "Error.";
+  }
+};
+
+window.addEventListener("DOMContentLoaded", () => {
+  if (localStorage.getItem("acceso18") === "1") {
+    menu18.classList.add("visible");
+    closeBtn.classList.remove("hidden");
+  }
 });
 
-/*Mensaje flotante*/
+closeBtn.onclick = () => modalClose.classList.remove("hidden");
+document.getElementById("confirmClose18").onclick = () => {
+  localStorage.removeItem("acceso18");
+  menu18.classList.remove("visible");
+  closeBtn.classList.add("hidden");
+  modalClose.classList.add("hidden");
+};
 
-function showBlockModal() {
-  const modal = document.getElementById('block-message');
-  modal.style.display = 'block';
-
-  setTimeout(() => {
-    modal.style.display = 'none';
-  }, 5000);
-}
-
-function hideBlockModal() {
-  const modal = document.getElementById('block-message');
-  modal.style.display = 'none';
-}
-
+forgotLink.onclick = async () => {
+  const correo = prompt("Ingresa tu correo para recuperar tu contraseña:");
+  if (!correo) return;
+  const res = await fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "recuperar",
+      email: correo
+    }),
+  });
+  const data = await res.json();
+  if (data.ok) {
+    alert("Correo enviado con tu contraseña.");
+  } else {
+    alert("No se encontró el correo.");
+  }
+};
 </script>
 
 
+
+
+
+
+<!-- 🔥 Botón +18 en el menú lateral -->
+<a id="open18Btn" href="#"><i class="fas fa-fire"></i><span>+18</span></a>
+
+<!-- 🔒 Modal de validación +18 -->
+<div id="modal18" class="modal18 hidden">
+  <div class="modal-content">
+    <span class="close18">&times;</span>
+    <h2>Contenido para adultos</h2>
+    <p>Debes ser mayor de 18 años y tener contraseña personal.</p>
+    <input type="email" id="email18" placeholder="Correo electrónico" required/>
+    <input type="password" id="pass18" placeholder="Contraseña +18" required/>
+    <button id="submit18">Validar</button>
+    <p><a href="#" id="forgotPass">¿Olvidaste tu contraseña?</a></p>
+    <p id="msg18" style="color:red;"></p>
+  </div>
+</div>
+
+<!-- ✅ Menú superior +18 (aparece tras validación) -->
+<a id="menu18Item" class="menu-item hidden" href="#">+18</a>
+
+<!-- ❌ Botón flotante para cerrar +18 -->
+<div id="close18Btn" class="close18-fab hidden">❌</div>
+
+<!-- ❌ Modal de cerrar sesión +18 -->
+<div id="modalClose18" class="modal18 hidden">
+  <div class="modal-content">
+    <span class="closeModalClose18">&times;</span>
+    <h3>¿Deseas cerrar +18?</h3>
+    <button id="confirmClose18" class="alignright">Sí</button>
+    <button id="cancelClose18" class="alignleft">No</button>
+  </div>
+</div>
+
+<style>
+/* Asegura visibilidad del botón +18 */
+#open18Btn {
+  display: block !important;
+  color: red !important;
+}
+.menu-item.visible {
+  display: inline-block !important;
+}
+
+.modal18 {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex; justify-content: center; align-items: center;
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+}
+.modal18.hidden { display: none; }
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  position: relative;
+}
+.modal-content input {
+  display: block;
+  width: 90%;
+  margin: 10px auto;
+  padding: 10px;
+}
+.modal-content .close18,
+.modal-content .closeModalClose18 {
+  position: absolute;
+  top: 10px; right: 15px;
+  cursor: pointer;
+  font-size: 20px;
+}
+#menu18Item { display: none; }
+#menu18Item.visible { display: inline-block; }
+.close18-fab {
+  position: fixed;
+  bottom: 20px; right: 20px;
+  background: red;
+  color: white;
+  font-size: 20px;
+  padding: 10px 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 999;
+}
+</style>
+
+
+<script>
+const scriptURL = "https://script.google.com/macros/s/AKfycbyDUIlAWudwKTH1asmwqbmpa2PS91y2VZFY_vMC_jE2rT5cclnRixt1byBfI9vvQd3m/exec";
+
+const modal = document.getElementById("modal18");
+const modalClose = document.getElementById("modalClose18");
+const openBtn = document.getElementById("open18Btn");
+const closeBtn = document.getElementById("close18Btn");
+const menu18 = document.getElementById("menu18Item");
+const submitBtn = document.getElementById("submit18");
+const emailField = document.getElementById("email18");
+const passField = document.getElementById("pass18");
+const msg18 = document.getElementById("msg18");
+const forgotLink = document.getElementById("forgotPass");
+
+openBtn.onclick = () => modal.classList.remove("hidden");
+document.querySelector(".close18").onclick = () => modal.classList.add("hidden");
+document.querySelector(".closeModalClose18").onclick = () => modalClose.classList.add("hidden");
+document.getElementById("cancelClose18").onclick = () => modalClose.classList.add("hidden");
+
+submitBtn.onclick = async () => {
+  const email = emailField.value.trim();
+  const pass = passField.value.trim();
+  msg18.innerText = "";
+  if (!email || !pass) {
+    msg18.innerText = "Completa los campos.";
+    return;
+  }
+  const res = await fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "validar",
+      email: email,
+      password: pass
+    }),
+  });
+  const data = await res.json();
+  if (data.acceso) {
+    modal.classList.add("hidden");
+    localStorage.setItem("acceso18", "1");
+    menu18.classList.add("visible");
+    closeBtn.classList.remove("hidden");
+  } else {
+    msg18.innerText = data.motivo || "Error.";
+  }
+};
+
+window.addEventListener("DOMContentLoaded", () => {
+  if (localStorage.getItem("acceso18") === "1") {
+    menu18.classList.add("visible");
+    closeBtn.classList.remove("hidden");
+  }
+});
+
+closeBtn.onclick = () => modalClose.classList.remove("hidden");
+document.getElementById("confirmClose18").onclick = () => {
+  localStorage.removeItem("acceso18");
+  menu18.classList.remove("visible");
+  closeBtn.classList.add("hidden");
+  modalClose.classList.add("hidden");
+};
+
+forgotLink.onclick = async () => {
+  const correo = prompt("Ingresa tu correo para recuperar tu contraseña:");
+  if (!correo) return;
+  const res = await fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify({
+      action: "recuperar",
+      email: correo
+    }),
+  });
+  const data = await res.json();
+  if (data.ok) {
+    alert("Correo enviado con tu contraseña.");
+  } else {
+    alert("No se encontró el correo.");
+  }
+};
+</script>
 
 
 </body>
