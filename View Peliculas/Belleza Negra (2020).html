@@ -114,7 +114,7 @@
       h2 { font-size: 1.3rem; }
       h3, h4 { font-size: 1.1rem; }
       .info, .sinopsis p, .serie p {
-        font-size: 1rem !important;
+        font-size: 0.80rem !important;
       }
     }
 
@@ -333,7 +333,7 @@
     document.getElementById('btn-favorito').addEventListener('click', () => {
       const nuevaPelicula = {
         titulo: "Belleza Negra",
-        imagen: "https://image.tmdb.org/t/p/w300/3wE2OAmWsuuE4IOp6i8iSeRYy4.jpg",
+        imagen: "https://image.tmdb.org/t/p/w300/d3wE2OAmWsuuE4IOp6i8iSeRYy4.jpg",
         genero: "Drama",
         archivo: "Belleza Negra (2020).html",
         tipo: "pelicula",
@@ -395,7 +395,7 @@
 
       /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
       const historialTitulo = "Belleza Negra";
-      const historialImagen = "https://image.tmdb.org/t/p/w300/3wE2OAmWsuuE4IOp6i8iSeRYy4.jpg";
+      const historialImagen = "https://image.tmdb.org/t/p/w300/d3wE2OAmWsuuE4IOp6i8iSeRYy4.jpg";
       const historialArchivo = "Belleza Negra (2020).html";
 
       let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
