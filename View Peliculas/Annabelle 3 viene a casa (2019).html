@@ -93,8 +93,9 @@
     }
 
     .serie img {
-      width: 100%;
-      max-width: 150px;
+      width: 120px;
+      height: 180px;
+      object-fit: cover;
       border-radius: 10px;
     }
 
@@ -114,7 +115,7 @@
       h2 { font-size: 1.3rem; }
       h3, h4 { font-size: 1.1rem; }
       .info, .sinopsis p, .serie p {
-        font-size: 1rem !important;
+        font-size: 0.80rem !important; /*estaba en 1rem*/
       }
     }
 
@@ -122,7 +123,7 @@
       body { font-size: 1.1rem; }
       h1 { font-size: 1.4rem; }
       h2 { font-size: 1.2rem; }
-      h3, h4 { font-size: 1rem; }
+      h3, h4 { font-size: 0.80rem; } /*estaba en 1rem*/
     }
 
     body, p, h1, h2, h3, h4, h5, h6, span, a, .titulo, .sinopsis, .recomendaciones, .serie {
@@ -190,7 +191,7 @@
 <body ondragstart="return false;" ondrop="return false;">
   
   <div class="player">
-    <video class="vid1 js-player" loading="lazy" controls poster="https://image.tmdb.org/t/p/w780/jB98SrdXAYSbiprjIwc7WfVCuCV.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+    <video class="vid1 js-player" controls loading="lazy" poster="https://image.tmdb.org/t/p/w780/jB98SrdXAYSbiprjIwc7WfVCuCV.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
       <source src="https://dl.dropbox.com/scl/fi/phy3ip3ioojlg7vcgd5gy/Annabelle.comes.home.2019.1080P-Dual-Lat.mp4?rlkey=geo7jbrydvuek4x8cyr2m5st4&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
@@ -247,29 +248,29 @@
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
-      <a href="#" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
-        <p>Nombre de pelicula</p>
+      <a href="Annabelle (2014).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/jNFqmsulwUrhYQW3MvqzfMc7SdS.jpg" alt="">
+        <p>Annabelle</p>
       </a>
-      <a href="#" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
-        <p>Nombre de pelicula</p>
+      <a href="Annabelle 2 la creacion 2 (2017).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/x0pekWNy7GS37bm30zuxWNLPXj8.jpg" alt="">
+        <p>Annabelle 2: La creacion</p>
       </a>
-      <a href="#" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
-        <p>Nombre de pelicula</p>
+      <a href="1978 (2025).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/iyKixwGhGRas1ppAih8E7SG5QDZ.jpg" alt="">
+        <p>1978</p>
       </a>
-      <a href="#" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
-        <p>Nombre de pelicula</p>
+      <a href="Presencia (2025).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/8mRO5AdZ4Rn1crgjTHaUnWWhJXB.jpg" alt="">
+        <p>Presencia</p>
       </a>
-      <a href="#" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
-        <p>Nombre de pelicula</p>
+      <a href="Destino Final Lazos De Sangre (2025).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/pKaSLXmpT6oSRjnnFzGECPt0BRx.jpg" alt="">
+        <p>Destino final 6: Lazos de sangre</p>
       </a>
-      <a href="#" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
-        <p>Nombre de pelicula</p>
+      <a href="Eliminado (2014).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/pzxHNiKjHL8Sz7DZ7POXXqohxet.jpg" alt="">
+        <p>Eliminar amigo</p>
       </a>
     </div>
   </div>
