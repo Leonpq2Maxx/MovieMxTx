@@ -1,1 +1,187 @@
-<!-- Código completo de index.html generado anteriormente -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MovieTx - Acceso</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url('https://image.tmdb.org/t/p/original/7RyHsO4yDXtBv1zUU3mTpHeQ0d5.jpg');
+      background-size: cover;
+      background-position: center;
+      color: white;
+    }
+    .container {
+      max-width: 400px;
+      margin: 60px auto;
+      background: rgba(0,0,0,0.85);
+      padding: 30px;
+      border-radius: 10px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 5px;
+    }
+    input, select {
+      background: #333;
+      color: white;
+    }
+    button {
+      background-color: #e50914;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #b00610;
+    }
+    .hidden {
+      display: none;
+    }
+    .error {
+      background: #ff4444;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
+    .success {
+      background: #4caf50;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
+    .link {
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    .link a {
+      color: #bbb;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="login-box">
+    <h2>Iniciar Sesión</h2>
+    <div id="login-error" class="error hidden"></div>
+    <input type="email" id="email" placeholder="Correo electrónico" required>
+    <input type="password" id="password" placeholder="Contraseña" required>
+    <button onclick="verificarUsuario()">Entrar</button>
+    <div class="link">¿No tienes cuenta? <a href="#" onclick="mostrarRegistro()">Regístrate</a></div>
+  </div>
+
+  <div class="container hidden" id="registro-box">
+    <h2>Registro</h2>
+    <div id="registro-msg" class="success hidden"></div>
+    <input type="text" id="nombre" placeholder="Nombre completo" required>
+    <input type="email" id="new-email" placeholder="Correo electrónico" required>
+    <input type="password" id="new-password" placeholder="Contraseña" required>
+    <button onclick="enviarRegistro()">Registrarse</button>
+    <div class="link">¿Ya tienes cuenta? <a href="#" onclick="mostrarLogin()">Inicia sesión</a></div>
+  </div>
+
+  <p style="color: #ccc;text-align: center;">
+    Enviar tu pago a este CBU: <br><strong style="color: whitesmoke;">4530000800019328236176</strong>
+  </p>
+
+  <div class="container hidden" id="pago-box">
+    <h2>Seleccionar Plan</h2>
+    <select id="plan">
+      <option value="Basico">Básico - $3</option>
+      <option value="Estandar">Estándar - $5</option>
+      <option value="Premium">Premium - $8</option>
+    </select>
+    <input type="text" placeholder="Nombre en tarjeta">
+    <input type="text" placeholder="Número de tarjeta">
+    <input type="text" placeholder="MM/AA">
+    <input type="text" placeholder="CVV">
+    <button onclick="confirmarPago()">Pagar y Activar</button>
+  </div>
+
+  <!-- HTML conectado a Google Sheets para login y registro -->
+<script>
+const API_URL = "https://script.google.com/macros/s/AKfycbyqDM0wh0zjzmT9EH7f1x0ggHYvX3FRDRaApcThZpLeeMKeTWC2msMkAaw-4mMq664T/exec"; // Reemplaza con tu URL real
+
+function mostrarRegistro() {
+  document.getElementById('login-box').classList.add('hidden');
+  document.getElementById('registro-box').classList.remove('hidden');
+}
+function mostrarLogin() {
+  document.getElementById('registro-box').classList.add('hidden');
+  document.getElementById('login-box').classList.remove('hidden');
+}
+function verificarUsuario() {
+  const email = document.getElementById('email').value.trim();
+  const pass = document.getElementById('password').value.trim();
+  const error = document.getElementById('login-error');
+
+  fetch(`${API_URL}?correo=${encodeURIComponent(email)}&password=${encodeURIComponent(pass)}`)
+    .then(res => res.text())
+    .then(text => {
+      if (text === "OK") {
+        window.location.href = "dashboard.html"; // o la siguiente página privada
+      } else if (text === "PENDIENTE") {
+        error.textContent = "Tu cuenta aún no ha sido aprobada.";
+        error.classList.remove('hidden');
+      } else {
+        error.textContent = "Usuario o contraseña incorrectos.";
+        error.classList.remove('hidden');
+      }
+    })
+    .catch(() => {
+      error.textContent = "Error al conectar con el servidor.";
+      error.classList.remove('hidden');
+    });
+}
+function enviarRegistro() {
+  const nombre = document.getElementById('nombre').value;
+  const correo = document.getElementById('new-email').value;
+  const pass = document.getElementById('new-password').value;
+  const plan = document.getElementById('plan')?.value || "-";
+
+  const payload = {
+    nombre: nombre,
+    correo: correo,
+    password: pass,
+    plan: plan
+  };
+
+  fetch(API_URL, {
+    method: "POST",
+    body: JSON.stringify(payload),
+    headers: { "Content-Type": "application/json" }
+  })
+  .then(res => res.text())
+  .then(() => {
+    const msg = document.getElementById('registro-msg');
+    msg.textContent = "✅ Registro enviado. Espera aprobación.";
+    msg.classList.remove('hidden');
+  })
+  .catch(() => {
+    alert("Error al enviar registro.");
+  });
+}
+function confirmarPago() {
+  alert("✅ Gracias por realizar el pago. Espera ser aprobado para ingresar.");
+}
+</script>
+
+
+  
+</body>
+</html>
