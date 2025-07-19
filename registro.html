@@ -4,17 +4,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login - MovieTx</title>
+  <title>Registro - MovieTx</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="login-container">
-    <h2>Iniciar sesión</h2>
+    <h2>Registrarse</h2>
+    <input type="text" id="nombre" placeholder="Nombre completo">
     <input type="email" id="email" placeholder="Correo electrónico">
     <input type="password" id="password" placeholder="Contraseña">
-    <button onclick="login()">Ingresar</button>
-    <p><a href="registro.html">¿No tienes cuenta? Regístrate</a></p>
-    <p><a href="recuperar.html">¿Olvidaste tu contraseña?</a></p>
+    <button onclick="registrar()">Registrar</button>
+    <p><a href="index.html">¿Ya tienes cuenta? Inicia sesión</a></p>
     <div id="msg"></div>
   </div>
   <script src="gs.js"></script>
