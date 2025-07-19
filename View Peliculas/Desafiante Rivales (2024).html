@@ -10,7 +10,7 @@
   <style>
     :root {
       --plyr-color-main: #ff0000;
-      --plyr-video-control-color: #0022ff;
+      --plyr-video-control-color:rgb(255, 255, 255);
     }
     * {
       margin: 0;
@@ -93,11 +93,10 @@
     }
 
     .serie img {
-      width: 100%;
-      height: 180px; /* o 240px */ /*ACA ES EL LARGO DE LA IMAGEN forzandolas para que se adapten bien*/
+      width: 120px;
+      height: 180px;
+      object-fit: cover;
       border-radius: 10px;
-      object-fit: cover;     /* recorta lo que sobra sin deformar */
-      object-position: center; /* centra el contenido visual */
     }
 
     .serie p {
@@ -116,7 +115,7 @@
       h2 { font-size: 1.3rem; }
       h3, h4 { font-size: 1.1rem; }
       .info, .sinopsis p, .serie p {
-        font-size: 1rem !important;
+        font-size: 0.80rem !important; /*estaba en 1rem*/
       }
     }
 
@@ -124,7 +123,7 @@
       body { font-size: 1.1rem; }
       h1 { font-size: 1.4rem; }
       h2 { font-size: 1.2rem; }
-      h3, h4 { font-size: 1rem; }
+      h3, h4 { font-size: 0.80rem; } /*estaba en 1rem*/
     }
 
     body, p, h1, h2, h3, h4, h5, h6, span, a, .titulo, .sinopsis, .recomendaciones, .serie {
@@ -192,7 +191,7 @@
 <body ondragstart="return false;" ondrop="return false;">
   
   <div class="player">
-    <video class="vid1 js-player" loading="lazy" controls poster="https://image.tmdb.org/t/p/original/504GSaoxBA5nLlcMsJfjzLZEKUp.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+    <video class="vid1 js-player" controls loading="lazy" poster="https://image.tmdb.org/t/p/w780/504GSaoxBA5nLlcMsJfjzLZEKUp.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
       <source src="https://dl.dropbox.com/scl/fi/hy4wfwbsn4t00joc9lv74/Challengers.2024.1080p-dual-lat-cinecalidad.re.mp4?rlkey=1w644zncwe5vtj2dyqur6j8zu&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
@@ -216,7 +215,7 @@
   <div class="titulo">
     <h3>Desafiantes Rivales</h3>
     <br>
-    <h4>Género: Drama, Romance</h4>
+    <h4>Género: Drama/Romance</h4>
   </div>
 
   <div class="sinopsis">
