@@ -33,6 +33,14 @@
   margin: 0 auto;
   position: relative;
 }
+    .plyr__controls {
+  pointer-events: auto !important;
+  z-index: 1 !important;
+}
+video {
+  touch-action: manipulation;
+}
+
 
     .player video,
     .player iframe,
@@ -372,7 +380,6 @@
     const STORAGE_KEY = 'pos_' + videoSrc;
 
     const player = new Plyr(videoElement, {
-  hideControls: false,
   controls: [
     'rewind', 'play-large', 'play', 'fast-forward',
     'progress', 'current-time', 'duration', 'mute', 'volume',
@@ -510,5 +517,35 @@
     }, 10000);
     });
   </script>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const video = document.querySelector('.vid1');
+    const plyrControls = document.querySelector('.plyr__controls');
+    let controlsVisible = true;
+
+    function isFullscreen() {
+      return document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+    }
+
+    video.addEventListener('click', () => {
+      if (!isFullscreen()) return;
+      controlsVisible = !controlsVisible;
+      if (plyrControls) {
+        plyrControls.style.opacity = controlsVisible ? '1' : '0';
+        plyrControls.style.pointerEvents = controlsVisible ? 'auto' : 'none';
+      }
+    });
+
+    // Mostrar controles al salir de fullscreen
+    document.addEventListener('fullscreenchange', () => {
+      if (!isFullscreen() && plyrControls) {
+        plyrControls.style.opacity = '1';
+        plyrControls.style.pointerEvents = 'auto';
+        controlsVisible = true;
+      }
+    });
+  });
+</script>
+
 </body>
 </html>
