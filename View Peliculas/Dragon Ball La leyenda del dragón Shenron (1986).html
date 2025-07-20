@@ -191,17 +191,17 @@
 <body ondragstart="return false;" ondrop="return false;">
   
   <div class="player">
-    <video class="vid1 js-player" controls loading="lazy" poster="https://image.tmdb.org/t/p/w780/xIv4HuvPP9nL7PU9vq2PKOKFvhj.jpg" preload="none">
-      <source src="https://dl.dropbox.com/scl/fi/l1fn1epxjjk4s3nuqxmia/Dragon-Ball-una-aventura-mistica.mp4?rlkey=frr86ylu658y84l8wb830ynmv&st=" type="video/mp4">
+    <video class="vid1 js-player" controls loading="lazy" poster="https://image.tmdb.org/t/p/w780/ydBG5pa3p3wsVktrFza2WNI55yw.jpg" preload="none">
+      <source src="https://dl.dropbox.com/scl/fi/s3lv2gz361hor0u0g1drg/Dragon-Ball-La-leyenda-de-shen-long.mp4?rlkey=t11dh1yqgqhzyfepifw6v6g3t&st=" type="video/mp4">
     </video>
   </div>
 
-  <div id="resume-msg">✅ Reanudando donde lo dejaste: Dragon Ball: Gran aventura mística</div>
+  <div id="resume-msg">✅ Reanudando donde lo dejaste: Dragon Ball: La leyenda del dragón Shenron</div>
 
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>1998</span>
-    <i class="fal fa-clock"></i><span>45min</span>
-    <i class="fal fa-thumbs-up"></i><span>77%</span>
+    <i class="fal fa-calendar-alt"></i><span>1986</span>
+    <i class="fal fa-clock"></i><span>56min</span>
+    <i class="fal fa-thumbs-up"></i><span>68%</span>
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
@@ -213,7 +213,7 @@
   </div>
 
   <div class="titulo">
-    <h3>Dragon Ball: Gran aventura mística</h3>
+    <h3>Dragon Ball: La leyenda del dragón Shenron</h3>
     <br>
     <h4>Género: Animación/Acción/Ciencia ficción/Anime</h4>
   </div>
@@ -223,7 +223,7 @@
       Sinopsis:
     </h4>
     <p>
-      Después de haber terminado su entrenamiento con el maestro Roshi, Goku y Krilín participan en un torneo de artes marciales organizado por el rey Chaoz, quien tiene bajo su mando a varios integrantes de la armada de la patrulla roja. Mientras tanto, el consejero del emperador está intentando reunir las 7 bolas de dragón, y para ello cuenta con la ayuda de Tao Pai Pai y Ten Shin Han.
+      Primera película animada de Dragon Ball. Viene a ser un resumen de los primeros capítulos de la serie, pese a incorporar algunos cambios. Cuenta la leyenda que hay siete esferas de dragón desparramadas por toda la Tierra. Aquél que logre juntarlas podrá invocar al dragón Shen-Ron que es capaz de cumplir cualquier deseo. Acompaña a Goku, Bulma, Oolong, Yamcha y Puar en esta fantástica aventura mientras enfrentan al ambicioso Rey Gourmeth quien tiene oprimido a su pueblo. Esta película es la base que utilizaron en 1989 para hacer "Dragon Ball: Comienza la magia".
     </p>
   </div>
 
@@ -332,13 +332,13 @@
         <img loading="lazy" src="https://image.tmdb.org/t/p/w300/qPv8avE1joxywziPMd49k6yINJp.jpg" alt="">
         <p>Dragon Ball Z: Plan para erradicar a los Super Saiyans</p>
       </a>
-      <a href="Dragon Ball La leyenda del dragón Shenron (1986).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/5uvaNiQ1rq08rAJgg5NyXQdBC58.jpg" alt="">
-        <p>Dragon Ball: La leyenda del dragón Shenron</p>
-      </a>
       <a href="Dragon Ball Gt despues de 100 años.html" class="serie">
         <img loading="lazy" src="https://image.tmdb.org/t/p/w300/izZaeWcWDir9PvuSwaITV1E1rA8.jpg" alt="">
         <p>Dragon Ball GT: Despues de 100 años</p>
+      </a>
+      <a href="Dragon Ball Gran aventura mística (1988).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/f2BipTKswrdpqoCc1xJDyL35rJy.jpg" alt="">
+        <p>Dragon Ball: Gran aventura mística</p>
       </a>
       <a href="Dragon Ball El camino hacia el poder (1996).html" class="serie">
         <img loading="lazy" src="https://image.tmdb.org/t/p/w300/2PiRMHl7QDwuB0rAw0GjVHVb847.jpg" alt="">
@@ -409,10 +409,10 @@
     /* ACA VA LA NOMBRE, IMAGEN, GENERO, ARCHIVO DONDE GUARDAN SU HTML DE PELICULA Y EL TIEMPO */
     document.getElementById('btn-favorito').addEventListener('click', () => {
       const nuevaPelicula = {
-        titulo: "Dragon Ball: Gran aventura mística",
-        imagen: "https://image.tmdb.org/t/p/w300/f2BipTKswrdpqoCc1xJDyL35rJy.jpg",
-        genero: "Anime",
-        archivo: "Dragon Ball Gran aventura mística (1988).html",
+        titulo: "Dragon Ball: La leyenda del dragón Shenron",
+        imagen: "https://image.tmdb.org/t/p/w300/5uvaNiQ1rq08rAJgg5NyXQdBC58.jpg",
+        genero: "anime",
+        archivo: "Dragon Ball La leyenda del dragón Shenron (1986).html",
         tipo: "pelicula",
         timestamp: Date.now()
       };
@@ -471,9 +471,9 @@
       const STORAGE_KEY = 'pos_' + videoSrc;
 
       /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
-      const historialTitulo = "Dragon Ball: Gran aventura mística";
-      const historialImagen = "https://image.tmdb.org/t/p/w300/f2BipTKswrdpqoCc1xJDyL35rJy.jpg";
-      const historialArchivo = "Dragon Ball Gran aventura mística (1988).html";
+      const historialTitulo = "Dragon Ball: La leyenda del dragón Shenron";
+      const historialImagen = "https://image.tmdb.org/t/p/w300/5uvaNiQ1rq08rAJgg5NyXQdBC58.jpg";
+      const historialArchivo = "Dragon Ball La leyenda del dragón Shenron (1986).html";
 
       let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
       let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
