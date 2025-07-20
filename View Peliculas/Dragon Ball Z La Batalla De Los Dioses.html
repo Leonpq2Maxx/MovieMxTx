@@ -25,14 +25,15 @@
       font-family: 'PT Sans', sans-serif;
       color: #fff;
     }
+    
     .player {
-      position: relative;
-      padding-top: 56.25%; /* 16:9 aspect ratio */
-      height: 0;
-      overflow: hidden;
-      max-width: 100%;
-      margin: 0 auto;
-    }
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
     .player video,
     .player iframe,
     .player .plyr {
@@ -191,10 +192,11 @@
 <body ondragstart="return false;" ondrop="return false;">
   
   <div class="player">
-    <video class="vid1 js-player" controls loading="lazy" poster="https://image.tmdb.org/t/p/w780/yIDS5QLvKtgzfu43eUWx5JkGW6p.jpg" preload="none">
-      <source loading="lazy" src="https://dn720303.ca.archive.org/0/items/dragon-ball-z-la-batalla-de-los-dioses/Dragon%20Ball%20Z%20la%20Batalla%20de%20los%20Dioses.ia.mp4" type="video/mp4">
-    </video>
-  </div>
+  <video class="vid1 js-player" controls playsinline loading="lazy" poster="https://image.tmdb.org/t/p/w780/yIDS5QLvKtgzfu43eUWx5JkGW6p.jpg" preload="none">
+    <source loading="lazy" src="https://dn720303.ca.archive.org/0/items/dragon-ball-z-la-batalla-de-los-dioses/Dragon%20Ball%20Z%20la%20Batalla%20de%20los%20Dioses.ia.mp4" type="video/mp4">
+  </video>
+</div>
+
 
   <div id="resume-msg">✅ Reanudando donde lo dejaste: Dragon Ball Z: La batalla de los dioses</div>
 
@@ -370,12 +372,14 @@
     const STORAGE_KEY = 'pos_' + videoSrc;
 
     const player = new Plyr(videoElement, {
-      controls: [
-        'rewind', 'play-large', 'play', 'fast-forward',
-        'progress', 'current-time', 'duration', 'mute', 'volume',
-        'captions', 'settings', 'pip', 'airplay', 'fullscreen'
-      ]
-    });
+  hideControls: false,
+  controls: [
+    'rewind', 'play-large', 'play', 'fast-forward',
+    'progress', 'current-time', 'duration', 'mute', 'volume',
+    'captions', 'settings', 'pip', 'airplay', 'fullscreen'
+  ]
+});
+
 
     document.addEventListener('DOMContentLoaded', () => {
       const savedTime = localStorage.getItem(STORAGE_KEY);
