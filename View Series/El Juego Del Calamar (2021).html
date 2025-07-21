@@ -271,43 +271,6 @@ const episodioCount = document.getElementById("episodio-count");
 const mainVideo = document.querySelector('.main-video video');
 const titleDiv = document.querySelector('.main-video .title');
 
-function renderEpisodios(temporada) {
-  episodiosContainer.innerHTML = "";
-  
-  const episodios = episodiosData[temporada] || [];
-  const yearSpan = document.querySelector('.info span');
-  const yearBySeason = { 1: '2007', 2: '2008', 3: '2009' };  /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010 (ABAJO HAY OTRO DEBE HACER LO MISMO)*/
-  if (yearSpan) yearSpan.textContent = yearBySeason[temporada] || '0000';
-
-  episodioCount.textContent = `${episodios.length} Capítulos`;
-
-  episodios.forEach((ep, index) => {
-    const btn = document.createElement("button");
-    btn.textContent = index + 1;
-    btn.style.cssText = `
-      width: 40px; height: 40px;
-      background: #222; border: none; border-radius: 5px;
-      color: #ccc; font-size: 1rem; cursor: pointer;
-    `;
-    btn.addEventListener("click", () => {
-      mainVideo.setAttribute("src", ep.src);
-      mainVideo.play();
-      if (titleDiv) {
-        titleDiv.innerHTML = ep.titulo;
-      }
-    });
-    episodiosContainer.appendChild(btn);
-  });
-
-  // Marcar automáticamente el primer episodio
-  const firstBtn = document.querySelector('#episodios button');
-  if (firstBtn) {
-    firstBtn.classList.add('active');
-    firstBtn.style.background = 'red';
-    firstBtn.style.color = '#fff';
-  }
-
-}
 
 // Inicializar con la temporada por defecto
 renderEpisodios(temporadaSelect.value);
@@ -340,7 +303,11 @@ function renderEpisodios(temporada) {
       color: #ccc; font-size: 1rem; cursor: pointer;
     `;
     btn.addEventListener("click", () => {
-      playEpisode(ep.src, ep.titulo, index);
+      mainVideo.setAttribute("src", ep.src);
+      mainVideo.play();
+      if (titleDiv) {
+        titleDiv.innerHTML = ep.titulo;
+      }
     });
     episodiosContainer.appendChild(btn);
   });
