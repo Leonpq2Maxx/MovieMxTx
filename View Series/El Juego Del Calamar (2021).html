@@ -303,6 +303,20 @@ function renderEpisodios(temporada) {
       color: #ccc; font-size: 1rem; cursor: pointer;
     `;
     btn.addEventListener("click", () => {
+      playEpisode(ep.src, ep.titulo, index);
+    });
+    episodiosContainer.appendChild(btn);
+  });
+
+  episodios.forEach((ep, index) => {
+    const btn = document.createElement("button");
+    btn.textContent = index + 1;
+    btn.style.cssText = `
+      width: 40px; height: 40px;
+      background: #222; border: none; border-radius: 5px;
+      color: #ccc; font-size: 1rem; cursor: pointer;
+    `;
+    btn.addEventListener("click", () => {
       mainVideo.setAttribute("src", ep.src);
       mainVideo.play();
       if (titleDiv) {
