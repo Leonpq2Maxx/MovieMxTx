@@ -183,16 +183,16 @@
 <div class="container">
 <div class="main-video">
 <div class="video">
-<video class='js-player' poster="https://image.tmdb.org/t/p/original/wJoPsjcJkMAr7ifNqo7qlNXDzil.jpg" controls muted preload="metadata"> <!--Aca te dejo la pagina para agregar el fondo https://www.themoviedb.org-->
+<video class='js-player' poster="https://image.tmdb.org/t/p/w780/y8tPZ9P4tYqYiACs6t4mlcWJnSC.jpg" controls muted preload="metadata"> <!--Aca te dejo la pagina para agregar el fondo https://www.themoviedb.org-->
 <source src="https://www.udrop.com/file/6goa/1x1" type="application/x-mpegURL">
 </video>
 <!--<video src="" poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3r48KQZbrv_w2zeTpEMqrIE0BysJMnmdydw&usqp=CAU" controls muted autoplay></video>-->
-<div id="resume-msg">✅ Reanudando donde lo dejaste: El juego del calamar</div>
+<div id="resume-msg">✅ Reanudando donde lo dejaste: Chespirito: Sin querer queriendo</div>
 
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>2021</span> <!-- AÑO DE ESTRENO DE LA SERIE -->
-    <i class="fal fa-clock"></i><span>T3</span> <!-- LA CANTIDAD DE TEMPORADAS QUE TIENE EJEMPLO "T1 (SI TIENE UNA TEMPORADAS)" SI TIENE VARIAS AGREGAR "T4" SERIAN TEMPORADA 4-->
-    <i class="fal fa-thumbs-up"></i><span>88%</span> <!-- LA CALIFICACION DE LA SERIE -->
+    <i class="fal fa-calendar-alt"></i><span>2025</span> <!-- AÑO DE ESTRENO DE LA SERIE -->
+    <i class="fal fa-clock"></i><span>T1</span> <!-- LA CANTIDAD DE TEMPORADAS QUE TIENE EJEMPLO "T1 (SI TIENE UNA TEMPORADAS)" SI TIENE VARIAS AGREGAR "T4" SERIAN TEMPORADA 4-->
+    <i class="fal fa-thumbs-up"></i><span>85%</span> <!-- LA CALIFICACION DE LA SERIE -->
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
@@ -204,7 +204,7 @@
   </div>
 
   <div class="titulo">
-    <h3>El juego del calamar</h3>
+    <h3>Chespirito: Sin querer queriendo</h3>
   </div>
 
   <!-- Selector de Temporadas y Botones de Episodios -->
@@ -212,8 +212,6 @@
   <div>
     <select id="temporada-select" style="background: #1c1c1c; color: white; font-size: 1rem; padding: 5px 10px; border-radius: 5px; border: 1px solid #333;">
       <option value="1" selected>Temporada 1</option>
-      <option value="2">Temporada 2</option>
-      <option value="3">Temporada 3</option>
     </select>
   </div>
   <div id="episodio-count" style="color: #bbb; font-size: 0.95rem;">10 Capítulos</div>
@@ -234,34 +232,13 @@
 <script>
 const episodiosData = {
   1: [
-    { titulo: "Episodio 1 - Luz roja, luz verde", src: "https://pomf2.lain.la/f/ms1jmsqt.mp4" },
-    { titulo: "Episodio 2 - INFIERNO", src: "https://pomf2.lain.la/f/qt4mljp.mp4" },
-    { titulo: "Episodio 3 - El hombre del paraguas", src: "https://pomf2.lain.la/f/l6nnuimm.mp4" },
-    { titulo: "Episodio 4 - No abandones el equipo", src: "https://pomf2.lain.la/f/7b498vvh.mp4" },
-    { titulo: "Episodio 5 - Un mundo justo", src: "https://pomf2.lain.la/f/1qkw8fnl.mp4" },
-    { titulo: "Episodio 6 - Canicas", src: "https://pomf2.lain.la/f/biuc9q09.mp4" },
-    { titulo: "Episodio 7 - Los Vip", src: "https://pomf2.lain.la/f/durwx8id.mp4" },
-    { titulo: "Episodio 8 - El Juego Del Calamar", src: "https://pomf2.lain.la/f/lj8wulcj.mp4" },
-    { titulo: "Episodio 9 - Ultimo Juego", src: "https://pomf2.lain.la/f/4wkb714z.mp4" }
+    { titulo: "Episodio 1 - Zapatero a tus zapatos", src: "https://dl.dropbox.com/scl/fi/2rxn8bbjx7offllrzzddk/Chespirito-sin-querer-queriendo-T1-C1.mp4?rlkey=hjvi2jjx2oinq0hekxp875ds9&st=" },
+    { titulo: "Episodio 2 - No hay mal que por bien no venga", src: "Link del video" },
+    { titulo: "Episodio 3 - Que no panda el cúnico", src: "Link del video" },
+    { titulo: "Episodio 4 - Es que no me tienen paciencia", src: "Link del video" },
+    { titulo: "Episodio 5 - El que ríe al último", src: "Link del video" },
+    { titulo: "Episodio 6", src: "Link del video" }
     // Agrega más si tienes
-  ],
-  2: [
-    { titulo: "Episodio 1 - Sustento y azar", src: "https://pomf2.lain.la/f/ms26sodv.mp4" },
-    { titulo: "Episodio 2 - Fiesta de Halloween", src: "https://pomf2.lain.la/f/vh3a6css.mp4" },
-    { titulo: "Episodio 3 - 001", src: "https://pomf2.lain.la/f/njqor1xp.mp4" },
-    { titulo: "Episodio 4 - Seis piernas", src: "https://pomf2.lain.la/f/4wbmkpbu.mp4" },
-    { titulo: "Episodio 5 - Otra ronda", src: "https://dl.dropboxusercontent.com/scl/fi/pulw5k1twd035wc9dkckr/El-Juego-Del-Calamar-T2-Cap5.mp4?rlkey=wbgasljxsqaa8jz31396bjzy3&st=" },
-    { titulo: "Episodio 6 - O X", src: "https://pomf2.lain.la/f/yt14iy7u.mp4" },
-    { titulo: "Episodio 7 - Amigos o enemigos", src: "https://pomf2.lain.la/f/a7npytuo.mp4" }
-  ],
-  3: [
-    { titulo: "Episodio 1 - Llaves y cuchillos", src: "https://dl.dropbox.com/scl/fi/6vque8yn2d81v084pfqwv/El-juego-del-calamar-T3-C1-2025.mp4?rlkey=yp1jrx2x4ec489c63m6nyfo82&st=" },
-    { titulo: "Episodio 2 - Noche estrellada", src: "https://dl.dropbox.com/scl/fi/yknn3xevxuk43z9fdk8px/El-juego-del-calamar-T3-C2-2025.mp4?rlkey=e51mv72g3lvso172elh8tw1ts&st=" },
-    { titulo: "Episodio 3 - No es culpa tuya", src: "https://dl.dropbox.com/scl/fi/ob63d7ent24jjqndac8lt/El-juego-del-calamar-T3-C3-2025.mp4?rlkey=1h841i5vpc67h6lyc4szrz1mo&st=" },
-    { titulo: "Episodio 4 - 222", src: "https://dl.dropbox.com/scl/fi/k5fpwtfy4e37pmkqaw3ig/El-juego-del-calamar-T3-C4-2025.mp4?rlkey=siblgnbxzs7sj4nbqag8i5tji&st=" },
-    { titulo: "Episodio 5 - ○△□", src: "https://dl.dropbox.com/scl/fi/ahh500o19r7jpz8j7fzaf/El-juego-del-calamar-T3-C5-2025.mp4?rlkey=p22znr5st1tj7ndzewi010iuz&st=" },
-    { titulo: "Episodio 6 - La naturaleza humana", src: "https://dl.dropbox.com/scl/fi/0qq28soexzcb13fia17u3/El-juego-del-calamar-T3-C6-2025.mp4?rlkey=bnbwerj1jfd63vv5fcdu940c0&st=" },
-    // Rellena si tienes links
   ]
 };
 
@@ -276,7 +253,7 @@ function renderEpisodios(temporada) {
   
   const episodios = episodiosData[temporada] || [];
   const yearSpan = document.querySelector('.info span');
-  const yearBySeason = { 1: '2007', 2: '2008', 3: '2009' };  /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010 (ABAJO HAY OTRO DEBE HACER LO MISMO)*/
+  const yearBySeason = { 1: '2025', 2: '2025', 3: '2025' };  /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010 (ABAJO HAY OTRO DEBE HACER LO MISMO)*/
   if (yearSpan) yearSpan.textContent = yearBySeason[temporada] || '0000';
 
   episodioCount.textContent = `${episodios.length} Capítulos`;
@@ -309,6 +286,7 @@ function renderEpisodios(temporada) {
 
 }
 
+
 // Inicializar con la temporada por defecto
 renderEpisodios(temporadaSelect.value);
 
@@ -326,7 +304,7 @@ function renderEpisodios(temporada) {
   
   const episodios = episodiosData[temporada] || [];
   const yearSpan = document.querySelector('.info span');
-  const yearBySeason = { 1: '2023', 2: '2024', 3: '2025' }; /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010*/
+  const yearBySeason = { 1: '2025', 2: '2024', 3: '2025' }; /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010*/
   if (yearSpan) yearSpan.textContent = yearBySeason[temporada] || '0000';
 
   episodioCount.textContent = `${episodios.length} Capítulos`;
@@ -529,14 +507,14 @@ if (ultimo && episodiosData[ultimo.temporada]) {
 
 <br>
 <div class="titulo">
-  <h4>Género: Action, Misterio, Drama, Crimen</h4> <!--Aca va el genero de la serie-->
+  <h4>Género: Drama/Comedia</h4> <!--Aca va el genero de la serie-->
 </div>
 
 
   <div class="sinopsis">
     <h4>Sinopsis:</h4><!--Aca va la sinopsis en el <p>Sinopsis</<p> que esta debajo-->
     <p>
-      Cientos de personas con problemas de dinero aceptan una invitación rarísima para competir en juegos infantiles. Dentro los esperan un tentador premio y desafíos letales.
+      La historia de Roberto Gómez Bolaños, el hombre que transformó su anhelo de hacer reír en un legado universal. Desde su infancia hasta su consagración en las décadas de los 50 a los 80, esta biografía íntima nos revela cómo un joven soñador encontró su lugar en la naciente industria televisiva, creando personajes inolvidables cargados de ternura y humor.
     </p>
   </div>
   <div style="text-align: center; margin-top: 15px;">
@@ -560,27 +538,27 @@ if (ultimo && episodiosData[ultimo.temporada]) {
   <br>
   <div class="series-grid">
     <a href="#" class="serie">
-      <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt=""> <!--Aca va las imagenes de las series solo debes de agregar la ultima parte despues de la "/" ej: (https://image.tmdb.org/t/p/original/qZJt1XlRVbQhGV7MtZnbiR6vxPh.jpg) solo debes agregar esto (qZJt1XlRVbQhGV7MtZnbiR6vxPh.jpg)-->
+      <img loading="lazy" src="https://raw.githubusercontent.com/Leonpq2Maxx/MovieTx/refs/heads/MovieTx/img%20poster/Invitaci%C3%B3n%20Primera%20Comuni%C3%B3n%20Acuarela%20Simple%20Verde%20y%20dorado.gif" alt=""> <!--Aca va las imagenes de las series solo debes de agregar la ultima parte despues de la "/" ej: (https://image.tmdb.org/t/p/original/qZJt1XlRVbQhGV7MtZnbiR6vxPh.jpg) solo debes agregar esto (qZJt1XlRVbQhGV7MtZnbiR6vxPh.jpg)-->
       <p>Nombre de serie</p>
     </a>
     <a href="#" class="serie">
-      <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt="">
+      <img loading="lazy" src="https://raw.githubusercontent.com/Leonpq2Maxx/MovieTx/refs/heads/MovieTx/img%20poster/Invitaci%C3%B3n%20Primera%20Comuni%C3%B3n%20Acuarela%20Simple%20Verde%20y%20dorado.gif" alt="">
       <p>Nombre de serie</p>
     </a>
     <a href="#" class="serie">
-      <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt="">
+      <img loading="lazy" src="https://raw.githubusercontent.com/Leonpq2Maxx/MovieTx/refs/heads/MovieTx/img%20poster/Invitaci%C3%B3n%20Primera%20Comuni%C3%B3n%20Acuarela%20Simple%20Verde%20y%20dorado.gif" alt="">
       <p>Nombre de serie</p>
     </a>
     <a href="#" class="serie">
-      <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt="">
+      <img loading="lazy" src="https://raw.githubusercontent.com/Leonpq2Maxx/MovieTx/refs/heads/MovieTx/img%20poster/Invitaci%C3%B3n%20Primera%20Comuni%C3%B3n%20Acuarela%20Simple%20Verde%20y%20dorado.gif" alt="">
       <p>Nombre de serie</p>
     </a>
     <a href="#" class="serie">
-      <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt="">
+      <img loading="lazy" src="https://raw.githubusercontent.com/Leonpq2Maxx/MovieTx/refs/heads/MovieTx/img%20poster/Invitaci%C3%B3n%20Primera%20Comuni%C3%B3n%20Acuarela%20Simple%20Verde%20y%20dorado.gif" alt="">
       <p>Nombre de serie</p>
     </a>
     <a href="#" class="serie">
-      <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt="">
+      <img loading="lazy" src="https://raw.githubusercontent.com/Leonpq2Maxx/MovieTx/refs/heads/MovieTx/img%20poster/Invitaci%C3%B3n%20Primera%20Comuni%C3%B3n%20Acuarela%20Simple%20Verde%20y%20dorado.gif" alt="">
       <p>Nombre de serie</p>
     </a>
   </div>
@@ -590,9 +568,9 @@ if (ultimo && episodiosData[ultimo.temporada]) {
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const serieTitulo = "El juego del calamar";
-    const serieImagen = "https://image.tmdb.org/t/p/w300/m2o9vamnvtseVG7HgcFeSEoJ8HR.jpg"; //Aca va la ultima parte de la imagen como hice el ej de arriba se agrega despues de la barra. esta de esta forma para que la imagen carge mas rapido
-    const archivoHTML = "../View Series/El Juego Del Calamar (2021).html"; // ✅ Ruta relativa al historial
+    const serieTitulo = "Chespirito: Sin querer queriendo";
+    const serieImagen = "https://image.tmdb.org/t/p/w300/Zf4F7BhM09OSl5YrPvAK7AUY5e.jpg"; //Aca va la ultima parte de la imagen como hice el ej de arriba se agrega despues de la barra. esta de esta forma para que la imagen carge mas rapido
+    const archivoHTML = "../View Series/Chespirito sin querer queriendo (2025).html"; // ✅ Ruta relativa al historial
     const progresoTexto = "Actualizado"; // Puedes cambiarlo dinámicamente
 
     let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
@@ -650,6 +628,7 @@ if (ultimo && episodiosData[ultimo.temporada]) {
 
 <!--PROBAR LUEGO SI FUNCIONA QUITANDOLO-->
 
+
 <!--FINAL ESTO ES NOMAS.......!-->
 
 
@@ -673,10 +652,10 @@ if (ultimo && episodiosData[ultimo.temporada]) {
 <script>
 document.getElementById('btn-favorito').addEventListener('click', () => {
   const nuevaPelicula = {
-  titulo: "El juego del calamar",
-  imagen: "https://image.tmdb.org/t/p/w300/m2o9vamnvtseVG7HgcFeSEoJ8HR.jpg",
-  genero: "Drama", // o "Serie", "Crimen/Serie", etc.
-  archivo: "../View Series/El Juego Del Calamar (2021).html",
+  titulo: "Chespirito: Sin querer queriendo",
+  imagen: "https://image.tmdb.org/t/p/w300/Zf4F7BhM09OSl5YrPvAK7AUY5e.jpg",
+  genero: "Drama comedia", // o "Serie", "Crimen/Serie", etc.
+  archivo: "../View Series/Chespirito sin querer queriendo (2025).html",
   tipo: "serie", // ✅ identifica si es "serie" o "pelicula"
   timestamp: Date.now() // opcional: para ordenar por fecha
   };

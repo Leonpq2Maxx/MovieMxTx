@@ -103,8 +103,9 @@
       color: white;
     }
     .serie img {
-      width: 100%;
-      max-width: 150px;
+      width: 120px;
+      height: 180px;
+      object-fit: cover;
       border-radius: 10px;
     }
     .serie p {
@@ -123,7 +124,7 @@
       h2 { font-size: 1.3rem; }
       h3, h4 { font-size: 1.1rem; }
       .info, .sinopsis p, .serie p {
-        font-size: 1rem !important;
+        font-size: 0.80rem !important; /*estaba en 1rem*/
       }
     }
 
@@ -131,7 +132,7 @@
       body { font-size: 1.1rem; }
       h1 { font-size: 1.4rem; }
       h2 { font-size: 1.2rem; }
-      h3, h4 { font-size: 1rem; }
+      h3, h4 { font-size: 0.80rem; } /*estaba en 1rem*/
     }
 
     body, p, h1, h2, h3, h4, h5, h6, span, a, .titulo, .sinopsis, .recomendaciones, .serie {
@@ -266,7 +267,7 @@ function renderEpisodios(temporada) {
   
   const episodios = episodiosData[temporada] || [];
   const yearSpan = document.querySelector('.info span');
-  const yearBySeason = { 1: '2024' };  /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010 (ABAJO HAY OTRO DEBE HACER LO MISMO)*/
+  const yearBySeason = { 1: '2007', 2: '2008', 3: '2009' };  /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010 (ABAJO HAY OTRO DEBE HACER LO MISMO)*/
   if (yearSpan) yearSpan.textContent = yearBySeason[temporada] || '0000';
 
   episodioCount.textContent = `${episodios.length} Capítulos`;
@@ -299,7 +300,6 @@ function renderEpisodios(temporada) {
 
 }
 
-
 // Inicializar con la temporada por defecto
 renderEpisodios(temporadaSelect.value);
 
@@ -317,7 +317,7 @@ function renderEpisodios(temporada) {
   
   const episodios = episodiosData[temporada] || [];
   const yearSpan = document.querySelector('.info span');
-  const yearBySeason = { 1: '2024' }; /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010*/
+  const yearBySeason = { 1: '2023', 2: '2024', 3: '2025' }; /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010*/
   if (yearSpan) yearSpan.textContent = yearBySeason[temporada] || '0000';
 
   episodioCount.textContent = `${episodios.length} Capítulos`;
@@ -520,7 +520,7 @@ if (ultimo && episodiosData[ultimo.temporada]) {
 
 <br>
 <div class="titulo">
-  <h4>Género: Animación, Anime, Accion, Aventura, Comedia, Sci-Fi & Fantasia</h4>
+  <h4>Género: Animación/Anime/Accion/Aventura/Comedia/Sci-Fi & Fantasia</h4>
 </div>
 
 
@@ -642,7 +642,6 @@ if (ultimo && episodiosData[ultimo.temporada]) {
 <!--PROBAR LUEGO SI FUNCIONA QUITANDOLO-->
 
 
-
 <!--FINAL ESTO ES NOMAS.......!-->
 
 
@@ -668,7 +667,7 @@ document.getElementById('btn-favorito').addEventListener('click', () => {
   const nuevaPelicula = {
   titulo: "Dragon Ball Daima",
   imagen: "https://image.tmdb.org/t/p/w300/uJw6nLCzQ8SftuCUJQNXTrvjlm4.jpg",
-  genero: "Anime", // o "Serie", "Crimen/Serie", etc.
+  genero: "Drama", // o "Serie", "Crimen/Serie", etc.
   archivo: "../View Series/Dragon Ball Daima (2025).html",
   tipo: "serie", // ✅ identifica si es "serie" o "pelicula"
   timestamp: Date.now() // opcional: para ordenar por fecha
