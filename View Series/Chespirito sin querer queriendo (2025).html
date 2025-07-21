@@ -50,21 +50,23 @@
       color: #fff;
     }
     
-    .main-video .video {
-  position: relative;
-  padding-top: 56.25%; /* Relación de aspecto 16:9 */
-  height: 0;
-  overflow: hidden;
-}
-
-.main-video .video video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
+    .video {
+      position: relative;
+      padding-top: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
+      overflow: hidden;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+    .video video,
+    .video iframe,
+    .video .plyr {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
 
     .info {
       display: flex;
@@ -193,12 +195,15 @@
 </head>
 <body>
 <div class="container">
-<div class="main-video">
-<div class="video">
-<video class='js-player' poster="https://image.tmdb.org/t/p/w780/y8tPZ9P4tYqYiACs6t4mlcWJnSC.jpg" controls muted preload="metadata"> <!--Aca te dejo la pagina para agregar el fondo https://www.themoviedb.org-->
-<source src="https://www.udrop.com/file/6goa/1x1" type="application/x-mpegURL">
-</video>
-<!--<video src="" poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3r48KQZbrv_w2zeTpEMqrIE0BysJMnmdydw&usqp=CAU" controls muted autoplay></video>-->
+  <div class="main-video">
+    <div class="video">
+      <video class='js-player' poster="https://image.tmdb.org/t/p/w780/y8tPZ9P4tYqYiACs6t4mlcWJnSC.jpg" controls muted preload="metadata"> <!--Aca te dejo la pagina para agregar el fondo https://www.themoviedb.org-->
+        <source src="https://www.udrop.com/file/6goa/1x1" type="application/x-mpegURL">
+      </video>
+      <!--<video src="" poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3r48KQZbrv_w2zeTpEMqrIE0BysJMnmdydw&usqp=CAU" controls muted autoplay></video>-->
+    </div>
+  </div>
+</div>  
 <div id="resume-msg">✅ Reanudando donde lo dejaste: Chespirito: Sin querer queriendo</div>
 
   <div class="info">
