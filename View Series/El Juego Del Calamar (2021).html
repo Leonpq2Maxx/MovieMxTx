@@ -210,30 +210,11 @@
   <!-- Selector de Temporadas y Botones de Episodios -->
 <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px; flex-wrap: wrap;">
   <div>
-    <select id="temporada-select" style="display: none;" style="background: #1c1c1c; color: white; font-size: 1rem; padding: 5px 10px; border-radius: 5px; border: 1px solid #333;">
+    <select id="temporada-select" style="background: #1c1c1c; color: white; font-size: 1rem; padding: 5px 10px; border-radius: 5px; border: 1px solid #333;">
       <option value="1" selected>Temporada 1</option>
       <option value="2">Temporada 2</option>
       <option value="3">Temporada 3</option>
     </select>
-<!-- BOTÓN QUE ABRE EL MODAL -->
-<div style="text-align: center; padding: 10px;">
-  <button onclick="abrirModalTemporadas()" style="padding: 10px 20px; background: #00a7ad; border: none; color: white; border-radius: 8px; font-size: 1rem;">Seleccionar Temporada</button>
-</div>
-
-<!-- MODAL DE TEMPORADAS -->
-<div id="modal-temporadas" style="display:none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.8); z-index:10000; justify-content:center; align-items:center;">
-  <div style="background:#111; padding:20px; border-radius:10px; text-align:center; max-width:300px; width:90%;">
-    <h3 style="color:white; margin-bottom:15px;">Selecciona una temporada</h3>
-    <select id="temporada-select-modal" onchange="seleccionarTemporadaDesdeModal()" style="background: #1c1c1c; color: white; font-size: 1rem; padding: 10px; border-radius: 5px; width: 100%;">
-      <option value="1">Temporada 1</option>
-      <option value="2">Temporada 2</option>
-      <option value="3">Temporada 3</option>
-    </select>
-    <br><br>
-    <button onclick="cerrarModalTemporadas()" style="background:#ff4444; color:white; border:none; padding:10px 20px; border-radius:6px;">Cerrar</button>
-  </div>
-</div>
-
   </div>
   <div id="episodio-count" style="color: #bbb; font-size: 0.95rem;">10 Capítulos</div>
 </div>
@@ -863,31 +844,6 @@ episodiosContainer.addEventListener("wheel", (e) => {
     });
   }
 }, { passive: false });
-</script>
-
-
-<script>
-function abrirModalTemporadas() {
-  const modal = document.getElementById("modal-temporadas");
-  const selectOriginal = document.getElementById("temporada-select");
-  const selectModal = document.getElementById("temporada-select-modal");
-
-  selectModal.value = selectOriginal.value;
-  modal.style.display = "flex";
-}
-
-function cerrarModalTemporadas() {
-  document.getElementById("modal-temporadas").style.display = "none";
-}
-
-function seleccionarTemporadaDesdeModal() {
-  const nuevaTemporada = document.getElementById("temporada-select-modal").value;
-  const selectOriginal = document.getElementById("temporada-select");
-
-  selectOriginal.value = nuevaTemporada;
-  selectOriginal.dispatchEvent(new Event("change"));
-  cerrarModalTemporadas();
-}
 </script>
 
 </body>
