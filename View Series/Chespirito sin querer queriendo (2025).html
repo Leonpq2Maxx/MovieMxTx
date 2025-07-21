@@ -50,17 +50,16 @@
       color: #fff;
     }
     
-    .video {
-      position: relative;
-      padding-top: 56.25%; /* 16:9 aspect ratio */
-      height: 0;
-      overflow: hidden;
-      max-width: 100%;
-      margin: 0 auto;
+    .player video {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
     }
-    .video video,
-    .video iframe,
-    .video .plyr {
+  
+  
+  .player video,
+    .player iframe,
+    .player .plyr {
       position: absolute;
       top: 0;
       left: 0;
@@ -68,6 +67,7 @@
       height: 100%;
     }
 
+  
     .info {
       display: flex;
       flex-wrap: wrap;
