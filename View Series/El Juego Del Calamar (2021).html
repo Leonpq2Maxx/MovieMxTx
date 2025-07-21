@@ -49,10 +49,22 @@
       font-family: 'PT Sans', sans-serif;
       color: #fff;
     }
-    .player video {
+    .video {
+      position: relative;
+      padding-top: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
+      overflow: hidden;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+    .video video,
+    .video iframe,
+    .video .plyr {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      height: auto;
-      border-radius: 8px;
+      height: 100%;
     }
     .info {
       display: flex;
@@ -180,14 +192,18 @@
   <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet">
 </head>
 <body>
-<div class="container">
-<div class="main-video">
-<div class="video">
-<video class='js-player' poster="https://image.tmdb.org/t/p/original/wJoPsjcJkMAr7ifNqo7qlNXDzil.jpg" controls muted preload="metadata"> <!--Aca te dejo la pagina para agregar el fondo https://www.themoviedb.org-->
-<source src="https://www.udrop.com/file/6goa/1x1" type="application/x-mpegURL">
-</video>
-<!--<video src="" poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3r48KQZbrv_w2zeTpEMqrIE0BysJMnmdydw&usqp=CAU" controls muted autoplay></video>-->
-<div id="resume-msg">✅ Reanudando donde lo dejaste: El juego del calamar</div>
+  <div class="container">
+    <div class="main-video">
+      <div class="video">
+        <video class='js-player' poster="https://image.tmdb.org/t/p/original/wJoPsjcJkMAr7ifNqo7qlNXDzil.jpg" controls muted preload="metadata"> <!--Aca te dejo la pagina para agregar el fondo https://www.themoviedb.org-->
+          <source src="https://www.udrop.com/file/6goa/1x1" type="application/x-mpegURL">
+        </video>
+        <!--<video src="" poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3r48KQZbrv_w2zeTpEMqrIE0BysJMnmdydw&usqp=CAU" controls muted autoplay></video>-->
+      </div>
+    </div>
+  </div>
+  
+  <div id="resume-msg">✅ Reanudando donde lo dejaste: El juego del calamar</div>
 
   <div class="info">
     <i class="fal fa-calendar-alt"></i><span>2021</span> <!-- AÑO DE ESTRENO DE LA SERIE -->
