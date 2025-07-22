@@ -1,12 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8"/>
 <title>MovieTx - Reproductor De Serie FUNCIONA 100% </title>
 <!-- Responsive viewport -->
-<meta content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0' name='viewport'/>
-<link rel="stylesheet" href="https://cdn.plyr.io/3.6.12/plyr.css"/>
-
+<meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" name="viewport">
+<link href="https://cdn.plyr.io/3.6.12/plyr.css" rel="stylesheet"/>
 <style>
   .container .main-video{background:#000000;border-radius:5px;padding:0px;}
   .container .main-video video{width:100%;border-radius:5px;}
@@ -174,48 +174,42 @@
       }
     }
   </style>
-<link rel="stylesheet" href="" />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet">
-</head>
+<link href="" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Roboto&amp;display=swap" rel="stylesheet"/>
+<link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet"/>
+</meta></head>
 <body>
 <div class="container">
-<div class="main-video">
+<div class="main-video"><div data-plyr-embed-id="5gquha3ICHE" data-plyr-provider="youtube" id="player"></div>
 <div class="video">
-<video class='js-player' poster="https://image.tmdb.org/t/p/original/wJoPsjcJkMAr7ifNqo7qlNXDzil.jpg" controls muted preload="metadata"> <!-- ACA DEBEN DE PONER LA IMAGEN DE FONDO QUE ESTARA EN LA PAGINA "https://www.themoviedb.org/"-->
-<source src="https://www.udrop.com/file/6goa/1x1" type="application/x-mpegURL">
-</video>
+
 <!--<video src="" poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3r48KQZbrv_w2zeTpEMqrIE0BysJMnmdydw&usqp=CAU" controls muted autoplay></video>-->
 <div id="resume-msg">✅ Reanudando donde lo dejaste: El juego del calamar</div>
-
-  <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>2021</span> <!-- AÑO DE ESTRENO DE LA SERIE -->
-    <i class="fal fa-clock"></i><span>T3</span> <!-- LA CANTIDAD DE TEMPORADAS QUE TIENE EJEMPLO "T1 (SI TIENE UNA TEMPORADAS)" SI TIENE VARIAS AGREGAR "T4" SERIAN TEMPORADA 4-->
-    <i class="fal fa-thumbs-up"></i><span>83%</span> <!-- LA CALIFICACION DE LA SERIE -->
-    <div class="hd-tag">
-      <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <rect width="24" height="24" rx="4" fill="white" />
-        <text x="4" y="17" fill="black" font-size="12" font-family="Arial, sans-serif" font-style="italic" font-weight="bold">HD</text>
-      </svg>
-      <span>1080P</span>
-    </div>
-    <span>🇲🇽</span>
-  </div>
-
-  <div class="titulo">
-    <h3>Trailer: El juego del calamar</h3>
-  </div>
-
-  <!-- Selector de Temporadas y Botones de Episodios -->
-<div style="display: flex; align-items: center; justify-content: space-between; padding: 10px; flex-wrap: wrap;">
-  <div>
-    <select id="temporada-select" style="background: #1c1c1c; color: white; font-size: 1rem; padding: 5px 10px; border-radius: 5px; border: 1px solid #333;">
-      <option value="1" selected>Temporada 1</option>
-    </select>
-  </div>
-  <div id="episodio-count" style="color: #bbb; font-size: 0.95rem;">10 Capítulos</div>
+<div class="info">
+<i class="fal fa-calendar-alt"></i><span>2021</span> <!-- AÑO DE ESTRENO DE LA SERIE -->
+<i class="fal fa-clock"></i><span>T3</span> <!-- LA CANTIDAD DE TEMPORADAS QUE TIENE EJEMPLO "T1 (SI TIENE UNA TEMPORADAS)" SI TIENE VARIAS AGREGAR "T4" SERIAN TEMPORADA 4-->
+<i class="fal fa-thumbs-up"></i><span>83%</span> <!-- LA CALIFICACION DE LA SERIE -->
+<div class="hd-tag">
+<svg height="22" viewbox="0 0 24 24" width="22" xmlns="http://www.w3.org/2000/svg">
+<rect fill="white" height="24" rx="4" width="24"></rect>
+<text fill="black" font-family="Arial, sans-serif" font-size="12" font-style="italic" font-weight="bold" x="4" y="17">HD</text>
+</svg>
+<span>1080P</span>
 </div>
-
+<span>🇲🇽</span>
+</div>
+<div class="titulo">
+<h3>Trailer: El juego del calamar</h3>
+</div>
+<!-- Selector de Temporadas y Botones de Episodios -->
+<div style="display: flex; align-items: center; justify-content: space-between; padding: 10px; flex-wrap: wrap;">
+<div>
+<select id="temporada-select" style="background: #1c1c1c; color: white; font-size: 1rem; padding: 5px 10px; border-radius: 5px; border: 1px solid #333;">
+<option selected="" value="1">Temporada 1</option>
+</select>
+</div>
+<div id="episodio-count" style="color: #bbb; font-size: 0.95rem;">10 Capítulos</div>
+</div>
 <!-- Botones de episodios -->
 <div id="episodios" style="
   display: flex;
@@ -228,191 +222,6 @@
   -webkit-overflow-scrolling: touch;
 "></div>
 
-<script>
-const episodiosData = {
-  1: [
-    { titulo: "Temporada 1 - 2021", src: "https://pomf2.lain.la/f/2ibx5be1.mp4" },
-    { titulo: "Temporada 2 - 2024", src: "https://pomf2.lain.la/f/gx2ce2jt.mp4" },
-    { titulo: "Temporada 3 - 2025", src: "https://pomf2.lain.la/f/ys5ort5.mp4" }
-    // Agrega más si tienes
-  ]
-};
-
-const temporadaSelect = document.getElementById("temporada-select");
-const episodiosContainer = document.getElementById("episodios");
-const episodioCount = document.getElementById("episodio-count");
-const mainVideo = document.querySelector('.main-video video');
-const titleDiv = document.querySelector('.main-video .title');
-
-function renderEpisodios(temporada) {
-  episodiosContainer.innerHTML = "";
-  
-  const episodios = episodiosData[temporada] || [];
-  const yearSpan = document.querySelector('.info span');
-  const yearBySeason = { 1: '2021', 2: '2024', 3: '2025' };
-  if (yearSpan) yearSpan.textContent = yearBySeason[temporada] || '0000';
-
-  episodioCount.textContent = `${episodios.length} Capítulos`;
-
-  episodios.forEach((ep, index) => {
-    const btn = document.createElement("button");
-    btn.textContent = index + 1;
-    btn.style.cssText = `
-      width: 40px; height: 40px;
-      background: #222; border: none; border-radius: 5px;
-      color: #ccc; font-size: 1rem; cursor: pointer;
-    `;
-    btn.addEventListener("click", () => {
-      mainVideo.setAttribute("src", ep.src);
-      mainVideo.play();
-      if (titleDiv) {
-        titleDiv.innerHTML = ep.titulo;
-      }
-    });
-    episodiosContainer.appendChild(btn);
-  });
-
-  // Marcar automáticamente el primer episodio
-  const firstBtn = document.querySelector('#episodios button');
-  if (firstBtn) {
-    firstBtn.classList.add('active');
-    firstBtn.style.background = 'red';
-    firstBtn.style.color = '#fff';
-  }
-
-}
-
-
-// Inicializar con la temporada por defecto
-renderEpisodios(temporadaSelect.value);
-
-// Cambiar temporada
-temporadaSelect.addEventListener("change", () => {
-  renderEpisodios(temporadaSelect.value);
-});
-</script>
-
-<script>
-let currentEpisodeIndex = 0;
-
-function renderEpisodios(temporada) {
-  episodiosContainer.innerHTML = "";
-  
-  const episodios = episodiosData[temporada] || [];
-  const yearSpan = document.querySelector('.info span');
-  const yearBySeason = { 1: '2021', 2: '2024', 3: '2025' };
-  if (yearSpan) yearSpan.textContent = yearBySeason[temporada] || '0000';
-
-  episodioCount.textContent = `${episodios.length} Capítulos`;
-
-  episodios.forEach((ep, index) => {
-    const btn = document.createElement("button");
-    btn.textContent = index + 1;
-    btn.style.cssText = `
-      width: 40px; height: 40px;
-      background: #222; border: none; border-radius: 5px;
-      color: #ccc; font-size: 1rem; cursor: pointer;
-    `;
-    btn.addEventListener("click", () => {
-      playEpisode(ep.src, ep.titulo, index);
-    });
-    episodiosContainer.appendChild(btn);
-  });
-
-  // Marcar automáticamente el primer episodio
-  const firstBtn = document.querySelector('#episodios button');
-  if (firstBtn) {
-    firstBtn.classList.add('active');
-    firstBtn.style.background = 'red';
-    firstBtn.style.color = '#fff';
-  }
-
-}
-
-function playEpisode(src, titulo, index) {
-  currentEpisodeIndex = index;
-  mainVideo.src = src;
-  mainVideo.load(); // prepara el video sin reproducir //
-  mainVideo.pause();
-mainVideo.currentTime = mainVideo.currentTime || 0; // asegúrate que se mantenga en el tiempo guardado si existe
-  mainVideo.play(); // forzar reproducción automática
-  if (titleDiv) titleDiv.innerHTML = titulo;
-
-  // Desmarcar todos los botones
-  const buttons = document.querySelectorAll("#episodios button");
-  buttons.forEach(btn => {
-    btn.classList.remove("active");
-    btn.style.background = "#222";
-    btn.style.color = "#ccc";
-  });
-
-  // Marcar el botón actual en rojo
-  buttons[index]?.classList.add("active");
-  buttons[index].style.background = "red";
-  buttons[index].style.color = "#fff";
-
-  // Reanudar si hay guardado
-  const msg = document.getElementById("resume-msg");
-  msg.textContent = `✅ ${titulo}`;
-  msg.classList.add("visible");
-  setTimeout(() => msg.classList.remove("visible"), 3000);
-}
-
-
-
-// Guardar tiempo cada 5s
-setInterval(() => {
-  if (!mainVideo.paused && !mainVideo.ended) {
-    localStorage.setItem(`resume_${temporadaSelect.value}_${currentEpisodeIndex}`, mainVideo.currentTime);
-  }
-}, 5000);
-
-
-mainVideo.addEventListener("pause", () => {
-  if (autoNextPlaying && !mainVideo.ended) {
-    mainVideo.play();
-    autoNextPlaying = false;
-  }
-});
-
-
-// Auto-next al finalizar
-mainVideo.addEventListener("ended", () => {
-  mainVideo.currentTime = 0;
-  const episodios = episodiosData[temporadaSelect.value] || [];
-  if (currentEpisodeIndex + 1 < episodios.length) {
-    const next = episodios[currentEpisodeIndex + 1];
-    playEpisode(next.src, next.titulo, currentEpisodeIndex + 1);
-  }
-});
-
-// Re-render al cambiar temporada
-temporadaSelect.addEventListener("change", () => {
-  // Detener y reiniciar el video
-  mainVideo.pause();
-  mainVideo.removeAttribute("src");
-  mainVideo.load(); // reinicia el reproductor
-});
-// Limpiar título
-  if (titleDiv) titleDiv.innerHTML = "Selecciona un episodio";
-  // Limpiar botones marcados
-  document.querySelectorAll("#episodios button").forEach(btn => {
-    btn.classList.remove("active");
-    btn.style.background = "#222";
-    btn.style.color = "#ccc";
-  });
-
-  
-
-
-// Inicial
-renderEpisodios(temporadaSelect.value);
-playEpisode(
-  episodiosData[temporadaSelect.value][0].src,
-  episodiosData[temporadaSelect.value][0].titulo,
-  0
-);
-</script>
 
 <style>
   #episodios button {
@@ -441,34 +250,27 @@ playEpisode(
 }
 
 </style>
-
 <div class="titulo">
-  <h4>Género: Accion, Misterio, Drama, Terror</h4> <!-- GENERO DE LA SERIE -->
+<h4>Género: Accion, Misterio, Drama, Terror</h4> <!-- GENERO DE LA SERIE -->
 </div>
-
-
-  <div class="sinopsis">
-    <h4>Sinopsis:</h4>
-    <p>
+<div class="sinopsis">
+<h4>Sinopsis:</h4>
+<p>
       Cientos de personas con problemas de dinero aceptan una invitación rarísima para competir en juegos infantiles. Dentro los esperan un tentador premio y desafíos letales.
     </p>
-  </div>
-
-<br>
-<div class="recomendaciones">
-  <h4>Podría interesarte:</h4>
-  <br>
-  <div class="series-grid">
-    <a href="../View Series/El Juego Del Calamar (2021).html" class="serie">
-      <img loading="lazy" src="https://image.tmdb.org/t/p/w300/xNvlt4jn2KbuKJoZ9UiVpm7lYjr.jpg" alt="">
-      <p>El juego del calamar</p>
-    </a>
-  </div>
 </div>
-<br>
-
-
-
+<br/>
+<div class="recomendaciones">
+<h4>Podría interesarte:</h4>
+<br/>
+<div class="series-grid">
+<a class="serie" href="../View Series/El Juego Del Calamar (2021).html">
+<img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w300/xNvlt4jn2KbuKJoZ9UiVpm7lYjr.jpg"/>
+<p>El juego del calamar</p>
+</a>
+</div>
+</div>
+<br/>
 <!-- Añadir Botones para .js-player: Reinicio al inicio (fa-step-backward), Retroceso (fa-undo) y Avance (fa-forward) -->
 <script>
 document.addEventListener("DOMContentLoaded", () => {
@@ -518,96 +320,79 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 </script>
-
-
-
 <!-- Lógica para guardar posición y mostrar mensaje de reanudación por episodio -->
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const mainVideo = document.querySelector('.main-video video');
-  const resumeMsg = document.getElementById('resume-msg');
-  let currentEpisode = null;
-
-  // Al hacer clic en un episodio
-  document.querySelectorAll('.video-list .vid').forEach(videoItem => {
-    videoItem.addEventListener('click', e => {
-      // Identificamos el episodio por posición en la lista
-      const episodeIndex = Array.from(document.querySelectorAll('.video-list .vid')).indexOf(videoItem);
-      currentEpisode = episodeIndex;
-
-      // Cambiamos la fuente del video
-      const src = videoItem.querySelector('video').getAttribute('src');
-      mainVideo.setAttribute('src', src);
-
-      // Checamos si existe posición guardada para este episodio
-      const savedTime = localStorage.getItem(`pos_episodio_${episodeIndex}`);
-      if (savedTime && parseFloat(savedTime) > 10) {
-        mainVideo.currentTime = parseFloat(savedTime);
-        resumeMsg.textContent = `✅ Reanudando ${videoItem.querySelector('.title').textContent.trim()} donde lo dejaste`;
-        resumeMsg.classList.add('visible');
-        setTimeout(() => {
-          resumeMsg.classList.remove('visible');
-        }, 3000);
-      }
-    });
-  });
-
-  // Guardamos posición cada 5 seg para cada episodio activo
-  setInterval(() => {
-    if (!mainVideo.paused && !mainVideo.ended && currentEpisode !== null) {
-      localStorage.setItem(`pos_episodio_${currentEpisode}`, mainVideo.currentTime);
-    }
-  }, 5000);
-});
-</script>
-
 
 <!-- ACELERAR VIDEO -->
-<script>
-const videoList = document.querySelectorAll('.video-list .vid');
-const mainVideo = document.querySelector('.main-video video');
 
-videoList.forEach(videoItem => {
-  videoItem.addEventListener('click', e => {
-    videoList.forEach(v => v.classList.remove('active'));
-    videoItem.classList.add('active');
-
-    const videoSrc = videoItem.getAttribute('data-url');
-    mainVideo.setAttribute('src', videoSrc);
-    mainVideo.play();
-  });
-});
-</script>
-
-
-
-
-
-</script>
 
 <!-- partial -->
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
-<script type="text/javascript">
-let listVideo = document.querySelectorAll('.video-list .vid');
-let mainVideo = document.querySelector('.main-video video');
-let title = document.querySelector('.main-video .title');
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-listVideo.forEach(video =>{
-  video.onclick = () =>{
-    listVideo.forEach(vid => vid.classList.remove('active'));
-    video.classList.add('active');
-    if(video.classList.contains('active')){
-      let src = video.children[0].getAttribute('src');
-      mainVideo.src = src;
-      let text = video.children[1].innerHTML;
-      title.innerHTML = text;
-    };
-  };
-});
-</script>
 <script src="https://cdn.plyr.io/3.6.12/plyr.js"></script>
 <script>//<![CDATA[
 const players = Array.from(document.querySelectorAll('.js-player')).map(player => new Plyr(player));
 //]]></script>
-</body>
+</div></div></div><script>
+const player = new Plyr('#player');
+const titleDiv = document.querySelector('.main-video .title');
+const temporadaSelect = document.getElementById("temporada-select");
+const episodiosContainer = document.getElementById("episodios");
+const episodioCount = document.getElementById("episodio-count");
+let currentEpisodeIndex = 0;
+
+const episodiosData = {
+  1: [
+    { titulo: "Episodio 1", src: "5gquha3ICHE" },
+    { titulo: "Episodio 2", src: "5gquha3ICHE" },
+    { titulo: "Episodio 3", src: "cTpISvwP9DM" }
+  ]
+};
+
+function playEpisode(videoId, titulo, index) {
+  currentEpisodeIndex = index;
+  player.source = {
+    type: 'video',
+    sources: [{ src: videoId, provider: 'youtube' }]
+  };
+  if (titleDiv) titleDiv.innerHTML = titulo;
+
+  const buttons = document.querySelectorAll("#episodios button");
+  buttons.forEach(btn => {
+    btn.classList.remove("active");
+    btn.style.background = "#222";
+    btn.style.color = "#ccc";
+  });
+  buttons[index]?.classList.add("active");
+  buttons[index].style.background = "red";
+  buttons[index].style.color = "#fff";
+
+  const msg = document.getElementById("resume-msg");
+  msg.textContent = `▶️ Reproduciendo: ${titulo}`;
+  msg.classList.add("visible");
+  setTimeout(() => msg.classList.remove("visible"), 3000);
+}
+
+function renderEpisodios(temporada) {
+  episodiosContainer.innerHTML = "";
+  const episodios = episodiosData[temporada] || [];
+  episodioCount.textContent = `${episodios.length} Capítulos`;
+
+  episodios.forEach((ep, index) => {
+    const btn = document.createElement("button");
+    btn.textContent = index + 1;
+    btn.classList.add("episodio-btn");
+    btn.addEventListener("click", () => {
+      playEpisode(ep.src, ep.titulo, index);
+    });
+    episodiosContainer.appendChild(btn);
+  });
+
+  // Reproducir el primero automáticamente
+  if (episodios.length > 0) {
+    playEpisode(episodios[0].src, episodios[0].titulo, 0);
+  }
+}
+
+renderEpisodios(1);
+</script></body>
 </html>
