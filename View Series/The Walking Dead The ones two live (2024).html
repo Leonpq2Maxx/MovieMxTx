@@ -189,19 +189,19 @@
     <div class="container">
       <div class="main-video">
         <div class="video">
-          <video class='js-player' poster="https://image.tmdb.org/t/p/w780/swFtS1S5556BFrQNJkwTTmyBFIT.jpg" controls muted preload="metadata"> <!--Aca te dejo la pagina para agregar el fondo https://www.themoviedb.org-->
+          <video class='js-player' poster="https://image.tmdb.org/t/p/w780/8yQjxIlAeVeqkuBKq3FUQGVqfIB.jpg" controls muted preload="metadata"> <!--Aca te dejo la pagina para agregar el fondo https://www.themoviedb.org-->
             <source src="https://www.udrop.com/file/6goa/1x1" type="application/x-mpegURL">
           </video>
           <!--<video src="" poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3r48KQZbrv_w2zeTpEMqrIE0BysJMnmdydw&usqp=CAU" controls muted autoplay></video>-->
         </div>
       </div>
     </div>  
-    <div id="resume-msg">✅ Reanudando donde lo dejaste: Naruto Shippuden</div>
+    <div id="resume-msg">✅ Reanudando donde lo dejaste: The Walking Dead: The Ones Who Live</div>
   
     <div class="info">
-      <i class="fal fa-calendar-alt"></i><span>2007</span> <!-- AÑO DE ESTRENO DE LA SERIE -->
-      <i class="fal fa-clock"></i><span>T5</span> <!-- LA CANTIDAD DE TEMPORADAS QUE TIENE EJEMPLO "T1 (SI TIENE UNA TEMPORADAS)" SI TIENE VARIAS AGREGAR "T4" SERIAN TEMPORADA 4--> 
-      <i class="fal fa-thumbs-up"></i><span>88%</span> <!-- LA CALIFICACION DE LA SERIE -->   
+      <i class="fal fa-calendar-alt"></i><span>2024</span> <!-- AÑO DE ESTRENO DE LA SERIE -->
+      <i class="fal fa-clock"></i><span>T1</span> <!-- LA CANTIDAD DE TEMPORADAS QUE TIENE EJEMPLO "T1 (SI TIENE UNA TEMPORADAS)" SI TIENE VARIAS AGREGAR "T4" SERIAN TEMPORADA 4--> 
+      <i class="fal fa-thumbs-up"></i><span>80%</span> <!-- LA CALIFICACION DE LA SERIE -->   
       <div class="hd-tag">     
         <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">      
           <rect width="24" height="24" rx="4" fill="white" />       
@@ -213,7 +213,7 @@
     </div>
   
     <div class="titulo">
-      <h3>Naruto Shippuden</h3>
+      <h3>The Walking Dead: The Ones Who Live</h3>
     </div>
   
     <!-- Selector de Temporadas y Botones de Episodios -->
@@ -222,10 +222,6 @@
       <div>
         <select id="temporada-select" style="background: #1c1c1c; color: white; font-size: 1rem; padding: 5px 10px; border-radius: 5px; border: 1px solid #333;">
           <option value="1" selected>Temporada 1</option>
-          <option value="2">Temporada 2</option>
-          <option value="3">Temporada 3</option>
-          <option value="4">Temporada 4</option>
-          <option value="5">Temporada 5</option>
         </select>
       </div>
       <div id="episodio-count" style="color: #bbb; font-size: 0.95rem;">10 Capítulos</div>
@@ -246,227 +242,14 @@
     <script>
       const episodiosData = {
         1: [
-          { titulo: "Episodio 1 - Vuelta a Casa", src: "https://pomf2.lain.la/f/c83t7eks.mp4" },
-          { titulo: "Episodio 2 - Akatsuki, empieza la acción", src: "https://pomf2.lain.la/f/0vb1fe2.mp4" },
-          { titulo: "Episodio 3 - Los Resultados del Entrenamiento", src: "https://pomf2.lain.la/f/3w27bltl.mp4" },
-          { titulo: "Episodio 4 - El Jinchūriki de la Arena", src: "https://pomf2.lain.la/f/xivm24it.mp4" },
-          { titulo: "Episodio 5 - ¡Como el Kazekage...!", src: "https://pomf2.lain.la/f/a2ebf8wm.mp4" },
-          { titulo: "Episodio 6 - Contingente despejado", src: "https://pomf2.lain.la/f/npn1q849.mp4" },
-          { titulo: "Episodio 7 - Corre, Kankuro", src: "https://pomf2.lain.la/f/bskcqavb.mp4" },
-          { titulo: "Episodio 8 - El equipo Kakashi ¡Desplegado!", src: "https://pomf2.lain.la/f/b1bpo6l.mp4" },
-          { titulo: "Episodio 340 - Edotensei: Liberacion", src: "https://pomf2.lain.la/f/ueryzymu.mp4" },
-          { titulo: "Episodio 341- El regreso de orochimaru", src: "https://pomf2.lain.la/f/178pgqsh.mp4" },
-          { titulo: "Episodio 342 - Secreto del Ninjutsu: Espacio-Tiempo", src: "https://pomf2.lain.la/f/8m19nanf.mp4" },
-          { titulo: "Episodio 343 - ¿Quien eres tu?", src: "https://pomf2.lain.la/f/edvsvkxm.mp4" },
-          { titulo: "Episodio 344 - Obito y Madara", src: "https://pomf2.lain.la/f/na0m9edc.mp4" }
+          { titulo: "Episodio 1", src: "https://pomf2.lain.la/f/sc6uvb3w.mp4" },
+          { titulo: "Episodio 2", src: "https://pomf2.lain.la/f/fig223a.mp4" },
+          { titulo: "Episodio 3", src: "https://pomf2.lain.la/f/deaxc02k.mp4" },
+          { titulo: "Episodio 4", src: "https://pomf2.lain.la/f/k6namnas.mp4" },
+          { titulo: "Episodio 5", src: "https://pomf2.lain.la/f/3ywcqtqq.mp4" },
+          { titulo: "Episodio 6", src: "https://pomf2.lain.la/f/i4gfu5wd.mp4" }
           // Agrega más si tienes
-        ],
-        2: [
-          { titulo: "Episodio 1 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 2 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 3 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 4 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 5 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 6 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 7 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 8 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 9 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 10 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 1 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 2 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 3 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 4 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 5 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 6 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 7 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 8 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 9 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 20 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 1 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 2 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 3 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 4 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 5 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 6 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 7 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 8 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 9 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 30 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 1 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 2 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 3 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 4 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 5 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 6 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 7 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 8 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 9 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 40 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 1 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 2 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 3 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 4 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 5 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 6 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 7 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 8 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 9 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 50 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 1 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 2 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 3 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 4 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 5 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 6 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 7 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 8 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 9 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 60 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 1 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 2 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 3 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 4 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 5 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 6 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 7 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 8 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 9 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 70 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 1 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 2 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 3 - TITULO DE EPISODIO", src: "#" },
-          { titulo: "Episodio 4 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 5 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 6 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 7 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 8 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 9 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 80 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 1 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 2 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 3 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 4 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 5 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 6 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 7 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 8 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 9 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 90 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 1 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 2 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 3 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 4 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 5 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 6 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 7 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 8 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 9 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 100 - TITULO DE EPISODIO", src: "link de episodio" }
-          // Agrega más si tienes
-        ],
-        3: [
-          { titulo: "Episodio 1 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 2 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 3 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 4 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 5 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 6 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 7 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 8 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 9 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 10 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 1 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 2 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 3 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 4 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 5 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 6 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 7 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 8 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 9 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 20 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 1 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 2 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 3 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 4 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 5 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 6 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 7 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 8 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 9 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 30 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 1 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 2 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 3 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 4 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 5 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 6 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 7 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 8 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 9 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 40 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 1 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 2 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 3 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 4 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 5 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 6 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 7 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 8 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 9 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 50 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 1 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 2 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 3 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 4 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 5 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 6 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 7 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 8 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 9 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 60 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 1 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 2 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 3 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 4 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 5 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 6 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 7 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 8 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 9 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 70 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 1 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 2 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 3 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 4 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 5 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 6 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 7 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 8 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 9 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 80 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 1 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 2 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 3 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 4 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 5 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 6 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 7 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 8 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 9 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 90 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 1 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 2 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 3 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 4 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 5 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 6 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 7 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 8 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 9 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 100 - TITULO DE EPISODIO", src: "link de episodio" }
-          // Agrega más si tienes
-        ],
+        ]
       };
       const temporadaSelect = document.getElementById("temporada-select");
       const episodiosContainer = document.getElementById("episodios");
@@ -479,7 +262,7 @@
   
         const episodios = episodiosData[temporada] || [];
         const yearSpan = document.querySelector('.info span');
-        const yearBySeason = { 1: '2007', 2: '2025', 3: '2025' };  /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010 (ABAJO HAY OTRO DEBE HACER LO MISMO)*/
+        const yearBySeason = { 1: '2024', 2: '2025', 3: '2025' };  /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010 (ABAJO HAY OTRO DEBE HACER LO MISMO)*/
         if (yearSpan) yearSpan.textContent = yearBySeason[temporada] || '0000';
         episodioCount.textContent = `${episodios.length} Capítulos`;
         
@@ -527,7 +310,7 @@
         episodiosContainer.innerHTML = "";
         const episodios = episodiosData[temporada] || [];
         const yearSpan = document.querySelector('.info span');
-        const yearBySeason = { 1: '2007', 2: '2024', 3: '2025' }; /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010*/
+        const yearBySeason = { 1: '2024', 2: '2024', 3: '2025' }; /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010*/
         
         if (yearSpan) yearSpan.textContent = yearBySeason[temporada] || '0000';
   
@@ -743,7 +526,7 @@
       }
     </style>
     <div class="titulo">
-      <h4>Género: Animación/Accion/Aventura/Ciencia Ficcion/Fantasia/Anime</h4> <!--Aca va el genero de la serie-->
+      <h4>Género: Drama/Apocalipsis zombie</h4> <!--Aca va el genero de la serie-->
     </div>
   
     <div class="sinopsis">
@@ -751,7 +534,7 @@
         Sinopsis: <!--Aca va la sinopsis en el <p>Sinopsis</<p> que esta debajo-->
       </h4>
       <p>
-        Los ninjas utilizan todo tipo de artes marciales desde la lucha cuerpo a cuerpo a ilusiones o técnicas secretas como por ejemplo la manipulación de elementos. El protagonista es un joven aspirante a ninja Uzumaki Naruto, un muchacho que sueña en convertirse algun dia en el líder de su aldea (Hokage). <!--ejemplo-->
+        La historia de amor de Rick Grimes y Michonne cambia gracias a un mundo cambiado. Separados por la distancia. Por un poder imparable. ¿Podrán encontrarse y descubrir quiénes eran en una situación diferente a cualquier otra que hayan conocido? <!--ejemplo-->
       </p>
     </div>
   
@@ -836,9 +619,9 @@
     
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        const serieTitulo = "Naruto Shippuden";
-        const serieImagen = "https://image.tmdb.org/t/p/w300/3V7kzJX7hvF0H9CDJsgcWKXTSsR.jpg"; //Aca va la ultima parte de la imagen como hice el ej de arriba se agrega despues de la barra. esta de esta forma para que la imagen carge mas rapido
-        const archivoHTML = "../View Series/Naruto Shippuden (2007).html"; // ✅ Ruta relativa al historial
+        const serieTitulo = "The Walking Dead: The Ones Who Live";
+        const serieImagen = "https://image.tmdb.org/t/p/w300/yft2a3vnCblf6wmF6gTqgdKZUMi.jpg"; //Aca va la ultima parte de la imagen como hice el ej de arriba se agrega despues de la barra. esta de esta forma para que la imagen carge mas rapido
+        const archivoHTML = "../View Series/The Walking Dead The ones two live (2024).html"; // ✅ Ruta relativa al historial
         const progresoTexto = "Actualizado"; // Puedes cambiarlo dinámicamente
 
         let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');    
@@ -913,10 +696,10 @@
     <script>
       document.getElementById('btn-favorito').addEventListener('click', () => {
         const nuevaPelicula = {
-          titulo: "Naruto Shippuden",
-          imagen: "https://image.tmdb.org/t/p/w300/3V7kzJX7hvF0H9CDJsgcWKXTSsR.jpg",
-          genero: "Drama comedia", /* o "Serie", "Crimen/Serie", etc.*/
-          archivo: "../View Series/Naruto Shippuden (2007).html",
+          titulo: "The Walking Dead: The Ones Who Live",
+          imagen: "https://image.tmdb.org/t/p/w300/yft2a3vnCblf6wmF6gTqgdKZUMi.jpg",
+          genero: "Drama", /* o "Serie", "Crimen/Serie", etc.*/
+          archivo: "../View Series/The Walking Dead The ones two live (2024).html",
           tipo: "serie", // ✅ identifica si es "serie" o "pelicula"
           timestamp: Date.now() // opcional: para ordenar por fecha
         };
@@ -1095,8 +878,8 @@
         }
       }, { passive: false });
     </script>    
-    
-    <script>
+
+<script>
       const episodiosPorTemporada = JSON.parse(localStorage.getItem("episodios_temporada") || "{}");
       
       function guardarProgresoTemporada(temporada, index) {
@@ -1242,5 +1025,6 @@
         }
       });
     </script>
+
   </body>
 </html>

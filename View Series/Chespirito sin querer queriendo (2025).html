@@ -227,6 +227,7 @@
       <div>
         <select id="temporada-select" style="background: #1c1c1c; color: white; font-size: 1rem; padding: 5px 10px; border-radius: 5px; border: 1px solid #333;">
           <option value="1" selected>Temporada 1</option>
+          <option value="2">Temporada 2</option>
         </select>
       </div>
       <div id="episodio-count" style="color: #bbb; font-size: 0.95rem;">10 Capítulos</div>
@@ -530,7 +531,7 @@
         box-shadow: 0 0 6px #ff4444;
       }
     </style>
-    <br>
+    
     <div class="titulo">
       <h4>Género: Drama/Comedia</h4> <!--Aca va el genero de la serie-->
     </div>
@@ -579,9 +580,9 @@
           <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt="">
           <p>Nombre de serie</p>
         </a>
-        <a href="Dragon Ball Daima (2025).html" class="serie">
+        <a href="#" class="serie">
           <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt="">
-          <p>Dragon </p>
+          <p>Nombre de serie</p>
         </a>
         <a href="#" class="serie">
           <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt="">
@@ -890,5 +891,152 @@
         }
       }, { passive: false });
     </script>    
+
+    <script>
+      const episodiosPorTemporada = JSON.parse(localStorage.getItem("episodios_temporada") || "{}");
+      
+      function guardarProgresoTemporada(temporada, index) {
+        episodiosPorTemporada[temporada] = index;
+        localStorage.setItem("episodios_temporada", JSON.stringify(episodiosPorTemporada));
+      }
+    
+      function obtenerProgresoTemporada(temporada) {
+        return episodiosPorTemporada[temporada] || 0;
+      }
+
+      // Modificar playEpisode para guardar por temporada
+    
+      const originalPlayEpisode = playEpisode;
+      playEpisode = function(src, titulo, index) {
+        guardarProgresoTemporada(temporadaSelect.value, index);
+        originalPlayEpisode(src, titulo, index);
+      }
+
+      // Modificar renderEpisodios para recuperar episodio anterior por temporada
+      const originalRenderEpisodios = renderEpisodios;
+      renderEpisodios = function(temporada) {
+        originalRenderEpisodios(temporada);
+        const savedIndex = obtenerProgresoTemporada(temporada);
+        const buttons = document.querySelectorAll("#episodios button");
+        if (buttons[savedIndex]) {
+          buttons[savedIndex].click();  // Auto reproducir
+          // Scroll centrado
+          setTimeout(() => {
+            const scrollLeft = buttons[savedIndex].offsetLeft - (episodiosContainer.offsetWidth / 2) + (buttons[savedIndex].offsetWidth / 2);
+            episodiosContainer.scrollTo({ left: scrollLeft, behavior: "smooth" });
+          }, 200);
+        }
+      }
+    </script>
+    
+    <script>
+      const formatTime = (seconds) => {
+        const m = Math.floor(seconds / 60);
+        const s = Math.floor(seconds % 60);
+        return m + ":" + (s < 10 ? "0" + s : s);
+      };
+
+      const originalPlayEpisode = playEpisode;
+      playEpisode = function(src, titulo, index) {
+        const temporada = temporadaSelect.value;
+        const key = `resume_${temporada}_${index}`;
+        const savedTime = parseFloat(localStorage.getItem(key));
+
+        // Guardar episodio actual
+        localStorage.setItem("ultimo_episodio", JSON.stringify({ temporada, index }));
+
+    
+        // Limpiar contenedor y crear video manualmente sin autoplay
+    
+        const mainVideoContainer = document.querySelector(".main-video");
+        mainVideoContainer.innerHTML = "";
+ 
+        const video = document.createElement("video");
+        video.className = "js-player";
+        video.setAttribute("controls", "");
+        video.setAttribute("preload", "auto");
+        video.setAttribute("poster", "poster.jpg"); // puedes cambiar a un poster dinámico si deseas
+
+        const source = document.createElement("source");
+        source.src = src;
+        source.type = "video/mp4";  
+        video.appendChild(source);
+
+    
+        const wrapper = document.createElement("div"); 
+        wrapper.className = "video";
+        wrapper.appendChild(video);
+        mainVideoContainer.appendChild(wrapper);
+
+        if (titleDiv) titleDiv.innerHTML = titulo;
+
+        const buttons = document.querySelectorAll("#episodios button");
+        buttons.forEach(btn => {
+          btn.classList.remove("active");
+          btn.style.background = "#222";
+          btn.style.color = "#ccc";
+        });
+
+        buttons[index]?.classList.add("active");
+        buttons[index].style.background = "red";
+        buttons[index].style.color = "#fff";
+
+        const msg = document.getElementById("resume-msg");  
+        msg.textContent = `⏯ Episodio cargado en ${formatTime(savedTime || 0)}: ${titulo}`;
+        msg.classList.add("visible");
+        setTimeout(() => msg.classList.remove("visible"), 3000);
+
+        // Aplicar posición guardada sin reproducir
+        let retries = 0;
+        const maxRetries = 20;
+        const interval = setInterval(() => {
+          if (video.readyState >= 1 && !isNaN(savedTime)) {
+            video.currentTime = savedTime;
+            clearInterval(interval);
+          } else if (++retries >= maxRetries) {
+            clearInterval(interval);
+          }
+        }, 300);
+
+        // Guardar tiempo actual cada 5s
+    
+        setInterval(() => {
+          if (!video.paused && !video.ended) {
+            localStorage.setItem(key, video.currentTime);
+          }
+        }, 5000);
+
+    
+        // Reproducir siguiente episodio al finalizar
+    
+        video.addEventListener("ended", () => {
+          video.currentTime = 0;     
+          const episodios = episodiosData[temporada] || [];    
+          if (index + 1 < episodios.length) {      
+            const next = episodios[index + 1];      
+            playEpisode(next.src, next.titulo, index + 1);    
+          }  
+        }, { once: true });
+      };
+
+  
+      // Al cargar la página, cargar automáticamente episodio guardado sin reproducir
+  
+      window.addEventListener("DOMContentLoaded", () => {
+    
+        const ultimo = JSON.parse(localStorage.getItem("ultimo_episodio") || "{}");
+        if (ultimo.temporada && typeof ultimo.index === "number") {
+          const episodios = episodiosData[ultimo.temporada];
+          if (episodios && episodios[ultimo.index]) {
+            temporadaSelect.value = ultimo.temporada;
+            renderEpisodios(ultimo.temporada);
+            setTimeout(() => {
+              const ep = episodios[ultimo.index];
+              playEpisode(ep.src, ep.titulo, ultimo.index);
+            }, 300);
+          }
+        }
+      });
+    </script>
   </body>
 </html>
