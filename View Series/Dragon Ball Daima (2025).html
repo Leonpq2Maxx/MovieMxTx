@@ -580,6 +580,12 @@ if (ultimo && episodiosData[ultimo.temporada]) {
 <!-- Historial -->
 
 <script>
+  function irSinHistorial(url) {
+    location.replace(url); // reemplaza la página actual sin dejarla en el historial
+  }
+</script>
+
+<script>
   document.addEventListener('DOMContentLoaded', () => {
     const serieTitulo = "Dragon Ball Daima";
     const serieImagen = "https://image.tmdb.org/t/p/w300/uJw6nLCzQ8SftuCUJQNXTrvjlm4.jpg"; //Aca va la ultima parte de la imagen como hice el ej de arriba se agrega despues de la barra. esta de esta forma para que la imagen carge mas rapido
@@ -837,17 +843,6 @@ episodiosContainer.addEventListener("wheel", (e) => {
   }
 }, { passive: false });
 </script>
-
-<script>
-  // Detectar si el usuario intenta retroceder
-  window.addEventListener("popstate", function () {
-    window.location.href = "index.html"; // cambia la ruta si tu index está en otro lugar
-  });
-
-  // Empujar un estado falso al historial
-  history.pushState(null, null, location.href);
-</script>
-
 
 </body>
 </html>
