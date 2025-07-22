@@ -580,12 +580,10 @@
           <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt="">
           <p>Nombre de serie</p>
         </a>
-        <a href="Dragon Ball Daima (2025).html" class="serie" onclick="localStorage.setItem('desdeChespirito', '1')">
-  <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt="">
-  <p>Dragon Ball</p>
-</a>
-
-
+        <a href="Dragon Ball Daima (2025).html" class="serie">
+          <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt="">
+          <p>Dragon </p>
+        </a>
         <a href="#" class="serie">
           <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt="">
           <p>Nombre de serie</p>
@@ -594,95 +592,119 @@
     </div>
     <br>
 
-    <script>
-  function irSerie(url) {
-    location.replace(url); // Reemplaza la página actual para que no quede en historial
-  }
-</script>
-
-
-    <!-- Historial -->
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const serieTitulo = "Chespirito: Sin querer queriendo";
-    const serieImagen = "https://image.tmdb.org/t/p/w300/Zf4F7BhM09OSl5YrPvAK7AUY5e.jpg"; //Aca va la ultima parte de la imagen como hice el ej de arriba se agrega despues de la barra. esta de esta forma para que la imagen carge mas rapido
-    const archivoHTML = "../View Series/Chespirito sin querer queriendo (2025).html"; // ✅ Ruta relativa al historial
-    const progresoTexto = "Actualizado"; // Puedes cambiarlo dinámicamente
-
-    let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
-    const index = historial.findIndex(h => h.titulo === serieTitulo);
-
-    if (index === -1) {
-      historial.unshift({
-        titulo: serieTitulo,
-        imagen: serieImagen,
-        progreso: progresoTexto,
-        archivo: archivoHTML,
-        tipo: "serie", // ✅ ya está
-        timestamp: Date.now() // ✅ IMPORTANTE
-      });
-      if (historial.length > 20) historial.pop(); // Limita a 20
-    } else {
-      historial[index].progreso = progresoTexto;
-      historial[index].timestamp = Date.now(); // ✅ Actualiza orden
-    }
-
-    localStorage.setItem('historial_usuarios', JSON.stringify(historial));
-  });
-</script>
-
-<!--Aca va el mensaje de capitulo-->
-  <div id="mensaje-confirmacion" style="
-    display: none;
-    position: fixed;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.85);
-    color: #fff;
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-size: 1rem;
-    z-index: 9999;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-    transition: opacity 0.5s ease;">
-  </div>
-
-  <script>
-    function mostrarMensaje(texto) {
-      const mensaje = document.getElementById('mensaje-confirmacion');
-      mensaje.textContent = texto;
-      mensaje.style.display = 'block';
-      mensaje.style.opacity = '1';
-      setTimeout(() => {
-        mensaje.style.opacity = '0';
-        setTimeout(() => mensaje.style.display = 'none', 500);
-      }, 3000);
-    }
-  </script>
-
-
-<!--PROBAR LUEGO SI FUNCIONA QUITANDOLO-->
-
-
-<!--FINAL ESTO ES NOMAS.......!-->
-
-
-<!--animacion de favorito-->
-
-<style>
-  /* ACA ES LA ANIMACION DE FAVORITOS */
-    @keyframes pop {
-      0%   { transform: scale(1); }
-      50%  { transform: scale(1.3); }
-      100% { transform: scale(1); }
-    }
+    <!--COLOR DE BARRA DE SCROOL-->
     
-    #btn-favorito.animado {
-      animation: pop 0.3s ease;
-    }
-</style>
+    <style>
+      #episodios {
+        overflow-x: auto;
+        scrollbar-height: auto;
+        scrollbar-color: #ff4444 #111;
+      }
+
+      #episodios::-webkit-scrollbar {
+        height: 10px;
+      }
+
+      #episodios::-webkit-scrollbar-thumb {
+        background-color: #ff4444;
+        border-radius: 10px;
+      }
+
+      #episodios::-webkit-scrollbar-track {
+        background: #111;
+        border-radius: 10px;
+      }
+      
+      @media (hover: none) and (pointer: coarse) {
+        #episodios {
+          padding-bottom: 20px;
+        }
+      }
+    </style>
+    
+    <!-- Historial -->
+    
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const serieTitulo = "Chespirito: Sin querer queriendo";
+        const serieImagen = "https://image.tmdb.org/t/p/w300/Zf4F7BhM09OSl5YrPvAK7AUY5e.jpg"; //Aca va la ultima parte de la imagen como hice el ej de arriba se agrega despues de la barra. esta de esta forma para que la imagen carge mas rapido
+        const archivoHTML = "../View Series/Chespirito sin querer queriendo (2025).html"; // ✅ Ruta relativa al historial
+        const progresoTexto = "Actualizado"; // Puedes cambiarlo dinámicamente
+
+        let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');    
+        const index = historial.findIndex(h => h.titulo === serieTitulo);
+    
+        if (index === -1) {
+          historial.unshift({
+            titulo: serieTitulo,
+            imagen: serieImagen,
+            progreso: progresoTexto,
+            archivo: archivoHTML,
+            tipo: "serie", // ✅ ya está
+            timestamp: Date.now() // ✅ IMPORTANTE
+          });
+          
+          if (historial.length > 20) historial.pop(); /* Limita a 20 */
+        }
+        else {
+          historial[index].progreso = progresoTexto;
+          historial[index].timestamp = Date.now(); // ✅ Actualiza orden
+        }
+        localStorage.setItem('historial_usuarios', JSON.stringify(historial));
+      });
+    </script>
+    
+    <!--Aca va el mensaje de capitulo-->
+    
+    <div id="mensaje-confirmacion" style="
+      display: none;
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.85);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 1rem;
+      z-index: 9999;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+      transition: opacity 0.5s ease;">
+    </div>
+    
+    <script>
+      function mostrarMensaje(texto) {
+        const mensaje = document.getElementById('mensaje-confirmacion');
+        mensaje.textContent = texto;
+        mensaje.style.display = 'block';
+        mensaje.style.opacity = '1';
+        setTimeout(() => {
+          mensaje.style.opacity = '0';
+          setTimeout(() => mensaje.style.display = 'none', 500);
+        }, 3000);
+      }
+    </script>
+    
+    <!--PROBAR LUEGO SI FUNCIONA QUITANDOLO-->
+
+
+    <!--FINAL ESTO ES NOMAS.......!-->
+
+
+    <!--animacion de favorito-->
+    
+    <style>
+      /* ACA ES LA ANIMACION DE FAVORITOS */
+      @keyframes pop {
+        0%   { transform: scale(1); }
+        50%  { transform: scale(1.3); }
+        100% { transform: scale(1); }
+      }
+    
+      #btn-favorito.animado {
+        animation: pop 0.3s ease;
+      }
+    </style>
 
 
 <!-- FAVORITOS -->
