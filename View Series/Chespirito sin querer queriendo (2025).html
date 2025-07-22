@@ -580,9 +580,9 @@
           <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt="">
           <p>Nombre de serie</p>
         </a>
-        <a href="#" class="serie">
+        <a href="Dragon Ball Daima (2025).html" class="serie">
           <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt="">
-          <p>Nombre de serie</p>
+          <p>Dragon Ball</p>
         </a>
         <a href="#" class="serie">
           <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt="">
@@ -852,6 +852,17 @@ episodiosContainer.addEventListener("wheel", (e) => {
   }
 }, { passive: false });
 </script>
+
+<script>
+  // Detectar si el usuario intenta retroceder
+  window.addEventListener("popstate", function () {
+    window.location.href = "../index.html"; // cambia la ruta si tu index está en otro lugar
+  });
+
+  // Empujar un estado falso al historial
+  history.pushState(null, null, location.href);
+</script>
+
 
 </body>
 </html>
