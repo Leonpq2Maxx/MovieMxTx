@@ -705,184 +705,191 @@
         animation: pop 0.3s ease;
       }
     </style>
+    <!-- FAVORITOS -->
+    <script>
+      document.getElementById('btn-favorito').addEventListener('click', () => {
+        const nuevaPelicula = {
+          titulo: "Chespirito: Sin querer queriendo",
+          imagen: "https://image.tmdb.org/t/p/w300/Zf4F7BhM09OSl5YrPvAK7AUY5e.jpg",
+          genero: "Drama comedia", /* o "Serie", "Crimen/Serie", etc.*/
+          archivo: "../View Series/Chespirito sin querer queriendo (2025).html",
+          tipo: "serie", // ✅ identifica si es "serie" o "pelicula"
+          timestamp: Date.now() // opcional: para ordenar por fecha
+        };
 
-
-<!-- FAVORITOS -->
-<script>
-document.getElementById('btn-favorito').addEventListener('click', () => {
-  const nuevaPelicula = {
-  titulo: "Chespirito: Sin querer queriendo",
-  imagen: "https://image.tmdb.org/t/p/w300/Zf4F7BhM09OSl5YrPvAK7AUY5e.jpg",
-  genero: "Drama comedia", // o "Serie", "Crimen/Serie", etc.
-  archivo: "../View Series/Chespirito sin querer queriendo (2025).html",
-  tipo: "serie", // ✅ identifica si es "serie" o "pelicula"
-  timestamp: Date.now() // opcional: para ordenar por fecha
-  };
-
-  /* animacion de favoritos */
-      const btn = document.getElementById('btn-favorito');
-      btn.classList.add('animado');
-      setTimeout(() => btn.classList.remove('animado'), 300);
-      mostrarMensaje("⭐ Agregado a Favoritos");
+        /* animacion de favoritos */
+        const btn = document.getElementById('btn-favorito');
+        btn.classList.add('animado');
+        setTimeout(() => btn.classList.remove('animado'), 300);
+        mostrarMensaje("⭐ Agregado a Favoritos");
+  
+        let favoritos = JSON.parse(localStorage.getItem('favoritos_detalles') || '[]');
+        if (!favoritos.some(f => f.titulo === nuevaPelicula.titulo)) {
+          favoritos.push(nuevaPelicula);
+          localStorage.setItem('favoritos_detalles', JSON.stringify(favoritos));
+        }
+        window.location.href = "../View Peliculas/favoritos.html";
+      });
+    </script>
+    
+    <!-- Añadir Botones para .js-player: Reinicio al inicio (fa-step-backward), Retroceso (fa-undo) y Avance (fa-forward) -->
+     
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll('.js-player').forEach(video => {
+          const controls = video.closest('.main-video')?.querySelector('.plyr__controls');
+    
+          if (controls && !controls.querySelector('#plyr-restart')) {
+            // 1️⃣ Crear botón de Reinicio al inicio (#plyr-restart) al EXTREMO IZQUIERDO
       
-  let favoritos = JSON.parse(localStorage.getItem('favoritos_detalles') || '[]');
-  if (!favoritos.some(f => f.titulo === nuevaPelicula.titulo)) {
-    favoritos.push(nuevaPelicula);
-    localStorage.setItem('favoritos_detalles', JSON.stringify(favoritos));
-  }
-  window.location.href = "../View Peliculas/favoritos.html";
-});
-</script>
-
-
-<!-- Añadir Botones para .js-player: Reinicio al inicio (fa-step-backward), Retroceso (fa-undo) y Avance (fa-forward) -->
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll('.js-player').forEach(video => {
-    const controls = video.closest('.main-video')?.querySelector('.plyr__controls');
-    if (controls && !controls.querySelector('#plyr-restart')) {
-      // 1️⃣ Crear botón de Reinicio al inicio (#plyr-restart) al EXTREMO IZQUIERDO
-      const restartBtn = document.createElement("button");
-      restartBtn.className = "plyr__control";
-      restartBtn.id = "plyr-restart";
-      restartBtn.innerHTML = '<i class="fas fa-undo"></i><span class="plyr__sr-only">Reiniciar al inicio</span>';
-      restartBtn.title = "Reiniciar al inicio (0s)";
-      restartBtn.addEventListener("click", () => {
-        video.currentTime = 0;
+            const restartBtn = document.createElement("button");
+            restartBtn.className = "plyr__control";      
+            restartBtn.id = "plyr-restart";     
+            restartBtn.innerHTML = '<i class="fas fa-undo"></i><span class="plyr__sr-only">Reiniciar al inicio</span>';      
+            restartBtn.title = "Reiniciar al inicio (0s)";   
+            restartBtn.addEventListener("click", () => {
+              video.currentTime = 0;
+            });
+      
+            controls.insertBefore(restartBtn, controls.firstChild);
+      
+            // 2️⃣ Crear botón de Retroceso (#plyr-rewind) junto al de Reinicio
+      
+            const rewindBtn = document.createElement("button");
+      
+            rewindBtn.className = "plyr__control";
+            rewindBtn.id = "plyr-rewind";
+            rewindBtn.innerHTML = '<i class="fas fa-step-backward"></i><span class="plyr__sr-only">Retroceder 10 segundos</span>';
+            rewindBtn.title = "Retroceder 10s";
+            rewindBtn.addEventListener("click", () => {
+              video.currentTime = Math.max(video.currentTime - 10, 0);
+            });
+      
+            controls.insertBefore(rewindBtn, restartBtn.nextSibling);
+      
+            // 3️⃣ Crear botón de Avance (#plyr-fast-forward) estándar de Plyr
+      
+            const forwardBtn = document.createElement("button");
+      
+            forwardBtn.className = "plyr__control";
+            forwardBtn.id = "plyr-fast-forward";
+            forwardBtn.innerHTML = '<i class="fa fa-forward"></i><span class="plyr__sr-only">Avanzar 10 segundos</span>';
+            forwardBtn.title = "Avanzar 10s";
+      
+            const playButton = controls.querySelector('.plyr__control[data-plyr="play"]');
+            if (playButton) {
+              playButton.after(forwardBtn);
+            } else {
+              controls.appendChild(forwardBtn);
+            }
+            forwardBtn.addEventListener("click", () => {
+              video.currentTime = Math.min(video.currentTime + 10, video.duration);
+            });
+          }
+        });
       });
-      controls.insertBefore(restartBtn, controls.firstChild);
+    </script>
 
-      // 2️⃣ Crear botón de Retroceso (#plyr-rewind) junto al de Reinicio
-      const rewindBtn = document.createElement("button");
-      rewindBtn.className = "plyr__control";
-      rewindBtn.id = "plyr-rewind";
-      rewindBtn.innerHTML = '<i class="fas fa-step-backward"></i><span class="plyr__sr-only">Retroceder 10 segundos</span>';
-      rewindBtn.title = "Retroceder 10s";
-      rewindBtn.addEventListener("click", () => {
-        video.currentTime = Math.max(video.currentTime - 10, 0);
+    <!-- Lógica para guardar posición y mostrar mensaje de reanudación por episodio -->
+    
+    <script>
+      document.addEventListener("DOMContentLoaded", () => { 
+        const mainVideo = document.querySelector('.main-video video'); 
+        const resumeMsg = document.getElementById('resume-msg');
+        let currentEpisode = null;
+  
+        // Al hacer clic en un episodio
+        document.querySelectorAll('.video-list .vid').forEach(videoItem => {
+          videoItem.addEventListener('click', e => {
+            // Identificamos el episodio por posición en la lista
+            const episodeIndex = Array.from(document.querySelectorAll('.video-list .vid')).indexOf(videoItem);
+            currentEpisode = episodeIndex;
+      
+            // Cambiamos la fuente del video
+            const src = videoItem.querySelector('video').getAttribute('src');
+            mainVideo.setAttribute('src', src);
+
+            // Checamos si existe posición guardada para este episodio
+            const savedTime = localStorage.getItem(`pos_episodio_${episodeIndex}`);
+            if (savedTime && parseFloat(savedTime) > 10) {
+              mainVideo.currentTime = parseFloat(savedTime);
+              resumeMsg.textContent = `✅ Reanudando ${videoItem.querySelector('.title').textContent.trim()} donde lo dejaste`;
+              resumeMsg.classList.add('visible');
+              setTimeout(() => {
+                resumeMsg.classList.remove('visible');
+              }, 3000);
+            }
+          });
+        });
+  
+        // Guardamos posición cada 5 seg para cada episodio activo
+  
+        setInterval(() => {
+          if (!mainVideo.paused && !mainVideo.ended && currentEpisode !== null) {
+            localStorage.setItem(`pos_episodio_${currentEpisode}`, mainVideo.currentTime);
+          }
+        }, 5000);
       });
-      controls.insertBefore(rewindBtn, restartBtn.nextSibling);
+    </script>
 
-      // 3️⃣ Crear botón de Avance (#plyr-fast-forward) estándar de Plyr
-      const forwardBtn = document.createElement("button");
-      forwardBtn.className = "plyr__control";
-      forwardBtn.id = "plyr-fast-forward";
-      forwardBtn.innerHTML = '<i class="fa fa-forward"></i><span class="plyr__sr-only">Avanzar 10 segundos</span>';
-      forwardBtn.title = "Avanzar 10s";
+    <!-- ACELERAR VIDEO -->
+    <script>
+      const videoList = document.querySelectorAll('.video-list .vid');
+      const mainVideo = document.querySelector('.main-video video');
 
-      const playButton = controls.querySelector('.plyr__control[data-plyr="play"]');
-      if (playButton) {
-        playButton.after(forwardBtn);
-      } else {
-        controls.appendChild(forwardBtn);
-      }
-
-      forwardBtn.addEventListener("click", () => {
-        video.currentTime = Math.min(video.currentTime + 10, video.duration);
+      videoList.forEach(videoItem => {
+  
+        videoItem.addEventListener('click', e => {
+          videoList.forEach(v => v.classList.remove('active'));
+          videoItem.classList.add('active');
+    
+          const videoSrc = videoItem.getAttribute('data-url');
+          mainVideo.setAttribute('src', videoSrc);
+          mainVideo.play();
+        });
       });
-    }
-  });
-});
-</script>
+    </script>
 
+    <!-- partial -->
 
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+    
+    <script type="text/javascript">
+      let listVideo = document.querySelectorAll('.video-list .vid');
+      let mainVideo = document.querySelector('.main-video video');
+      let title = document.querySelector('.main-video .title');
+      
+      listVideo.forEach(video =>{
+        video.onclick = () =>{
+          listVideo.forEach(vid => vid.classList.remove('active'));
+          video.classList.add('active');
+          if(video.classList.contains('active')){
+            let src = video.children[0].getAttribute('src');
+            mainVideo.src = src;
+            let text = video.children[1].innerHTML;
+            title.innerHTML = text;
+          };
+        };
+      });
+    </script>
+    
+    <script src="https://cdn.plyr.io/3.6.12/plyr.js"></script>
+    <script>//<![CDATA[
+      const players = Array.from(document.querySelectorAll('.js-player')).map(player => new Plyr(player));
+      //]]>
+    </script>
 
-<!-- Lógica para guardar posición y mostrar mensaje de reanudación por episodio -->
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const mainVideo = document.querySelector('.main-video video');
-  const resumeMsg = document.getElementById('resume-msg');
-  let currentEpisode = null;
-
-  // Al hacer clic en un episodio
-  document.querySelectorAll('.video-list .vid').forEach(videoItem => {
-    videoItem.addEventListener('click', e => {
-      // Identificamos el episodio por posición en la lista
-      const episodeIndex = Array.from(document.querySelectorAll('.video-list .vid')).indexOf(videoItem);
-      currentEpisode = episodeIndex;
-
-      // Cambiamos la fuente del video
-      const src = videoItem.querySelector('video').getAttribute('src');
-      mainVideo.setAttribute('src', src);
-
-      // Checamos si existe posición guardada para este episodio
-      const savedTime = localStorage.getItem(`pos_episodio_${episodeIndex}`);
-      if (savedTime && parseFloat(savedTime) > 10) {
-        mainVideo.currentTime = parseFloat(savedTime);
-        resumeMsg.textContent = `✅ Reanudando ${videoItem.querySelector('.title').textContent.trim()} donde lo dejaste`;
-        resumeMsg.classList.add('visible');
-        setTimeout(() => {
-          resumeMsg.classList.remove('visible');
-        }, 3000);
-      }
-    });
-  });
-
-  // Guardamos posición cada 5 seg para cada episodio activo
-  setInterval(() => {
-    if (!mainVideo.paused && !mainVideo.ended && currentEpisode !== null) {
-      localStorage.setItem(`pos_episodio_${currentEpisode}`, mainVideo.currentTime);
-    }
-  }, 5000);
-});
-</script>
-
-
-<!-- ACELERAR VIDEO -->
-<script>
-const videoList = document.querySelectorAll('.video-list .vid');
-const mainVideo = document.querySelector('.main-video video');
-
-videoList.forEach(videoItem => {
-  videoItem.addEventListener('click', e => {
-    videoList.forEach(v => v.classList.remove('active'));
-    videoItem.classList.add('active');
-
-    const videoSrc = videoItem.getAttribute('data-url');
-    mainVideo.setAttribute('src', videoSrc);
-    mainVideo.play();
-  });
-});
-</script>
-
-
-<!-- partial -->
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
-<script type="text/javascript">
-let listVideo = document.querySelectorAll('.video-list .vid');
-let mainVideo = document.querySelector('.main-video video');
-let title = document.querySelector('.main-video .title');
-
-listVideo.forEach(video =>{
-  video.onclick = () =>{
-    listVideo.forEach(vid => vid.classList.remove('active'));
-    video.classList.add('active');
-    if(video.classList.contains('active')){
-      let src = video.children[0].getAttribute('src');
-      mainVideo.src = src;
-      let text = video.children[1].innerHTML;
-      title.innerHTML = text;
-    };
-  };
-});
-</script>
-<script src="https://cdn.plyr.io/3.6.12/plyr.js"></script>
-<script>//<![CDATA[
-const players = Array.from(document.querySelectorAll('.js-player')).map(player => new Plyr(player));
-//]]></script>
-
-<script>
-const episodiosContainer = document.getElementById("episodios");
-episodiosContainer.addEventListener("wheel", (e) => {
-  if (e.deltaY !== 0) {
-    e.preventDefault();
-    episodiosContainer.scrollBy({
-      left: e.deltaY * 2, // Aumenta la sensibilidad horizontal
-      behavior: "smooth"
-    });
-  }
-}, { passive: false });
-</script>
-
-</body>
+    <script>
+      const episodiosContainer = document.getElementById("episodios");
+      episodiosContainer.addEventListener("wheel", (e) => {
+        if (e.deltaY !== 0) {
+          e.preventDefault();
+          episodiosContainer.scrollBy({
+            left: e.deltaY * 2, // Aumenta la sensibilidad horizontal
+            behavior: "smooth"
+          });
+        }
+      }, { passive: false });
+    </script>    
+  </body>
 </html>
