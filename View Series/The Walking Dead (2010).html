@@ -659,13 +659,12 @@
     
         if (index === -1) {
           historial.unshift({
-            titulo: serieTitulo,
-            imagen: serieImagen,
-            progreso: progresoTexto,
-            progreso: 'Temporada 2 - Episodio 7',
-            archivo: archivoHTML,
-            tipo: "serie", // ✅ ya está
-            timestamp: Date.now() // ✅ IMPORTANTE
+            titulo: 'The Walking Dead (2010)',
+  archivo: 'The Walking Dead (2010).html',
+  imagen: 'img/thewalkingdead.jpg',
+  tipo: 'serie',
+  progreso: 'Temporada 2 - Episodio 7',
+  timestamp: 1720700000000
           });
           
           if (historial.length > 20) historial.pop(); /* Limita a 20 */
