@@ -222,6 +222,8 @@
       <div>
         <select id="temporada-select" style="background: #1c1c1c; color: white; font-size: 1rem; padding: 5px 10px; border-radius: 5px; border: 1px solid #333;">
           <option value="1" selected>Temporada 1</option>
+          <option value="2">Temporada 2</option>
+          <option value="3">Temporada 3</option>
         </select>
       </div>
       <div id="episodio-count" style="color: #bbb; font-size: 0.95rem;">10 Capítulos</div>
@@ -249,7 +251,7 @@
           { titulo: "Episodio 5 - El que ríe al último", src: "https://dl.dropbox.com/scl/fi/gc9b1435w1c1d72erjzzq/Chespirito-sin-querer-queriendo-T1-C5.mp4?rlkey=7gq2fl14jepxorqv7umw64kmo&st=" },
           { titulo: "Episodio 6", src: "https://dl.dropbox.com/scl/fi/v8xkbejc01pf2gn193z85/Chespirito-sin-querer-queriendo-T1-C6.mp4?rlkey=e0pu51p3yy1qs09g0lo2abyik&st=" }
           // Agrega más si tienes
-        ],
+        ]
       };
       const temporadaSelect = document.getElementById("temporada-select");
       const episodiosContainer = document.getElementById("episodios");
@@ -262,7 +264,7 @@
   
         const episodios = episodiosData[temporada] || [];
         const yearSpan = document.querySelector('.info span');
-        const yearBySeason = { 1: '2025', 2: '2023', 3: '2025' };  /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010 (ABAJO HAY OTRO DEBE HACER LO MISMO)*/
+        const yearBySeason = { 1: '2021', 2: '2023', 3: '2025' };  /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010 (ABAJO HAY OTRO DEBE HACER LO MISMO)*/
         if (yearSpan) yearSpan.textContent = yearBySeason[temporada] || '0000';
         episodioCount.textContent = `${episodios.length} Capítulos`;
         
@@ -309,7 +311,7 @@
         episodiosContainer.innerHTML = "";
         const episodios = episodiosData[temporada] || [];
         const yearSpan = document.querySelector('.info span');
-        const yearBySeason = { 1: '2025', 2: '2023', 3: '2025' }; /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010*/
+        const yearBySeason = { 1: '2021', 2: '2023', 3: '2025' }; /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010*/
         
         if (yearSpan) yearSpan.textContent = yearBySeason[temporada] || '0000';
   
@@ -1023,7 +1025,7 @@
         }
       });
     </script>
-    
+  
 
 
 
@@ -1031,7 +1033,17 @@
 
 
 
-    
+
+
+
+
+
+
+
+
+
+
+
 <script>
   const originalRenderEpisodios = renderEpisodios;
 
