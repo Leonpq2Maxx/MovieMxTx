@@ -189,19 +189,19 @@
     <div class="container">
       <div class="main-video">
         <div class="video">
-          <video class='js-player' poster="https://image.tmdb.org/t/p/w780/" controls muted preload="metadata"> <!--Aca te dejo la pagina para agregar el fondo https://www.themoviedb.org-->
+          <video class='js-player' poster="https://image.tmdb.org/t/p/w780/y8tPZ9P4tYqYiACs6t4mlcWJnSC.jpg" controls muted preload="metadata"> <!--Aca te dejo la pagina para agregar el fondo https://www.themoviedb.org-->
             <source src="https://www.udrop.com/file/6goa/1x1" type="application/x-mpegURL">
           </video>
           <!--<video src="" poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3r48KQZbrv_w2zeTpEMqrIE0BysJMnmdydw&usqp=CAU" controls muted autoplay></video>-->
         </div>
       </div>
     </div>  
-    <div id="resume-msg">✅ Reanudando donde lo dejaste: Nombre de serie</div>
+    <div id="resume-msg">✅ Reanudando donde lo dejaste: Chespirito: Sin querer queriendo</div>
   
     <div class="info">
-      <i class="fal fa-calendar-alt"></i><span>0000</span> <!-- AÑO DE ESTRENO DE LA SERIE -->
-      <i class="fal fa-clock"></i><span>T0</span> <!-- LA CANTIDAD DE TEMPORADAS QUE TIENE EJEMPLO "T1 (SI TIENE UNA TEMPORADAS)" SI TIENE VARIAS AGREGAR "T4" SERIAN TEMPORADA 4--> 
-      <i class="fal fa-thumbs-up"></i><span>00%</span> <!-- LA CALIFICACION DE LA SERIE -->   
+      <i class="fal fa-calendar-alt"></i><span>2025</span> <!-- AÑO DE ESTRENO DE LA SERIE -->
+      <i class="fal fa-clock"></i><span>T1</span> <!-- LA CANTIDAD DE TEMPORADAS QUE TIENE EJEMPLO "T1 (SI TIENE UNA TEMPORADAS)" SI TIENE VARIAS AGREGAR "T4" SERIAN TEMPORADA 4--> 
+      <i class="fal fa-thumbs-up"></i><span>85%</span> <!-- LA CALIFICACION DE LA SERIE -->   
       <div class="hd-tag">     
         <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">      
           <rect width="24" height="24" rx="4" fill="white" />       
@@ -213,7 +213,7 @@
     </div>
   
     <div class="titulo">
-      <h3>Nombre de serie</h3>
+      <h3>Chespirito: Sin querer queriendo</h3>
     </div>
   
     <!-- Selector de Temporadas y Botones de Episodios -->
@@ -222,8 +222,6 @@
       <div>
         <select id="temporada-select" style="background: #1c1c1c; color: white; font-size: 1rem; padding: 5px 10px; border-radius: 5px; border: 1px solid #333;">
           <option value="1" selected>Temporada 1</option>
-          <option value="2">Temporada 2</option>
-          <option value="3">Temporada 3</option>
         </select>
       </div>
       <div id="episodio-count" style="color: #bbb; font-size: 0.95rem;">10 Capítulos</div>
@@ -244,32 +242,14 @@
     <script>
       const episodiosData = {
         1: [
-          { titulo: "Episodio 1 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 2 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 3 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 4 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 5 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 6 - TITULO DE EPISODIO", src: "link de episodio" }
+          { titulo: "Episodio 1 - Zapatero a tus zapatos", src: "https://dl.dropbox.com/scl/fi/2rxn8bbjx7offllrzzddk/Chespirito-sin-querer-queriendo-T1-C1.mp4?rlkey=hjvi2jjx2oinq0hekxp875ds9&st=" },
+          { titulo: "Episodio 2 - No hay mal que por bien no venga", src: "https://dl.dropbox.com/scl/fi/6sr2f4vypmw7r9iv0xtax/Chespirito-sin-querer-queriendo-T1-C2.mp4?rlkey=8jp6gc91xi9le5jo97g5dckot&st=" },
+          { titulo: "Episodio 3 - Que no panda el cúnico", src: "https://dl.dropbox.com/scl/fi/8d92w87l1ignjd8mev0ff/Chespirito-sin-querer-queriendo-T1-C3.mp4?rlkey=2bojt7pyhqykmd3et8nlvldbi&st=" },
+          { titulo: "Episodio 4 - Es que no me tienen paciencia", src: "https://dl.dropbox.com/scl/fi/kx7zbroyx4mso2je46syv/Chespirito-sin-querer-queriendo-T1-C4.mp4?rlkey=q3rfpfx6kes5co31bv4ur8q37&st=" },
+          { titulo: "Episodio 5 - El que ríe al último", src: "https://dl.dropbox.com/scl/fi/gc9b1435w1c1d72erjzzq/Chespirito-sin-querer-queriendo-T1-C5.mp4?rlkey=7gq2fl14jepxorqv7umw64kmo&st=" },
+          { titulo: "Episodio 6", src: "https://dl.dropbox.com/scl/fi/v8xkbejc01pf2gn193z85/Chespirito-sin-querer-queriendo-T1-C6.mp4?rlkey=e0pu51p3yy1qs09g0lo2abyik&st=" }
           // Agrega más si tienes
-        ],
-        2: [
-          { titulo: "Episodio 1 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 2 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 3 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 4 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 5 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 6 - TITULO DE EPISODIO", src: "link de episodio" }
-          // Agrega más si tienes
-        ],
-        3: [
-          { titulo: "Episodio 1 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 2 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 3 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 4 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 5 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 6 - TITULO DE EPISODIO", src: "link de episodio" }
-          // Agrega más si tienes
-        ],
+        ]
       };
       const temporadaSelect = document.getElementById("temporada-select");
       const episodiosContainer = document.getElementById("episodios");
@@ -282,7 +262,7 @@
   
         const episodios = episodiosData[temporada] || [];
         const yearSpan = document.querySelector('.info span');
-        const yearBySeason = { 1: '2021', 2: '2023', 3: '2025' };  /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010 (ABAJO HAY OTRO DEBE HACER LO MISMO)*/
+        const yearBySeason = { 1: '2025', 2: '2023', 3: '2025' };  /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010 (ABAJO HAY OTRO DEBE HACER LO MISMO)*/
         if (yearSpan) yearSpan.textContent = yearBySeason[temporada] || '0000';
         episodioCount.textContent = `${episodios.length} Capítulos`;
         
@@ -329,7 +309,7 @@
         episodiosContainer.innerHTML = "";
         const episodios = episodiosData[temporada] || [];
         const yearSpan = document.querySelector('.info span');
-        const yearBySeason = { 1: '2021', 2: '2023', 3: '2025' }; /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010*/
+        const yearBySeason = { 1: '2025', 2: '2023', 3: '2025' }; /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010*/
         
         if (yearSpan) yearSpan.textContent = yearBySeason[temporada] || '0000';
   
@@ -545,7 +525,7 @@
     </style>
     <br>
     <div class="titulo">
-      <h4>Género: </h4> <!--Aca va el genero de la serie-->
+      <h4>Género: Drama/Comedia</h4> <!--Aca va el genero de la serie-->
     </div>
   
     <div class="sinopsis">
@@ -553,7 +533,7 @@
         Sinopsis: <!--Aca va la sinopsis en el <p>Sinopsis</<p> que esta debajo-->
       </h4>
       <p>
-        BIENVENIDO <!--ejemplo-->
+        La historia de Roberto Gómez Bolaños, el hombre que transformó su anhelo de hacer reír en un legado universal. Desde su infancia hasta su consagración en las décadas de los 50 a los 80, esta biografía íntima nos revela cómo un joven soñador encontró su lugar en la naciente industria televisiva, creando personajes inolvidables cargados de ternura y humor.
       </p>
     </div>
   
@@ -592,7 +572,7 @@
           <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt="">
           <p>Nombre de serie</p>
         </a>
-        <a href="Dragon Ball Daima (2025).html" class="serie">
+        <a href="#" class="serie">
           <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt="">
           <p>Nombre de serie</p>
         </a>
@@ -638,9 +618,9 @@
     
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        const serieTitulo = "Nombre de serie";
-        const serieImagen = "https://image.tmdb.org/t/p/w300/"; //Aca va la ultima parte de la imagen como hice el ej de arriba se agrega despues de la barra. esta de esta forma para que la imagen carge mas rapido
-        const archivoHTML = "../View Series/.html"; // ✅ Ruta relativa al historial
+        const serieTitulo = "Chespirito: Sin querer queriendo";
+        const serieImagen = "https://image.tmdb.org/t/p/w300/Zf4F7BhM09OSl5YrPvAK7AUY5e.jpg"; //Aca va la ultima parte de la imagen como hice el ej de arriba se agrega despues de la barra. esta de esta forma para que la imagen carge mas rapido
+        const archivoHTML = "../View Series/Chespirito sin querer queriendo (2025).html"; // ✅ Ruta relativa al historial
         const progresoTexto = "Actualizado"; // Puedes cambiarlo dinámicamente
 
         let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');    
@@ -715,10 +695,10 @@
     <script>
       document.getElementById('btn-favorito').addEventListener('click', () => {
         const nuevaPelicula = {
-          titulo: "Nombre de serie",
-          imagen: "https://image.tmdb.org/t/p/w300/",
+          titulo: "Chespirito: Sin querer queriendo",
+          imagen: "https://image.tmdb.org/t/p/w300/Zf4F7BhM09OSl5YrPvAK7AUY5e.jpg",
           genero: "Drama comedia", /* o "Serie", "Crimen/Serie", etc.*/
-          archivo: "../View Series/.html",
+          archivo: "../View Series/Chespirito sin querer queriendo (2025).html",
           tipo: "serie", // ✅ identifica si es "serie" o "pelicula"
           timestamp: Date.now() // opcional: para ordenar por fecha
         };

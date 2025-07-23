@@ -189,19 +189,19 @@
     <div class="container">
       <div class="main-video">
         <div class="video">
-          <video class='js-player' poster="https://image.tmdb.org/t/p/w780/" controls muted preload="metadata"> <!--Aca te dejo la pagina para agregar el fondo https://www.themoviedb.org-->
+          <video class='js-player' poster="https://image.tmdb.org/t/p/w780/3gKgNFClO9cthY5I1RvgJhnmnvV.jpg" controls muted preload="metadata"> <!--Aca te dejo la pagina para agregar el fondo https://www.themoviedb.org-->
             <source src="https://www.udrop.com/file/6goa/1x1" type="application/x-mpegURL">
           </video>
           <!--<video src="" poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3r48KQZbrv_w2zeTpEMqrIE0BysJMnmdydw&usqp=CAU" controls muted autoplay></video>-->
         </div>
       </div>
     </div>  
-    <div id="resume-msg">✅ Reanudando donde lo dejaste: Nombre de serie</div>
+    <div id="resume-msg">✅ Reanudando donde lo dejaste: The Walking Dead</div>
   
     <div class="info">
-      <i class="fal fa-calendar-alt"></i><span>0000</span> <!-- AÑO DE ESTRENO DE LA SERIE -->
-      <i class="fal fa-clock"></i><span>T0</span> <!-- LA CANTIDAD DE TEMPORADAS QUE TIENE EJEMPLO "T1 (SI TIENE UNA TEMPORADAS)" SI TIENE VARIAS AGREGAR "T4" SERIAN TEMPORADA 4--> 
-      <i class="fal fa-thumbs-up"></i><span>00%</span> <!-- LA CALIFICACION DE LA SERIE -->   
+      <i class="fal fa-calendar-alt"></i><span>2010</span> <!-- AÑO DE ESTRENO DE LA SERIE -->
+      <i class="fal fa-clock"></i><span>T11</span> <!-- LA CANTIDAD DE TEMPORADAS QUE TIENE EJEMPLO "T1 (SI TIENE UNA TEMPORADAS)" SI TIENE VARIAS AGREGAR "T4" SERIAN TEMPORADA 4--> 
+      <i class="fal fa-thumbs-up"></i><span>87%</span> <!-- LA CALIFICACION DE LA SERIE -->   
       <div class="hd-tag">     
         <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">      
           <rect width="24" height="24" rx="4" fill="white" />       
@@ -213,7 +213,7 @@
     </div>
   
     <div class="titulo">
-      <h3>Nombre de serie</h3>
+      <h3>The Walking Dead</h3>
     </div>
   
     <!-- Selector de Temporadas y Botones de Episodios -->
@@ -224,6 +224,14 @@
           <option value="1" selected>Temporada 1</option>
           <option value="2">Temporada 2</option>
           <option value="3">Temporada 3</option>
+          <option value="4">Temporada 4</option>
+          <option value="5">Temporada 5</option>
+          <option value="6">Temporada 6</option>
+          <option value="7">Temporada 7</option>
+          <option value="8">Temporada 8</option>
+          <option value="9">Temporada 9</option>
+          <option value="10">Temporada 10</option>
+          <option value="11">Temporada 11</option>
         </select>
       </div>
       <div id="episodio-count" style="color: #bbb; font-size: 0.95rem;">10 Capítulos</div>
@@ -244,32 +252,34 @@
     <script>
       const episodiosData = {
         1: [
-          { titulo: "Episodio 1 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 2 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 3 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 4 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 5 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 6 - TITULO DE EPISODIO", src: "link de episodio" }
+          { titulo: "Episodio 1 - Los viejos tiempos", src: "https://pomf2.lain.la/f/suvf9w98.mp4" },
+          { titulo: "Episodio 2 - Agallas", src: "https://pomf2.lain.la/f/4f4e75d7.mp4" },
+          { titulo: "Episodio 3 - Díselo a las ranas", src: "https://pomf2.lain.la/f/v4wlp04p.mp4" },
+          { titulo: "Episodio 4 - Muchachos", src: "https://pomf2.lain.la/f/q3bd5p0o.mp4" },
+          { titulo: "Episodio 5 - Código Wildfire", src: "https://pomf2.lain.la/f/bxxsk325.mp4" },
+          { titulo: "Episodio 6 - TS-19", src: "https://pomf2.lain.la/f/ofq1mlqu.mp4" }
           // Agrega más si tienes
         ],
         2: [
-          { titulo: "Episodio 1 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 2 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 3 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 4 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 5 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 6 - TITULO DE EPISODIO", src: "link de episodio" }
-          // Agrega más si tienes
+          { titulo: "Episodio 1 - Lo que nos espera", src: "" },
+          { titulo: "Episodio 2 - Sangría", src: "" },
+          { titulo: "Episodio 3 - Guarda la última", src: "" },
+          { titulo: "Episodio 4 - La rosa cheroqui", src: "" },
+          { titulo: "Episodio 5 - El chupacabras", src: "" },
+          { titulo: "Episodio 6 - Secretos", src: "" },
+          { titulo: "Episodio 7 - Prácticamente muertos", src: "" },
+          { titulo: "Episodio 8 - Nebraska", src: "" },
+          { titulo: "Episodio 9 - Dedo en gatillo", src: "" },
+          { titulo: "Episodio 10 - A 30 kilómetros", src: "" },
+          { titulo: "Episodio 11 - Juez, jurado y verdugo", src: "" },
+          { titulo: "Episodio 12 - Los mejores ángeles", src: "" },
+          { titulo: "Episodio 12 - Junto al fuego que se extingue", src: "" }
         ],
         3: [
-          { titulo: "Episodio 1 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 2 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 3 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 4 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 5 - TITULO DE EPISODIO", src: "link de episodio" },
-          { titulo: "Episodio 6 - TITULO DE EPISODIO", src: "link de episodio" }
-          // Agrega más si tienes
-        ],
+          { titulo: "Episodio 1", src: "#" },
+          { titulo: "Episodio 2", src: "#" }
+          // Rellena si tienes links
+        ]
       };
       const temporadaSelect = document.getElementById("temporada-select");
       const episodiosContainer = document.getElementById("episodios");
@@ -545,7 +555,7 @@
     </style>
     <br>
     <div class="titulo">
-      <h4>Género: </h4> <!--Aca va el genero de la serie-->
+      <h4>Género: Accion/Drama/Apocalipsis Zombie</h4> <!--Aca va el genero de la serie-->
     </div>
   
     <div class="sinopsis">
@@ -553,7 +563,7 @@
         Sinopsis: <!--Aca va la sinopsis en el <p>Sinopsis</<p> que esta debajo-->
       </h4>
       <p>
-        BIENVENIDO <!--ejemplo-->
+        "The Walking Dead" está ambientada en un futuro apocalíptico con la Tierra devastada por el efecto de un cataclismo, que ha provocado la mutación en zombies de la mayor parte de los habitantes del planeta. La serie, explora las dificultades de los protagonistas para sobrevivir en un mundo poblado por el horror, así como las relaciones personales que se establecen entre ellos, en ocasiones también una amenaza para su supervivencia. <!--ejemplo-->
       </p>
     </div>
   
@@ -638,10 +648,12 @@
     
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        const serieTitulo = "Nombre de serie";
-        const serieImagen = "https://image.tmdb.org/t/p/w300/"; //Aca va la ultima parte de la imagen como hice el ej de arriba se agrega despues de la barra. esta de esta forma para que la imagen carge mas rapido
-        const archivoHTML = "../View Series/.html"; // ✅ Ruta relativa al historial
+        const serieTitulo = "The Walking Dead";
+        const serieImagen = "https://image.tmdb.org/t/p/w300/yn7psGTZsHumHOkLUmYpyrIcA2G.jpg"; //Aca va la ultima parte de la imagen como hice el ej de arriba se agrega despues de la barra. esta de esta forma para que la imagen carge mas rapido
+        const archivoHTML = "../View Series/The Walking Dead (2010).html"; // ✅ Ruta relativa al historial
         const progresoTexto = "Actualizado"; // Puedes cambiarlo dinámicamente
+        progreso: `Temporada ${temporadaActual} - Episodio ${episodioActual}`,
+
 
         let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');    
         const index = historial.findIndex(h => h.titulo === serieTitulo);
@@ -715,10 +727,10 @@
     <script>
       document.getElementById('btn-favorito').addEventListener('click', () => {
         const nuevaPelicula = {
-          titulo: "Nombre de serie",
-          imagen: "https://image.tmdb.org/t/p/w300/",
-          genero: "Drama comedia", /* o "Serie", "Crimen/Serie", etc.*/
-          archivo: "../View Series/.html",
+          titulo: "The Walking Dead",
+          imagen: "https://image.tmdb.org/t/p/w300/yn7psGTZsHumHOkLUmYpyrIcA2G.jpg",
+          genero: "Drama", /* o "Serie", "Crimen/Serie", etc.*/
+          archivo: "../View Series/The Walking Dead (2010).html",
           tipo: "serie", // ✅ identifica si es "serie" o "pelicula"
           timestamp: Date.now() // opcional: para ordenar por fecha
         };
