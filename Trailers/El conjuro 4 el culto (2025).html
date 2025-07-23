@@ -300,7 +300,7 @@
     <script>
       let currentEpisodeIndex = 0;
 
-      function renderEpisodios(temporada) { 
+      function renderEpisodios(temporada) {
         episodiosContainer.innerHTML = "";
         const episodios = episodiosData[temporada] || [];
         const yearSpan = document.querySelector('.info span');
@@ -594,7 +594,7 @@
             imagen: serieImagen,
             progreso: progresoTexto,
             archivo: archivoHTML,
-            tipo: "serie", // ✅ ya está
+            tipo: "Pelicula", // ✅ ya está
             timestamp: Date.now() // ✅ IMPORTANTE
           });
           
@@ -667,7 +667,7 @@
           imagen: "https://image.tmdb.org/t/p/w300/",
           genero: "Drama comedia", /* o "Serie", "Crimen/Serie", etc.*/
           archivo: "../View Series/.html",
-          tipo: "serie", // ✅ identifica si es "serie" o "pelicula"
+          tipo: "Pelicula", // ✅ identifica si es "serie" o "pelicula"
           timestamp: Date.now() // opcional: para ordenar por fecha
         };
 

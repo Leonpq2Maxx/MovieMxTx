@@ -489,13 +489,13 @@ i {
 </div>
 <!--MENU SUPERIOR-->
 <div class="top-scroll-menu">
-<a class="menu-item" href="#">2025</a>
-<a class="menu-item" href="#">2024</a>
-<a class="menu-item" href="#">Peliculas</a>
-<a class="menu-item" href="#">Series</a>
-<a class="menu-item" href="#">Pronto</a>
-<a class="menu-item" href="#">Trailers</a>
-<a class="menu-item" href="#">Populares</a>
+  <a class="menu-item" href="#">2025</a>
+  <a class="menu-item" href="#">2024</a>
+  <a class="menu-item" href="#">Peliculas</a>
+  <a class="menu-item" href="#">Series</a>
+  <a class="menu-item" href="#">Pronto</a>
+  <a class="menu-item" href="#">Trailers</a>
+  <a class="menu-item" href="#">Populares</a>
 </div>
 <!--MENU SUPERIOR COLORES Y-->
 <style>
@@ -796,11 +796,11 @@ document.querySelectorAll('.card-link').forEach(link => {
 
 <br><br/>
 <div class="poster">
-  <h4 class="alignleft">Nuevas</h4><a href="Mostras Mas/Series Agregadas.html"><h4 class="alignright">Ver Todo</h4></a></div>
+  <h4 class="alignleft">Nuevas</h4><a href="#"><h4 class="alignright">Ver Todo</h4></a></div>
   <br/>
   <div class="scrollmenu">
     
-    <a class="card-link" data-href="View Peliculas/Cómo entrenar a tu dragón (2025.html)">
+    <a class="card-link" data-href="View Peliculas/Como entrenar a tu dragon (2025)">
       <div class="xplus">
         <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/fTpbUIwdsfyIldzYvzQi2K4Icws.jpg"/>
         <i>Cómo entrenar a tu...</i>
@@ -976,7 +976,7 @@ document.querySelectorAll('.card-link').forEach(link => {
   <br/>
   <div class="scrollmenu">
 
-    <a class="card-link" data-href="View Peliculas/Cómo entrenar a tu dragón (2025).html">
+    <a class="card-link" data-href="View Peliculas/Como entrenar a tu dragon (2025)">
       <div class="xplus">
         <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/fTpbUIwdsfyIldzYvzQi2K4Icws.jpg"/>
         <i>Cómo entrenar a tu...</i>
@@ -984,7 +984,7 @@ document.querySelectorAll('.card-link').forEach(link => {
       </div>
     </a>
 
-    <a class="card-link" data-href="Megan 2 (2025).html">
+    <a class="card-link" data-href="View Peliculas/Megan 2 (2025).html">
       <div class="xplus">
         <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/fBgyUqyu3ioTSQjJJE5RFs2EG3B.jpg"/>
         <i>M3GAN 2.0</i>
@@ -1135,7 +1135,7 @@ document.querySelectorAll('.card-link').forEach(link => {
 
 
 <div class="poster">
-  <h4 class="alignleft">Peliculas <br/>Agregadas</h4><a href="Mostras Mas/Peliculas Agregadas.html"><h4 class="alignright">Ver Todo</h4></a></div>
+  <h4 class="alignleft">Peliculas <br/>Agregadas</h4><a href="Mostras Mas/movies_2025_grid (1).html"><h4 class="alignright">Ver Todo</h4></a></div>
   <br/>
   <div class="scrollmenu">
     
@@ -1270,7 +1270,7 @@ document.querySelectorAll('.card-link').forEach(link => {
   <br/>
   <div class="scrollmenu">
 
-    <a class="card-link" data-href="View Peliculas/Cómo entrenar a tu dragón (2025).html">
+    <a class="card-link" data-href="View Peliculas/Como entrenar a tu dragon (2025)">
       <div class="xplus">
         <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/fTpbUIwdsfyIldzYvzQi2K4Icws.jpg"/>
         <i>Cómo entrenar a tu...</i>
@@ -1278,7 +1278,7 @@ document.querySelectorAll('.card-link').forEach(link => {
       </div>
     </a>
 
-    <a class="card-link" data-href="Megan 2 (2025).html">
+    <a class="card-link" data-href="View Peliculas/Megan 2 (2025).html">
       <div class="xplus">
         <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/fBgyUqyu3ioTSQjJJE5RFs2EG3B.jpg"/>
         <i>M3GAN 2.0</i>
@@ -2736,7 +2736,7 @@ document.querySelectorAll('.card-link').forEach(link => {
       </div>
     </a>
 
-    <a class="card-link" data-adulto="true" data-href="Cantar desnuda (2025).html">
+    <a class="card-link" data-href="View Peliculas/Cantar desnuda (2025).html">
       <div class="xplus">
         <img alt="" class="xaviec" loading="lazy" src="https://cinepelayo.com/wp-content/uploads/2025/01/cartel-cantar-desnuda.jpg"/>
         <i>Cantar desnuda</i>
@@ -3365,224 +3365,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 </script>
-
-<!--MAYOR DE 18-->
-
-<!-- Modal HTML -->
-<div id="age-modal" style="display: none;" class="modal-backdrop">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <h2>¿Eres mayor de edad?</h2>
-    <p>Ingresa tu año de nacimiento:</p>
-    <input type="number" id="birth-year" placeholder="Ej: 2006" />
-    <div class="modal-actions">
-      <button onclick="validateAge()">Sí</button>
-      <button onclick="denyAccessTemporary()">No</button>
-    </div>
-  </div>
-</div>
-
-<div id="block-message" style="display: none;" class="block-modal">
-  <div class="block-content">
-    <button class="block-close" onclick="hideBlockModal()">✕</button>
-    <p>No puedes acceder al contenido +18 por 30 segundos.</p>
-  </div>
-</div>
-
-
-<!-- Estilos del modal -->
-<style>
-.modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(8px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
-.modal-box {
-  background: #00000063;
-  color: #ffffff;
-  padding: 25px;
-  border-radius: 12px;
-  max-width: 300px;
-  width: 90%;
-  text-align: center;
-  position: relative;
-}
-.modal-actions button {
-  margin: 10px;
-  padding: 8px 15px;
-  cursor: pointer;
-  border: none;
-  border-radius: 5px;
-  background: #cf0b56ff;
-  color: white;
-}
-.modal-close {
-  position: absolute;
-  top: 8px;
-  right: 10px;
-  background: transparent;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-input, button, select, textarea {
-  font: inherit;
-  font-size: 100%;
-  color: #000000;
-  line-height: normal;
-}
-
-/*MENSAJE FLOTANTE*/
-
-.block-modal {
-  position: fixed;
-  bottom: 70px;
-  right: 55px;
-  background: rgba(0, 0, 0, 0.85);
-  color: white;
-  padding: 15px 20px;
-  border-radius: 12px;
-  z-index: 99999;
-  max-width: 300px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-  animation: fadeIn 0.3s ease-in-out;
-}
-
-.block-content {
-  position: relative;
-  padding-right: 14px;
-  line-height: 1.6;
-}
-
-.block-close {
-  position: absolute;
-  top: 0;
-  right: 0;
-  border: none;
-  background: transparent;
-  color: white;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-
-</style>
-
-<!-- Lógica JS -->
-<script>
-function closeModal() {
-  document.getElementById('age-modal').style.display = 'none';
-}
-
-function showBlockModal() {
-  const modal = document.getElementById('block-message');
-  modal.style.display = 'block';
-  setTimeout(() => {
-    hideBlockModal();
-  }, 30000); // 30 segundos
-}
-
-function hideBlockModal() {
-  const modal = document.getElementById('block-message');
-  modal.style.display = 'none';
-}
-
-function denyAccessPermanently() {
-  localStorage.setItem('isBanned', 'true');
-  closeModal();
-  alert('Acceso bloqueado permanentemente. No puedes acceder al contenido +18.');
-}
-
-function validateAge() {
-  const year = parseInt(document.getElementById('birth-year').value);
-  const currentYear = new Date().getFullYear();
-  const age = currentYear - year;
-
-  if (!year || year > currentYear || year < 1900) {
-    alert("Año inválido.");
-    return;
-  }
-
-  if (age >= 18) {
-    sessionStorage.setItem('isAdultSession', 'true');
-    closeModal();
-    if (window._adultLinkTarget) {
-      window.location.href = window._adultLinkTarget;
-      window._adultLinkTarget = null;
-    }
-  } else {
-    denyAccessPermanently();
-  }
-}
-
-function isBlocked() {
-  const blockedUntil = localStorage.getItem('blockedUntil');
-  return blockedUntil && new Date().getTime() < parseInt(blockedUntil);
-}
-
-function isPermanentlyBanned() {
-  return localStorage.getItem('isBanned') === 'true';
-}
-
-function checkAgeAndRedirect(e, link) {
-  e.preventDefault();
-
-  if (isPermanentlyBanned()) {
-    alert("Has sido bloqueado permanentemente del contenido +18.");
-    return;
-  }
-
-  if (isBlocked()) {
-    showBlockModal(); // << esta línea muestra el nuevo modal
-    return;
-  }
-
-  window._adultLinkTarget = link.getAttribute('href') || link.getAttribute('data-href');
-  sessionStorage.removeItem('isAdultSession');
-  document.getElementById('birth-year').value = "";
-  document.getElementById('age-modal').style.display = 'flex';
-}
-
-
-document.addEventListener('DOMContentLoaded', function () {
-  document.querySelectorAll('a[data-adulto="true"]').forEach(link => {
-    link.addEventListener('click', function (e) {
-      checkAgeAndRedirect(e, this);
-    });
-  });
-});
-
-/*Mensaje flotante*/
-
-function showBlockModal() {
-  const modal = document.getElementById('block-message');
-  modal.style.display = 'block';
-
-  setTimeout(() => {
-    modal.style.display = 'none';
-  }, 5000);
-}
-
-function hideBlockModal() {
-  const modal = document.getElementById('block-message');
-  modal.style.display = 'none';
-}
-
-</script>
-
-
-
 
 </body>
 </html>
