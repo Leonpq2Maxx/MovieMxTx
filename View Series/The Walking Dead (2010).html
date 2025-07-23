@@ -659,12 +659,12 @@
     
         if (index === -1) {
           historial.unshift({
-            titulo: 'The Walking Dead (2010)',
-  archivo: 'The Walking Dead (2010).html',
-  imagen: 'img/thewalkingdead.jpg',
-  tipo: 'serie',
-  progreso: 'Temporada 2 - Episodio 7',
-  timestamp: 1720700000000
+            titulo: serieTitulo,
+            imagen: serieImagen,
+            progreso: progresoTexto,
+            archivo: archivoHTML,
+            tipo: "serie", // ✅ ya está
+            timestamp: Date.now() // ✅ IMPORTANTE
           });
           
           if (historial.length > 20) historial.pop(); /* Limita a 20 */
@@ -673,7 +673,16 @@
           historial[index].progreso = progresoTexto;
           historial[index].timestamp = Date.now(); // ✅ Actualiza orden
         }
-        localStorage.setItem('historial_usuarios', JSON.stringify(historial));
+        
+const historialItem = {
+  id: videoId,
+  nombre: videoTitle,
+  img: poster,
+  fecha: new Date().toLocaleString(),
+  progreso: `Temporada ${temporadaSelect.value} - Episodio ${index + 1}`
+};
+
+localStorage.setItem('historial_usuarios', JSON.stringify(historial));
       });
     </script>
     
