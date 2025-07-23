@@ -673,16 +673,7 @@
           historial[index].progreso = progresoTexto;
           historial[index].timestamp = Date.now(); // ✅ Actualiza orden
         }
-        
-const historialItem = {
-  id: videoId,
-  nombre: videoTitle,
-  img: poster,
-  fecha: new Date().toLocaleString(),
-  progreso: `Temporada ${temporadaSelect.value} - Episodio ${index + 1}`
-};
-
-localStorage.setItem('historial_usuarios', JSON.stringify(historial));
+        localStorage.setItem('historial_usuarios', JSON.stringify(historial));
       });
     </script>
     
