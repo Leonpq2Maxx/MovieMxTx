@@ -479,7 +479,7 @@
   
         const episodios = episodiosData[temporada] || [];
         const yearSpan = document.querySelector('.info span');
-        const yearBySeason = { 1: '2007', 2: '2025', 3: '2025' };  /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010 (ABAJO HAY OTRO DEBE HACER LO MISMO)*/
+        const yearBySeason = { 1: '2021', 2: '2023', 3: '2025' };  /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010 (ABAJO HAY OTRO DEBE HACER LO MISMO)*/
         if (yearSpan) yearSpan.textContent = yearBySeason[temporada] || '0000';
         episodioCount.textContent = `${episodios.length} Capítulos`;
         
@@ -494,7 +494,6 @@
           
           btn.addEventListener("click", () => {
             mainVideo.setAttribute("src", ep.src);
-            mainVideo.play();
             if (titleDiv) {
               titleDiv.innerHTML = ep.titulo;
             }
@@ -527,7 +526,7 @@
         episodiosContainer.innerHTML = "";
         const episodios = episodiosData[temporada] || [];
         const yearSpan = document.querySelector('.info span');
-        const yearBySeason = { 1: '2007', 2: '2024', 3: '2025' }; /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010*/
+        const yearBySeason = { 1: '2021', 2: '2023', 3: '2025' }; /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010*/
         
         if (yearSpan) yearSpan.textContent = yearBySeason[temporada] || '0000';
   
@@ -563,7 +562,7 @@
         mainVideo.load(); // prepara el video sin reproducir //
         mainVideo.pause();
         mainVideo.currentTime = mainVideo.currentTime || 0; // asegúrate que se mantenga en el tiempo guardado si existe
-        mainVideo.play(); // forzar reproducción automática
+        // forzar reproducción automática
         if (titleDiv) titleDiv.innerHTML = titulo;
 
   
@@ -607,7 +606,6 @@
 
       mainVideo.addEventListener("pause", () => {
         if (autoNextPlaying && !mainVideo.ended) {
-          mainVideo.play();
           autoNextPlaying = false;
         }
       });
@@ -744,7 +742,7 @@
     </style>
     <br>
     <div class="titulo">
-      <h4>Género: Animación/Accion/Aventura/Ciencia Ficcion/Fantasia/Anime</h4> <!--Aca va el genero de la serie-->
+      <h4>Género: Acción/Drama/Misterio/Crimen</h4> <!--Aca va el genero de la serie-->
     </div>
   
     <div class="sinopsis">
@@ -752,7 +750,7 @@
         Sinopsis: <!--Aca va la sinopsis en el <p>Sinopsis</<p> que esta debajo-->
       </h4>
       <p>
-        Los ninjas utilizan todo tipo de artes marciales desde la lucha cuerpo a cuerpo a ilusiones o técnicas secretas como por ejemplo la manipulación de elementos. El protagonista es un joven aspirante a ninja Uzumaki Naruto, un muchacho que sueña en convertirse algun dia en el líder de su aldea (Hokage). <!--ejemplo-->
+        Cientos de personas con problemas de dinero aceptan una invitación rarísima para competir en juegos infantiles. Dentro los esperan un tentador premio y desafíos letales. <!--ejemplo--> <!--ejemplo-->
       </p>
     </div>
   
@@ -791,7 +789,7 @@
           <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt="">
           <p>Nombre de serie</p>
         </a>
-        <a href="Dragon Ball Daima (2025).html" class="serie">
+        <a href="#" class="serie">
           <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt="">
           <p>Nombre de serie</p>
         </a>
@@ -1050,8 +1048,7 @@
     
           const videoSrc = videoItem.getAttribute('data-url');
           mainVideo.setAttribute('src', videoSrc);
-          mainVideo.play();
-        });
+          });
       });
     </script>
 
@@ -1095,7 +1092,7 @@
           });
         }
       }, { passive: false });
-    </script>    
+    </script>  
     
     <script>
       const episodiosPorTemporada = JSON.parse(localStorage.getItem("episodios_temporada") || "{}");
@@ -1243,5 +1240,119 @@
         }
       });
     </script>
-  </body>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  const originalRenderEpisodios = renderEpisodios;
+
+  renderEpisodios = function(temporada) {
+    originalRenderEpisodios(temporada);
+
+    setTimeout(() => {
+      const savedIndex = obtenerProgresoTemporada(temporada);
+      const index = typeof savedIndex === "number" ? savedIndex : 0;
+      const episodios = episodiosData[temporada] || [];
+      const ep = episodios[index];
+      if (!ep) return;
+
+      // Mostrar el título
+      const titleDiv = document.querySelector(".title");
+      if (titleDiv) titleDiv.textContent = ep.titulo;
+
+      // Limpiar el contenedor y reconstruir el reproductor
+      const contenedor = document.getElementById("contenedor-video");
+      contenedor.innerHTML = \`
+        <video id="main-video" poster="\${ep.poster || ''}" controls>
+          <source src="\${ep.src}" type="video/mp4">
+          Tu navegador no soporta el elemento de video.
+        </video>
+      \`;
+
+      const video = document.getElementById("main-video");
+      if (!video) return;
+
+      video.load(); // fuerza recarga del video
+      video.pause();
+
+      // Restaurar tiempo si está guardado
+      const key = \`progreso_\${temporada}_\${index}\`;
+      const progreso = parseFloat(localStorage.getItem(key));
+      if (!isNaN(progreso)) {
+        video.currentTime = progreso;
+      }
+
+      // Centrar botón del episodio activo
+      const botones = document.querySelectorAll("#episodios button");
+      if (botones.length > index) {
+        const scrollLeft = botones[index].offsetLeft - (episodiosContainer.offsetWidth / 2) + (botones[index].offsetWidth / 2);
+        episodiosContainer.scrollTo({ left: scrollLeft, behavior: "smooth" });
+      }
+    }, 500); // Esperamos 500ms para asegurar render del DOM
+  };
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const ultimo = JSON.parse(localStorage.getItem("ultimo_episodio") || "{}");
+    if (ultimo.temporada && typeof ultimo.index === "number") {
+      temporadaSelect.value = ultimo.temporada;
+      renderEpisodios(ultimo.temporada);
+    } else {
+      renderEpisodios(temporadaSelect.value);
+    }
+  });
+
+  temporadaSelect.addEventListener("change", () => {
+    renderEpisodios(temporadaSelect.value);
+  });
+</script>
+
+
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    const ultimo = JSON.parse(localStorage.getItem("ultimo_episodio") || "{}");
+    const temporada = ultimo.temporada || temporadaSelect.value;
+    const index = typeof ultimo.index === "number" ? ultimo.index : obtenerProgresoTemporada(temporada);
+    const episodio = (episodiosData[temporada] || [])[index];
+
+    temporadaSelect.value = temporada;
+    renderEpisodios(temporada);
+
+    if (episodio) {
+      setTimeout(() => {
+        playEpisode(episodio.src, episodio.titulo, index);
+      }, 300);
+    }
+  });
+
+  temporadaSelect.addEventListener("change", () => {
+    const temporada = temporadaSelect.value;
+    renderEpisodios(temporada);
+    const index = obtenerProgresoTemporada(temporada);
+    const episodio = (episodiosData[temporada] || [])[index];
+
+    if (episodio) {
+      setTimeout(() => {
+        playEpisode(episodio.src, episodio.titulo, index);
+      }, 300);
+    }
+  });
+</script>
+
+</body>
 </html>
