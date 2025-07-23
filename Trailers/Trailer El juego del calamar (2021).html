@@ -189,7 +189,7 @@
     <div class="container">
       <div class="main-video">
         <div class="video">
-          <video class='js-player' poster="https://image.tmdb.org/t/p/w780/wJoPsjcJkMAr7ifNqo7qlNXDzil.jpg" controls muted preload="metadata"> <!--Aca te dejo la pagina para agregar el fondo https://www.themoviedb.org-->
+          <video class='js-player' poster="https://image.tmdb.org/t/p/w780/6zpqAdAmOktVVcQXhy85Y1oBu5e.jpg" controls muted preload="metadata"> <!--Aca te dejo la pagina para agregar el fondo https://www.themoviedb.org-->
             <source src="https://www.udrop.com/file/6goa/1x1" type="application/x-mpegURL">
           </video>
           <!--<video src="" poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3r48KQZbrv_w2zeTpEMqrIE0BysJMnmdydw&usqp=CAU" controls muted autoplay></video>-->
@@ -199,9 +199,8 @@
     <div id="resume-msg">✅ Reanudando donde lo dejaste: Trailer: El juego del calamar</div>
   
     <div class="info">
-      <i class="fal fa-calendar-alt"></i><span>2021</span> <!-- AÑO DE ESTRENO DE LA SERIE -->
-      <i class="fal fa-clock"></i><span>T3</span> <!-- LA CANTIDAD DE TEMPORADAS QUE TIENE EJEMPLO "T1 (SI TIENE UNA TEMPORADAS)" SI TIENE VARIAS AGREGAR "T4" SERIAN TEMPORADA 4--> 
-      <i class="fal fa-thumbs-up"></i><span>80%</span> <!-- LA CALIFICACION DE LA SERIE -->   
+      <i class="fal fa-calendar-alt"></i><span>2025</span> <!-- AÑO DE ESTRENO DE LA SERIE -->
+      <i class="fal fa-thumbs-up"></i><span>00%</span> <!-- LA CALIFICACION DE LA SERIE -->   
       <div class="hd-tag">     
         <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">      
           <rect width="24" height="24" rx="4" fill="white" />       
@@ -242,9 +241,9 @@
     <script>
       const episodiosData = {
         1: [
-          { titulo: "Episodio 1 - 2021", src: "https://pomf2.lain.la/f/2ibx5be1.mp4" },
-          { titulo: "Episodio 2 - 2023", src: "https://pomf2.lain.la/f/gx2ce2jt.mp4" },
-          { titulo: "Episodio 3 - 2025", src: "https://pomf2.lain.la/f/ys5ort5.mp4" }
+          { titulo: "Trailer - 2021", src: "https://www.youtube.com/embed/Mj4_xG5NXeo?si=3Cb2eGMb_8etoYka" },
+          { titulo: "Trailer - 2023", src: "https://www.youtube.com/embed/Oh_B9Ejvn-8?si=U2xcbCC9FDD-sqyU" },
+          { titulo: "Trailer - 2025", src: "https://www.youtube.com/embed/cTpISvwP9DM?si=EwxjLIVmzzFIFllI" }
           // Agrega más si tienes
         ],
       };
@@ -259,7 +258,7 @@
   
         const episodios = episodiosData[temporada] || [];
         const yearSpan = document.querySelector('.info span');
-        const yearBySeason = { 1: '2021', 2: '2025', 3: '2025' };  /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010 (ABAJO HAY OTRO DEBE HACER LO MISMO)*/
+        const yearBySeason = { 1: '2025', 2: '2025', 3: '2025' };  /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010 (ABAJO HAY OTRO DEBE HACER LO MISMO)*/
         if (yearSpan) yearSpan.textContent = yearBySeason[temporada] || '0000';
         episodioCount.textContent = `${episodios.length} Capítulos`;
         
@@ -307,7 +306,7 @@
         episodiosContainer.innerHTML = "";
         const episodios = episodiosData[temporada] || [];
         const yearSpan = document.querySelector('.info span');
-        const yearBySeason = { 1: '2021', 2: '2024', 3: '2025' }; /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010*/
+        const yearBySeason = { 1: '2025', 2: '2024', 3: '2025' }; /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010*/
         
         if (yearSpan) yearSpan.textContent = yearBySeason[temporada] || '0000';
   
@@ -524,7 +523,7 @@
     </style>
     <br>
     <div class="titulo">
-      <h4>Género: Acción/Drama/Misterio/Crimen</h4> <!--Aca va el genero de la serie-->
+      <h4>Género: Acción/Misterio/Drama/Crimen</h4> <!--Aca va el genero de la serie-->
     </div>
   
     <div class="sinopsis">
@@ -532,7 +531,7 @@
         Sinopsis: <!--Aca va la sinopsis en el <p>Sinopsis</<p> que esta debajo-->
       </h4>
       <p>
-        Cientos de personas con problemas de dinero aceptan una invitación rarísima para competir en juegos infantiles. Dentro los esperan un tentador premio y desafíos letales. <!--ejemplo-->
+        Cientos de personas con problemas de dinero aceptan una invitación rarísima para competir en juegos infantiles. Dentro los esperan un tentador premio y desafíos letales.
       </p>
     </div>
     <br>
@@ -543,7 +542,7 @@
       <div class="series-grid">
         <a href="../View Series/El Juego Del Calamar (2021).html" class="serie">
           <img loading="lazy" src="https://image.tmdb.org/t/p/w300/m2o9vamnvtseVG7HgcFeSEoJ8HR.jpg" alt=""> <!--Aca va las imagenes de las series solo debes de agregar la ultima parte despues de la "/" ej: (https://image.tmdb.org/t/p/original/qZJt1XlRVbQhGV7MtZnbiR6vxPh.jpg) solo debes agregar esto (qZJt1XlRVbQhGV7MtZnbiR6vxPh.jpg)-->
-          <p>El Juego Del Calamar</p>
+          <p>El juego del calamar</p>
         </a>
       </div>
     </div>
@@ -584,8 +583,8 @@
     <script>
       document.addEventListener('DOMContentLoaded', () => {
         const serieTitulo = "Trailer: El juego del calamar";
-        const serieImagen = "https://image.tmdb.org/t/p/w300/xNvlt4jn2KbuKJoZ9UiVpm7lYjr.jpg"; //Aca va la ultima parte de la imagen como hice el ej de arriba se agrega despues de la barra. esta de esta forma para que la imagen carge mas rapido
-        const archivoHTML = "../Trailers/Trailer El juego del calamar (2021).html"; // ✅ Ruta relativa al historial
+        const serieImagen = "https://image.tmdb.org/t/p/w300/m2o9vamnvtseVG7HgcFeSEoJ8HR.jpg"; //Aca va la ultima parte de la imagen como hice el ej de arriba se agrega despues de la barra. esta de esta forma para que la imagen carge mas rapido
+        const archivoHTML = "../Trailers/El Juego Del Calamar (2021).html"; // ✅ Ruta relativa al historial
         const progresoTexto = "Actualizado"; // Puedes cambiarlo dinámicamente
 
         let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');    
@@ -848,5 +847,92 @@
         }
       }, { passive: false });
     </script>    
-  </body>
+  
+<script>
+  function esYouTube(url) {
+    return url.includes("youtube.com") || url.includes("youtu.be");
+  }
+
+  function playEpisode(src, titulo, index) {
+    currentEpisodeIndex = index;
+    const mainVideoContainer = document.querySelector(".main-video .video");
+
+    // Limpiar contenido actual
+    mainVideoContainer.innerHTML = "";
+
+    if (esYouTube(src)) {
+      const iframe = document.createElement("iframe");
+      iframe.setAttribute("src", src.replace("watch?v=", "embed/"));
+      iframe.setAttribute("frameborder", "0");
+      iframe.setAttribute("allowfullscreen", "true");
+      iframe.setAttribute("allow", "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture");
+      iframe.className = "js-player";
+      mainVideoContainer.appendChild(iframe);
+    } else {
+      const video = document.createElement("video");
+      video.className = "js-player";
+      video.setAttribute("controls", "");
+      video.setAttribute("preload", "metadata");
+      video.setAttribute("poster", "https://image.tmdb.org/t/p/w780/wJoPsjcJkMAr7ifNqo7qlNXDzil.jpg");
+      const source = document.createElement("source");
+      source.setAttribute("src", src);
+      source.setAttribute("type", "video/mp4");
+      video.appendChild(source);
+      mainVideoContainer.appendChild(video);
+      video.load();
+    }
+
+    const titleDiv = document.querySelector(".main-video .title");
+    if (titleDiv) {
+      titleDiv.innerHTML = titulo;
+    }
+
+    const buttons = document.querySelectorAll("#episodios button");
+    buttons.forEach(btn => {
+      btn.classList.remove("active");
+      btn.style.background = "#222";
+      btn.style.color = "#ccc";
+    });
+
+    buttons[index]?.classList.add("active");
+    buttons[index].style.background = "red";
+    buttons[index].style.color = "#fff";
+
+    const msg = document.getElementById("resume-msg");
+    msg.textContent = `✅ ${titulo}`;
+    msg.classList.add("visible");
+    setTimeout(() => msg.classList.remove("visible"), 3000);
+
+    localStorage.setItem("ultimo_episodio", JSON.stringify({
+      temporada: temporadaSelect.value,
+      index: index
+    }));
+
+    setTimeout(() => {
+      const players = Array.from(document.querySelectorAll('.js-player')).map(p => new Plyr(p));
+    }, 500);
+  }
+</script>
+
+
+<script>
+  // Ejecutar al cargar para cargar automáticamente el primer episodio sin clic
+  window.addEventListener("DOMContentLoaded", () => {
+    const temporada = temporadaSelect.value;
+    const episodios = episodiosData[temporada];
+    const saved = JSON.parse(localStorage.getItem("ultimo_episodio"));
+    let index = 0;
+
+    if (saved && saved.temporada === temporada && episodios[saved.index]) {
+      index = saved.index;
+    }
+
+    const ep = episodios[index];
+    if (ep) {
+      playEpisode(ep.src, ep.titulo, index);
+    }
+  });
+</script>
+
+</body>
 </html>
