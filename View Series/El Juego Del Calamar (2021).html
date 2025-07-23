@@ -300,7 +300,6 @@
           
           btn.addEventListener("click", () => {
             mainVideo.setAttribute("src", ep.src);
-            mainVideo.play();
             if (titleDiv) {
               titleDiv.innerHTML = ep.titulo;
             }
@@ -369,7 +368,7 @@
         mainVideo.load(); // prepara el video sin reproducir //
         mainVideo.pause();
         mainVideo.currentTime = mainVideo.currentTime || 0; // asegúrate que se mantenga en el tiempo guardado si existe
-        mainVideo.play(); // forzar reproducción automática
+        // forzar reproducción automática
         if (titleDiv) titleDiv.innerHTML = titulo;
 
   
@@ -413,7 +412,6 @@
 
       mainVideo.addEventListener("pause", () => {
         if (autoNextPlaying && !mainVideo.ended) {
-          mainVideo.play();
           autoNextPlaying = false;
         }
       });
@@ -856,8 +854,7 @@
     
           const videoSrc = videoItem.getAttribute('data-url');
           mainVideo.setAttribute('src', videoSrc);
-          mainVideo.play();
-        });
+          });
       });
     </script>
 
