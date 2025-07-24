@@ -25,7 +25,7 @@
 
   </style>
 
-<style>
+  <style>
     body {
       font-family: sans-serif;
       margin: 0;
@@ -160,7 +160,9 @@
       z-index: 1;
     }
 
-  </style></head>
+  </style>
+
+</head>
 <body>
 <header>
 <h1>2025 Movie <span id="contador" style="font-size: 1.0rem; font-weight: normal; color: #bbb;"></span></h1>
@@ -2091,24 +2093,7 @@ function filtrarPeliculas() {
   display: none;
 }
 </style>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  document.querySelectorAll('.movie').forEach(movie => {
-    const htmlLink = movie.getAttribute("data-html");
-    const lockIcon = movie.querySelector(".lock-icon");
 
-    if (htmlLink && htmlLink.trim() !== "") {
-      if (lockIcon) {
-        lockIcon.style.display = "none";
-      }
-    } else {
-      if (lockIcon) {
-        lockIcon.style.display = "inline";
-      }
-    }
-  });
-});
-</script>
 <script>
 document.querySelectorAll('.movie').forEach(movie => {
   movie.addEventListener('click', function (e) {
@@ -2176,6 +2161,37 @@ document.getElementById("confirmAgeBtn").addEventListener("click", function () {
     result.style.color = "red";
   }
 });
+// Restaurar búsqueda y scroll al volver
+  window.addEventListener("DOMContentLoaded", () => {
+    const ultima = localStorage.getItem("ultimaBusqueda");
+    const scroll = localStorage.getItem("scrollY");
+    const input = document.getElementById("search-input");
+    if (ultima && input) {
+      input.value = ultima;
+      filtrarPeliculas();
+    }
+    if (scroll) {
+      window.scrollTo(0, parseInt(scroll));
+    }
+    localStorage.removeItem("ultimaBusqueda");
+    localStorage.removeItem("scrollY");
+  });
+  function filtrarPeliculas() {
+    const input = document.getElementById("search-input");
+    const texto = input.value.toLowerCase();
+    localStorage.setItem("ultimaBusqueda", texto);
+    const peliculas = document.querySelectorAll(".movie");
+    peliculas.forEach(peli => {
+      const titulo = peli.dataset.titulo || "";
+      const genero = peli.dataset.genero || "";
+      const anio = peli.dataset.anio || "";
+      const visible = titulo.includes(texto) || genero.includes(texto) || anio.includes(texto);
+      peli.style.display = visible ? "block" : "none";
+    });
+  }
 </script>
+
+
+
 </body>
 </html>
