@@ -168,6 +168,153 @@
     </div>
   </div>
 
+  <!-- Modal de verificación de edad -->
+<div id="ageModal" class="age-modal hidden">
+  <div class="age-modal-content">
+    <span class="close-button" onclick="closeModal()">×</span>
+    <h2>¿Eres mayor de edad?</h2>
+
+    <label for="birthyear">Año de nacimiento:</label>
+    <input type="number" id="birthyear" placeholder="Año" min="1900" max="2025" />
+
+    <label for="age">Edad actual:</label>
+    <input type="number" id="age" placeholder="Edad" min="1" max="120" />
+
+    <button id="confirmAgeBtn">Validar edad</button>
+    <p id="result-message"></p>
+  </div>
+</div>
+
+<style>
+  .age-modal {
+    position: fixed;
+    z-index: 9999;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .age-modal-content {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+    position: relative;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  }
+
+  .age-modal-content h2,
+  .age-modal-content label,
+  .age-modal-content p {
+    color: #000;
+  }
+
+  .age-modal-content input {
+    width: 90%;
+    margin: 10px auto;
+    padding: 8px;
+    display: block;
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .age-modal-content button {
+    background: #0b57cf;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  .close-button {
+    position: absolute;
+    right: 12px;
+    top: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #888;
+    cursor: pointer;
+  }
+
+  .hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  let pendingRedirect = null;
+
+  function verificarFavorito(url, requiereEdad) {
+    if (requiereEdad) {
+      pendingRedirect = url;
+      openModal();
+    } else {
+      location.href = url;
+    }
+  }
+
+  function openModal() {
+    document.getElementById("ageModal").classList.remove("hidden");
+    document.getElementById("result-message").innerText = "";
+    document.getElementById("birthyear").value = "";
+    document.getElementById("age").value = "";
+  }
+
+  function closeModal() {
+    document.getElementById("ageModal").classList.add("hidden");
+    pendingRedirect = null;
+  }
+
+  document.getElementById("confirmAgeBtn").addEventListener("click", function () {
+    const birthYear = parseInt(document.getElementById("birthyear").value);
+    const enteredAge = parseInt(document.getElementById("age").value);
+    const currentYear = new Date().getFullYear();
+    const calculatedAge = currentYear - birthYear;
+    const result = document.getElementById("result-message");
+
+    if (
+      isNaN(birthYear) || isNaN(enteredAge) ||
+      birthYear > currentYear || birthYear < 1900 ||
+      enteredAge < 0 || enteredAge > 120
+    ) {
+      result.innerText = "Por favor completa los campos con valores válidos.";
+      result.style.color = "red";
+      return;
+    }
+
+    if (enteredAge !== calculatedAge) {
+      result.innerText = "La edad no coincide con el año de nacimiento.";
+      result.style.color = "red";
+      return;
+    }
+
+    if (enteredAge >= 18) {
+      result.innerText = "Acceso permitido. Redirigiendo...";
+      result.style.color = "green";
+      setTimeout(() => {
+        if (pendingRedirect) {
+          window.location.href = pendingRedirect;
+        }
+      }, 1500);
+    } else {
+      result.innerText = "No eres mayor de edad, vuelve a intentarlo más adelante.";
+      result.style.color = "red";
+    }
+  });
+</script>
+
+
   <script>
     let favoritos = JSON.parse(localStorage.getItem('favoritos_detalles') || '[]');
     favoritos.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
@@ -196,7 +343,7 @@
         const episodio = item.progreso || '';
         const fecha = item.timestamp ? new Date(item.timestamp).toLocaleDateString() : '';
         div.innerHTML = `
-          <a href="${item.archivo}" class="enlace">
+          <<a href="#" class="enlace" onclick="verificarFavorito('${item.archivo}', ${item.adulto === true})">
             <img src="${item.imagen}" alt="${item.titulo}">
             <div class="item-title">${item.titulo}</div>
             <div class="fecha">${episodio ? '📺 ' + episodio : '🕓 ' + fecha}</div>
