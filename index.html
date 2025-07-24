@@ -2736,13 +2736,14 @@ document.querySelectorAll('.card-link').forEach(link => {
       </div>
     </a>
 
-    <a class="card-link" data-href="View Peliculas/Cantar desnuda (2025).html">
-      <div class="xplus">
+    <a class="card-link" data-href="View Peliculas/Cantar desnuda (2025).html" data-adulto="adulto" onclick="handleAdultLinkClick(event)">
+       <div class="xplus">
         <img alt="" class="xaviec" loading="lazy" src="https://cinepelayo.com/wp-content/uploads/2025/01/cartel-cantar-desnuda.jpg"/>
         <i>Cantar desnuda</i>
         <span class="lock-icon">🔒</span>
       </div>
     </a>
+
 
     <a class="card-link" data-href="View Peliculas/Freestyle (2023).html">
       <div class="xplus">
@@ -2762,6 +2763,201 @@ document.querySelectorAll('.card-link').forEach(link => {
 
   </div>
 </div>
+
+<!--VERIFICACION DE EDAD-->
+
+<div id="ageModal" class="age-modal hidden">
+  <div class="age-modal-content">
+    <span class="close-button" onclick="closeModal()">×</span>
+    <h2>¿Eres mayor de edad?</h2>
+
+    <label for="birthyear">Año de nacimiento:</label>
+    <input type="number" id="birthyear" placeholder="Ej: 2005" min="1900" max="2025" />
+
+    <label for="age">Edad actual:</label>
+    <input type="number" id="age" placeholder="Ej: 18" min="1" max="120" />
+
+    <button id="confirmAgeBtn">Validar edad</button>
+    <p id="result-message"></p>
+  </div>
+</div>
+
+<!--ESTILO DE LA VERIFICACION DE EDAD-->
+<style>
+  .age-modal {  
+    position: fixed;
+    z-index: 9999;  
+    left: 0; top: 0;  
+    width: 100%; height: 100%;  
+    background: rgba(0, 0, 0, 0.4);  
+    -webkit-backdrop-filter: blur(6px);  
+    backdrop-filter: blur(6px);  
+    display: flex;  
+    justify-content: center; 
+    align-items: center;
+  }
+
+  .age-modal-content {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 20px; 
+    border-radius: 10px; 
+    text-align: center;
+    width: 300px;
+    position: relative; 
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .age-modal-content h2,
+  .age-modal-content label,
+  .age-modal-content p {
+    color: #000000;
+  }
+
+  /* Inputs en modo claro */
+  .age-modal-content input {
+    width: 90%;  
+    margin: 10px auto;  
+    padding: 8px;  
+    display: block; 
+    background-color: #ffffff; 
+    color: #000000; 
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+  }
+
+
+  /* Modo oscuro */
+  body.dark .age-modal-content,
+  .dark .age-modal-content { 
+    background-color: #1e1e1e; 
+    color: #f5f5f5;
+  }
+
+body.dark .age-modal-content h2,
+.dark .age-modal-content h2,
+body.dark .age-modal-content label,
+.dark .age-modal-content label,
+body.dark .age-modal-content p,
+.dark .age-modal-content p {
+  color: #f5f5f5;
+}
+
+/* Inputs en modo oscuro */
+body.dark .age-modal-content input,
+.dark .age-modal-content input {
+  background-color: #2b2b2b;
+  color: #ffffff;
+  border: 1px solid #555;
+}
+
+.age-modal-content button {
+  background: #0b57cf;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.age-modal-content button:hover {
+  background: #063ea3;
+}
+
+.close-button {
+  position: absolute;
+  right: 12px;
+  top: 8px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+/*COLOR DE NUMEROS DE EJEMPLO*/
+/* Placeholder para modo claro */
+.age-modal-content input::placeholder {
+  color: #777;
+}
+
+/* Placeholder para modo oscuro */
+body.dark .age-modal-content input::placeholder,
+.dark .age-modal-content input::placeholder {
+  color: #ccc;
+}
+
+</style>
+
+
+<script>
+let pendingRedirect = null;
+
+function handleAdultLinkClick(event) {
+  const link = event.currentTarget;
+  const href = link.getAttribute('data-href');
+  const isAdult = link.getAttribute('data-adulto') === 'adulto';
+
+  if (isAdult) {
+    event.preventDefault();
+    pendingRedirect = href;
+    openModal();
+  }
+}
+
+function openModal() {
+  document.getElementById("ageModal").classList.remove("hidden");
+  document.getElementById("result-message").innerText = "";
+  document.getElementById("birthyear").value = "";
+  document.getElementById("age").value = "";
+}
+
+function closeModal() {
+  document.getElementById("ageModal").classList.add("hidden");
+  pendingRedirect = null;
+}
+
+document.getElementById("confirmAgeBtn").addEventListener("click", function () {
+  const birthYear = parseInt(document.getElementById("birthyear").value);
+  const enteredAge = parseInt(document.getElementById("age").value);
+  const currentYear = new Date().getFullYear();
+  const calculatedAge = currentYear - birthYear;
+  const result = document.getElementById("result-message");
+
+  if (
+    isNaN(birthYear) || isNaN(enteredAge) ||
+    birthYear > currentYear || birthYear < 1900 ||
+    enteredAge < 0 || enteredAge > 120
+  ) {
+    result.innerText = "Por favor completa los campos con valores válidos.";
+    result.style.color = "red";
+    return;
+  }
+
+  if (enteredAge !== calculatedAge) {
+    result.innerText = "La edad no coincide con el año de nacimiento.";
+    result.style.color = "red";
+    return;
+  }
+
+  if (enteredAge >= 18) {
+    result.innerText = "Acceso permitido. Redirigiendo...";
+    result.style.color = "green";
+    setTimeout(() => {
+      if (pendingRedirect) {
+        window.location.href = pendingRedirect;
+      }
+    }, 1500);
+  } else {
+    result.innerText = "No eres mayor de edad, vuelve a intentarlo más adelante.";
+    result.style.color = "red";
+  }
+});
+</script>
+
+
+<!--FIN DE LA VALIDACION DE EDAD.-->
 
 
 <br/>
