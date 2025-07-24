@@ -257,9 +257,9 @@
         <img loading="lazy" src="https://image.tmdb.org/t/p/w300/x2pegSby27ebOwW361GJb1aKcxa.jpg" alt="">
         <p>Banger</p>
       </a>
-      <a href="Karol G Mañana fue muy bonito (2025).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/5aXoQYwaQ7JJVUWclHAEXJgiS2M.jpg" alt="">
-        <p>Karol G: Mañana fue muy bonito</p>
+      <a class="serie" data-href="Vivir en Sevilla (1978).html" data-adulto="adulto">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/bGrSAgLWcqg752fPAJkTTtcNKYW.jpg" alt="">
+        <p>Vivir en Sevilla</p>
       </a>
       <a href="Freestyle (2023).html" class="serie">
         <img loading="lazy" src="https://image.tmdb.org/t/p/w300/8jwbiJB8Am1N9OsqaJs9vrGerlG.jpg" alt="">
@@ -274,15 +274,16 @@
         <p>Tu coño</p>
       </a>
     </div>
-    <script>
-  // Detecta si se presiona "atrás" (popstate) y redirige al index
+    <!-- Tu contenido -->
+<script>
   window.addEventListener('popstate', function () {
     window.location.href = "../index.html";
   });
-
-  // Forzar una entrada falsa en el historial para capturar el "atrás"
   history.pushState(null, '', location.href);
 </script>
+</body>
+</html>
+
 
   </div>
 
@@ -296,7 +297,7 @@
       <label for="birthyear">Año de nacimiento:</label>
       <input type="number" id="birthyear" placeholder="Año" min="1900" max="2025" />
     
-      <label for="age">Edad actual:</label>
+      <label for="age">Edad</label>
       <input type="number" id="age" placeholder="Edad" min="1" max="120" />
     
       <button id="confirmAgeBtn">Validar edad</button>
