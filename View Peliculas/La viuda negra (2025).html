@@ -235,7 +235,7 @@
   border-radius: 20px;
   font-size: 0.8rem;
   font-style: normal;
-  max-width: 170px;          /* Limita el ancho máximo */
+  max-width: 165px;          /* Limita el ancho máximo */
   white-space: nowrap;       /* No saltar de línea */
   overflow: hidden;          /* Oculta el exceso */
   text-overflow: ellipsis;   /* Agrega los ... */
@@ -245,59 +245,13 @@
 
   </style>
   <div class="sinopsis">
-  <h4>Sinopsis:</h4>
-  <p id="sinopsis-texto" class="colapsado">
-    Cuando un hombre aparece muerto, la investigación del caso desbarata la imagen perfecta de su esposa y pone al descubierto su doble vida en este thriller basado en hechos reales.
-  </p>
-  <button id="toggle-sinopsis" class="btn-sinopsis">Ver más</button>
-</div>
-<style>
-  .sinopsis p.colapsado {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-height: 2.9em; /* para 2 líneas */
-}
-.btn-sinopsis {
-  background: none;
-  border: none;
-  color: rgb(255, 55, 0);
-  font-style: normal;
-  font-size: 0.9rem;
-  cursor: pointer;
-  padding: 5px;
-}
-
-</style>
-<script>
-  const sinopsisTexto = document.getElementById('sinopsis-texto');
-  const btnToggle = document.getElementById('toggle-sinopsis');
-
-  function evaluarSinopsis() {
-    // Guardar altura inicial
-    const originalMaxHeight = getComputedStyle(sinopsisTexto).maxHeight;
-    sinopsisTexto.classList.remove('colapsado');
-
-    // Comparar altura visible vs scrollable (real)
-    const contenidoAlto = sinopsisTexto.scrollHeight;
-    sinopsisTexto.classList.add('colapsado');
-
-    const colapsadoAlto = sinopsisTexto.scrollHeight;
-
-    if (contenidoAlto <= colapsadoAlto + 1) {
-      btnToggle.style.display = 'none';
-    }
-  }
-
-  btnToggle.addEventListener('click', () => {
-    sinopsisTexto.classList.toggle('colapsado');
-    btnToggle.textContent = sinopsisTexto.classList.contains('colapsado') ? 'Ver más' : 'Ver menos';
-  });
-
-  document.addEventListener('DOMContentLoaded', evaluarSinopsis);
-</script>
+    <h4>
+      Sinopsis:
+    </h4>
+    <p>
+      Cuando un hombre aparece muerto, la investigación del caso desbarata la imagen perfecta de su esposa y pone al descubierto su doble vida en este thriller basado en hechos reales.
+    </p>
+  </div>
   <!-- NO BORRAR ES EL BOTON DEL FAVORITOS -->
   <div style="text-align: center; margin-top: 15px;">
     <button id="btn-favorito" style="
@@ -614,7 +568,7 @@
     document.getElementById('btn-favorito').addEventListener('click', () => {
       const nuevaPelicula = {
         titulo: "La viuda negra",
-        imagen: "httuuabL0qp3zygLDEjImbPiWR9j2e.jpgps://image.tmdb.org/t/p/w300/",
+        imagen: "https://image.tmdb.org/t/p/w300/uuabL0qp3zygLDEjImbPiWR9j2e.jpg",
         genero: "Genero",
         archivo: "La viuda negra (2025).html",
         tipo: "pelicula",
