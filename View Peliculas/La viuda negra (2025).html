@@ -247,7 +247,7 @@
   <div class="sinopsis">
   <h4>Sinopsis:</h4>
   <p id="sinopsis-texto" class="colapsado">
-    Dragon Ball narra las aventuras de Son Gokū, un guerrero saiyajin, desde su infancia hasta la edad adulta, mientras protege la Tierra de diversas amenazas. La serie se centra en sus peleas contra enemigos cada vez más poderosos, la búsqueda de las Esferas del Dragón que conceden deseos, y el desarrollo de sus habilidades de combate. 
+    Dragon Ball narra las aventuras de Son Gokū, un guerrero saiyajin.
   </p>
   <button id="toggle-sinopsis" class="btn-sinopsis">Ver más</button>
 </div>
@@ -258,7 +258,7 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-height: 3.9em; /* para 2 líneas */
+  max-height: 2.9em; /* para 2 líneas */
 }
 .btn-sinopsis {
   background: none;
@@ -275,10 +275,28 @@
   const sinopsisTexto = document.getElementById('sinopsis-texto');
   const btnToggle = document.getElementById('toggle-sinopsis');
 
+  function evaluarSinopsis() {
+    // Guardar altura inicial
+    const originalMaxHeight = getComputedStyle(sinopsisTexto).maxHeight;
+    sinopsisTexto.classList.remove('colapsado');
+
+    // Comparar altura visible vs scrollable (real)
+    const contenidoAlto = sinopsisTexto.scrollHeight;
+    sinopsisTexto.classList.add('colapsado');
+
+    const colapsadoAlto = sinopsisTexto.scrollHeight;
+
+    if (contenidoAlto <= colapsadoAlto + 1) {
+      btnToggle.style.display = 'none';
+    }
+  }
+
   btnToggle.addEventListener('click', () => {
     sinopsisTexto.classList.toggle('colapsado');
     btnToggle.textContent = sinopsisTexto.classList.contains('colapsado') ? 'Ver más' : 'Ver menos';
   });
+
+  document.addEventListener('DOMContentLoaded', evaluarSinopsis);
 </script>
   <!-- NO BORRAR ES EL BOTON DEL FAVORITOS -->
   <div style="text-align: center; margin-top: 15px;">
