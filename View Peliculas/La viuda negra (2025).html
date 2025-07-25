@@ -227,28 +227,19 @@
   flex-wrap: wrap;
 }
 
-
-
 .genero-badge {
   padding: 4px 10px;
-  background: transparent;
-  color: #00ffff;
-  border: 1px solid #00ffff;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #0bf;
+  border: 1px solid #0bf;
   border-radius: 20px;
   font-size: 0.8rem;
   font-style: normal;
-  max-width: 160px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-shadow:
-    0 0 5px #00ffff,
-    0 0 10px #00ffff,
-    0 0 15px #00ffff,
-    0 0 20px #00ffff;
-  box-shadow: 0 0 5px #00ffff44, 0 0 15px #00ffff22 inset;
+  max-width: 160px;          /* Limita el ancho máximo */
+  white-space: nowrap;       /* No saltar de línea */
+  overflow: hidden;          /* Oculta el exceso */
+  text-overflow: ellipsis;   /* Agrega los ... */
 }
-
 
 
   </style>
@@ -282,36 +273,30 @@
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
-      <a href="#" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
-        <p>Nombre de pelicula</p>
+      <a href="Asesino serial (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/gs9GQ9n95BdVE8Uv1ZKNS1bSwCf.jpg" alt="">
+        <p>Asesino serial</p>
       </a>
-      <a href="#" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
-        <p>Nombre de pelicula</p>
+      <a href="Mala influencia (2025).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/oogmlZekRCHP0JDhHKDZIyDIfpP.jpg" alt="">
+        <p>Mala influencia</p>
       </a>
-      <a href="#" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
-        <p>Nombre de pelicula</p>
+      <a href="¡A Ganar! (2018).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/6GVYL9K2IBFrfIqwwFqMPu5DdC5.jpg" alt="">
+        <p>¡A ganar!</p>
       </a>
-      <a href="#" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
-        <p>Nombre de pelicula</p>
+      <a href="Todo bien (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/mKdRfCpWkcH0wEEg6yO4a8ES4TX.jpg" alt="">
+        <p>¿Todo bien?</p>
       </a>
-      <a href="#" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
-        <p>Nombre de pelicula</p>
+      <a href="Desafiante Rivales (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/Aiqfn4XtXUPr7QNsDsAKNQ1aOKV.jpg" alt="">
+        <p>Desafiante Rivales</p>
       </a>
-      <a href="#" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt=""> <!--EN CASO DE NO SER PARA ADULTOS UTILICE ESTAS 6 ESTRUCTURAS DEL CODIGO, LA DE ABAJO ES PARA ADULTOS. SI NO CONTIENES PELICULAS DE ADULTOS UTILIZA LAS 6 QUE DEJARE MARCADA CON NUMEROS DEL (1 AL 6) EN CASO DE TENER PELICULA DE ADULTOS UTILIZA EL DE ABAJO-->
-        <p>Nombre de pelicula</p>
+      <a href="Anora (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/tZCrWnyN4zEtJiFem5TFoYT8nxI.jpg" alt=""> <!--EN CASO DE NO SER PARA ADULTOS UTILICE ESTAS 6 ESTRUCTURAS DEL CODIGO, LA DE ABAJO ES PARA ADULTOS. SI NO CONTIENES PELICULAS DE ADULTOS UTILIZA LAS 6 QUE DEJARE MARCADA CON NUMEROS DEL (1 AL 6) EN CASO DE TENER PELICULA DE ADULTOS UTILIZA EL DE ABAJO-->
+        <p>Anora</p>
       </a>
-      <a href="Asesino serial (2024).html" class="serie"><img src="https://image.tmdb.org/t/p/original/gs9GQ9n95BdVE8Uv1ZKNS1bSwCf.jpg" alt="Serie 1"><p>Asesino serial</p></a>
-        <a href="Mala influencia (2025).html" class="serie"><img src="https://image.tmdb.org/t/p/original/oogmlZekRCHP0JDhHKDZIyDIfpP.jpg" alt="Serie 2"><p>Mala influencia</p></a>
-        <a href="¡A Ganar! (2018).html" class="serie"><img src="https://image.tmdb.org/t/p/original/6GVYL9K2IBFrfIqwwFqMPu5DdC5.jpg" alt="Serie 3"><p>¡A ganar!</p></a>
-        <a href="Todo bien (2024).html" class="serie"><img src="https://image.tmdb.org/t/p/original/mKdRfCpWkcH0wEEg6yO4a8ES4TX.jpg" alt="Serie 4"><p>¿Todo bien?</p></a>
-        <a href="Desafiante Rivales (2024).html" class="serie"><img src="https://image.tmdb.org/t/p/original/Aiqfn4XtXUPr7QNsDsAKNQ1aOKV.jpg" alt="Serie 5"><p>Desafiante Rivales</p></a>
-        <a href="Anora (2024).html" class="serie"><img src="https://image.tmdb.org/t/p/original/tZCrWnyN4zEtJiFem5TFoYT8nxI.jpg" alt="Serie 6"><p>Anora</p></a>
     </div>
   </div>
 
