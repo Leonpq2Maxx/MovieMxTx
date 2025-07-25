@@ -296,7 +296,11 @@
     btnToggle.textContent = sinopsisTexto.classList.contains('colapsado') ? 'Ver más' : 'Ver menos';
   });
 
-  document.addEventListener('DOMContentLoaded', evaluarSinopsis);
+  document.addEventListener('DOMContentLoaded', () => {
+  requestAnimationFrame(() => {
+    evaluarSinopsis();
+  });
+});
 </script>
   <!-- NO BORRAR ES EL BOTON DEL FAVORITOS -->
   <div style="text-align: center; margin-top: 15px;">
