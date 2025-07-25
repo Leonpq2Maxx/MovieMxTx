@@ -997,7 +997,7 @@ document.querySelectorAll('.card-link').forEach(link => {
 </div>
 </a>
 </div>
-<br><br/>
+<br/><br>
 <div class="poster">
 <h4 class="alignleft">Recien subidas</h4></div>
 <br/>
@@ -2979,20 +2979,6 @@ document.querySelectorAll('.card-link').forEach(link => {
 </div>
 </a>
 </div>
-<div class="adulto-section" style="display: none;">
-  <h2>Películas para Adultos</h2>
-  <div class="movie-grid">
-    <div class="movie-card">
-      <img src="https://ei.phncdn.com/(m=bLWsSeKlbyaT)(mh=X14ord3nZca6tuTw)c93e22a2-a3d3-4767-a5e4-4cd1c68b92f2.jpg" alt="Película adulta 1">
-      <h3>Keila Bassi</h3>
-    </div>
-    <div class="movie-card">
-      <img src="ruta/de/imagen2.jpg" alt="Película adulta 2">
-      <h3>Título Adulto 2</h3>
-    </div>
-    <!-- Podés seguir agregando más tarjetas -->
-  </div>
-</div>
 <br/><br/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
@@ -3004,7 +2990,7 @@ document.querySelectorAll('.card-link').forEach(link => {
 <a href="Buscar/Buscador.html"><i class="fas fa-search"></i><span>Buscar</span></a>
 <a href="Menus Peliculas Series/Compartir.html"><i class="fas fa-share-alt"></i><span>Compartir</span></a>
 <a href="View Peliculas/historial_usuario.html"><i class="fas fa-history"></i><span>Adulto</span></a>
-<a href="View Peliculas/historial_usuario.html"><i class="fas fa-history"></i><span>Historial</span></a>
+<a href="View Peliculas/historial_usuario.html"><i class="fas fa-history"></i><span>Adulto</span></a>
 <a class="menu-item" href="#" id="menu-adulto" style="display:none;">Adulto</a></nav>
 <style>
 @media (max-width: 768px) {
@@ -3254,19 +3240,22 @@ document.addEventListener("DOMContentLoaded", () => {
 </div>
 </div>
 </div>
-
-
 <div class="adulto-section" style="display: none;">
 <h2>Contenido exclusivo para adultos</h2>
 <p>Este contenido solo está disponible tras verificar tu edad.</p>
 </div>
 
-<script>
-let edadVerificada = false;
 
+<script>
 document.addEventListener("DOMContentLoaded", function () {
   const icono = document.querySelector('.fas.fa-history');
   const botonAdulto = icono ? icono.closest('a') : null;
+
+  const edadVerificada = localStorage.getItem("edadVerificada") === "true";
+
+  if (edadVerificada) {
+    mostrarMenuAdulto();
+  }
 
   if (botonAdulto) {
     botonAdulto.addEventListener('click', function (e) {
@@ -3281,14 +3270,14 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-function cerrarModal(id) {
-  document.getElementById(id).style.display = 'none';
-}
-
 function limpiarInputsEdad() {
   document.getElementById('birth-year').value = '';
   document.getElementById('input-age').value = '';
   document.getElementById('edad-error').style.display = 'none';
+}
+
+function cerrarModal(id) {
+  document.getElementById(id).style.display = 'none';
 }
 
 function validarEdad() {
@@ -3298,51 +3287,45 @@ function validarEdad() {
   const actualAge = currentYear - birthYear;
 
   if (actualAge === inputAge && inputAge >= 18) {
-    edadVerificada = true;
+    localStorage.setItem("edadVerificada", "true");
     cerrarModal('modal-verificacion');
-
-    const topMenu = document.querySelector('.top-scroll-menu');
-    if (topMenu) {
-      if (!document.getElementById('menu-adulto')) {
-        const item1 = document.createElement('a');
-        item1.className = 'menu-item';
-        item1.href = '#';
-        item1.textContent = 'Adulto';
-        item1.id = 'menu-adulto';
-        topMenu.appendChild(item1);
-      }
-
-      if (!document.getElementById('menu-populares-adulto')) {
-        const item2 = document.createElement('a');
-        item2.className = 'menu-item';
-        item2.href = '#';
-        item2.textContent = 'Populares Adulto';
-        item2.id = 'menu-populares-adulto';
-        item2.addEventListener('click', function(e) {
-          e.preventDefault();
-          const adultoSection = document.querySelector('.adulto-section');
-          if (adultoSection) {
-            adultoSection.style.display = 'block';
-            adultoSection.scrollIntoView({ behavior: 'smooth' });
-          }
-        });
-        topMenu.appendChild(item2);
-      }
-    }
+    mostrarMenuAdulto();
   } else {
     document.getElementById('edad-error').style.display = 'block';
   }
 }
 
+function mostrarMenuAdulto() {
+  const topMenu = document.querySelector('.top-scroll-menu');
+
+  if (topMenu && !document.getElementById('menu-adulto')) {
+    const item1 = document.createElement('a');
+    item1.className = 'menu-item';
+    item1.href = '#';
+    item1.textContent = 'Adulto';
+    item1.id = 'menu-adulto';
+    topMenu.appendChild(item1);
+  }
+
+  if (topMenu && !document.getElementById('menu-populares-adulto')) {
+    const item2 = document.createElement('a');
+    item2.className = 'menu-item';
+    item2.href = 'populares_adulto.html';
+    item2.textContent = 'Populares Adulto';
+    item2.id = 'menu-populares-adulto';
+    topMenu.appendChild(item2);
+  }
+}
+
 function cerrarContenidoAdulto() {
-  edadVerificada = false;
+  localStorage.removeItem("edadVerificada");
   cerrarModal('modal-cierre');
+
   const menuItem = document.getElementById('menu-adulto');
   if (menuItem) menuItem.remove();
+
   const populares = document.getElementById('menu-populares-adulto');
   if (populares) populares.remove();
-  const adultoSection = document.querySelector('.adulto-section');
-  if (adultoSection) adultoSection.style.display = 'none';
 }
 </script>
 </body>
