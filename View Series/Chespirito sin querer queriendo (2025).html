@@ -251,8 +251,21 @@
           <option value="1" selected>Temporada 1</option>
         </select>
       </div>
-      <div id="episodio-count" style="color: #bbb; font-size: 0.95rem;">10 Capítulos</div>
+      <div id="episodio-count" style="color: #bbb; font-size: 0.95rem;">Agregado 0 capítulos</div>
+
     </div>
+    <script>
+  function actualizarContadorEpisodios() {
+    const episodios = document.querySelectorAll('.episodio');
+    const contador = document.getElementById('episodio-count');
+
+    const total = episodios.length;
+    contador.textContent = `Agregado ${total} capítulo${total !== 1 ? 's' : ''}`;
+  }
+
+  // Ejecutar al cargar
+  document.addEventListener('DOMContentLoaded', actualizarContadorEpisodios);
+</script>
 
     <!-- Botones de episodios -->
      <div id="episodios" style="
