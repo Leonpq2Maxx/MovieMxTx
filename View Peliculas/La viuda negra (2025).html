@@ -214,7 +214,7 @@
   
   <div class="titulo-flex">
     <h3>La viuda negra</h3>
-    <div class="genero-badge">Suspenso/Misterio/Animacion</div>
+    <div class="genero-badge">Crimen/Suspenso/Misterio</div>
   </div>
 
   <style>
@@ -245,14 +245,41 @@
 
   </style>
   <div class="sinopsis">
-    <h4>
-      Sinopsis:
-    </h4>
-    <p>
-      Cuando un hombre aparece muerto, la investigación del caso desbarata la imagen perfecta de su esposa y pone al descubierto su doble vida en este thriller basado en hechos reales.
-    </p>
-  </div>
+  <h4>Sinopsis:</h4>
+  <p id="sinopsis-texto" class="colapsado">
+    Dragon Ball narra las aventuras de Son Gokū, un guerrero saiyajin, desde su infancia hasta la edad adulta, mientras protege la Tierra de diversas amenazas. La serie se centra en sus peleas contra enemigos cada vez más poderosos, la búsqueda de las Esferas del Dragón que conceden deseos, y el desarrollo de sus habilidades de combate. 
+  </p>
+  <button id="toggle-sinopsis" class="btn-sinopsis">Ver más</button>
+</div>
+<style>
+  .sinopsis p.colapsado {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 3.9em; /* para 2 líneas */
+}
+.btn-sinopsis {
+  background: none;
+  border: none;
+  color: rgb(255, 55, 0);
+  font-style: normal;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 5px;
+}
 
+</style>
+<script>
+  const sinopsisTexto = document.getElementById('sinopsis-texto');
+  const btnToggle = document.getElementById('toggle-sinopsis');
+
+  btnToggle.addEventListener('click', () => {
+    sinopsisTexto.classList.toggle('colapsado');
+    btnToggle.textContent = sinopsisTexto.classList.contains('colapsado') ? 'Ver más' : 'Ver menos';
+  });
+</script>
   <!-- NO BORRAR ES EL BOTON DEL FAVORITOS -->
   <div style="text-align: center; margin-top: 15px;">
     <button id="btn-favorito" style="
@@ -569,9 +596,9 @@
     document.getElementById('btn-favorito').addEventListener('click', () => {
       const nuevaPelicula = {
         titulo: "La viuda negra",
-        imagen: "https://image.tmdb.org/t/p/w300/",
+        imagen: "httuuabL0qp3zygLDEjImbPiWR9j2e.jpgps://image.tmdb.org/t/p/w300/",
         genero: "Genero",
-        archivo: ".html",
+        archivo: "La viuda negra (2025).html",
         tipo: "pelicula",
         timestamp: Date.now()
       };
@@ -631,8 +658,8 @@
 
       /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
       const historialTitulo = "La viuda negra";
-      const historialImagen = "https://image.tmdb.org/t/p/w300/";
-      const historialArchivo = ".html";
+      const historialImagen = "https://image.tmdb.org/t/p/w300/uuabL0qp3zygLDEjImbPiWR9j2e.jpg";
+      const historialArchivo = "La viuda negra (2025).html";
 
       let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
       let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
