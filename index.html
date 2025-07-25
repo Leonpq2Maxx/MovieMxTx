@@ -903,7 +903,7 @@ document.querySelectorAll('.card-link').forEach(link => {
 <br/><br/>
 <div class="poster">
 <h4 class="alignleft">Series 2025</h4><a href="Mostras Mas/Series Agregadas.html"><h4 class="alignright">Ver Todo</h4></a></div>
-<br>
+<br/>
 <div class="scrollmenu">
 <a class="card-link" data-href="View Series/Chespirito sin querer queriendo (2025).html">
 <div class="xplus">
@@ -997,7 +997,7 @@ document.querySelectorAll('.card-link').forEach(link => {
 </div>
 </a>
 </div>
-<br/><br/>
+<br><br/>
 <div class="poster">
 <h4 class="alignleft">Recien subidas</h4></div>
 <br/>
@@ -3242,6 +3242,11 @@ document.addEventListener("DOMContentLoaded", () => {
 </div>
 
 
+<div class="adulto-section" style="display: none;">
+<h2>Contenido exclusivo para adultos</h2>
+<p>Este contenido solo está disponible tras verificar tu edad.</p>
+</div>
+
 <script>
 let edadVerificada = false;
 
@@ -3253,6 +3258,7 @@ document.addEventListener("DOMContentLoaded", function () {
     botonAdulto.addEventListener('click', function (e) {
       e.preventDefault();
       if (!edadVerificada) {
+        limpiarInputsEdad();
         document.getElementById('modal-verificacion').style.display = 'flex';
       } else {
         document.getElementById('modal-cierre').style.display = 'flex';
@@ -3265,6 +3271,12 @@ function cerrarModal(id) {
   document.getElementById(id).style.display = 'none';
 }
 
+function limpiarInputsEdad() {
+  document.getElementById('birth-year').value = '';
+  document.getElementById('input-age').value = '';
+  document.getElementById('edad-error').style.display = 'none';
+}
+
 function validarEdad() {
   const birthYear = parseInt(document.getElementById('birth-year').value);
   const inputAge = parseInt(document.getElementById('input-age').value);
@@ -3273,11 +3285,9 @@ function validarEdad() {
 
   if (actualAge === inputAge && inputAge >= 18) {
     edadVerificada = true;
-    document.getElementById('edad-error').style.display = 'none';
     cerrarModal('modal-verificacion');
 
     const topMenu = document.querySelector('.top-scroll-menu');
-
     if (topMenu) {
       if (!document.getElementById('menu-adulto')) {
         const item1 = document.createElement('a');
