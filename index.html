@@ -1000,7 +1000,7 @@ document.querySelectorAll('.card-link').forEach(link => {
 <br/><br/>
 <div class="poster">
 <h4 class="alignleft">Recien subidas</h4></div>
-<br/>
+<br>
 <div class="scrollmenu">
 <a class="card-link" data-href="View Peliculas/Como entrenar a tu dragon (2025)">
 <div class="xplus">
@@ -1136,7 +1136,7 @@ document.querySelectorAll('.card-link').forEach(link => {
 </div>
 </a>
 </div>
-<br><br/>
+<br/><br/>
 <div class="poster">
 <h4 class="alignleft">Peliculas <br/>Agregadas</h4><a href="Mostras Mas/Peliculas Agregadas.html"><h4 class="alignright">Ver Todo</h4></a></div>
 <br/>
@@ -3246,29 +3246,14 @@ document.addEventListener("DOMContentLoaded", () => {
 </div>
 
 
-<div class="modal" id="modal-recuperacion" style="display:none;">
-<div class="modal-content">
-<span class="close" onclick="cerrarModal('modal-recuperacion')">×</span>
-<h2>Recuperar contraseña</h2>
-<label>Año de nacimiento</label>
-<input id="recovery-year" placeholder="Ej: 2000" required="" type="number"/>
-<label>Edad</label>
-<input id="recovery-age" placeholder="Ej: 25" required="" type="number"/>
-<label>Nueva contraseña</label>
-<input id="new-password" placeholder="Nueva contraseña" required="" type="password"/>
-<label>Confirmar nueva contraseña</label>
-<input id="confirm-new-password" placeholder="Confirmar nueva contraseña" required="" type="password"/>
-<p id="recovery-error" style="display:none; color:red;">Datos inválidos o no coinciden.</p>
-<button onclick="recuperarContrasena()">Restablecer contraseña</button>
-</div>
-</div>
-
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   const icono = document.querySelector('.fas.fa-history');
   const botonAdulto = icono ? icono.closest('a') : null;
 
-  if (localStorage.getItem("edadVerificada") === "true") {
+  const edadVerificada = localStorage.getItem("edadVerificada") === "true";
+
+  if (edadVerificada) {
     mostrarMenuAdulto();
   }
 
@@ -3288,10 +3273,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function limpiarInputsEdad() {
   document.getElementById('birth-year').value = '';
   document.getElementById('input-age').value = '';
-  document.getElementById('input-password').value = '';
-  document.getElementById('confirm-password').value = '';
   document.getElementById('edad-error').style.display = 'none';
-  document.getElementById('password-error').style.display = 'none';
 }
 
 function cerrarModal(id) {
@@ -3301,24 +3283,15 @@ function cerrarModal(id) {
 function validarEdad() {
   const birthYear = parseInt(document.getElementById('birth-year').value);
   const inputAge = parseInt(document.getElementById('input-age').value);
-  const password = document.getElementById('input-password').value;
-  const confirmPassword = document.getElementById('confirm-password').value;
   const currentYear = new Date().getFullYear();
   const actualAge = currentYear - birthYear;
 
-  const edadValida = actualAge === inputAge && inputAge >= 18;
-  const passValida = password.length >= 4 && password === confirmPassword;
-
-  if (edadValida && passValida) {
+  if (actualAge === inputAge && inputAge >= 18) {
     localStorage.setItem("edadVerificada", "true");
-    localStorage.setItem("birthYear", birthYear);
-    localStorage.setItem("inputAge", inputAge);
-    localStorage.setItem("password", password);
     cerrarModal('modal-verificacion');
     mostrarMenuAdulto();
   } else {
-    if (!edadValida) document.getElementById('edad-error').style.display = 'block';
-    if (!passValida) document.getElementById('password-error').style.display = 'block';
+    document.getElementById('edad-error').style.display = 'block';
   }
 }
 
@@ -3344,36 +3317,8 @@ function mostrarMenuAdulto() {
   }
 }
 
-function mostrarRecuperacion() {
-  cerrarModal('modal-verificacion');
-  document.getElementById('modal-recuperacion').style.display = 'flex';
-}
-
-function recuperarContrasena() {
-  const ry = parseInt(document.getElementById('recovery-year').value);
-  const ra = parseInt(document.getElementById('recovery-age').value);
-  const newPass = document.getElementById('new-password').value;
-  const confirmNew = document.getElementById('confirm-new-password').value;
-
-  const storedY = parseInt(localStorage.getItem("birthYear"));
-  const storedA = parseInt(localStorage.getItem("inputAge"));
-
-  const valid = ry === storedY && ra === storedA && newPass.length >= 4 && newPass === confirmNew;
-
-  if (valid) {
-    localStorage.setItem("password", newPass);
-    cerrarModal("modal-recuperacion");
-    alert("Contraseña actualizada.");
-  } else {
-    document.getElementById("recovery-error").style.display = "block";
-  }
-}
-
 function cerrarContenidoAdulto() {
   localStorage.removeItem("edadVerificada");
-  localStorage.removeItem("birthYear");
-  localStorage.removeItem("inputAge");
-  localStorage.removeItem("password");
   cerrarModal('modal-cierre');
 
   const menuItem = document.getElementById('menu-adulto');
