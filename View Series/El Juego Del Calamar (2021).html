@@ -635,6 +635,18 @@
           padding-bottom: 20px;
         }
       }
+      @media (pointer: coarse) {
+        #episodios {
+          scroll-padding: 10px;
+          -webkit-overflow-scrolling: touch;
+          overscroll-behavior-x: contain;
+          touch-action: pan-x;
+          scroll-behavior: smooth;
+        }
+        #episodios button {
+          scroll-snap-align: start;
+        }
+      }
     </style>
     
     <!-- Historial -->
@@ -893,7 +905,7 @@
         if (e.deltaY !== 0) {
           e.preventDefault();
           episodiosContainer.scrollBy({
-            left: e.deltaY * 2, // Aumenta la sensibilidad horizontal
+            left: e.deltaY * 3, // Aumenta la sensibilidad horizontal
             behavior: "smooth"
           });
         }

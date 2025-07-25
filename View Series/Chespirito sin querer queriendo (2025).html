@@ -251,21 +251,8 @@
           <option value="1" selected>Temporada 1</option>
         </select>
       </div>
-      <div id="episodio-count" style="color: #bbb; font-size: 0.95rem;">Agregado 0 capítulos</div>
-
+      <div id="episodio-count" style="color: #bbb; font-size: 0.95rem;">10 Capítulos</div>
     </div>
-    <script>
-  function actualizarContadorEpisodios() {
-    const episodios = document.querySelectorAll('.episodio');
-    const contador = document.getElementById('episodio-count');
-
-    const total = episodios.length;
-    contador.textContent = `Agregado ${total} capítulo${total !== 1 ? 's' : ''}`;
-  }
-
-  // Ejecutar al cargar
-  document.addEventListener('DOMContentLoaded', actualizarContadorEpisodios);
-</script>
 
     <!-- Botones de episodios -->
      <div id="episodios" style="
@@ -288,7 +275,8 @@
           { titulo: "Episodio 4 - Es que no me tienen paciencia", src: "https://dl.dropbox.com/scl/fi/kx7zbroyx4mso2je46syv/Chespirito-sin-querer-queriendo-T1-C4.mp4?rlkey=q3rfpfx6kes5co31bv4ur8q37&st=" },
           { titulo: "Episodio 5 - El que ríe al último", src: "https://dl.dropbox.com/scl/fi/gc9b1435w1c1d72erjzzq/Chespirito-sin-querer-queriendo-T1-C5.mp4?rlkey=7gq2fl14jepxorqv7umw64kmo&st=" },
           { titulo: "Episodio 6", src: "https://dl.dropbox.com/scl/fi/v8xkbejc01pf2gn193z85/Chespirito-sin-querer-queriendo-T1-C6.mp4?rlkey=e0pu51p3yy1qs09g0lo2abyik&st=" },
-          { titulo: "Episodio 7", src: "" }
+          { titulo: "Episodio 7", src: "" },
+          { titulo: "Episodio 8", src: "" }
           // Agrega más si tienes
         ],
       };
@@ -565,7 +553,7 @@
       }
     </style>
     <br>
-  
+    
     <div class="sinopsis">
       <h4>
         Sinopsis: <!--Aca va la sinopsis en el <p>Sinopsis</<p> que esta debajo-->
