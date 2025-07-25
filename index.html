@@ -434,7 +434,9 @@ i {
 }
 </style>
 </head>
-<body class="oneGrd MN-2 mobS hdMn bD onIndx onHm" id="mainCont">
+<body class="oneGrd MN-2 mobS hdMn bD onIndx onHm" id="mainCont"><div class="sidebar">
+<a href="#" id="btn-adulto"><i class="fas fa-history"></i><span> Adulto</span></a>
+</div>
 <script>/*<![CDATA[*/ (localStorage.getItem('mode')) === 'darkmode' ? document.querySelector('#mainCont').classList.add('drK') : document.querySelector('#mainCont').classList.remove('drK') /*]]>*/</script>
 <input class="prfI hidden" id="offPrf" type="checkbox"/>
 <input class="navI hidden" id="offNav" type="checkbox"/>
@@ -1136,9 +1138,9 @@ document.querySelectorAll('.card-link').forEach(link => {
 </div>
 </a>
 </div>
-<br/><br>
+<br/><br/>
 <div class="poster">
-<h4 class="alignleft">Peliculas <br/>Agregadas</h4><a href="Mostras Mas/Peliculas Agregadas.html"><h4 class="alignright">Ver Todo</h4></a></div>
+<h4 class="alignleft">Peliculas <br>Agregadas</br></h4><a href="Mostras Mas/Peliculas Agregadas.html"><h4 class="alignright">Ver Todo</h4></a></div>
 <br/>
 <div class="scrollmenu">
 <a class="card-link" data-href="View Peliculas/Cómo entrenar a tu dragón (2025.html)">
@@ -3181,7 +3183,7 @@ document.querySelector('.carousel').addEventListener('mouseleave', startAutoplay
 window.addEventListener('resize', updateSlider);
 updateSlider();
 startAutoplay();
-</script></br><script>
+</script><script>
 document.querySelectorAll('.card-link').forEach(link => {
   const dataHref = link.getAttribute('data-href');
   if (!dataHref || dataHref.trim() === "") {
