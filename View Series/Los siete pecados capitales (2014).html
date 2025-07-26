@@ -430,10 +430,11 @@
         msg.classList.add("visible");
         setTimeout(() => msg.classList.remove("visible"), 3000);
   
-        localStorage.setItem("ultimo_episodio", JSON.stringify({
-          temporada: temporadaSelect.value,
-          index: index
-        }));
+        localStorage.setItem(storageKey, JSON.stringify({
+  temporada: temporadaSelect.value,
+  index: index
+}));
+
       }
 
       // Guardar tiempo cada 5s
