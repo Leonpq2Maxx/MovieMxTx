@@ -309,7 +309,7 @@
       const mainVideo = document.querySelector('.main-video video');
       const titleDiv = document.querySelector('.main-video .title');
       // 🔁 CAMBIÁ este nombre por uno único para cada archivo HTML
-const nombreSerie = "DragonBallZ"; // por ejemplo: "DragonBallDaima", "TheWalkingDead", etc.
+const nombreSerie = "DragonBallZ1989"; // por ejemplo: "DragonBallDaima", "TheWalkingDead", etc.
 const storageKey = `ultimo_episodio_${nombreSerie}`;
 
       
@@ -408,7 +408,7 @@ const storageKey = `ultimo_episodio_${nombreSerie}`;
 
       setInterval(() => {
         if (!mainVideo.paused && !mainVideo.ended) {
-          localStorage.setItem(`resume_${temporadaSelect.value}_${currentEpisodeIndex}`, mainVideo.currentTime);
+          localStorage.setItem(`resume_${nombreSerie}_${temporadaSelect.value}_${currentEpisodeIndex}`, mainVideo.currentTime);
         }
       }, 5000);
 

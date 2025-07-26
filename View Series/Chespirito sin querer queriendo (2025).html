@@ -415,7 +415,7 @@ const storageKey = `ultimo_episodio_${nombreSerie}`;
 
       setInterval(() => {
         if (!mainVideo.paused && !mainVideo.ended) {
-          localStorage.setItem(`resume_${temporadaSelect.value}_${currentEpisodeIndex}`, mainVideo.currentTime);
+          localStorage.setItem(`resume_${nombreSerie}_${temporadaSelect.value}_${currentEpisodeIndex}`, mainVideo.currentTime);
         }
       }, 5000);
 
