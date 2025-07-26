@@ -212,9 +212,36 @@
       <span>🇲🇽</span>
     </div>
   
-    <div class="titulo">
+    <div class="titulo-flex">
       <h3>The Walking Dead</h3>
+      <div class="genero-badge">genero</div>
     </div>
+
+    <style>
+      .titulo-flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .genero-badge {
+        padding: 4px 10px;
+        background-color: rgba(255, 255, 255, 0.1);
+        color: rgb(246, 255, 0);
+        border: 1px solid rgb(246, 255, 0);
+        border-radius: 20px;
+        font-size: 0.7rem;
+        font-style: normal;
+        max-width: 135px;          /* Limita el ancho máximo */
+        white-space: nowrap;       /* No saltar de línea */
+        overflow: hidden;          /* Oculta el exceso */
+        text-overflow: ellipsis;   /* Agrega los ... */
+      }
+
+    </style>
   
     <!-- Selector de Temporadas y Botones de Episodios -->
      
@@ -252,32 +279,33 @@
     <script>
       const episodiosData = {
         1: [
-          { titulo: "Episodio 1 - Los viejos tiempos", src: "https://pomf2.lain.la/f/suvf9w98.mp4" },
-          { titulo: "Episodio 2 - Agallas", src: "https://pomf2.lain.la/f/4f4e75d7.mp4" },
-          { titulo: "Episodio 3 - Díselo a las ranas", src: "https://pomf2.lain.la/f/v4wlp04p.mp4" },
-          { titulo: "Episodio 4 - Muchachos", src: "https://pomf2.lain.la/f/q3bd5p0o.mp4" },
-          { titulo: "Episodio 5 - Código Wildfire", src: "https://pomf2.lain.la/f/bxxsk325.mp4" },
-          { titulo: "Episodio 6 - TS-19", src: "https://pomf2.lain.la/f/ofq1mlqu.mp4" }
+          { titulo: "Episodio 1 - Nombre del episodio", src: "Link del video" },
+          { titulo: "Episodio 2 - Nombre del episodio", src: "Link del video" },
+          { titulo: "Episodio 3 - Nombre del episodio", src: "Link del video" },
+          { titulo: "Episodio 4 - Nombre del episodio", src: "Link del video" },
+          { titulo: "Episodio 5 - Nombre del episodio", src: "Link del video" },
+          { titulo: "Episodio 6 - Nombre del episodio", src: "Link del video" },
+          { titulo: "Episodio 7 - Nombre del episodio", src: "Link del video" },
+          { titulo: "Episodio 8 - Nombre del episodio", src: "Link del video" },
+          { titulo: "Episodio 9 - Nombre del episodio", src: "Link del video" }
           // Agrega más si tienes
         ],
         2: [
-          { titulo: "Episodio 1 - Lo que nos espera", src: "" },
-          { titulo: "Episodio 2 - Sangría", src: "" },
-          { titulo: "Episodio 3 - Guarda la última", src: "" },
-          { titulo: "Episodio 4 - La rosa cheroqui", src: "" },
-          { titulo: "Episodio 5 - El chupacabras", src: "" },
-          { titulo: "Episodio 6 - Secretos", src: "" },
-          { titulo: "Episodio 7 - Prácticamente muertos", src: "" },
-          { titulo: "Episodio 8 - Nebraska", src: "" },
-          { titulo: "Episodio 9 - Dedo en gatillo", src: "" },
-          { titulo: "Episodio 10 - A 30 kilómetros", src: "" },
-          { titulo: "Episodio 11 - Juez, jurado y verdugo", src: "" },
-          { titulo: "Episodio 12 - Los mejores ángeles", src: "" },
-          { titulo: "Episodio 12 - Junto al fuego que se extingue", src: "" }
+          { titulo: "Episodio 1 - Nombre del episodio", src: "Link del video" },
+          { titulo: "Episodio 2 - Nombre del episodio", src: "Link del video" },
+          { titulo: "Episodio 3 - Nombre del episodio", src: "Link del video" },
+          { titulo: "Episodio 4 - Nombre del episodio", src: "Link del video" },
+          { titulo: "Episodio 5 - Nombre del episodio", src: "Link del video" },
+          { titulo: "Episodio 6 - Nombre del episodio", src: "Link del video" },
+          { titulo: "Episodio 7 - Nombre del episodio", src: "Link del video" }
         ],
         3: [
-          { titulo: "Episodio 1", src: "#" },
-          { titulo: "Episodio 2", src: "#" }
+          { titulo: "Episodio 1 - Nombre del episodio", src: "Link del video" },
+          { titulo: "Episodio 2 - Nombre del episodio", src: "Link del video" },
+          { titulo: "Episodio 3 - Nombre del episodio", src: "Link del video" },
+          { titulo: "Episodio 4 - Nombre del episodio", src: "Link del video" },
+          { titulo: "Episodio 5 - Nombre del episodio", src: "Link del video" },
+          { titulo: "Episodio 6 - Nombre del episodio", src: "Link del video" },
           // Rellena si tienes links
         ]
       };
@@ -553,11 +581,9 @@
         box-shadow: 0 0 6px #ff4444;
       }
     </style>
+
     <br>
-    <div class="titulo">
-      <h4>Género: Accion/Drama/Apocalipsis Zombie</h4> <!--Aca va el genero de la serie-->
-    </div>
-  
+    
     <div class="sinopsis">
       <h4>
         Sinopsis: <!--Aca va la sinopsis en el <p>Sinopsis</<p> que esta debajo-->
@@ -566,7 +592,7 @@
         "The Walking Dead" está ambientada en un futuro apocalíptico con la Tierra devastada por el efecto de un cataclismo, que ha provocado la mutación en zombies de la mayor parte de los habitantes del planeta. La serie, explora las dificultades de los protagonistas para sobrevivir en un mundo poblado por el horror, así como las relaciones personales que se establecen entre ellos, en ocasiones también una amenaza para su supervivencia. <!--ejemplo-->
       </p>
     </div>
-  
+    
     <div style="text-align: center; margin-top: 15px;">
       <button id="btn-favorito" style="
         background: #ff4444;
@@ -602,7 +628,7 @@
           <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt="">
           <p>Nombre de serie</p>
         </a>
-        <a href="Dragon Ball Daima (2025).html" class="serie">
+        <a href="#" class="serie">
           <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt="">
           <p>Nombre de serie</p>
         </a>
@@ -642,18 +668,6 @@
           padding-bottom: 20px;
         }
       }
-      @media (pointer: coarse) {
-        #episodios {
-          scroll-padding: 10px;
-          -webkit-overflow-scrolling: touch;
-          overscroll-behavior-x: contain;
-          touch-action: pan-x;
-          scroll-behavior: smooth;
-        }
-        #episodios button {
-          scroll-snap-align: start;
-        }
-      }
     </style>
     
     <!-- Historial -->
@@ -664,7 +678,6 @@
         const serieImagen = "https://image.tmdb.org/t/p/w300/yn7psGTZsHumHOkLUmYpyrIcA2G.jpg"; //Aca va la ultima parte de la imagen como hice el ej de arriba se agrega despues de la barra. esta de esta forma para que la imagen carge mas rapido
         const archivoHTML = "../View Series/The Walking Dead (2010).html"; // ✅ Ruta relativa al historial
         const progresoTexto = "Actualizado"; // Puedes cambiarlo dinámicamente
-
 
         let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');    
         const index = historial.findIndex(h => h.titulo === serieTitulo);
@@ -913,7 +926,7 @@
         if (e.deltaY !== 0) {
           e.preventDefault();
           episodiosContainer.scrollBy({
-            left: e.deltaY * 3, // Aumenta la sensibilidad horizontal
+            left: e.deltaY * 2, // Aumenta la sensibilidad horizontal
             behavior: "smooth"
           });
         }
@@ -1066,7 +1079,7 @@
         }
       });
     </script>
-    
+  
 
 
 
@@ -1074,7 +1087,17 @@
 
 
 
-    
+
+
+
+
+
+
+
+
+
+
+
 <script>
   const originalRenderEpisodios = renderEpisodios;
 
