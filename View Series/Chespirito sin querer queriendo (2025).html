@@ -147,6 +147,37 @@
         font-style: normal !important;  
       }
     
+      #resume-msg {      
+        display: none;     
+        position: fixed;    
+        top: 20px;    
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.85);
+        padding: 10px 20px;
+        color: #0f0;
+        border-radius: 8px;
+        z-index: 9999;
+        font-weight: bold;
+        max-width: 90%;
+        font-size: 1rem;
+        text-align: center;
+        box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+        opacity: 0;
+        transition: opacity 0.8s ease;
+      }
+
+      #resume-msg.visible {      
+        display: block;
+        opacity: 1;
+      }
+
+      @media (max-width: 480px) {      
+        #resume-msg {
+          font-size: 0.9rem;
+          padding: 8px 16px;
+        }
+      }
 
     </style>
     <link rel="stylesheet" href="" />
@@ -165,6 +196,7 @@
         </div>
       </div>
     </div>  
+    <div id="resume-msg">✅ Reanudando donde lo dejaste: Chespirito: Sin querer queriendo</div>
   
     <div class="info">
       <i class="fal fa-calendar-alt"></i><span>2025</span> <!-- AÑO DE ESTRENO DE LA SERIE -->
@@ -554,13 +586,13 @@ const storageKey = `ultimo_episodio_${nombreSerie}`;
       <h4>Podría interesarte:</h4>
       <br>
       <div class="series-grid">
-        <a href="Los siete pecados capitales (2014).html" class="serie">
-          <img loading="lazy" src="https://image.tmdb.org/t/p/w300/r9Kp3g1JUpUZ8L1sIBrs97HM1Cl.jpg" alt=""> <!--Aca va las imagenes de las series solo debes de agregar la ultima parte despues de la "/" ej: (https://image.tmdb.org/t/p/original/qZJt1XlRVbQhGV7MtZnbiR6vxPh.jpg) solo debes agregar esto (qZJt1XlRVbQhGV7MtZnbiR6vxPh.jpg)-->
-          <p>Los siete pecados capitales</p>
-        </a>
         <a href="Dragon Ball Z (1989).html" class="serie">
-          <img loading="lazy" src="https://image.tmdb.org/t/p/w300/yfyToia25GnvjY7FPAGaCm3lKRc.jpg" alt="">
-          <p>Dragon Ball z</p>
+          <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt=""> <!--Aca va las imagenes de las series solo debes de agregar la ultima parte despues de la "/" ej: (https://image.tmdb.org/t/p/original/qZJt1XlRVbQhGV7MtZnbiR6vxPh.jpg) solo debes agregar esto (qZJt1XlRVbQhGV7MtZnbiR6vxPh.jpg)-->
+          <p>dragon ball</p>
+        </a>
+        <a href="#" class="serie">
+          <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt="">
+          <p>Nombre de serie</p>
         </a>
         <a href="#" class="serie">
           <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt="">
