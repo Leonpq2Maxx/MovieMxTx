@@ -313,12 +313,7 @@ const nombreSerie = "DragonBallZ"; // por ejemplo: "DragonBallDaima", "TheWalkin
 const storageKey = `ultimo_episodio_${nombreSerie}`;
 
 
-      function renderEpisodios(temporada) {
-        episodiosContainer.innerHTML = "";
-  
-        const episodios = episodiosData[temporada] || [];
-        const yearSpan = document.querySelector('.info span');
-        const yearBySeason = { 1: '2021', 2: '2023', 3: '2025' };  /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010 (ABAJO HAY OTRO DEBE HACER LO MISMO)*/
+      ;  /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010 (ABAJO HAY OTRO DEBE HACER LO MISMO)*/
         if (yearSpan) yearSpan.textContent = yearBySeason[temporada] || '0000';
         episodioCount.textContent = `${episodios.length} Capítulos`;
         
@@ -1065,7 +1060,7 @@ const storageKey = `ultimo_episodio_${nombreSerie}`;
   
       window.addEventListener("DOMContentLoaded", () => {
     
-        const ultimo = JSON.parse(localStorage.getItem("ultimo_episodio") || "{}");
+        const ultimo = JSON.parse(localStorage.getItem(storageKey) || "{}");
         if (ultimo.temporada && typeof ultimo.index === "number") {
           const episodios = episodiosData[ultimo.temporada];
           if (episodios && episodios[ultimo.index]) {
@@ -1147,7 +1142,7 @@ const storageKey = `ultimo_episodio_${nombreSerie}`;
   };
 
   window.addEventListener("DOMContentLoaded", () => {
-    const ultimo = JSON.parse(localStorage.getItem("ultimo_episodio") || "{}");
+    const ultimo = JSON.parse(localStorage.getItem(storageKey) || "{}");
     if (ultimo.temporada && typeof ultimo.index === "number") {
       temporadaSelect.value = ultimo.temporada;
       renderEpisodios(ultimo.temporada);
@@ -1164,7 +1159,7 @@ const storageKey = `ultimo_episodio_${nombreSerie}`;
 
 <script>
   window.addEventListener("DOMContentLoaded", () => {
-    const ultimo = JSON.parse(localStorage.getItem("ultimo_episodio") || "{}");
+    const ultimo = JSON.parse(localStorage.getItem(storageKey) || "{}");
     const temporada = ultimo.temporada || temporadaSelect.value;
     const index = typeof ultimo.index === "number" ? ultimo.index : obtenerProgresoTemporada(temporada);
     const episodio = (episodiosData[temporada] || [])[index];
