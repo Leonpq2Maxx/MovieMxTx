@@ -212,9 +212,36 @@
       <span>🇲🇽</span>
     </div>
   
-    <div class="titulo">
-      <h3>Dragon Ball Daima</h3>
-    </div>
+    <div class="titulo-flex">
+    <h3>Dragon Ball Daima</h3>
+    <div class="genero-badge">Anime/Accion/Animacion</div>
+  </div>
+
+  <style>
+    .titulo-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .genero-badge {
+      padding: 4px 10px;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: rgb(246, 255, 0);
+      border: 1px solid rgb(246, 255, 0);
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-style: normal;
+      max-width: 130px;          /* Limita el ancho máximo */
+      white-space: nowrap;       /* No saltar de línea */
+      overflow: hidden;          /* Oculta el exceso */
+      text-overflow: ellipsis;   /* Agrega los ... */
+    }
+
+  </style>
   
     <!-- Selector de Temporadas y Botones de Episodios -->
      
@@ -222,8 +249,6 @@
       <div>
         <select id="temporada-select" style="background: #1c1c1c; color: white; font-size: 1rem; padding: 5px 10px; border-radius: 5px; border: 1px solid #333;">
           <option value="1" selected>Temporada 1</option>
-          <option value="2">Temporada 2</option>
-          <option value="3">Temporada 3</option>
         </select>
       </div>
       <div id="episodio-count" style="color: #bbb; font-size: 0.95rem;">10 Capítulos</div>
@@ -278,7 +303,7 @@
   
         const episodios = episodiosData[temporada] || [];
         const yearSpan = document.querySelector('.info span');
-        const yearBySeason = { 1: '2025', 2: '2023', 3: '2025' };  /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010 (ABAJO HAY OTRO DEBE HACER LO MISMO)*/
+        const yearBySeason = { 1: '2021', 2: '2023', 3: '2025' };  /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010 (ABAJO HAY OTRO DEBE HACER LO MISMO)*/
         if (yearSpan) yearSpan.textContent = yearBySeason[temporada] || '0000';
         episodioCount.textContent = `${episodios.length} Capítulos`;
         
@@ -325,7 +350,7 @@
         episodiosContainer.innerHTML = "";
         const episodios = episodiosData[temporada] || [];
         const yearSpan = document.querySelector('.info span');
-        const yearBySeason = { 1: '2025', 2: '2023', 3: '2025' }; /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010*/
+        const yearBySeason = { 1: '2021', 2: '2023', 3: '2025' }; /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010*/
         
         if (yearSpan) yearSpan.textContent = yearBySeason[temporada] || '0000';
   
@@ -540,9 +565,6 @@
       }
     </style>
     <br>
-    <div class="titulo">
-      <h4>Género: Animación/Anime/Accion/Aventura/Comedia/Sci-Fi & Fantasia</h4> <!--Aca va el genero de la serie-->
-    </div>
   
     <div class="sinopsis">
       <h4>
@@ -588,7 +610,7 @@
           <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt="">
           <p>Nombre de serie</p>
         </a>
-        <a href="Dragon Ball Daima (2025).html" class="serie">
+        <a href="#" class="serie">
           <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt="">
           <p>Nombre de serie</p>
         </a>
@@ -626,18 +648,6 @@
       @media (hover: none) and (pointer: coarse) {
         #episodios {
           padding-bottom: 20px;
-        }
-      }
-      @media (pointer: coarse) {
-        #episodios {
-          scroll-padding: 10px;
-          -webkit-overflow-scrolling: touch;
-          overscroll-behavior-x: contain;
-          touch-action: pan-x;
-          scroll-behavior: smooth;
-        }
-        #episodios button {
-          scroll-snap-align: start;
         }
       }
     </style>
@@ -898,7 +908,7 @@
         if (e.deltaY !== 0) {
           e.preventDefault();
           episodiosContainer.scrollBy({
-            left: e.deltaY * 3, // Aumenta la sensibilidad horizontal
+            left: e.deltaY * 2, // Aumenta la sensibilidad horizontal
             behavior: "smooth"
           });
         }
@@ -1051,7 +1061,7 @@
         }
       });
     </script>
-    
+  
 
 
 
@@ -1059,7 +1069,17 @@
 
 
 
-    
+
+
+
+
+
+
+
+
+
+
+
 <script>
   const originalRenderEpisodios = renderEpisodios;
 
