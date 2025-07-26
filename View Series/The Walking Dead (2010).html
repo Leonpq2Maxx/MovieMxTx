@@ -214,7 +214,7 @@
   
     <div class="titulo-flex">
       <h3>The Walking Dead</h3>
-      <div class="genero-badge">AAccion/Drama/Zombie</div>
+      <div class="genero-badge">AaAccion/Drama/Zombie</div>
     </div>
 
     <style>
@@ -322,12 +322,10 @@
         });
   
         // Marcar automáticamente el primer episodio
-        const firstBtn = document.querySelector('#episodios button');
-        if (firstBtn) {
-          firstBtn.classList.add('active');
-          firstBtn.style.background = 'red';
-          firstBtn.style.color = '#fff';
-        }
+        if (episodios.length > 0) {
+  playEpisode(episodios[0].src, episodios[0].titulo, 0);
+}
+
       }
 
       // Inicializar con la temporada por defecto
@@ -368,12 +366,10 @@
         });
 
         // Marcar automáticamente el primer episodio
-        const firstBtn = document.querySelector('#episodios button');
-        if (firstBtn) {
-          firstBtn.classList.add('active');
-          firstBtn.style.background = 'red';
-          firstBtn.style.color = '#fff';
-        }
+        if (episodios.length > 0) {
+  playEpisode(episodios[0].src, episodios[0].titulo, 0);
+}
+
       }
 
       function playEpisode(src, titulo, index) {
