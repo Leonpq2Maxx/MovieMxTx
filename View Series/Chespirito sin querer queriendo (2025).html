@@ -189,19 +189,19 @@
     <div class="container">
       <div class="main-video">
         <div class="video">
-          <video class='js-player' poster="https://image.tmdb.org/t/p/w780/y8tPZ9P4tYqYiACs6t4mlcWJnSC.jpg" controls muted preload="metadata"> <!--Aca te dejo la pagina para agregar el fondo https://www.themoviedb.org-->
+          <video class='js-player' poster="https://image.tmdb.org/t/p/w780/82KxmpKkkyc5k8UgY0LtHIX51D0.jpg" controls muted preload="metadata"> <!--Aca te dejo la pagina para agregar el fondo https://www.themoviedb.org-->
             <source src="https://www.udrop.com/file/6goa/1x1" type="application/x-mpegURL">
           </video>
           <!--<video src="" poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3r48KQZbrv_w2zeTpEMqrIE0BysJMnmdydw&usqp=CAU" controls muted autoplay></video>-->
         </div>
       </div>
     </div>  
-    <div id="resume-msg">✅ Reanudando donde lo dejaste: Chespirito: Sin querer queriendo</div>
+    <div id="resume-msg">✅ Reanudando donde lo dejaste: Chespi</div>
   
     <div class="info">
-      <i class="fal fa-calendar-alt"></i><span>2025</span> <!-- AÑO DE ESTRENO DE LA SERIE -->
-      <i class="fal fa-clock"></i><span>T1</span> <!-- LA CANTIDAD DE TEMPORADAS QUE TIENE EJEMPLO "T1 (SI TIENE UNA TEMPORADAS)" SI TIENE VARIAS AGREGAR "T4" SERIAN TEMPORADA 4--> 
-      <i class="fal fa-thumbs-up"></i><span>85%</span> <!-- LA CALIFICACION DE LA SERIE -->   
+      <i class="fal fa-calendar-alt"></i><span>1989</span> <!-- AÑO DE ESTRENO DE LA SERIE -->
+      <i class="fal fa-clock"></i><span>T5</span> <!-- LA CANTIDAD DE TEMPORADAS QUE TIENE EJEMPLO "T1 (SI TIENE UNA TEMPORADAS)" SI TIENE VARIAS AGREGAR "T4" SERIAN TEMPORADA 4--> 
+      <i class="fal fa-thumbs-up"></i><span>84%</span> <!-- LA CALIFICACION DE LA SERIE -->   
       <div class="hd-tag">     
         <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">      
           <rect width="24" height="24" rx="4" fill="white" />       
@@ -213,8 +213,8 @@
     </div>
   
     <div class="titulo-flex">
-      <h3>Chespirito: Sin querer queriendo</h3>
-      <div class="genero-badge">Drama/Comedia</div>
+      <h3>Chespi</h3>
+      <div class="genero-badge">Anime/Animacion/Accion</div>
     </div>
 
     <style>
@@ -248,7 +248,11 @@
     <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px; flex-wrap: wrap;">
       <div>
         <select id="temporada-select" style="background: #1c1c1c; color: white; font-size: 1rem; padding: 5px 10px; border-radius: 5px; border: 1px solid #333;">
-          <option value="1" selected>Temporada 1</option>
+          <option value="1" selected>Temporada Saijayins</option>
+          <option value="2">Temporada Freezer</option>
+          <option value="3">Temporada Garlick Jr</option>
+          <option value="4">Temporada Androides</option>
+          <option value="5">Temporada Majin boo</option>
         </select>
       </div>
       <div id="episodio-count" style="color: #bbb; font-size: 0.95rem;">10 Capítulos</div>
@@ -285,20 +289,20 @@
       const episodioCount = document.getElementById("episodio-count");
       const mainVideo = document.querySelector('.main-video video');
       const titleDiv = document.querySelector('.main-video .title');
-      const storageKey = "ultimo_episodio_Chespirito"; // ✅ para esta serie
+      const storageKey = "ultimo_episodio_dragonballz"; // ✅ para esta serie
 
+      let currentEpisodeIndex = 0;
 
-      function renderEpisodios(temporada) {
+      function renderEpisodios(temporada) { 
         episodiosContainer.innerHTML = "";
-  
         const episodios = episodiosData[temporada] || [];
         const yearSpan = document.querySelector('.info span');
-        const yearBySeason = { 1: '2021', 2: '2023', 3: '2025' };  /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010 (ABAJO HAY OTRO DEBE HACER LO MISMO)*/
+        const yearBySeason = { 1: '2021', 2: '2023', 3: '2025' }; /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010*/
         if (yearSpan) yearSpan.textContent = yearBySeason[temporada] || '0000';
         episodioCount.textContent = `${episodios.length} Capítulos`;
         const storageKey = "ultimo_episodio_Chespirito"; // ✅ para esta serie
 
-        
+  
         episodios.forEach((ep, index) => {
           const btn = document.createElement("button");
           btn.textContent = index + 1;
@@ -307,16 +311,13 @@
           background: #222; border: none; border-radius: 5px;
           color: #ccc; font-size: 1rem; cursor: pointer;
           `;
-          
-          btn.addEventListener("click", () => {
-            mainVideo.setAttribute("src", ep.src);
-            if (titleDiv) {
-              titleDiv.innerHTML = ep.titulo;
-            }
+    
+         btn.addEventListener("click", () => {
+            playEpisode(ep.src, ep.titulo, index);
           });
           episodiosContainer.appendChild(btn);
         });
-  
+
         // Marcar automáticamente el primer episodio
         const firstBtn = document.querySelector('#episodios button');
         if (firstBtn) {
@@ -333,46 +334,6 @@
       temporadaSelect.addEventListener("change", () => {
         renderEpisodios(temporadaSelect.value);
       });
-    </script>
-    
-    <script>
-      let currentEpisodeIndex = 0;
-
-      function renderEpisodios(temporada) { 
-        episodiosContainer.innerHTML = "";
-        const episodios = episodiosData[temporada] || [];
-        const yearSpan = document.querySelector('.info span');
-        const yearBySeason = { 1: '2021', 2: '2023', 3: '2025' }; /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010*/
-        const storageKey = "ultimo_episodio_Chespirito"; // ✅ para esta serie
-
-        
-        if (yearSpan) yearSpan.textContent = yearBySeason[temporada] || '0000';
-  
-        episodioCount.textContent = `${episodios.length} Capítulos`;
-  
-        episodios.forEach((ep, index) => {
-          const btn = document.createElement("button");
-          btn.textContent = index + 1;
-          btn.style.cssText = `
-          width: 40px; height: 40px;
-          background: #222; border: none; border-radius: 5px;
-          color: #ccc; font-size: 1rem; cursor: pointer;
-          `;
-    
-          btn.addEventListener("click", () => {
-            playEpisode(ep.src, ep.titulo, index);
-          });
-          episodiosContainer.appendChild(btn);
-        });
-
-        // Marcar automáticamente el primer episodio
-        const firstBtn = document.querySelector('#episodios button');
-        if (firstBtn) {
-          firstBtn.classList.add('active');
-          firstBtn.style.background = 'red';
-          firstBtn.style.color = '#fff';
-        }
-      }
 
       function playEpisode(src, titulo, index) {
         currentEpisodeIndex = index;
@@ -559,13 +520,12 @@
       }
     </style>
     <br>
-    
     <div class="sinopsis">
       <h4>
         Sinopsis: <!--Aca va la sinopsis en el <p>Sinopsis</<p> que esta debajo-->
       </h4>
       <p>
-        La historia de Roberto Gómez Bolaños, el hombre que transformó su anhelo de hacer reír en un legado universal. Desde su infancia hasta su consagración en las décadas de los 50 a los 80, esta biografía íntima nos revela cómo un joven soñador encontró su lugar en la naciente industria televisiva, creando personajes inolvidables cargados de ternura y humor.
+        Continuación del anime 'Dragon Ball' que se divide básicamente en cuatro sagas: la llegada de los Saiyajins, la batalla contra Freezer, el nacimiento de Célula y el despertar de Monstruo Bu. De éstas se desprenden subsagas y algunas otras historias que no son originales del manga.
       </p>
     </div>
   
@@ -588,12 +548,12 @@
       <h4>Podría interesarte:</h4>
       <br>
       <div class="series-grid">
-        <a href="#" class="serie">
+        <a href="Los siete pecados capitales (2014).html" class="serie">
           <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt=""> <!--Aca va las imagenes de las series solo debes de agregar la ultima parte despues de la "/" ej: (https://image.tmdb.org/t/p/original/qZJt1XlRVbQhGV7MtZnbiR6vxPh.jpg) solo debes agregar esto (qZJt1XlRVbQhGV7MtZnbiR6vxPh.jpg)-->
-          <p>Nombre de serie</p>
+          <p>Los siete</p>
         </a>
-        <a href="#" class="serie">
-          <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt="">
+        <a href="Chespirito sin querer queriendo (2025).html" class="serie">
+          <img loading="lazy" src="https://image.tmdb.org/t/p/w300/Zf4F7BhM09OSl5YrPvAK7AUY5e.jpg" alt="">
           <p>Nombre de serie</p>
         </a>
         <a href="#" class="serie">
@@ -650,8 +610,8 @@
     
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        const serieTitulo = "Chespirito: Sin querer queriendo";
-        const serieImagen = "https://image.tmdb.org/t/p/w300/Zf4F7BhM09OSl5YrPvAK7AUY5e.jpg"; //Aca va la ultima parte de la imagen como hice el ej de arriba se agrega despues de la barra. esta de esta forma para que la imagen carge mas rapido
+        const serieTitulo = "CHESPI";
+        const serieImagen = "https://image.tmdb.org/t/p/w300/rKPONjvDSn63blDzYrPOWvjWLoy.jpg"; //Aca va la ultima parte de la imagen como hice el ej de arriba se agrega despues de la barra. esta de esta forma para que la imagen carge mas rapido
         const archivoHTML = "../View Series/Chespirito sin querer queriendo (2025).html"; // ✅ Ruta relativa al historial
         const progresoTexto = "Actualizado"; // Puedes cambiarlo dinámicamente
 
@@ -727,8 +687,8 @@
     <script>
       document.getElementById('btn-favorito').addEventListener('click', () => {
         const nuevaPelicula = {
-          titulo: "Chespirito: Sin querer queriendo",
-          imagen: "https://image.tmdb.org/t/p/w300/Zf4F7BhM09OSl5YrPvAK7AUY5e.jpg",
+          titulo: "CHESPI",
+          imagen: "https://image.tmdb.org/t/p/w300/rKPONjvDSn63blDzYrPOWvjWLoy.jpg",
           genero: "Drama comedia", /* o "Serie", "Crimen/Serie", etc.*/
           archivo: "../View Series/Chespirito sin querer queriendo (2025).html",
           tipo: "serie", // ✅ identifica si es "serie" o "pelicula"
@@ -960,7 +920,8 @@
         const savedTime = parseFloat(localStorage.getItem(key));
 
         // Guardar episodio actual
-        localStorage.setItem("ultimo_episodio", JSON.stringify({ temporada, index }));
+        localStorage.setItem(storageKey, JSON.stringify({ temporada: temporadaSelect.value, index: index }));
+
 
     
         // Limpiar contenedor y crear video manualmente sin autoplay
@@ -1041,7 +1002,7 @@
   
       window.addEventListener("DOMContentLoaded", () => {
     
-        const ultimo = JSON.parse(localStorage.getItem("ultimo_episodio") || "{}");
+        const ultimo = JSON.parse(localStorage.getItem(storageKey) || "null");
         if (ultimo.temporada && typeof ultimo.index === "number") {
           const episodios = episodiosData[ultimo.temporada];
           if (episodios && episodios[ultimo.index]) {
@@ -1123,7 +1084,7 @@
   };
 
   window.addEventListener("DOMContentLoaded", () => {
-    const ultimo = JSON.parse(localStorage.getItem("ultimo_episodio") || "{}");
+    const ultimo = JSON.parse(localStorage.getItem(storageKey) || "null");
     if (ultimo.temporada && typeof ultimo.index === "number") {
       temporadaSelect.value = ultimo.temporada;
       renderEpisodios(ultimo.temporada);
@@ -1140,7 +1101,7 @@
 
 <script>
   window.addEventListener("DOMContentLoaded", () => {
-    const ultimo = JSON.parse(localStorage.getItem("ultimo_episodio") || "{}");
+    const ultimo = JSON.parse(localStorage.getItem(storageKey) || "null");
     const temporada = ultimo.temporada || temporadaSelect.value;
     const index = typeof ultimo.index === "number" ? ultimo.index : obtenerProgresoTemporada(temporada);
     const episodio = (episodiosData[temporada] || [])[index];

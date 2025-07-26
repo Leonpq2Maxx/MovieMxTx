@@ -331,15 +331,8 @@
           color: #ccc; font-size: 1rem; cursor: pointer;
           `;
     
-          btn.addEventListener("click", () => {
+         btn.addEventListener("click", () => {
             playEpisode(ep.src, ep.titulo, index);
-          });
-          episodiosContainer.appendChild(btn);
-          btn.addEventListener("click", () => {
-            mainVideo.setAttribute("src", ep.src);
-            if (titleDiv) {
-              titleDiv.innerHTML = ep.titulo;
-            }
           });
           episodiosContainer.appendChild(btn);
         });
