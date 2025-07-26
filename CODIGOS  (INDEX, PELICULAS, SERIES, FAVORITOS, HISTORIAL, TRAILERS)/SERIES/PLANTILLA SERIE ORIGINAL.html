@@ -212,9 +212,36 @@
       <span>🇲🇽</span>
     </div>
   
-    <div class="titulo">
+    <div class="titulo-flex">
       <h3>Nombre de serie</h3>
+      <div class="genero-badge">genero</div>
     </div>
+
+    <style>
+      .titulo-flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .genero-badge {
+        padding: 4px 10px;
+        background-color: rgba(255, 255, 255, 0.1);
+        color: rgb(246, 255, 0);
+        border: 1px solid rgb(246, 255, 0);
+        border-radius: 20px;
+        font-size: 0.7rem;
+        font-style: normal;
+        max-width: 165px;          /* Limita el ancho máximo */
+        white-space: nowrap;       /* No saltar de línea */
+        overflow: hidden;          /* Oculta el exceso */
+        text-overflow: ellipsis;   /* Agrega los ... */
+      }
+
+    </style>
   
     <!-- Selector de Temporadas y Botones de Episodios -->
      
@@ -547,10 +574,6 @@
       }
     </style>
     <br>
-    <div class="titulo">
-      <h4>Género: </h4> <!--Aca va el genero de la serie-->
-    </div>
-  
     <div class="sinopsis">
       <h4>
         Sinopsis: <!--Aca va la sinopsis en el <p>Sinopsis</<p> que esta debajo-->
@@ -635,19 +658,6 @@
           padding-bottom: 20px;
         }
       }
-      @media (pointer: coarse) {
-        #episodios {
-          scroll-padding: 10px;
-          -webkit-overflow-scrolling: touch;
-          overscroll-behavior-x: contain;
-          touch-action: pan-x;
-          scroll-behavior: smooth;
-        }
-        #episodios button {
-          scroll-snap-align: start;
-        }
-      }
-
     </style>
     
     <!-- Historial -->
@@ -900,15 +910,13 @@
       //]]>
     </script>
 
-    <!--AUMENTAR LA SENSIBILIDAD DEL SCROLLBAR-->
-
     <script>
       const episodiosContainer = document.getElementById("episodios");
       episodiosContainer.addEventListener("wheel", (e) => {
         if (e.deltaY !== 0) {
           e.preventDefault();
           episodiosContainer.scrollBy({
-            left: e.deltaY * 3, // Aumenta la sensibilidad horizontal
+            left: e.deltaY * 2, // Aumenta la sensibilidad horizontal
             behavior: "smooth"
           });
         }
