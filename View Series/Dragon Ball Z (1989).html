@@ -341,9 +341,12 @@ const storageKey = `ultimo_episodio_${nombreSerie}`;
         });
   
         // Marcar automáticamente el primer episodio
-        if (episodios.length > 0) {
-  playEpisode(episodios[0].src, episodios[0].titulo, 0);
-}
+        const firstBtn = document.querySelector('#episodios button');
+        if (firstBtn) {
+          firstBtn.classList.add('active');
+          firstBtn.style.background = 'red';
+          firstBtn.style.color = '#fff';
+        }
 
       }
 
@@ -385,9 +388,12 @@ const storageKey = `ultimo_episodio_${nombreSerie}`;
         });
 
         // Marcar automáticamente el primer episodio
-        if (episodios.length > 0) {
-  playEpisode(episodios[0].src, episodios[0].titulo, 0);
-}
+        const firstBtn = document.querySelector('#episodios button');
+        if (firstBtn) {
+          firstBtn.classList.add('active');
+          firstBtn.style.background = 'red';
+          firstBtn.style.color = '#fff';
+        }
 
       }
 
