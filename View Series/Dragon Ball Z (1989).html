@@ -273,7 +273,7 @@
     <script>
       const episodiosData = {
         1: [
-          { titulo: "Episodio 1 - El misterio de las esferas de dragon", src: "https://ia800605.us.archive.org/12/items/DRAGONBALLGTLATINL/001-El%20misterio%20de%20las%20esferas%20de%20dragon.mp4?cnt=0" },
+          { titulo: "Episodio 1 - Nombre del episodio", src: "https://ia800605.us.archive.org/12/items/DRAGONBALLGTLATINL/001-El%20misterio%20de%20las%20esferas%20de%20dragon.mp4?cnt=0" },
           { titulo: "Episodio 2 - Nombre del episodio", src: "Link del video" },
           { titulo: "Episodio 3 - Nombre del episodio", src: "Link del video" },
           { titulo: "Episodio 4 - Nombre del episodio", src: "Link del video" },
@@ -308,6 +308,10 @@
       const episodioCount = document.getElementById("episodio-count");
       const mainVideo = document.querySelector('.main-video video');
       const titleDiv = document.querySelector('.main-video .title');
+      // 🔁 CAMBIÁ este nombre por uno único para cada archivo HTML
+const nombreSerie = "DragonBallZ"; // por ejemplo: "DragonBallDaima", "TheWalkingDead", etc.
+const storageKey = `ultimo_episodio_${nombreSerie}`;
+
 
       function renderEpisodios(temporada) {
         episodiosContainer.innerHTML = "";
@@ -474,7 +478,7 @@
 
       // Inicial
 
-      const ultimo = JSON.parse(localStorage.getItem("ultimo_episodio") || "null");
+      const ultimo = JSON.parse(localStorage.getItem(storageKey) || "null");
 
       if (ultimo && episodiosData[ultimo.temporada]) {
         temporadaSelect.value = ultimo.temporada;
@@ -972,7 +976,7 @@
         const savedTime = parseFloat(localStorage.getItem(key));
 
         // Guardar episodio actual
-        localStorage.setItem("ultimo_episodio", JSON.stringify({ temporada, index }));
+        localStorage.setItem(storageKey, JSON.stringify({ temporada: temporadaSelect.value, index: index }));
 
     
         // Limpiar contenedor y crear video manualmente sin autoplay
