@@ -281,7 +281,7 @@
           { titulo: "Episodio 6 - Nombre del episodio", src: "Link del video" },
           { titulo: "Episodio 7 - Nombre del episodio", src: "Link del video" },
           { titulo: "Episodio 8 - Nombre del episodio", src: "Link del video" },
-          { titulo: "Episodio 9 - Nombre del episodio", src: "Link del video" }
+          { titulo: "Episodio 9 - Nombre del episodio", src: "https://ia800605.us.archive.org/12/items/DRAGONBALLGTLATINL/001-El%20misterio%20de%20las%20esferas%20de%20dragon.mp4?cnt=0" }
           // Agrega más si tienes
         ],
         2: [
@@ -341,9 +341,12 @@ const storageKey = `ultimo_episodio_${nombreSerie}`;
         });
   
         // Marcar automáticamente el primer episodio
-        if (episodios.length > 0) {
-  playEpisode(episodios[0].src, episodios[0].titulo, 0);
-}
+        const firstBtn = document.querySelector('#episodios button');
+        if (firstBtn) {
+          firstBtn.classList.add('active');
+          firstBtn.style.background = 'red';
+          firstBtn.style.color = '#fff';
+        }
 
       }
 
@@ -385,9 +388,13 @@ const storageKey = `ultimo_episodio_${nombreSerie}`;
         });
 
         // Marcar automáticamente el primer episodio
-        if (episodios.length > 0) {
-  playEpisode(episodios[0].src, episodios[0].titulo, 0);
-}
+        
+        const firstBtn = document.querySelector('#episodios button');
+        if (firstBtn) {
+          firstBtn.classList.add('active');
+          firstBtn.style.background = 'red';
+          firstBtn.style.color = '#fff';
+        }
 
       }
 
