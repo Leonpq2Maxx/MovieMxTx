@@ -285,6 +285,8 @@
       const episodioCount = document.getElementById("episodio-count");
       const mainVideo = document.querySelector('.main-video video');
       const titleDiv = document.querySelector('.main-video .title');
+      const storageKey = "ultimo_episodio_Chespirito"; // ✅ para esta serie
+
 
       function renderEpisodios(temporada) {
         episodiosContainer.innerHTML = "";
@@ -294,6 +296,8 @@
         const yearBySeason = { 1: '2021', 2: '2023', 3: '2025' };  /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010 (ABAJO HAY OTRO DEBE HACER LO MISMO)*/
         if (yearSpan) yearSpan.textContent = yearBySeason[temporada] || '0000';
         episodioCount.textContent = `${episodios.length} Capítulos`;
+        const storageKey = "ultimo_episodio_Chespirito"; // ✅ para esta serie
+
         
         episodios.forEach((ep, index) => {
           const btn = document.createElement("button");
@@ -339,6 +343,8 @@
         const episodios = episodiosData[temporada] || [];
         const yearSpan = document.querySelector('.info span');
         const yearBySeason = { 1: '2021', 2: '2023', 3: '2025' }; /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010*/
+        const storageKey = "ultimo_episodio_Chespirito"; // ✅ para esta serie
+
         
         if (yearSpan) yearSpan.textContent = yearBySeason[temporada] || '0000';
   
@@ -401,7 +407,7 @@
         msg.classList.add("visible");
         setTimeout(() => msg.classList.remove("visible"), 3000);
   
-        localStorage.setItem("ultimo_episodio", JSON.stringify({
+        localStorage.setItem(storageKey, JSON.stringify({
           temporada: temporadaSelect.value,
           index: index
         }));
@@ -455,7 +461,7 @@
 
       // Inicial
 
-      const ultimo = JSON.parse(localStorage.getItem("ultimo_episodio") || "null");
+      const ultimo = JSON.parse(localStorage.getItem(storageKey) || "null");
 
       if (ultimo && episodiosData[ultimo.temporada]) {
         temporadaSelect.value = ultimo.temporada;

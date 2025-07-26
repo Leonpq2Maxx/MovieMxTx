@@ -308,12 +308,8 @@
       const episodioCount = document.getElementById("episodio-count");
       const mainVideo = document.querySelector('.main-video video');
       const titleDiv = document.querySelector('.main-video .title');
-      // 🔁 CAMBIÁ este nombre por uno único para cada archivo HTML
-      const nombreSerie = "DragonBallZ"; // por ejemplo: "DragonBallDaima", "TheWalkingDead", etc.
-      const storageKey = `ultimo_episodio_${nombreSerie}`;
+      const storageKey = "ultimo_episodio_dragonballz"; // ✅ para esta serie
 
-
-      
       let currentEpisodeIndex = 0;
 
       function renderEpisodios(temporada) { 
@@ -321,10 +317,10 @@
         const episodios = episodiosData[temporada] || [];
         const yearSpan = document.querySelector('.info span');
         const yearBySeason = { 1: '2021', 2: '2023', 3: '2025' }; /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010*/
-        
         if (yearSpan) yearSpan.textContent = yearBySeason[temporada] || '0000';
-  
         episodioCount.textContent = `${episodios.length} Capítulos`;
+        const storageKey = "ultimo_episodio_dragonballz"; // ✅ para esta serie
+
   
         episodios.forEach((ep, index) => {
           const btn = document.createElement("button");
@@ -339,6 +335,13 @@
             playEpisode(ep.src, ep.titulo, index);
           });
           episodiosContainer.appendChild(btn);
+          btn.addEventListener("click", () => {
+            mainVideo.setAttribute("src", ep.src);
+            if (titleDiv) {
+              titleDiv.innerHTML = ep.titulo;
+            }
+          });
+          episodiosContainer.appendChild(btn);
         });
 
         // Marcar automáticamente el primer episodio
@@ -349,6 +352,14 @@
           firstBtn.style.color = '#fff';
         }
       }
+
+      // Inicializar con la temporada por defecto
+      renderEpisodios(temporadaSelect.value);
+
+      // Cambiar temporada
+      temporadaSelect.addEventListener("change", () => {
+        renderEpisodios(temporadaSelect.value);
+      });
 
       function playEpisode(src, titulo, index) {
         currentEpisodeIndex = index;
@@ -368,14 +379,6 @@
           btn.style.color = "#ccc";
         });
 
-        // Inicializar con la temporada por defecto
-      renderEpisodios(temporadaSelect.value);
-
-      // Cambiar temporada
-      temporadaSelect.addEventListener("change", () => {
-        renderEpisodios(temporadaSelect.value);
-      });
-
 
         // Marcar el botón actual en rojo
   
@@ -391,7 +394,7 @@
         msg.classList.add("visible");
         setTimeout(() => msg.classList.remove("visible"), 3000);
   
-        localStorage.setItem("ultimo_episodio", JSON.stringify({
+        localStorage.setItem(storageKey, JSON.stringify({
           temporada: temporadaSelect.value,
           index: index
         }));
@@ -575,8 +578,8 @@
           <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt=""> <!--Aca va las imagenes de las series solo debes de agregar la ultima parte despues de la "/" ej: (https://image.tmdb.org/t/p/original/qZJt1XlRVbQhGV7MtZnbiR6vxPh.jpg) solo debes agregar esto (qZJt1XlRVbQhGV7MtZnbiR6vxPh.jpg)-->
           <p>Los siete</p>
         </a>
-        <a href="#" class="serie">
-          <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt="">
+        <a href="Chespirito sin querer queriendo (2025).html" class="serie">
+          <img loading="lazy" src="https://image.tmdb.org/t/p/w300/Zf4F7BhM09OSl5YrPvAK7AUY5e.jpg" alt="">
           <p>Nombre de serie</p>
         </a>
         <a href="#" class="serie">
@@ -945,6 +948,7 @@
         // Guardar episodio actual
         localStorage.setItem(storageKey, JSON.stringify({ temporada: temporadaSelect.value, index: index }));
 
+
     
         // Limpiar contenedor y crear video manualmente sin autoplay
     
@@ -1024,7 +1028,7 @@
   
       window.addEventListener("DOMContentLoaded", () => {
     
-        const ultimo = JSON.parse(localStorage.getItem("ultimo_episodio") || "{}");
+        const ultimo = JSON.parse(localStorage.getItem(storageKey) || "null");
         if (ultimo.temporada && typeof ultimo.index === "number") {
           const episodios = episodiosData[ultimo.temporada];
           if (episodios && episodios[ultimo.index]) {
@@ -1106,7 +1110,7 @@
   };
 
   window.addEventListener("DOMContentLoaded", () => {
-    const ultimo = JSON.parse(localStorage.getItem("ultimo_episodio") || "{}");
+    const ultimo = JSON.parse(localStorage.getItem(storageKey) || "null");
     if (ultimo.temporada && typeof ultimo.index === "number") {
       temporadaSelect.value = ultimo.temporada;
       renderEpisodios(ultimo.temporada);
@@ -1123,7 +1127,7 @@
 
 <script>
   window.addEventListener("DOMContentLoaded", () => {
-    const ultimo = JSON.parse(localStorage.getItem("ultimo_episodio") || "{}");
+    const ultimo = JSON.parse(localStorage.getItem(storageKey) || "null");
     const temporada = ultimo.temporada || temporadaSelect.value;
     const index = typeof ultimo.index === "number" ? ultimo.index : obtenerProgresoTemporada(temporada);
     const episodio = (episodiosData[temporada] || [])[index];
