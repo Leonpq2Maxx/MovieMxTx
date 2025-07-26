@@ -167,9 +167,9 @@
     </div>  
   
     <div class="info">
-      <i class="fal fa-calendar-alt"></i><span>1989</span> <!-- AÑO DE ESTRENO DE LA SERIE -->
-      <i class="fal fa-clock"></i><span>T5</span> <!-- LA CANTIDAD DE TEMPORADAS QUE TIENE EJEMPLO "T1 (SI TIENE UNA TEMPORADAS)" SI TIENE VARIAS AGREGAR "T4" SERIAN TEMPORADA 4--> 
-      <i class="fal fa-thumbs-up"></i><span>84%</span> <!-- LA CALIFICACION DE LA SERIE -->   
+      <i class="fal fa-calendar-alt"></i><span>2025</span> <!-- AÑO DE ESTRENO DE LA SERIE -->
+      <i class="fal fa-clock"></i><span>T1</span> <!-- LA CANTIDAD DE TEMPORADAS QUE TIENE EJEMPLO "T1 (SI TIENE UNA TEMPORADAS)" SI TIENE VARIAS AGREGAR "T4" SERIAN TEMPORADA 4--> 
+      <i class="fal fa-thumbs-up"></i><span>85%</span> <!-- LA CALIFICACION DE LA SERIE -->   
       <div class="hd-tag">     
         <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">      
           <rect width="24" height="24" rx="4" fill="white" />       
@@ -181,8 +181,8 @@
     </div>
   
     <div class="titulo-flex">
-      <h3>Dragon Ball Z</h3>
-      <div class="genero-badge">Anime/Animacion/Accion</div>
+      <h3>Dragon ball z kai</h3>
+      <div class="genero-badge">Drama/Comedia</div>
     </div>
 
     <style>
@@ -216,11 +216,7 @@
     <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px; flex-wrap: wrap;">
       <div>
         <select id="temporada-select" style="background: #1c1c1c; color: white; font-size: 1rem; padding: 5px 10px; border-radius: 5px; border: 1px solid #333;">
-          <option value="1" selected>Temporada Saijayins</option>
-          <option value="2">Temporada Freezer</option>
-          <option value="3">Temporada Garlick Jr</option>
-          <option value="4">Temporada Androides</option>
-          <option value="5">Temporada Majin boo</option>
+          <option value="1" selected>Temporada 1</option>
         </select>
       </div>
       <div id="episodio-count" style="color: #bbb; font-size: 0.95rem;">10 Capítulos</div>
@@ -239,61 +235,38 @@
     "></div>
     
     <script>
+
+const nombreSerie = "dragonballz";
+const storageKey = `ultimo_episodio_${nombreSerie}`;
+
       const episodiosData = {
         1: [
-          { src: "https://ia800605.us.archive.org/12/items/DRAGONBALLGTLATINL/001-El%20misterio%20de%20las%20esferas%20de%20dragon.mp4?cnt=0" },
-          { src: "Link del video" },
-          { src: "Link del video" },
-          { src: "Link del video" },
-          { src: "Link del video" },
-          { src: "Link del video" },
-          { src: "Link del video" },
-          { src: "Link del video" },
-          { src: "Link del video" }
+          { titulo: "Episodio 1 - Zapatero a tus zapatos", src: "https://dl.dropbox.com/scl/fi/2rxn8bbjx7offllrzzddk/Chespirito-sin-querer-queriendo-T1-C1.mp4?rlkey=hjvi2jjx2oinq0hekxp875ds9&st=" },
+          { titulo: "Episodio 2 - No hay mal que por bien no venga", src: "https://dl.dropbox.com/scl/fi/6sr2f4vypmw7r9iv0xtax/Chespirito-sin-querer-queriendo-T1-C2.mp4?rlkey=8jp6gc91xi9le5jo97g5dckot&st=" },
+          { titulo: "Episodio 3 - Que no panda el cúnico", src: "https://dl.dropbox.com/scl/fi/8d92w87l1ignjd8mev0ff/Chespirito-sin-querer-queriendo-T1-C3.mp4?rlkey=2bojt7pyhqykmd3et8nlvldbi&st=" },
+          { titulo: "Episodio 4 - Es que no me tienen paciencia", src: "https://dl.dropbox.com/scl/fi/kx7zbroyx4mso2je46syv/Chespirito-sin-querer-queriendo-T1-C4.mp4?rlkey=q3rfpfx6kes5co31bv4ur8q37&st=" },
+          { titulo: "Episodio 5 - El que ríe al último", src: "https://dl.dropbox.com/scl/fi/gc9b1435w1c1d72erjzzq/Chespirito-sin-querer-queriendo-T1-C5.mp4?rlkey=7gq2fl14jepxorqv7umw64kmo&st=" },
+          { titulo: "Episodio 6", src: "https://dl.dropbox.com/scl/fi/v8xkbejc01pf2gn193z85/Chespirito-sin-querer-queriendo-T1-C6.mp4?rlkey=e0pu51p3yy1qs09g0lo2abyik&st=" },
+          { titulo: "Episodio 7", src: "" },
+          { titulo: "Episodio 8", src: "" }
           // Agrega más si tienes
         ],
-        2: [
-          { titulo: "Episodio 1 - Nombre del episodio", src: "Link del video" },
-          { titulo: "Episodio 2 - Nombre del episodio", src: "Link del video" },
-          { titulo: "Episodio 3 - Nombre del episodio", src: "Link del video" },
-          { titulo: "Episodio 4 - Nombre del episodio", src: "Link del video" },
-          { titulo: "Episodio 5 - Nombre del episodio", src: "Link del video" },
-          { titulo: "Episodio 6 - Nombre del episodio", src: "Link del video" },
-          { titulo: "Episodio 7 - Nombre del episodio", src: "Link del video" }
-        ],
-        3: [
-          { titulo: "Episodio 1 - Nombre del episodio", src: "Link del video" },
-          { titulo: "Episodio 2 - Nombre del episodio", src: "Link del video" },
-          { titulo: "Episodio 3 - Nombre del episodio", src: "Link del video" },
-          { titulo: "Episodio 4 - Nombre del episodio", src: "Link del video" },
-          { titulo: "Episodio 5 - Nombre del episodio", src: "Link del video" },
-          { titulo: "Episodio 6 - Nombre del episodio", src: "Link del video" },
-          // Rellena si tienes links
-        ]
       };
       const temporadaSelect = document.getElementById("temporada-select");
       const episodiosContainer = document.getElementById("episodios");
       const episodioCount = document.getElementById("episodio-count");
       const mainVideo = document.querySelector('.main-video video');
       const titleDiv = document.querySelector('.main-video .title');
-      // 🔁 CAMBIÁ este nombre por uno único para cada archivo HTML
-const nombreSerie = "DragonBallZ"; // por ejemplo: "DragonBallDaima", "TheWalkingDead", etc.
-const storageKey = `ultimo_episodio_${nombreSerie}`;
 
-      
-    </script>
-    
-    <script>
-      let currentEpisodeIndex = 0;
-
-      function renderEpisodios(temporada) { 
+      function renderEpisodios(temporada) {
         episodiosContainer.innerHTML = "";
+  
         const episodios = episodiosData[temporada] || [];
         const yearSpan = document.querySelector('.info span');
-        const yearBySeason = { 1: '2021', 2: '2023', 3: '2025' }; /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010*/
+        const yearBySeason = { 1: '2021', 2: '2023', 3: '2025' };  /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010 (ABAJO HAY OTRO DEBE HACER LO MISMO)*/
         if (yearSpan) yearSpan.textContent = yearBySeason[temporada] || '0000';
         episodioCount.textContent = `${episodios.length} Capítulos`;
-  
+        
         episodios.forEach((ep, index) => {
           const btn = document.createElement("button");
           btn.textContent = index + 1;
@@ -302,11 +275,7 @@ const storageKey = `ultimo_episodio_${nombreSerie}`;
           background: #222; border: none; border-radius: 5px;
           color: #ccc; font-size: 1rem; cursor: pointer;
           `;
-    
-          btn.addEventListener("click", () => {
-            playEpisode(ep.src, ep.titulo, index);
-          });
-          episodiosContainer.appendChild(btn);
+          
           btn.addEventListener("click", () => {
             mainVideo.setAttribute("src", ep.src);
             if (titleDiv) {
@@ -315,7 +284,7 @@ const storageKey = `ultimo_episodio_${nombreSerie}`;
           });
           episodiosContainer.appendChild(btn);
         });
-
+  
         // Marcar automáticamente el primer episodio
         const firstBtn = document.querySelector('#episodios button');
         if (firstBtn) {
@@ -332,6 +301,44 @@ const storageKey = `ultimo_episodio_${nombreSerie}`;
       temporadaSelect.addEventListener("change", () => {
         renderEpisodios(temporadaSelect.value);
       });
+    </script>
+    
+    <script>
+      let currentEpisodeIndex = 0;
+
+      function renderEpisodios(temporada) { 
+        episodiosContainer.innerHTML = "";
+        const episodios = episodiosData[temporada] || [];
+        const yearSpan = document.querySelector('.info span');
+        const yearBySeason = { 1: '2021', 2: '2023', 3: '2025' }; /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010*/
+        
+        if (yearSpan) yearSpan.textContent = yearBySeason[temporada] || '0000';
+  
+        episodioCount.textContent = `${episodios.length} Capítulos`;
+  
+        episodios.forEach((ep, index) => {
+          const btn = document.createElement("button");
+          btn.textContent = index + 1;
+          btn.style.cssText = `
+          width: 40px; height: 40px;
+          background: #222; border: none; border-radius: 5px;
+          color: #ccc; font-size: 1rem; cursor: pointer;
+          `;
+    
+          btn.addEventListener("click", () => {
+            playEpisode(ep.src, ep.titulo, index);
+          });
+          episodiosContainer.appendChild(btn);
+        });
+
+        // Marcar automáticamente el primer episodio
+        const firstBtn = document.querySelector('#episodios button');
+        if (firstBtn) {
+          firstBtn.classList.add('active');
+          firstBtn.style.background = 'red';
+          firstBtn.style.color = '#fff';
+        }
+      }
 
       function playEpisode(src, titulo, index) {
         currentEpisodeIndex = index;
@@ -518,12 +525,13 @@ const storageKey = `ultimo_episodio_${nombreSerie}`;
       }
     </style>
     <br>
+    
     <div class="sinopsis">
       <h4>
         Sinopsis: <!--Aca va la sinopsis en el <p>Sinopsis</<p> que esta debajo-->
       </h4>
       <p>
-        Continuación del anime 'Dragon Ball' que se divide básicamente en cuatro sagas: la llegada de los Saiyajins, la batalla contra Freezer, el nacimiento de Célula y el despertar de Monstruo Bu. De éstas se desprenden subsagas y algunas otras historias que no son originales del manga.
+        La historia de Roberto Gómez Bolaños, el hombre que transformó su anhelo de hacer reír en un legado universal. Desde su infancia hasta su consagración en las décadas de los 50 a los 80, esta biografía íntima nos revela cómo un joven soñador encontró su lugar en la naciente industria televisiva, creando personajes inolvidables cargados de ternura y humor.
       </p>
     </div>
   
@@ -547,12 +555,12 @@ const storageKey = `ultimo_episodio_${nombreSerie}`;
       <br>
       <div class="series-grid">
         <a href="Chespirito sin querer queriendo (2025).html" class="serie">
-          <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt=""> <!--Aca va las imagenes de las series solo debes de agregar la ultima parte despues de la "/" ej: (https://image.tmdb.org/t/p/original/qZJt1XlRVbQhGV7MtZnbiR6vxPh.jpg) solo debes agregar esto (qZJt1XlRVbQhGV7MtZnbiR6vxPh.jpg)-->
-          <p>Chespi</p>
+          <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt=""> <!--Aca va las imagenes de las series solo debes de agregar la ultima parte despues de la "/" ej: (https://image.tmdb.org/t/p/original/qZJt1XlRVbQhGV7MtZnbiR6vxPh.jpg) solo debes agregar esto (qZJt1XlRVbQhGV7MtZnbiR6vxPh.jpg)-->
+          <p>Chespiritooooo</p>
         </a>
-        <a href="Los siete pecados capitales (2014).html" class="serie">
-          <img loading="lazy" src="https://image.tmdb.org/t/p/w300/r9Kp3g1JUpUZ8L1sIBrs97HM1Cl.jpg" alt="">
-          <p>Los siete pecados capitales</p>
+        <a href="Dragon Ball Z (1989).html" class="serie">
+          <img loading="lazy" src="https://image.tmdb.org/t/p/w300/yfyToia25GnvjY7FPAGaCm3lKRc.jpg" alt="">
+          <p>Dragon Ball z</p>
         </a>
         <a href="#" class="serie">
           <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt="">
@@ -608,8 +616,8 @@ const storageKey = `ultimo_episodio_${nombreSerie}`;
     
     <script>
       document.addEventListener('DOMContentLoaded', () => {
-        const serieTitulo = "Dragon Ball Z";
-        const serieImagen = "https://image.tmdb.org/t/p/w300/yfyToia25GnvjY7FPAGaCm3lKRc.jpg"; //Aca va la ultima parte de la imagen como hice el ej de arriba se agrega despues de la barra. esta de esta forma para que la imagen carge mas rapido
+        const serieTitulo = "Dragon ball z kai";
+        const serieImagen = "https://image.tmdb.org/t/p/w300/3a9eeqrmdjQMeF9oLoBbpP53NCD.jpg"; //Aca va la ultima parte de la imagen como hice el ej de arriba se agrega despues de la barra. esta de esta forma para que la imagen carge mas rapido
         const archivoHTML = "../View Series/Dragon Ball Z (1989).html"; // ✅ Ruta relativa al historial
         const progresoTexto = "Actualizado"; // Puedes cambiarlo dinámicamente
 
@@ -685,8 +693,8 @@ const storageKey = `ultimo_episodio_${nombreSerie}`;
     <script>
       document.getElementById('btn-favorito').addEventListener('click', () => {
         const nuevaPelicula = {
-          titulo: "Dragon Ball Z",
-          imagen: "https://image.tmdb.org/t/p/w300/yfyToia25GnvjY7FPAGaCm3lKRc.jpg",
+          titulo: "Dragon ball z kai",
+          imagen: "https://image.tmdb.org/t/p/w300/3a9eeqrmdjQMeF9oLoBbpP53NCD.jpg",
           genero: "Drama comedia", /* o "Serie", "Crimen/Serie", etc.*/
           archivo: "../View Series/Dragon Ball Z (1989).html",
           tipo: "serie", // ✅ identifica si es "serie" o "pelicula"
@@ -918,8 +926,7 @@ const storageKey = `ultimo_episodio_${nombreSerie}`;
         const savedTime = parseFloat(localStorage.getItem(key));
 
         // Guardar episodio actual
-        localStorage.setItem(storageKey, JSON.stringify({ temporada: temporadaSelect.value, index: index }));
-
+        localStorage.setItem(storageKey, JSON.stringify({ temporada, index }));
 
     
         // Limpiar contenedor y crear video manualmente sin autoplay
@@ -1000,7 +1007,7 @@ const storageKey = `ultimo_episodio_${nombreSerie}`;
   
       window.addEventListener("DOMContentLoaded", () => {
     
-        const ultimo = JSON.parse(localStorage.getItem(storageKey) || "null");
+        const ultimo = JSON.parse(localStorage.getItem(storageKey) || "{}");
         if (ultimo.temporada && typeof ultimo.index === "number") {
           const episodios = episodiosData[ultimo.temporada];
           if (episodios && episodios[ultimo.index]) {
@@ -1082,7 +1089,7 @@ const storageKey = `ultimo_episodio_${nombreSerie}`;
   };
 
   window.addEventListener("DOMContentLoaded", () => {
-    const ultimo = JSON.parse(localStorage.getItem(storageKey) || "null");
+    const ultimo = JSON.parse(localStorage.getItem(storageKey) || "{}");
     if (ultimo.temporada && typeof ultimo.index === "number") {
       temporadaSelect.value = ultimo.temporada;
       renderEpisodios(ultimo.temporada);
@@ -1099,7 +1106,7 @@ const storageKey = `ultimo_episodio_${nombreSerie}`;
 
 <script>
   window.addEventListener("DOMContentLoaded", () => {
-    const ultimo = JSON.parse(localStorage.getItem(storageKey) || "null");
+    const ultimo = JSON.parse(localStorage.getItem(storageKey) || "{}");
     const temporada = ultimo.temporada || temporadaSelect.value;
     const index = typeof ultimo.index === "number" ? ultimo.index : obtenerProgresoTemporada(temporada);
     const episodio = (episodiosData[temporada] || [])[index];
