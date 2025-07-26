@@ -281,7 +281,7 @@
           { titulo: "Episodio 6 - Nombre del episodio", src: "Link del video" },
           { titulo: "Episodio 7 - Nombre del episodio", src: "Link del video" },
           { titulo: "Episodio 8 - Nombre del episodio", src: "Link del video" },
-          { titulo: "Episodio 9 - Nombre del episodio", src: "https://ia800605.us.archive.org/12/items/DRAGONBALLGTLATINL/001-El%20misterio%20de%20las%20esferas%20de%20dragon.mp4?cnt=0" }
+          { titulo: "Episodio 9 - Nombre del episodio", src: "Link del video" }
           // Agrega más si tienes
         ],
         2: [
@@ -309,52 +309,11 @@
       const mainVideo = document.querySelector('.main-video video');
       const titleDiv = document.querySelector('.main-video .title');
       // 🔁 CAMBIÁ este nombre por uno único para cada archivo HTML
-const nombreSerie = "DragonBallZ"; // por ejemplo: "DragonBallDaima", "TheWalkingDead", etc.
-const storageKey = `ultimo_episodio_${nombreSerie}`;
+      const nombreSerie = "DragonBallZ"; // por ejemplo: "DragonBallDaima", "TheWalkingDead", etc.
+      const storageKey = `ultimo_episodio_${nombreSerie}`;
 
 
-      ;  /*ACA HAY QUE CAMBIAR EL AÑO POR EJ: EL AÑO SE LA SERIE SE ESTRENO EN EL "2010" DEBES DE CAMBIAR 2023 Y PONER 2010 (ABAJO HAY OTRO DEBE HACER LO MISMO)*/
-        if (yearSpan) yearSpan.textContent = yearBySeason[temporada] || '0000';
-        episodioCount.textContent = `${episodios.length} Capítulos`;
-        
-        episodios.forEach((ep, index) => {
-          const btn = document.createElement("button");
-          btn.textContent = index + 1;
-          btn.style.cssText = `
-          width: 40px; height: 40px;
-          background: #222; border: none; border-radius: 5px;
-          color: #ccc; font-size: 1rem; cursor: pointer;
-          `;
-          
-          btn.addEventListener("click", () => {
-            mainVideo.setAttribute("src", ep.src);
-            if (titleDiv) {
-              titleDiv.innerHTML = ep.titulo;
-            }
-          });
-          episodiosContainer.appendChild(btn);
-        });
-  
-        // Marcar automáticamente el primer episodio
-        const firstBtn = document.querySelector('#episodios button');
-        if (firstBtn) {
-          firstBtn.classList.add('active');
-          firstBtn.style.background = 'red';
-          firstBtn.style.color = '#fff';
-        }
-
-      }
-
-      // Inicializar con la temporada por defecto
-      renderEpisodios(temporadaSelect.value);
-
-      // Cambiar temporada
-      temporadaSelect.addEventListener("change", () => {
-        renderEpisodios(temporadaSelect.value);
-      });
-    </script>
-    
-    <script>
+      
       let currentEpisodeIndex = 0;
 
       function renderEpisodios(temporada) { 
@@ -389,7 +348,6 @@ const storageKey = `ultimo_episodio_${nombreSerie}`;
           firstBtn.style.background = 'red';
           firstBtn.style.color = '#fff';
         }
-
       }
 
       function playEpisode(src, titulo, index) {
@@ -410,6 +368,14 @@ const storageKey = `ultimo_episodio_${nombreSerie}`;
           btn.style.color = "#ccc";
         });
 
+        // Inicializar con la temporada por defecto
+      renderEpisodios(temporadaSelect.value);
+
+      // Cambiar temporada
+      temporadaSelect.addEventListener("change", () => {
+        renderEpisodios(temporadaSelect.value);
+      });
+
 
         // Marcar el botón actual en rojo
   
@@ -425,12 +391,10 @@ const storageKey = `ultimo_episodio_${nombreSerie}`;
         msg.classList.add("visible");
         setTimeout(() => msg.classList.remove("visible"), 3000);
   
-        /*RECORDATORIO INDIVIDUAL DE EPISODIOS*/
-        localStorage.setItem(storageKey, JSON.stringify({
-  temporada: temporadaSelect.value,
-  index: index
-}));
-
+        localStorage.setItem("ultimo_episodio", JSON.stringify({
+          temporada: temporadaSelect.value,
+          index: index
+        }));
       }
 
       // Guardar tiempo cada 5s
@@ -607,13 +571,13 @@ const storageKey = `ultimo_episodio_${nombreSerie}`;
       <h4>Podría interesarte:</h4>
       <br>
       <div class="series-grid">
-        <a href="#" class="serie">
-          <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt=""> <!--Aca va las imagenes de las series solo debes de agregar la ultima parte despues de la "/" ej: (https://image.tmdb.org/t/p/original/qZJt1XlRVbQhGV7MtZnbiR6vxPh.jpg) solo debes agregar esto (qZJt1XlRVbQhGV7MtZnbiR6vxPh.jpg)-->
-          <p>Nombre de serie</p>
-        </a>
         <a href="Los siete pecados capitales (2014).html" class="serie">
-          <img loading="lazy" src="https://image.tmdb.org/t/p/w300/r9Kp3g1JUpUZ8L1sIBrs97HM1Cl.jpg" alt="">
-          <p>Los siete pecados capitales</p>
+          <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt=""> <!--Aca va las imagenes de las series solo debes de agregar la ultima parte despues de la "/" ej: (https://image.tmdb.org/t/p/original/qZJt1XlRVbQhGV7MtZnbiR6vxPh.jpg) solo debes agregar esto (qZJt1XlRVbQhGV7MtZnbiR6vxPh.jpg)-->
+          <p>Los siete</p>
+        </a>
+        <a href="#" class="serie">
+          <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt="">
+          <p>Nombre de serie</p>
         </a>
         <a href="#" class="serie">
           <img loading="lazy" src="../img poster/Agregar peliculas.gif" alt="">
@@ -1060,7 +1024,7 @@ const storageKey = `ultimo_episodio_${nombreSerie}`;
   
       window.addEventListener("DOMContentLoaded", () => {
     
-        const ultimo = JSON.parse(localStorage.getItem(storageKey) || "{}");
+        const ultimo = JSON.parse(localStorage.getItem("ultimo_episodio") || "{}");
         if (ultimo.temporada && typeof ultimo.index === "number") {
           const episodios = episodiosData[ultimo.temporada];
           if (episodios && episodios[ultimo.index]) {
@@ -1142,7 +1106,7 @@ const storageKey = `ultimo_episodio_${nombreSerie}`;
   };
 
   window.addEventListener("DOMContentLoaded", () => {
-    const ultimo = JSON.parse(localStorage.getItem(storageKey) || "{}");
+    const ultimo = JSON.parse(localStorage.getItem("ultimo_episodio") || "{}");
     if (ultimo.temporada && typeof ultimo.index === "number") {
       temporadaSelect.value = ultimo.temporada;
       renderEpisodios(ultimo.temporada);
@@ -1159,7 +1123,7 @@ const storageKey = `ultimo_episodio_${nombreSerie}`;
 
 <script>
   window.addEventListener("DOMContentLoaded", () => {
-    const ultimo = JSON.parse(localStorage.getItem(storageKey) || "{}");
+    const ultimo = JSON.parse(localStorage.getItem("ultimo_episodio") || "{}");
     const temporada = ultimo.temporada || temporadaSelect.value;
     const index = typeof ultimo.index === "number" ? ultimo.index : obtenerProgresoTemporada(temporada);
     const episodio = (episodiosData[temporada] || [])[index];
