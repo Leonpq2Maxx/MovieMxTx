@@ -337,12 +337,10 @@
         });
   
         // Marcar automáticamente el primer episodio
-        const firstBtn = document.querySelector('#episodios button');
-        if (firstBtn) {
-          firstBtn.classList.add('active');
-          firstBtn.style.background = 'red';
-          firstBtn.style.color = '#fff';
-        }
+        if (episodios.length > 0) {
+  playEpisode(episodios[0].src, episodios[0].titulo, 0);
+}
+
       }
 
       // Inicializar con la temporada por defecto
@@ -383,12 +381,10 @@
         });
 
         // Marcar automáticamente el primer episodio
-        const firstBtn = document.querySelector('#episodios button');
-        if (firstBtn) {
-          firstBtn.classList.add('active');
-          firstBtn.style.background = 'red';
-          firstBtn.style.color = '#fff';
-        }
+        if (episodios.length > 0) {
+  playEpisode(episodios[0].src, episodios[0].titulo, 0);
+}
+
       }
 
       function playEpisode(src, titulo, index) {
