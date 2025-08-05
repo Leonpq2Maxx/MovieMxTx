@@ -192,7 +192,7 @@
   
   <div class="player">
     <video class="vid1 js-player" loading="lazy" controls poster="https://image.tmdb.org/t/p/w780/wUMDnvi1xa8iMEpRDVAXrcAtqus.jpg" preload="none">
-      <source src="Link de pelicul" type="video/mp4">
+      <source src="https://dl.dropbox.com/scl/fi/k0mfodc5lt9anzzq9x65w/Crater-un-viaje-inolvidable-2023.mp4?rlkey=861xx2vypv5psonie0uz4hs8f&st=" type="video/mp4">
     </video>
   </div>
 
@@ -212,11 +212,35 @@
     <span>🇲🇽</span>
   </div>
 
-  <div class="titulo">
+  <div class="titulo-flex">
     <h3>Cráter: Un viaje inolvidable</h3>
-    <br>
-    <h4>Género: Ciencia ficción/Acción/Aventura/Familia</h4>
+    <div class="genero-badge">Acción/Ciencia ficción/Aventura/Familia</div>
   </div>
+
+  <style>
+    .titulo-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .genero-badge {
+      padding: 4px 10px;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 0, 81, 1);
+      border: 1px solid rgba(255, 0, 81, 1);
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-style: normal;
+      max-width: 135px;          /* Limita el ancho máximo */
+      white-space: nowrap;       /* No saltar de línea */
+      overflow: hidden;          /* Oculta el exceso */
+      text-overflow: ellipsis;   /* Agrega los ... */
+    }
+  </style>
 
   <div class="sinopsis">
     <h4>
