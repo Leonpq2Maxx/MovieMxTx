@@ -191,17 +191,17 @@
 <body ondragstart="return false;" ondrop="return false;">
   
   <div class="player">
-    <video class="vid1 js-player" controls loading="lazy" poster="https://image.tmdb.org/t/p/w780/mGr18hk6oDQyGjaSpbF7o5epoJV.jpg" preload="none">
-      <source loading="lazy" src="https://dl.dropbox.com/scl/fi/s60h3fjqyfocpgd528frg/Dragon-Ball-Z-Los-tres-super-saiyajins.mp4?rlkey=uukcaj37oqfeptt9k5ajyj095&st=" type="video/mp4">
+    <video class="vid1 js-player" controls loading="lazy" poster="https://image.tmdb.org/t/p/w780/nZaJFGAb6VxUbDQI14Tq1ZfzlxL.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+      <source src="Link de pelicula" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
 
-  <div id="resume-msg">✅ Reanudando donde lo dejaste: Dragon Ball Z: Los tres grandes Super Saiyans</div>
+  <div id="resume-msg">✅ Reanudando donde lo dejaste: Dulce venganza 2</div>
 
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>1992</span>
-    <i class="fal fa-clock"></i><span>45min</span>
-    <i class="fal fa-thumbs-up"></i><span>86%</span>
+    <i class="fal fa-calendar-alt"></i><span>2013</span> <!--Aca va el año de estreno de pelicula-->
+    <i class="fal fa-clock"></i><span>1h 46min</span> <!--aca va cuanto dura-->
+    <i class="fal fa-thumbs-up"></i><span>82%</span> <!--aca va la calificacion-->
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
@@ -213,8 +213,8 @@
   </div>
 
   <div class="titulo-flex">
-    <h3 class="titulo">Dragon Ball Z: Los tres grandes Super Saiyans</h3>
-    <div class="genero-badge">Animación/Anime/Acción/Ciencia ficción</div>
+    <h3>Dulce venganza 2</h3>
+    <div class="genero-badge">Terror/Crimen/Suspenso</div>
   </div>
 
   <style>
@@ -240,24 +240,46 @@
       overflow: hidden;          /* Oculta el exceso */
       text-overflow: ellipsis;   /* Agrega los ... */
     }
+    
+  </style>
 
-    .titulo {
+  <div class="titulo-flex">
+    <h3></h3>
+    <div class="genero-badge"></div>
+  </div>
+
+  <style>
+    .titulo-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .genero-badge {
+      padding: 4px 10px;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 0, 81, 1);
+      border: 1px solid rgba(255, 0, 81, 1);
+      border-radius: 20px;
       font-size: 0.7rem;
       font-style: normal;
-      max-width: 210px;          /* Limita el ancho máximo */
+      max-width: 135px;          /* Limita el ancho máximo */
       white-space: nowrap;       /* No saltar de línea */
       overflow: hidden;          /* Oculta el exceso */
       text-overflow: ellipsis;   /* Agrega los ... */
     }
     
   </style>
-
+  
   <div class="sinopsis">
     <h4>
       Sinopsis:
     </h4>
     <p>
-      Décima película basada en el manga/anime de Akira Toriyama y séptima de la etapa Dragon Ball Z. Cuando el Dr. Gero murió asesinado por #17, el ordenador central no quedo desactivado, sino siguió trabajando. Este trabajo consistió en crear tres nuevos androides: #13, #14 y #15; con el único motivo de destruir a Son Goku...
+      Jessica acaba de instalarse en Nueva York, donde, al igual que muchas otras jóvenes trata de hacer carrera como modelo. Pero en su primera sesión de fotos en la gran ciudad termina siendo brutalmente violada y torturada. Creyéndola muerta, Jessica es enterrada viva, pero contra todo pronóstico, se las arregla para escapar con vida de su tumba. Ahora exigirá su venganza…
     </p>
   </div>
 
@@ -282,105 +304,29 @@
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
-      <a href="Dragon Ball Z La Batalla De Los Dioses.html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/cIyPFIeSKNTiWU9Zny0c0IVPQRY.jpg" alt="">
-        <p>Dragon Ball Z La Batalla De Los Dioses</p>
+      <a href="Dulce venganza (2010).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/yfJwNAIzPPyAAOoCue1goOuHM81.jpg" alt="">
+        <p>Dulce venganza</p>
       </a>
-      <a href="Dragon Ball Z La resurreccion de Freezer (2015).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/hasMQTJXgv20EyNUDcNKMhQW6gq.jpg" alt="">
-        <p>Dragon Ball Z: La resurreccion de Freezer</p>
+      <a href="Dulce venganza 3 (2015).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/aH3TbHO71FkUSXVKDbpPaoFtgG3.jpg" alt="">
+        <p>Dulce venganza 3</p>
       </a>
-      <a href="Dragon Ball Super Broly.html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/6JilEC1SON8tWIRHcdJzf4uVBpX.jpg" alt="">
-        <p>Dragon Ball Super: Broly</p>
+      <a href="Mara (2018).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/gQDmXAef1Oc1SXci5mui2x5DJwt.jpg" alt="">
+        <p>Mara</p>
       </a>
-      <a href="Dragon Ball Super Super Hero (2022).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/o3a2yc2zkmdsq9wZ6Hnyu3jfLcC.jpg" alt="">
-        <p>Dragon Ball Super: Super Hero</p>
+      <a href="Martyrs (2008).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/5kymocKK0SfyEEV0ohNEBz1lxNx.jpg" alt="">
+        <p>Martyrs</p>
       </a>
-      <a href="Dragon Ball Z El poder invensible.html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/qanX5FNg7w7DfjLqwGHZJtiF0Ri.jpg" alt="">
-        <p>Dragon Ball Z: El poder Invencible</p>
+      <a href="La Sustancia (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/cQD1qEnPOKUPHAui0okOLZSgitu.jpg" alt="">
+        <p>La Sustancia</p>
       </a>
-      <a href="Dragon Ball Z El regreso del guerrero legendario.html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/iwvMmddNNf6DVLq3CBe8hhpHUgE.jpg" alt="">
-        <p>Dragon Ball Z: El regreso Del guerrero legendario</p>
-      </a>
-      <a href="Dragon Ball Z El combate final.html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/gYcZAjYdTUGVf5oyqO2CawwuBla.jpg" alt="">
-        <p>Dragon Ball Z: El combate final</p>
-      </a>
-      <a href="Dragon Ball Z El ataque del dragón (1995).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/7uRu9EA3nie0n2mlVDDLlTI3IzC.jpg" alt="">
-        <p>Dragon Ball Z: El ataque del dragon</p>
-      </a>
-      <a href="Dragon Ball Z La galaxia corre peligro (1993).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/oAUr61gawC5q4LlxtmfrIwKeGco.jpg" alt="">
-        <p>Dragon Ball Z: La galaxia corre peligro</p>
-      </a>
-      <a href="Dragon Ball Z Los rivales mas poderosos.html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/uqTSXqjaSgSAT2lCv3GyZeodQPG.jpg" alt="">
-        <p>Dragon Ball Z: Los rivales mas poderosos</p>
-      </a>
-      <a href="Dragon Ball Z El regreso de cooler.html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/zJn14ySh0NTZCOIReQZiWE1fkje.jpg" alt="">
-        <p>Dragon Ball Z: El regreso de Cooler</p>
-      </a>
-      <a href="Dragon Ball Z La pelea de bardock vs freezer.html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/mnFEyVcDlSshzl65hEdWoYXtnm3.jpg" alt="">
-        <p>Dragon Ball Z: La pelea de Bardock Vs Freezer</p>
-      </a>
-      <a href="Dragon Ball Z Episodio de bardock.html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/f9a79aC4CaaUKZt4el5Ncnt24sM.jpg" alt="">
-        <p>Dragon Ball Z: Episodio de Bardock</p>
-      </a>
-      <a href="Dragon Ball Z El mas fuerte del mundo.html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/5elbm3iLgGQ6nA5vqUmi9vIojbF.jpg" alt="">
-        <p>Dragon Ball Z: El más fuerte del mundo</p>
-      </a>
-      <a href="Dragon Ball Z Devuelvamen a mi gohan.html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/koo5d4CdZd0sxcxxTgxXUHMSY10.jpg" alt="">
-        <p>Dragon Ball Z: Devuélvanme a mi Gohan</p>
-      </a>
-      <a href="Dragon Ball Z Los dos guerreros del futuro.html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/x0FCkSSdOGTA3gC99QayGJH0Dqx.jpg" alt="">
-        <p>Dragon Ball Z: Los dos guerraros del futuro</p>
-      </a>
-      <a href="Dragon Ball Z La fusion de goku y vegeta.html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/yo9ioIpVLR8AitD9Q9m13Nf3of8.jpg" alt="">
-        <p>Dragon Ball Z: La fusion de Goku y Vegeta</p>
-      </a>
-      <a href="Dragon Ball Z El super guerrero Son Goku.html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/usMb0DzjnMkekizU3ZKkTHQ4x40.jpg" alt="">
-        <p>Dragon Ball Z: El super saiyajin Son Goku</p>
-      </a>
-      <a href="Dragon Ball Z La super batalla (1990).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/69dMY6CPe6mqi7nMC2bVeCcjJQI.jpg" alt="">
-        <p>Dragon Ball Z: La super batalla</p>
-      </a>
-      <a href="Dragon Ball Z Plan para erradicar a los Super Saiyans (2010).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/qPv8avE1joxywziPMd49k6yINJp.jpg" alt="">
-        <p>Dragon Ball Z: Plan para erradicar a los Super Saiyans</p>
-      </a>
-      <a href="Dragon Ball Gt despues de 100 años.html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/izZaeWcWDir9PvuSwaITV1E1rA8.jpg" alt="">
-        <p>Dragon Ball GT: Despues de 100 años</p>
-      </a>
-      <a href="Dragon Ball La leyenda del dragón Shenron (1986).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/5uvaNiQ1rq08rAJgg5NyXQdBC58.jpg" alt="">
-        <p>Dragon Ball: La leyenda del dragón Shenron</p>
-      </a>
-      <a href="Dragon Ball Gran aventura mística (1988).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/f2BipTKswrdpqoCc1xJDyL35rJy.jpg" alt="">
-        <p>Dragon Ball: Gran aventura mística</p>
-      </a>
-      <a href="Dragon Ball La princesa durmiente del castillo del mal (1987).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/sTTQ3efvJeW4VDheKvyoLgFAgku.jpg" alt="">
-        <p>Dragon Ball: La princesa durmiente del castillo del mal</p>
-      </a>
-      <a href="Dragon Ball El camino hacia el poder (1996).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/2PiRMHl7QDwuB0rAw0GjVHVb847.jpg" alt="">
-        <p>Dragon Ball: El camino hacia el poder</p>
+      <a href="La primera profecia (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/kJkrr39cjRcfz3jR6XcGa8wSkyl.jpg" alt="">
+        <p>La Primera profecia</p>
       </a>
     </div>
   </div>
@@ -443,10 +389,10 @@
     /* ACA VA LA NOMBRE, IMAGEN, GENERO, ARCHIVO DONDE GUARDAN SU HTML DE PELICULA Y EL TIEMPO */
     document.getElementById('btn-favorito').addEventListener('click', () => {
       const nuevaPelicula = {
-        titulo: "Dragon Ball Z: Los tres grandes Super Saiyans",
-        imagen: "https://image.tmdb.org/t/p/w300/pIwjWaEuCcT3QVBd9Ng9wG3kbpU.jpg",
-        genero: "anime",
-        archivo: "Dragon Ball Z Los tres grandes Super Saiyans.html",
+        titulo: "Dulce venganza 2",
+        imagen: "https://image.tmdb.org/t/p/w300/g1WEqWtielGmcWj0hleLhDriB7w.jpg",
+        genero: "Genero",
+        archivo: "Dulce venganza 2 (2013).html",
         tipo: "pelicula",
         timestamp: Date.now()
       };
@@ -505,9 +451,9 @@
       const STORAGE_KEY = 'pos_' + videoSrc;
 
       /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
-      const historialTitulo = "Dragon Ball Z: Los tres grandes Super Saiyans";
-      const historialImagen = "https://image.tmdb.org/t/p/w300/pIwjWaEuCcT3QVBd9Ng9wG3kbpU.jpg";
-      const historialArchivo = "Dragon Ball Z Los tres grandes Super Saiyans.html";
+      const historialTitulo = "Dulce venganza 2";
+      const historialImagen = "https://image.tmdb.org/t/p/w300/g1WEqWtielGmcWj0hleLhDriB7w.jpg";
+      const historialArchivo = "Dulce venganza 2 (2013).html";
 
       let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
       let indexHist = historial.findIndex(item => item.titulo === historialTitulo);

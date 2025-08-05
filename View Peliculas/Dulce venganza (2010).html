@@ -191,17 +191,17 @@
 <body ondragstart="return false;" ondrop="return false;">
   
   <div class="player">
-    <video class="vid1 js-player" controls loading="lazy" poster="https://image.tmdb.org/t/p/w780/" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+    <video class="vid1 js-player" controls loading="lazy" poster="https://image.tmdb.org/t/p/w780/w86s0hTKFJ9Vtusm8kknGoU61Up.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
       <source src="Link de pelicul" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
 
-  <div id="resume-msg">✅ Reanudando donde lo dejaste: Nombre de pelicula</div>
+  <div id="resume-msg">✅ Reanudando donde lo dejaste: Dulce venganza</div>
 
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>0000</span> <!--Aca va el año de estreno de pelicula-->
-    <i class="fal fa-clock"></i><span>0h 00min</span> <!--aca va cuanto dura-->
-    <i class="fal fa-thumbs-up"></i><span>00%</span> <!--aca va la calificacion-->
+    <i class="fal fa-calendar-alt"></i><span>2010</span> <!--Aca va el año de estreno de pelicula-->
+    <i class="fal fa-clock"></i><span>1h 48min</span> <!--aca va cuanto dura-->
+    <i class="fal fa-thumbs-up"></i><span>63%</span> <!--aca va la calificacion-->
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
@@ -211,19 +211,44 @@
     </div>
     <span>🇲🇽</span>
   </div>
-  
-  <div class="titulo">
-    <h3>Nombre de pelicula</h3>
-    <br/>
-    <h4>Género: </h4>
+
+  <div class="titulo-flex">
+    <h3>Dulce venganza</h3>
+    <div class="genero-badge">Crimen/Terror/Suspenso</div>
   </div>
+
+  <style>
+    .titulo-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .genero-badge {
+      padding: 4px 10px;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 0, 81, 1);
+      border: 1px solid rgba(255, 0, 81, 1);
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-style: normal;
+      max-width: 135px;          /* Limita el ancho máximo */
+      white-space: nowrap;       /* No saltar de línea */
+      overflow: hidden;          /* Oculta el exceso */
+      text-overflow: ellipsis;   /* Agrega los ... */
+    }
+    
+  </style>
   
   <div class="sinopsis">
     <h4>
       Sinopsis:
     </h4>
     <p>
-      SINOPSIS.
+      Una joven escritora viaja al campo en busca de un poco de soledad y tranquilidad para trabajar en su nuevo libro. Pero en su lugar encuentra una horrible pesadilla. Tras ser agredida por cuatro degenerados, Jennifer logra sobrevivir y mientras intenta sobreponerse, en su mente, ahora dañada y psicótica sólo existe una idea: la venganza sobre esos cuatro hombres que la violaron.
     </p>
   </div>
 
@@ -248,29 +273,29 @@
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
-      <a href="#" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
-        <p>Nombre de pelicula</p>
+      <a href="Dulce venganza 2 (2013).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/g1WEqWtielGmcWj0hleLhDriB7w.jpg" alt="">
+        <p>Dulce venganza 2</p>
       </a>
-      <a href="#" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
-        <p>Nombre de pelicula</p>
+      <a href="Dulce venganza 3 (2015).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/aH3TbHO71FkUSXVKDbpPaoFtgG3.jpg" alt="">
+        <p>Dulce venganza 3</p>
       </a>
-      <a href="#" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
-        <p>Nombre de pelicula</p>
+      <a href="Until Dawn Noche de terror (2025).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/vAYTXSUnQjmTFcm97BhROQav1wF.jpg" alt="">
+        <p>Until Dawn: Noche de terror</p>
       </a>
-      <a href="#" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
-        <p>Nombre de pelicula</p>
+      <a href="Un lugar en Silencio 3 Día uno (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/mB9GP9Wd7RduYpCSiqurZSnarl6.jpg" alt="">
+        <p>Un lugar en Silencio: Día uno</p>
       </a>
-      <a href="#" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
-        <p>Nombre de pelicula</p>
+      <a href="Terrifier 3 Payaso (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/63xYQj1BwRFielxsBDXvHIJyXVm.jpg" alt="">
+        <p>Terrifier 3</p>
       </a>
-      <a href="#" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
-        <p>Nombre de pelicula</p>
+      <a href="Megan 2 (2025).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/fBgyUqyu3ioTSQjJJE5RFs2EG3B.jpg" alt="">
+        <p>M3GAN 2</p>
       </a>
     </div>
   </div>
@@ -333,10 +358,10 @@
     /* ACA VA LA NOMBRE, IMAGEN, GENERO, ARCHIVO DONDE GUARDAN SU HTML DE PELICULA Y EL TIEMPO */
     document.getElementById('btn-favorito').addEventListener('click', () => {
       const nuevaPelicula = {
-        titulo: "Nombre de pelicula",
-        imagen: "https://image.tmdb.org/t/p/w300/",
+        titulo: "Dulce venganza",
+        imagen: "https://image.tmdb.org/t/p/w300/yfJwNAIzPPyAAOoCue1goOuHM81.jpg",
         genero: "Genero",
-        archivo: ".html",
+        archivo: "Dulce venganza (2010).html",
         tipo: "pelicula",
         timestamp: Date.now()
       };
@@ -395,9 +420,9 @@
       const STORAGE_KEY = 'pos_' + videoSrc;
 
       /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
-      const historialTitulo = "Nombre de pelicula";
-      const historialImagen = "https://image.tmdb.org/t/p/w300/";
-      const historialArchivo = ".html";
+      const historialTitulo = "Dulce venganza";
+      const historialImagen = "https://image.tmdb.org/t/p/w300/yfJwNAIzPPyAAOoCue1goOuHM81.jpg";
+      const historialArchivo = "Dulce venganza (2010).html";
 
       let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
       let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
