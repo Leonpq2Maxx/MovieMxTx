@@ -211,9 +211,9 @@
     </div>
     <span>🇲🇽</span>
   </div>
-  
+
   <div class="titulo-flex">
-    <h3>After 4: Aquí acaba todo</h3>
+    <h3 class="titulo">After 4: Aquí acaba todo</h3>
     <div class="genero-badge">Romance/Drama</div>
   </div>
 
@@ -241,6 +241,14 @@
       text-overflow: ellipsis;   /* Agrega los ... */
     }
 
+    .titulo {
+      font-size: 0.7rem;
+      font-style: normal;
+      max-width: 210px;          /* Limita el ancho máximo */
+      white-space: nowrap;       /* No saltar de línea */
+      overflow: hidden;          /* Oculta el exceso */
+      text-overflow: ellipsis;   /* Agrega los ... */
+    }
   </style>
 
   <div class="sinopsis">
