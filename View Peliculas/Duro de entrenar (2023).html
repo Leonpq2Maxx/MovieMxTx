@@ -213,7 +213,7 @@
   </div>
   
   <div class="titulo-flex">
-    <h3 class="titulo">Duro de entrenar</h3>
+    <h3>Duro de entrenar</h3>
     <div class="genero-badge">Accion/Comedia/Suspenso</div>
   </div>
 
@@ -236,15 +236,6 @@
       font-size: 0.7rem;
       font-style: normal;
       max-width: 135px;          /* Limita el ancho máximo */
-      white-space: nowrap;       /* No saltar de línea */
-      overflow: hidden;          /* Oculta el exceso */
-      text-overflow: ellipsis;   /* Agrega los ... */
-    }
-
-    .titulo {
-      font-size: 0.7rem;
-      font-style: normal;
-      max-width: 200px;          /* Limita el ancho máximo */
       white-space: nowrap;       /* No saltar de línea */
       overflow: hidden;          /* Oculta el exceso */
       text-overflow: ellipsis;   /* Agrega los ... */
@@ -577,7 +568,7 @@
     document.getElementById('btn-favorito').addEventListener('click', () => {
       const nuevaPelicula = {
         titulo: "Duro de entrenar",
-        imagen: "https://image.tmdb.org/t/p/w300/XkS6kSA0W3c0zVr3QrCBseaNgc.jpg",
+        imagen: "https://image.tmdb.org/t/p/w300/lXkS6kSA0W3c0zVr3QrCBseaNgc.jpg",
         genero: "Genero",
         archivo: "Duro de entrenar (2023).html",
         tipo: "pelicula",
@@ -640,7 +631,7 @@
 
       /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
       const historialTitulo = "Duro de entrenar";
-      const historialImagen = "https://image.tmdb.org/t/p/w300/XkS6kSA0W3c0zVr3QrCBseaNgc.jpg";
+      const historialImagen = "https://image.tmdb.org/t/p/w300/lXkS6kSA0W3c0zVr3QrCBseaNgc.jpg";
       const historialArchivo = "Duro de entrenar (2023).html";
 
       let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
