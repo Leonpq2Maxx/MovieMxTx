@@ -191,6 +191,15 @@
       font-size: 1rem;
       font-style: normal;
     }
+
+    .actor .actor-role {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.75rem;
+  color: #bbb;
+  font-style: italic;
+}
+
     .actores-row {
       display: flex;
       gap: 12px;
@@ -336,34 +345,38 @@
   </div>
 
   <!-- ======== SECCIÓN ACTORES (DESLIZABLE HORIZONTAL) ======== -->
-  <div class="actores">
-    <h4>Actores</h4>
-    <div class="actores-row" id="actores-row">
-      <!-- Reemplaza los src por las fotos reales de cada actor -->
-      <div class="actor">
-        <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/5Vs7huBmTKftwlsc2BPAntyaQYj.jpg" alt="Vera Farmiga">
-        <span class="actor-name">Vera Farmiga</span>
-      </div>
-      <div class="actor">
-        <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/tc1ezEfIY8BhCy85svOUDtpBFPt.jpg" alt="Patrick Wilson">
-        <span class="actor-name">Patrick Wilson</span>
-      </div>
-      <div class="actor">
-        <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/cBSSODc05j8s8omYfX0Px07AIvr.jpg" alt="Actor 3">
-        <span class="actor-name">Mia Tomlinson</span>
-      </div>
-      <div class="actor">
-        <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/s8UEIomgY5AaEmPHkcPAScp68Fw.jpg" alt="Actor 4">
-        <span class="actor-name">Ben Hardy</span>
-      </div>
-      <div class="actor">
-        <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/A43USnarLnfWXDvWimT24cPVfEm.jpg" alt="Actor 5">
-        <span class="actor-name">Rebecca Calder</span>
-      </div>
-      <!-- añade más .actor según necesites -->
+<div class="actores">
+  <h4>Actores</h4>
+  <div class="actores-row" id="actores-row">
+    <div class="actor">
+      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/5Vs7huBmTKftwlsc2BPAntyaQYj.jpg" alt="Vera Farmiga">
+      <span class="actor-name">Vera Farmiga</span>
+      <span class="actor-role">Lorraine Warren</span>
+    </div>
+    <div class="actor">
+      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/tc1ezEfIY8BhCy85svOUDtpBFPt.jpg" alt="Patrick Wilson">
+      <span class="actor-name">Patrick Wilson</span>
+      <span class="actor-role">Ed Warren</span>
+    </div>
+    <div class="actor">
+      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/cBSSODc05j8s8omYfX0Px07AIvr.jpg" alt="Mia Tomlinson">
+      <span class="actor-name">Mia Tomlinson</span>
+      <span class="actor-role">Personaje 3</span>
+    </div>
+    <div class="actor">
+      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/s8UEIomgY5AaEmPHkcPAScp68Fw.jpg" alt="Ben Hardy">
+      <span class="actor-name">Ben Hardy</span>
+      <span class="actor-role">Personaje 4</span>
+    </div>
+    <div class="actor">
+      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/A43USnarLnfWXDvWimT24cPVfEm.jpg" alt="Rebecca Calder">
+      <span class="actor-name">Rebecca Calder</span>
+      <span class="actor-role">Personaje 5</span>
     </div>
   </div>
-  <!-- ======== FIN ACTORES ======== -->
+</div>
+<!-- ======== FIN ACTORES ======== -->
+
 
   <!-- NO BORRAR ES EL BOTON DEL FAVORITOS -->
   <div style="text-align: center; margin-top: 15px;">
