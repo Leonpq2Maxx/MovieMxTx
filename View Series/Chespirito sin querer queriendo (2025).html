@@ -661,30 +661,31 @@
   let lastEpisode = null;
 
   function playEpisode(src, titulo, index) {
-    const temporada = temporadaSelect.value;
-    const key = `resume_${temporada}_${index}`;
-    savedTime = parseFloat(localStorage.getItem(key)) || 0;
-    lastEpisode = { src, titulo, index, temporada, key };
+  const temporada = temporadaSelect.value;
+  const key = `resume_${temporada}_${index}`;
+  savedTime = parseFloat(localStorage.getItem(key)) || 0;
+  lastEpisode = { src, titulo, index, temporada, key };
 
-    mainVideo.src = src;
-    mainVideo.load();
-    mainVideo.pause();
+  mainVideo.src = src;
+  mainVideo.load();
+  mainVideo.pause();
 
-    // Quitar marcas previas
-    document.querySelectorAll("#episodios button").forEach(b=>{
-      b.classList.remove("active");
-      b.style.background="#222"; 
-      b.style.color="#ccc";
-    });
+  // Reset estilos botones
+  document.querySelectorAll("#episodios button").forEach(b=>{
+    b.classList.remove("active");
+    b.style.background="#222"; 
+    b.style.color="#ccc";
+  });
 
-    // Si hay progreso guardado → mostrar popup
-    if (savedTime > 10) {
-      resumeText.textContent = `¿Quieres reanudar "${titulo}" en ${Math.floor(savedTime/60)}:${("0"+Math.floor(savedTime%60)).slice(-2)}?`;
-      resumePopup.classList.add("visible");
-    } else {
-      startEpisode(0);
-    }
+  // ✅ Aquí ya NO reanuda solo, espera al popup/startEpisode()
+  if (savedTime > 10) {
+    resumeText.textContent = `¿Quieres reanudar "${titulo}" en ${Math.floor(savedTime/60)}:${("0"+Math.floor(savedTime%60)).slice(-2)}?`;
+    resumePopup.classList.add("visible");
+  } else {
+    startEpisode(0);
   }
+}
+
 
   function startEpisode(time) {
     if (lastEpisode) {
@@ -1212,33 +1213,37 @@
 <script>
   window.addEventListener("DOMContentLoaded", () => {
     const ultimo = JSON.parse(localStorage.getItem("ultimo_episodio") || "{}");
-    const temporada = ultimo.temporada || temporadaSelect.value;
-    const index = typeof ultimo.index === "number" ? ultimo.index : obtenerProgresoTemporada(temporada);
-    const episodio = (episodiosData[temporada] || [])[index];
+    if (ultimo.temporada && typeof ultimo.index === "number") {
+      const episodios = episodiosData[ultimo.temporada] || [];
+      const ep = episodios[ultimo.index];
+      if (ep) {
+        // Verificar si existe tiempo guardado
+        const key = `resume_${ultimo.temporada}_${ultimo.index}`;
+        const savedTime = parseFloat(localStorage.getItem(key)) || 0;
 
-    temporadaSelect.value = temporada;
-    renderEpisodios(temporada);
-
-    if (episodio) {
-      setTimeout(() => {
-        playEpisode(episodio.src, episodio.titulo, index);
-      }, 300);
+        if (savedTime > 10) {
+          resumeText.textContent = `¿Quieres reanudar "${ep.titulo}" en ${Math.floor(savedTime/60)}:${("0"+Math.floor(savedTime%60)).slice(-2)}?`;
+          lastEpisode = { src: ep.src, titulo: ep.titulo, index: ultimo.index, temporada: ultimo.temporada, key };
+          savedTimeGlobal = savedTime;
+          resumePopup.classList.add("visible"); // 👈 Mostrar popup
+        } else {
+          // Si no hay tiempo guardado, iniciar desde cero
+          playEpisode(ep.src, ep.titulo, ultimo.index);
+        }
+      }
+    } else {
+      // No hay episodio guardado → solo renderizar lista
+      renderEpisodios(temporadaSelect.value);
     }
   });
 
-  temporadaSelect.addEventListener("change", () => {
-    const temporada = temporadaSelect.value;
-    renderEpisodios(temporada);
-    const index = obtenerProgresoTemporada(temporada);
-    const episodio = (episodiosData[temporada] || [])[index];
+  // Guardar el tiempo global del popup
+  let savedTimeGlobal = 0;
 
-    if (episodio) {
-      setTimeout(() => {
-        playEpisode(episodio.src, episodio.titulo, index);
-      }, 300);
-    }
-  });
+  resumeBtn.addEventListener("click", () => startEpisode(savedTimeGlobal));
+  restartBtn.addEventListener("click", () => startEpisode(0));
 </script>
+
 
 </body>
 </html>
