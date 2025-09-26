@@ -274,24 +274,299 @@
     <div class="genero-badge">Terror,Sobrenatural</div>
   </div>
 
- /* === Indicador temporada/episodio sobre el video === */
-.episode-indicator {
-  position: absolute;
-  top: 15px;           /* 🔼 antes era bottom:10px */
-  left: 15px;
-  background: rgba(0,0,0,0.6);
-  color: #fff;
-  padding: 6px 12px;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  z-index: 5;
-  max-width: 90%;
-  pointer-events: none;
-}
-.episode-indicator span {
-  color: #ff0051;
-  font-weight: bold;
-}
+ <!-- ====== MODAL DE TEMPORADAS Y EPISODIOS ====== -->
+<style>
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(4px);
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+  }
+  .modal-overlay.active { display: flex; }
+
+  .modal-content {
+    background: #111;
+    color: #fff;
+    border-radius: 12px;
+    max-width: 480px;
+    width: 90%;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(255,0,81,0.5);
+    animation: fadeInUp .4s ease;
+  }
+  @keyframes fadeInUp {
+    from {opacity: 0; transform: translateY(30px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    padding-bottom: 8px;
+  }
+  .modal-header h3 {
+    font-size: 1.2rem;
+    color: #ff0051;
+    margin: 0;
+  }
+
+  .close-btn {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .season-select {
+    width: 100%;
+    background: #222;
+    border: 1px solid rgba(255,0,81,0.4);
+    color: #fff;
+    padding: 8px 10px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+  }
+
+  .episodes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 260px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #ff0051 transparent;
+  }
+  .episodes-list::-webkit-scrollbar { width: 6px; }
+  .episodes-list::-webkit-scrollbar-thumb {
+    background-color: #ff0051;
+    border-radius: 3px;
+  }
+
+  .episode-item {
+    background: #1a1a1a;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background .3s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .episode-item:hover { background: rgba(255,0,81,0.2); }
+
+  .episode-title {
+    font-size: 0.95rem;
+    font-weight: bold;
+  }
+  .episode-duration {
+    font-size: 0.8rem;
+    color: #bbb;
+  }
+
+  .btn-temp {
+    display: inline-block;
+    margin: 15px auto;
+    background: #ff0051;
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background .3s;
+  }
+  .btn-temp:hover { background: #ff336f; }
+
+  /* === Indicador temporada/episodio sobre el video === */
+  .episode-indicator {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    z-index: 5;
+    max-width: 90%;
+    pointer-events: none;
+  }
+  .episode-indicator span {
+    color: #ff0051;
+    font-weight: bold;
+  }
+</style>
+
+<!-- Botón de Temporadas -->
+<div style="text-align:center;">
+  <button class="btn-temp" id="openModal">📺 Ver Temporadas</button>
+</div>
+
+<!-- Indicador sobre el reproductor -->
+<div class="episode-indicator" id="episodeIndicator">
+  📺 Temporada 1 · Episodio 1: El Comienzo
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Temporadas</h3>
+      <button class="close-btn" id="closeModal">&times;</button>
+    </div>
+
+    <select id="seasonSelect" class="season-select">
+      <option value="1">Temporada 1</option>
+      <option value="2">Temporada 2</option>
+      <option value="3">Temporada 3</option>
+    </select>
+
+    <div class="episodes-list" id="episodesList"></div>
+  </div>
+</div>
+
+<script>
+  const modalOverlay = document.getElementById('modalOverlay');
+  const openModalBtn = document.getElementById('openModal');
+  const closeModalBtn = document.getElementById('closeModal');
+  const seasonSelect = document.getElementById('seasonSelect');
+  const episodesList = document.getElementById('episodesList');
+  const mainVideo = document.querySelector('.vid1');
+  const indicator = document.getElementById('episodeIndicator');
+
+  // Variables de estado
+  let currentSeason = 1;
+  let currentEpisodeIndex = 0;
+
+  // Clave para guardar el progreso
+  const STORAGE_KEY = 'serie_conjuro4_progreso';
+
+  // Datos de ejemplo (reemplaza los src por los tuyos)
+  const dataTemporadas = {
+    1: [
+      {titulo: 'Episodio 1: El Comienzo', duracion: '45 min', src: 'https://www.w3schools.com/html/mov_bbb.mp4'},
+      {titulo: 'Episodio 2: La Maldición', duracion: '48 min', src: 'https://www.w3schools.com/html/movie.mp4'},
+      {titulo: 'Episodio 3: El Ritual', duracion: '50 min', src: 'https://www.w3schools.com/html/mov_bbb.mp4'},
+    ],
+    2: [
+      {titulo: 'Episodio 1: Nuevos Enemigos', duracion: '44 min', src: 'https://www.w3schools.com/html/movie.mp4'},
+      {titulo: 'Episodio 2: La Casa Maldita', duracion: '49 min', src: 'https://www.w3schools.com/html/mov_bbb.mp4'},
+      {titulo: 'Episodio 3: El Exorcismo', duracion: '51 min', src: 'https://www.w3schools.com/html/movie.mp4'},
+    ],
+    3: [
+      {titulo: 'Episodio 1: El Último Caso', duracion: '46 min', src: 'https://www.w3schools.com/html/mov_bbb.mp4'},
+      {titulo: 'Episodio 2: Espíritus del Pasado', duracion: '47 min', src: 'https://www.w3schools.com/html/movie.mp4'},
+      {titulo: 'Episodio 3: Final del Rito', duracion: '52 min', src: 'https://www.w3schools.com/html/mov_bbb.mp4'},
+    ],
+  };
+
+  // Actualizar el texto del indicador
+  function actualizarIndicador() {
+    const episodio = dataTemporadas[currentSeason][currentEpisodeIndex];
+    indicator.textContent = `📺 Temporada ${currentSeason} · ${episodio.titulo}`;
+  }
+
+  // Cargar lista de episodios
+  function cargarEpisodios(temp) {
+    episodesList.innerHTML = '';
+    dataTemporadas[temp].forEach((ep, idx) => {
+      const item = document.createElement('div');
+      item.classList.add('episode-item');
+      item.innerHTML = `
+        <span class="episode-title">${ep.titulo}</span>
+        <span class="episode-duration">${ep.duracion}</span>
+      `;
+      item.addEventListener('click', () => {
+        reproducirEpisodio(temp, idx);
+        modalOverlay.classList.remove('active');
+      });
+      episodesList.appendChild(item);
+    });
+  }
+
+  // Reproducir un episodio específico
+  function reproducirEpisodio(temp, idx) {
+    currentSeason = temp;
+    currentEpisodeIndex = idx;
+
+    const episodio = dataTemporadas[temp][idx];
+
+    if (mainVideo) {
+      mainVideo.pause();
+      mainVideo.querySelector('source').setAttribute('src', episodio.src);
+      mainVideo.load();
+      mainVideo.play();
+    }
+
+    if (window.player) {
+      window.player.source = {
+        type: 'video',
+        sources: [{ src: episodio.src, type: 'video/mp4' }]
+      };
+      window.player.play();
+    }
+
+    // Guardar progreso
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({season: temp, episode: idx}));
+    actualizarIndicador();
+  }
+
+  // Avanzar automáticamente al siguiente episodio
+  if (mainVideo) {
+    mainVideo.addEventListener('ended', () => {
+      const nextIndex = currentEpisodeIndex + 1;
+      if (dataTemporadas[currentSeason] && dataTemporadas[currentSeason][nextIndex]) {
+        reproducirEpisodio(currentSeason, nextIndex);
+      } else {
+        console.log('🎬 No hay más episodios en esta temporada.');
+      }
+    });
+  }
+
+  // Recuperar progreso guardado al cargar la página
+  document.addEventListener('DOMContentLoaded', () => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const {season, episode} = JSON.parse(saved);
+      if (dataTemporadas[season] && dataTemporadas[season][episode]) {
+        currentSeason = season;
+        currentEpisodeIndex = episode;
+        seasonSelect.value = season;
+        cargarEpisodios(season);
+        reproducirEpisodio(season, episode);
+      } else {
+        actualizarIndicador();
+      }
+    } else {
+      actualizarIndicador(); // por defecto
+    }
+  });
+
+  // Eventos de UI
+  openModalBtn.addEventListener('click', () => {
+    modalOverlay.classList.add('active');
+    currentSeason = parseInt(seasonSelect.value);
+    cargarEpisodios(currentSeason);
+  });
+  closeModalBtn.addEventListener('click', () => modalOverlay.classList.remove('active'));
+  seasonSelect.addEventListener('change', e => {
+    currentSeason = parseInt(e.target.value);
+    cargarEpisodios(currentSeason);
+  });
+  modalOverlay.addEventListener('click', e => {
+    if (e.target === modalOverlay) modalOverlay.classList.remove('active');
+  });
+</script>
+<!-- ====== FIN MODAL ====== -->
 
 
   <style>
