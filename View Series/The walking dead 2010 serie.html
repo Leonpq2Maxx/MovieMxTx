@@ -247,7 +247,7 @@
   
   <div class="player">
     <video class="vid1 js-player" controls loading="lazy" poster="https://image.tmdb.org/t/p/original/fJXqP9S9llRUy9tuccuwvIYFBA4.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
-      <source src="Link de pelicula" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
+      <source src="https://dl.dropbox.com/scl/fi/gu33t6g275pz3y85tc6xk/El-conjuro-4-el-ultimo.rito-2025.mp4?rlkey=7quk3bru3oth9ewqsae1ibgpl&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
 
@@ -274,7 +274,7 @@
     <div class="genero-badge">Terror,Sobrenatural</div>
   </div>
 
- <!-- ====== MODAL DE TEMPORADAS Y EPISODIOS ====== -->
+  <!-- ====== MODAL DE TEMPORADAS Y EPISODIOS ====== -->
 <style>
   .modal-overlay {
     display: none;
@@ -389,20 +389,48 @@
   /* === Indicador temporada/episodio sobre el video === */
   .episode-indicator {
     position: absolute;
-    bottom: 10px;
-    left: 10px;
-    background: rgba(0,0,0,0.6);
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.7);
     color: #fff;
-    padding: 6px 10px;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    z-index: 5;
-    max-width: 90%;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-sizing: 0 2px 6px rgba(0,0,0,0.5);
+    opacity: 0.9;
+    transition: all 0.3s ease;
     pointer-events: none;
+    z-index: 10;
+    max-width: 90%;
+    white-space: nowrap;
+    overflor: hidden;
+    text-overflow: ellipsis;
   }
   .episode-indicator span {
     color: #ff0051;
     font-weight: bold;
+  }
+  .episode-indicator i {
+    color: #ff0051;
+    font-size: 1rem;
+  }
+
+  /* Modo movil*/
+  @media (max-width: 480px) {
+    .episode-indicador {
+      font-size: 0.08rem;
+      padding: 6px 10px;
+      bottom: 10px;
+      gap: 4px;
+    }
+    .episode-indicador i {
+      font-size: 0.09rem;
+    }
   }
 </style>
 
@@ -413,7 +441,8 @@
 
 <!-- Indicador sobre el reproductor -->
 <div class="episode-indicator" id="episodeIndicator">
-  📺 Temporada 1 · Episodio 1: El Comienzo
+  <i class="fas fa-play-circle"></i>
+  <span>📺 Temporada 1 · Episodio 1: El Comienzo</span>
 </div>
 
 <!-- Modal -->
@@ -472,7 +501,7 @@
   // Actualizar el texto del indicador
   function actualizarIndicador() {
     const episodio = dataTemporadas[currentSeason][currentEpisodeIndex];
-    indicator.textContent = `📺 Temporada ${currentSeason} · ${episodio.titulo}`;
+    indicator.querySelector("span").textContent = `📺 Temporada ${currentSeason} · ${episodio.titulo}`;
   }
 
   // Cargar lista de episodios
@@ -518,8 +547,7 @@
     // Guardar progreso
     localStorage.setItem(STORAGE_KEY, JSON.stringify({season: temp, episode: idx}));
     actualizarIndicador();
-  }
-
+  
   // Avanzar automáticamente al siguiente episodio
   if (mainVideo) {
     mainVideo.addEventListener('ended', () => {
@@ -709,10 +737,6 @@
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
-      <a href="La Monja (2018).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/ce6f0GNhtHdIvtCoXfp3amE0fWz.jpg" alt="">
-        <p>La monja</p>
-      </a>
       <a href="El conjuro 1 (2013).html" class="serie">
         <img loading="lazy" src="https://image.tmdb.org/t/p/w300/10ir0eISr3p1MF1mjZwGTx7u4vv.jpg" alt="">
         <p>El conjuro: Experiente Warren</p>
@@ -728,6 +752,10 @@
       <a href="Annabelle 2 la creacion 2 (2017).html" class="serie">
         <img loading="lazy" src="https://image.tmdb.org/t/p/w300/x0pekWNy7GS37bm30zuxWNLPXj8.jpg" alt="">
         <p>Annabelle 2: La creacion</p>
+      </a>
+      <a href="Baghead contacto con la muerte (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/5ssaCHmqvTZDVZtcNhNZTzfb7Nj.jpg" alt="">
+        <p>Baghead: contacto con la muerte</p>
       </a>
       <a href="Insidious La puerta roja (2023).html" class="serie">
         <img loading="lazy" src="https://image.tmdb.org/t/p/w300/wD4eLIHUaTvrXQqAzlfduHQ1NYg.jpg" alt="">
@@ -895,3 +923,5 @@
   </script>
 </body>
 </html>
+
+
