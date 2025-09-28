@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>MovieTx - Reproductor</title>
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans&amp;family=Roboto&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/gh/CDNSFree2/Plyr/plyr.css" rel="stylesheet"/>
+  <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet"/>
+  <style>
+    :root {
+      --plyr-color-main: #ff0000;
+      --plyr-video-control-color:rgb(255, 255, 255);
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      outline: none;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    body {
+      background-color: #000;
+      font-family: 'PT Sans', sans-serif;
+      color: #fff;
+    }
+    .player {
+      position: relative;
+      padding-top: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
+      overflow: hidden;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+    .player video,
+    .player iframe,
+    .player .plyr {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      border: 1px solid rgba(16, 235, 255, 0.461);
+      border-radius: 10px;
+      margin: 10px;
+      font-size: 14px;
+    }
+    .info i {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .hd-tag {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hd-tag svg {
+      border-radius: 4px;
+    }
+    .titulo, .sinopsis {
+      padding: 10px;
+    }
+    .recomendaciones {
+      padding: 10px;
+    }
+    .series-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 15px;
+      text-align: center;
+    }
+    .serie {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: white;
+    }
+
+    .serie img {
+      width: 120px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .serie p {
+      margin-top: 5px;
+    }
+
+    html { font-size: 100%; }
+    body { font-size: 1rem; }
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.5rem; }
+    h3, h4 { font-size: 1.2rem; }
+
+    @media screen and (max-width: 768px) {
+      body { font-size: 1.05rem; }
+      h1 { font-size: 1.5rem; }
+      h2 { font-size: 1.3rem; }
+      h3, h4 { font-size: 1.1rem; }
+      .info, .sinopsis p, .serie p {
+        font-size: 0.80rem !important; /*estaba en 1rem*/
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      body { font-size: 1.1rem; }
+      h1 { font-size: 1.4rem; }
+      h2 { font-size: 1.2rem; }
+      h3, h4 { font-size: 0.80rem; } /*estaba en 1rem*/
+    }
+
+    body, p, h1, h2, h3, h4, h5, h6, span, a, .titulo, .sinopsis, .recomendaciones, .serie {
+      font-style: italic;
+    }
+
+    .info, .info *, .info span, .info i {
+      font-style: normal !important;
+    }
+
+    #resume-msg {
+      display: none;
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.85);
+      padding: 10px 20px;
+      color: #0f0;
+      border-radius: 8px;
+      z-index: 9999;
+      font-weight: bold;
+      max-width: 90%;
+      font-size: 1rem;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+
+    #resume-msg.visible {
+      display: block;
+      opacity: 1;
+    }
+
+    @media (max-width: 480px) {
+      #resume-msg {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+      }
+    }
+
+    #genero-texto.colapsado {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ACA ES LA ANIMACION DE FAVORITOS */
+    @keyframes pop {
+      0%   { transform: scale(1); }
+      50%  { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+    
+    #btn-favorito.animado {
+      animation: pop 0.3s ease;
+    }
+
+    /* ---------- NUEVOS ESTILOS PARA LA SECCIÓN DE ACTORES ---------- */
+    .actores {
+      padding: 10px;
+      margin-top: 6px;
+    }
+    .actores h4 {
+      margin-bottom: 8px;
+      font-size: 1rem;
+      font-style: normal;
+    }
+
+    .actor .actor-role {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.75rem;
+  color: #bbb;
+  font-style: italic;
+}
+
+    .actores-row {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      -webkit-overflow-scrolling: touch; /* smooth on iOS */
+      scroll-snap-type: x mandatory;
+      padding-left: 8px;
+    }
+    .actores-row::-webkit-scrollbar { display: none; } /* oculta scrollbar en webkit */
+    .actor {
+      flex: 0 0 auto;
+      width: 100px;
+      scroll-snap-align: start;
+      text-align: center;
+    }
+    .actor img {
+      width: 100px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
+    .actor .actor-name {
+      margin-top: 6px;
+      font-size: 0.85rem;
+      line-height: 1.1;
+      display: block;
+      color: #fff;
+      font-style: normal;
+    }
+
+    @media (max-width: 480px) {
+      .actor { width: 88px; }
+      .actor img { width: 88px; height: 125px; }
+      .actor .actor-name { font-size: 0.78rem; }
+    }
+
+  </style>
+</head>
+
+<body ondragstart="return false;" ondrop="return false;">
+  
+  <div class="player">
+    <video class="vid1 js-player" controls loading="lazy" poster="https://image.tmdb.org/t/p/original/fJXqP9S9llRUy9tuccuwvIYFBA4.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+      <source src="https://dl.dropbox.com/scl/fi/gu33t6g275pz3y85tc6xk/El-conjuro-4-el-ultimo.rito-2025.mp4?rlkey=7quk3bru3oth9ewqsae1ibgpl&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
+    </video>
+  </div>
+  <div id="episodio-actual" style="
+  text-align:center;
+  margin:10px;
+  font-size:1rem;
+  font-weight:bold;
+  color:#ff2d5b;
+"></div>
+
+
+  <div id="resume-msg">✅ Reanudando donde lo dejaste: El Conjuro 4: El ultimo rito</div>
+
+  <div class="info">
+    <i class="fal fa-calendar-alt"></i><span>2025</span> <!--Aca va el año de estreno de pelicula-->
+    <i class="fal fa-clock"></i><span>2h 15min</span> <!--aca va cuanto dura-->
+    <i class="fal fa-thumbs-up"></i><span>99%</span> <!--aca va la calificacion-->
+    <!-- CAMARA-->
+      <div style="display: flex; align-items: center; gap: 6px;">
+        <!-- Ícono de cámara en SVG -->
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 5H16.83L15 3H9L7.17 5H4C2.9 5 2 5.9 2 7V19C2 20.1 2.9 21 4 21H20C21.1 21 22 20.1 22 19V7C22 5.9 21.1 5 20 5ZM12 17C9.79 17 8 15.21 8 13C8 10.79 9.79 9 12 9C14.21 9 16 10.79 16 13C16 15.21 14.21 17 12 17Z"/>
+        </svg>
+        <!-- Texto CAM -->
+        <span style="color: white; font-size: 14px; font-family: sans-serif;">CAM</span>
+      </div>
+    <span>🇲🇽</span>
+  </div>
+  
+  <div class="titulo-flex">
+    <h3 class="titulo">El Conjuro 4: El ultimo rito</h3>
+    <div class="genero-badge">Terror,Sobrenatural</div>
+  </div>
+
+<!-- ---------- INICIA: Modal de Temporadas y Episodios ---------- -->
+<!-- Botón para abrir el modal -->
+<button id="open-seasons" class="seasons-open-btn">Temporadas & Episodios</button>
+
+<!-- Modal -->
+<div id="seasons-modal" class="seasons-modal" aria-hidden="true" role="dialog" aria-label="Temporadas y episodios">
+  <div class="seasons-backdrop" data-close></div>
+  <div class="seasons-panel" role="document">
+    <header class="seasons-header">
+      <div>
+        <h2 id="series-title">Título de la Serie / Colección</h2>
+        <p id="series-sub" class="muted">Selecciona temporada y episodio</p>
+      </div>
+      <button class="close-btn" id="close-seasons" aria-label="Cerrar modal">&times;</button>
+    </header>
+
+    <div class="seasons-body">
+      <aside class="seasons-list" aria-label="Lista de temporadas">
+        <ul id="seasons-list-ul"></ul>
+      </aside>
+
+      <section class="episodes-area" aria-live="polite">
+        <div class="episodes-toolbar">
+          <div class="season-meta">
+            <strong id="season-label">Temporada 1</strong>
+            <span id="season-desc" class="muted">— 8 episodios</span>
+          </div>
+          <div class="episodes-search">
+            <input id="ep-search" placeholder="Buscar episodio..." />
+          </div>
+        </div>
+
+        <div id="episodes-grid" class="episodes-grid" role="list"></div>
+
+        <div id="episodes-footer" class="episodes-footer muted">
+          Haz click en un episodio para reproducir / abrir.
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<!-- ---------- ESTILOS (dark, moderno, responsive) ---------- -->
+<style>
+  :root{
+    --bg:#040406;
+    --panel:#0b0b0d;
+    --muted: #9aa3ae;
+    --accent: #ff2d5b;
+    --glass: rgba(255,255,255,0.03);
+    --card: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+    --radius: 12px;
+    --shadow: 0 8px 30px rgba(0,0,0,0.7);
+    --glass-border: rgba(255,255,255,0.04);
+  }
+  /* Button to open */
+  .seasons-open-btn{
+    background: linear-gradient(90deg, rgba(255,45,91,0.12), rgba(255,45,91,0.06));
+    color: white;
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 10px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+    font-weight: 600;
+    backdrop-filter: blur(6px);
+  }
+
+  /* Modal layout */
+  .seasons-modal{ position: fixed; inset: 0; display: none; z-index: 9999; font-family: 'PT Sans', Roboto, sans-serif; }
+  .seasons-modal[aria-hidden="false"]{ display: block; }
+  .seasons-backdrop{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.75)); backdrop-filter: blur(6px); }
+  .seasons-panel{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: min(1100px, 96%);
+    max-height: 88vh;
+    background: linear-gradient(180deg, #071018, #070607);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--glass-border);
+    overflow: hidden;
+    display:flex;
+    flex-direction: column;
+  }
+
+  .seasons-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 16px 18px;
+    gap:10px;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+  }
+  .seasons-header h2{ margin:0; font-size:1.05rem; color:#fff; letter-spacing:0.2px; }
+  .seasons-header .muted{ color: var(--muted); font-size:0.85rem; margin-top:2px; }
+
+  .close-btn{
+    background: transparent; color: #fff; border: none; font-size: 26px; line-height:1; cursor:pointer; padding:6px 10px; border-radius:8px;
+  }
+  .close-btn:hover{ background: rgba(255,255,255,0.02); }
+
+  .seasons-body{ display:flex; gap:16px; padding: 18px; overflow: hidden; flex:1; min-height:320px; }
+
+  /* temporadas (izq) */
+  .seasons-list{ width: 220px; background: var(--glass); border-radius: 10px; padding:10px; flex-shrink:0; border:1px solid rgba(255,255,255,0.02); overflow:auto; }
+  .seasons-list ul{ list-style:none; padding:6px; margin:0; display:flex; flex-direction:column; gap:8px; }
+  .seasons-list li{
+    display:flex; align-items:center; gap:10px; padding:10px; border-radius:10px; cursor:pointer;
+    transition: transform .18s ease, background .18s ease, box-shadow .18s;
+  }
+  .season-thumb{ width:56px; height:36px; background-size:cover; background-position:center; border-radius:6px; flex-shrink:0; box-shadow: 0 6px 18px rgba(0,0,0,0.5); }
+  .season-info{ display:flex; flex-direction:column; min-width:0; }
+  .season-info .s-title{ color:#fff; font-weight:600; font-size:0.95rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .season-info .s-sub{ color:var(--muted); font-size:0.8rem; margin-top:2px; }
+
+  .seasons-list li:hover{ transform: translateY(-3px); background: rgba(255,255,255,0.02); box-shadow: 0 10px 30px rgba(2,8,20,0.6); }
+  .seasons-list li.active{ background: linear-gradient(90deg, rgba(255,45,91,0.12), rgba(255,45,91,0.03)); box-shadow: 0 12px 40px rgba(255,45,91,0.06); border:1px solid rgba(255,45,91,0.12); }
+
+  /* episodes area (derecha) */
+  .episodes-area{ flex:1; display:flex; flex-direction:column; gap:12px; overflow:auto; }
+  .episodes-toolbar{ display:flex; justify-content:space-between; align-items:center; gap:12px; }
+  .episodes-search input{
+    padding:8px 12px; width:220px; border-radius:10px; border:1px solid rgba(255,255,255,0.04); background:transparent; color:#fff;
+  }
+  .episodes-grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:12px; padding-top:6px; }
+  .episode-card{
+    display:flex; gap:12px; align-items:center; padding:10px; border-radius:10px; background:var(--card); border:1px solid rgba(255,255,255,0.02);
+    cursor:pointer; transition: transform .16s ease, box-shadow .16s;
+  }
+  .episode-card:hover{ transform: translateY(-6px); box-shadow: 0 18px 40px rgba(2,8,20,0.6); }
+  .ep-thumb{ width:120px; height:68px; border-radius:8px; background-size:cover; background-position:center; flex-shrink:0; }
+  .ep-meta{ display:flex; flex-direction:column; min-width:0; }
+  .ep-title{ color:#fff; font-weight:700; font-size:0.95rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .ep-desc{ color:var(--muted); font-size:0.85rem; margin-top:6px; }
+  .ep-actions{ margin-left:auto; display:flex; align-items:center; gap:8px; color:var(--muted); font-size:0.9rem; }
+
+  .play-btn{
+    background: linear-gradient(90deg, rgba(255,45,91,1), rgba(255,120,140,1)); color:white; padding:8px 12px; border-radius:8px; border:none; cursor:pointer; font-weight:700;
+    box-shadow: 0 6px 20px rgba(255,45,91,0.12);
+  }
+
+  .episodes-footer{ padding:8px 12px; font-size:0.85rem; }
+
+  /* responsive */
+  @media (max-width: 880px){
+    .seasons-body{ flex-direction: column; padding: 12px; gap:12px; }
+    .seasons-list{ width:100%; display:flex; overflow-x:auto; padding:8px; }
+    .seasons-list ul{ flex-direction:row; gap:10px; }
+    .seasons-list li{ min-width:170px; flex:0 0 auto; }
+  }
+  @media (max-width:480px){
+    .episode-card{ padding:8px; gap:8px; }
+    .ep-thumb{ width:96px; height:56px; }
+    .episodes-grid{ grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap:10px; }
+    .seasons-panel{ width: 96%; max-height: 92vh; }
+  }
+  /* --- Mejoras de adaptación móvil --- */
+@media (max-width: 768px) {
+  .seasons-panel {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: none !important;
+    border-radius: 0;
+    left: 0;
+    top: 0;
+    transform: none;
+  }
+
+  .seasons-header {
+    padding: 12px;
+  }
+  .seasons-header h2 {
+    font-size: 1rem;
+  }
+
+  .episodes-search input {
+    width: 100%;
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .episodes-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px;
+  }
+
+  .episode-card {
+    flex-direction: row;
+    padding: 12px;
+  }
+
+  .ep-thumb {
+    width: 120px;
+    height: 70px;
+  }
+
+  .ep-title {
+    font-size: 1rem;
+  }
+
+  .ep-desc {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .episode-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ep-thumb {
+    width: 100%;
+    height: 180px;
+  }
+
+  .ep-meta {
+    margin-top: 8px;
+  }
+
+  .play-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+  }
+}
+
+</style>
+
+<!-- ---------- SCRIPT: datos + interacción ---------- -->
+<script>
+  /* ---------- Datos: cambia esto por tu contenido real ---------- */
+  const seasonsData = [
+    {
+      id: 1,
+      title: "Temporada 1",
+      thumb: "https://image.tmdb.org/t/p/w300/4u7Q1QZ7b1s2c0N3y2yGQyG3o8A.jpg",
+      desc: "Lanzada 2019 — 8 episodios",
+      episodes: [
+        { id: "s1e1", title: "Episodio 1 — Inicio oscuro", time: "45m", thumb: "https://image.tmdb.org/t/p/w300/8uO0gUM8aNqYLs1OsTBQiXu0fEv.jpg", href: "https://dl.dropbox.com/scl/fi/gu33t6g275pz3y85tc6xk/El-conjuro-4-el-ultimo.rito-2025.mp4?rlkey=7quk3bru3oth9ewqsae1ibgpl&st=" },
+        { id: "s1e2", title: "Episodio 2 — Noche sin fin", time: "42m", thumb: "https://image.tmdb.org/t/p/w300/abc.jpg", href: "#" },
+        // ... más episodios
+      ]
+    },
+    {
+      id: 2,
+      title: "Temporada 2",
+      thumb: "https://image.tmdb.org/t/p/w300/nZ1.jpg",
+      desc: "Lanzada 2021 — 10 episodios",
+      episodes: [
+        { id: "s2e1", title: "Episodio 1 — Reaparece", time: "50m", thumb: "https://image.tmdb.org/t/p/w300/xyz.jpg", href: "#" },
+        { id: "s2e2", title: "Episodio 2 — Silencio", time: "41m", thumb: "https://image.tmdb.org/t/p/w300/xyz2.jpg", href: "#" },
+        // ...
+      ]
+    }
+  ];
+  /* ----------------------------------------------------------- */
+
+  // elementos
+  const openBtn = document.getElementById('open-seasons');
+  const modal = document.getElementById('seasons-modal');
+  const closeBtn = document.getElementById('close-seasons');
+  const backdrop = document.querySelector('.seasons-backdrop');
+  const seasonsListUL = document.getElementById('seasons-list-ul');
+  const episodesGrid = document.getElementById('episodes-grid');
+  const seasonLabel = document.getElementById('season-label');
+  const seasonDesc = document.getElementById('season-desc');
+  const epSearch = document.getElementById('ep-search');
+  const seriesTitle = document.getElementById('series-title');
+  const seriesSub = document.getElementById('series-sub');
+
+  let activeSeasonIndex = 0;
+
+  // Inicia modal
+  function openModal(){
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    renderSeasons();
+    selectSeason(0);
+    // foco
+    closeBtn.focus();
+  }
+  function closeModal(){
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  openBtn.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', closeModal);
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape') closeModal();
+  });
+
+  // render temporadas
+  function renderSeasons(){
+    seasonsListUL.innerHTML = '';
+    seasonsData.forEach((s, idx) => {
+      const li = document.createElement('li');
+      li.className = idx === activeSeasonIndex ? 'active' : '';
+      li.tabIndex = 0;
+      li.setAttribute('role','button');
+      li.innerHTML = `
+        <div class="season-thumb" style="background-image:url('${s.thumb}')"></div>
+        <div class="season-info">
+          <div class="s-title">${s.title}</div>
+          <div class="s-sub">${s.desc}</div>
+        </div>
+      `;
+      li.addEventListener('click', () => selectSeason(idx));
+      li.addEventListener('keydown', (ev) => { if(ev.key === 'Enter') selectSeason(idx); });
+      seasonsListUL.appendChild(li);
+    });
+  }
+
+  // seleccionar temporada
+  function selectSeason(index){
+    activeSeasonIndex = index;
+    // actualizar clases
+    Array.from(seasonsListUL.children).forEach((li, i) => {
+      li.classList.toggle('active', i === index);
+    });
+    const season = seasonsData[index];
+    seasonLabel.textContent = season.title;
+    seasonDesc.textContent = `— ${season.episodes.length} episodios`;
+    // render episodios
+    renderEpisodes(season.episodes);
+    // actualiza header (puedes personalizar)
+    seriesTitle.textContent = "Tu Serie Favorita";
+    seriesSub.textContent = `${season.title} • ${season.desc}`;
+    epSearch.value = '';
+  }
+
+  // render episodios
+  function renderEpisodes(episodes){
+    episodesGrid.innerHTML = '';
+    if(!episodes || episodes.length === 0){
+      episodesGrid.innerHTML = `<div class="muted">No hay episodios disponibles.</div>`;
+      return;
+    }
+    episodes.forEach(ep => {
+      const card = document.createElement('article');
+      card.className = 'episode-card';
+      card.setAttribute('role','listitem');
+      card.innerHTML = `
+        <div class="ep-thumb" style="background-image:url('${ep.thumb || ''}')"></div>
+        <div class="ep-meta">
+          <div class="ep-title">${ep.title}</div>
+          <div class="ep-desc">${ep.time || ''}</div>
+        </div>
+        <div class="ep-actions">
+          <button class="play-btn" data-href="${ep.href || '#'}" aria-label="Reproducir ${ep.title}">Reproducir</button>
+        </div>
+      `;
+      // click en tarjeta => abrir link / reproducir
+      // dentro del addEventListener de los botones play
+card.querySelector('.play-btn').addEventListener('click', (ev) => {
+  const href = ev.currentTarget.dataset.href;
+  if(href && href !== '#'){
+    const videoElement = document.querySelector('.vid1');
+    const source = videoElement.querySelector('source');
+    source.setAttribute('src', href);
+    videoElement.load();
+    videoElement.play();
+    closeModal();
+
+    // 🔴 Guardar temporada y episodio actual
+    const episodioInfo = {
+      temporada: seasonsData[activeSeasonIndex].title,
+      episodio: ep.title
+    };
+    localStorage.setItem('ultimoEpisodio', JSON.stringify(episodioInfo));
+
+    // 🔴 Mostrar en pantalla
+    document.getElementById('episodio-actual').textContent =
+      `📺 Viendo: ${episodioInfo.temporada} - ${episodioInfo.episodio}`;
+  } else {
+    alert('No hay un link válido para este episodio: ' + ep.title);
+  }
+});
+document.addEventListener('DOMContentLoaded', () => {
+  const ultimo = JSON.parse(localStorage.getItem('ultimoEpisodio') || 'null');
+  if (ultimo) {
+    document.getElementById('episodio-actual').textContent =
+      `⏮ Último visto: ${ultimo.temporada} - ${ultimo.episodio}`;
+  }
+});
+
+
+      episodesGrid.appendChild(card);
+    });
+  }
+
+  // búsqueda simple
+  epSearch.addEventListener('input', (e) => {
+    const q = e.target.value.trim().toLowerCase();
+    const eps = seasonsData[activeSeasonIndex].episodes || [];
+    const filtered = eps.filter(x => x.title.toLowerCase().includes(q));
+    renderEpisodes(filtered);
+  });
+
+  // keyboard focus trap (simple)
+  modal.addEventListener('keydown', (e) => {
+    if(e.key !== 'Tab') return;
+    const focusable = modal.querySelectorAll('button, [tabindex], input');
+    if(!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length -1];
+    if(e.shiftKey && document.activeElement === first){ last.focus(); e.preventDefault(); }
+    else if(!e.shiftKey && document.activeElement === last){ first.focus(); e.preventDefault(); }
+  });
+
+  // inicializa (si quieres abrir automático, descomenta)
+  // renderSeasons(); selectSeason(0);
+</script>
+<!-- ---------- FIN: Modal de Temporadas y Episodios ---------- -->
+
+  <style>
+    .titulo-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .genero-badge {
+      padding: 4px 10px;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 0, 81, 1);
+      border: 1px solid rgba(255, 0, 81, 1);
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-style: normal;
+      max-width: 135px;          /* Limita el ancho máximo */
+      white-space: nowrap;       /* No saltar de línea */
+      overflow: hidden;          /* Oculta el exceso */
+      text-overflow: ellipsis;   /* Agrega los ... */
+    }
+
+    .titulo {
+      font-size: 0.7rem;
+      font-style: normal;
+      max-width: 200px;          /* Limita el ancho máximo */
+      white-space: nowrap;       /* No saltar de línea */
+      overflow: hidden;          /* Oculta el exceso */
+      text-overflow: ellipsis;   /* Agrega los ... */
+    }
+
+  </style>
+
+  <style>
+    .titulo-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .genero-badge {
+      padding: 4px 10px;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 0, 81, 1);
+      border: 1px solid rgba(255, 0, 81, 1);
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-style: normal;
+      max-width: 135px;          /* Limita el ancho máximo */
+      white-space: nowrap;       /* No saltar de línea */
+      overflow: hidden;          /* Oculta el exceso */
+      text-overflow: ellipsis;   /* Agrega los ... */
+    }
+    
+  </style>
+  
+  <div class="sinopsis">
+    <h4>
+      Sinopsis:
+    </h4>
+    <p>
+      Los investigadores de lo paranormal Ed y Lorraine Warren se enfrentan a un último caso aterrador en el que están implicadas entidades misteriosas a las que deben enfrentarse.
+    </p>
+  </div>
+
+  <!-- ======== SECCIÓN ACTORES (DESLIZABLE HORIZONTAL) ======== -->
+<div class="actores">
+  <h4>Actores</h4>
+  <div class="actores-row" id="actores-row">
+    <div class="actor">
+      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/5Vs7huBmTKftwlsc2BPAntyaQYj.jpg" alt="Vera Farmiga">
+      <span class="actor-name">Vera Farmiga</span>
+      <span class="actor-role">Lorraine Warren</span>
+    </div>
+    <div class="actor">
+      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/tc1ezEfIY8BhCy85svOUDtpBFPt.jpg" alt="Patrick Wilson">
+      <span class="actor-name">Patrick Wilson</span>
+      <span class="actor-role">Ed Warren</span>
+    </div>
+    <div class="actor">
+      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/cBSSODc05j8s8omYfX0Px07AIvr.jpg" alt="Mia Tomlinson">
+      <span class="actor-name">Mia Tomlinson</span>
+      <span class="actor-role">Judy Warren</span>
+    </div>
+    <div class="actor">
+      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/s8UEIomgY5AaEmPHkcPAScp68Fw.jpg" alt="Ben Hardy">
+      <span class="actor-name">Ben Hardy</span>
+      <span class="actor-role">Tony Spera</span>
+    </div>
+    <div class="actor">
+      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/A43USnarLnfWXDvWimT24cPVfEm.jpg" alt="Rebecca Calder">
+      <span class="actor-name">Rebecca Calder</span>
+      <span class="actor-role">Janet Smurl</span>
+    </div>
+    <div class="actor">
+      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/zxewsfDGYuCqV7gsZjMQct6BXMJ.jpg" alt="Rebecca Calder">
+      <span class="actor-name">Elliot Cowan</span>
+      <span class="actor-role">Jack Smurl</span>
+    </div>
+    <div class="actor">
+      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/gBJmrtY2fBFfkQRfosLv2MNWx2J.jpg" alt="Rebecca Calder">
+      <span class="actor-name">Shannon Kook</span>
+      <span class="actor-role">Drew Thomas</span>
+    </div>
+    <div class="actor">
+      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/ng01ren9pCYPIsIwRqC1xHzD5IG.jpg" alt="Rebecca Calder">
+      <span class="actor-name">Steve Coulter</span>
+      <span class="actor-role">Father Gordon</span>
+    </div>
+  </div>
+</div>
+<!-- ======== FIN ACTORES ======== -->
+
+
+  <!-- NO BORRAR ES EL BOTON DEL FAVORITOS -->
+  <div style="text-align: center; margin-top: 15px;">
+    <button id="btn-favorito" style="
+      background: #ff4444;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 20px;
+      font-size: 1rem;
+      cursor: pointer;
+    ">
+      ⭐ Favoritos
+    </button>
+  </div>
+
+  <br>
+
+  <div class="recomendaciones">
+    <h4>Podría interesarte:</h4>
+    <br/>
+    <div class="series-grid">
+      <a href="El conjuro 1 (2013).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/10ir0eISr3p1MF1mjZwGTx7u4vv.jpg" alt="">
+        <p>El conjuro: Experiente Warren</p>
+      </a>
+      <a href="El conjuro 2 (2016).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/x4jUJ0fF60SSOeUUTkaRtmnDvwG.jpg" alt="">
+        <p>El conjuro 2: El caso enfield</p>
+      </a>
+      <a href="El conjuro 3 (2021) .html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/79QjdRiT9zTLkrOq9FltoIxClma.jpg" alt="">
+        <p>El conjuro 3: El diablo me obligo hacerlo</p>
+      </a>
+      <a href="Annabelle 2 la creacion 2 (2017).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/x0pekWNy7GS37bm30zuxWNLPXj8.jpg" alt="">
+        <p>Annabelle 2: La creacion</p>
+      </a>
+      <a href="Baghead contacto con la muerte (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/5ssaCHmqvTZDVZtcNhNZTzfb7Nj.jpg" alt="">
+        <p>Baghead: contacto con la muerte</p>
+      </a>
+      <a href="Insidious La puerta roja (2023).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/wD4eLIHUaTvrXQqAzlfduHQ1NYg.jpg" alt="">
+        <p>Insidiuos: puerta roja</p>
+      </a>
+    </div>
+  </div>
+  
+  <!-- ¡¡¡NO BORRAR ESTE SCRIPT ES DE FAVORITOS Y SI LO BORRAN AFECTARAN EL FUNCIONAMIENTO DE REPRODUCTOR Y FAVORITOS!!! -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.6.7/plyr.min.js">
+    document.getElementById('btn-favorito').addEventListener('click', () => {
+
+      let favoritos = JSON.parse(localStorage.getItem('favoritos_detalles') || '[]');
+      if (!favoritos.some(f => f.titulo === nuevaPelicula.titulo)) {
+        favoritos.push(nuevaPelicula);
+        localStorage.setItem('favoritos_detalles', JSON.stringify(favoritos));
+      }
+      window.location.href = "favoritos.html";
+    });
+  </script>
+  
+  <script>
+    const videoElement = document.querySelector('.vid1');
+    const videoSrc = videoElement.querySelector('source').getAttribute('src');
+    const STORAGE_KEY = 'pos_' + videoSrc;
+
+    const player = new Plyr(videoElement, {
+      controls: [
+        'rewind', 'play-large', 'play', 'fast-forward',
+        'progress', 'current-time', 'duration', 'mute', 'volume',
+        'captions', 'settings', 'pip', 'airplay', 'fullscreen'
+      ]
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedTime = localStorage.getItem(STORAGE_KEY);
+      // ❌ Evita reanudar desde el tiempo guardado
+  // if (savedTime && parseFloat(savedTime) > 10) {
+  //   videoElement.currentTime = parseFloat(savedTime);
+  //   const msg = document.getElementById('resume-msg');
+  //   msg.classList.add('visible');
+  //   setTimeout(() => msg.classList.remove('visible'), 5000);
+  // }
+
+      const controls = document.querySelector('.plyr__controls');
+  if (controls && !document.getElementById('custom-rewind')) {
+    const rewindBtn = document.createElement('button');
+    rewindBtn.id = 'custom-rewind';
+    rewindBtn.className = 'plyr__control';
+    rewindBtn.setAttribute('aria-label', 'Retroceder 10 segundos');
+    rewindBtn.innerHTML = '<i class="fas fa-undo"></i>';
+    rewindBtn.onclick = () => {
+      videoElement.currentTime = 0;
+    };
+    controls.insertBefore(rewindBtn, controls.firstChild);
+  }
+});
+    
+    setInterval(() => {
+      if (!videoElement.paused && !videoElement.ended) {
+        localStorage.setItem(STORAGE_KEY, videoElement.currentTime);
+      }
+    }, 5000);
+    
+    /* ACA VA LA NOMBRE, IMAGEN, GENERO, ARCHIVO DONDE GUARDAN SU HTML DE PELICULA Y EL TIEMPO */
+    document.getElementById('btn-favorito').addEventListener('click', () => {
+      const nuevaPelicula = {
+        titulo: "El Conjuro 4: El ultimo rito",
+        imagen: "https://image.tmdb.org/t/p/w300/dyW5mX4wwDoZWgTYObx6pg9V0i9.jpg",
+        genero: "Genero",
+        archivo: "El Conjuro 4  El ultimo rito (2025).html",
+        tipo: "pelicula",
+        adulto: true,
+        timestamp: Date.now()
+      };
+
+      /* animacion de favoritos */
+      const btn = document.getElementById('btn-favorito');
+      btn.classList.add('animado');
+      setTimeout(() => btn.classList.remove('animado'), 300);
+      mostrarMensaje("⭐ Agregado a Favoritos");
+
+      let favoritos = JSON.parse(localStorage.getItem('favoritos_detalles') || '[]');
+      if (!favoritos.some(f => f.titulo === nuevaPelicula.titulo)) {
+        favoritos.push(nuevaPelicula);
+        localStorage.setItem('favoritos_detalles', JSON.stringify(favoritos));
+      }
+      window.location.href = "favoritos.html";
+    });
+  </script>
+
+  <!--Aca va el mensaje que se ha agregado al historial-->
+  <div id="mensaje-confirmacion" style="
+    display: none;
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    z-index: 9999;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    transition: opacity 0.5s ease;">
+  </div>
+
+  <script>
+    function mostrarMensaje(texto) {
+      const mensaje = document.getElementById('mensaje-confirmacion');
+      mensaje.textContent = texto;
+      mensaje.style.display = 'block';
+      mensaje.style.opacity = '1';
+      setTimeout(() => {
+        mensaje.style.opacity = '0';
+        setTimeout(() => mensaje.style.display = 'none', 500);
+      }, 3000);
+    }
+  </script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const videoElement = document.querySelector('.vid1');
+      if (!videoElement) return;
+
+      const videoSrc = videoElement.querySelector('source').getAttribute('src');
+      const STORAGE_KEY = 'pos_' + videoSrc;
+
+      /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
+      const historialTitulo = "El Conjuro 4: El ultimo rito";
+      const historialImagen = "https://image.tmdb.org/t/p/w300/dyW5mX4wwDoZWgTYObx6pg9V0i9.jpg";
+      const historialArchivo = "El Conjuro 4  El ultimo rito (2025).html";
+
+      let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
+      let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
+      
+      if (indexHist === -1) {
+        historial.push({
+        titulo: historialTitulo,
+        imagen: historialImagen,
+        progreso: "Asistido 0 min",
+        archivo: historialArchivo,
+        tipo: "pelicula", // ✅ ya está
+        adulto: true,
+        timestamp: Date.now()
+      });
+      localStorage.setItem('historial_usuarios', JSON.stringify(historial));
+      indexHist = historial.length - 1;
+      mostrarMensaje('✅ Agregado al historial');
+    }
+    setInterval(() => {
+      if (!videoElement.paused && !videoElement.ended) {
+        historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
+        indexHist = historial.findIndex(item => item.titulo === historialTitulo);
+        if (indexHist !== -1) {
+          const minutos = Math.floor(videoElement.currentTime / 60);
+          historial[indexHist].progreso = `Asistido ${minutos} min`;
+          historial[indexHist].timestamp = Date.now(); // ✅ esto asegura que suba al principio
+          localStorage.setItem('historial_usuarios', JSON.stringify(historial));
+        }
+        localStorage.setItem(STORAGE_KEY, videoElement.currentTime);
+      }
+    }, 10000);
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
