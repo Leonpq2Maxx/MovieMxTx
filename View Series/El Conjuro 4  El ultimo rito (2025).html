@@ -741,14 +741,47 @@
 
     // 🎬 Al hacer click, reproducir y guardar
     card.querySelector('.play-btn').addEventListener('click', (ev) => {
-      const href = ev.currentTarget.dataset.href;
-      if(href && href !== '#'){
-        const videoElement = document.querySelector('.vid1');
-        const source = videoElement.querySelector('source');
-        source.setAttribute('src', href);
-        videoElement.load();
-        videoElement.play();
-        closeModal();
+  const href = ev.currentTarget.dataset.href;
+  if (href && href !== '#') {
+    const videoElement = document.querySelector('.vid1');
+    const source = videoElement.querySelector('source');
+    source.setAttribute('src', href);
+    videoElement.load();
+
+    // 🔴 Buscar progreso guardado para este episodio
+    const savedTime = localStorage.getItem("pos_" + ep.id);
+    if (savedTime && parseFloat(savedTime) > 10) {
+      videoElement.currentTime = parseFloat(savedTime);
+      mostrarMensaje(`⏯️ Reanudando en el minuto ${Math.floor(savedTime / 60)} de ${ep.title}`);
+    }
+
+    videoElement.play();
+    closeModal();
+
+    // Guardar info del episodio actual
+    const episodioInfo = {
+      temporada: seasonsData[activeSeasonIndex].title,
+      episodio: ep.title,
+      id: ep.id
+    };
+    localStorage.setItem('ultimoEpisodio', JSON.stringify(episodioInfo));
+
+    document.getElementById('episodio-actual').innerHTML =
+      `<i class="fas fa-tv"></i> Viendo: <span style="color:#ff2d5b">${episodioInfo.temporada}</span> - ${episodioInfo.episodio}`;
+
+    // Resaltar episodio
+    document.querySelectorAll('.episode-card').forEach(c => c.classList.remove('viendo'));
+    card.classList.add('viendo');
+
+    // 🔴 Guardar progreso cada 5s SOLO para este episodio
+    setInterval(() => {
+      if (!videoElement.paused && !videoElement.ended) {
+        localStorage.setItem("pos_" + ep.id, videoElement.currentTime);
+      }
+    }, 5000);
+  }
+});
+
         
         // 🔴 Guardar temporada y episodio actual
         const episodioInfo = {
@@ -796,6 +829,10 @@
 
   // inicializa (si quieres abrir automático, descomenta)
   // renderSeasons(); selectSeason(0);
+
+  // 🔴 Cada episodio tendrá su propia clave de tiempo
+const STORAGE_KEY = "pos_" + ep.id;
+
 </script>
 <!-- ---------- FIN: Modal de Temporadas y Episodios ---------- -->
 
@@ -1126,6 +1163,7 @@
   </script>
 </body>
 </html>
+
 
 
 
