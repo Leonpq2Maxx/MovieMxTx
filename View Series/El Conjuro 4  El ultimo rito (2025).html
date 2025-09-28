@@ -625,64 +625,70 @@
 
   // render episodios
   function renderEpisodes(episodes){
-    episodesGrid.innerHTML = '';
-    if(!episodes || episodes.length === 0){
-      episodesGrid.innerHTML = `<div class="muted">No hay episodios disponibles.</div>`;
-      return;
-    }
-    episodes.forEach(ep => {
-      const card = document.createElement('article');
-      card.className = 'episode-card';
-      card.setAttribute('role','listitem');
-      card.innerHTML = `
-        <div class="ep-thumb" style="background-image:url('${ep.thumb || ''}')"></div>
-        <div class="ep-meta">
-          <div class="ep-title">${ep.title}</div>
-          <div class="ep-desc">${ep.time || ''}</div>
-        </div>
-        <div class="ep-actions">
-          <button class="play-btn" data-href="${ep.href || '#'}" aria-label="Reproducir ${ep.title}">Reproducir</button>
-        </div>
-      `;
-      // click en tarjeta => abrir link / reproducir
-      // dentro del addEventListener de los botones play
-card.querySelector('.play-btn').addEventListener('click', (ev) => {
-  const href = ev.currentTarget.dataset.href;
-  if(href && href !== '#'){
-    const videoElement = document.querySelector('.vid1');
-    const source = videoElement.querySelector('source');
-    source.setAttribute('src', href);
-    videoElement.load();
-    videoElement.play();
-    closeModal();
-    
-// 🔴 Guardar temporada y episodio actual
-const episodioInfo = {
-  temporada: seasonsData[activeSeasonIndex].title,
-  episodio: ep.title,
-  id: ep.id
-};
-localStorage.setItem('ultimoEpisodio', JSON.stringify(episodioInfo));
-
-// 🔴 Mostrar en pantalla
-document.getElementById('episodio-actual').textContent =
-  `📺 Viendo: ${episodioInfo.temporada} - ${episodioInfo.episodio}`;
-
-  } else {
-    alert('No hay un link válido para este episodio: ' + ep.title);
+  episodesGrid.innerHTML = '';
+  if(!episodes || episodes.length === 0){
+    episodesGrid.innerHTML = `<div class="muted">No hay episodios disponibles.</div>`;
+    return;
   }
-});
-document.addEventListener('DOMContentLoaded', () => {
+
+  // Cargar último episodio guardado
   const ultimo = JSON.parse(localStorage.getItem('ultimoEpisodio') || 'null');
-if (ultimo && ultimo.id === ep.id) {
-  card.classList.add('viendo');
-}
-});
 
+  episodes.forEach(ep => {
+    const card = document.createElement('article');
+    card.className = 'episode-card';
+    card.setAttribute('role','listitem');
+    card.innerHTML = `
+      <div class="ep-thumb" style="background-image:url('${ep.thumb || ''}')"></div>
+      <div class="ep-meta">
+        <div class="ep-title">${ep.title}</div>
+        <div class="ep-desc">${ep.time || ''}</div>
+      </div>
+      <div class="ep-actions">
+        <button class="play-btn" data-href="${ep.href || '#'}" aria-label="Reproducir ${ep.title}">Reproducir</button>
+      </div>
+    `;
 
-      episodesGrid.appendChild(card);
+    // ✅ Marcar si es el episodio actual
+    if (ultimo && ultimo.id === ep.id) {
+      card.classList.add('viendo');
+    }
+
+    // 🎬 Al hacer click, reproducir y guardar
+    card.querySelector('.play-btn').addEventListener('click', (ev) => {
+      const href = ev.currentTarget.dataset.href;
+      if(href && href !== '#'){
+        const videoElement = document.querySelector('.vid1');
+        const source = videoElement.querySelector('source');
+        source.setAttribute('src', href);
+        videoElement.load();
+        videoElement.play();
+        closeModal();
+        
+        // 🔴 Guardar temporada y episodio actual
+        const episodioInfo = {
+          temporada: seasonsData[activeSeasonIndex].title,
+          episodio: ep.title,
+          id: ep.id
+        };
+        localStorage.setItem('ultimoEpisodio', JSON.stringify(episodioInfo));
+
+        // 🔴 Mostrar en pantalla
+        document.getElementById('episodio-actual').textContent =
+          `📺 Viendo: ${episodioInfo.temporada} - ${episodioInfo.episodio}`;
+
+        // 🔴 Resaltar episodio en la lista
+        document.querySelectorAll('.episode-card').forEach(c => c.classList.remove('viendo'));
+        card.classList.add('viendo');
+      } else {
+        alert('No hay un link válido para este episodio: ' + ep.title);
+      }
     });
-  }
+
+    episodesGrid.appendChild(card);
+  });
+}
+
 
   // búsqueda simple
   epSearch.addEventListener('input', (e) => {
@@ -1035,6 +1041,7 @@ if (ultimo && ultimo.id === ep.id) {
   </script>
 </body>
 </html>
+
 
 
 
