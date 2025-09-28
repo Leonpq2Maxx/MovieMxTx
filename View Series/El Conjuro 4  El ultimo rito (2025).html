@@ -251,6 +251,7 @@
     </video>
   </div>
 
+  <div id="resume-msg">✅ Reanudando donde lo dejaste: El Conjuro 4: El ultimo rito</div>
 
   <div class="info">
     <i class="fal fa-calendar-alt"></i><span>2025</span> <!--Aca va el año de estreno de pelicula-->
@@ -857,6 +858,7 @@
   <script>
     const videoElement = document.querySelector('.vid1');
     const videoSrc = videoElement.querySelector('source').getAttribute('src');
+    const STORAGE_KEY = 'pos_' + videoSrc;
 
     const player = new Plyr(videoElement, {
       controls: [
@@ -865,6 +867,15 @@
         'captions', 'settings', 'pip', 'airplay', 'fullscreen'
       ]
     });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedTime = localStorage.getItem(STORAGE_KEY);
+      if (savedTime && parseFloat(savedTime) > 10) {
+        videoElement.currentTime = parseFloat(savedTime);
+        const msg = document.getElementById('resume-msg');
+        msg.classList.add('visible');
+        setTimeout(() => msg.classList.remove('visible'), 5000);
+      }
 
       const controls = document.querySelector('.plyr__controls');
       if (controls && !document.getElementById('custom-rewind')) {
@@ -879,6 +890,12 @@
         controls.insertBefore(rewindBtn, controls.firstChild);
       }
     });
+    
+    setInterval(() => {
+      if (!videoElement.paused && !videoElement.ended) {
+        localStorage.setItem(STORAGE_KEY, videoElement.currentTime);
+      }
+    }, 5000);
     
     /* ACA VA LA NOMBRE, IMAGEN, GENERO, ARCHIVO DONDE GUARDAN SU HTML DE PELICULA Y EL TIEMPO */
     document.getElementById('btn-favorito').addEventListener('click', () => {
@@ -984,8 +1001,6 @@
   </script>
 </body>
 </html>
-
-
 
 
 
