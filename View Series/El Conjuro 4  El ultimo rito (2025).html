@@ -262,6 +262,31 @@
 .plyr--full-ui.plyr--ready.plyr__controls--showing #episodio-overlay {
   opacity: 1;
 }
+#episodio-overlay {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(0,0,0,0.6);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #ff2d5b;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 15;
+}
+
+/* ✅ Mostrar cuando los controles están visibles */
+.plyr:not(.plyr--hide-controls) #episodio-overlay {
+  opacity: 1;
+}
+
+    
 
   </style>
 </head>
@@ -273,8 +298,9 @@
     <source src="https://dl.dropbox.com/scl/fi/gu33t6g275pz3y85tc6xk/El-conjuro-4-el-ultimo.rito-2025.mp4?rlkey=7quk3bru3oth9ewqsae1ibgpl&st=" type="video/mp4">
   </video>
 
-  <!-- 🔴 Indicador de temporada y episodio -->
-  <div id="episodio-overlay"><i class="fas fa-tv"></i> Temporada 1 - Episodio 1</div>
+  <!-- 🔴 Indicador dentro del reproductor -->
+<div id="episodio-overlay"><i class="fas fa-tv"></i> Temporada 1 - Episodio 1</div>
+</div> <!-- recién acá cierra .player -->
 </div>
 
 
@@ -1051,6 +1077,7 @@ if (ultimo) {
   </script>
 </body>
 </html>
+
 
 
 
