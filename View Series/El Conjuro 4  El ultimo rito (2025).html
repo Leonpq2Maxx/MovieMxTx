@@ -239,91 +239,6 @@
       .actor img { width: 88px; height: 125px; }
       .actor .actor-name { font-size: 0.78rem; }
     }
-.episode-card.viendo {
-  border: 2px solid var(--accent);
-  box-shadow: 0 0 12px rgba(255,45,91,0.6);
-}
-
-    /* --- Mejor experiencia deslizable en móvil --- */
-@media (max-width: 880px) {
-  /* Lista de temporadas horizontal deslizable */
-  .seasons-list {
-    display: flex;
-    overflow-x: auto;
-    gap: 12px;
-    padding: 8px;
-    -webkit-overflow-scrolling: touch; /* suavidad en iOS */
-    scroll-snap-type: x mandatory;
-  }
-
-  .seasons-list ul {
-    flex-direction: row;
-    gap: 12px;
-    width: max-content;
-  }
-
-  .seasons-list li {
-    flex: 0 0 auto;
-    scroll-snap-align: start;
-    min-width: 160px;
-  }
-
-  .seasons-list::-webkit-scrollbar {
-    display: none; /* oculta scrollbar en móviles */
-  }
-}
-
-@media (max-width: 768px) {
-  /* Episodios también deslizable si hay muchos */
-  .episodes-grid {
-    display: flex !important;
-    overflow-x: auto;
-    gap: 12px;
-    padding: 8px;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .episodes-grid::-webkit-scrollbar {
-    display: none;
-  }
-
-  .episode-card {
-    flex: 0 0 85%; /* ocupa casi toda la pantalla */
-    scroll-snap-align: center;
-  }
-}
-#episodio-actual {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  background: rgba(255, 45, 91, 0.08);
-  border: 1px solid rgba(255, 45, 91, 0.5);
-  padding: 6px 12px;
-  border-radius: 10px;
-  font-size: 0.8rem;   /* 🔴 Más chico que antes */
-  font-weight: 500;
-  color: #fff;
-  margin: 10px auto;
-  text-align: center;
-  backdrop-filter: blur(4px);
-  box-shadow: 0 2px 8px rgba(255, 45, 91, 0.25);
-  max-width: fit-content;
-}
-
-
-#episodio-actual i {
-  color: #ff2d5b;
-  font-size: 1.2rem;
-}
-
-/* Animación de aparición */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
 
   </style>
 </head>
@@ -597,23 +512,6 @@
     font-size: 1rem;
   }
 }
-.mensaje-flotante {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: rgba(0,0,0,0.85);
-  color: #fff;
-  padding: 12px 16px;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  z-index: 9999;
-  animation: fadeIn 0.5s ease;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px);}
-  to { opacity: 1; transform: translateY(0);}
-}
 
 </style>
 
@@ -624,15 +522,11 @@
     {
       id: 1,
       title: "Temporada 1",
-      thumb: "https://image.tmdb.org/t/p/w300/5kosg4zhYIuzTxbPcrJVFylgOYk.jpg",
-      desc: "Lanzada 2010 — 6 episodios",
+      thumb: "https://image.tmdb.org/t/p/w300/4u7Q1QZ7b1s2c0N3y2yGQyG3o8A.jpg",
+      desc: "Lanzada 2019 — 8 episodios",
       episodes: [
-        { id: "s1e1", title: "Episodio 1 — Los días pasados", time: "1h 07m", thumb: "https://occ-0-3791-1740.1.nflxso.net/dnm/api/v6/9pS1daC2n6UGc3dUogvWIPMR_OU/AAAABRYX0t-g71Kln-IZMzngfrIcQEkQt1NQk5cj5ffDA0SeRxO68uq9TGvAo_u0UuQFLy8agyDhjmCOkFzGXTp92ILo5Ire9Zh0GCAx8aH-xtrUnCp0isuhD7Nt.webp?r=ca2", href: "https://dl.dropbox.com/scl/fi/gu33t6g275pz3y85tc6xk/El-conjuro-4-el-ultimo.rito-2025.mp4?rlkey=7quk3bru3oth9ewqsae1ibgpl&st=" },
-        { id: "s1e2", title: "Episodio 2 — ", time: "00m", thumb: "https://image.tmdb.org/t/p/w300/abc.jpg", href: "https://dl.dropbox.com/scl/fi/h3y5ye6hfqifjsqolfg0w/1978.2025.1080P-Lat.mkv?rlkey=fbvfj844uowkaro7wi6y6ifqb&st=" },
-        { id: "s1e3", title: "Episodio 3 — ", time: "00m", thumb: "https://image.tmdb.org/t/p/w300/abc.jpg", href: "#" },
-        { id: "s1e4", title: "Episodio 4 — ", time: "00m", thumb: "https://image.tmdb.org/t/p/w300/abc.jpg", href: "#" },
-        { id: "s1e5", title: "Episodio 5 — ", time: "00m", thumb: "https://image.tmdb.org/t/p/w300/abc.jpg", href: "#" },
-        { id: "s1e6", title: "Episodio 6 — ", time: "00m", thumb: "https://image.tmdb.org/t/p/w300/abc.jpg", href: "#" },
+        { id: "s1e1", title: "Episodio 1 — Inicio oscuro", time: "45m", thumb: "https://image.tmdb.org/t/p/w300/8uO0gUM8aNqYLs1OsTBQiXu0fEv.jpg", href: "https://dl.dropbox.com/scl/fi/gu33t6g275pz3y85tc6xk/El-conjuro-4-el-ultimo.rito-2025.mp4?rlkey=7quk3bru3oth9ewqsae1ibgpl&st=" },
+        { id: "s1e2", title: "Episodio 2 — Noche sin fin", time: "42m", thumb: "https://image.tmdb.org/t/p/w300/abc.jpg", href: "#" },
         // ... más episodios
       ]
     },
@@ -727,93 +621,63 @@
 
   // render episodios
   function renderEpisodes(episodes){
-  episodesGrid.innerHTML = '';
-  if(!episodes || episodes.length === 0){
-    episodesGrid.innerHTML = `<div class="muted">No hay episodios disponibles.</div>`;
-    return;
-  }
-
-  // Cargar último episodio guardado
-  const ultimo = JSON.parse(localStorage.getItem('ultimoEpisodio') || 'null');
-
-  episodes.forEach(ep => {
-    const card = document.createElement('article');
-    card.className = 'episode-card';
-    card.setAttribute('role','listitem');
-    card.innerHTML = `
-      <div class="ep-thumb" style="background-image:url('${ep.thumb || ''}')"></div>
-      <div class="ep-meta">
-        <div class="ep-title">${ep.title}</div>
-        <div class="ep-desc">${ep.time || ''}</div>
-      </div>
-      <div class="ep-actions">
-        <button class="play-btn" data-href="${ep.href || '#'}" aria-label="Reproducir ${ep.title}">Reproducir</button>
-      </div>
-    `;
-
-    // ✅ Marcar si es el episodio actual
-    if (ultimo && ultimo.id === ep.id) {
-      card.classList.add('viendo');
+    episodesGrid.innerHTML = '';
+    if(!episodes || episodes.length === 0){
+      episodesGrid.innerHTML = `<div class="muted">No hay episodios disponibles.</div>`;
+      return;
     }
-
-    card.querySelector('.play-btn').addEventListener('click', (ev) => {
+    episodes.forEach(ep => {
+      const card = document.createElement('article');
+      card.className = 'episode-card';
+      card.setAttribute('role','listitem');
+      card.innerHTML = `
+        <div class="ep-thumb" style="background-image:url('${ep.thumb || ''}')"></div>
+        <div class="ep-meta">
+          <div class="ep-title">${ep.title}</div>
+          <div class="ep-desc">${ep.time || ''}</div>
+        </div>
+        <div class="ep-actions">
+          <button class="play-btn" data-href="${ep.href || '#'}" aria-label="Reproducir ${ep.title}">Reproducir</button>
+        </div>
+      `;
+      // click en tarjeta => abrir link / reproducir
+      // dentro del addEventListener de los botones play
+card.querySelector('.play-btn').addEventListener('click', (ev) => {
   const href = ev.currentTarget.dataset.href;
-  if (href && href !== '#') {
+  if(href && href !== '#'){
     const videoElement = document.querySelector('.vid1');
     const source = videoElement.querySelector('source');
     source.setAttribute('src', href);
     videoElement.load();
-
-    // 🔑 Clave única de progreso para este episodio
-    const STORAGE_KEY = "progreso_" + ep.id;
-
-    // ⏪ Revisar si hay progreso guardado
-    const savedTime = localStorage.getItem(STORAGE_KEY);
-    if (savedTime && parseFloat(savedTime) > 10) {
-      videoElement.currentTime = parseFloat(savedTime);
-      mostrarMensaje(`⏪ Reanudando "${ep.title}" desde el minuto ${Math.floor(savedTime / 60)}.`);
-    }
-
     videoElement.play();
     closeModal();
 
-    // 📌 Guardar info del último episodio visto
+    // 🔴 Guardar temporada y episodio actual
     const episodioInfo = {
       temporada: seasonsData[activeSeasonIndex].title,
-      episodio: ep.title,
-      id: ep.id
+      episodio: ep.title
     };
     localStorage.setItem('ultimoEpisodio', JSON.stringify(episodioInfo));
 
-    document.getElementById('episodio-actual').innerHTML =
-      `<i class="fas fa-tv"></i> Viendo: <span style="color:#ff2d5b">${episodioInfo.temporada}</span> - ${episodioInfo.episodio}`;
-
-    // ✨ Resaltar episodio actual
-    document.querySelectorAll('.episode-card').forEach(c => c.classList.remove('viendo'));
-    card.classList.add('viendo');
-
-    // 💾 Guardar progreso cada 5s para este episodio
-    setInterval(() => {
-      if (!videoElement.paused && !videoElement.ended) {
-        localStorage.setItem(STORAGE_KEY, videoElement.currentTime);
-      }
-    }, 5000);
+    // 🔴 Mostrar en pantalla
+    document.getElementById('episodio-actual').textContent =
+      `📺 Viendo: ${episodioInfo.temporada} - ${episodioInfo.episodio}`;
   } else {
     alert('No hay un link válido para este episodio: ' + ep.title);
   }
 });
-function mostrarMensaje(texto) {
-  let aviso = document.createElement('div');
-  aviso.className = 'mensaje-flotante';
-  aviso.textContent = texto;
-  document.body.appendChild(aviso);
-  setTimeout(() => aviso.remove(), 4000);
-}
+document.addEventListener('DOMContentLoaded', () => {
+  const ultimo = JSON.parse(localStorage.getItem('ultimoEpisodio') || 'null');
+  if (ultimo) {
+    document.getElementById('episodio-actual').textContent =
+      `⏮ Último visto: ${ultimo.temporada} - ${ultimo.episodio}`;
+  }
+});
 
-    episodesGrid.appendChild(card);
-  });
-}
 
+      episodesGrid.appendChild(card);
+    });
+  }
 
   // búsqueda simple
   epSearch.addEventListener('input', (e) => {
@@ -1166,16 +1030,6 @@ function mostrarMensaje(texto) {
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
 
 
 
