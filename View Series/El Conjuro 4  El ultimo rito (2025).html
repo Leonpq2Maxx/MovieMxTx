@@ -288,6 +288,26 @@
     scroll-snap-align: center;
   }
 }
+/* Estilo para episodio en reproducción */
+.episode-card.viendo {
+  border: 2px solid var(--accent);
+  background: rgba(255, 45, 91, 0.08);
+  box-shadow: 0 0 12px rgba(255,45,91,0.6);
+  position: relative;
+}
+
+.episode-card.viendo::after {
+  content: "▶ Viendo ahora";
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 3px 6px;
+  border-radius: 6px;
+}
 
   </style>
 </head>
@@ -1086,6 +1106,7 @@
   </script>
 </body>
 </html>
+
 
 
 
