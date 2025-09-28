@@ -239,27 +239,6 @@
       .actor img { width: 88px; height: 125px; }
       .actor .actor-name { font-size: 0.78rem; }
     }
-    #episodio-overlay {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  background: rgba(0,0,0,0.6);
-  padding: 6px 12px;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  font-weight: bold;
-  color: #ff2d5b;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-  z-index: 10;
-}
-
-.plyr--full-ui.plyr--ready.plyr--paused #episodio-overlay,
-.plyr--full-ui.plyr--ready.plyr--playing.plyr__controls--showing #episodio-overlay {
-  opacity: 1;
-}
-
 
   </style>
 </head>
@@ -270,12 +249,14 @@
     <video class="vid1 js-player" controls loading="lazy" poster="https://image.tmdb.org/t/p/original/fJXqP9S9llRUy9tuccuwvIYFBA4.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
       <source src="https://dl.dropbox.com/scl/fi/gu33t6g275pz3y85tc6xk/El-conjuro-4-el-ultimo.rito-2025.mp4?rlkey=7quk3bru3oth9ewqsae1ibgpl&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
-    <div class="player">
-  <video class="vid1 js-player" controls></video>
-  <div id="episodio-overlay">Temporada 1 - Episodio 1</div>
-</div>
-
   </div>
+  <div id="episodio-actual" style="
+  text-align:center;
+  margin:10px;
+  font-size:1rem;
+  font-weight:bold;
+  color:#ff2d5b;
+"></div>
 
 
   <div id="resume-msg">✅ Reanudando donde lo dejaste: El Conjuro 4: El ultimo rito</div>
@@ -970,14 +951,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       window.location.href = "favoritos.html";
     });
-    document.getElementById('episodio-overlay').textContent =
-  `${episodioInfo.temporada} - ${episodioInfo.episodio}`;
-const ultimo = JSON.parse(localStorage.getItem('ultimoEpisodio') || 'null');
-if (ultimo) {
-  document.getElementById('episodio-overlay').textContent =
-    `${ultimo.temporada} - ${ultimo.episodio}`;
-}
-
   </script>
 
   <!--Aca va el mensaje que se ha agregado al historial-->
@@ -1057,7 +1030,6 @@ if (ultimo) {
   </script>
 </body>
 </html>
-
 
 
 
