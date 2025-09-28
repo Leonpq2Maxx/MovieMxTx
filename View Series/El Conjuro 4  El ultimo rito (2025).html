@@ -644,28 +644,51 @@
       // dentro del addEventListener de los botones play
 card.querySelector('.play-btn').addEventListener('click', (ev) => {
   const href = ev.currentTarget.dataset.href;
-  if(href && href !== '#'){
+  if (href && href !== '#') {
     const videoElement = document.querySelector('.vid1');
     const source = videoElement.querySelector('source');
     source.setAttribute('src', href);
     videoElement.load();
+
+    // 🔑 Clave única de progreso para este episodio
+    const STORAGE_KEY = "progreso_" + ep.id;
+
+    // ⏪ Revisar si hay progreso guardado
+    const savedTime = localStorage.getItem(STORAGE_KEY);
+    if (savedTime && parseFloat(savedTime) > 10) {
+      videoElement.currentTime = parseFloat(savedTime);
+      mostrarMensaje(`⏪ Reanudando "${ep.title}" desde el minuto ${Math.floor(savedTime / 60)}.`);
+    }
+
     videoElement.play();
     closeModal();
 
-    // 🔴 Guardar temporada y episodio actual
+    // 📌 Guardar info del último episodio visto
     const episodioInfo = {
       temporada: seasonsData[activeSeasonIndex].title,
-      episodio: ep.title
+      episodio: ep.title,
+      id: ep.id
     };
     localStorage.setItem('ultimoEpisodio', JSON.stringify(episodioInfo));
 
-    // 🔴 Mostrar en pantalla
-    document.getElementById('episodio-actual').textContent =
-      `📺 Viendo: ${episodioInfo.temporada} - ${episodioInfo.episodio}`;
+    document.getElementById('episodio-actual').innerHTML =
+      `<i class="fas fa-tv"></i> Viendo: <span style="color:#ff2d5b">${episodioInfo.temporada}</span> - ${episodioInfo.episodio}`;
+
+    // ✨ Resaltar episodio actual
+    document.querySelectorAll('.episode-card').forEach(c => c.classList.remove('viendo'));
+    card.classList.add('viendo');
+
+    // 💾 Guardar progreso cada 5s para este episodio
+    setInterval(() => {
+      if (!videoElement.paused && !videoElement.ended) {
+        localStorage.setItem(STORAGE_KEY, videoElement.currentTime);
+      }
+    }, 5000);
   } else {
     alert('No hay un link válido para este episodio: ' + ep.title);
   }
 });
+
 document.addEventListener('DOMContentLoaded', () => {
   const ultimo = JSON.parse(localStorage.getItem('ultimoEpisodio') || 'null');
   if (ultimo) {
@@ -1030,6 +1053,7 @@ document.addEventListener('DOMContentLoaded', () => {
   </script>
 </body>
 </html>
+
 
 
 
