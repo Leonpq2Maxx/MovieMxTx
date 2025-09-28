@@ -250,6 +250,14 @@
       <source src="https://dl.dropbox.com/scl/fi/gu33t6g275pz3y85tc6xk/El-conjuro-4-el-ultimo.rito-2025.mp4?rlkey=7quk3bru3oth9ewqsae1ibgpl&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
+  <div id="episodio-actual" style="
+  text-align:center;
+  margin:10px;
+  font-size:1rem;
+  font-weight:bold;
+  color:#ff2d5b;
+"></div>
+
 
   <div id="resume-msg">✅ Reanudando donde lo dejaste: El Conjuro 4: El ultimo rito</div>
 
@@ -633,19 +641,39 @@
         </div>
       `;
       // click en tarjeta => abrir link / reproducir
-      card.querySelector('.play-btn').addEventListener('click', (ev) => {
+      // dentro del addEventListener de los botones play
+card.querySelector('.play-btn').addEventListener('click', (ev) => {
   const href = ev.currentTarget.dataset.href;
   if(href && href !== '#'){
     const videoElement = document.querySelector('.vid1');
     const source = videoElement.querySelector('source');
     source.setAttribute('src', href);
-    videoElement.load();  // recarga el video con la nueva fuente
-    videoElement.play();  // empieza a reproducir
-    closeModal();         // opcional: cerrar el modal al seleccionar episodio
+    videoElement.load();
+    videoElement.play();
+    closeModal();
+
+    // 🔴 Guardar temporada y episodio actual
+    const episodioInfo = {
+      temporada: seasonsData[activeSeasonIndex].title,
+      episodio: ep.title
+    };
+    localStorage.setItem('ultimoEpisodio', JSON.stringify(episodioInfo));
+
+    // 🔴 Mostrar en pantalla
+    document.getElementById('episodio-actual').textContent =
+      `📺 Viendo: ${episodioInfo.temporada} - ${episodioInfo.episodio}`;
   } else {
     alert('No hay un link válido para este episodio: ' + ep.title);
   }
 });
+document.addEventListener('DOMContentLoaded', () => {
+  const ultimo = JSON.parse(localStorage.getItem('ultimoEpisodio') || 'null');
+  if (ultimo) {
+    document.getElementById('episodio-actual').textContent =
+      `⏮ Último visto: ${ultimo.temporada} - ${ultimo.episodio}`;
+  }
+});
+
 
       episodesGrid.appendChild(card);
     });
@@ -1002,6 +1030,7 @@
   </script>
 </body>
 </html>
+
 
 
 
