@@ -890,11 +890,6 @@
       }
     });
     
-     setInterval(() => {
-   if (!videoElement.paused && !videoElement.ended) {
-     localStorage.setItem(STORAGE_KEY, videoElement.currentTime);
-   }
- }, 5000);
     
     /* ACA VA LA NOMBRE, IMAGEN, GENERO, ARCHIVO DONDE GUARDAN SU HTML DE PELICULA Y EL TIEMPO */
     document.getElementById('btn-favorito').addEventListener('click', () => {
@@ -1000,6 +995,7 @@
   </script>
 </body>
 </html>
+
 
 
 
