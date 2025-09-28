@@ -651,27 +651,28 @@ card.querySelector('.play-btn').addEventListener('click', (ev) => {
     videoElement.load();
     videoElement.play();
     closeModal();
+    
+// 🔴 Guardar temporada y episodio actual
+const episodioInfo = {
+  temporada: seasonsData[activeSeasonIndex].title,
+  episodio: ep.title,
+  id: ep.id
+};
+localStorage.setItem('ultimoEpisodio', JSON.stringify(episodioInfo));
 
-    // 🔴 Guardar temporada y episodio actual
-    const episodioInfo = {
-      temporada: seasonsData[activeSeasonIndex].title,
-      episodio: ep.title
-    };
-    localStorage.setItem('ultimoEpisodio', JSON.stringify(episodioInfo));
+// 🔴 Mostrar en pantalla
+document.getElementById('episodio-actual').textContent =
+  `📺 Viendo: ${episodioInfo.temporada} - ${episodioInfo.episodio}`;
 
-    // 🔴 Mostrar en pantalla
-    document.getElementById('episodio-actual').textContent =
-      `📺 Viendo: ${episodioInfo.temporada} - ${episodioInfo.episodio}`;
   } else {
     alert('No hay un link válido para este episodio: ' + ep.title);
   }
 });
 document.addEventListener('DOMContentLoaded', () => {
   const ultimo = JSON.parse(localStorage.getItem('ultimoEpisodio') || 'null');
-  if (ultimo) {
-    document.getElementById('episodio-actual').textContent =
-      `⏮ Último visto: ${ultimo.temporada} - ${ultimo.episodio}`;
-  }
+if (ultimo && ultimo.id === ep.id) {
+  card.classList.add('viendo');
+}
 });
 
 
@@ -1030,6 +1031,7 @@ document.addEventListener('DOMContentLoaded', () => {
   </script>
 </body>
 </html>
+
 
 
 
