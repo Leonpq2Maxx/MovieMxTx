@@ -597,6 +597,23 @@
     font-size: 1rem;
   }
 }
+.mensaje-flotante {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  z-index: 9999;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px);}
+  to { opacity: 1; transform: translateY(0);}
+}
 
 </style>
 
@@ -739,36 +756,59 @@
       card.classList.add('viendo');
     }
 
-    // 🎬 Al hacer click, reproducir y guardar
     card.querySelector('.play-btn').addEventListener('click', (ev) => {
-      const href = ev.currentTarget.dataset.href;
-      if(href && href !== '#'){
-        const videoElement = document.querySelector('.vid1');
-        const source = videoElement.querySelector('source');
-        source.setAttribute('src', href);
-        videoElement.load();
-        videoElement.play();
-        closeModal();
-        
-        // 🔴 Guardar temporada y episodio actual
-        const episodioInfo = {
-          temporada: seasonsData[activeSeasonIndex].title,
-          episodio: ep.title,
-          id: ep.id
-        };
-        localStorage.setItem('ultimoEpisodio', JSON.stringify(episodioInfo));
+  const href = ev.currentTarget.dataset.href;
+  if (href && href !== '#') {
+    const videoElement = document.querySelector('.vid1');
+    const source = videoElement.querySelector('source');
+    source.setAttribute('src', href);
+    videoElement.load();
 
-        // 🔴 Mostrar en pantalla
-        document.getElementById('episodio-actual').textContent =
-          `📺 Viendo: ${episodioInfo.temporada} - ${episodioInfo.episodio}`;
+    // 🔑 Clave única de progreso para este episodio
+    const STORAGE_KEY = "progreso_" + ep.id;
 
-        // 🔴 Resaltar episodio en la lista
-        document.querySelectorAll('.episode-card').forEach(c => c.classList.remove('viendo'));
-        card.classList.add('viendo');
-      } else {
-        alert('No hay un link válido para este episodio: ' + ep.title);
+    // ⏪ Revisar si hay progreso guardado
+    const savedTime = localStorage.getItem(STORAGE_KEY);
+    if (savedTime && parseFloat(savedTime) > 10) {
+      videoElement.currentTime = parseFloat(savedTime);
+      mostrarMensaje(`⏪ Reanudando "${ep.title}" desde el minuto ${Math.floor(savedTime / 60)}.`);
+    }
+
+    videoElement.play();
+    closeModal();
+
+    // 📌 Guardar info del último episodio visto
+    const episodioInfo = {
+      temporada: seasonsData[activeSeasonIndex].title,
+      episodio: ep.title,
+      id: ep.id
+    };
+    localStorage.setItem('ultimoEpisodio', JSON.stringify(episodioInfo));
+
+    document.getElementById('episodio-actual').innerHTML =
+      `<i class="fas fa-tv"></i> Viendo: <span style="color:#ff2d5b">${episodioInfo.temporada}</span> - ${episodioInfo.episodio}`;
+
+    // ✨ Resaltar episodio actual
+    document.querySelectorAll('.episode-card').forEach(c => c.classList.remove('viendo'));
+    card.classList.add('viendo');
+
+    // 💾 Guardar progreso cada 5s para este episodio
+    setInterval(() => {
+      if (!videoElement.paused && !videoElement.ended) {
+        localStorage.setItem(STORAGE_KEY, videoElement.currentTime);
       }
-    });
+    }, 5000);
+  } else {
+    alert('No hay un link válido para este episodio: ' + ep.title);
+  }
+});
+function mostrarMensaje(texto) {
+  let aviso = document.createElement('div');
+  aviso.className = 'mensaje-flotante';
+  aviso.textContent = texto;
+  document.body.appendChild(aviso);
+  setTimeout(() => aviso.remove(), 4000);
+}
 
     episodesGrid.appendChild(card);
   });
@@ -1126,6 +1166,7 @@
   </script>
 </body>
 </html>
+
 
 
 
