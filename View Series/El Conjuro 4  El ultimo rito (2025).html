@@ -434,6 +434,77 @@
     .episodes-grid{ grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap:10px; }
     .seasons-panel{ width: 96%; max-height: 92vh; }
   }
+  /* --- Mejoras de adaptación móvil --- */
+@media (max-width: 768px) {
+  .seasons-panel {
+    width: 100% !important;
+    height: 100% !important;
+    max-height: none !important;
+    border-radius: 0;
+    left: 0;
+    top: 0;
+    transform: none;
+  }
+
+  .seasons-header {
+    padding: 12px;
+  }
+  .seasons-header h2 {
+    font-size: 1rem;
+  }
+
+  .episodes-search input {
+    width: 100%;
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .episodes-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px;
+  }
+
+  .episode-card {
+    flex-direction: row;
+    padding: 12px;
+  }
+
+  .ep-thumb {
+    width: 120px;
+    height: 70px;
+  }
+
+  .ep-title {
+    font-size: 1rem;
+  }
+
+  .ep-desc {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .episode-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ep-thumb {
+    width: 100%;
+    height: 180px;
+  }
+
+  .ep-meta {
+    margin-top: 8px;
+  }
+
+  .play-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+  }
+}
+
 </style>
 
 <!-- ---------- SCRIPT: datos + interacción ---------- -->
@@ -930,6 +1001,7 @@
   </script>
 </body>
 </html>
+
 
 
 
