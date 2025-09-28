@@ -293,6 +293,36 @@
     scroll-snap-align: center;
   }
 }
+#episodio-actual {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(255, 45, 91, 0.08);
+  border: 1px solid rgba(255, 45, 91, 0.6);
+  padding: 10px 18px;
+  border-radius: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 15px auto;
+  text-align: center;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 18px rgba(255, 45, 91, 0.25);
+  max-width: fit-content;
+  animation: fadeIn 0.6s ease;
+}
+
+#episodio-actual i {
+  color: #ff2d5b;
+  font-size: 1.2rem;
+}
+
+/* Animación de aparición */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 
   </style>
@@ -1092,6 +1122,7 @@
   </script>
 </body>
 </html>
+
 
 
 
