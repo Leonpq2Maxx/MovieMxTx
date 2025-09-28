@@ -870,26 +870,27 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       const savedTime = localStorage.getItem(STORAGE_KEY);
-      if (savedTime && parseFloat(savedTime) > 10) {
-        videoElement.currentTime = parseFloat(savedTime);
-        const msg = document.getElementById('resume-msg');
-        msg.classList.add('visible');
-        setTimeout(() => msg.classList.remove('visible'), 5000);
-      }
+      // ❌ Evita reanudar desde el tiempo guardado
+  // if (savedTime && parseFloat(savedTime) > 10) {
+  //   videoElement.currentTime = parseFloat(savedTime);
+  //   const msg = document.getElementById('resume-msg');
+  //   msg.classList.add('visible');
+  //   setTimeout(() => msg.classList.remove('visible'), 5000);
+  // }
 
       const controls = document.querySelector('.plyr__controls');
-      if (controls && !document.getElementById('custom-rewind')) {
-        const rewindBtn = document.createElement('button');
-        rewindBtn.id = 'custom-rewind';
-        rewindBtn.className = 'plyr__control';
-        rewindBtn.setAttribute('aria-label', 'Retroceder 10 segundos');
-        rewindBtn.innerHTML = '<i class="fas fa-undo"></i>';
-        rewindBtn.onclick = () => {
-          videoElement.currentTime = 0;
-        };
-        controls.insertBefore(rewindBtn, controls.firstChild);
-      }
-    });
+  if (controls && !document.getElementById('custom-rewind')) {
+    const rewindBtn = document.createElement('button');
+    rewindBtn.id = 'custom-rewind';
+    rewindBtn.className = 'plyr__control';
+    rewindBtn.setAttribute('aria-label', 'Retroceder 10 segundos');
+    rewindBtn.innerHTML = '<i class="fas fa-undo"></i>';
+    rewindBtn.onclick = () => {
+      videoElement.currentTime = 0;
+    };
+    controls.insertBefore(rewindBtn, controls.firstChild);
+  }
+});
     
     setInterval(() => {
       if (!videoElement.paused && !videoElement.ended) {
@@ -1001,6 +1002,7 @@
   </script>
 </body>
 </html>
+
 
 
 
