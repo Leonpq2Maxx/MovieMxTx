@@ -273,7 +273,8 @@
     <h3 class="titulo">El Conjuro 4: El ultimo rito</h3>
     <div class="genero-badge">Terror,Sobrenatural</div>
   </div>
-<!-- ---------- INICIA: Modal de Temporadas y Episodios ---------- -->
+
+<!-- ---------- INICIA: Modal de Temporadas y Episodios ---------- -->
 <!-- Botón para abrir el modal -->
 <button id="open-seasons" class="seasons-open-btn">Temporadas & Episodios</button>
 
@@ -562,16 +563,19 @@
       `;
       // click en tarjeta => abrir link / reproducir
       card.querySelector('.play-btn').addEventListener('click', (ev) => {
-        const href = ev.currentTarget.dataset.href;
-        // acción por defecto: abrir en nueva pestaña. Cambia para integrarlo con tu reproductor.
-        if(href && href !== '#'){
-          play-btn(href, '_blank');
-        } else {
-          // Si quieres reproducir en el reproductor de la página, llama tu función aquí.
-          // ejemplo: playEpisode(ep);
-          alert('Aquí puedes enlazar el episodio al reproductor: ' + ep.title);
-        }
-      });
+  const href = ev.currentTarget.dataset.href;
+  if(href && href !== '#'){
+    const videoElement = document.querySelector('.vid1');
+    const source = videoElement.querySelector('source');
+    source.setAttribute('src', href);
+    videoElement.load();  // recarga el video con la nueva fuente
+    videoElement.play();  // empieza a reproducir
+    closeModal();         // opcional: cerrar el modal al seleccionar episodio
+  } else {
+    alert('No hay un link válido para este episodio: ' + ep.title);
+  }
+});
+
       episodesGrid.appendChild(card);
     });
   }
@@ -926,5 +930,6 @@
   </script>
 </body>
 </html>
+
 
 
