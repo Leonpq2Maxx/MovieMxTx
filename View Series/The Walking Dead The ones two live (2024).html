@@ -945,29 +945,29 @@ document.addEventListener("DOMContentLoaded", () => {
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
-      <a href="El conjuro 1 (2013).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/10ir0eISr3p1MF1mjZwGTx7u4vv.jpg" alt="">
-        <p>El conjuro: Experiente Warren</p>
+      <a href="" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/9iYinsg30olSCuDoH8VxtRN5gZx.jpg" alt="">
+        <p>The walking dead</p>
       </a>
-      <a href="El conjuro 2 (2016).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/x4jUJ0fF60SSOeUUTkaRtmnDvwG.jpg" alt="">
-        <p>El conjuro 2: El caso enfield</p>
+      <a href="" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/kdM24KINoAVK9wjCtDJCkdffEpc.jpg" alt="">
+        <p>The Walking Dead: Daryl Dixon</p>
       </a>
-      <a href="El conjuro 3 (2021) .html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/79QjdRiT9zTLkrOq9FltoIxClma.jpg" alt="">
-        <p>El conjuro 3: El diablo me obligo hacerlo</p>
+      <a href="" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/yd8cDZG4XjNRk7jfEWy18KH07d2.jpg" alt="">
+        <p>Fear the Walking Dead</p>
       </a>
-      <a href="Annabelle 2 la creacion 2 (2017).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/x0pekWNy7GS37bm30zuxWNLPXj8.jpg" alt="">
-        <p>Annabelle 2: La creacion</p>
+      <a href="" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/ugdiqJsceA9slg2k4Uu6VKegaw8.jpg" alt="">
+        <p>The Walking Dead: Dead City</p>
       </a>
-      <a href="Baghead contacto con la muerte (2024).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/5ssaCHmqvTZDVZtcNhNZTzfb7Nj.jpg" alt="">
-        <p>Baghead: contacto con la muerte</p>
+      <a href="" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/6HanIV2hTLE2w7A5bI1KJb3bTL7.jpg" alt="">
+        <p>The Walking Dead: World Beyond</p>
       </a>
-      <a href="Insidious La puerta roja (2023).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/wD4eLIHUaTvrXQqAzlfduHQ1NYg.jpg" alt="">
-        <p>Insidiuos: puerta roja</p>
+      <a href="" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/zRMUHvTgQ79zteQafNI46Nd9XFm.jpg" alt="">
+        <p>Tales of the Walking Dead</p>
       </a>
     </div>
   </div>
@@ -981,7 +981,7 @@ document.addEventListener("DOMContentLoaded", () => {
         favoritos.push(nuevaPelicula);
         localStorage.setItem('favoritos_detalles', JSON.stringify(favoritos));
       }
-      window.location.href = "favoritos.html";
+      window.location.href = "../View Peliculas/favoritos.html";
     });
   </script>
   
@@ -1034,7 +1034,7 @@ document.addEventListener("DOMContentLoaded", () => {
         titulo: "The Walking dead: Tho ones two live",
         imagen: "https://image.tmdb.org/t/p/original/t1yUeYKw3s0VntQxzdUgza4msGU.jpg",
         genero: "Genero",
-        archivo: "View Series/The Walking Dead The ones two live (2024).html",
+        archivo: "../View Series/The Walking Dead The ones two live (2024).html",
         tipo: "serie",
         timestamp: Date.now()
       };
@@ -1050,7 +1050,7 @@ document.addEventListener("DOMContentLoaded", () => {
         favoritos.push(nuevaPelicula);
         localStorage.setItem('favoritos_detalles', JSON.stringify(favoritos));
       }
-      window.location.href = "favoritos.html";
+      window.location.href = "../View Peliculas/favoritos.html";
     });
   </script>
 
@@ -1106,8 +1106,7 @@ document.addEventListener("DOMContentLoaded", () => {
         imagen: historialImagen,
         progreso: "Asistido 0 min",
         archivo: historialArchivo,
-        tipo: "pelicula", // ✅ ya está
-        adulto: true,
+        tipo: "serie", // ✅ ya está
         timestamp: Date.now()
       });
       localStorage.setItem('historial_usuarios', JSON.stringify(historial));
