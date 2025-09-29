@@ -327,13 +327,10 @@
   color:#ff2d5b;
 "></div>
 
-
-  <div id="resume-msg">✅ Reanudando donde lo dejaste: El Conjuro 4: El ultimo rito</div>
-
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>2024</span> <!--Aca va el año de estreno de pelicula-->
+    <i class="fal fa-calendar-alt"></i><span>2025</span> <!--Aca va el año de estreno de pelicula-->
    <!--aca va cuanto dura-->
-    <i class="fal fa-thumbs-up"></i><span>99%</span> <!--aca va la calificacion-->
+    <i class="fal fa-thumbs-up"></i><span>80%</span> <!--aca va la calificacion-->
     <!-- CAMARA-->
       <div style="display: flex; align-items: center; gap: 6px;">
         <!-- Ícono de cámara en SVG -->
@@ -347,8 +344,8 @@
   </div>
   
   <div class="titulo-flex">
-    <h3 class="titulo">Chespirito sin querer queriendo (2025).h</h3>
-    <div class="genero-badge">Drama</div>
+    <h3 class="titulo">Chespirito: Sin querer queriendo (2025).h</h3>
+    <div class="genero-badge">Drama/Comedia</div>
   </div>
 
 <!-- ---------- INICIA: Modal de Temporadas y Episodios ---------- -->
@@ -771,7 +768,7 @@ const SERIES_KEY = "Chespirito_Sin_Querer_Queriendo2";
   });
 
   // inicializa (si quieres abrir automático, descomenta)
-  // renderSeasons(); selectSeason(0);
+   renderSeasons(); selectSeason(0);
   // ✅ Restaurar el indicador de episodio actual al cargar la página
 document.addEventListener("DOMContentLoaded", () => {
   const ultimo = JSON.parse(localStorage.getItem(`ultimoEpisodio_${SERIES_KEY}`) || 'null');
@@ -850,7 +847,7 @@ document.addEventListener("DOMContentLoaded", () => {
       Sinopsis:
     </h4>
     <p>
-      La historia de amor de Rick Grimes y Michonne cambia por un mundo diferente. Separados por la distancia. Por un poder imparable. ¿Podrán reencontrarse y descubrir quiénes eran en una situación sin precedentes?
+      Miniserie que sigue la vida y carrera del actor, comediante y productor mexicano Roberto Gómez Bolaños, conocido por ser el creador de El Chavo del 8, El Chapulín Colorado y Chespirito.
     </p>
   </div>
 
@@ -859,44 +856,49 @@ document.addEventListener("DOMContentLoaded", () => {
   <h4>Actores</h4>
   <div class="actores-row" id="actores-row">
     <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w240_and_h266_face/kSweOGPprLe1vDvu38wJQaWIih7.jpg" alt="Terry O'Quinn">
-      <span class="actor-name">Terry O'Quinn</span>
-      <span class="actor-role">John Beale</span>
+      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/208LKmdjpDVbBXiQRpOLLYE5ddH.jpg" alt="Pablo Cruz Guerrero">
+      <span class="actor-name">Pablo Cruz Guerrero</span>
+      <span class="actor-role">Chespirito</span>
     </div>
     <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w240_and_h266_face/gR4RzQTDsMfVv8oEh2VRbO8LkFz.jpg" alt="Patrick Wilson">
-      <span class="actor-name">Andrés Lincoln</span>
-      <span class="actor-role">Rick Grimes</span>
+      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/2kRoqJjcQE9V1jHg7wCXuvXbUO.jpg" alt="Paulina Dávila">
+      <span class="actor-name">Paulina Dávila</span>
+      <span class="actor-role">Graciela Fernández</span>
     </div>
     <div class="actor">
-      <img loading="lazy" src="" alt="Mia Tomlinson">
-      <span class="actor-name">M</span>
-      <span class="actor-role">j</span>
+      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/9jYfhy4UVCZmhEluI2ENAHI0uvk.jpg" alt="Bárbara López">
+      <span class="actor-name">Bárbara López</span>
+      <span class="actor-role">Margarita Ruiz (Florinda Meza)</span>
     </div>
     <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/s8UEIomgY5AaEmPHkcPAScp68Fw.jpg" alt="Ben Hardy">
-      <span class="actor-name">Ben Hardy</span>
-      <span class="actor-role">Tony Spera</span>
+      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/oH6I58ap02zkWhxic5tm6LcOltz.jpg" alt="Arturo Barba">
+      <span class="actor-name">Arturo Barba</span>
+      <span class="actor-role">Rubén Aguirre</span>
     </div>
     <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/A43USnarLnfWXDvWimT24cPVfEm.jpg" alt="Rebecca Calder">
-      <span class="actor-name">Rebecca Calder</span>
-      <span class="actor-role">Janet Smurl</span>
+      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/A43USnarLnfWXDvWimT24cPVfEm.jpg" alt="">
+      <span class="actor-name">Juan Lecanda</span>
+      <span class="actor-role">Marcos Barragán (Carlos Villagran)</span>
     </div>
     <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/zxewsfDGYuCqV7gsZjMQct6BXMJ.jpg" alt="Rebecca Calder">
-      <span class="actor-name">Elliot Cowan</span>
-      <span class="actor-role">Jack Smurl</span>
+      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/1QZ25PBiv5EzjjCZjGZSdpvi1vV.jpg" alt="Miguel Islas">
+      <span class="actor-name">Miguel Islas</span>
+      <span class="actor-role">Ramón Valdés</span>
     </div>
     <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/gBJmrtY2fBFfkQRfosLv2MNWx2J.jpg" alt="Rebecca Calder">
-      <span class="actor-name">Shannon Kook</span>
-      <span class="actor-role">Drew Thomas</span>
+      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/8s1ZllGoHYFp0Twk1zalX9Y47m9.jpg" alt="Andrea Noli">
+      <span class="actor-name">Andrea Noli</span>
+      <span class="actor-role">Angelines Fernández</span>
     </div>
     <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/ng01ren9pCYPIsIwRqC1xHzD5IG.jpg" alt="Rebecca Calder">
-      <span class="actor-name">Steve Coulter</span>
-      <span class="actor-role">Father Gordon</span>
+      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/AnaNOPWsAZ2al0ivMYYbpqz6j49.jpg" alt="Paola Montes De Oca">
+      <span class="actor-name">Paola Montes De Oca</span>
+      <span class="actor-role">Maria Antonieta de las Nieves</span>
+    </div>
+    <div class="actor">
+      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/4ccvacBDAVU49hC3C97baY8o3SA.jpg" alt="Eugenio Bartilotti">
+      <span class="actor-name">Eugenio Bartilotti</span>
+      <span class="actor-role">Edgar Vivar</span>
     </div>
   </div>
 </div>
@@ -924,29 +926,29 @@ document.addEventListener("DOMContentLoaded", () => {
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
-      <a href="El conjuro 1 (2013).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/10ir0eISr3p1MF1mjZwGTx7u4vv.jpg" alt="">
-        <p>El conjuro: Experiente Warren</p>
+      <a href="" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/q03eQL8AUx49lVH6IT3IlmWzhQu.jpg" alt="">
+        <p>Rosario Tijeras</p>
       </a>
-      <a href="El conjuro 2 (2016).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/x4jUJ0fF60SSOeUUTkaRtmnDvwG.jpg" alt="">
-        <p>El conjuro 2: El caso enfield</p>
+      <a href="" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/bNKwoYqkCXfIhhr5Jz8slrsw32r.jpg" alt="">
+        <p>Miércoles</p>
       </a>
-      <a href="El conjuro 3 (2021) .html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/79QjdRiT9zTLkrOq9FltoIxClma.jpg" alt="">
-        <p>El conjuro 3: El diablo me obligo hacerlo</p>
+      <a href="" class="serie">
+        <img loading="lazy" src="" alt="">
+        <p></p>
       </a>
-      <a href="Annabelle 2 la creacion 2 (2017).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/x0pekWNy7GS37bm30zuxWNLPXj8.jpg" alt="">
-        <p>Annabelle 2: La creacion</p>
+      <a href="" class="serie">
+        <img loading="lazy" src="" alt="">
+        <p></p>
       </a>
-      <a href="Baghead contacto con la muerte (2024).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/5ssaCHmqvTZDVZtcNhNZTzfb7Nj.jpg" alt="">
-        <p>Baghead: contacto con la muerte</p>
+      <a href="" class="serie">
+        <img loading="lazy" src="" alt="">
+        <p></p>
       </a>
-      <a href="Insidious La puerta roja (2023).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/wD4eLIHUaTvrXQqAzlfduHQ1NYg.jpg" alt="">
-        <p>Insidiuos: puerta roja</p>
+      <a href="" class="serie">
+        <img loading="lazy" src="" alt="">
+        <p></p>
       </a>
     </div>
   </div>
@@ -960,7 +962,7 @@ document.addEventListener("DOMContentLoaded", () => {
         favoritos.push(nuevaPelicula);
         localStorage.setItem('favoritos_detalles', JSON.stringify(favoritos));
       }
-      window.location.href = "favoritos.html";
+      window.location.href = "../View Peliculas/favoritos.html";
     });
   </script>
   
@@ -1010,12 +1012,11 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ACA VA LA NOMBRE, IMAGEN, GENERO, ARCHIVO DONDE GUARDAN SU HTML DE PELICULA Y EL TIEMPO */
     document.getElementById('btn-favorito').addEventListener('click', () => {
       const nuevaPelicula = {
-        titulo: "El Conjuro 4: El ultimo rito",
+        titulo: "Chespirito: sin querer queriendo",
         imagen: "https://image.tmdb.org/t/p/w300/dyW5mX4wwDoZWgTYObx6pg9V0i9.jpg",
         genero: "Genero",
-        archivo: "El Conjuro 4  El ultimo rito (2025).html",
-        tipo: "pelicula",
-        adulto: true,
+        archivo: "../View Series/Chespirito sin querer queriendo (2025).html",
+        tipo: "serie",
         timestamp: Date.now()
       };
 
@@ -1030,7 +1031,7 @@ document.addEventListener("DOMContentLoaded", () => {
         favoritos.push(nuevaPelicula);
         localStorage.setItem('favoritos_detalles', JSON.stringify(favoritos));
       }
-      window.location.href = "favoritos.html";
+      window.location.href = "../View Series/favoritos.html";
     });
   </script>
 
@@ -1086,8 +1087,7 @@ document.addEventListener("DOMContentLoaded", () => {
         imagen: historialImagen,
         progreso: "Asistido 0 min",
         archivo: historialArchivo,
-        tipo: "pelicula", // ✅ ya está
-        adulto: true,
+        tipo: "serie",
         timestamp: Date.now()
       });
       localStorage.setItem('historial_usuarios', JSON.stringify(historial));
