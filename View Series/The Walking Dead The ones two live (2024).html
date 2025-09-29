@@ -1031,12 +1031,11 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ACA VA LA NOMBRE, IMAGEN, GENERO, ARCHIVO DONDE GUARDAN SU HTML DE PELICULA Y EL TIEMPO */
     document.getElementById('btn-favorito').addEventListener('click', () => {
       const nuevaPelicula = {
-        titulo: "El Conjuro 4: El ultimo rito",
-        imagen: "https://image.tmdb.org/t/p/w300/dyW5mX4wwDoZWgTYObx6pg9V0i9.jpg",
+        titulo: "The Walking dead: Tho ones two live",
+        imagen: "https://image.tmdb.org/t/p/original/t1yUeYKw3s0VntQxzdUgza4msGU.jpg",
         genero: "Genero",
-        archivo: "El Conjuro 4  El ultimo rito (2025).html",
-        tipo: "pelicula",
-        adulto: true,
+        archivo: "View Series/The Walking Dead The ones two live (2024).html",
+        tipo: "serie",
         timestamp: Date.now()
       };
 
@@ -1094,9 +1093,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const STORAGE_KEY = 'pos_' + videoSrc;
 
       /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
-      const historialTitulo = "El Conjuro 4: El ultimo rito";
-      const historialImagen = "https://image.tmdb.org/t/p/w300/dyW5mX4wwDoZWgTYObx6pg9V0i9.jpg";
-      const historialArchivo = "El Conjuro 4  El ultimo rito (2025).html";
+      const historialTitulo = "The Walking dead: The ones two live";
+      const historialImagen = "https://image.tmdb.org/t/p/w300/t1yUeYKw3s0VntQxzdUgza4msGU.jpg";
+      const historialArchivo = "View Series/The Walking Dead The ones two live (2024).html";
 
       let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
       let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
