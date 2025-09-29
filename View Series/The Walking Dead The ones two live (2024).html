@@ -772,6 +772,16 @@ const SERIES_KEY = "WalkingDead_TheOnesTwoLive";
 
   // inicializa (si quieres abrir automático, descomenta)
   // renderSeasons(); selectSeason(0);
+
+  // ✅ Restaurar el indicador de episodio actual al cargar la página
+document.addEventListener("DOMContentLoaded", () => {
+  const ultimo = JSON.parse(localStorage.getItem(`ultimoEpisodio_${SERIES_KEY}`) || 'null');
+  if (ultimo) {
+    document.getElementById('episodio-actual').textContent =
+      `📺 Viendo: ${ultimo.temporada} - ${ultimo.episodio}`;
+  }
+});
+
 </script>
 <!-- ---------- FIN: Modal de Temporadas y Episodios ---------- -->
 
