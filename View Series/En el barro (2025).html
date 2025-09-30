@@ -316,7 +316,7 @@
 <body ondragstart="return false;" ondrop="return false;">
   
   <div class="player">
-    <video class="vid1 js-player" controls loading="lazy" poster="https://image.tmdb.org/t/p/original/y8tPZ9P4tYqYiACs6t4mlcWJnSC.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+    <video class="vid1 js-player" controls loading="lazy" poster="https://image.tmdb.org/t/p/w780/bxPELhUZNgbFUN31EZTBC99wOHD.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
       <source src="" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
@@ -330,7 +330,7 @@
 
 
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>2024</span> <!--Aca va el año de estreno de pelicula-->
+    <i class="fal fa-calendar-alt"></i><span>2025</span> <!--Aca va el año de estreno de pelicula-->
    <!--aca va cuanto dura-->
     <i class="fal fa-thumbs-up"></i><span>80%</span> <!--aca va la calificacion-->
     <div class="hd-tag">
@@ -340,8 +340,6 @@
       </svg>
       <span>1080P</span>
     </div>
-        <span style="color: white; font-size: 14px; font-family: sans-serif;">CAM</span>
-      </div>
     <span>🇲🇽</span>
   </div>
   
@@ -585,22 +583,24 @@
 
 <!-- ---------- SCRIPT: datos + interacción ---------- -->
 <script>
-const SERIES_KEY = "WalkingDead_TheOnesTwoLive";
+const SERIES_KEY = "En_el_barro25";
 
   /* ---------- Datos: cambia esto por tu contenido real ---------- */
   const seasonsData = [
     {
       id: 1,
       title: "Temporada 1",
-      thumb: "https://image.tmdb.org/t/p/original/5PCKxpFcCTDFT3b1olJGPaAIM9e.jpg",
-      desc: "Lanzada 2024— 6 episodios",
+      thumb: "https://image.tmdb.org/t/p/w780/v8xHeTkIBOl51yRp0zcAu2VYhdZ.jpg",
+      desc: "Lanzada 2025— 8 episodios",
       episodes: [
-        { id: "s1e1", title: "Episodio 1 - Años", time: "45m", thumb: "https://image.tmdb.org/t/p/original/8WrLYjzukBMeeSN9QYPw28qVA6h.jpg", href: "https://pomf2.lain.la/f/sc6uvb3w.mp4" },
-        { id: "s1e2", title: "Episodio 2 — Irse", time: "45m", thumb: "https://image.tmdb.org/t/p/original/bcp6gmyQuoRdkpJFCHpJYDJVyO9.jpg", href: "https://pomf2.lain.la/f/3ywcqtqq.mp4" },
-        { id: "s1e3", title: "Episodio 3 — Adios", time: "45m", thumb: "https://image.tmdb.org/t/p/original/o1Qw7o1ab4tAzMUh5esJ41TNpZF.jpg", href: "https://pomf2.lain.la/f/i4gfu5wd.mp4" },
-        { id: "s1e4", title: "Episodio 4 — Lo que eramos", time: "45m", thumb: "https://image.tmdb.org/t/p/original/93RqOHVclGyBoH4FIi3VmHnlxXe.jpg", href: "https://pomf2.lain.la/f/k6namnas.mp4" },
-        { id: "s1e5", title: "Episodio 5 — Convertirnos", time: "45m", thumb: "https://image.tmdb.org/t/p/original/q6Vqo90TAbu9NbuIhPgxzgIZogh.jpg", href: "https://pomf2.lain.la/f/3ywcqtqq.mp4" },
-        { id: "s1e6", title: "Episodio 6 — La ultima vez", time: "45m", thumb: "https://image.tmdb.org/t/p/original/lJNkVYOsxOmEXcCvbC8SeQYjdL4.jpg", href: "https://pomf2.lain.la/f/i4gfu5wd.mp4" },
+        { id: "s1e1", title: "Episodio 1", time: "45m", thumb: "", href: "" },
+        { id: "s1e2", title: "Episodio 2", time: "45m", thumb: "", href: "" },
+        { id: "s1e3", title: "Episodio 3", time: "45m", thumb: "", href: "" },
+        { id: "s1e4", title: "Episodio 4", time: "45m", thumb: "", href: "" },
+        { id: "s1e5", title: "Episodio 5", time: "45m", thumb: "", href: "" },
+        { id: "s1e6", title: "Episodio 6", time: "45m", thumb: "", href: "" },
+        { id: "s1e7", title: "Episodio 7", time: "45m", thumb: "", href: "" },
+        { id: "s1e8", title: "Episodio 8", time: "45m", thumb: "", href: "" },
         // ... más episodios
       ]
     },
@@ -849,7 +849,7 @@ document.addEventListener("DOMContentLoaded", () => {
       Sinopsis:
     </h4>
     <p>
-      Miniserie que sigue la vida y carrera del actor, comediante y productor mexicano Roberto Gómez Bolaños, conocido por ser el creador de El Chavo del 8, El Chapulín Colorado y Chespirito.
+      Cinco prisioneras forjan un vínculo único después de un accidente mortal... hasta que la corrupción y las guerras territoriales dentro de una prisión despiadada amenazan con destruirlas.
     </p>
   </div>
 
@@ -858,49 +858,34 @@ document.addEventListener("DOMContentLoaded", () => {
   <h4>Actores</h4>
   <div class="actores-row" id="actores-row">
     <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/208LKmdjpDVbBXiQRpOLLYE5ddH.jpg" alt="Pablo Cruz Guerrero">
-      <span class="actor-name">Pablo Cruz Guerrero</span>
-      <span class="actor-role">Chespirito</span>
+      <img loading="lazy" src="" alt="">
+      <span class="actor-name"></span>
+      <span class="actor-role"></span>
     </div>
     <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/2kRoqJjcQE9V1jHg7wCXuvXbUO.jpg" alt="Paulina Dávila">
-      <span class="actor-name">Paulina Dávila</span>
-      <span class="actor-role">Graciela Fernández</span>
+      <img loading="lazy" src="" alt="">
+      <span class="actor-name"></span>
+      <span class="actor-role"></span>
     </div>
     <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/9jYfhy4UVCZmhEluI2ENAHI0uvk.jpg" alt="Bárbara López">
-      <span class="actor-name">Bárbara López</span>
-      <span class="actor-role">Margarita Ruiz (Florinda Meza)</span>
+      <img loading="lazy" src="" alt="">
+      <span class="actor-name"></span>
+      <span class="actor-role"></span>
     </div>
     <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/oH6I58ap02zkWhxic5tm6LcOltz.jpg" alt="Arturo Barba">
-      <span class="actor-name">Arturo Barba</span>
-      <span class="actor-role">Rubén Aguirre</span>
+      <img loading="lazy" src="" alt="">
+      <span class="actor-name"></span>
+      <span class="actor-role"></span>
     </div>
     <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/A43USnarLnfWXDvWimT24cPVfEm.jpg" alt="">
-      <span class="actor-name">Juan Lecanda</span>
-      <span class="actor-role">Marcos Barragán (Carlos Villagran)</span>
+      <img loading="lazy" src="" alt="">
+      <span class="actor-name"></span>
+      <span class="actor-role"></span>
     </div>
     <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/1QZ25PBiv5EzjjCZjGZSdpvi1vV.jpg" alt="Miguel Islas">
-      <span class="actor-name">Miguel Islas</span>
-      <span class="actor-role">Ramón Valdés</span>
-    </div>
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/8s1ZllGoHYFp0Twk1zalX9Y47m9.jpg" alt="Andrea Noli">
-      <span class="actor-name">Andrea Noli</span>
-      <span class="actor-role">Angelines Fernández</span>
-    </div>
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/AnaNOPWsAZ2al0ivMYYbpqz6j49.jpg" alt="Paola Montes De Oca">
-      <span class="actor-name">Paola Montes De Oca</span>
-      <span class="actor-role">Maria Antonieta de las Nieves</span>
-    </div>
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/4ccvacBDAVU49hC3C97baY8o3SA.jpg" alt="Eugenio Bartilotti">
-      <span class="actor-name">Eugenio Bartilotti</span>
-      <span class="actor-role">Edgar Vivar</span>
+      <img loading="lazy" src="" alt="">
+      <span class="actor-name"></span>
+      <span class="actor-role"></span>
     </div>
   </div>
 </div>
@@ -929,28 +914,28 @@ document.addEventListener("DOMContentLoaded", () => {
     <br/>
     <div class="series-grid">
       <a href="" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/9iYinsg30olSCuDoH8VxtRN5gZx.jpg" alt="">
-        <p>The walking dead</p>
+        <img loading="lazy" src="" alt="">
+        <p></p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/kdM24KINoAVK9wjCtDJCkdffEpc.jpg" alt="">
-        <p>The Walking Dead: Daryl Dixon</p>
+        <img loading="lazy" src="" alt="">
+        <p></p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/yd8cDZG4XjNRk7jfEWy18KH07d2.jpg" alt="">
-        <p>Fear the Walking Dead</p>
+        <img loading="lazy" src="" alt="">
+        <p></p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/ugdiqJsceA9slg2k4Uu6VKegaw8.jpg" alt="">
-        <p>The Walking Dead: Dead City</p>
+        <img loading="lazy" src="" alt="">
+        <p></p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/6HanIV2hTLE2w7A5bI1KJb3bTL7.jpg" alt="">
-        <p>The Walking Dead: World Beyond</p>
+        <img loading="lazy" src="" alt="">
+        <p></p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/zRMUHvTgQ79zteQafNI46Nd9XFm.jpg" alt="">
-        <p>Tales of the Walking Dead</p>
+        <img loading="lazy" src="" alt="">
+        <p></p>
       </a>
     </div>
   </div>
@@ -1014,10 +999,10 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ACA VA LA NOMBRE, IMAGEN, GENERO, ARCHIVO DONDE GUARDAN SU HTML DE PELICULA Y EL TIEMPO */
     document.getElementById('btn-favorito').addEventListener('click', () => {
       const nuevaPelicula = {
-        titulo: "Chespirito: Sin querer queriendo",
-        imagen: "https://image.tmdb.org/t/p/w300/bLyhzXAWvOn0L17NbCYP2aZ4sPt.jpg",
+        titulo: "En el barro",
+        imagen: "https://image.tmdb.org/t/p/w300/kKi1YdzQNM87Mcz7WxxclHbevwr.jpg",
         genero: "Genero",
-        archivo: "../View Series/Chespirito sin querer queriendo (2025).html",
+        archivo: "../View Series/En el barro (2025).html",
         tipo: "serie",
         timestamp: Date.now()
       };
@@ -1076,9 +1061,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const STORAGE_KEY = 'pos_' + videoSrc;
 
       /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
-      const historialTitulo = "Chespirito: Sin querer queriendo";
-      const historialImagen = "https://image.tmdb.org/t/p/w300/bLyhzXAWvOn0L17NbCYP2aZ4sPt.jpg";
-      const historialArchivo = "View Series/Chespirito sin querer queriendo (2025).html";
+      const historialTitulo = "En el barro";
+      const historialImagen = "https://image.tmdb.org/t/p/w300/kKi1YdzQNM87Mcz7WxxclHbevwr.jpg";
+      const historialArchivo = "../View Series/En el barro (2025).html";
 
       let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
       let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
