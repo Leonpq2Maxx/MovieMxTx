@@ -727,7 +727,7 @@ const SERIES_KEY = "En_el_barro25";
 
         // 🔴 Mostrar en pantalla
         document.getElementById('episodio-actual').textContent =
-          `📺 Viendo: ${episodioInfo.temporada} - ${episodioInfo.episodio}`;
+          ` Viendo: ${episodioInfo.temporada} - ${episodioInfo.episodio}`;
 
         // 🔴 Resaltar episodio en la lista
         document.querySelectorAll('.episode-card').forEach(c => c.classList.remove('viendo'));
@@ -769,7 +769,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const ultimo = JSON.parse(localStorage.getItem(`ultimoEpisodio_${SERIES_KEY}`) || 'null');
   if (ultimo) {
     document.getElementById('episodio-actual').textContent =
-      `📺 Viendo: ${ultimo.temporada} - ${ultimo.episodio}`;
+      ` Viendo: ${ultimo.temporada} - ${ultimo.episodio}`;
   }
 });
 
@@ -842,7 +842,7 @@ document.addEventListener("DOMContentLoaded", () => {
       Sinopsis:
     </h4>
     <p>
-      Cinco prisioneras forjan un vínculo único después de un accidente mortal... hasta que la corrupción y las guerras territoriales dentro de una prisión despiadada amenazan con destruirlas.
+      Los investigadores paranormales Ed y Lorraine Warren se enfrentan a un último caso aterrador que involucra entidades misteriosas a las que deben enfrentarse.
     </p>
   </div>
 
