@@ -316,10 +316,14 @@
 <body ondragstart="return false;" ondrop="return false;">
   
   <div class="player">
-    <video class="vid1 js-player" controls loading="lazy" poster="https://image.tmdb.org/t/p/w780/9DYFYhmbXRGsMhfUgXM3VSP9uLX.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
-      <source src="" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
-    </video>
-  </div>
+  <iframe id="yt-player"
+    src=""
+    frameborder="0"
+    allowfullscreen
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+  </iframe>
+</div>
+
   <div id="episodio-actual" style="
   text-align:center;
   margin:10px;
@@ -707,15 +711,16 @@ const SERIES_KEY = "Trailer_Conjuro4_Elrito25";
     }
 
     // 🎬 Al hacer click, reproducir y guardar
-    card.querySelector('.play-btn').addEventListener('click', (ev) => {
-      const href = ev.currentTarget.dataset.href;
-      if(href && href !== '#'){
-        const videoElement = document.querySelector('.vid1');
-        const source = videoElement.querySelector('source');
-        source.setAttribute('src', href);
-        videoElement.load();
-        videoElement.play();
-        closeModal();
+    const iframeElement = document.getElementById('yt-player');
+
+card.querySelector('.play-btn').addEventListener('click', (ev) => {
+  const href = ev.currentTarget.dataset.href;
+  if (href && href !== '#') {
+    iframeElement.src = href;  // cargar trailer de YouTube
+    closeModal();
+  }
+});
+
         
         // 🔴 Guardar temporada y episodio actual
         const episodioInfo = {
