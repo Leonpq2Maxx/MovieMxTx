@@ -700,13 +700,12 @@ const SERIES_KEY = "WalkingDead_TheOnesTwoLive";
     card.className = 'episode-card';
     card.setAttribute('role','listitem');
     card.innerHTML = `
-      <div class="ep-thumb" style="background-image:url('${ep.thumb || ''}')"></div>
       <div class="ep-meta">
         <div class="ep-title">${ep.title}</div>
         <div class="ep-desc">${ep.time || ''}</div>
       </div>
       <div class="ep-actions">
-        <button class="play-btn" data-href="${ep.href || '#'}" aria-label="Reproducir ${ep.title}">Reproducir</button>
+        <button class="play-btn" data-href="${ep.href || '#'}" aria-label="Reproducir ${ep.title}">▶ Reproducir</button>
       </div>
     `;
 
