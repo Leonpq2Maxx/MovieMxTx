@@ -271,22 +271,23 @@
 @media (max-width: 768px) {
   /* Episodios también deslizable si hay muchos */
   .episodes-grid {
-    display: flex !important;
-    overflow-x: auto;
-    gap: 12px;
-    padding: 8px;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-  }
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+  padding: 8px !important;
+  overflow-x: visible !important;
+  overflow-y: auto !important;
+}
 
   .episodes-grid::-webkit-scrollbar {
     display: none;
   }
 
   .episode-card {
-    flex: 0 0 85%; /* ocupa casi toda la pantalla */
-    scroll-snap-align: center;
-  }
+  flex: none !important;
+  width: 100% !important;
+  align-items: center !important;
+}
 }
 /* Estilo para episodio en reproducción */
 .episode-card.viendo {
