@@ -707,40 +707,15 @@ const SERIES_KEY = "Trailer_Conjuro4_Elrito25";
     }
 
     // 🎬 Al hacer click, reproducir y guardar
-
-// ✅ Manejo de reproducción MP4 o YouTube
-card.querySelector('.play-btn').addEventListener('click', (ev) => {
-  const href = ev.currentTarget.dataset.href;
-  if (!href || href === '#') {
-    alert('No hay un link válido para este episodio: ' + ep.title);
-    return;
-  }
-
-  const videoElement = document.querySelector('.vid1');
-  const iframeElement = document.querySelector('.vid1-iframe');
-
-  if (href.endsWith(".mp4")) {
-    // ▶ Reproducir archivo MP4
-    iframeElement.style.display = "none";
-    iframeElement.src = "";
-
-    videoElement.style.display = "block";
-    const source = videoElement.querySelector('source');
-    source.setAttribute('src', href);
-    videoElement.load();
-    videoElement.play();
-  } else {
-    // ▶ Reproducir link de YouTube
-    videoElement.style.display = "none";
-    videoElement.pause();
-    videoElement.querySelector('source').setAttribute('src', "");
-
-    iframeElement.style.display = "block";
-    iframeElement.src = href;
-  }
-
-  closeModal();
-});
+    card.querySelector('.play-btn').addEventListener('click', (ev) => {
+      const href = ev.currentTarget.dataset.href;
+      if(href && href !== '#'){
+        const videoElement = document.querySelector('.vid1');
+        const source = videoElement.querySelector('source');
+        source.setAttribute('src', href);
+        videoElement.load();
+        videoElement.play();
+        closeModal();
         
         // 🔴 Guardar temporada y episodio actual
         const episodioInfo = {
