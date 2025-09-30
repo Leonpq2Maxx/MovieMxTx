@@ -342,8 +342,8 @@
   </div>
   
   <div class="titulo-flex">
-    <h3 class="titulo">Trailer El conjuro 4: El ultimo rito</h3>
-    <div class="genero-badge">Terror</div>
+    <h3 class="titulo">The Walking Dead: The ones two live</h3>
+    <div class="genero-badge">Terror/Apocalipsis</div>
   </div>
 
 <!-- ---------- INICIA: Modal de Temporadas y Episodios ---------- -->
@@ -588,10 +588,15 @@ const SERIES_KEY = "WalkingDead_TheOnesTwoLive";
     {
       id: 1,
       title: "Temporada 1",
-      thumb: "https://image.tmdb.org/t/p/w780/cDNuAKzhfM6GQ8jce55jn9SQLY3.jpg",
-      desc: "Lanzada 2025 - Trailer",
+      thumb: "https://image.tmdb.org/t/p/original/5PCKxpFcCTDFT3b1olJGPaAIM9e.jpg",
+      desc: "Lanzada 2024— 6 episodios",
       episodes: [
-        { id: "s1e1", title: "Trailer", time: "2m 30s", thumb: "", href: "https://www.youtube.com/embed/HFEoFlccCr0?si=CVqDIqG5Q6zMuhh1" },
+        { id: "s1e1", title: "Episodio 1 - Años", time: "45m", thumb: "https://image.tmdb.org/t/p/original/8WrLYjzukBMeeSN9QYPw28qVA6h.jpg", href: "https://pomf2.lain.la/f/sc6uvb3w.mp4" },
+        { id: "s1e2", title: "Episodio 2 — Irse", time: "45m", thumb: "https://image.tmdb.org/t/p/original/bcp6gmyQuoRdkpJFCHpJYDJVyO9.jpg", href: "https://pomf2.lain.la/f/3ywcqtqq.mp4" },
+        { id: "s1e3", title: "Episodio 3 — Adios", time: "45m", thumb: "https://image.tmdb.org/t/p/original/o1Qw7o1ab4tAzMUh5esJ41TNpZF.jpg", href: "https://pomf2.lain.la/f/i4gfu5wd.mp4" },
+        { id: "s1e4", title: "Episodio 4 — Lo que eramos", time: "45m", thumb: "https://image.tmdb.org/t/p/original/93RqOHVclGyBoH4FIi3VmHnlxXe.jpg", href: "https://pomf2.lain.la/f/k6namnas.mp4" },
+        { id: "s1e5", title: "Episodio 5 — Convertirnos", time: "45m", thumb: "https://image.tmdb.org/t/p/original/q6Vqo90TAbu9NbuIhPgxzgIZogh.jpg", href: "https://pomf2.lain.la/f/3ywcqtqq.mp4" },
+        { id: "s1e6", title: "Episodio 6 — La ultima vez", time: "45m", thumb: "https://image.tmdb.org/t/p/original/lJNkVYOsxOmEXcCvbC8SeQYjdL4.jpg", href: "https://pomf2.lain.la/f/i4gfu5wd.mp4" },
         // ... más episodios
       ]
     },
@@ -935,28 +940,28 @@ document.addEventListener("DOMContentLoaded", () => {
     <br/>
     <div class="series-grid">
       <a href="" class="serie">
-        <img loading="lazy" src="" alt="">
-        <p></p>
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/9iYinsg30olSCuDoH8VxtRN5gZx.jpg" alt="">
+        <p>The walking dead</p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/vWmrqbzad1j80BPINqD0M5hEHSF.jpg" alt="">
-        <p>El conjuro 4: El ultimo rito</p>
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/kdM24KINoAVK9wjCtDJCkdffEpc.jpg" alt="">
+        <p>The Walking Dead: Daryl Dixon</p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="" alt="">
-        <p></p>
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/yd8cDZG4XjNRk7jfEWy18KH07d2.jpg" alt="">
+        <p>Fear the Walking Dead</p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="" alt="">
-        <p></p>
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/ugdiqJsceA9slg2k4Uu6VKegaw8.jpg" alt="">
+        <p>The Walking Dead: Dead City</p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="" alt="">
-        <p></p>
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/6HanIV2hTLE2w7A5bI1KJb3bTL7.jpg" alt="">
+        <p>The Walking Dead: World Beyond</p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="" alt="">
-        <p></p>
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/zRMUHvTgQ79zteQafNI46Nd9XFm.jpg" alt="">
+        <p>Tales of the Walking Dead</p>
       </a>
     </div>
   </div>
@@ -1020,11 +1025,11 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ACA VA LA NOMBRE, IMAGEN, GENERO, ARCHIVO DONDE GUARDAN SU HTML DE PELICULA Y EL TIEMPO */
     document.getElementById('btn-favorito').addEventListener('click', () => {
       const nuevaPelicula = {
-        titulo: "El conjuro 4: El ultimo rito",
-        imagen: "https://image.tmdb.org/t/p/w300/n9CXtIFdpxIqqsmEdD7CO7gb4X3.jpg",
+        titulo: "The Walking dead: Tho ones two live",
+        imagen: "https://image.tmdb.org/t/p/original/t1yUeYKw3s0VntQxzdUgza4msGU.jpg",
         genero: "Genero",
-        archivo: "../Trailers/El conjuro 4 el culto (2025).html",
-        tipo: "Trailer",
+        archivo: "../View Series/The Walking Dead The ones two live (2024).html",
+        tipo: "serie",
         timestamp: Date.now()
       };
 
@@ -1082,9 +1087,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const STORAGE_KEY = 'pos_' + videoSrc;
 
       /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
-      const historialTitulo = "El conjuro 4: El ultimo rito";
-      const historialImagen = "https://image.tmdb.org/t/p/w300/n9CXtIFdpxIqqsmEdD7CO7gb4X3.jpg";
-      const historialArchivo = "Trailers/El conjuro 4 el culto (2025).html";
+      const historialTitulo = "The Walking dead: The ones two live";
+      const historialImagen = "https://image.tmdb.org/t/p/w300/t1yUeYKw3s0VntQxzdUgza4msGU.jpg";
+      const historialArchivo = "View Series/The Walking Dead The ones two live (2024).html";
 
       let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
       let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
@@ -1095,7 +1100,7 @@ document.addEventListener("DOMContentLoaded", () => {
         imagen: historialImagen,
         progreso: "Asistido 0 min",
         archivo: historialArchivo,
-        tipo: "Trailer", // ✅ ya está
+        tipo: "serie", // ✅ ya está
         timestamp: Date.now()
       });
       localStorage.setItem('historial_usuarios', JSON.stringify(historial));
