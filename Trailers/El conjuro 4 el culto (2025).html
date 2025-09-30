@@ -316,7 +316,7 @@
 <body ondragstart="return false;" ondrop="return false;">
   
   <div class="player">
-    <video class="vid1 js-player" controls loading="lazy" poster="https://image.tmdb.org/t/p/w780/bxPELhUZNgbFUN31EZTBC99wOHD.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+    <video class="vid1 js-player" controls loading="lazy" poster="https://image.tmdb.org/t/p/w780/9DYFYhmbXRGsMhfUgXM3VSP9uLX.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
       <source src="" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
@@ -332,7 +332,7 @@
   <div class="info">
     <i class="fal fa-calendar-alt"></i><span>2025</span> <!--Aca va el año de estreno de pelicula-->
    <!--aca va cuanto dura-->
-    <i class="fal fa-thumbs-up"></i><span>80%</span> <!--aca va la calificacion-->
+    <i class="fal fa-thumbs-up"></i><span>88%</span> <!--aca va la calificacion-->
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
@@ -344,8 +344,8 @@
   </div>
   
   <div class="titulo-flex">
-    <h3 class="titulo">En el barro</h3>
-    <div class="genero-badge">Drama/Comedia</div>
+    <h3 class="titulo">Trailer: El conjuro 4: El ultimo rito</h3>
+    <div class="genero-badge">Terror</div>
   </div>
 
 <!-- ---------- INICIA: Modal de Temporadas y Episodios ---------- -->
@@ -590,17 +590,10 @@ const SERIES_KEY = "En_el_barro25";
     {
       id: 1,
       title: "Temporada 1",
-      thumb: "https://image.tmdb.org/t/p/w780/v8xHeTkIBOl51yRp0zcAu2VYhdZ.jpg",
-      desc: "Lanzada 2025— 8 episodios",
+      thumb: "https://image.tmdb.org/t/p/w780/cDNuAKzhfM6GQ8jce55jn9SQLY3.jpg",
+      desc: "Lanzada 2025— 1 episodios",
       episodes: [
-        { id: "s1e1", title: "Episodio 1", time: "45m", thumb: "", href: "" },
-        { id: "s1e2", title: "Episodio 2", time: "45m", thumb: "", href: "" },
-        { id: "s1e3", title: "Episodio 3", time: "45m", thumb: "", href: "" },
-        { id: "s1e4", title: "Episodio 4", time: "45m", thumb: "", href: "" },
-        { id: "s1e5", title: "Episodio 5", time: "45m", thumb: "", href: "" },
-        { id: "s1e6", title: "Episodio 6", time: "45m", thumb: "", href: "" },
-        { id: "s1e7", title: "Episodio 7", time: "45m", thumb: "", href: "" },
-        { id: "s1e8", title: "Episodio 8", time: "45m", thumb: "", href: "" },
+        { id: "s1e1", title: "Trailer", time: "2m 30s", thumb: "", href: "" },
         // ... más episodios
       ]
     },
@@ -858,24 +851,24 @@ document.addEventListener("DOMContentLoaded", () => {
   <h4>Actores</h4>
   <div class="actores-row" id="actores-row">
     <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/mTiTouoWJPqgdFWmdbzljUniDHH.jpg" alt="">
-      <span class="actor-name">Ana Garibaldi</span>
-      <span class="actor-role">Gladys Guerra</span>
+      <img loading="lazy" src="" alt="">
+      <span class="actor-name"></span>
+      <span class="actor-role"></span>
     </div>
     <div class="actor">
-      <img loading="lazy" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6ySXKKZaeQmhaUw66U5fglxO-3SFfFTgUEw&s" alt="">
-      <span class="actor-name">María Becerra</span>
-      <span class="actor-role">Cleo</span>
+      <img loading="lazy" src="" alt="">
+      <span class="actor-name"></span>
+      <span class="actor-role"></span>
     </div>
     <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/biyzs4vdBviMYzxpsMqxIX5Uota.jpg" alt="">
-      <span class="actor-name">Valentina Zenere</span>
-      <span class="actor-role">Marina</span>
+      <img loading="lazy" src="" alt="">
+      <span class="actor-name"></span>
+      <span class="actor-role"></span>
     </div>
     <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/3CtvCjKbUPyWq5SLAbYeBbb9M8d.jpg" alt="">
-      <span class="actor-name">Rita Cortese</span>
-      <span class="actor-role">Cecilia Moranzón</span>
+      <img loading="lazy" src="" alt="">
+      <span class="actor-name"></span>
+      <span class="actor-role"></span>
     </div>
     <div class="actor">
       <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/wOGnE0zRmekWkPJpt3RRtD7SOnN.jpg" alt="">
@@ -999,11 +992,11 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ACA VA LA NOMBRE, IMAGEN, GENERO, ARCHIVO DONDE GUARDAN SU HTML DE PELICULA Y EL TIEMPO */
     document.getElementById('btn-favorito').addEventListener('click', () => {
       const nuevaPelicula = {
-        titulo: "En el barro",
-        imagen: "https://image.tmdb.org/t/p/w300/kKi1YdzQNM87Mcz7WxxclHbevwr.jpg",
+        titulo: "El conjuro 4: El ultimo rito",
+        imagen: "https://image.tmdb.org/t/p/w300/n9CXtIFdpxIqqsmEdD7CO7gb4X3.jpg",
         genero: "Genero",
         archivo: "../View Series/En el barro (2025).html",
-        tipo: "serie",
+        tipo: "trailer",
         timestamp: Date.now()
       };
 
@@ -1061,9 +1054,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const STORAGE_KEY = 'pos_' + videoSrc;
 
       /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
-      const historialTitulo = "En el barro";
-      const historialImagen = "https://image.tmdb.org/t/p/w300/kKi1YdzQNM87Mcz7WxxclHbevwr.jpg";
-      const historialArchivo = "../View Series/En el barro (2025).html";
+      const historialTitulo = "El conjuro 4: El ultimo rito";
+      const historialImagen = "https://image.tmdb.org/t/p/w300/n9CXtIFdpxIqqsmEdD7CO7gb4X3.jpg";
+      const historialArchivo = "../View Peliculas/El conjuro 4 el culto (2025).html";
 
       let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
       let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
@@ -1074,7 +1067,7 @@ document.addEventListener("DOMContentLoaded", () => {
         imagen: historialImagen,
         progreso: "Asistido 0 min",
         archivo: historialArchivo,
-        tipo: "serie", // ✅ ya está
+        tipo: "trailer", // ✅ ya está
         timestamp: Date.now()
       });
       localStorage.setItem('historial_usuarios', JSON.stringify(historial));
