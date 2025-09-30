@@ -590,7 +590,7 @@ const SERIES_KEY = "WalkingDead_TheOnesTwoLive";
     {
       id: 1,
       title: "Temporada 1",
-      thumb: "https://image.tmdb.org/t/p/original/5PCKxpFcCTDFT3b1olJGPaAIM9e.jpg",
+      thumb: "https://image.tmdb.org/t/p/w780/qfXerlD4L1TIfxd5VHcCOcXbaAp.jpg",
       desc: "Lanzada 2024— 6 episodios",
       episodes: [
         { id: "s1e1", title: "Episodio 1 - Años", time: "45m", thumb: "https://image.tmdb.org/t/p/original/8WrLYjzukBMeeSN9QYPw28qVA6h.jpg", href: "https://pomf2.lain.la/f/sc6uvb3w.mp4" },
@@ -732,7 +732,7 @@ const SERIES_KEY = "WalkingDead_TheOnesTwoLive";
 
         // 🔴 Mostrar en pantalla
         document.getElementById('episodio-actual').textContent =
-          `📺 Viendo: ${episodioInfo.temporada} - ${episodioInfo.episodio}`;
+          ` Viendo: ${episodioInfo.temporada} - ${episodioInfo.episodio}`;
 
         // 🔴 Resaltar episodio en la lista
         document.querySelectorAll('.episode-card').forEach(c => c.classList.remove('viendo'));
@@ -774,7 +774,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const ultimo = JSON.parse(localStorage.getItem(`ultimoEpisodio_${SERIES_KEY}`) || 'null');
   if (ultimo) {
     document.getElementById('episodio-actual').textContent =
-      `📺 Viendo: ${ultimo.temporada} - ${ultimo.episodio}`;
+      ` Viendo: ${ultimo.temporada} - ${ultimo.episodio}`;
   }
 });
 
@@ -856,49 +856,39 @@ document.addEventListener("DOMContentLoaded", () => {
   <h4>Actores</h4>
   <div class="actores-row" id="actores-row">
     <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/208LKmdjpDVbBXiQRpOLLYE5ddH.jpg" alt="Pablo Cruz Guerrero">
-      <span class="actor-name">Pablo Cruz Guerrero</span>
-      <span class="actor-role">Chespirito</span>
+      <img loading="lazy" src="" alt="">
+      <span class="actor-name"></span>
+      <span class="actor-role"></span>
     </div>
     <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/2kRoqJjcQE9V1jHg7wCXuvXbUO.jpg" alt="Paulina Dávila">
-      <span class="actor-name">Paulina Dávila</span>
-      <span class="actor-role">Graciela Fernández</span>
+      <img loading="lazy" src="" alt="">
+      <span class="actor-name"></span>
+      <span class="actor-role"></span>
     </div>
     <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/9jYfhy4UVCZmhEluI2ENAHI0uvk.jpg" alt="Bárbara López">
-      <span class="actor-name">Bárbara López</span>
-      <span class="actor-role">Margarita Ruiz (Florinda Meza)</span>
+      <img loading="lazy" src="" alt="">
+      <span class="actor-name"></span>
+      <span class="actor-role"></span>
     </div>
     <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/oH6I58ap02zkWhxic5tm6LcOltz.jpg" alt="Arturo Barba">
-      <span class="actor-name">Arturo Barba</span>
-      <span class="actor-role">Rubén Aguirre</span>
+      <img loading="lazy" src="" alt="">
+      <span class="actor-name"></span>
+      <span class="actor-role"></span>
     </div>
     <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/A43USnarLnfWXDvWimT24cPVfEm.jpg" alt="">
-      <span class="actor-name">Juan Lecanda</span>
-      <span class="actor-role">Marcos Barragán (Carlos Villagran)</span>
+      <img loading="lazy" src="" alt="">
+      <span class="actor-name"></span>
+      <span class="actor-role"></span>
     </div>
     <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/1QZ25PBiv5EzjjCZjGZSdpvi1vV.jpg" alt="Miguel Islas">
-      <span class="actor-name">Miguel Islas</span>
-      <span class="actor-role">Ramón Valdés</span>
+      <img loading="lazy" src="" alt="">
+      <span class="actor-name"></span>
+      <span class="actor-role"></span>
     </div>
     <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/8s1ZllGoHYFp0Twk1zalX9Y47m9.jpg" alt="Andrea Noli">
-      <span class="actor-name">Andrea Noli</span>
-      <span class="actor-role">Angelines Fernández</span>
-    </div>
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/AnaNOPWsAZ2al0ivMYYbpqz6j49.jpg" alt="Paola Montes De Oca">
-      <span class="actor-name">Paola Montes De Oca</span>
-      <span class="actor-role">Maria Antonieta de las Nieves</span>
-    </div>
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/4ccvacBDAVU49hC3C97baY8o3SA.jpg" alt="Eugenio Bartilotti">
-      <span class="actor-name">Eugenio Bartilotti</span>
-      <span class="actor-role">Edgar Vivar</span>
+      <img loading="lazy" src="" alt="">
+      <span class="actor-name"></span>
+      <span class="actor-role"></span>
     </div>
   </div>
 </div>
@@ -1012,10 +1002,10 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ACA VA LA NOMBRE, IMAGEN, GENERO, ARCHIVO DONDE GUARDAN SU HTML DE PELICULA Y EL TIEMPO */
     document.getElementById('btn-favorito').addEventListener('click', () => {
       const nuevaPelicula = {
-        titulo: "Chespirito: Sin querer queriendo",
-        imagen: "https://image.tmdb.org/t/p/w300/bLyhzXAWvOn0L17NbCYP2aZ4sPt.jpg",
+        titulo: "The Walking dead: The ones two live",
+        imagen: "https://image.tmdb.org/t/p/w300/t1yUeYKw3s0VntQxzdUgza4msGU.jpg",
         genero: "Genero",
-        archivo: "../View Series/Chespirito sin querer queriendo (2025).html",
+        archivo: "../View Series/CThe Wañking Dead The ones two live (2024).html",
         tipo: "serie",
         timestamp: Date.now()
       };
@@ -1074,9 +1064,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const STORAGE_KEY = 'pos_' + videoSrc;
 
       /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
-      const historialTitulo = "Chespirito: Sin querer queriendo";
-      const historialImagen = "https://image.tmdb.org/t/p/w300/bLyhzXAWvOn0L17NbCYP2aZ4sPt.jpg";
-      const historialArchivo = "View Series/Chespirito sin querer queriendo (2025).html";
+      const historialTitulo = "The walking dead: The ones two live";
+      const historialImagen = "https://image.tmdb.org/t/p/w300/t1yUeYKw3s0VntQxzdUgza4msGU.jpg";
+      const historialArchivo = "View Series/The Walking Dead The ones two live (2024).html";
 
       let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
       let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
