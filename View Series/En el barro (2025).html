@@ -713,43 +713,7 @@ const SERIES_KEY = "En_el_barro25";
       card.classList.add('viendo');
     }
 
-    
-// ✅ Función para reproducir episodio con reanudación individual
-function playEpisode(ep, href) {
-  const videoElement = document.querySelector('.vid1');
-  const source = videoElement.querySelector('source');
-  source.setAttribute('src', href);
-  videoElement.load();
-
-  const PROGRESO_KEY = `progreso_$EnElBarro_${ep.id}`;
-  const savedTime = localStorage.getItem(PROGRESO_KEY);
-
-  if (savedTime && parseFloat(savedTime) > 30) {
-    const modal = document.getElementById('resume-modal');
-    modal.style.display = 'block';
-
-    document.getElementById('resume-yes').onclick = () => {
-      modal.style.display = 'none';
-      videoElement.currentTime = parseFloat(savedTime);
-      playEpisode(ep, href);
-    };
-    document.getElementById('resume-no').onclick = () => {
-      modal.style.display = 'none';
-      videoElement.currentTime = 0;
-      playEpisode(ep, href);
-    };
-  } else {
-    playEpisode(ep, href);
-  }
-
-  setInterval(() => {
-    if (!videoElement.paused && !videoElement.ended) {
-      localStorage.setItem(PROGRESO_KEY, videoElement.currentTime);
-    }
-  }, 5000);
-}
-
-// 🎬 Al hacer click, reproducir y guardar
+    // 🎬 Al hacer click, reproducir y guardar
     card.querySelector('.play-btn').addEventListener('click', (ev) => {
       const href = ev.currentTarget.dataset.href;
       if(href && href !== '#'){
@@ -757,7 +721,7 @@ function playEpisode(ep, href) {
         const source = videoElement.querySelector('source');
         source.setAttribute('src', href);
         videoElement.load();
-        playEpisode(ep, href);
+        videoElement.play();
         closeModal();
         
         // 🔴 Guardar temporada y episodio actual
@@ -1132,16 +1096,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 10000);
     });
   </script>
-
-<!-- Modal de reanudación -->
-<div id="resume-modal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
-  background:#111; color:#fff; padding:20px; border-radius:10px; z-index:9999; text-align:center;">
-  <p id="resume-text">¿Quieres reanudar este episodio donde lo dejaste?</p>
-  <button id="resume-yes">▶ Reanudar</button>
-  <button id="resume-no">⏮ Desde el inicio</button>
-</div>
 </body>
-
 </html>
 
 
