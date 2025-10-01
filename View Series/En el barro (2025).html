@@ -335,6 +335,53 @@
   opacity: 1;
 }
 
+    .ep-card {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border-bottom: 1px solid #333;
+}
+.ep-thumb {
+  width: 80px;    /* más chica */
+  height: 45px;
+  border-radius: 4px;
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+  margin-right: 10px;
+  position: relative;
+}
+.ep-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.3);
+  color: white;
+  font-size: 1.2rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.ep-thumb:hover .ep-overlay { opacity: 1; }
+
+.ep-meta { flex: 1; }
+
+.ep-progress {
+  height: 4px;
+  background: #444;
+  border-radius: 2px;
+  margin-top: 4px;
+  overflow: hidden;
+}
+.ep-progress span {
+  display: block;
+  height: 100%;
+  background: var(--accent, #ff4444);
+  width: 0%;
+  transition: width 0.4s ease;
+}
+
 
   </style>
 </head>
@@ -724,18 +771,48 @@ const SERIES_KEY = "En_el_barro25";
     const card = document.createElement('article');
     card.className = 'episode-card';
     card.setAttribute('role','listitem');
-    card.innerHTML = `
+    card.className = "ep-card";
+card.innerHTML = `
   <div class="ep-thumb" style="background-image:url('${ep.thumb || "https://cdn-icons-png.flaticon.com/512/0/375.png"}')">
     <div class="ep-overlay"><i class="fas fa-play"></i></div>
   </div>
   <div class="ep-meta">
     <div class="ep-title">${ep.title}</div>
     <div class="ep-desc">${ep.time || ''}</div>
+    <div class="ep-progress" id="progress-${ep.id}" style="display:none;">
+      <span></span>
+    </div>
   </div>
   <div class="ep-actions">
-    <button class="play-btn" data-href="${ep.href || '#'}" aria-label="Reproducir ${ep.title}">▶ Reproducir</button>
+    <button class="play-btn" data-href="${ep.href || '#'}" data-id="${ep.id}">▶</button>
   </div>
 `;
+
+    const savedPct = localStorage.getItem(PROGRESO_KEY);
+if (savedPct) {
+  const bar = card.querySelector(`#progress-${ep.id}`);
+  if (bar) {
+    bar.style.display = "block";
+    bar.querySelector("span").style.width = savedPct + "%";
+  }
+}
+
+
+    // progreso
+    const PROGRESO_KEY = `progreso_${seriesKey}_${ep.id}`;
+
+// Guardar cada 5s
+setInterval(() => {
+  if (!videoElement.paused && !videoElement.ended) {
+    const pct = (videoElement.currentTime / videoElement.duration) * 100;
+    localStorage.setItem(PROGRESO_KEY, pct);
+  }
+  if (videoElement.ended) {
+    localStorage.removeItem(PROGRESO_KEY); // borrar al finalizar
+    document.getElementById(`progress-${ep.id}`).style.display = "none";
+  }
+}, 5000);
+
 
 
     // ✅ Marcar si es el episodio actual
