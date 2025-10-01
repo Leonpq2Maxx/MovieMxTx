@@ -310,6 +310,32 @@
   border-radius: 6px;
 }
 
+    .ep-thumb {
+  width: 120px;
+  height: 68px;
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+  position: relative;
+}
+.ep-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.3);
+  color: white;
+  font-size: 1.5rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.ep-thumb:hover .ep-overlay {
+  opacity: 1;
+}
+
+
   </style>
 </head>
 
@@ -699,14 +725,18 @@ const SERIES_KEY = "En_el_barro25";
     card.className = 'episode-card';
     card.setAttribute('role','listitem');
     card.innerHTML = `
-      <div class="ep-meta">
-        <div class="ep-title">${ep.title}</div>
-        <div class="ep-desc">${ep.time || ''}</div>
-      </div>
-      <div class="ep-actions">
-        <button class="play-btn" data-href="${ep.href || '#'}" aria-label="Reproducir ${ep.title}">▶ Reproducir</button>
-      </div>
-    `;
+  <div class="ep-thumb" style="background-image:url('${ep.thumb || "https://cdn-icons-png.flaticon.com/512/0/375.png"}')">
+    <div class="ep-overlay"><i class="fas fa-play"></i></div>
+  </div>
+  <div class="ep-meta">
+    <div class="ep-title">${ep.title}</div>
+    <div class="ep-desc">${ep.time || ''}</div>
+  </div>
+  <div class="ep-actions">
+    <button class="play-btn" data-href="${ep.href || '#'}" aria-label="Reproducir ${ep.title}">▶ Reproducir</button>
+  </div>
+`;
+
 
     // ✅ Marcar si es el episodio actual
     if (ultimo && ultimo.id === ep.id) {
@@ -734,7 +764,7 @@ const SERIES_KEY = "En_el_barro25";
 
         // 🔴 Mostrar en pantalla
         document.getElementById('episodio-actual').textContent =
-          `📺 Viendo: ${episodioInfo.temporada} - ${episodioInfo.episodio}`;
+          ` Viendo: ${episodioInfo.temporada} - ${episodioInfo.episodio}`;
 
         // 🔴 Resaltar episodio en la lista
         document.querySelectorAll('.episode-card').forEach(c => c.classList.remove('viendo'));
@@ -776,7 +806,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const ultimo = JSON.parse(localStorage.getItem(`ultimoEpisodio_${SERIES_KEY}`) || 'null');
   if (ultimo) {
     document.getElementById('episodio-actual').textContent =
-      `📺 Viendo: ${ultimo.temporada} - ${ultimo.episodio}`;
+      ` Viendo: ${ultimo.temporada} - ${ultimo.episodio}`;
   }
 });
 
