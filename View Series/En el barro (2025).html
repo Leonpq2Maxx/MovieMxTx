@@ -310,79 +310,6 @@
   border-radius: 6px;
 }
 
-    .ep-thumb {
-  width: 120px;
-  height: 68px;
-  border-radius: 8px;
-  background-size: cover;
-  background-position: center;
-  flex-shrink: 0;
-  position: relative;
-}
-.ep-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0,0,0,0.3);
-  color: white;
-  font-size: 1.5rem;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-.ep-thumb:hover .ep-overlay {
-  opacity: 1;
-}
-
-    .ep-card {
-  display: flex;
-  align-items: center;
-  padding: 8px;
-  border-bottom: 1px solid #333;
-}
-.ep-thumb {
-  width: 80px;    /* más chica */
-  height: 45px;
-  border-radius: 4px;
-  background-size: cover;
-  background-position: center;
-  flex-shrink: 0;
-  margin-right: 10px;
-  position: relative;
-}
-.ep-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0,0,0,0.3);
-  color: white;
-  font-size: 1.2rem;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-.ep-thumb:hover .ep-overlay { opacity: 1; }
-
-.ep-meta { flex: 1; }
-
-.ep-progress {
-  height: 4px;
-  background: #444;
-  border-radius: 2px;
-  margin-top: 4px;
-  overflow: hidden;
-}
-.ep-progress span {
-  display: block;
-  height: 100%;
-  background: var(--accent, #ff4444);
-  width: 0%;
-  transition: width 0.4s ease;
-}
-
-
   </style>
 </head>
 
@@ -664,11 +591,11 @@ const SERIES_KEY = "En_el_barro25";
       id: 1,
       title: "Temporada 1",
       thumb: "https://image.tmdb.org/t/p/w780/v8xHeTkIBOl51yRp0zcAu2VYhdZ.jpg",
-      desc: "Lanzada 2025 — 3 episodios",
+      desc: "Lanzada 2025 — 2 episodios",
       episodes: [
         { id: "s1e1", title: "Episodio 1", time: "45m", thumb: "", href: "https://dl.dropbox.com/scl/fi/bawnnxf6ccjy765pzdsr1/En-el-barro-Cap-1.mp4?rlkey=xf38z7zwucx1747ox9ax1389z&st=" },
         { id: "s1e2", title: "Episodio 2", time: "45m", thumb: "", href: "https://dl.dropbox.com/scl/fi/x63tx11kljnw75sh82f6x/En-el-barro-Cap-2.mp4?rlkey=twb14o7mk2rwvp52yxet5z0qn&st=" },
-        { id: "s1e3", title: "Episodio 3", time: "45m", thumb: "", href: "https://dl.dropbox.com/scl/fi/uf3d7ix814z61eqlwmkwp/En-el-barro-Cap-3.mp4?rlkey=ridj4j6adxlz7huiz98mchy8m&st=" },
+        { id: "s1e3", title: "Episodio 3", time: "45m", thumb: "", href: "" },
         { id: "s1e4", title: "Episodio 4", time: "45m", thumb: "", href: "" },
         { id: "s1e5", title: "Episodio 5", time: "45m", thumb: "", href: "" },
         { id: "s1e6", title: "Episodio 6", time: "45m", thumb: "", href: "" },
@@ -771,49 +698,15 @@ const SERIES_KEY = "En_el_barro25";
     const card = document.createElement('article');
     card.className = 'episode-card';
     card.setAttribute('role','listitem');
-    card.className = "ep-card";
-card.innerHTML = `
-  <div class="ep-thumb" style="background-image:url('${ep.thumb || "https://cdn-icons-png.flaticon.com/512/0/375.png"}')">
-    <div class="ep-overlay"><i class="fas fa-play"></i></div>
-  </div>
-  <div class="ep-meta">
-    <div class="ep-title">${ep.title}</div>
-    <div class="ep-desc">${ep.time || ''}</div>
-    <div class="ep-progress" id="progress-${ep.id}" style="display:none;">
-      <span></span>
-    </div>
-  </div>
-  <div class="ep-actions">
-    <button class="play-btn" data-href="${ep.href || '#'}" data-id="${ep.id}">▶</button>
-  </div>
-`;
-
-    const savedPct = localStorage.getItem(PROGRESO_KEY);
-if (savedPct) {
-  const bar = card.querySelector(`#progress-${ep.id}`);
-  if (bar) {
-    bar.style.display = "block";
-    bar.querySelector("span").style.width = savedPct + "%";
-  }
-}
-
-
-    // progreso
-    const PROGRESO_KEY = `progreso_${seriesKey}_${ep.id}`;
-
-// Guardar cada 5s
-setInterval(() => {
-  if (!videoElement.paused && !videoElement.ended) {
-    const pct = (videoElement.currentTime / videoElement.duration) * 100;
-    localStorage.setItem(PROGRESO_KEY, pct);
-  }
-  if (videoElement.ended) {
-    localStorage.removeItem(PROGRESO_KEY); // borrar al finalizar
-    document.getElementById(`progress-${ep.id}`).style.display = "none";
-  }
-}, 5000);
-
-
+    card.innerHTML = `
+      <div class="ep-meta">
+        <div class="ep-title">${ep.title}</div>
+        <div class="ep-desc">${ep.time || ''}</div>
+      </div>
+      <div class="ep-actions">
+        <button class="play-btn" data-href="${ep.href || '#'}" aria-label="Reproducir ${ep.title}">▶ Reproducir</button>
+      </div>
+    `;
 
     // ✅ Marcar si es el episodio actual
     if (ultimo && ultimo.id === ep.id) {
@@ -841,7 +734,7 @@ setInterval(() => {
 
         // 🔴 Mostrar en pantalla
         document.getElementById('episodio-actual').textContent =
-          ` Viendo: ${episodioInfo.temporada} - ${episodioInfo.episodio}`;
+          `📺 Viendo: ${episodioInfo.temporada} - ${episodioInfo.episodio}`;
 
         // 🔴 Resaltar episodio en la lista
         document.querySelectorAll('.episode-card').forEach(c => c.classList.remove('viendo'));
@@ -883,7 +776,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const ultimo = JSON.parse(localStorage.getItem(`ultimoEpisodio_${SERIES_KEY}`) || 'null');
   if (ultimo) {
     document.getElementById('episodio-actual').textContent =
-      ` Viendo: ${ultimo.temporada} - ${ultimo.episodio}`;
+      `📺 Viendo: ${ultimo.temporada} - ${ultimo.episodio}`;
   }
 });
 
