@@ -181,64 +181,143 @@
       animation: pop 0.3s ease;
     }
 
-    /* ---------- NUEVOS ESTILOS PARA LA SECCIÓN DE ACTORES ---------- */
-    .actores {
-      padding: 10px;
-      margin-top: 6px;
-    }
-    .actores h4 {
-      margin-bottom: 8px;
-      font-size: 1rem;
-      font-style: normal;
-    }
-
-    .actor .actor-role {
-  display: block;
-  margin-top: 2px;
-  font-size: 0.75rem;
-  color: #bbb;
-  font-style: italic;
+#btn-favorito {
+  background: linear-gradient(135deg, #ff2d55, #ff5e7e);
+  color: white;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 20px rgba(255, 45, 91, 0.35);
 }
 
-    .actores-row {
-      display: flex;
-      gap: 12px;
-      overflow-x: auto;
-      padding-bottom: 8px;
-      -webkit-overflow-scrolling: touch; /* smooth on iOS */
-      scroll-snap-type: x mandatory;
-      padding-left: 8px;
-    }
-    .actores-row::-webkit-scrollbar { display: none; } /* oculta scrollbar en webkit */
-    .actor {
-      flex: 0 0 auto;
-      width: 100px;
-      scroll-snap-align: start;
-      text-align: center;
-    }
-    .actor img {
-      width: 100px;
-      height: 140px;
-      object-fit: cover;
-      border-radius: 8px;
-      display: block;
-      margin: 0 auto;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
-    }
-    .actor .actor-name {
-      margin-top: 6px;
-      font-size: 0.85rem;
-      line-height: 1.1;
-      display: block;
-      color: #fff;
-      font-style: normal;
-    }
+#btn-favorito:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(255, 45, 91, 0.55);
+}
 
-    @media (max-width: 480px) {
-      .actor { width: 88px; }
-      .actor img { width: 88px; height: 125px; }
-      .actor .actor-name { font-size: 0.78rem; }
-    }
+#btn-favorito::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  transform: rotate(25deg);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%) rotate(25deg); }
+  50% { transform: translateX(100%) rotate(25deg); }
+  100% { transform: translateX(100%) rotate(25deg); }
+}
+.info-pelicula {
+  text-align: center;
+  margin-top: 20px;
+  color: #fff;
+}
+
+.sinopsis {
+  font-size: 1rem;
+  color: #bbb;
+  max-width: 600px;
+  margin: 10px auto 20px;
+}
+
+.acciones {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.play-btn {
+  background: linear-gradient(135deg, #1db954, #1ed760);
+  color: white;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 20px rgba(29, 185, 84, 0.35);
+}
+
+.play-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(29, 185, 84, 0.55);
+}
+
+#btn-favorito {
+  background: linear-gradient(135deg, #ff2d55, #ff5e7e);
+  color: white;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 20px rgba(255, 45, 91, 0.35);
+}
+
+#btn-favorito:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(255, 45, 91, 0.55);
+}
+
+#btn-favorito::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  transform: rotate(25deg);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%) rotate(25deg); }
+  50% { transform: translateX(100%) rotate(25deg); }
+  100% { transform: translateX(100%) rotate(25deg); }
+}
+  .season-episode-tag {
+  display: inline-block;
+  margin-top: 8px;
+  margin-bottom: 14px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #9ad0ff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+}
+
 
   </style>
 </head>
@@ -247,7 +326,7 @@
   
   <div class="player">
     <video class="vid1 js-player" controls loading="lazy" poster="https://image.tmdb.org/t/p/original/fJXqP9S9llRUy9tuccuwvIYFBA4.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
-      <source src="https://dl.dropbox.com/scl/fi/gu33t6g275pz3y85tc6xk/El-conjuro-4-el-ultimo.rito-2025.mp4?rlkey=7quk3bru3oth9ewqsae1ibgpl&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
+      <source src="Link de pelicula" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
 
@@ -269,10 +348,19 @@
     <span>🇲🇽</span>
   </div>
   
-  <div class="titulo-flex">
-    <h3 class="titulo">El Conjuro 4: El ultimo rito</h3>
-    <div class="genero-badge">Terror,Sobrenatural</div>
+  <div class="info-pelicula">
+    <h1>El conjuro 4: El ultimo rito</h1>
+  <span class="genero-badge">Terror • Sobrenatural</span>
+  
+    <p class="sinopsis">
+      Los investigadores de lo paranormal Ed y Lorraine Warren se enfrentan a un último caso aterrador en el que están implicadas entidades misteriosas a las que deben enfrentarse.
+    </p>
+  
+    <div class="acciones">
+      <button id="btn-favorito">⭐ Agregar a Favoritos</button>
+    </div>
   </div>
+    <br>
 
   <style>
     .titulo-flex {
@@ -334,86 +422,16 @@
     }
     
   </style>
-  
-  <div class="sinopsis">
-    <h4>
-      Sinopsis:
-    </h4>
-    <p>
-      Los investigadores de lo paranormal Ed y Lorraine Warren se enfrentan a un último caso aterrador en el que están implicadas entidades misteriosas a las que deben enfrentarse.
-    </p>
-  </div>
-
-  <!-- ======== SECCIÓN ACTORES (DESLIZABLE HORIZONTAL) ======== -->
-<div class="actores">
-  <h4>Actores</h4>
-  <div class="actores-row" id="actores-row">
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/5Vs7huBmTKftwlsc2BPAntyaQYj.jpg" alt="Vera Farmiga">
-      <span class="actor-name">Vera Farmiga</span>
-      <span class="actor-role">Lorraine Warren</span>
-    </div>
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/tc1ezEfIY8BhCy85svOUDtpBFPt.jpg" alt="Patrick Wilson">
-      <span class="actor-name">Patrick Wilson</span>
-      <span class="actor-role">Ed Warren</span>
-    </div>
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/cBSSODc05j8s8omYfX0Px07AIvr.jpg" alt="Mia Tomlinson">
-      <span class="actor-name">Mia Tomlinson</span>
-      <span class="actor-role">Judy Warren</span>
-    </div>
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/s8UEIomgY5AaEmPHkcPAScp68Fw.jpg" alt="Ben Hardy">
-      <span class="actor-name">Ben Hardy</span>
-      <span class="actor-role">Tony Spera</span>
-    </div>
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/A43USnarLnfWXDvWimT24cPVfEm.jpg" alt="Rebecca Calder">
-      <span class="actor-name">Rebecca Calder</span>
-      <span class="actor-role">Janet Smurl</span>
-    </div>
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/zxewsfDGYuCqV7gsZjMQct6BXMJ.jpg" alt="Rebecca Calder">
-      <span class="actor-name">Elliot Cowan</span>
-      <span class="actor-role">Jack Smurl</span>
-    </div>
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/gBJmrtY2fBFfkQRfosLv2MNWx2J.jpg" alt="Rebecca Calder">
-      <span class="actor-name">Shannon Kook</span>
-      <span class="actor-role">Drew Thomas</span>
-    </div>
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/ng01ren9pCYPIsIwRqC1xHzD5IG.jpg" alt="Rebecca Calder">
-      <span class="actor-name">Steve Coulter</span>
-      <span class="actor-role">Father Gordon</span>
-    </div>
-  </div>
-</div>
-<!-- ======== FIN ACTORES ======== -->
-
-
-  <!-- NO BORRAR ES EL BOTON DEL FAVORITOS -->
-  <div style="text-align: center; margin-top: 15px;">
-    <button id="btn-favorito" style="
-      background: #ff4444;
-      color: white;
-      padding: 10px 16px;
-      border: none;
-      border-radius: 20px;
-      font-size: 1rem;
-      cursor: pointer;
-    ">
-      ⭐ Favoritos
-    </button>
-  </div>
-
   <br>
 
   <div class="recomendaciones">
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
+      <a href="La Monja (2018).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/ce6f0GNhtHdIvtCoXfp3amE0fWz.jpg" alt="">
+        <p>La monja</p>
+      </a>
       <a href="El conjuro 1 (2013).html" class="serie">
         <img loading="lazy" src="https://image.tmdb.org/t/p/w300/10ir0eISr3p1MF1mjZwGTx7u4vv.jpg" alt="">
         <p>El conjuro: Experiente Warren</p>
@@ -429,10 +447,6 @@
       <a href="Annabelle 2 la creacion 2 (2017).html" class="serie">
         <img loading="lazy" src="https://image.tmdb.org/t/p/w300/x0pekWNy7GS37bm30zuxWNLPXj8.jpg" alt="">
         <p>Annabelle 2: La creacion</p>
-      </a>
-      <a href="Baghead contacto con la muerte (2024).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/5ssaCHmqvTZDVZtcNhNZTzfb7Nj.jpg" alt="">
-        <p>Baghead: contacto con la muerte</p>
       </a>
       <a href="Insidious La puerta roja (2023).html" class="serie">
         <img loading="lazy" src="https://image.tmdb.org/t/p/w300/wD4eLIHUaTvrXQqAzlfduHQ1NYg.jpg" alt="">
@@ -600,5 +614,3 @@
   </script>
 </body>
 </html>
-
-
