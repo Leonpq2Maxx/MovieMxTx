@@ -71,10 +71,6 @@
     .titulo, .sinopsis {
       padding: 10px;
     }
-    .titulo h3, .titulo h4, .sinopsis h4 {
-      font-family: 'Kanit', sans-serif;
-      margin-bottom: 5px;
-    }
     .recomendaciones {
       padding: 10px;
     }
@@ -185,6 +181,65 @@
       animation: pop 0.3s ease;
     }
 
+    /* ---------- NUEVOS ESTILOS PARA LA SECCIÓN DE ACTORES ---------- */
+    .actores {
+      padding: 10px;
+      margin-top: 6px;
+    }
+    .actores h4 {
+      margin-bottom: 8px;
+      font-size: 1rem;
+      font-style: normal;
+    }
+
+    .actor .actor-role {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.75rem;
+  color: #bbb;
+  font-style: italic;
+}
+
+    .actores-row {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      -webkit-overflow-scrolling: touch; /* smooth on iOS */
+      scroll-snap-type: x mandatory;
+      padding-left: 8px;
+    }
+    .actores-row::-webkit-scrollbar { display: none; } /* oculta scrollbar en webkit */
+    .actor {
+      flex: 0 0 auto;
+      width: 100px;
+      scroll-snap-align: start;
+      text-align: center;
+    }
+    .actor img {
+      width: 100px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
+    .actor .actor-name {
+      margin-top: 6px;
+      font-size: 0.85rem;
+      line-height: 1.1;
+      display: block;
+      color: #fff;
+      font-style: normal;
+    }
+
+    @media (max-width: 480px) {
+      .actor { width: 88px; }
+      .actor img { width: 88px; height: 125px; }
+      .actor .actor-name { font-size: 0.78rem; }
+    }
+
   </style>
 </head>
 
@@ -201,7 +256,7 @@
   <div class="info">
     <i class="fal fa-calendar-alt"></i><span>2014</span>
     <i class="fal fa-clock"></i><span>1h 38min</span>
-    <i class="fal fa-thumbs-up"></i><span>62%</span>
+    <i class="fal fa-thumbs-up"></i><span>78%</span>
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
@@ -211,11 +266,12 @@
     </div>
     <span>🇲🇽</span>
   </div>
-
+  
   <div class="titulo-flex">
-    <h3>Annabelle</h3>
+    <h3 class="titulo">Annabelle</h3>
     <div class="genero-badge">Terror</div>
   </div>
+  
 
   <style>
     .titulo-flex {
@@ -240,6 +296,42 @@
       overflow: hidden;          /* Oculta el exceso */
       text-overflow: ellipsis;   /* Agrega los ... */
     }
+
+    .titulo {
+      font-size: 0.7rem;
+      font-style: normal;
+      max-width: 200px;          /* Limita el ancho máximo */
+      white-space: nowrap;       /* No saltar de línea */
+      overflow: hidden;          /* Oculta el exceso */
+      text-overflow: ellipsis;   /* Agrega los ... */
+    }
+
+  </style>
+
+  <style>
+    .titulo-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .genero-badge {
+      padding: 4px 10px;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 0, 81, 1);
+      border: 1px solid rgba(255, 0, 81, 1);
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-style: normal;
+      max-width: 135px;          /* Limita el ancho máximo */
+      white-space: nowrap;       /* No saltar de línea */
+      overflow: hidden;          /* Oculta el exceso */
+      text-overflow: ellipsis;   /* Agrega los ... */
+    }
+    
   </style>
   
   <div class="sinopsis">
@@ -250,6 +342,55 @@
       John Form encuentra el regalo perfecto para su mujer embarazada, Mia: una preciosa e inusual muñeca vintage que lleva un vestido de novia blanco inmaculado. Sin embargo, la alegría de Mia al recibir a Annabelle no dura mucho. Durante una espantosa noche la pareja ve como miembros de una secta satánica invaden su hogar y los atacan brutalmente. No sólo dejan sangre derramada y terror tras su visita…los miembros de la secta conjuran a un ente de tal maldad que nada de lo que han hecho se compara al siniestro camino a la maldición que ahora es… Annabelle.
     </p>
   </div>
+
+  <!-- ======== SECCIÓN ACTORES (DESLIZABLE HORIZONTAL) ======== -->
+<div class="actores">
+  <h4>Actores</h4>
+  <div class="actores-row" id="actores-row">
+    <div class="actor">
+      <img loading="lazy" src="" alt="">
+      <span class="actor-name">NIMBRE DE ACTOR</span>
+      <span class="actor-role">NIMBRE DE ACTOR</span>
+    </div>
+    <div class="actor">
+      <img loading="lazy" src="" alt="">
+      <span class="actor-name">NIMBRE DE ACTOR</span>
+      <span class="actor-role">NIMBRE DE ACTOR</span>
+    </div>
+    <div class="actor">
+      <img loading="lazy" src="" alt="">
+      <span class="actor-name">NIMBRE DE ACTOR</span>
+      <span class="actor-role">NIMBRE DE ACTOR</span>
+    </div>
+    <div class="actor">
+      <img loading="lazy" src="" alt="">
+      <span class="actor-name">NIMBRE DE ACTOR</span>
+      <span class="actor-role">NIMBRE DE ACTOR</span>
+    </div>
+    <div class="actor">
+      <img loading="lazy" src="" alt="">
+      <span class="actor-name">NIMBRE DE ACTOR</span>
+      <span class="actor-role">NIMBRE DE ACTOR</span>
+    </div>
+    <div class="actor">
+      <img loading="lazy" src="" alt="">
+      <span class="actor-name">NIMBRE DE ACTOR</span>
+      <span class="actor-role">NIMBRE DE ACTOR</span>
+    </div>
+    <div class="actor">
+      <img loading="lazy" src="" alt="">
+      <span class="actor-name">NIMBRE DE ACTOR</span>
+      <span class="actor-role">NIMBRE DE ACTOR</span>
+    </div>
+    <div class="actor">
+      <img loading="lazy" src="" alt="">
+      <span class="actor-name">NIMBRE DE ACTOR</span>
+      <span class="actor-role">NIMBRE DE ACTOR</span>
+    </div>
+  </div>
+</div>
+<!-- ======== FIN ACTORES ======== -->
+
 
   <!-- NO BORRAR ES EL BOTON DEL FAVORITOS -->
   <div style="text-align: center; margin-top: 15px;">
@@ -433,7 +574,8 @@
         progreso: "Asistido 0 min",
         archivo: historialArchivo,
         tipo: "pelicula", // ✅ ya está
-        // timestamp: Date.now()
+        adulto: true,
+        timestamp: Date.now()
       });
       localStorage.setItem('historial_usuarios', JSON.stringify(historial));
       indexHist = historial.length - 1;
