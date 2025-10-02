@@ -180,65 +180,6 @@
     #btn-favorito.animado {
       animation: pop 0.3s ease;
     }
-
-    /* ---------- NUEVOS ESTILOS PARA LA SECCIÓN DE ACTORES ---------- */
-    .actores {
-      padding: 10px;
-      margin-top: 6px;
-    }
-    .actores h4 {
-      margin-bottom: 8px;
-      font-size: 1rem;
-      font-style: normal;
-    }
-
-    .actor .actor-role {
-  display: block;
-  margin-top: 2px;
-  font-size: 0.75rem;
-  color: #bbb;
-  font-style: italic;
-}
-
-    .actores-row {
-      display: flex;
-      gap: 12px;
-      overflow-x: auto;
-      padding-bottom: 8px;
-      -webkit-overflow-scrolling: touch; /* smooth on iOS */
-      scroll-snap-type: x mandatory;
-      padding-left: 8px;
-    }
-    .actores-row::-webkit-scrollbar { display: none; } /* oculta scrollbar en webkit */
-    .actor {
-      flex: 0 0 auto;
-      width: 100px;
-      scroll-snap-align: start;
-      text-align: center;
-    }
-    .actor img {
-      width: 100px;
-      height: 140px;
-      object-fit: cover;
-      border-radius: 8px;
-      display: block;
-      margin: 0 auto;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
-    }
-    .actor .actor-name {
-      margin-top: 6px;
-      font-size: 0.85rem;
-      line-height: 1.1;
-      display: block;
-      color: #fff;
-      font-style: normal;
-    }
-
-    @media (max-width: 480px) {
-      .actor { width: 88px; }
-      .actor img { width: 88px; height: 125px; }
-      .actor .actor-name { font-size: 0.78rem; }
-    }
 /* --- Mejor experiencia deslizable en móvil --- */
 @media (max-width: 880px) {
   /* Lista de temporadas horizontal deslizable */
@@ -309,6 +250,143 @@
   padding: 3px 6px;
   border-radius: 6px;
 }
+#btn-favorito {
+  background: linear-gradient(135deg, #ff2d55, #ff5e7e);
+  color: white;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 20px rgba(255, 45, 91, 0.35);
+}
+
+#btn-favorito:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(255, 45, 91, 0.55);
+}
+
+#btn-favorito::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  transform: rotate(25deg);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%) rotate(25deg); }
+  50% { transform: translateX(100%) rotate(25deg); }
+  100% { transform: translateX(100%) rotate(25deg); }
+}
+.info-pelicula {
+  text-align: center;
+  margin-top: 20px;
+  color: #fff;
+}
+
+.sinopsis {
+  font-size: 1rem;
+  color: #bbb;
+  max-width: 600px;
+  margin: 10px auto 20px;
+}
+
+.acciones {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.play-btn {
+  background: linear-gradient(135deg, #1db954, #1ed760);
+  color: white;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 20px rgba(29, 185, 84, 0.35);
+}
+
+.play-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(29, 185, 84, 0.55);
+}
+
+#btn-favorito {
+  background: linear-gradient(135deg, #ff2d55, #ff5e7e);
+  color: white;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 20px rgba(255, 45, 91, 0.35);
+}
+
+#btn-favorito:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(255, 45, 91, 0.55);
+}
+
+#btn-favorito::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  transform: rotate(25deg);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%) rotate(25deg); }
+  50% { transform: translateX(100%) rotate(25deg); }
+  100% { transform: translateX(100%) rotate(25deg); }
+}
+  .season-episode-tag {
+  display: inline-block;
+  margin-top: 8px;
+  margin-bottom: 14px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #9ad0ff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+}
+
 
   </style>
 </head>
@@ -343,10 +421,24 @@
     <span>🇲🇽</span>
   </div>
   
-  <div class="titulo-flex">
-    <h3 class="titulo">Chespirito: Sin querer queriendo (2025).h</h3>
-    <div class="genero-badge">Drama/Comedia</div>
+  <div class="info-pelicula">
+    <h1>Chespirito: Sin querer queriendo</h1>
+    <span class="genero-badge">Comedia • Drama</span>
+    <br>
+    <br>
+    <!-- Botón para abrir el modal -->
+    <button id="open-seasons" class="seasons-open-btn">Ver Temporadas & Episodios</button>
+    
+    <p class="sinopsis">
+      Miniserie que sigue la vida y carrera del actor, comediante y productor mexicano Roberto Gómez Bolaños, conocido por ser el creador de El Chavo del 8, El Chapulín Colorado y Chespirito.
+    </p>
+  
+    <div class="acciones">
+      <button id="btn-favorito">⭐ Agregar a Favoritos</button>
+    </div>
   </div>
+  <br>
+
 
 <!-- ---------- INICIA: Modal de Temporadas y Episodios ---------- -->
 <!-- Botón para abrir el modal -->
@@ -591,14 +683,14 @@ const SERIES_KEY = "Chespirito_Sin_querer_queriendo25";
       id: 1,
       title: "Temporada 1",
       thumb: "https://image.tmdb.org/t/p/w780/uWtq2F3IBBbpgUB1rEw5VDoeYD.jpg",
-      desc: "Lanzada 2024 — 9 episodios",
+      desc: "Lanzada 2024 — 6 episodios",
       episodes: [
-        { id: "s1e1", title: "Episodio 1", time: "45m", thumb: "", href: "" },
-        { id: "s1e2", title: "Episodio 2", time: "45m", thumb: "", href: "" },
-        { id: "s1e3", title: "Episodio 3", time: "45m", thumb: "", href: "" },
-        { id: "s1e4", title: "Episodio 4", time: "45m", thumb: "", href: "" },
-        { id: "s1e5", title: "Episodio 5", time: "45m", thumb: "", href: "" },
-        { id: "s1e6", title: "Episodio 6", time: "45m", thumb: "", href: "" },
+        { id: "s1e1", title: "Episodio 1", time: "45m", thumb: "", href: "https://dl.dropbox.com/scl/fi/2rxn8bbjx7offllrzzddk/Chespirito-sin-querer-queriendo-T1-C1.mp4?rlkey=hjvi2jjx2oinq0hekxp875ds9&st=" },
+        { id: "s1e2", title: "Episodio 2", time: "45m", thumb: "", href: "https://dl.dropbox.com/scl/fi/6sr2f4vypmw7r9iv0xtax/Chespirito-sin-querer-queriendo-T1-C2.mp4?rlkey=8jp6gc91xi9le5jo97g5dckot&st=" },
+        { id: "s1e3", title: "Episodio 3", time: "45m", thumb: "", href: "https://dl.dropbox.com/scl/fi/8d92w87l1ignjd8mev0ff/Chespirito-sin-querer-queriendo-T1-C3.mp4?rlkey=2bojt7pyhqykmd3et8nlvldbi&st=" },
+        { id: "s1e4", title: "Episodio 4", time: "45m", thumb: "", href: "https://dl.dropbox.com/scl/fi/kx7zbroyx4mso2je46syv/Chespirito-sin-querer-queriendo-T1-C4.mp4?rlkey=q3rfpfx6kes5co31bv4ur8q37&st=" },
+        { id: "s1e5", title: "Episodio 5", time: "45m", thumb: "", href: "https://dl.dropbox.com/scl/fi/gc9b1435w1c1d72erjzzq/Chespirito-sin-querer-queriendo-T1-C5.mp4?rlkey=7gq2fl14jepxorqv7umw64kmo&st=" },
+        { id: "s1e6", title: "Episodio 6", time: "45m", thumb: "", href: "https://dl.dropbox.com/scl/fi/v8xkbejc01pf2gn193z85/Chespirito-sin-querer-queriendo-T1-C6.mp4?rlkey=e0pu51p3yy1qs09g0lo2abyik&st=" },
         { id: "s1e7", title: "Episodio 7", time: "45m", thumb: "", href: "" },
         { id: "s1e8", title: "Episodio 8", time: "45m", thumb: "", href: "" },
         { id: "s1e9", title: "Episodio 9", time: "45m", thumb: "", href: "" },
@@ -845,84 +937,6 @@ document.addEventListener("DOMContentLoaded", () => {
     
   </style>
   
-  <div class="sinopsis">
-    <h4>
-      Sinopsis:
-    </h4>
-    <p>
-      Miniserie que sigue la vida y carrera del actor, comediante y productor mexicano Roberto Gómez Bolaños, conocido por ser el creador de El Chavo del 8, El Chapulín Colorado y Chespirito.
-    </p>
-  </div>
-
-  <!-- ======== SECCIÓN ACTORES (DESLIZABLE HORIZONTAL) ======== -->
-<div class="actores">
-  <h4>Actores</h4>
-  <div class="actores-row" id="actores-row">
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/208LKmdjpDVbBXiQRpOLLYE5ddH.jpg" alt="Pablo Cruz Guerrero">
-      <span class="actor-name">Pablo Cruz Guerrero</span>
-      <span class="actor-role">Chespirito</span>
-    </div>
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/2kRoqJjcQE9V1jHg7wCXuvXbUO.jpg" alt="Paulina Dávila">
-      <span class="actor-name">Paulina Dávila</span>
-      <span class="actor-role">Graciela Fernández</span>
-    </div>
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/9jYfhy4UVCZmhEluI2ENAHI0uvk.jpg" alt="Bárbara López">
-      <span class="actor-name">Bárbara López</span>
-      <span class="actor-role">Margarita Ruiz (Florinda Meza)</span>
-    </div>
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/oH6I58ap02zkWhxic5tm6LcOltz.jpg" alt="Arturo Barba">
-      <span class="actor-name">Arturo Barba</span>
-      <span class="actor-role">Rubén Aguirre</span>
-    </div>
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/A43USnarLnfWXDvWimT24cPVfEm.jpg" alt="">
-      <span class="actor-name">Juan Lecanda</span>
-      <span class="actor-role">Marcos Barragán (Carlos Villagran)</span>
-    </div>
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/1QZ25PBiv5EzjjCZjGZSdpvi1vV.jpg" alt="Miguel Islas">
-      <span class="actor-name">Miguel Islas</span>
-      <span class="actor-role">Ramón Valdés</span>
-    </div>
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/8s1ZllGoHYFp0Twk1zalX9Y47m9.jpg" alt="Andrea Noli">
-      <span class="actor-name">Andrea Noli</span>
-      <span class="actor-role">Angelines Fernández</span>
-    </div>
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/AnaNOPWsAZ2al0ivMYYbpqz6j49.jpg" alt="Paola Montes De Oca">
-      <span class="actor-name">Paola Montes De Oca</span>
-      <span class="actor-role">Maria Antonieta de las Nieves</span>
-    </div>
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/4ccvacBDAVU49hC3C97baY8o3SA.jpg" alt="Eugenio Bartilotti">
-      <span class="actor-name">Eugenio Bartilotti</span>
-      <span class="actor-role">Edgar Vivar</span>
-    </div>
-  </div>
-</div>
-<!-- ======== FIN ACTORES ======== -->
-
-
-  <!-- NO BORRAR ES EL BOTON DEL FAVORITOS -->
-  <div style="text-align: center; margin-top: 15px;">
-    <button id="btn-favorito" style="
-      background: #ff4444;
-      color: white;
-      padding: 10px 16px;
-      border: none;
-      border-radius: 20px;
-      font-size: 1rem;
-      cursor: pointer;
-    ">
-      ⭐ Favoritos
-    </button>
-  </div>
-
   <br>
 
   <div class="recomendaciones">

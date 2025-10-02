@@ -342,15 +342,27 @@
     </div>
     <span>🇲🇽</span>
   </div>
+
+  <div class="info-pelicula">
+    <h1>Dragin Ball Z</h1>
+    <span class="genero-badge">Animacion • Anime • Aventura</span>
+    <br>
+    <br>
+    <!-- Botón para abrir el modal -->
+    <button id="open-seasons" class="seasons-open-btn">Ver Temporadas & Episodios</button>
+    
+    <p class="sinopsis">
+      La historia de amor de Rick Grimes y Michonne cambia por un mundo diferente. Separados por la distancia. Por un poder imparable. ¿Podrán reencontrarse y descubrir quiénes eran en una situación sin precedentes?
+    </p>
   
-  <div class="titulo-flex">
-    <h3 class="titulo">Dragon Ball Z</h3>
-    <div class="genero-badge">Anime/Accion/animacion</div>
+    <div class="acciones">
+      <button id="btn-favorito">⭐ Agregar a Favoritos</button>
+    </div>
   </div>
+  <br>
+
 
 <!-- ---------- INICIA: Modal de Temporadas y Episodios ---------- -->
-<!-- Botón para abrir el modal -->
-<button id="open-seasons" class="seasons-open-btn">Temporadas & Episodios</button>
 
 <!-- Modal -->
 <div id="seasons-modal" class="seasons-modal" aria-hidden="true" role="dialog" aria-label="Temporadas y episodios">
@@ -901,69 +913,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     
   </style>
-  
-  <div class="sinopsis">
-    <h4>
-      Sinopsis:
-    </h4>
-    <p>
-      La historia de amor de Rick Grimes y Michonne cambia por un mundo diferente. Separados por la distancia. Por un poder imparable. ¿Podrán reencontrarse y descubrir quiénes eran en una situación sin precedentes?
-    </p>
-  </div>
-
-  <!-- ======== SECCIÓN ACTORES (DESLIZABLE HORIZONTAL) ======== -->
-<div class="actores">
-  <h4>Actores</h4>
-  <div class="actores-row" id="actores-row">
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/kSweOGPprLe1vDvu38wJQaWIih7.jpg" alt="">
-      <span class="actor-name">Terry O'Quinn</span>
-      <span class="actor-role">Mayor general Johnathan Beale</span>
-    </div>
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/gR4RzQTDsMfVv8oEh2VRbO8LkFz.jpg" alt="">
-      <span class="actor-name">Andrés Lincoln</span>
-      <span class="actor-role">Rick Grimes</span>
-    </div>
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/wpvo1vZosUOSRONP5u8SxrCY18s.jpg" alt="">
-      <span class="actor-name">Danai del Norte</span>
-      <span class="actor-role">Michonne</span>
-    </div>
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/c2YsFhPEEXEgqMTgASdvVoOkbnH.jpg" alt="">
-      <span class="actor-name">Pollyanna McIntosh</span>
-      <span class="actor-role">Jadis Stokes</span>
-    </div>
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/fW2ITcpENpNnHf4wuNltf3PSQTk.jpg" alt="">
-      <span class="actor-name">Lesley-Ann Brandt</span>
-      <span class="actor-role">Perla Thorne</span>
-    </div>
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/509fvrZgzAcXrJ3zKSIvwb7J3Ck.jpg" alt="">
-      <span class="actor-name">Craig Tate</span>
-      <span class="actor-role">Donald Okafor</span>
-    </div>
-  </div>
-</div>
-<!-- ======== FIN ACTORES ======== -->
-
-
-  <!-- NO BORRAR ES EL BOTON DEL FAVORITOS -->
-  <div style="text-align: center; margin-top: 15px;">
-    <button id="btn-favorito" style="
-      background: #ff4444;
-      color: white;
-      padding: 10px 16px;
-      border: none;
-      border-radius: 20px;
-      font-size: 1rem;
-      cursor: pointer;
-    ">
-      ⭐ Favoritos
-    </button>
-  </div>
 
   <br>
 
