@@ -440,8 +440,6 @@
   <br>
 
 <!-- ---------- INICIA: Modal de Temporadas y Episodios ---------- -->
-<!-- Botón para abrir el modal -->
-<button id="open-seasons" class="seasons-open-btn">Temporadas & Episodios</button>
 
 <!-- Modal -->
 <div id="seasons-modal" class="seasons-modal" aria-hidden="true" role="dialog" aria-label="Temporadas y episodios">
@@ -837,7 +835,7 @@ const SERIES_KEY = "Dragon_Ball_Daima25";
 
         // 🔴 Mostrar en pantalla
         document.getElementById('episodio-actual').textContent =
-          `📺 Viendo: ${episodioInfo.temporada} - ${episodioInfo.episodio}`;
+          ` Viendo: ${episodioInfo.temporada} - ${episodioInfo.episodio}`;
 
         // 🔴 Resaltar episodio en la lista
         document.querySelectorAll('.episode-card').forEach(c => c.classList.remove('viendo'));
@@ -879,7 +877,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const ultimo = JSON.parse(localStorage.getItem(`ultimoEpisodio_${SERIES_KEY}`) || 'null');
   if (ultimo) {
     document.getElementById('episodio-actual').textContent =
-      `📺 Viendo: ${ultimo.temporada} - ${ultimo.episodio}`;
+      ` Viendo: ${ultimo.temporada} - ${ultimo.episodio}`;
   }
 });
 

@@ -394,7 +394,7 @@
 <body ondragstart="return false;" ondrop="return false;">
   
   <div class="player">
-    <video class="vid1 js-player" controls loading="lazy" poster="https://image.tmdb.org/t/p/w780/s9xZojg7pNDv26hzvi0Lgt5esWC.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+    <video class="vid1 js-player" controls loading="lazy" poster="https://image.tmdb.org/t/p/w780/sdn6qjAATvVBUU7ZcGgoMUPwFoC.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
       <source src="" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
@@ -408,9 +408,9 @@
 
 
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>1989</span> <!--Aca va el año de estreno de pelicula-->
+    <i class="fal fa-calendar-alt"></i><span>2010</span> <!--Aca va el año de estreno de pelicula-->
    <!--aca va cuanto dura-->
-    <i class="fal fa-thumbs-up"></i><span>93%</span> <!--aca va la calificacion-->
+    <i class="fal fa-thumbs-up"></i><span>87%</span> <!--aca va la calificacion-->
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
@@ -420,19 +420,18 @@
     </div>
     <span>🇲🇽</span>
   </div>
-
+  
   <div class="info-pelicula">
-    <h1>Dragin Ball Z</h1>
-    <span class="genero-badge">Animacion • Anime • Aventura</span>
+    <h1>Una buena familia americana</h1>
+    <span class="genero-badge">Drama</span>
     <br>
     <br>
     <!-- Botón para abrir el modal -->
     <button id="open-seasons" class="seasons-open-btn">Ver Temporadas & Episodios</button>
-    
-    <p class="sinopsis">
-      La historia de amor de Rick Grimes y Michonne cambia por un mundo diferente. Separados por la distancia. Por un poder imparable. ¿Podrán reencontrarse y descubrir quiénes eran en una situación sin precedentes?
-    </p>
   
+    <p class="sinopsis">
+      Esta serie dramática, contada desde varios puntos de vista para tratar de plasmar todas las perspectivas, prejuicios y traumas, está inspirada por la inquietante historia de una pareja del Medio Oeste estadounidense que adopta a una niña con un tipo de enanismo raro. Sin embargo, conforme va creciendo junto a sus hijos biológicos, van aflorando misterios sobre ella y su historia, y empiezan a sospechar poco a poco que quizá no es quien dice ser.
+    </p>
     <div class="acciones">
       <button id="btn-favorito">⭐ Agregar a Favoritos</button>
     </div>
@@ -672,82 +671,23 @@
 
 <!-- ---------- SCRIPT: datos + interacción ---------- -->
 <script>
-const SERIES_KEY = "Dragon_Ball_Z1989";
+const SERIES_KEY = "The_Walking_Dead2010";
 
   /* ---------- Datos: cambia esto por tu contenido real ---------- */
   const seasonsData = [
     {
       id: 1,
       title: "Temporada 1",
-      thumb: "https://image.tmdb.org/t/p/w780/dV5hTAW2pJYxGlwkfBNCgQR10Vb.jpg",
-      desc: "Lanzada 1989 — 0 episodios",
+      thumb: "https://image.tmdb.org/t/p/w780/dhdzMtQJOAiTJr3Bhcxval2ZT2T.jpg",
+      desc: "Lanzada 2010— 0 episodios",
       episodes: [
-        { id: "s1e1", title: "Episodio 1", time: "45m", thumb: "", href: "" },
-        { id: "s1e2", title: "Episodio 2", time: "45m", thumb: "", href: "" },
-        { id: "s1e3", title: "Episodio 3", time: "45m", thumb: "", href: "" },
-        { id: "s1e4", title: "Episodio 4", time: "45m", thumb: "", href: "" },
-        { id: "s1e5", title: "Episodio 5", time: "45m", thumb: "", href: "" },
-        { id: "s1e6", title: "Episodio 6", time: "45m", thumb: "", href: "" },
-        // ... más episodios
-      ]
-    },
-    {
-      id: 2,
-      title: "Temporada 2",
-      thumb: "https://image.tmdb.org/t/p/w780/n5K2DlgAeCWLlCPmlZnug9tYAIj.jpg",
-      desc: "Lanzada 1989 — 0 episodios",
-      episodes: [
-        { id: "s1e1", title: "Episodio 1", time: "45m", thumb: "", href: "" },
-        { id: "s1e2", title: "Episodio 2", time: "45m", thumb: "", href: "" },
-        { id: "s1e3", title: "Episodio 3", time: "45m", thumb: "", href: "" },
-        { id: "s1e4", title: "Episodio 4", time: "45m", thumb: "", href: "" },
-        { id: "s1e5", title: "Episodio 5", time: "45m", thumb: "", href: "" },
-        { id: "s1e6", title: "Episodio 6", time: "45m", thumb: "", href: "" },
-        // ... más episodios
-      ]
-    },
-    {
-      id: 3,
-      title: "Temporada 3",
-      thumb: "https://image.tmdb.org/t/p/w780/7sWJg75argLzaIt6nv3wQt070Yt.jpg",
-      desc: "Lanzada 1989 — 0 episodios",
-      episodes: [
-        { id: "s1e1", title: "Episodio 1", time: "45m", thumb: "", href: "" },
-        { id: "s1e2", title: "Episodio 2", time: "45m", thumb: "", href: "" },
-        { id: "s1e3", title: "Episodio 3", time: "45m", thumb: "", href: "" },
-        { id: "s1e4", title: "Episodio 4", time: "45m", thumb: "", href: "" },
-        { id: "s1e5", title: "Episodio 5", time: "45m", thumb: "", href: "" },
-        { id: "s1e6", title: "Episodio 6", time: "45m", thumb: "", href: "" },
-        // ... más episodios
-      ]
-    },
-    {
-      id: 4,
-      title: "Temporada 4",
-      thumb: "https://image.tmdb.org/t/p/w780/8hxEVDiDJXx5pjKosXm4iBBj9Ww.jpg",
-      desc: "Lanzada 1989 — 0 episodios",
-      episodes: [
-        { id: "s1e1", title: "Episodio 1", time: "45m", thumb: "", href: "" },
-        { id: "s1e2", title: "Episodio 2", time: "45m", thumb: "", href: "" },
-        { id: "s1e3", title: "Episodio 3", time: "45m", thumb: "", href: "" },
-        { id: "s1e4", title: "Episodio 4", time: "45m", thumb: "", href: "" },
-        { id: "s1e5", title: "Episodio 5", time: "45m", thumb: "", href: "" },
-        { id: "s1e6", title: "Episodio 6", time: "45m", thumb: "", href: "" },
-        // ... más episodios
-      ]
-    },
-    {
-      id: 5,
-      title: "Temporada 5",
-      thumb: "https://image.tmdb.org/t/p/w780/wt4cVRnzQsgZsMLX1jwnPHtCS0l.jpg",
-      desc: "Lanzada 1989 — 0 episodios",
-      episodes: [
-        { id: "s1e1", title: "Episodio 1", time: "45m", thumb: "", href: "" },
-        { id: "s1e2", title: "Episodio 2", time: "45m", thumb: "", href: "" },
-        { id: "s1e3", title: "Episodio 3", time: "45m", thumb: "", href: "" },
-        { id: "s1e4", title: "Episodio 4", time: "45m", thumb: "", href: "" },
-        { id: "s1e5", title: "Episodio 5", time: "45m", thumb: "", href: "" },
-        { id: "s1e6", title: "Episodio 6", time: "45m", thumb: "", href: "" },
+        { id: "s1e1", title: "Episodio 1", time: "45m", thumb: "", href: "https://dl.dropbox.com/scl/fi/u7of1bnagiofdsgwbmzit/Una-buena-familia-america-1.mp4?rlkey=kimbt8muoj5vv4pj4o4axtmwy&st=" },
+        { id: "s1e2", title: "Episodio 2", time: "45m", thumb: "", href: "https://dl.dropbox.com/scl/fi/5iire9gbcz6y69vc16kkw/Una-buena-familia-america-2.mp4?rlkey=0n5yoy0a748yq6njvg8mmzs5f&st=" },
+        { id: "s1e3", title: "Episodio 3", time: "45m", thumb: "", href: "https://dl.dropbox.com/scl/fi/jvxwfz71m3k71ykpbbwev/Una-buena-familia-america-3.mp4?rlkey=kqdexbx32bks08pwjnen58yeq&st=" },
+        { id: "s1e4", title: "Episodio 4", time: "45m", thumb: "", href: "https://dl.dropbox.com/scl/fi/zkwd4tfni113hi5c0g2cq/Una-buena-familia-americana-4.mp4?rlkey=2bvnmnt0jl54itrq2ug5by5db&st=" },
+        { id: "s1e5", title: "Episodio 5", time: "45m", thumb: "", href: "https://dl.dropbox.com/scl/fi/2hijinz3bmhr8leyw2l6q/Una-buena-familia-americana-5.mp4?rlkey=chhqdddlo6zqzxs4llzkhe5cx&st=" },
+        { id: "s1e6", title: "Episodio 6", time: "45m", thumb: "", href: "https://dl.dropbox.com/scl/fi/spjwe4bv0i0pp1588ay0x/Una-buena-familia-americana-6.mp4?rlkey=2ay0so9gcmctn0p52b86g1md1&st=" },
+        { id: "s1e7", title: "Episodio 7", time: "45m", thumb: "", href: "https://dl.dropbox.com/scl/fi/u1u1gtcc5vb3wjqnftn3s/Una-buena-familia-7.mp4?rlkey=v0nuwy21cgzibttfrs2sc20g5&st=" },
         // ... más episodios
       ]
     },
@@ -1083,10 +1023,10 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ACA VA LA NOMBRE, IMAGEN, GENERO, ARCHIVO DONDE GUARDAN SU HTML DE PELICULA Y EL TIEMPO */
     document.getElementById('btn-favorito').addEventListener('click', () => {
       const nuevaPelicula = {
-        titulo: "Dragon Ball Z",
-        imagen: "https://image.tmdb.org/t/p/w300/oD3FnW6vug8VnhvSYA0gTG9oT5k.jpg",
+        titulo: "Una buena familia americana",
+        imagen: "https://image.tmdb.org/t/p/w300/aIAdaQ0R9G75h3iCckaoxQrHRH.jpg",
         genero: "Genero",
-        archivo: "../View Series/Dragon Ball Z (1989).html",
+        archivo: "../View Series/Una buena familia americana (2025).html",
         tipo: "serie",
         timestamp: Date.now()
       };
@@ -1145,9 +1085,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const STORAGE_KEY = 'pos_' + videoSrc;
 
       /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
-      const historialTitulo = "Dragon Ball Z";
-      const historialImagen = "https://image.tmdb.org/t/p/w300/oD3FnW6vug8VnhvSYA0gTG9oT5k.jpg";
-      const historialArchivo = "../View Series/Dragon Ball Z (1989).html";
+      const historialTitulo = "Una buena familia americana";
+      const historialImagen = "https://image.tmdb.org/t/p/w300/aIAdaQ0R9G75h3iCckaoxQrHRH.jpg";
+      const historialArchivo = "../View Series/Una buena familia americana (2025).html";
 
       let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
       let indexHist = historial.findIndex(item => item.titulo === historialTitulo);

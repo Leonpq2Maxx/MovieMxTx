@@ -180,65 +180,6 @@
     #btn-favorito.animado {
       animation: pop 0.3s ease;
     }
-
-    /* ---------- NUEVOS ESTILOS PARA LA SECCIÓN DE ACTORES ---------- */
-    .actores {
-      padding: 10px;
-      margin-top: 6px;
-    }
-    .actores h4 {
-      margin-bottom: 8px;
-      font-size: 1rem;
-      font-style: normal;
-    }
-
-    .actor .actor-role {
-  display: block;
-  margin-top: 2px;
-  font-size: 0.75rem;
-  color: #bbb;
-  font-style: italic;
-}
-
-    .actores-row {
-      display: flex;
-      gap: 12px;
-      overflow-x: auto;
-      padding-bottom: 8px;
-      -webkit-overflow-scrolling: touch; /* smooth on iOS */
-      scroll-snap-type: x mandatory;
-      padding-left: 8px;
-    }
-    .actores-row::-webkit-scrollbar { display: none; } /* oculta scrollbar en webkit */
-    .actor {
-      flex: 0 0 auto;
-      width: 100px;
-      scroll-snap-align: start;
-      text-align: center;
-    }
-    .actor img {
-      width: 100px;
-      height: 140px;
-      object-fit: cover;
-      border-radius: 8px;
-      display: block;
-      margin: 0 auto;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
-    }
-    .actor .actor-name {
-      margin-top: 6px;
-      font-size: 0.85rem;
-      line-height: 1.1;
-      display: block;
-      color: #fff;
-      font-style: normal;
-    }
-
-    @media (max-width: 480px) {
-      .actor { width: 88px; }
-      .actor img { width: 88px; height: 125px; }
-      .actor .actor-name { font-size: 0.78rem; }
-    }
 /* --- Mejor experiencia deslizable en móvil --- */
 @media (max-width: 880px) {
   /* Lista de temporadas horizontal deslizable */
@@ -309,6 +250,143 @@
   padding: 3px 6px;
   border-radius: 6px;
 }
+#btn-favorito {
+  background: linear-gradient(135deg, #ff2d55, #ff5e7e);
+  color: white;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 20px rgba(255, 45, 91, 0.35);
+}
+
+#btn-favorito:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(255, 45, 91, 0.55);
+}
+
+#btn-favorito::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  transform: rotate(25deg);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%) rotate(25deg); }
+  50% { transform: translateX(100%) rotate(25deg); }
+  100% { transform: translateX(100%) rotate(25deg); }
+}
+.info-pelicula {
+  text-align: center;
+  margin-top: 20px;
+  color: #fff;
+}
+
+.sinopsis {
+  font-size: 1rem;
+  color: #bbb;
+  max-width: 600px;
+  margin: 10px auto 20px;
+}
+
+.acciones {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.play-btn {
+  background: linear-gradient(135deg, #1db954, #1ed760);
+  color: white;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 20px rgba(29, 185, 84, 0.35);
+}
+
+.play-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(29, 185, 84, 0.55);
+}
+
+#btn-favorito {
+  background: linear-gradient(135deg, #ff2d55, #ff5e7e);
+  color: white;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 20px rgba(255, 45, 91, 0.35);
+}
+
+#btn-favorito:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(255, 45, 91, 0.55);
+}
+
+#btn-favorito::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  transform: rotate(25deg);
+  animation: shine 3s infinite;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%) rotate(25deg); }
+  50% { transform: translateX(100%) rotate(25deg); }
+  100% { transform: translateX(100%) rotate(25deg); }
+}
+  .season-episode-tag {
+  display: inline-block;
+  margin-top: 8px;
+  margin-bottom: 14px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #9ad0ff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.3px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+}
+
 
   </style>
 </head>
@@ -317,7 +395,7 @@
   
   <div class="player">
     <video class="vid1 js-player" controls loading="lazy" poster="https://image.tmdb.org/t/p/w780/bxPELhUZNgbFUN31EZTBC99wOHD.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
-      <source src="" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
+      <source src="https://dl.dropbox.com/scl/fi/c4y8vmzvwttrw9y51zvz8/Annabelle.2014.1080P-Dual-Lat.mp4?rlkey=igq4az6ke0jtnu22suc5uyt51&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
   <div id="episodio-actual" style="
@@ -328,6 +406,8 @@
   color:#ff2d5b;
 "></div>
 
+
+  <div id="resume-msg">✅ Reanudando donde lo dejaste: El Conjuro 4: El ultimo rito</div>
 
   <div class="info">
     <i class="fal fa-calendar-alt"></i><span>2025</span> <!--Aca va el año de estreno de pelicula-->
@@ -343,14 +423,26 @@
     <span>🇲🇽</span>
   </div>
   
-  <div class="titulo-flex">
-    <h3 class="titulo">En el barro</h3>
-    <div class="genero-badge">Drama/Comedia</div>
+  <div class="info-pelicula">
+    <h1>En el barro</h1>
+    <span class="genero-badge">Acción • Drama</span>
+    <br>
+    <br>
+    <!-- Botón para abrir el modal -->
+    <button id="open-seasons" class="seasons-open-btn">Ver Temporadas & Episodios</button>
+    
+    <p class="sinopsis">
+      Aquí va la sinopsis de la película, con la descripción breve hechos sobre naturales pasan en una casa , una joven niña sobre de violencia y sus padres la dejaron en un sotano, pero la familia no sabia que cosas misteriosas guardaba en ese lugar. 
+    </p>
+  
+    <div class="acciones">
+      <button id="btn-favorito">⭐ Agregar a Favoritos</button>
+    </div>
   </div>
+  <br>
 
 <!-- ---------- INICIA: Modal de Temporadas y Episodios ---------- -->
-<!-- Botón para abrir el modal -->
-<button id="open-seasons" class="seasons-open-btn">Temporadas & Episodios</button>
+
 
 <!-- Modal -->
 <div id="seasons-modal" class="seasons-modal" aria-hidden="true" role="dialog" aria-label="Temporadas y episodios">
@@ -389,7 +481,7 @@
     </div>
   </div>
 </div>
-
+  <br>
 <!-- ---------- ESTILOS (dark, moderno, responsive) ---------- -->
 <style>
   :root{
@@ -583,7 +675,7 @@
 
 <!-- ---------- SCRIPT: datos + interacción ---------- -->
 <script>
-const SERIES_KEY = "En_el_barro25";
+const SERIES_KEY = "En_el_barra25";
 
   /* ---------- Datos: cambia esto por tu contenido real ---------- */
   const seasonsData = [
@@ -591,7 +683,7 @@ const SERIES_KEY = "En_el_barro25";
       id: 1,
       title: "Temporada 1",
       thumb: "https://image.tmdb.org/t/p/w780/v8xHeTkIBOl51yRp0zcAu2VYhdZ.jpg",
-      desc: "Lanzada 2025 — 2 episodios",
+      desc: "Lanzada 2025 — 8 episodios",
       episodes: [
         { id: "s1e1", title: "Episodio 1", time: "45m", thumb: "", href: "https://dl.dropbox.com/scl/fi/bawnnxf6ccjy765pzdsr1/En-el-barro-Cap-1.mp4?rlkey=xf38z7zwucx1747ox9ax1389z&st=" },
         { id: "s1e2", title: "Episodio 2", time: "45m", thumb: "", href: "https://dl.dropbox.com/scl/fi/x63tx11kljnw75sh82f6x/En-el-barro-Cap-2.mp4?rlkey=twb14o7mk2rwvp52yxet5z0qn&st=" },
@@ -734,7 +826,7 @@ const SERIES_KEY = "En_el_barro25";
 
         // 🔴 Mostrar en pantalla
         document.getElementById('episodio-actual').textContent =
-          `📺 Viendo: ${episodioInfo.temporada} - ${episodioInfo.episodio}`;
+          ` Viendo: ${episodioInfo.temporada} - ${episodioInfo.episodio}`;
 
         // 🔴 Resaltar episodio en la lista
         document.querySelectorAll('.episode-card').forEach(c => c.classList.remove('viendo'));
@@ -776,7 +868,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const ultimo = JSON.parse(localStorage.getItem(`ultimoEpisodio_${SERIES_KEY}`) || 'null');
   if (ultimo) {
     document.getElementById('episodio-actual').textContent =
-      `📺 Viendo: ${ultimo.temporada} - ${ultimo.episodio}`;
+      ` Viendo: ${ultimo.temporada} - ${ultimo.episodio}`;
   }
 });
 
@@ -843,69 +935,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     
   </style>
-  
-  <div class="sinopsis">
-    <h4>
-      Sinopsis:
-    </h4>
-    <p>
-      Cinco prisioneras forjan un vínculo único después de un accidente mortal... hasta que la corrupción y las guerras territoriales dentro de una prisión despiadada amenazan con destruirlas.
-    </p>
-  </div>
-
-  <!-- ======== SECCIÓN ACTORES (DESLIZABLE HORIZONTAL) ======== -->
-<div class="actores">
-  <h4>Actores</h4>
-  <div class="actores-row" id="actores-row">
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/mTiTouoWJPqgdFWmdbzljUniDHH.jpg" alt="">
-      <span class="actor-name">Ana Garibaldi</span>
-      <span class="actor-role">Gladys Guerra</span>
-    </div>
-    <div class="actor">
-      <img loading="lazy" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6ySXKKZaeQmhaUw66U5fglxO-3SFfFTgUEw&s" alt="">
-      <span class="actor-name">María Becerra</span>
-      <span class="actor-role">Cleo</span>
-    </div>
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/biyzs4vdBviMYzxpsMqxIX5Uota.jpg" alt="">
-      <span class="actor-name">Valentina Zenere</span>
-      <span class="actor-role">Marina</span>
-    </div>
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/3CtvCjKbUPyWq5SLAbYeBbb9M8d.jpg" alt="">
-      <span class="actor-name">Rita Cortese</span>
-      <span class="actor-role">Cecilia Moranzón</span>
-    </div>
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/wOGnE0zRmekWkPJpt3RRtD7SOnN.jpg" alt="">
-      <span class="actor-name">Lorena Vega</span>
-      <span class="actor-role">La Zurda</span>
-    </div>
-    <div class="actor">
-      <img loading="lazy" src="https://media.themoviedb.org/t/p/w138_and_h175_face/biDr9VrNIF05Fk1rohSNAnxBdLp.jpg" alt="">
-      <span class="actor-name">Gerardo Romano</span>
-      <span class="actor-role">Sergio Antín</span>
-    </div>
-  </div>
-</div>
-<!-- ======== FIN ACTORES ======== -->
-
-
-  <!-- NO BORRAR ES EL BOTON DEL FAVORITOS -->
-  <div style="text-align: center; margin-top: 15px;">
-    <button id="btn-favorito" style="
-      background: #ff4444;
-      color: white;
-      padding: 10px 16px;
-      border: none;
-      border-radius: 20px;
-      font-size: 1rem;
-      cursor: pointer;
-    ">
-      ⭐ Favoritos
-    </button>
-  </div>
 
   <br>
 
@@ -914,16 +943,16 @@ document.addEventListener("DOMContentLoaded", () => {
     <br/>
     <div class="series-grid">
       <a href="" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/eAy2tSlGtzseWfYemt398QrPtf2.jpg" alt="">
-        <p>El Marginal</p>
+        <img loading="lazy" src="" alt="">
+        <p></p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="../Rosario Tijeras.jpg" alt="">
-        <p>Rosario Tijeras</p>
+        <img loading="lazy" src="" alt="">
+        <p></p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/original/lTCsGvAjqBbqp7T5ziK28SeDfVT.jpg" alt="">
-        <p>CATO</p>
+        <img loading="lazy" src="" alt="">
+        <p></p>
       </a>
       <a href="" class="serie">
         <img loading="lazy" src="" alt="">
@@ -999,10 +1028,10 @@ document.addEventListener("DOMContentLoaded", () => {
     /* ACA VA LA NOMBRE, IMAGEN, GENERO, ARCHIVO DONDE GUARDAN SU HTML DE PELICULA Y EL TIEMPO */
     document.getElementById('btn-favorito').addEventListener('click', () => {
       const nuevaPelicula = {
-        titulo: "En el barro",
-        imagen: "https://image.tmdb.org/t/p/w300/kKi1YdzQNM87Mcz7WxxclHbevwr.jpg",
+        titulo: "The Walking dead: Tho ones two live",
+        imagen: "https://image.tmdb.org/t/p/original/t1yUeYKw3s0VntQxzdUgza4msGU.jpg",
         genero: "Genero",
-        archivo: "../View Series/En el barro (2025).html",
+        archivo: "../View Series/The Walking Dead The ones two live (2024).html",
         tipo: "serie",
         timestamp: Date.now()
       };
@@ -1061,9 +1090,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const STORAGE_KEY = 'pos_' + videoSrc;
 
       /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
-      const historialTitulo = "En el barro";
-      const historialImagen = "https://image.tmdb.org/t/p/w300/kKi1YdzQNM87Mcz7WxxclHbevwr.jpg";
-      const historialArchivo = "../View Series/En el barro (2025).html";
+      const historialTitulo = "The Walking dead: The ones two live";
+      const historialImagen = "https://image.tmdb.org/t/p/w300/t1yUeYKw3s0VntQxzdUgza4msGU.jpg";
+      const historialArchivo = "View Series/The Walking Dead The ones two live (2024).html";
 
       let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
       let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
