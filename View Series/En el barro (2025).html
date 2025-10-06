@@ -441,6 +441,97 @@
   </div>
   <br>
 
+  <!-- Modal de Película Ya Agregada -->
+<div id="modal-ya-favorito" class="modal-fav" aria-hidden="true">
+  <div class="modal-fav-backdrop"></div>
+  <div class="modal-fav-box">
+    <h3>🎬 Esta película ya está agregada en favoritos</h3>
+    <button id="btn-fav-aceptar">Aceptar</button>
+  </div>
+</div>
+
+<style>
+  /* Estilo del modal */
+  .modal-fav {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+  }
+  .modal-fav[aria-hidden="false"] {
+    display: flex;
+    animation: fadeIn 0.4s ease forwards;
+  }
+  .modal-fav-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(5px);
+  }
+  .modal-fav-box {
+    position: relative;
+    background: linear-gradient(145deg, #0d0d0d, #1a1a1a);
+    border: 2px solid #ff2d5b;
+    border-radius: 14px;
+    padding: 25px 30px;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 0 25px rgba(255,45,91,0.5);
+    max-width: 90%;
+    width: 380px;
+    z-index: 10;
+    animation: scaleUp 0.3s ease forwards;
+  }
+  .modal-fav-box h3 {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    color: #fff;
+  }
+  #btn-fav-aceptar {
+    background: linear-gradient(135deg, #ff2d5b, #ff5e7e);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    padding: 10px 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+  }
+  #btn-fav-aceptar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(255,45,91,0.7);
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes scaleUp {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+</style>
+
+<script>
+  function mostrarModalFavoritoExistente() {
+    const modal = document.getElementById('modal-ya-favorito');
+    const btnAceptar = document.getElementById('btn-fav-aceptar');
+    modal.setAttribute('aria-hidden', 'false');
+
+    let cerrarTimeout = setTimeout(() => cerrarModal(), 15000); // auto cierre 15s
+
+    function cerrarModal() {
+      modal.setAttribute('aria-hidden', 'true');
+      clearTimeout(cerrarTimeout);
+    }
+
+    btnAceptar.onclick = cerrarModal;
+    modal.querySelector('.modal-fav-backdrop').onclick = cerrarModal;
+  }
+</script>
+
+
 <!-- ---------- INICIA: Modal de Temporadas y Episodios ---------- -->
 
 
@@ -1044,10 +1135,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
       let favoritos = JSON.parse(localStorage.getItem('favoritos_detalles') || '[]');
       if (!favoritos.some(f => f.titulo === nuevaPelicula.titulo)) {
-        favoritos.push(nuevaPelicula);
-        localStorage.setItem('favoritos_detalles', JSON.stringify(favoritos));
-      }
-      window.location.href = "../View Peliculas/favoritos.html";
+  favoritos.push(nuevaPelicula);
+  localStorage.setItem('favoritos_detalles', JSON.stringify(favoritos));
+  window.location.href = "../View Peliculas/favoritos.html";
+} else {
+  mostrarModalFavoritoExistente();
+}
+
     });
   </script>
 
