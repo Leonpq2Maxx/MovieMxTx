@@ -441,6 +441,73 @@
   </div>
   <br>
 
+  <!-- MODAL MENSAJE DE SIGUIENTE TEMPORADA CONFIRMACION -->
+
+  <div id="modal-siguiente" class="modal">
+  <div class="modal-content">
+    <p id="modal-siguiente-texto"></p>
+    <div class="modal-buttons">
+      <button id="modal-siguiente-aceptar">Aceptar</button>
+      <button id="modal-siguiente-cancelar">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+  <style>
+    .modal-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+}
+.modal-buttons button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+#modal-siguiente-aceptar {
+  background: #ff2d5b;
+  color: white;
+}
+#modal-siguiente-cancelar {
+  background: #555;
+  color: white;
+}
+
+    </style>
+
+  <script>
+    function mostrarModalSiguienteEpisodio(episodioInfo, onAceptar, onCancelar) {
+  const modal = document.getElementById('modal-siguiente');
+  const texto = document.getElementById('modal-siguiente-texto');
+  const btnAceptar = document.getElementById('modal-siguiente-aceptar');
+  const btnCancelar = document.getElementById('modal-siguiente-cancelar');
+
+  texto.textContent = `¿Reproducir siguiente episodio?\n${episodioInfo.temporada} - ${episodioInfo.episodio}`;
+  modal.style.display = 'flex';
+
+  // Resetear listeners (evita duplicados)
+  btnAceptar.replaceWith(btnAceptar.cloneNode(true));
+  btnCancelar.replaceWith(btnCancelar.cloneNode(true));
+
+  const nuevoAceptar = document.getElementById('modal-siguiente-aceptar');
+  const nuevoCancelar = document.getElementById('modal-siguiente-cancelar');
+
+  nuevoAceptar.addEventListener('click', () => {
+    modal.style.display = 'none';
+    if (onAceptar) onAceptar();
+  });
+
+  nuevoCancelar.addEventListener('click', () => {
+    modal.style.display = 'none';
+    if (onCancelar) onCancelar();
+  });
+}
+
+  </script>
+  <!-- fin -->
+
   <!-- 🔔 MODAL UNIFICADO DE FAVORITOS (para ambos mensajes) -->
 <div id="modal-favoritos" class="modal-fav" aria-hidden="true">
   <div class="modal-fav-backdrop"></div>
@@ -1142,28 +1209,59 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // ✅ Reanudar episodio al presionar Play
-player.on('play', () => {
+player.on('ended', () => {
   const ultimo = JSON.parse(localStorage.getItem(`ultimoEpisodio_${SERIES_KEY}`) || 'null');
-  if (ultimo) {
-    const season = seasonsData.find(s => s.title === ultimo.temporada);
-    const ep = season ? season.episodes.find(e => e.id === ultimo.id) : null;
+  if (!ultimo) return;
 
-    if (ep && ep.href) {
-      const currentSrc = videoElement.querySelector('source').getAttribute('src');
-      if (currentSrc !== ep.href) {
-        // Cambiar al episodio guardado
+  const seasonIndex = seasonsData.findIndex(s => s.title === ultimo.temporada);
+  if (seasonIndex === -1) return;
+
+  const season = seasonsData[seasonIndex];
+  const currentIndex = season.episodes.findIndex(e => e.id === ultimo.id);
+  if (currentIndex === -1) return;
+
+  let nextEp = season.episodes[currentIndex + 1];
+  let nextSeasonIndex = seasonIndex;
+
+  if (!nextEp) {
+    nextSeasonIndex = seasonIndex + 1;
+    if (seasonsData[nextSeasonIndex]) {
+      nextEp = seasonsData[nextSeasonIndex].episodes[0];
+    }
+  }
+
+  if (nextEp && nextEp.href) {
+    const episodioInfo = {
+      temporada: seasonsData[nextSeasonIndex].title,
+      episodio: nextEp.title,
+      id: nextEp.id
+    };
+
+    // Mostrar modal con Aceptar / Cancelar
+    mostrarModalSiguienteEpisodio(
+      episodioInfo,
+      () => { // ✅ Aceptar
         const source = videoElement.querySelector('source');
-        source.setAttribute('src', ep.href);
+        source.setAttribute('src', nextEp.href);
         videoElement.load();
         videoElement.play();
 
-        // Mostrar indicador en pantalla
-        document.getElementById('episodio-actual').textContent =
-          `🔁 Continuando: ${ultimo.temporada} - ${ultimo.episodio}`;
+        localStorage.setItem(`ultimoEpisodio_${SERIES_KEY}`, JSON.stringify(episodioInfo));
+
+        const overlay = document.getElementById('episodio-overlay') || document.getElementById('episodio-actual');
+        if (overlay) overlay.textContent = `▶️ ${episodioInfo.temporada} - ${episodioInfo.episodio}`;
+      },
+      () => { // ❌ Cancelar
+        videoElement.currentTime = 0;
+        player.pause();
       }
-    }
+    );
+  } else {
+    videoElement.currentTime = 0;
+    player.pause();
   }
 });
+
 
 
     document.addEventListener('DOMContentLoaded', () => {
