@@ -441,17 +441,16 @@
   </div>
   <br>
 
-  <!-- Modal de Película Ya Agregada -->
-<div id="modal-ya-favorito" class="modal-fav" aria-hidden="true">
+  <!-- 🔔 MODAL UNIFICADO DE FAVORITOS (para ambos mensajes) -->
+<div id="modal-favoritos" class="modal-fav" aria-hidden="true">
   <div class="modal-fav-backdrop"></div>
   <div class="modal-fav-box">
-    <h3>🎬 Esta Serie ya está agregada en favoritos</h3>
-    <button id="btn-fav-aceptar">Aceptar</button>
+    <h3 id="modal-fav-texto">Mensaje aquí</h3>
+    <button id="modal-fav-aceptar">Aceptar</button>
   </div>
 </div>
 
 <style>
-  /* Estilo del modal */
   .modal-fav {
     position: fixed;
     inset: 0;
@@ -468,7 +467,7 @@
     position: absolute;
     inset: 0;
     background: rgba(0,0,0,0.75);
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(6px);
   }
   .modal-fav-box {
     position: relative;
@@ -489,7 +488,7 @@
     font-size: 1.1rem;
     color: #fff;
   }
-  #btn-fav-aceptar {
+  #modal-fav-aceptar {
     background: linear-gradient(135deg, #ff2d5b, #ff5e7e);
     color: #fff;
     border: none;
@@ -498,11 +497,13 @@
     font-weight: 600;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.3s ease;
+    animation: bounceIn 0.6s ease;
   }
-  #btn-fav-aceptar:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 15px rgba(255,45,91,0.7);
+  #modal-fav-aceptar:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 0 15px rgba(255,45,91,0.8);
   }
+
   @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -511,7 +512,61 @@
     from { transform: scale(0.9); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
   }
+  @keyframes bounceIn {
+    0% { transform: scale(0.6); opacity: 0; }
+    60% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
+  }
 </style>
+
+<script>
+  // 🔹 Función general para mostrar el modal
+  function mostrarModalFavoritos(mensaje) {
+    const modal = document.getElementById('modal-favoritos');
+    const texto = document.getElementById('modal-fav-texto');
+    const btnAceptar = document.getElementById('modal-fav-aceptar');
+    texto.textContent = mensaje;
+    modal.setAttribute('aria-hidden', 'false');
+
+    let cerrarTimeout = setTimeout(() => cerrarModal(), 15000);
+
+    function cerrarModal() {
+      modal.setAttribute('aria-hidden', 'true');
+      clearTimeout(cerrarTimeout);
+    }
+
+    btnAceptar.onclick = cerrarModal;
+    modal.querySelector('.modal-fav-backdrop').onclick = cerrarModal;
+  }
+
+  // 🔹 Botón "Agregar a Favoritos"
+  document.getElementById('btn-favorito').addEventListener('click', () => {
+    const nuevaSerie = {
+      titulo: "En el barro",
+      imagen: "https://image.tmdb.org/t/p/w780/bxPELhUZNgbFUN31EZTBC99wOHD.jpg",
+      genero: "Acción • Drama",
+      archivo: "../View Series/En el barro (2025).html",
+      tipo: "serie",
+      timestamp: Date.now()
+    };
+
+    const btn = document.getElementById('btn-favorito');
+    btn.classList.add('animado');
+    setTimeout(() => btn.classList.remove('animado'), 300);
+
+    let favoritos = JSON.parse(localStorage.getItem('favoritos_detalles') || '[]');
+
+    if (!favoritos.some(f => f.titulo === nuevaSerie.titulo)) {
+      favoritos.push(nuevaSerie);
+      localStorage.setItem('favoritos_detalles', JSON.stringify(favoritos));
+      mostrarModalFavoritos("⭐ Serie agregada a favoritos");
+      setTimeout(() => window.location.href = "../View Peliculas/favoritos.html", 1800);
+    } else {
+      mostrarModalFavoritos("🎬 Esta serie ya está agregada en favoritos");
+    }
+  });
+</script>
+
 
 <script>
   function mostrarModalFavoritoExistente() {
@@ -1131,7 +1186,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const btn = document.getElementById('btn-favorito');
       btn.classList.add('animado');
       setTimeout(() => btn.classList.remove('animado'), 300);
-      mostrarMensaje("⭐ Agregado a Favoritos");
 
       let favoritos = JSON.parse(localStorage.getItem('favoritos_detalles') || '[]');
       if (!favoritos.some(f => f.titulo === nuevaPelicula.titulo)) {
