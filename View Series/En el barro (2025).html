@@ -1256,7 +1256,8 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       localStorage.setItem('historial_usuarios', JSON.stringify(historial));
       indexHist = historial.length - 1;
-      mostrarMensaje('✅ Agregado al historial');
+      mostrarModalFavoritos("✅ Agregado al historial");
+
     }
     setInterval(() => {
       if (!videoElement.paused && !videoElement.ended) {
