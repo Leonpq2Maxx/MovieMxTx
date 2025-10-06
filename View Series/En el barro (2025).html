@@ -529,18 +529,18 @@ function mostrarModalSiguienteTemporada(episodioInfo, onAceptar, onCancelar) {
 
     document.addEventListener('DOMContentLoaded', () => {
   const ultimo = JSON.parse(localStorage.getItem(`ultimoEpisodio_${SERIES_KEY}`) || 'null');
-  if (ultimo) {
-    const season = seasonsData.find(s => s.title === ultimo.temporada);
-    const ep = season ? season.episodes.find(e => e.id === ultimo.id) : null;
+  if (ultimo && ultimo.href) {
+    const videoElement = document.querySelector('.vid1');
+    const source = videoElement.querySelector('source');
+    source.setAttribute('src', ultimo.href);
+    videoElement.load();
 
-    if (ep && ep.href) {
-      const source = videoElement.querySelector('source');
-      source.setAttribute('src', ep.href);
-      videoElement.load();
-      // 👇 el play se hace recién cuando el usuario toca play en Plyr
-    }
+    // Actualizar indicador en pantalla
+    document.getElementById('episodio-actual').textContent =
+      `▶ Viendo: ${ultimo.temporada} - ${ultimo.episodio}`;
   }
 });
+
 
 
 // ✅ Reanudar episodio al tocar Play
@@ -585,12 +585,13 @@ player.on('ended', () => {
 
       // 🔴 Modal de confirmación para cambiar temporada
       const episodioInfo = {
-  temporada: season.title,
+  temporada: seasonsData[activeSeasonIndex].title,
   episodio: ep.title,
   id: ep.id,
-  href: ep.href   // ✅ agrega esto
+  href: ep.href   // 👈 Agregar esto
 };
 localStorage.setItem(`ultimoEpisodio_${SERIES_KEY}`, JSON.stringify(episodioInfo));
+
 
       const episodioInfo = {
         temporada: seasonsData[nextSeasonIndex].title,
