@@ -11,386 +11,82 @@
     :root {
       --plyr-color-main: #ff0000;
       --plyr-video-control-color:rgb(255, 255, 255);
+      --netflix-red: #e50914;
     }
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      outline: none;
-      -webkit-tap-highlight-color: transparent;
-      user-select: none;
+    * { margin: 0; padding: 0; box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; user-select: none; }
+    body { background-color: #000; font-family: 'PT Sans', sans-serif; color: #fff; }
+
+    /* Player */
+    .player { position: relative; padding-top: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 0 auto; }
+    .player video, .player iframe, .player .plyr { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+    .info { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: center; padding: 10px; border: 1px solid rgba(16, 235, 255, 0.461); border-radius: 10px; margin: 10px; font-size: 14px; }
+    .titulo, .sinopsis { padding: 10px; }
+    .recomendaciones { padding: 10px; }
+
+    /* Indicator */
+    #episodio-actual { text-align:center; margin:10px; font-size:1rem; font-weight:bold; color:var(--netflix-red); }
+
+    /* Seasons modal (existing styles kept, plus progress styles) */
+    .seasons-modal{ position: fixed; inset: 0; display: none; z-index: 9999; font-family: 'PT Sans', Roboto, sans-serif; }
+    .seasons-modal[aria-hidden="false"]{ display: block; }
+    .seasons-backdrop{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.75)); backdrop-filter: blur(6px); }
+    .seasons-panel{ position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: min(1100px, 96%); max-height: 88vh; background: linear-gradient(180deg, #071018, #070607); border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.7); border: 1px solid rgba(255,255,255,0.04); overflow: hidden; display:flex; flex-direction: column; }
+    .seasons-header{ display:flex; align-items:center; justify-content:space-between; padding: 16px 18px; gap:10px; border-bottom: 1px solid rgba(255,255,255,0.03); background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent); }
+    .seasons-header h2{ margin:0; font-size:1.05rem; color:#fff; letter-spacing:0.2px; }
+    .close-btn{ background: transparent; color: #fff; border: none; font-size: 26px; line-height:1; cursor:pointer; padding:6px 10px; border-radius:8px; }
+    .seasons-body{ display:flex; gap:16px; padding: 18px; overflow: hidden; flex:1; min-height:320px; }
+    .seasons-list{ width: 220px; background: rgba(255,255,255,0.03); border-radius: 10px; padding:10px; flex-shrink:0; border:1px solid rgba(255,255,255,0.02); overflow:auto; }
+    .seasons-list ul{ list-style:none; padding:6px; margin:0; display:flex; flex-direction:column; gap:8px; }
+    .seasons-list li{ display:flex; align-items:center; gap:10px; padding:10px; border-radius:10px; cursor:pointer; transition: transform .18s ease, background .18s ease, box-shadow .18s; }
+    .season-thumb{ width:56px; height:36px; background-size:cover; background-position:center; border-radius:6px; flex-shrink:0; box-shadow: 0 6px 18px rgba(0,0,0,0.5); }
+    .season-info{ display:flex; flex-direction:column; min-width:0; }
+    .season-info .s-title{ color:#fff; font-weight:600; font-size:0.95rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .episodes-area{ flex:1; display:flex; flex-direction:column; gap:12px; overflow:auto; }
+    .episodes-toolbar{ display:flex; justify-content:space-between; align-items:center; gap:12px; }
+    .episodes-grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:12px; padding-top:6px; }
+    .episode-card{ display:flex; gap:12px; align-items:center; padding:10px; border-radius:10px; background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02)); border:1px solid rgba(255,255,255,0.02); cursor:pointer; transition: transform .16s ease, box-shadow .16s; position: relative; }
+    .ep-meta{ display:flex; flex-direction:column; min-width:0; }
+    .ep-title{ color:#fff; font-weight:700; font-size:0.95rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .ep-desc{ color:#9aa3ae; font-size:0.85rem; margin-top:6px; }
+    .ep-actions{ margin-left:auto; display:flex; align-items:center; gap:8px; color:var(--muted); font-size:0.9rem; }
+
+    /* Progress bar below episode */
+    .ep-progress { height: 8px; background: #333; border-radius: 8px; margin-top: 8px; overflow: hidden; display: block; width: 100%; }
+    .ep-progress .bar { display: block; height: 100%; background: var(--netflix-red); width: 0%; transition: width 0.25s linear; }
+
+    /* Small percentage text */
+    .ep-progress-percent { font-size: 0.8rem; color: #bbb; margin-top: 6px; }
+
+    .episode-card.viendo { border: 2px solid var(--netflix-red); box-shadow: 0 0 12px rgba(229,9,20,0.15); }
+    .episode-card.viendo::after { content: "▶ Viendo ahora"; position: absolute; top: 8px; right: 8px; background: var(--netflix-red); color: #fff; font-size: 0.7rem; font-weight: 600; padding: 3px 6px; border-radius: 6px; }
+
+    /* Resume modal (appears at page load) */
+    .resume-modal { position: fixed; inset: 0; display: none; z-index: 100000; align-items: center; justify-content: center; }
+    .resume-modal.show { display: flex; }
+    .resume-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); }
+    .resume-card { position: relative; background: #070707; color: #fff; padding: 20px; border-radius: 12px; width: min(460px, 92%); z-index: 100001; box-shadow: 0 18px 60px rgba(0,0,0,0.8); text-align: center; border: 1px solid rgba(255,255,255,0.04); }
+    .resume-card h3 { margin-bottom: 8px; font-size: 1.05rem; }
+    .resume-card p { color: #cfcfcf; margin-bottom: 16px; }
+
+    .resume-btn { display:inline-block; padding: 10px 14px; border-radius: 8px; border: none; font-weight: 700; cursor: pointer; margin: 6px; }
+    .resume-btn.resume { background: var(--netflix-red); color: #fff; }
+    .resume-btn.restart { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,0.12); }
+
+    /* Responsive tweaks */
+    @media (max-width: 880px) {
+      .seasons-body{ flex-direction: column; padding: 12px; gap:12px; }
+      .seasons-list{ width:100%; display:flex; overflow-x:auto; padding:8px; }
+      .seasons-list ul{ flex-direction:row; gap:10px; }
+      .seasons-list li{ min-width:170px; flex:0 0 auto; }
+      .ep-progress { height: 6px; }
     }
-    body {
-      background-color: #000;
-      font-family: 'PT Sans', sans-serif;
-      color: #fff;
+    @media (max-width:480px){
+      .ep-title{ font-size: 0.95rem; }
+      .ep-desc{ font-size: 0.8rem; }
     }
-    .player {
-      position: relative;
-      padding-top: 56.25%; /* 16:9 aspect ratio */
-      height: 0;
-      overflow: hidden;
-      max-width: 100%;
-      margin: 0 auto;
-    }
-    .player video,
-    .player iframe,
-    .player .plyr {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-
-    .info {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      justify-content: center;
-      padding: 10px;
-      border: 1px solid rgba(16, 235, 255, 0.461);
-      border-radius: 10px;
-      margin: 10px;
-      font-size: 14px;
-    }
-    .info i {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .hd-tag {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .hd-tag svg {
-      border-radius: 4px;
-    }
-    .titulo, .sinopsis {
-      padding: 10px;
-    }
-    .recomendaciones {
-      padding: 10px;
-    }
-    .series-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 15px;
-      text-align: center;
-    }
-    .serie {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-decoration: none;
-      color: white;
-    }
-
-    .serie img {
-      width: 120px;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 10px;
-    }
-
-    .serie p {
-      margin-top: 5px;
-    }
-
-    html { font-size: 100%; }
-    body { font-size: 1rem; }
-    h1 { font-size: 2rem; }
-    h2 { font-size: 1.5rem; }
-    h3, h4 { font-size: 1.2rem; }
-
-    @media screen and (max-width: 768px) {
-      body { font-size: 1.05rem; }
-      h1 { font-size: 1.5rem; }
-      h2 { font-size: 1.3rem; }
-      h3, h4 { font-size: 1.1rem; }
-      .info, .sinopsis p, .serie p {
-        font-size: 0.80rem !important; /*estaba en 1rem*/
-      }
-    }
-
-    @media screen and (max-width: 480px) {
-      body { font-size: 1.1rem; }
-      h1 { font-size: 1.4rem; }
-      h2 { font-size: 1.2rem; }
-      h3, h4 { font-size: 0.80rem; } /*estaba en 1rem*/
-    }
-
-    body, p, h1, h2, h3, h4, h5, h6, span, a, .titulo, .sinopsis, .recomendaciones, .serie {
-      font-style: italic;
-    }
-
-    .info, .info *, .info span, .info i {
-      font-style: normal !important;
-    }
-
-    #resume-msg {
-      display: none;
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0, 0, 0, 0.85);
-      padding: 10px 20px;
-      color: #0f0;
-      border-radius: 8px;
-      z-index: 9999;
-      font-weight: bold;
-      max-width: 90%;
-      font-size: 1rem;
-      text-align: center;
-      box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
-      opacity: 0;
-      transition: opacity 0.8s ease;
-    }
-
-    #resume-msg.visible {
-      display: block;
-      opacity: 1;
-    }
-
-    @media (max-width: 480px) {
-      #resume-msg {
-        font-size: 0.9rem;
-        padding: 8px 16px;
-      }
-    }
-
-    #genero-texto.colapsado {
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    /* ACA ES LA ANIMACION DE FAVORITOS */
-    @keyframes pop {
-      0%   { transform: scale(1); }
-      50%  { transform: scale(1.3); }
-      100% { transform: scale(1); }
-    }
-    
-    #btn-favorito.animado {
-      animation: pop 0.3s ease;
-    }
-/* --- Mejor experiencia deslizable en móvil --- */
-@media (max-width: 880px) {
-  /* Lista de temporadas horizontal deslizable */
-  .seasons-list {
-    display: flex;
-    overflow-x: auto;
-    gap: 12px;
-    padding: 8px;
-    -webkit-overflow-scrolling: touch; /* suavidad en iOS */
-    scroll-snap-type: x mandatory;
-  }
-
-  .seasons-list ul {
-    flex-direction: row;
-    gap: 12px;
-    width: max-content;
-  }
-
-  .seasons-list li {
-    flex: 0 0 auto;
-    scroll-snap-align: start;
-    min-width: 160px;
-  }
-
-  .seasons-list::-webkit-scrollbar {
-    display: none; /* oculta scrollbar en móviles */
-  }
-}
-
-@media (max-width: 768px) {
-  /* Episodios también deslizable si hay muchos */
-  .episodes-grid {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 12px !important;
-  padding: 8px !important;
-  overflow-x: visible !important;
-  overflow-y: auto !important;
-}
-
-  .episodes-grid::-webkit-scrollbar {
-    display: none;
-  }
-
-  .episode-card {
-  flex: none !important;
-  width: 100% !important;
-  align-items: center !important;
-}
-}
-/* Estilo para episodio en reproducción */
-.episode-card.viendo {
-  border: 2px solid var(--accent);
-  background: rgba(255, 45, 91, 0.08);
-  box-shadow: 0 0 12px rgba(255,45,91,0.6);
-  position: relative;
-}
-
-.episode-card.viendo::after {
-  content: "▶ Viendo ahora";
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: var(--accent);
-  color: #fff;
-  font-size: 0.7rem;
-  font-weight: 600;
-  padding: 3px 6px;
-  border-radius: 6px;
-}
-#btn-favorito {
-  background: linear-gradient(135deg, #ff2d55, #ff5e7e);
-  color: white;
-  padding: 12px 22px;
-  border: none;
-  border-radius: 999px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
-  box-shadow: 0 8px 20px rgba(255, 45, 91, 0.35);
-}
-
-#btn-favorito:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 28px rgba(255, 45, 91, 0.55);
-}
-
-#btn-favorito::after {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255, 255, 255, 0.25),
-    transparent
-  );
-  transform: rotate(25deg);
-  animation: shine 3s infinite;
-}
-
-@keyframes shine {
-  0% { transform: translateX(-100%) rotate(25deg); }
-  50% { transform: translateX(100%) rotate(25deg); }
-  100% { transform: translateX(100%) rotate(25deg); }
-}
-.info-pelicula {
-  text-align: center;
-  margin-top: 20px;
-  color: #fff;
-}
-
-.sinopsis {
-  font-size: 1rem;
-  color: #bbb;
-  max-width: 600px;
-  margin: 10px auto 20px;
-}
-
-.acciones {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  flex-wrap: wrap;
-}
-
-.play-btn {
-  background: linear-gradient(135deg, #1db954, #1ed760);
-  color: white;
-  padding: 12px 22px;
-  border: none;
-  border-radius: 999px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
-  box-shadow: 0 8px 20px rgba(29, 185, 84, 0.35);
-}
-
-.play-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 28px rgba(29, 185, 84, 0.55);
-}
-
-#btn-favorito {
-  background: linear-gradient(135deg, #ff2d55, #ff5e7e);
-  color: white;
-  padding: 12px 22px;
-  border: none;
-  border-radius: 999px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
-  box-shadow: 0 8px 20px rgba(255, 45, 91, 0.35);
-}
-
-#btn-favorito:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 28px rgba(255, 45, 91, 0.55);
-}
-
-#btn-favorito::after {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255, 255, 255, 0.25),
-    transparent
-  );
-  transform: rotate(25deg);
-  animation: shine 3s infinite;
-}
-
-@keyframes shine {
-  0% { transform: translateX(-100%) rotate(25deg); }
-  50% { transform: translateX(100%) rotate(25deg); }
-  100% { transform: translateX(100%) rotate(25deg); }
-}
-  .season-episode-tag {
-  display: inline-block;
-  margin-top: 8px;
-  margin-bottom: 14px;
-  padding: 6px 14px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
-  border: 1px solid rgba(255,255,255,0.15);
-  color: #9ad0ff;
-  font-weight: 600;
-  font-size: 0.9rem;
-  letter-spacing: 0.3px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
-}
-
-
   </style>
 </head>
-
 <body ondragstart="return false;" ondrop="return false;">
 
   <!-- VIDEO PLAYER -->
@@ -403,9 +99,6 @@
 
   <!-- indicador -->
   <div id="episodio-actual"></div>
-
-  <!-- Resume toast (kept) -->
-  <div id="resume-msg">✅ Reanudando donde lo dejaste: En el barro</div>
 
   <div class="info">
     <i class="fal fa-calendar-alt"></i><span>2025</span>
@@ -479,385 +172,14 @@
     </div>
   </div>
 
+  <br>
+
   <style>
     /* small cosmetic: play button inside cards */
     .play-btn{ background: linear-gradient(90deg, rgba(229,9,20,1), rgba(255,80,90,1)); color:white; padding:8px 12px; border-radius:8px; border:none; cursor:pointer; font-weight:700; }
   </style>
 
-  <br>
-
-
-<style>
-  .modal-fav {
-    position: fixed;
-    inset: 0;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 99999;
-  }
-  .modal-fav[aria-hidden="false"] {
-    display: flex;
-    animation: fadeIn 0.4s ease forwards;
-  }
-  .modal-fav-backdrop {
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.75);
-    backdrop-filter: blur(6px);
-  }
-  .modal-fav-box {
-    position: relative;
-    background: linear-gradient(145deg, #0d0d0d, #1a1a1a);
-    border: 2px solid #ff2d5b;
-    border-radius: 14px;
-    padding: 25px 30px;
-    text-align: center;
-    color: #fff;
-    box-shadow: 0 0 25px rgba(255,45,91,0.5);
-    max-width: 90%;
-    width: 380px;
-    z-index: 10;
-    animation: scaleUp 0.3s ease forwards;
-  }
-  .modal-fav-box h3 {
-    margin-bottom: 20px;
-    font-size: 1.1rem;
-    color: #fff;
-  }
-  #modal-fav-aceptar {
-    background: linear-gradient(135deg, #ff2d5b, #ff5e7e);
-    color: #fff;
-    border: none;
-    border-radius: 999px;
-    padding: 10px 25px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.3s ease;
-    animation: bounceIn 0.6s ease;
-  }
-  #modal-fav-aceptar:hover {
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 0 15px rgba(255,45,91,0.8);
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  @keyframes scaleUp {
-    from { transform: scale(0.9); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-  }
-  @keyframes bounceIn {
-    0% { transform: scale(0.6); opacity: 0; }
-    60% { transform: scale(1.1); opacity: 1; }
-    100% { transform: scale(1); }
-  }
-</style>
-
-<script>
-  // 🔹 Función general para mostrar el modal
-  function mostrarModalFavoritos(mensaje) {
-    const modal = document.getElementById('modal-favoritos');
-    const texto = document.getElementById('modal-fav-texto');
-    const btnAceptar = document.getElementById('modal-fav-aceptar');
-    texto.textContent = mensaje;
-    modal.setAttribute('aria-hidden', 'false');
-
-    let cerrarTimeout = setTimeout(() => cerrarModal(), 15000);
-
-    function cerrarModal() {
-      modal.setAttribute('aria-hidden', 'true');
-      clearTimeout(cerrarTimeout);
-    }
-
-    btnAceptar.onclick = cerrarModal;
-    modal.querySelector('.modal-fav-backdrop').onclick = cerrarModal;
-  }
-
-  // 🔹 Botón "Agregar a Favoritos"
-  document.getElementById('btn-favorito').addEventListener('click', () => {
-    const nuevaSerie = {
-      titulo: "En el barro",
-      imagen: "https://image.tmdb.org/t/p/w780/kKi1YdzQNM87Mcz7WxxclHbevwr.jpg",
-      genero: "Acción • Drama",
-      archivo: "../View Series/En el barro (2025).html",
-      tipo: "serie",
-      timestamp: Date.now()
-    };
-
-    const btn = document.getElementById('btn-favorito');
-    btn.classList.add('animado');
-    setTimeout(() => btn.classList.remove('animado'), 300);
-
-    let favoritos = JSON.parse(localStorage.getItem('favoritos_detalles') || '[]');
-
-    if (!favoritos.some(f => f.titulo === nuevaSerie.titulo)) {
-      favoritos.push(nuevaSerie);
-      localStorage.setItem('favoritos_detalles', JSON.stringify(favoritos));
-      mostrarModalFavoritos("⭐ Serie agregada a favoritos");
-      setTimeout(() => window.location.href = "../View Peliculas/favoritos.html", 1800);
-    } else {
-      mostrarModalFavoritos("🎬 Esta serie ya está agregada en favoritos");
-    }
-  });
-</script>
-
-
-<script>
-  function mostrarModalFavoritoExistente() {
-    const modal = document.getElementById('modal-ya-favorito');
-    const btnAceptar = document.getElementById('btn-fav-aceptar');
-    modal.setAttribute('aria-hidden', 'false');
-
-    let cerrarTimeout = setTimeout(() => cerrarModal(), 15000); // auto cierre 15s
-
-    function cerrarModal() {
-      modal.setAttribute('aria-hidden', 'true');
-      clearTimeout(cerrarTimeout);
-    }
-
-    btnAceptar.onclick = cerrarModal;
-    modal.querySelector('.modal-fav-backdrop').onclick = cerrarModal;
-  }
-</script>
-
-
-<!-- ---------- INICIA: Modal de Temporadas y Episodios ---------- -->
-
-
-<!-- Modal -->
-<div id="seasons-modal" class="seasons-modal" aria-hidden="true" role="dialog" aria-label="Temporadas y episodios">
-  <div class="seasons-backdrop" data-close></div>
-  <div class="seasons-panel" role="document">
-    <header class="seasons-header">
-      <div>
-        <h2 id="series-title">Título de la Serie / Colección</h2>
-        <p id="series-sub" class="muted">Selecciona temporada y episodio</p>
-      </div>
-      <button class="close-btn" id="close-seasons" aria-label="Cerrar modal">&times;</button>
-    </header>
-
-    <div class="seasons-body">
-      <aside class="seasons-list" aria-label="Lista de temporadas">
-        <ul id="seasons-list-ul"></ul>
-      </aside>
-
-      <section class="episodes-area" aria-live="polite">
-        <div class="episodes-toolbar">
-          <div class="season-meta">
-            <strong id="season-label">Temporada 1</strong>
-            <span id="season-desc" class="muted">— 8 episodios</span>
-          </div>
-          <div class="episodes-search">
-            <input id="ep-search" placeholder="Buscar episodio..." />
-          </div>
-        </div>
-
-        <div id="episodes-grid" class="episodes-grid" role="list"></div>
-
-        <div id="episodes-footer" class="episodes-footer muted">
-          Haz click en un episodio para reproducir / abrir.
-        </div>
-      </section>
-    </div>
-  </div>
-</div>
-  <br>
-<!-- ---------- ESTILOS (dark, moderno, responsive) ---------- -->
-<style>
-  :root{
-    --bg:#040406;
-    --panel:#0b0b0d;
-    --muted: #9aa3ae;
-    --accent: #ff2d5b;
-    --glass: rgba(255,255,255,0.03);
-    --card: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
-    --radius: 12px;
-    --shadow: 0 8px 30px rgba(0,0,0,0.7);
-    --glass-border: rgba(255,255,255,0.04);
-  }
-  /* Button to open */
-  .seasons-open-btn{
-    background: linear-gradient(90deg, rgba(255,45,91,0.12), rgba(255,45,91,0.06));
-    color: white;
-    border: 1px solid rgba(255,255,255,0.06);
-    padding: 10px 14px;
-    border-radius: 999px;
-    cursor: pointer;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.4);
-    font-weight: 600;
-    backdrop-filter: blur(6px);
-  }
-
-  /* Modal layout */
-  .seasons-modal{ position: fixed; inset: 0; display: none; z-index: 9999; font-family: 'PT Sans', Roboto, sans-serif; }
-  .seasons-modal[aria-hidden="false"]{ display: block; }
-  .seasons-backdrop{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.75)); backdrop-filter: blur(6px); }
-  .seasons-panel{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-    width: min(1100px, 96%);
-    max-height: 88vh;
-    background: linear-gradient(180deg, #071018, #070607);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    border: 1px solid var(--glass-border);
-    overflow: hidden;
-    display:flex;
-    flex-direction: column;
-  }
-
-  .seasons-header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding: 16px 18px;
-    gap:10px;
-    border-bottom: 1px solid rgba(255,255,255,0.03);
-    background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
-  }
-  .seasons-header h2{ margin:0; font-size:1.05rem; color:#fff; letter-spacing:0.2px; }
-  .seasons-header .muted{ color: var(--muted); font-size:0.85rem; margin-top:2px; }
-
-  .close-btn{
-    background: transparent; color: #fff; border: none; font-size: 26px; line-height:1; cursor:pointer; padding:6px 10px; border-radius:8px;
-  }
-  .close-btn:hover{ background: rgba(255,255,255,0.02); }
-
-  .seasons-body{ display:flex; gap:16px; padding: 18px; overflow: hidden; flex:1; min-height:320px; }
-
-  /* temporadas (izq) */
-  .seasons-list{ width: 220px; background: var(--glass); border-radius: 10px; padding:10px; flex-shrink:0; border:1px solid rgba(255,255,255,0.02); overflow:auto; }
-  .seasons-list ul{ list-style:none; padding:6px; margin:0; display:flex; flex-direction:column; gap:8px; }
-  .seasons-list li{
-    display:flex; align-items:center; gap:10px; padding:10px; border-radius:10px; cursor:pointer;
-    transition: transform .18s ease, background .18s ease, box-shadow .18s;
-  }
-  .season-thumb{ width:56px; height:36px; background-size:cover; background-position:center; border-radius:6px; flex-shrink:0; box-shadow: 0 6px 18px rgba(0,0,0,0.5); }
-  .season-info{ display:flex; flex-direction:column; min-width:0; }
-  .season-info .s-title{ color:#fff; font-weight:600; font-size:0.95rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .season-info .s-sub{ color:var(--muted); font-size:0.8rem; margin-top:2px; }
-
-  .seasons-list li:hover{ transform: translateY(-3px); background: rgba(255,255,255,0.02); box-shadow: 0 10px 30px rgba(2,8,20,0.6); }
-  .seasons-list li.active{ background: linear-gradient(90deg, rgba(255,45,91,0.12), rgba(255,45,91,0.03)); box-shadow: 0 12px 40px rgba(255,45,91,0.06); border:1px solid rgba(255,45,91,0.12); }
-
-  /* episodes area (derecha) */
-  .episodes-area{ flex:1; display:flex; flex-direction:column; gap:12px; overflow:auto; }
-  .episodes-toolbar{ display:flex; justify-content:space-between; align-items:center; gap:12px; }
-  .episodes-search input{
-    padding:8px 12px; width:220px; border-radius:10px; border:1px solid rgba(255,255,255,0.04); background:transparent; color:#fff;
-  }
-  .episodes-grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:12px; padding-top:6px; }
-  .episode-card{
-    display:flex; gap:12px; align-items:center; padding:10px; border-radius:10px; background:var(--card); border:1px solid rgba(255,255,255,0.02);
-    cursor:pointer; transition: transform .16s ease, box-shadow .16s;
-  }
-  .episode-card:hover{ transform: translateY(-6px); box-shadow: 0 18px 40px rgba(2,8,20,0.6); }
-  .ep-thumb{ width:120px; height:68px; border-radius:8px; background-size:cover; background-position:center; flex-shrink:0; }
-  .ep-meta{ display:flex; flex-direction:column; min-width:0; }
-  .ep-title{ color:#fff; font-weight:700; font-size:0.95rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .ep-desc{ color:var(--muted); font-size:0.85rem; margin-top:6px; }
-  .ep-actions{ margin-left:auto; display:flex; align-items:center; gap:8px; color:var(--muted); font-size:0.9rem; }
-
-  .play-btn{
-    background: linear-gradient(90deg, rgba(255,45,91,1), rgba(255,120,140,1)); color:white; padding:8px 12px; border-radius:8px; border:none; cursor:pointer; font-weight:700;
-    box-shadow: 0 6px 20px rgba(255,45,91,0.12);
-  }
-
-  .episodes-footer{ padding:8px 12px; font-size:0.85rem; }
-
-  /* responsive */
-  @media (max-width: 880px){
-    .seasons-body{ flex-direction: column; padding: 12px; gap:12px; }
-    .seasons-list{ width:100%; display:flex; overflow-x:auto; padding:8px; }
-    .seasons-list ul{ flex-direction:row; gap:10px; }
-    .seasons-list li{ min-width:170px; flex:0 0 auto; }
-  }
-  @media (max-width:480px){
-    .episode-card{ padding:8px; gap:8px; }
-    .ep-thumb{ width:96px; height:56px; }
-    .episodes-grid{ grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap:10px; }
-    .seasons-panel{ width: 96%; max-height: 92vh; }
-  }
-  /* --- Mejoras de adaptación móvil --- */
-@media (max-width: 768px) {
-  .seasons-panel {
-    width: 100% !important;
-    height: 100% !important;
-    max-height: none !important;
-    border-radius: 0;
-    left: 0;
-    top: 0;
-    transform: none;
-  }
-
-  .seasons-header {
-    padding: 12px;
-  }
-  .seasons-header h2 {
-    font-size: 1rem;
-  }
-
-  .episodes-search input {
-    width: 100%;
-    padding: 10px;
-    font-size: 0.9rem;
-  }
-
-  .episodes-grid {
-    grid-template-columns: 1fr !important;
-    gap: 14px;
-  }
-
-  .episode-card {
-    flex-direction: row;
-    padding: 12px;
-  }
-
-  .ep-thumb {
-    width: 120px;
-    height: 70px;
-  }
-
-  .ep-title {
-    font-size: 1rem;
-  }
-
-  .ep-desc {
-    font-size: 0.85rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .episode-card {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .ep-thumb {
-    width: 100%;
-    height: 180px;
-  }
-
-  .ep-meta {
-    margin-top: 8px;
-  }
-
-  .play-btn {
-    width: 100%;
-    padding: 10px;
-    font-size: 1rem;
-  }
-}
-
-</style>
-
-<!-- ---------- SCRIPT: datos + interacción ---------- -->
-<!-- ---------- SCRIPT: datos + interacción (integrado con progreso + resume modal) ---------- -->
+  <!-- ---------- SCRIPT: datos + interacción (integrado con progreso + resume modal) ---------- -->
   <script>
   (function(){
     // Unique key for this series (used to keep resume/progress isolated)
