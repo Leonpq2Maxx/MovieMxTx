@@ -1152,16 +1152,16 @@ document.addEventListener("DOMContentLoaded", () => {
     <br/>
     <div class="series-grid">
       <a href="" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/eAy2tSlGtzseWfYemt398QrPtf2.jpg" alt="">
-        <p>El marginal</p>
+        <img loading="lazy" src="" alt="">
+        <p></p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="../Rosario Tijeras.jpg" alt="">
-        <p>Rosario Tijeras</p>
+        <img loading="lazy" src="" alt="">
+        <p></p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/5DlNYe4e8aVHoKH4XrUuREWMY8s.jpg" alt="">
-        <p>Merlina</p>
+        <img loading="lazy" src="" alt="">
+        <p></p>
       </a>
       <a href="" class="serie">
         <img loading="lazy" src="" alt="">
@@ -1520,6 +1520,52 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   actualizarBarraProgreso();
 });
+</script>}
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const videoElement = document.querySelector('.vid1');
+    if (!videoElement) return;
+
+    const videoSrc = videoElement.querySelector('source').getAttribute('src');
+    const STORAGE_KEY = 'pos_' + videoSrc;
+
+    /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
+    const historialTitulo = "En el barro";
+    const historialImagen = "https://image.tmdb.org/t/p/w300/kKi1YdzQNM87Mcz7WxxclHbevwr.jpg";
+    const historialArchivo = "../View Series/En el barro (2025).html";
+
+    let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
+    let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
+    
+    if (indexHist === -1) {
+      historial.push({
+      titulo: historialTitulo,
+      imagen: historialImagen,
+      progreso: "Asistido 0 min",
+      archivo: historialArchivo,
+      tipo: "serie", // ✅ ya está
+      timestamp: Date.now()
+    });
+    localStorage.setItem('historial_usuarios', JSON.stringify(historial));
+    indexHist = historial.length - 1;
+    mostrarModalFavoritos("✅ Agregado al historial");
+
+  }
+  setInterval(() => {
+    if (!videoElement.paused && !videoElement.ended) {
+      historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
+      indexHist = historial.findIndex(item => item.titulo === historialTitulo);
+      if (indexHist !== -1) {
+        const minutos = Math.floor(videoElement.currentTime / 60);
+        historial[indexHist].progreso = `Asistido ${minutos} min`;
+        historial[indexHist].timestamp = Date.now(); // ✅ esto asegura que suba al principio
+        localStorage.setItem('historial_usuarios', JSON.stringify(historial));
+      }
+      localStorage.setItem(STORAGE_KEY, videoElement.currentTime);
+    }
+  }, 10000);
+  });
 </script>
 
 
