@@ -828,7 +828,6 @@ const SERIES_KEY = "En_el_barra25";
     {
       id: 1,
       title: "Temporada 1",
-      year: 2022,                 // ← agregamos el año
       thumb: "https://image.tmdb.org/t/p/w780/v8xHeTkIBOl51yRp0zcAu2VYhdZ.jpg",
       desc: "Lanzada 2025 — 8 episodios",
       episodes: [
@@ -859,8 +858,6 @@ const SERIES_KEY = "En_el_barra25";
   const epSearch = document.getElementById('ep-search');
   const seriesTitle = document.getElementById('series-title');
   const seriesSub = document.getElementById('series-sub');
-  const yearSpan = document.querySelector('.info span'); 
-// Este <span> es el que ahora muestra 2025
 
   let activeSeasonIndex = 0;
 
@@ -914,10 +911,6 @@ const SERIES_KEY = "En_el_barra25";
       li.classList.toggle('active', i === index);
     });
     const season = seasonsData[index];
-    if (yearSpan && season.year) {
-  yearSpan.textContent = season.year;
-}
-
     seasonLabel.textContent = season.title;
     seasonDesc.textContent = `— ${season.episodes.length} episodios`;
     // render episodios
