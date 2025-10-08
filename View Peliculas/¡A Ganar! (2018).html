@@ -840,107 +840,158 @@ player.on('play', () => {
     });
   </script>
   <!-- 🔴 Modal Continuar Viendo -->
-<div id="continue-modal">
-  <div class="modal-box">
-    <h3>¿Quieres continuar viendo desde donde lo dejaste?</h3>
-    <p id="continue-info" style="margin-bottom:10px;color:#ccc;font-size:0.9rem;"></p>
-    <div class="actions">
+
+
+<!-- 🎬 MODAL REANUDAR ESTILO NETFLIX -->
+<style>
+#modal-reanudar {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  backdrop-filter: blur(5px);
+}
+
+#modal-reanudar.activo {
+  display: flex;
+  animation: aparecer 0.3s ease forwards;
+}
+
+#modal-reanudar .caja {
+  background: linear-gradient(145deg, #111, #1a1a1a);
+  color: #fff;
+  padding: 25px 30px;
+  border-radius: 14px;
+  text-align: center;
+  width: 90%;
+  max-width: 380px;
+  box-shadow: 0 0 25px rgba(255,45,91,0.5);
+  position: relative;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+#modal-reanudar h3 {
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+#modal-reanudar p {
+  color: #ccc;
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+}
+
+#modal-reanudar .acciones {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+#modal-reanudar button {
+  background: linear-gradient(135deg, #ff2d5b, #ff5e7e);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+#modal-reanudar button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(255,45,91,0.6);
+}
+
+#cerrar-reanudar {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  color: #ff5e7e;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+#cerrar-reanudar:hover {
+  color: #fff;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+</style>
+
+<div id="modal-reanudar">
+  <div class="caja">
+    <button id="cerrar-reanudar">✕</button>
+    <h3>¿Quieres continuar viendo?</h3>
+    <p id="info-reanudar"></p>
+    <div class="acciones">
       <button id="btn-continuar">Continuar</button>
-      <button id="btn-empezar-nuevo">Empezar desde 0</button>
+      <button id="btn-empezar">Empezar desde 0</button>
     </div>
   </div>
 </div>
 
-
-
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const modal = document.getElementById('continue-modal');
+  const video = document.querySelector('.vid1');
+  if (!video) return;
+
+  const STORAGE_KEY = 'pos_' + video.querySelector('source').getAttribute('src');
+  const modal = document.getElementById('modal-reanudar');
+  const info = document.getElementById('info-reanudar');
   const btnContinuar = document.getElementById('btn-continuar');
-  const btnNuevo = document.getElementById('btn-empezar-nuevo');
-  const continueInfo = document.getElementById('continue-info');
-  const videoElement = document.querySelector('.vid1');
-  const source = videoElement.querySelector('source');
+  const btnEmpezar = document.getElementById('btn-empezar');
+  const btnCerrar = document.getElementById('cerrar-reanudar');
 
-  // ✅ Usamos una clave basada en el título de la película
-  const MOVIE_KEY = "¡A Ganar! (2018)";
-  const STORAGE_KEY = "ultimoTiempo_" + MOVIE_KEY;
-
-  const ultimoTiempo = parseFloat(localStorage.getItem(STORAGE_KEY) || 0);
-
-  // Si hay tiempo guardado, mostrar modal
-  if (ultimoTiempo > 30) {
-    continueInfo.textContent = `Minuto ${(ultimoTiempo / 60).toFixed(1)}`;
-    modal.classList.add('active');
-  }
-
-  btnContinuar.addEventListener('click', () => {
-    videoElement.currentTime = ultimoTiempo;
-    videoElement.play();
-    modal.classList.remove('active');
-  });
-
-  btnNuevo.addEventListener('click', () => {
-    videoElement.currentTime = 0;
-    videoElement.play();
-    modal.classList.remove('active');
-  });
-
-  // Guardar progreso cada 5 segundos
+  // Guardar posición cada 5 segundos
   setInterval(() => {
-    if (!videoElement.paused && !videoElement.ended) {
-      localStorage.setItem(STORAGE_KEY, videoElement.currentTime);
+    if (!video.paused && !video.ended) {
+      localStorage.setItem(STORAGE_KEY, video.currentTime);
     }
   }, 5000);
-});
-  
-  // Autoplay al siguiente episodio
-  videoElement.addEventListener('ended', () => {
-    const ultimo = JSON.parse(localStorage.getItem(`ultimoEpisodio_${SERIES_KEY}`) || 'null');
-    if (ultimo) {
-      const season = seasonsData.find(s => s.title === ultimo.temporada);
-      const idx = season.episodes.findIndex(e => e.id === ultimo.id);
-      if (idx !== -1 && idx + 1 < season.episodes.length) {
-        const nextEp = season.episodes[idx+1];
-        if (nextEp.href) {
-          source.setAttribute('src', nextEp.href);
-          videoElement.load();
-          videoElement.play();
-          localStorage.setItem(`ultimoEpisodio_${SERIES_KEY}`, JSON.stringify({
-            temporada: season.title,
-            episodio: nextEp.title,
-            id: nextEp.id
-          }));
-          document.getElementById('episodio-actual').textContent =
-            `▶ Viendo: ${season.title} - ${nextEp.title}`;
-        }
-      }
-    }
+
+  // Si hay progreso guardado, mostrar modal
+  const guardado = parseFloat(localStorage.getItem(STORAGE_KEY) || 0);
+  if (guardado > 20) { // Solo mostrar si vio al menos 20 segundos
+    const minutos = Math.floor(guardado / 60);
+    const segundos = Math.floor(guardado % 60);
+    info.textContent = `Último minuto visto: ${minutos}:${segundos.toString().padStart(2,'0')}`;
+    setTimeout(() => modal.classList.add('activo'), 800);
+  }
+
+  // Continuar
+  btnContinuar.addEventListener('click', () => {
+    video.currentTime = guardado;
+    modal.classList.remove('activo');
+    video.play();
   });
 
-  // Mostrar barra de progreso debajo de cada episodio
-  function actualizarBarraProgreso(){
-    const ultimo = JSON.parse(localStorage.getItem(`ultimoEpisodio_${SERIES_KEY}`) || 'null');
-    const tiempo = parseFloat(localStorage.getItem('ultimoTiempoReproduccion') || 0);
-    if (ultimo && tiempo > 0) {
-      const card = [...document.querySelectorAll('.episode-card')]
-        .find(c => c.querySelector('.ep-title').textContent.includes(ultimo.episodio));
-      if (card) {
-        if (!card.querySelector('.progress-bar-container')) {
-          const pbContainer = document.createElement('div');
-          pbContainer.className = 'progress-bar-container';
-          pbContainer.innerHTML = '<div class="progress-bar"></div>';
-          card.appendChild(pbContainer);
-        }
-        const barra = card.querySelector('.progress-bar');
-        // Para calcular porcentaje, suponemos duración estándar 45 min = 2700s
-        const porcentaje = Math.min(100, (tiempo / 2700) * 100);
-        barra.style.width = porcentaje + '%';
-      }
-    }
-  }
-  actualizarBarraProgreso();
+  // Empezar desde 0
+  btnEmpezar.addEventListener('click', () => {
+    localStorage.removeItem(STORAGE_KEY);
+    video.currentTime = 0;
+    modal.classList.remove('activo');
+    video.play();
+  });
+
+  // Cerrar modal con la X
+  btnCerrar.addEventListener('click', () => {
+    modal.classList.remove('activo');
+  });
 });
-</script>}
+</script>
+
+
+
 </body>
 </html>
