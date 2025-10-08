@@ -839,5 +839,121 @@ player.on('play', () => {
     }, 10000);
     });
   </script>
+  <!-- 🔴 Modal Continuar Viendo -->
+<div id="continue-modal">
+  <div class="modal-box">
+    <h3>¿Quieres continuar viendo desde donde lo dejaste?</h3>
+    <p id="continue-info" style="margin-bottom:10px;color:#ccc;font-size:0.9rem;"></p>
+    <div class="actions">
+      <button id="btn-continuar">Continuar</button>
+      <button id="btn-empezar-nuevo">Empezar desde 0</button>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('continue-modal');
+  const btnContinuar = document.getElementById('btn-continuar');
+  const btnNuevo = document.getElementById('btn-empezar-nuevo');
+  const continueInfo = document.getElementById('continue-info');
+  const videoElement = document.querySelector('.vid1');
+  const source = videoElement.querySelector('source');
+
+  const ultimo = JSON.parse(localStorage.getItem(`ultimoEpisodio_${SERIES_KEY}`) || 'null');
+  const ultimoTiempo = localStorage.getItem('ultimoTiempoReproduccion') || 0;
+
+  if (ultimo) {
+    continueInfo.textContent = `${ultimo.temporada} - ${ultimo.episodio} | Minuto ${(ultimoTiempo/60).toFixed(1)}`;
+    modal.classList.add('active');
+  }
+
+  btnContinuar.addEventListener('click', () => {
+    if (ultimo) {
+      const season = seasonsData.find(s => s.title === ultimo.temporada);
+      const ep = season ? season.episodes.find(e => e.id === ultimo.id) : null;
+      if (ep && ep.href) {
+        source.setAttribute('src', ep.href);
+        videoElement.load();
+        videoElement.currentTime = parseFloat(ultimoTiempo) || 0;
+        videoElement.play();
+      }
+    }
+    modal.classList.remove('active');
+  });
+
+  btnNuevo.addEventListener('click', () => {
+    if (ultimo) {
+      const season = seasonsData.find(s => s.title === ultimo.temporada);
+      const ep = season ? season.episodes.find(e => e.id === ultimo.id) : null;
+      if (ep && ep.href) {
+        source.setAttribute('src', ep.href);  // 🔴 aseguramos que cargue el episodio actual
+        videoElement.load();
+        videoElement.currentTime = 0;         // 🔴 empieza desde 0
+        videoElement.play();
+      }
+    }
+    localStorage.removeItem('ultimoTiempoReproduccion');
+    modal.classList.remove('active');
+  });
+
+  // Guardar progreso cada 5s
+  setInterval(() => {
+    if (!videoElement.paused && !videoElement.ended) {
+      localStorage.setItem('ultimoTiempoReproduccion', videoElement.currentTime);
+      actualizarBarraProgreso();
+    }
+  }, 5000);
+
+  // Autoplay al siguiente episodio
+  videoElement.addEventListener('ended', () => {
+    const ultimo = JSON.parse(localStorage.getItem(`ultimoEpisodio_${SERIES_KEY}`) || 'null');
+    if (ultimo) {
+      const season = seasonsData.find(s => s.title === ultimo.temporada);
+      const idx = season.episodes.findIndex(e => e.id === ultimo.id);
+      if (idx !== -1 && idx + 1 < season.episodes.length) {
+        const nextEp = season.episodes[idx+1];
+        if (nextEp.href) {
+          source.setAttribute('src', nextEp.href);
+          videoElement.load();
+          videoElement.play();
+          localStorage.setItem(`ultimoEpisodio_${SERIES_KEY}`, JSON.stringify({
+            temporada: season.title,
+            episodio: nextEp.title,
+            id: nextEp.id
+          }));
+          document.getElementById('episodio-actual').textContent =
+            `▶ Viendo: ${season.title} - ${nextEp.title}`;
+        }
+      }
+    }
+  });
+
+  // Mostrar barra de progreso debajo de cada episodio
+  function actualizarBarraProgreso(){
+    const ultimo = JSON.parse(localStorage.getItem(`ultimoEpisodio_${SERIES_KEY}`) || 'null');
+    const tiempo = parseFloat(localStorage.getItem('ultimoTiempoReproduccion') || 0);
+    if (ultimo && tiempo > 0) {
+      const card = [...document.querySelectorAll('.episode-card')]
+        .find(c => c.querySelector('.ep-title').textContent.includes(ultimo.episodio));
+      if (card) {
+        if (!card.querySelector('.progress-bar-container')) {
+          const pbContainer = document.createElement('div');
+          pbContainer.className = 'progress-bar-container';
+          pbContainer.innerHTML = '<div class="progress-bar"></div>';
+          card.appendChild(pbContainer);
+        }
+        const barra = card.querySelector('.progress-bar');
+        // Para calcular porcentaje, suponemos duración estándar 45 min = 2700s
+        const porcentaje = Math.min(100, (tiempo / 2700) * 100);
+        barra.style.width = porcentaje + '%';
+      }
+    }
+  }
+  actualizarBarraProgreso();
+});
+</script>}
 </body>
 </html>
