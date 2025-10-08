@@ -1419,6 +1419,17 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 </div>
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('continue-modal');
+  const closeModalX = document.getElementById('close-continue-modal');
+
+  // 👇 Asegúrate de que esto exista
+  closeModalX.addEventListener('click', () => {
+    modal.classList.remove('active'); // 🔴 Oculta el modal
+  });
+});
+</script>
 
 
   <style>
