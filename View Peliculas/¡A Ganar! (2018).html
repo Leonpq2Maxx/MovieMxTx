@@ -862,51 +862,38 @@ document.addEventListener('DOMContentLoaded', () => {
   const videoElement = document.querySelector('.vid1');
   const source = videoElement.querySelector('source');
 
-  const ultimo = JSON.parse(localStorage.getItem(`ultimoEpisodio_${SERIES_KEY}`) || 'null');
-  const ultimoTiempo = localStorage.getItem('ultimoTiempoReproduccion') || 0;
+  // ✅ Usamos una clave basada en el título de la película
+  const MOVIE_KEY = "¡A Ganar! (2018)";
+  const STORAGE_KEY = "ultimoTiempo_" + MOVIE_KEY;
 
-  if (ultimo) {
-    continueInfo.textContent = `${ultimo.temporada} - ${ultimo.episodio} | Minuto ${(ultimoTiempo/60).toFixed(1)}`;
+  const ultimoTiempo = parseFloat(localStorage.getItem(STORAGE_KEY) || 0);
+
+  // Si hay tiempo guardado, mostrar modal
+  if (ultimoTiempo > 30) {
+    continueInfo.textContent = `Minuto ${(ultimoTiempo / 60).toFixed(1)}`;
     modal.classList.add('active');
   }
 
   btnContinuar.addEventListener('click', () => {
-    if (ultimo) {
-      const season = seasonsData.find(s => s.title === ultimo.temporada);
-      const ep = season ? season.episodes.find(e => e.id === ultimo.id) : null;
-      if (ep && ep.href) {
-        source.setAttribute('src', ep.href);
-        videoElement.load();
-        videoElement.currentTime = parseFloat(ultimoTiempo) || 0;
-        videoElement.play();
-      }
-    }
+    videoElement.currentTime = ultimoTiempo;
+    videoElement.play();
     modal.classList.remove('active');
   });
 
   btnNuevo.addEventListener('click', () => {
-    if (ultimo) {
-      const season = seasonsData.find(s => s.title === ultimo.temporada);
-      const ep = season ? season.episodes.find(e => e.id === ultimo.id) : null;
-      if (ep && ep.href) {
-        source.setAttribute('src', ep.href);  // 🔴 aseguramos que cargue el episodio actual
-        videoElement.load();
-        videoElement.currentTime = 0;         // 🔴 empieza desde 0
-        videoElement.play();
-      }
-    }
-    localStorage.removeItem('ultimoTiempoReproduccion');
+    videoElement.currentTime = 0;
+    videoElement.play();
     modal.classList.remove('active');
   });
 
-  // Guardar progreso cada 5s
+  // Guardar progreso cada 5 segundos
   setInterval(() => {
     if (!videoElement.paused && !videoElement.ended) {
-      localStorage.setItem('ultimoTiempoReproduccion', videoElement.currentTime);
-      actualizarBarraProgreso();
+      localStorage.setItem(STORAGE_KEY, videoElement.currentTime);
     }
   }, 5000);
-
+});
+  
   // Autoplay al siguiente episodio
   videoElement.addEventListener('ended', () => {
     const ultimo = JSON.parse(localStorage.getItem(`ultimoEpisodio_${SERIES_KEY}`) || 'null');
