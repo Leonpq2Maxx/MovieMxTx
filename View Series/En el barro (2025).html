@@ -1404,10 +1404,12 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-
 <!-- 🔴 Modal Continuar Viendo -->
 <div id="continue-modal">
   <div class="modal-box">
+    <!-- 🔹 Botón X para cerrar -->
+    <button id="close-continue-modal" aria-label="Cerrar">✖</button>
+
     <h3>¿Quieres continuar viendo desde donde lo dejaste?</h3>
     <p id="continue-info" style="margin-bottom:10px;color:#ccc;font-size:0.9rem;"></p>
     <div class="actions">
@@ -1417,7 +1419,23 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 </div>
 
+  <style>
+    #close-continue-modal {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: rgba(229,9,20,0.7); /* rojo más suave */
+  font-size: 0.9rem;        /* tamaño más pequeño */
+  cursor: pointer;
+  padding: 2px 6px;
+}
+#close-continue-modal:hover {
+  color: #e50914;           /* rojo intenso al pasar el mouse */
+}
 
+  </style>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -1438,6 +1456,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   btnContinuar.addEventListener('click', () => {
     if (ultimo) {
+      const closeModalX = document.getElementById('close-continue-modal');
+closeModalX.addEventListener('click', () => {
+  modal.classList.remove('active');
+});
+
       const season = seasonsData.find(s => s.title === ultimo.temporada);
       const ep = season ? season.episodes.find(e => e.id === ultimo.id) : null;
       if (ep && ep.href) {
