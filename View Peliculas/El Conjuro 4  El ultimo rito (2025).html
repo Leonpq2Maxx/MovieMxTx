@@ -538,7 +538,7 @@
   // 🔹 Botón "Agregar a Favoritos"
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
-      titulo: "El Conjuro 4  El ultimo rito",
+      titulo: "El Conjuro 4: El ultimo rito",
       imagen: "https://image.tmdb.org/t/p/w300/dyW5mX4wwDoZWgTYObx6pg9V0i9.jpg",
       genero: "Acción • Drama",
       archivo: "../View Series/El Conjuro 4  El ultimo rito (2025).html",
@@ -651,7 +651,7 @@
   <br>
   
   <div class="recomendaciones">
-    <h4>Podría interesartesaa:</h4>
+    <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
       <a href="La Monja (2018).html" class="serie">
@@ -804,7 +804,7 @@ player.on('play', () => {
       const STORAGE_KEY = 'pos_' + videoSrc;
 
       /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
-      const historialTitulo = "El Conjuro 4  El ultimo rito";
+      const historialTitulo = "El Conjuro 4: El ultimo rito";
       const historialImagen = "https://image.tmdb.org/t/p/w300/dyW5mX4wwDoZWgTYObx6pg9V0i9.jpg";
       const historialArchivo = "El Conjuro 4: El ultimo rito (2025).html";
 
@@ -817,7 +817,7 @@ player.on('play', () => {
         imagen: historialImagen,
         progreso: "Asistido 0 min",
         archivo: historialArchivo,
-        tipo: "serie", // ✅ ya está
+        tipo: "pelicula", // ✅ ya está
         timestamp: Date.now()
       });
       localStorage.setItem('historial_usuarios', JSON.stringify(historial));
