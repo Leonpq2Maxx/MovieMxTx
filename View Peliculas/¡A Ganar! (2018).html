@@ -387,6 +387,39 @@
   box-shadow: 0 4px 12px rgba(0,0,0,0.35);
 }
 
+    /* === Barra de progreso con degradado animado === */
+.plyr__progress--played {
+  background: linear-gradient(270deg, #ff004c, #ff7a00, #ffe600, #00ff6a, #00c3ff, #8a2be2);
+  background-size: 600% 600%;
+  animation: gradientFlow 8s ease infinite;
+  height: 6px !important;
+  border-radius: 10px;
+}
+
+/* Animación fluida multicolor */
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* === Icono “M” como indicador de progreso === */
+.plyr__progress__thumb {
+  width: 22px !important;
+  height: 22px !important;
+  background: url('80692615-letter-m-icon-logo-design-element-removebg-preview.png') no-repeat center center / contain !important;
+  border: none !important;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+  transform: translateY(-3px);
+}
+
+/* Elimina borde al pasar el mouse (para mantener limpio el logo) */
+.plyr__progress__thumb:focus,
+.plyr__progress__thumb:hover {
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.9);
+  transform: scale(1.05) translateY(-3px);
+}
+
 
   </style>
 </head>
