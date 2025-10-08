@@ -964,20 +964,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, 5000);
 
-  // Si hay progreso guardado, mostrar modal
+  // Mostrar modal si hay progreso guardado
   const guardado = parseFloat(localStorage.getItem(STORAGE_KEY) || 0);
-  if (guardado > 20) { // Solo mostrar si vio al menos 20 segundos
+  if (guardado > 20) {
     const minutos = Math.floor(guardado / 60);
     const segundos = Math.floor(guardado % 60);
     info.textContent = `Último minuto visto: ${minutos}:${segundos.toString().padStart(2,'0')}`;
     setTimeout(() => modal.classList.add('activo'), 800);
   }
 
-  // Continuar
+  // Continuar correctamente cuando los metadatos estén cargados
   btnContinuar.addEventListener('click', () => {
-    video.currentTime = guardado;
-    modal.classList.remove('activo');
-    video.play();
+    const continuar = () => {
+      video.currentTime = guardado;
+      modal.classList.remove('activo');
+      video.play();
+    };
+    if (video.readyState >= 1) {
+      continuar();
+    } else {
+      video.addEventListener('loadedmetadata', continuar, { once: true });
+    }
   });
 
   // Empezar desde 0
@@ -994,6 +1001,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
+
  
 
 
