@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2025 Movie</title>
+   <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      background: #0c0c0c;
+      color: white;
+    }
+    header {
+      background: #161616;
+      padding: 15px;
+      text-align: center;
+      font-size: 1rem;
+      font-weight: bold;
+      position: relative;
+    }
+    .back {
+      color: white;
+      text-decoration: none;
+      font-size: 1.5rem;
+      position: absolute;
+      left: 10px;
+      top: 15px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 1rem;
+    }
+    .search-box {
+      padding: 10px;
+      text-align: center;
+    }
+    .search-box input {
+      width: 90%;
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      font-size: 1rem;
+      background: #1c1c1c;
+      color: white;
+    }
+    .movie-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      padding: 10px;
+    }
+    .movie {
+      background: #1c1c1c;
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    .movie img {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: brightness(1);
+      position: relative;
+      z-index: 1;
+    }
+    .movie.locked img {
+      filter: brightness(0.5);
+    }
+    .movie .tag,
+    .movie .year-tag,
+    .movie .lock-icon {
+      position: absolute;
+      z-index: 2;
+      color: white;
+      font-weight: bold;
+    }
+    .movie .tag,
+    .movie .year-tag {
+      background: rgb(255, 32, 143);
+      padding: 2px 6px;
+      font-size: 0.7rem;
+      border-radius: 3px;
+    }
+    .movie .tag {
+      top: 5px;
+      left: 5px;
+    }
+    .movie .year-tag {
+      top: 25px;
+      left: 5px;
+    }
+    .movie .lock-icon {
+      top: 5px;
+      right: 5px;
+      width: 30px;
+      height: 30px;
+      background: rgba(0,0,0,0.6);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: bounce 1s infinite;
+      font-size: 1.1rem;
+    }
+    .movie p {
+      margin: 8px;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .movie-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      padding: 10px;
+    }
+
+    @media (orientation: landscape) {
+      .movie-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .movie img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      display: block;
+      filter: brightness(1);
+      position: relative;
+      z-index: 1;
+    }
+
+  </style>
+
+  <!--PRUEBA-->
+
+  <style>
+    .movie .recien-tag {
+  position: absolute;
+  top: 160px;
+  left: 5px;
+  background: rgb(255, 32, 143); /* verde rosa */
+  color: white;
+  font-weight: bold;
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: 3px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+
+  </style>
+</head>
+<body>
+  <header>
+  <h1>2025 Movie <span id="contador" style="font-size: 1.0rem; font-weight: normal; color: #bbb;"></span></h1>
+</header>
+
+
+  <div class="search-box">
+  <input type="text" id="search-input" placeholder="Buscar por nombre, género o año..." oninput="filtrarPeliculas()">
+</div>
+
+<style>
+  input::placeholder {
+    background: linear-gradient(90deg, #ff0000, #018dff, #ff00d9, #018dff, #ff0090, #ff0000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+    animation: animateText 5s linear infinite;
+  }
+
+  @keyframes animateText {
+    0% { background-position: 0% }
+    100% { background-position: 200% }
+  }
+</style>
+
+  <div class="movie-grid" id="movie-grid">
+
+    <div class="movie locked" data-titulo="el conjuro 4 el ultimo rito el culjuro" data-genero="Terror" data-anio="2025" data-html="../View Peliculas/El Conjuro 4  El ultimo rito (2025).html" data-fecha="2025-10-07">
+      <span class="tag">Pelicula</span>
+      <span class="year-tag">2025</span>
+      <img src="https://image.tmdb.org/t/p/w300/dyW5mX4wwDoZWgTYObx6pg9V0i9.jpg">
+      <span class="lock-icon">🔒</span>
+      <p>El conjuro 4: El ultimo rito</p>
+    </div>
+
+    <div class="movie locked" data-titulo="en el barro" data-genero="drama argentina" data-anio="2025" data-html="../View Series/En el barro (2025).html" data-fecha="2025-10-09">
+      <span class="tag">Serie</span>
+      <span class="year-tag">2025</span>
+      <img src="https://image.tmdb.org/t/p/w300/kKi1YdzQNM87Mcz7WxxclHbevwr.jpg">
+      <span class="lock-icon">🔒</span>
+      <p>En el barro</p>
+    </div>
+
+    <div class="movie locked" data-titulo="culpa mia londres 2" data-genero="romance drama" data-anio="2025" data-html="../View Peliculas/2 Culpa Mia (2025).html" data-fecha="2025-10-08">
+      <span class="tag">Pelicula</span>
+      <span class="year-tag">2025</span>
+      <img src="https://image.tmdb.org/t/p/w300/q0HxfkF9eoa6wSVnzwMhuDSK7ba.jpg">
+      <span class="lock-icon">🔒</span>
+      <p>Culpa mia: Londres</p>
+    </div>
+
+    <div class="movie locked" data-titulo="60 minutos" data-genero="accion mma peleas " data-anio="2024" data-html="../View Peliculas/60 Minutos (2024).html" data-fecha="2025-10-08">
+      <span class="tag">Pelicula</span>
+      <span class="year-tag">2024</span>
+      <img src="https://image.tmdb.org/t/p/w300/cND79ZWPFINDtkA8uwmQo1gnPPE.jpg">
+      <span class="lock-icon">🔒</span>
+      <p>60 Minutos</p>
+    </div>
+
+    <div class="movie locked" data-titulo="culpa tuya 1" data-genero="drama romance" data-anio="2024" data-html="../View Peliculas/1 Culpa tuya (2024).html" data-fecha="2025-10-09">
+      <span class="tag">Pelicula</span>
+      <span class="year-tag">2024</span>
+      <img src="https://image.tmdb.org/t/p/w300/1jvCVdlgInyItAUEvvvCakm1Yxz.jpg">
+      <span class="lock-icon">🔒</span>
+      <p>Culpa tuya</p>
+    </div>
+
+    <div class="movie locked" data-titulo="365 dias 2 aquel dia " data-genero="romance drama" data-anio="2022" data-html="../View Peliculas/365 Dias 2 Aquel dia (2022).html" data-fecha="2025-10-08">
+      <span class="tag">Pelicula</span>
+      <span class="year-tag">2022</span>
+      <img src="https://image.tmdb.org/t/p/w300/k3J2GdYxhR6U2RfsHZOsmHVKW7m.jpg">
+      <span class="lock-icon">🔒</span>
+      <p>365 Dias 2: Aquel dia</p>
+    </div>
+
+    <div class="movie locked" data-titulo="scooby ¡scooby!" data-genero="animacion aventura" data-anio="2020" data-html="../View Peliculas/¡Scooby! (2020).html" data-fecha="2025-10-09">
+      <span class="tag">Pelicula</span>
+      <span class="year-tag">2020</span>
+      <img src="https://image.tmdb.org/t/p/w300/tOhuq4RYr2Rt9TM7X4dkr7A9HSd.jpg">
+      <span class="lock-icon">🔒</span>
+      <p>¡Scooby!</p>
+    </div>
+
+    <div class="movie locked" data-titulo="365 dias 1" data-genero="romance drama" data-anio="2020" data-html="../View Peliculas/365 dias (2020).html" data-fecha="2025-|0-08">
+      <span class="tag">Pelicula</span>
+      <span class="year-tag">2020</span>
+      <img src="https://image.tmdb.org/t/p/w300/jz8T3hrU6GuMqSuQ4Rbd4MJUeaq.jpg">
+      <span class="lock-icon">🔒</span>
+      <p>365 Dias</p>
+    </div>
+
+    <div class="movie locked" data-titulo="a ganar" data-genero="drama" data-anio="2018" data-html="../View Peliculas/¡A Ganar! (2018).html" data-fecha="2025-10-08">
+      <span class="tag">Pelicula</span>
+      <span class="year-tag">2018</span>
+      <img src="https://image.tmdb.org/t/p/w300/6GVYL9K2IBFrfIqwwFqMPu5DdC5.jpg">
+      <span class="lock-icon">🔒</span>
+      <p>¡A Ganar!</p>
+    </div>
+
+    <div class="movie locked" data-titulo="" data-genero="animacion anime" data-anio="1988" data-html="../View Peliculas/" data-fecha="2025-07-11">
+      <span class="tag">Pelicula</span>
+      <span class="year-tag">1988</span>
+      <img src="https://image.tmdb.org/t/p/w300/">
+      <span class="lock-icon">🔒</span>
+      <p></p>
+    </div>
+
+    <div class="movie locked" data-titulo="" data-genero="animacion anime" data-anio="1988" data-html="../View Peliculas/" data-fecha="2025-07-11">
+      <span class="tag">Pelicula</span>
+      <span class="year-tag">1988</span>
+      <img src="https://image.tmdb.org/t/p/w300/">
+      <span class="lock-icon">🔒</span>
+      <p></p>
+    </div>
+
+    
+  </div>
+  
+
+  <script>
+  function filtrarPeliculas() {
+    const input = document.getElementById("search-input");
+    const texto = input.value.toLowerCase();
+    localStorage.setItem("ultimaBusqueda", texto);
+    const peliculas = document.querySelectorAll(".movie");
+    peliculas.forEach(peli => {
+      const titulo = peli.dataset.titulo || "";
+      const genero = peli.dataset.genero || "";
+      const anio = peli.dataset.anio || "";
+      const visible = titulo.includes(texto) || genero.includes(texto) || anio.includes(texto);
+      peli.style.display = visible ? "block" : "none";
+    });
+  }
+
+  // Restaurar búsqueda y scroll al volver
+  window.addEventListener("DOMContentLoaded", () => {
+    const ultima = localStorage.getItem("ultimaBusqueda");
+    const scroll = localStorage.getItem("scrollY");
+    const input = document.getElementById("search-input");
+    if (ultima && input) {
+      input.value = ultima;
+      filtrarPeliculas();
+    }
+    if (scroll) {
+      window.scrollTo(0, parseInt(scroll));
+    }
+    localStorage.removeItem("ultimaBusqueda");
+    localStorage.removeItem("scrollY");
+  });
+
+  // Películas activas + guardar scroll
+  document.querySelectorAll(".movie").forEach(peli => {
+    const htmlFile = peli.dataset.html;
+    if (htmlFile && htmlFile.trim() !== "") {
+      peli.classList.remove("locked");
+      const lockIcon = peli.querySelector(".lock-icon");
+      if (lockIcon) lockIcon.remove();
+      peli.addEventListener("click", () => {
+        localStorage.setItem("ultimaBusqueda", document.getElementById("search-input").value);
+        localStorage.setItem("scrollY", window.scrollY);
+        window.location.href = htmlFile;
+      });
+    }
+  });
+</script>
+
+
+<!--ESTO ES SI SE AGREGO UNA NUEVA PELICULA SE MOSTRARA ESTE MENSAJE "Nuevo agregado"-->
+<script>
+  document.querySelectorAll(".movie").forEach(peli => {
+    const fecha = peli.dataset.fecha;
+    if (fecha) {
+      const fechaCreacion = new Date(fecha);
+      const hoy = new Date();
+      const diasDiferencia = (hoy - fechaCreacion) / (1000 * 60 * 60 * 24);
+      if (diasDiferencia <= 5) { /*aca cuenta los dias que se mostrara "recien agregados*/
+        const recien = document.createElement("span");
+        recien.className = "recien-tag";
+        recien.textContent = "Recién agregado";
+        peli.appendChild(recien);
+      }
+    }
+  });
+</script>
+
+<script>
+  function actualizarContadorPeliculas() {
+    const peliculasVisibles = document.querySelectorAll(".movie-grid .movie:not([style*='display: none'])").length;
+    const contador = document.getElementById("contador");
+    if (contador) {
+      contador.textContent = `(${peliculasVisibles})`;
+    }
+  }
+
+  // Llama a la función al cargar la página
+  window.addEventListener("DOMContentLoaded", () => {
+    actualizarContadorPeliculas();
+  });
+
+  // También al filtrar películas
+  const input = document.getElementById("search-input");
+  if (input) {
+    input.addEventListener("input", () => {
+      filtrarPeliculas();
+      actualizarContadorPeliculas();
+    });
+  }
+</script>
+
+
+
+</body>
+</html>
