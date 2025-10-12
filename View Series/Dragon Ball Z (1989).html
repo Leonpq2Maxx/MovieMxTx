@@ -606,7 +606,7 @@
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
       titulo: "Dragon Ball Z",
-      imagen: "https://image.tmdb.org/t/p/w780/8PT42NbjTZzYzCnPzg4NZzSW97n.jpg",
+      imagen: "https://image.tmdb.org/t/p/w300/8PT42NbjTZzYzCnPzg4NZzSW97n.jpg",
       genero: "Animacion",
       archivo: "../View Series/Dragon Ball Z (1989).html",
       tipo: "serie",
@@ -1331,14 +1331,6 @@ player.on('play', () => {
     
     /* ACA VA LA NOMBRE, IMAGEN, GENERO, ARCHIVO DONDE GUARDAN SU HTML DE PELICULA Y EL TIEMPO */
     document.getElementById('btn-favorito').addEventListener('click', () => {
-      const nuevaPelicula = {
-        titulo: "En el barro",
-        imagen: "https://image.tmdb.org/t/p/original/kKi1YdzQNM87Mcz7WxxclHbevwr.jpg",
-        genero: "Genero",
-        archivo: "../View Series/En el barro (2025).html",
-        tipo: "serie",
-        timestamp: Date.now()
-      };
 
       /* animacion de favoritos */
       const btn = document.getElementById('btn-favorito');
