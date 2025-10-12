@@ -388,7 +388,70 @@
 }
 
 
-  </style>
+  
+/* 🔴 Modal "Continuar Viendo" estilo Netflix */
+#continue-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(6px);
+  z-index: 99999;
+}
+#continue-modal.active { display: flex; }
+#continue-modal .modal-box {
+  background: #141414;
+  color: #fff;
+  border-radius: 12px;
+  padding: 20px 25px;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 0 25px rgba(229,9,20,0.5);
+  text-align: center;
+}
+#continue-modal h3 {
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  color: #e50914;
+}
+#continue-modal .actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+#continue-modal button {
+  flex: 1;
+  padding: 8px 12px;
+  background: #e50914;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+#continue-modal button:hover {
+  background: #f6121d;
+}
+/* 🔴 Barra de progreso debajo de episodios */
+.episode-card .progress-bar-container {
+  width: 100%;
+  height: 5px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 6px;
+}
+.episode-card .progress-bar {
+  height: 100%;
+  background: #e50914;
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+</style>
 </head>
 
 <body ondragstart="return false;" ondrop="return false;">
@@ -406,6 +469,8 @@
   color:#ff2d5b;
 "></div>
 
+
+  <div id="resume-msg">✅ Reanudando donde lo dejaste: </div>
 
   <div class="info">
     <i class="fal fa-calendar-alt"></i><span>2024</span> <!--Aca va el año de estreno de pelicula-->
@@ -438,7 +503,154 @@
   </div>
   <br>
 
+  <!-- 🔔 MODAL UNIFICADO DE FAVORITOS (para ambos mensajes) -->
+<div id="modal-favoritos" class="modal-fav" aria-hidden="true">
+  <div class="modal-fav-backdrop"></div>
+  <div class="modal-fav-box">
+    <h3 id="modal-fav-texto">Mensaje aquí</h3>
+    <button id="modal-fav-aceptar">Aceptar</button>
+  </div>
+</div>
+
+<style>
+  .modal-fav {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+  }
+  .modal-fav[aria-hidden="false"] {
+    display: flex;
+    animation: fadeIn 0.4s ease forwards;
+  }
+  .modal-fav-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(6px);
+  }
+  .modal-fav-box {
+    position: relative;
+    background: linear-gradient(145deg, #0d0d0d, #1a1a1a);
+    border: 2px solid #ff2d5b;
+    border-radius: 14px;
+    padding: 25px 30px;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 0 25px rgba(255,45,91,0.5);
+    max-width: 90%;
+    width: 380px;
+    z-index: 10;
+    animation: scaleUp 0.3s ease forwards;
+  }
+  .modal-fav-box h3 {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    color: #fff;
+  }
+  #modal-fav-aceptar {
+    background: linear-gradient(135deg, #ff2d5b, #ff5e7e);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    padding: 10px 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    animation: bounceIn 0.6s ease;
+  }
+  #modal-fav-aceptar:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 0 15px rgba(255,45,91,0.8);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes scaleUp {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  @keyframes bounceIn {
+    0% { transform: scale(0.6); opacity: 0; }
+    60% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
+  }
+</style>
+
+<script>
+  // 🔹 Función general para mostrar el modal
+  function mostrarModalFavoritos(mensaje) {
+    const modal = document.getElementById('modal-favoritos');
+    const texto = document.getElementById('modal-fav-texto');
+    const btnAceptar = document.getElementById('modal-fav-aceptar');
+    texto.textContent = mensaje;
+    modal.setAttribute('aria-hidden', 'false');
+
+    let cerrarTimeout = setTimeout(() => cerrarModal(), 15000);
+
+    function cerrarModal() {
+      modal.setAttribute('aria-hidden', 'true');
+      clearTimeout(cerrarTimeout);
+    }
+
+    btnAceptar.onclick = cerrarModal;
+    modal.querySelector('.modal-fav-backdrop').onclick = cerrarModal;
+  };
+
+    // 🔹 Botón "Agregar a Favoritos"
+  document.getElementById('btn-favorito').addEventListener('click', () => {
+    const nuevaSerie = {
+      titulo: "The Walking dead: The ones two live",
+      imagen: "https://image.tmdb.org/t/p/w300/t1yUeYKw3s0VntQxzdUgza4msGU.jpg",
+      genero: "Acción • Drama",
+      archivo: "../View Series/The Walking Dead The ones two live (2024).html",
+      tipo: "serie",
+      timestamp: Date.now()
+    };
+
+    const btn = document.getElementById('btn-favorito');
+    btn.classList.add('animado');
+    setTimeout(() => btn.classList.remove('animado'), 300);
+
+    let favoritos = JSON.parse(localStorage.getItem('favoritos_detalles') || '[]');
+
+    if (!favoritos.some(f => f.titulo === nuevaSerie.titulo)) {
+      favoritos.push(nuevaSerie);
+      localStorage.setItem('favoritos_detalles', JSON.stringify(favoritos));
+      mostrarModalFavoritos("⭐ Serie agregada a favoritos");
+      setTimeout(() => window.location.href = "../View Peliculas/favoritos.html", 1800);
+    } else {
+      mostrarModalFavoritos("🎬 Esta serie ya está agregada en favoritos");
+    }
+  });
+</script>
+
+
+<script>
+  function mostrarModalFavoritoExistente() {
+    const modal = document.getElementById('modal-ya-favorito');
+    const btnAceptar = document.getElementById('btn-fav-aceptar');
+    modal.setAttribute('aria-hidden', 'false');
+
+    let cerrarTimeout = setTimeout(() => cerrarModal(), 15000); // auto cierre 15s
+
+    function cerrarModal() {
+      modal.setAttribute('aria-hidden', 'true');
+      clearTimeout(cerrarTimeout);
+    }
+
+    btnAceptar.onclick = cerrarModal;
+    modal.querySelector('.modal-fav-backdrop').onclick = cerrarModal;
+  }
+</script>
+
+
 <!-- ---------- INICIA: Modal de Temporadas y Episodios ---------- -->
+
 
 <!-- Modal -->
 <div id="seasons-modal" class="seasons-modal" aria-hidden="true" role="dialog" aria-label="Temporadas y episodios">
@@ -477,7 +689,7 @@
     </div>
   </div>
 </div>
-
+  <br>
 <!-- ---------- ESTILOS (dark, moderno, responsive) ---------- -->
 <style>
   :root{
@@ -671,7 +883,7 @@
 
 <!-- ---------- SCRIPT: datos + interacción ---------- -->
 <script>
-const SERIES_KEY = "WalkingDead_TheOnesTwoLive";
+const SERIES_KEY = "The_Kilking_Dead_The_Ones_Two_Live_Serie_2024";
 
   /* ---------- Datos: cambia esto por tu contenido real ---------- */
   const seasonsData = [
@@ -930,8 +1142,6 @@ document.addEventListener("DOMContentLoaded", () => {
     
   </style>
 
-  <br>
-
   <div class="recomendaciones">
     <h4>Podría interesarte:</h4>
     <br/>
@@ -989,6 +1199,31 @@ document.addEventListener("DOMContentLoaded", () => {
       ]
     });
 
+    // ✅ Reanudar episodio al presionar Play
+player.on('play', () => {
+  const ultimo = JSON.parse(localStorage.getItem(`ultimoEpisodio_${SERIES_KEY}`) || 'null');
+  if (ultimo) {
+    const season = seasonsData.find(s => s.title === ultimo.temporada);
+    const ep = season ? season.episodes.find(e => e.id === ultimo.id) : null;
+
+    if (ep && ep.href) {
+      const currentSrc = videoElement.querySelector('source').getAttribute('src');
+      if (currentSrc !== ep.href) {
+        // Cambiar al episodio guardado
+        const source = videoElement.querySelector('source');
+        source.setAttribute('src', ep.href);
+        videoElement.load();
+        videoElement.play();
+
+        // Mostrar indicador en pantalla
+        document.getElementById('episodio-actual').textContent =
+          `🔁 Continuando: ${ultimo.temporada} - ${ultimo.episodio}`;
+      }
+    }
+  }
+});
+
+
     document.addEventListener('DOMContentLoaded', () => {
       const savedTime = localStorage.getItem(STORAGE_KEY);
       // ❌ Evita reanudar desde el tiempo guardado
@@ -1021,46 +1256,23 @@ document.addEventListener("DOMContentLoaded", () => {
     
     /* ACA VA LA NOMBRE, IMAGEN, GENERO, ARCHIVO DONDE GUARDAN SU HTML DE PELICULA Y EL TIEMPO */
     document.getElementById('btn-favorito').addEventListener('click', () => {
-      const nuevaPelicula = {
-        titulo: "The Walking dead: The ones two live",
-        imagen: "https://image.tmdb.org/t/p/w300/t1yUeYKw3s0VntQxzdUgza4msGU.jpg",
-        genero: "Genero",
-        archivo: "../View Series/The Walking Dead The ones two live (2024).html",
-        tipo: "serie",
-        timestamp: Date.now()
-      };
 
       /* animacion de favoritos */
       const btn = document.getElementById('btn-favorito');
       btn.classList.add('animado');
       setTimeout(() => btn.classList.remove('animado'), 300);
-      mostrarMensaje("⭐ Agregado a Favoritos");
 
       let favoritos = JSON.parse(localStorage.getItem('favoritos_detalles') || '[]');
       if (!favoritos.some(f => f.titulo === nuevaPelicula.titulo)) {
-        favoritos.push(nuevaPelicula);
-        localStorage.setItem('favoritos_detalles', JSON.stringify(favoritos));
-      }
-      window.location.href = "../View Peliculas/favoritos.html";
+  favoritos.push(nuevaPelicula);
+  localStorage.setItem('favoritos_detalles', JSON.stringify(favoritos));
+  window.location.href = "../View Peliculas/favoritos.html";
+} else {
+  mostrarModalFavoritoExistente();
+}
+
     });
   </script>
-
-  <!--Aca va el mensaje que se ha agregado al historial-->
-  <div id="mensaje-confirmacion" style="
-    display: none;
-    position: fixed;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.85);
-    color: #fff;
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-size: 1rem;
-    z-index: 9999;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-    transition: opacity 0.5s ease;">
-  </div>
 
   <script>
     function mostrarMensaje(texto) {
@@ -1075,52 +1287,335 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   </script>
   
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const videoElement = document.querySelector('.vid1');
-      if (!videoElement) return;
+  
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('continue-modal');
+  const btnContinuar = document.getElementById('btn-continuar');
+  const btnNuevo = document.getElementById('btn-empezar-nuevo');
+  const continueInfo = document.getElementById('continue-info');
+  const videoElement = document.querySelector('.vid1');
+  const source = videoElement.querySelector('source');
 
-      const videoSrc = videoElement.querySelector('source').getAttribute('src');
-      const STORAGE_KEY = 'pos_' + videoSrc;
+  const ultimo = JSON.parse(localStorage.getItem(`ultimoEpisodio_${SERIES_KEY}`) || 'null');
+  const ultimoTiempo = localStorage.getItem('ultimoTiempoReproduccion') || 0;
 
-      /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
-      const historialTitulo = "The walking dead: The ones two live";
-      const historialImagen = "https://image.tmdb.org/t/p/w300/t1yUeYKw3s0VntQxzdUgza4msGU.jpg";
-      const historialArchivo = "../View Series/The Walking Dead The ones two live (2024).html";
+  if (ultimo) {
+    continueInfo.textContent = `${ultimo.temporada} - ${ultimo.episodio} | Minuto ${(ultimoTiempo/60).toFixed(1)}`;
+    modal.classList.add('active');
+  }
 
-      let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
-      let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
-      
-      if (indexHist === -1) {
-        historial.push({
-        titulo: historialTitulo,
-        imagen: historialImagen,
-        progreso: "Asistido 0 min",
-        archivo: historialArchivo,
-        tipo: "serie", // ✅ ya está
-        timestamp: Date.now()
-      });
-      localStorage.setItem('historial_usuarios', JSON.stringify(historial));
-      indexHist = historial.length - 1;
-      mostrarMensaje('✅ Agregado al historial');
-    }
-    setInterval(() => {
-      if (!videoElement.paused && !videoElement.ended) {
-        historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
-        indexHist = historial.findIndex(item => item.titulo === historialTitulo);
-        if (indexHist !== -1) {
-          const minutos = Math.floor(videoElement.currentTime / 60);
-          historial[indexHist].progreso = `Asistido ${minutos} min`;
-          historial[indexHist].timestamp = Date.now(); // ✅ esto asegura que suba al principio
-          localStorage.setItem('historial_usuarios', JSON.stringify(historial));
-        }
-        localStorage.setItem(STORAGE_KEY, videoElement.currentTime);
+  btnContinuar.addEventListener('click', () => {
+    if (ultimo) {
+      const season = seasonsData.find(s => s.title === ultimo.temporada);
+      const ep = season ? season.episodes.find(e => e.id === ultimo.id) : null;
+      if (ep && ep.href) {
+        source.setAttribute('src', ep.href);
+        videoElement.load();
+        videoElement.currentTime = parseFloat(ultimoTiempo) || 0;
+        videoElement.play();
       }
-    }, 10000);
+    }
+    modal.classList.remove('active');
+  });
+
+  btnNuevo.addEventListener('click', () => {
+    if (ultimo) {
+      const season = seasonsData.find(s => s.title === ultimo.temporada);
+      const ep = season ? season.episodes.find(e => e.id === ultimo.id) : null;
+      if (ep && ep.href) {
+        source.setAttribute('src', ep.href);  // 🔴 aseguramos que cargue el episodio actual
+        videoElement.load();
+        videoElement.currentTime = 0;         // 🔴 empieza desde 0
+        videoElement.play();
+      }
+    }
+    localStorage.removeItem('ultimoTiempoReproduccion');
+    modal.classList.remove('active');
+  });
+
+  // Guardar progreso cada 5s
+  setInterval(() => {
+    if (!videoElement.paused && !videoElement.ended) {
+      localStorage.setItem('ultimoTiempoReproduccion', videoElement.currentTime);
+      actualizarBarraProgreso();
+    }
+  }, 5000);
+
+  // Autoplay al siguiente episodio
+  videoElement.addEventListener('ended', () => {
+    const ultimo = JSON.parse(localStorage.getItem(`ultimoEpisodio_${SERIES_KEY}`) || 'null');
+    if (ultimo) {
+      const season = seasonsData.find(s => s.title === ultimo.temporada);
+      const idx = season.episodes.findIndex(e => e.id === ultimo.id);
+      if (idx !== -1 && idx + 1 < season.episodes.length) {
+        const nextEp = season.episodes[idx+1];
+        if (nextEp.href) {
+          source.setAttribute('src', nextEp.href);
+          videoElement.load();
+          videoElement.play();
+          localStorage.setItem(`ultimoEpisodio_${SERIES_KEY}`, JSON.stringify({
+            temporada: season.title,
+            episodio: nextEp.title,
+            id: nextEp.id
+          }));
+          document.getElementById('episodio-actual').textContent =
+            `▶ Viendo: ${season.title} - ${nextEp.title}`;
+        }
+      }
+    }
+  });
+
+  // Mostrar barra de progreso debajo de cada episodio
+  function actualizarBarraProgreso(){
+    const ultimo = JSON.parse(localStorage.getItem(`ultimoEpisodio_${SERIES_KEY}`) || 'null');
+    const tiempo = parseFloat(localStorage.getItem('ultimoTiempoReproduccion') || 0);
+    if (ultimo && tiempo > 0) {
+      const card = [...document.querySelectorAll('.episode-card')]
+        .find(c => c.querySelector('.ep-title').textContent.includes(ultimo.episodio));
+      if (card) {
+        if (!card.querySelector('.progress-bar-container')) {
+          const pbContainer = document.createElement('div');
+          pbContainer.className = 'progress-bar-container';
+          pbContainer.innerHTML = '<div class="progress-bar"></div>';
+          card.appendChild(pbContainer);
+        }
+        const barra = card.querySelector('.progress-bar');
+        // Para calcular porcentaje, suponemos duración estándar 45 min = 2700s
+        const porcentaje = Math.min(100, (tiempo / 2700) * 100);
+        barra.style.width = porcentaje + '%';
+      }
+    }
+  }
+  actualizarBarraProgreso();
+});
+</script>
+
+<!-- 🔴 Modal Continuar Viendo -->
+<div id="continue-modal">
+  <div class="modal-box">
+    <!-- 🔴 La X debe estar DENTRO de modal-box -->
+    <button id="close-continue-modal" aria-label="Cerrar">✖</button>
+    
+    <h3>¿Quieres continuar viendo desde donde lo dejaste?</h3>
+    <p id="continue-info"></p>
+    <div class="actions">
+      <button id="btn-continuar">Continuar</button>
+      <button id="btn-empezar-nuevo">Empezar desde 0</button>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('continue-modal');
+  const closeModalX = document.getElementById('close-continue-modal');
+
+  // 👇 Asegúrate de que esto exista
+  closeModalX.addEventListener('click', () => {
+    modal.classList.remove('active'); // 🔴 Oculta el modal
+  });
+});
+</script>
+
+
+  <style>
+   #continue-modal .modal-box {
+  position: relative;   /* 🔹 Esto asegura que la X se posicione dentro de esta caja */
+  background: #141414;
+  color: #fff;
+  border-radius: 12px;
+  padding: 40px 25px 25px;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 0 25px rgba(229,9,20,0.5);
+  text-align: center;
+}
+
+#close-continue-modal {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: rgba(229,9,20,0.7);
+  font-size: 0.6rem;  /* 🔹 Ajusta tamaño de la X */
+  cursor: pointer;
+  padding: 2px 6px;
+}
+#close-continue-modal:hover {
+  color: #e50914;
+}
+
+
+
+  </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('continue-modal');
+  const btnContinuar = document.getElementById('btn-continuar');
+  const btnNuevo = document.getElementById('btn-empezar-nuevo');
+  const continueInfo = document.getElementById('continue-info');
+  const videoElement = document.querySelector('.vid1');
+  const source = videoElement.querySelector('source');
+
+  const ultimo = JSON.parse(localStorage.getItem(`ultimoEpisodio_${SERIES_KEY}`) || 'null');
+  const ultimoTiempo = localStorage.getItem('ultimoTiempoReproduccion') || 0;
+
+  if (ultimo) {
+    continueInfo.textContent = `${ultimo.temporada} - ${ultimo.episodio} | Minuto ${(ultimoTiempo/60).toFixed(1)}`;
+    modal.classList.add('active');
+  }
+
+  btnContinuar.addEventListener('click', () => {
+    if (ultimo) {
+      const closeModalX = document.getElementById('close-continue-modal');
+closeModalX.addEventListener('click', () => {
+  modal.classList.remove('active');
+});
+
+      const closeModalX = document.getElementById('close-continue-modal');
+closeModalX.addEventListener('click', () => {
+  modal.classList.remove('active');
+});
+
+
+      const season = seasonsData.find(s => s.title === ultimo.temporada);
+      const ep = season ? season.episodes.find(e => e.id === ultimo.id) : null;
+      if (ep && ep.href) {
+        source.setAttribute('src', ep.href);
+        videoElement.load();
+        videoElement.currentTime = parseFloat(ultimoTiempo) || 0;
+        videoElement.play();
+      }
+    }
+    modal.classList.remove('active');
+  });
+
+  btnNuevo.addEventListener('click', () => {
+    if (ultimo) {
+      const season = seasonsData.find(s => s.title === ultimo.temporada);
+      const ep = season ? season.episodes.find(e => e.id === ultimo.id) : null;
+      if (ep && ep.href) {
+        source.setAttribute('src', ep.href);  // 🔴 aseguramos que cargue el episodio actual
+        videoElement.load();
+        videoElement.currentTime = 0;         // 🔴 empieza desde 0
+        videoElement.play();
+      }
+    }
+    localStorage.removeItem('ultimoTiempoReproduccion');
+    modal.classList.remove('active');
+  });
+
+  // Guardar progreso cada 5s
+  setInterval(() => {
+    if (!videoElement.paused && !videoElement.ended) {
+      localStorage.setItem('ultimoTiempoReproduccion', videoElement.currentTime);
+      actualizarBarraProgreso();
+    }
+  }, 5000);
+
+  // Autoplay al siguiente episodio
+  videoElement.addEventListener('ended', () => {
+    const ultimo = JSON.parse(localStorage.getItem(`ultimoEpisodio_${SERIES_KEY}`) || 'null');
+    if (ultimo) {
+      const season = seasonsData.find(s => s.title === ultimo.temporada);
+      const idx = season.episodes.findIndex(e => e.id === ultimo.id);
+      if (idx !== -1 && idx + 1 < season.episodes.length) {
+        const nextEp = season.episodes[idx+1];
+        if (nextEp.href) {
+          source.setAttribute('src', nextEp.href);
+          videoElement.load();
+          videoElement.play();
+          localStorage.setItem(`ultimoEpisodio_${SERIES_KEY}`, JSON.stringify({
+            temporada: season.title,
+            episodio: nextEp.title,
+            id: nextEp.id
+          }));
+          document.getElementById('episodio-actual').textContent =
+            `▶ Viendo: ${season.title} - ${nextEp.title}`;
+        }
+      }
+    }
+  });
+
+  // Mostrar barra de progreso debajo de cada episodio
+  function actualizarBarraProgreso(){
+    const ultimo = JSON.parse(localStorage.getItem(`ultimoEpisodio_${SERIES_KEY}`) || 'null');
+    const tiempo = parseFloat(localStorage.getItem('ultimoTiempoReproduccion') || 0);
+    if (ultimo && tiempo > 0) {
+      const card = [...document.querySelectorAll('.episode-card')]
+        .find(c => c.querySelector('.ep-title').textContent.includes(ultimo.episodio));
+      if (card) {
+        if (!card.querySelector('.progress-bar-container')) {
+          const pbContainer = document.createElement('div');
+          pbContainer.className = 'progress-bar-container';
+          pbContainer.innerHTML = '<div class="progress-bar"></div>';
+          card.appendChild(pbContainer);
+        }
+        const barra = card.querySelector('.progress-bar');
+        // Para calcular porcentaje, suponemos duración estándar 45 min = 2700s
+        const porcentaje = Math.min(100, (tiempo / 2700) * 100);
+        barra.style.width = porcentaje + '%';
+      }
+    }
+  }
+  actualizarBarraProgreso();
+});
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const videoElement = document.querySelector('.vid1');
+    if (!videoElement) return;
+
+    const videoSrc = videoElement.querySelector('source').getAttribute('src');
+    const STORAGE_KEY = 'pos_' + videoSrc;
+
+    /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
+    const historialTitulo = "The walking dead: The ones two live";
+    const historialImagen = "https://image.tmdb.org/t/p/w300/t1yUeYKw3s0VntQxzdUgza4msGU.jpg";
+    const historialArchivo = "../View Series/The Walking Dead The ones two live (2024).html";
+
+    let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
+    let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
+    
+    if (indexHist === -1) {
+      historial.push({
+      titulo: historialTitulo,
+      imagen: historialImagen,
+      progreso: "Asistido 0 min",
+      archivo: historialArchivo,
+      tipo: "serie", // ✅ ya está
+      timestamp: Date.now()
     });
-  </script>
+    localStorage.setItem('historial_usuarios', JSON.stringify(historial));
+    indexHist = historial.length - 1;
+    mostrarModalFavoritos("✅ Agregado al historial");
+
+  }
+  setInterval(() => {
+    if (!videoElement.paused && !videoElement.ended) {
+      historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
+      indexHist = historial.findIndex(item => item.titulo === historialTitulo);
+      if (indexHist !== -1) {
+        const minutos = Math.floor(videoElement.currentTime / 60);
+        historial[indexHist].progreso = `Asistido ${minutos} min`;
+        historial[indexHist].timestamp = Date.now(); // ✅ esto asegura que suba al principio
+        localStorage.setItem('historial_usuarios', JSON.stringify(historial));
+      }
+      localStorage.setItem(STORAGE_KEY, videoElement.currentTime);
+    }
+  }, 10000);
+  });
+</script>
+
+
 </body>
 </html>
+
+
 
 
 
