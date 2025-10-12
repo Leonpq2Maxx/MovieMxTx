@@ -388,6 +388,133 @@ i {
 
 </head>
 <body class="oneGrd MN-2 mobS hdMn bD onIndx onHm" id="mainCont">
+    
+    
+   <!-- Pantalla de carga MovieTx mejorada -->
+<div id="loader-container">
+  <div class="loader-content">
+    <div class="logo-container">
+      <img src="Logo MovieTx.png" alt="MovieTx Logo" class="logo-movietx" />
+      <div class="reflejo"></div>
+    </div>
+    <h1 class="titulo-movietx">MovieTx</h1>
+    <div class="barra-externa">
+      <div class="barra-interna"></div>
+    </div>
+    <p class="texto-carga">Disfrutar mi aplicación de películas y series</p>
+  </div>
+</div>
+
+<style>
+#loader-container {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  z-index: 99999;
+  text-align: center;
+}
+.logo-container {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 10px;
+}
+.logo-movietx {
+  width: 150px;
+  display: block;
+  filter: drop-shadow(0 0 10px #fff);
+}
+.reflejo {
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.1) 100%);
+  animation: reflejoLogo 2s linear infinite;
+  transform: skewX(-25deg);
+}
+@keyframes reflejoLogo {
+  0% { left: -75%; }
+  100% { left: 125%; }
+}
+.titulo-movietx {
+  font-size: 2.2em;
+  font-weight: bold;
+  margin-top: 15px;
+  background: linear-gradient(90deg, #fff, #00bfff, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200%;
+  animation: brilloTexto 3s linear infinite;
+}
+@keyframes brilloTexto {
+  0% { background-position: 0%; }
+  100% { background-position: 200%; }
+}
+.barra-externa {
+  width: 220px;
+  height: 8px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 20px;
+  margin: 25px auto 10px auto;
+  overflow: hidden;
+  box-shadow: 0 0 10px #00bfff;
+}
+.barra-interna {
+  width: 0%;
+  height: 100%;
+  background: #00bfff;
+  box-shadow: 0 0 20px #00bfff;
+  border-radius: 20px;
+  animation: cargaBarra 4s ease-in-out infinite;
+}
+@keyframes cargaBarra {
+  0% { width: 0%; }
+  50% { width: 100%; }
+  100% { width: 0%; }
+}
+.texto-carga {
+  position: relative;
+  font-size: 1em;
+  color: #ddd;
+  text-align: center;
+  margin-top: 60px; /* más abajo */
+  opacity: 0;
+  animation: fadeUp 3s ease-out 1s forwards, reflejoTexto 4s linear infinite 3s;
+  background: linear-gradient(90deg, #fff, #00bfff, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200%;
+}
+@keyframes fadeUp {
+  0% { transform: translateY(40px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+@keyframes reflejoTexto {
+  0% { background-position: 0%; }
+  100% { background-position: 200%; }
+}
+</style>
+
+<script>
+window.addEventListener('load', () => {
+  const loader = document.getElementById('loader-container');
+  loader.style.transition = 'opacity 1s ease';
+  loader.style.opacity = '0';
+  setTimeout(() => loader.remove(), 1000);
+});
+</script>
+ 
+  
+  
+    
 <script>/*<![CDATA[*/ (localStorage.getItem('mode')) === 'darkmode' ? document.querySelector('#mainCont').classList.add('drK') : document.querySelector('#mainCont').classList.remove('drK') /*]]>*/</script>
 <input class="prfI hidden" id="offPrf" type="checkbox"/>
 <input class="navI hidden" id="offNav" type="checkbox"/>
@@ -591,13 +718,8 @@ document.querySelectorAll('.menu-item').forEach(function(item) {
     <div class="carousel-track-container">
       <ul class="carousel-track">
         <li class="slide current-slide">
-          <a href="View Series/En el barro (2025).html">
-            <img alt="" src="https://image.tmdb.org/t/p/w780/v8xHeTkIBOl51yRp0zcAu2VYhdZ.jpg" loading="lazy"/>
-          </a>
-        </li>
-        <li class="slide">
           <a href="View Peliculas/El Conjuro 4 El ultimo rito (2025).html">
-            <img alt="" src="https://image.tmdb.org/t/p/w780/cDNuAKzhfM6GQ8jce55jn9SQLY3.jpg" loading="lazy"/>
+            <img alt="" src="https://image.tmdb.org/t/p/original/cDNuAKzhfM6GQ8jce55jn9SQLY3.jpg" loading="lazy"/>
           </a>
         </li>
         <li class="slide">
@@ -909,14 +1031,14 @@ document.querySelectorAll('.card-link').forEach(link => {
         <span class="lock-icon">🔒</span>
       </div>
     </a>
-    <a class="card-link" data-href="View Series/El Juego Del Calamar (2021).html">
+    <a class="card-link" data-href="">
       <div class="xplus">
         <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/xNvlt4jn2KbuKJoZ9UiVpm7lYjr.jpg"/>
         <i>El juego Del calamar</i>
         <span class="lock-icon">🔒</span>
       </div>
     </a>
-    <a class="card-link" data-href="View Series/Una buena familia americana (2025).html">
+    <a class="card-link" data-href="">
       <div class="xplus">
         <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/aIAdaQ0R9G75h3iCckaoxQrHRH.jpg"/>
         <i>Una buena familia...</i>
@@ -3367,7 +3489,7 @@ document.querySelectorAll('.card-link').forEach(link => {
 <nav class="menu-inferior">
   <a href="Menus Peliculas Series/Precio.html"><i class="fas fa-dollar-sign"></i><span>Precio</span></a>
   <a href="View Peliculas/favoritos.html"><i class="fas fa-heart"></i><span>Favoritos</span></a>
-  <a href="Mostras Mas/Busqueda.html"><i class="fas fa-search"></i><span>Buscar</span></a>
+  <a href="Buscar/Buscador.html"><i class="fas fa-search"></i><span>Buscar</span></a>
   <a href="Menus Peliculas Series/Compartir.html"><i class="fas fa-share-alt"></i><span>Compartir</span></a>
   <a href="View Peliculas/historial_usuario.html"><i class="fas fa-history"></i><span>Historial</span></a>
 </nav>
