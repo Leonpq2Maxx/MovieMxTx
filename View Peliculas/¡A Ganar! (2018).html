@@ -409,6 +409,21 @@
 
   <div id="resume-msg">✅ Reanudando donde lo dejaste: ¡A GANAR!</div>
 
+  <div class="hero-banner" style="
+  background: linear-gradient(to bottom, rgba(0,0,0,0.6), #000), 
+              url('https://image.tmdb.org/t/p/w1280/zwfec4vK1EvkQapE5wcYrB1BHov.jpg') center/cover;
+  height: 250px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 20px;
+  text-align: center;
+  color: #fff;
+">
+  <h1 style="font-size: 1.8rem; text-shadow: 0 0 10px #000;">¡A GANAR! (2018)</h1>
+</div>
+
+
   <div class="info">
     <i class="fal fa-calendar-alt"></i><span>2018</span> <!--Aca va el año de estreno de pelicula-->
     <i class="fal fa-clock"></i><span>1h 41min</span> <!--aca va cuanto dura-->
@@ -430,11 +445,37 @@
     <p class="sinopsis">
       Basado en la historia real del equipo de voleibol femenino de West High School. Tras la trágica muerte de la jugadora estrella de la escuela, Caroline 'Line' Found, las jugadores restantes deberán unirse bajo la dirección de su dura entrenadora (Helen Hunt) con la esperanza de ganar el campeonato estatal.
     </p>
+
+    <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
+  <p><strong>Director:</strong> Sean McNamara</p>
+  <p><strong>Reparto:</strong> Helen Hunt, Erin Moriarty, William Hurt</p>
+  <p><strong>Género:</strong> Drama | <strong>País:</strong> 🇺🇸 EE.UU.</p>
+</div>
+
   
     <div class="acciones">
       <button id="btn-favorito">⭐ Agregar a Favoritos</button>
     </div>
   </div>
+
+  <div class="acciones">
+  <button class="play-btn">▶ Ver Tráiler</button>
+  <button id="btn-favorito">⭐ Agregar a Favoritos</button>
+</div>
+
+<div id="trailer-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;justify-content:center;align-items:center;">
+  <iframe width="90%" height="60%" src="https://www.youtube.com/embed/vnqJXc35h48" frameborder="0" allowfullscreen></iframe>
+</div>
+
+<script>
+  document.querySelector('.play-btn').onclick = () => {
+    document.getElementById('trailer-modal').style.display = 'flex';
+  };
+  document.getElementById('trailer-modal').onclick = () => {
+    document.getElementById('trailer-modal').style.display = 'none';
+  };
+</script>
+
 
   <!-- CONTINUAR -->
 
@@ -811,6 +852,11 @@ document.addEventListener('DOMContentLoaded', () => {
       </a>
     </div>
   </div>
+
+  <footer style="text-align:center;color:#777;padding:20px 10px;border-top:1px solid rgba(255,255,255,0.1);margin-top:30px;">
+  <p>MovieTx © 2025 — Todos los derechos reservados</p>
+</footer>
+
   
   <!-- ¡¡¡NO BORRAR ESTE SCRIPT ES DE FAVORITOS Y SI LO BORRAN AFECTARAN EL FUNCIONAMIENTO DE REPRODUCTOR Y FAVORITOS!!! -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.6.7/plyr.min.js">
