@@ -409,21 +409,6 @@
 
   <div id="resume-msg">✅ Reanudando donde lo dejaste: ¡A GANAR!</div>
 
-  <div class="hero-banner" style="
-  background: linear-gradient(to bottom, rgba(0,0,0,0.6), #000), 
-              url('https://image.tmdb.org/t/p/w1280/zwfec4vK1EvkQapE5wcYrB1BHov.jpg') center/cover;
-  height: 250px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: 20px;
-  text-align: center;
-  color: #fff;
-">
-  <h1 style="font-size: 1.8rem; text-shadow: 0 0 10px #000;">¡A GANAR! (2018)</h1>
-</div>
-
-
   <div class="info">
     <i class="fal fa-calendar-alt"></i><span>2018</span> <!--Aca va el año de estreno de pelicula-->
     <i class="fal fa-clock"></i><span>1h 41min</span> <!--aca va cuanto dura-->
@@ -435,7 +420,6 @@
       </svg>
       <span>1080P</span>
     </div>
-    <span>🇲🇽</span>
   </div>
   
   <div class="info-pelicula">
@@ -449,14 +433,16 @@
     <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
   <p><strong>Director:</strong> Sean McNamara</p>
   <p><strong>Reparto:</strong> Helen Hunt, Erin Moriarty, William Hurt</p>
-  <p><strong>Género:</strong> Drama | <strong>País:</strong> 🇺🇸 EE.UU.</p>
+  <p><strong>Estreno:</strong> 06/04/2018 | <strong>Idioma:</strong> 🇲🇽.</p>
 </div>
 
-  
+  <br>
     <div class="acciones">
       <button id="btn-favorito">⭐ Agregar a Favoritos</button>
     </div>
   </div>
+  
+  <br>
 
   <div class="acciones">
   <button class="play-btn">▶ Ver Tráiler</button>
@@ -468,7 +454,7 @@
 </div>
 
 <script>
-  document.querySelector('.play-btn').onclick = () => {
+  document.querySelector('.play-btn').onclick = (favoritos.html) => {
     document.getElementById('trailer-modal').style.display = 'flex';
   };
   document.getElementById('trailer-modal').onclick = () => {
