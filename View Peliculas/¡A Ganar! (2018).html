@@ -454,10 +454,10 @@
 </div>
 
 <script>
-  document.querySelector('.play-btn').onclick = (favoritos.html) => {
+  document.querySelector('.play-btn').onclick = () => {
     document.getElementById('trailer-modal').style.display = 'flex';
   };
-  document.getElementById('trailer-modal').onclick = () => {
+  document.getElementById('trailer-modal').onclick = (favoritos.html) => {
     document.getElementById('trailer-modal').style.display = 'none';
   };
 </script>
