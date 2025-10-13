@@ -441,27 +441,6 @@
       <button id="btn-favorito">⭐ Agregar a Favoritos</button>
     </div>
   </div>
-  
-  <br>
-
-  <div class="acciones">
-  <button class="play-btn">▶ Ver Tráiler</button>
-  <button id="btn-favorito">⭐ Agregar a Favoritos</button>
-</div>
-
-<div id="trailer-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9999;justify-content:center;align-items:center;">
-  <iframe width="90%" height="60%" src="https://www.youtube.com/embed/vnqJXc35h48" frameborder="0" allowfullscreen></iframe>
-</div>
-
-<script>
-  document.querySelector('.play-btn').onclick = () => {
-    document.getElementById('trailer-modal').style.display = 'flex';
-  };
-  document.getElementById('trailer-modal').onclick = (favoritos.html) => {
-    document.getElementById('trailer-modal').style.display = 'none';
-  };
-</script>
-
 
   <!-- CONTINUAR -->
 
@@ -805,8 +784,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
   </style>
-
-  <br>
   
   <div class="recomendaciones">
     <h4>Podría interesarte:</h4>
