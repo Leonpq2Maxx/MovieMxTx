@@ -5,14 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>2025 Movie</title>
   <style>
-    /* ==================== ESTILOS BASE ==================== */
     body {
       font-family: 'Poppins', sans-serif;
       margin: 0;
       background: #0c0c0c;
       color: white;
     }
-
     header {
       background: linear-gradient(90deg, #111, #1c1c1c);
       padding: 15px;
@@ -24,19 +22,12 @@
       z-index: 10;
       box-shadow: 0 2px 5px rgba(0,0,0,0.7);
     }
-
-    h1 {
-      margin: 0;
-      font-size: 1rem;
-    }
-
-    /* ==================== BUSCADOR ==================== */
+    h1 { margin: 0; font-size: 1rem; }
     .search-box {
       padding: 10px;
       text-align: center;
       position: relative;
     }
-
     .search-box input {
       width: 90%;
       padding: 10px 35px 10px 40px;
@@ -48,12 +39,10 @@
       box-shadow: 0 0 6px rgba(255, 0, 144, 0.2);
       transition: 0.3s;
     }
-
     .search-box input:focus {
       outline: none;
       box-shadow: 0 0 10px #ff0090;
     }
-
     .search-box::before {
       content: '🔍';
       position: absolute;
@@ -64,7 +53,6 @@
       font-size: 1.2rem;
       pointer-events: none;
     }
-
     input::placeholder {
       background: linear-gradient(90deg, #ff0000, #018dff, #ff00d9, #018dff, #ff0090, #ff0000);
       -webkit-background-clip: text;
@@ -72,13 +60,10 @@
       font-weight: bold;
       animation: animateText 5s linear infinite;
     }
-
     @keyframes animateText {
       0% { background-position: 0% }
       100% { background-position: 200% }
     }
-
-    /* ==================== GRID DE PELÍCULAS ==================== */
     .movie-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -86,20 +71,12 @@
       padding: 10px;
       animation: fadeIn 1s ease-in-out;
     }
-
     @media (max-width: 600px) {
-      .movie-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      .movie-grid { grid-template-columns: repeat(2, 1fr); }
     }
-
     @media (orientation: landscape) and (min-width: 700px) {
-      .movie-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
+      .movie-grid { grid-template-columns: repeat(4, 1fr); }
     }
-
-    /* ==================== TARJETAS ==================== */
     .movie {
       background: linear-gradient(180deg, #1c1c1c, #2a2a2a);
       border-radius: 8px;
@@ -111,12 +88,10 @@
       animation: fadeIn 0.6s forwards;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-
     .movie:hover {
       transform: scale(1.05);
       box-shadow: 0 0 15px rgba(255, 0, 144, 0.5);
     }
-
     .movie img {
       width: 100%;
       aspect-ratio: 2 / 3;
@@ -124,11 +99,7 @@
       display: block;
       border-bottom: 1px solid #111;
     }
-
-    .movie.locked img {
-      filter: brightness(0.5);
-    }
-
+    .movie.locked img { filter: brightness(0.5); }
     .movie p {
       margin: 8px;
       text-align: center;
@@ -136,10 +107,7 @@
       color: #f5f5f5;
       text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
     }
-
-    /* ==================== ETIQUETAS ==================== */
-    .movie .tag,
-    .movie .year-tag {
+    .movie .tag, .movie .year-tag {
       position: absolute;
       z-index: 2;
       color: white;
@@ -149,17 +117,8 @@
       font-size: 0.7rem;
       border-radius: 3px;
     }
-
-    .movie .tag {
-      top: 5px;
-      left: 5px;
-    }
-
-    .movie .year-tag {
-      top: 25px;
-      left: 5px;
-    }
-
+    .movie .tag { top: 5px; left: 5px; }
+    .movie .year-tag { top: 25px; left: 5px; }
     .movie .lock-icon {
       position: absolute;
       top: 5px;
@@ -175,12 +134,7 @@
       font-size: 1.1rem;
       color: white;
     }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
-    }
-
+    @keyframes bounce { 0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);}}
     .movie .recien-tag {
       position: absolute;
       top: 160px;
@@ -194,18 +148,8 @@
       z-index: 3;
       animation: pulse 1.5s infinite;
     }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.8; transform: scale(1.1); }
-    }
-
-    /* ==================== ANIMACIONES ==================== */
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-
-    /* ==================== SIN RESULTADOS ==================== */
+    @keyframes pulse {0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.8;transform:scale(1.1);}}
+    @keyframes fadeIn {to { opacity: 1; }}
     .no-results {
       text-align: center;
       padding: 20px;
@@ -213,245 +157,24 @@
       color: #bbb;
       display: none;
     }
-
   </style>
 </head>
-
 <body>
   <header>
     <h1>Buscador <span id="contador" style="font-size: 1.0rem; font-weight: normal; color: #bbb;"></span></h1>
   </header>
-
   <div class="search-box">
     <input type="text" id="search-input" placeholder="Buscar por nombre, género o año..." oninput="filtrarPeliculas()">
   </div>
-
-  <div class="movie-grid" id="movie-grid">
-
-    
-    <div class="movie locked" data-titulo="el conjuro 4 el ultimo rito el culjuro" data-genero="Terror" data-anio="2025" data-html="../View Peliculas/El Conjuro 4  El ultimo rito (2025).html" data-fecha="2025-10-07">
-      <span class="tag">Pelicula</span>
-      <span class="year-tag">2025</span>
-      <img src="https://image.tmdb.org/t/p/w300/dyW5mX4wwDoZWgTYObx6pg9V0i9.jpg">
-      <span class="lock-icon">🔒</span>
-      <p>El conjuro 4: El ultimo rito</p>
-    </div>
-
-    <div class="movie locked" data-titulo="en el barro" data-genero="drama argentina" data-anio="2025" data-html="../View Series/En el barro (2025).html" data-fecha="2025-10-09">
-      <span class="tag">Serie</span>
-      <span class="year-tag">2025</span>
-      <img src="https://image.tmdb.org/t/p/w300/kKi1YdzQNM87Mcz7WxxclHbevwr.jpg">
-      <span class="lock-icon">🔒</span>
-      <p>En el barro</p>
-    </div>
-
-    <div class="movie locked" data-titulo="almas marcadas rule + shaw" data-genero="romance drama" data-anio="2025" data-html="../View Peliculas/Almas marcadas Rule + Shaw (2025).html" data-fecha="2025-10-12">
-      <span class="tag">Pelicula</span>
-      <span class="year-tag">2025</span>
-      <img src="https://image.tmdb.org/t/p/w300/6rFgrN5k4c1HrVoyr0zNDdH4bK5.jpg">
-      <span class="lock-icon">🔒</span>
-      <p>Almas marcadas: Rule + Shaw</p>
-    </div>
-
-
-    <div class="movie locked" data-titulo="culpa mia londres 2" data-genero="romance drama" data-anio="2025" data-html="../View Peliculas/2 Culpa Mia (2025).html" data-fecha="2025-10-08">
-      <span class="tag">Pelicula</span>
-      <span class="year-tag">2025</span>
-      <img src="https://image.tmdb.org/t/p/w300/q0HxfkF9eoa6wSVnzwMhuDSK7ba.jpg">
-      <span class="lock-icon">🔒</span>
-      <p>Culpa mia: Londres</p>
-    </div>
-
-    <div class="movie locked" data-titulo="1978 argentina" data-genero="terror argentina" data-anio="2025" data-html="../View Peliculas/1978 (2025).html" data-fecha="2025-10-08">
-      <span class="tag">Pelicula</span>
-      <span class="year-tag">2025</span>
-      <img src="https://image.tmdb.org/t/p/w300/iyKixwGhGRas1ppAih8E7SG5QDZ.jpg">
-      <span class="lock-icon">🔒</span>
-      <p>1978</p>
-    </div>
-
-    <div class="movie locked" data-titulo="alarum codigo letal" data-genero="accion suspenso crimen" data-anio="2025" data-html="../View Peliculas/Alarum Código Letal (2025).html" data-fecha="2025-10-12">
-      <span class="tag">Pelicula</span>
-      <span class="year-tag">2025</span>
-      <img src="https://image.tmdb.org/t/p/w300/d3QFYKpEY2LSSTh70C227Z2mlwB.jpg">
-      <span class="lock-icon">🔒</span>
-      <p>Alarum: Código letal</p>
-    </div>
-
-    <div class="movie locked" data-titulo="60 minutos" data-genero="accion mma peleas " data-anio="2024" data-html="../View Peliculas/60 Minutos (2024).html" data-fecha="2025-10-08">
-      <span class="tag">Pelicula</span>
-      <span class="year-tag">2024</span>
-      <img src="https://image.tmdb.org/t/p/w300/cND79ZWPFINDtkA8uwmQo1gnPPE.jpg">
-      <span class="lock-icon">🔒</span>
-      <p>60 Minutos</p>
-    </div>
-
-    <div class="movie locked" data-titulo="culpa tuya 1" data-genero="drama romance" data-anio="2024" data-html="../View Peliculas/1 Culpa tuya (2024).html" data-fecha="2025-10-09">
-      <span class="tag">Pelicula</span>
-      <span class="year-tag">2024</span>
-      <img src="https://image.tmdb.org/t/p/w300/1jvCVdlgInyItAUEvvvCakm1Yxz.jpg">
-      <span class="lock-icon">🔒</span>
-      <p>Culpa tuya</p>
-    </div>
-
-    <div class="movie locked" data-titulo="abigail" data-genero="terror" data-anio="2024" data-html="../View Peliculas/Abigail (2024).html" data-fecha="2025-10-08">
-      <span class="tag">Pelicula</span>
-      <span class="year-tag">2024</span>
-      <img src="https://image.tmdb.org/t/p/w300/kmB9grIf2fvpwwsDmNMN0XFz1tT.jpg">
-      <span class="lock-icon">🔒</span>
-      <p>Abigail</p>
-    </div>
-
-    <div class="movie locked" data-titulo="Al rescate de fondo de Bikini" data-genero="animacion aventura comedia familia" data-anio="2024" data-html="../View Peliculas/Al rescate de Fondo de Bikini La película de Arenita Mejillas (2024).html" data-fecha="2025-10-12">
-      <span class="tag">Pelicula</span>
-      <span class="year-tag">2024</span>
-      <img src="https://image.tmdb.org/t/p/w300/7WfWEy1EIJj4nLR6PdE6A09TcOv.jpg">
-      <span class="lock-icon">🔒</span>
-      <p>Al rescate de fondo de Bikini</p>
-    </div>
-
-    <div class="movie locked" data-titulo="after 4 aquí acaba todo" data-genero="romance drama" data-anio="2023" data-html="../View Peliculas/After 4 Aquí acaba todo (2023).htm" data-fecha="2025-10-12">
-      <span class="tag">Pelicula</span>
-      <span class="year-tag">2023</span>
-      <img src="https://image.tmdb.org/t/p/w300/jO3VGQi5sHIj2BGS963g1F74yCq.jpg">
-      <span class="lock-icon">🔒</span>
-      <p>After 4: Aquí acaba todo</p>
-    </div>
-
-    <div class="movie locked" data-titulo="after 3 amor infinito" data-genero="romance drama" data-anio="2022" data-html="../View Peliculas/After 3 Amor infinito (2022).html" data-fecha="2025-10-12">
-      <span class="tag">Pelicula</span>
-      <span class="year-tag">2022</span>
-      <img src="https://image.tmdb.org/t/p/w300/vcI9BD5kMmVI45Pzj5B1ZaGpFIR.jpg">
-      <span class="lock-icon">🔒</span>
-      <p>After 3: Amor infinito</p>
-    </div>
-
-    <div class="movie locked" data-titulo="365 dias 3 mas" data-genero="romance drama" data-anio="2022" data-html="../View Peliculas/365 dias mas 3 (2022).html" data-fecha="2025-10-08">
-      <span class="tag">Pelicula</span>
-      <span class="year-tag">2022</span>
-      <img src="https://image.tmdb.org/t/p/w300/mwcII5bXMeMTKyCejPuBPBTjmxu.jpg">
-      <span class="lock-icon">🔒</span>
-      <p>365 Dias 3: Mas</p>
-    </div>
-
-    <div class="movie locked" data-titulo="365 dias 2 aquel dia " data-genero="romance drama" data-anio="2022" data-html="../View Peliculas/365 Dias 2 Aquel dia (2022).html" data-fecha="2025-10-08">
-      <span class="tag">Pelicula</span>
-      <span class="year-tag">2022</span>
-      <img src="https://image.tmdb.org/t/p/w300/k3J2GdYxhR6U2RfsHZOsmHVKW7m.jpg">
-      <span class="lock-icon">🔒</span>
-      <p>365 Dias 2: Aquel dia</p>
-    </div>
-
-    <div class="movie locked" data-titulo="scooby ¡scooby!" data-genero="animacion aventura" data-anio="2020" data-html="../View Peliculas/¡Scooby! (2020).html" data-fecha="2025-10-09">
-      <span class="tag">Pelicula</span>
-      <span class="year-tag">2020</span>
-      <img src="https://image.tmdb.org/t/p/w300/tOhuq4RYr2Rt9TM7X4dkr7A9HSd.jpg">
-      <span class="lock-icon">🔒</span>
-      <p>¡Scooby!</p>
-    </div>
-
-    <div class="movie locked" data-titulo="after 2 en mil pedazos" data-genero="romance drama" data-anio="2020" data-html="../View Peliculas/After 2 En mil pedazos (2020).html" data-fecha="2025-10-12">
-      <span class="tag">Pelicula</span>
-      <span class="year-tag">2020</span>
-      <img src="https://image.tmdb.org/t/p/w300/8nPw22C41EUWXREWmY9iIivMXxm.jpg">
-      <span class="lock-icon">🔒</span>
-      <p>After 2: En mil pedazos</p>
-    </div>
-
-    <div class="movie locked" data-titulo="365 dias 1" data-genero="romance drama" data-anio="2020" data-html="../View Peliculas/365 dias (2020).html" data-fecha="2025-10-08">
-      <span class="tag">Pelicula</span>
-      <span class="year-tag">2020</span>
-      <img src="https://image.tmdb.org/t/p/w300/jz8T3hrU6GuMqSuQ4Rbd4MJUeaq.jpg">
-      <span class="lock-icon">🔒</span>
-      <p>365 Dias</p>
-    </div>
-
-    <div class="movie locked" data-titulo="aladdin" data-genero="aventura disney comedia fantasia" data-anio="2019" data-html="../View Peliculas/Aladdín (2019).html" data-fecha="2025-10-12">
-      <span class="tag">Pelicula</span>
-      <span class="year-tag">2019</span>
-      <img src="https://image.tmdb.org/t/p/w300/fv9c5fsdxqUzkullgMB4cZja29y.jpg">
-      <span class="lock-icon">🔒</span>
-      <p>Aladdin</p>
-    </div>
-
-    <div class="movie locked" data-titulo="after 1 aqui empieza todo" data-genero="romance drama" data-anio="2019" data-html="../View Peliculas/After 1 Aquí empieza todo (2019).HTML" data-fecha="2025-10-08">
-      <span class="tag">Pelicula</span>
-      <span class="year-tag">2019</span>
-      <img src="https://image.tmdb.org/t/p/w300/5kZxlS9vLExy3hZA5GfNFg8oJgZ.jpg">
-      <span class="lock-icon">🔒</span>
-      <p>After: Aqui empieza todo</p>
-    </div>
-
-    <div class="movie locked" data-titulo="a ganar" data-genero="drama" data-anio="2018" data-html="../View Peliculas/¡A Ganar! (2018).html" data-fecha="2025-10-08">
-      <span class="tag">Pelicula</span>
-      <span class="year-tag">2018</span>
-      <img src="https://image.tmdb.org/t/p/w300/6GVYL9K2IBFrfIqwwFqMPu5DdC5.jpg">
-      <span class="lock-icon">🔒</span>
-      <p>¡A Ganar!</p>
-    </div>
-
-    <div class="movie locked" data-titulo="alvin y las ardillas" data-genero="animacion aventura musical" data-anio="2007" data-html="../View Peliculas/Alvin y las ardillas (2007).html" data-fecha="2025-10-12">
-      <span class="tag">Pelicula</span>
-      <span class="year-tag">2007</span>
-      <img src="https://image.tmdb.org/t/p/w300/jgvlT0DhzAQET6nkM6N1BVoGDSj.jpg">
-      <span class="lock-icon">🔒</span>
-      <p>Alvin y las ardillas</p>
-    </div>
-
-    <div class="movie locked" data-titulo="aladdin 3 el rey de los ladrones" data-genero="animacion aventura disney romance fantasia " data-anio="1986" data-html="../View Peliculas/Aladdin 3 y el rey de los ladrones (1996).html" data-fecha="2025-10-12">
-      <span class="tag">Pelicula</span>
-      <span class="year-tag">1996</span>
-      <img src="https://image.tmdb.org/t/p/w300/abWvjyJz4kcp1xDn28RwyXjoIds.jpg">
-      <span class="lock-icon">🔒</span>
-      <p>Aladdin 3: El rey de los ladrones</p>
-    </div>
-
-
-    <div class="movie locked" data-titulo="aladdin 2 el retorno de fafar" data-genero="animacion aventura disney romance fantasia " data-anio="1994" data-html="../View Peliculas/Aladdin 2 El retorno de Jafar (1994).html" data-fecha="2025-10-12">
-      <span class="tag">Pelicula</span>
-      <span class="year-tag">1994</span>
-      <img src="https://image.tmdb.org/t/p/w300/tC54XTUu4NVsMeWdSofja2uye9c.jpg">
-      <span class="lock-icon">🔒</span>
-      <p>Aladdin 2: El retorno de Jafar</p>
-    </div>
-
-    <div class="movie locked" data-titulo="aladdin" data-genero="animacion aventura disney fantasia musical familia" data-anio="1993" data-html="../View Peliculas/Aladdin (1993).html" data-fecha="2025-10-12">
-      <span class="tag">Pelicula</span>
-      <span class="year-tag">1993</span>
-      <img src="https://image.tmdb.org/t/p/w300/eLFfl7vS8dkeG1hKp5mwbm37V83.jpg">
-      <span class="lock-icon">🔒</span>
-      <p>Aladdin</p>
-    </div>
-
-    <div class="movie locked" data-titulo="" data-genero="animacion anime" data-anio="1988" data-html="../View Peliculas/" data-fecha="2025-07-11">
-      <span class="tag">Pelicula</span>
-      <span class="year-tag">1988</span>
-      <img src="https://image.tmdb.org/t/p/w300/">
-      <span class="lock-icon">🔒</span>
-      <p></p>
-    </div>
-
-    <div class="movie locked" data-titulo="" data-genero="animacion anime" data-anio="1988" data-html="../View Peliculas/" data-fecha="2025-07-11">
-      <span class="tag">Pelicula</span>
-      <span class="year-tag">1988</span>
-      <img src="https://image.tmdb.org/t/p/w300/">
-      <span class="lock-icon">🔒</span>
-      <p></p>
-    </div>
-    
-  </div>
-
+  <div class="movie-grid" id="movie-grid"></div>
   <div id="no-results" class="no-results">No se encontraron resultados 😕</div>
-
   <script>
     function filtrarPeliculas() {
       const input = document.getElementById("search-input");
       const texto = input.value.toLowerCase();
       localStorage.setItem("ultimaBusqueda", texto);
-
       const peliculas = document.querySelectorAll(".movie");
       let visibles = 0;
-
       peliculas.forEach(peli => {
         const titulo = peli.dataset.titulo || "";
         const genero = peli.dataset.genero || "";
@@ -460,26 +183,18 @@
         peli.style.display = visible ? "block" : "none";
         if (visible) visibles++;
       });
-
       document.getElementById("no-results").style.display = visibles === 0 ? "block" : "none";
       actualizarContadorPeliculas();
     }
-
     window.addEventListener("DOMContentLoaded", () => {
       const ultima = localStorage.getItem("ultimaBusqueda");
       const scroll = localStorage.getItem("scrollY");
       const input = document.getElementById("search-input");
-      if (ultima && input) {
-        input.value = ultima;
-        filtrarPeliculas();
-      }
-      if (scroll) {
-        window.scrollTo(0, parseInt(scroll));
-      }
+      if (ultima && input) { input.value = ultima; filtrarPeliculas(); }
+      if (scroll) { window.scrollTo(0, parseInt(scroll)); }
       localStorage.removeItem("ultimaBusqueda");
       localStorage.removeItem("scrollY");
     });
-
     document.querySelectorAll(".movie").forEach(peli => {
       const htmlFile = peli.dataset.html;
       if (htmlFile && htmlFile.trim() !== "") {
@@ -493,7 +208,6 @@
         });
       }
     });
-
     document.querySelectorAll(".movie").forEach(peli => {
       const fecha = peli.dataset.fecha;
       if (fecha) {
@@ -508,15 +222,12 @@
         }
       }
     });
-
     function actualizarContadorPeliculas() {
       const peliculasVisibles = document.querySelectorAll(".movie-grid .movie:not([style*='display: none'])").length;
       const contador = document.getElementById("contador");
       if (contador) contador.textContent = `(${peliculasVisibles})`;
     }
-
     window.addEventListener("DOMContentLoaded", actualizarContadorPeliculas);
   </script>
 </body>
 </html>
-
