@@ -4,95 +4,164 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>2025 Movie</title>
-   <style>
+  <style>
+    /* ==================== ESTILOS BASE ==================== */
     body {
-      font-family: sans-serif;
+      font-family: 'Poppins', sans-serif;
       margin: 0;
       background: #0c0c0c;
       color: white;
     }
+
     header {
-      background: #161616;
+      background: linear-gradient(90deg, #111, #1c1c1c);
       padding: 15px;
       text-align: center;
       font-size: 1rem;
       font-weight: bold;
-      position: relative;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.7);
     }
-    .back {
-      color: white;
-      text-decoration: none;
-      font-size: 1.5rem;
-      position: absolute;
-      left: 10px;
-      top: 15px;
-    }
+
     h1 {
       margin: 0;
       font-size: 1rem;
     }
+
+    /* ==================== BUSCADOR ==================== */
     .search-box {
       padding: 10px;
       text-align: center;
+      position: relative;
     }
+
     .search-box input {
       width: 90%;
-      padding: 10px;
+      padding: 10px 35px 10px 40px;
       border-radius: 6px;
       border: none;
       font-size: 1rem;
       background: #1c1c1c;
       color: white;
+      box-shadow: 0 0 6px rgba(255, 0, 144, 0.2);
+      transition: 0.3s;
     }
+
+    .search-box input:focus {
+      outline: none;
+      box-shadow: 0 0 10px #ff0090;
+    }
+
+    .search-box::before {
+      content: '🔍';
+      position: absolute;
+      left: 25px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #ff0090;
+      font-size: 1.2rem;
+      pointer-events: none;
+    }
+
+    input::placeholder {
+      background: linear-gradient(90deg, #ff0000, #018dff, #ff00d9, #018dff, #ff0090, #ff0000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: bold;
+      animation: animateText 5s linear infinite;
+    }
+
+    @keyframes animateText {
+      0% { background-position: 0% }
+      100% { background-position: 200% }
+    }
+
+    /* ==================== GRID DE PELÍCULAS ==================== */
     .movie-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
       padding: 10px;
+      animation: fadeIn 1s ease-in-out;
     }
+
+    @media (max-width: 600px) {
+      .movie-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (orientation: landscape) and (min-width: 700px) {
+      .movie-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    /* ==================== TARJETAS ==================== */
     .movie {
-      background: #1c1c1c;
-      border-radius: 6px;
+      background: linear-gradient(180deg, #1c1c1c, #2a2a2a);
+      border-radius: 8px;
       overflow: hidden;
       position: relative;
-      font-size: 0.9rem;
       cursor: pointer;
+      font-size: 0.9rem;
+      opacity: 0;
+      animation: fadeIn 0.6s forwards;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+
+    .movie:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(255, 0, 144, 0.5);
+    }
+
     .movie img {
       width: 100%;
-      height: auto;
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
       display: block;
-      filter: brightness(1);
-      position: relative;
-      z-index: 1;
+      border-bottom: 1px solid #111;
     }
+
     .movie.locked img {
       filter: brightness(0.5);
     }
+
+    .movie p {
+      margin: 8px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #f5f5f5;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
+    }
+
+    /* ==================== ETIQUETAS ==================== */
     .movie .tag,
-    .movie .year-tag,
-    .movie .lock-icon {
+    .movie .year-tag {
       position: absolute;
       z-index: 2;
       color: white;
       font-weight: bold;
-    }
-    .movie .tag,
-    .movie .year-tag {
       background: rgb(255, 32, 143);
       padding: 2px 6px;
       font-size: 0.7rem;
       border-radius: 3px;
     }
+
     .movie .tag {
       top: 5px;
       left: 5px;
     }
+
     .movie .year-tag {
       top: 25px;
       left: 5px;
     }
+
     .movie .lock-icon {
+      position: absolute;
       top: 5px;
       right: 5px;
       width: 30px;
@@ -104,90 +173,62 @@
       justify-content: center;
       animation: bounce 1s infinite;
       font-size: 1.1rem;
+      color: white;
     }
-    .movie p {
-      margin: 8px;
-      text-align: center;
-      font-size: 0.85rem;
-    }
+
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-5px); }
     }
 
-    .movie-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      padding: 10px;
-    }
-
-    @media (orientation: landscape) {
-      .movie-grid {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
-
-    .movie img {
-      width: 100%;
-      height: auto;
-      aspect-ratio: 2 / 3;
-      object-fit: cover;
-      display: block;
-      filter: brightness(1);
-      position: relative;
-      z-index: 1;
-    }
-
-  </style>
-
-  <!--PRUEBA-->
-
-  <style>
     .movie .recien-tag {
-  position: absolute;
-  top: 160px;
-  left: 5px;
-  background: rgb(255, 32, 143); /* verde rosa */
-  color: white;
-  font-weight: bold;
-  font-size: 0.65rem;
-  padding: 2px 6px;
-  border-radius: 3px;
-  z-index: 3;
-  pointer-events: none;
-}
+      position: absolute;
+      top: 160px;
+      left: 5px;
+      background: linear-gradient(90deg, #ff00d9, #ff0090);
+      color: white;
+      font-weight: bold;
+      font-size: 0.65rem;
+      padding: 2px 6px;
+      border-radius: 3px;
+      z-index: 3;
+      animation: pulse 1.5s infinite;
+    }
 
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.1); }
+    }
+
+    /* ==================== ANIMACIONES ==================== */
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* ==================== SIN RESULTADOS ==================== */
+    .no-results {
+      text-align: center;
+      padding: 20px;
+      font-size: 1rem;
+      color: #bbb;
+      display: none;
+    }
 
   </style>
 </head>
+
 <body>
   <header>
-  <h1>Buscador <span id="contador" style="font-size: 1.0rem; font-weight: normal; color: #bbb;"></span></h1>
-</header>
-
+    <h1>Buscador <span id="contador" style="font-size: 1.0rem; font-weight: normal; color: #bbb;"></span></h1>
+  </header>
 
   <div class="search-box">
-  <input type="text" id="search-input" placeholder="Buscar por nombre, género o año..." oninput="filtrarPeliculas()">
-</div>
-
-<style>
-  input::placeholder {
-    background: linear-gradient(90deg, #ff0000, #018dff, #ff00d9, #018dff, #ff0090, #ff0000);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: bold;
-    animation: animateText 5s linear infinite;
-  }
-
-  @keyframes animateText {
-    0% { background-position: 0% }
-    100% { background-position: 200% }
-  }
-</style>
+    <input type="text" id="search-input" placeholder="Buscar por nombre, género o año..." oninput="filtrarPeliculas()">
+  </div>
 
   <div class="movie-grid" id="movie-grid">
 
+    
     <div class="movie locked" data-titulo="el conjuro 4 el ultimo rito el culjuro" data-genero="Terror" data-anio="2025" data-html="../View Peliculas/El Conjuro 4  El ultimo rito (2025).html" data-fecha="2025-10-07">
       <span class="tag">Pelicula</span>
       <span class="year-tag">2025</span>
@@ -397,102 +438,85 @@
       <span class="lock-icon">🔒</span>
       <p></p>
     </div>
-
     
   </div>
-  
+
+  <div id="no-results" class="no-results">No se encontraron resultados 😕</div>
 
   <script>
-  function filtrarPeliculas() {
-    const input = document.getElementById("search-input");
-    const texto = input.value.toLowerCase();
-    localStorage.setItem("ultimaBusqueda", texto);
-    const peliculas = document.querySelectorAll(".movie");
-    peliculas.forEach(peli => {
-      const titulo = peli.dataset.titulo || "";
-      const genero = peli.dataset.genero || "";
-      const anio = peli.dataset.anio || "";
-      const visible = titulo.includes(texto) || genero.includes(texto) || anio.includes(texto);
-      peli.style.display = visible ? "block" : "none";
-    });
-  }
+    function filtrarPeliculas() {
+      const input = document.getElementById("search-input");
+      const texto = input.value.toLowerCase();
+      localStorage.setItem("ultimaBusqueda", texto);
 
-  // Restaurar búsqueda y scroll al volver
-  window.addEventListener("DOMContentLoaded", () => {
-    const ultima = localStorage.getItem("ultimaBusqueda");
-    const scroll = localStorage.getItem("scrollY");
-    const input = document.getElementById("search-input");
-    if (ultima && input) {
-      input.value = ultima;
-      filtrarPeliculas();
-    }
-    if (scroll) {
-      window.scrollTo(0, parseInt(scroll));
-    }
-    localStorage.removeItem("ultimaBusqueda");
-    localStorage.removeItem("scrollY");
-  });
+      const peliculas = document.querySelectorAll(".movie");
+      let visibles = 0;
 
-  // Películas activas + guardar scroll
-  document.querySelectorAll(".movie").forEach(peli => {
-    const htmlFile = peli.dataset.html;
-    if (htmlFile && htmlFile.trim() !== "") {
-      peli.classList.remove("locked");
-      const lockIcon = peli.querySelector(".lock-icon");
-      if (lockIcon) lockIcon.remove();
-      peli.addEventListener("click", () => {
-        localStorage.setItem("ultimaBusqueda", document.getElementById("search-input").value);
-        localStorage.setItem("scrollY", window.scrollY);
-        window.location.href = htmlFile;
+      peliculas.forEach(peli => {
+        const titulo = peli.dataset.titulo || "";
+        const genero = peli.dataset.genero || "";
+        const anio = peli.dataset.anio || "";
+        const visible = titulo.includes(texto) || genero.includes(texto) || anio.includes(texto);
+        peli.style.display = visible ? "block" : "none";
+        if (visible) visibles++;
       });
-    }
-  });
-</script>
 
-
-<!--ESTO ES SI SE AGREGO UNA NUEVA PELICULA SE MOSTRARA ESTE MENSAJE "Nuevo agregado"-->
-<script>
-  document.querySelectorAll(".movie").forEach(peli => {
-    const fecha = peli.dataset.fecha;
-    if (fecha) {
-      const fechaCreacion = new Date(fecha);
-      const hoy = new Date();
-      const diasDiferencia = (hoy - fechaCreacion) / (1000 * 60 * 60 * 24);
-      if (diasDiferencia <= 5) { /*aca cuenta los dias que se mostrara "recien agregados*/
-        const recien = document.createElement("span");
-        recien.className = "recien-tag";
-        recien.textContent = "Recién agregado";
-        peli.appendChild(recien);
-      }
-    }
-  });
-</script>
-
-<script>
-  function actualizarContadorPeliculas() {
-    const peliculasVisibles = document.querySelectorAll(".movie-grid .movie:not([style*='display: none'])").length;
-    const contador = document.getElementById("contador");
-    if (contador) {
-      contador.textContent = `(${peliculasVisibles})`;
-    }
-  }
-
-  // Llama a la función al cargar la página
-  window.addEventListener("DOMContentLoaded", () => {
-    actualizarContadorPeliculas();
-  });
-
-  // También al filtrar películas
-  const input = document.getElementById("search-input");
-  if (input) {
-    input.addEventListener("input", () => {
-      filtrarPeliculas();
+      document.getElementById("no-results").style.display = visibles === 0 ? "block" : "none";
       actualizarContadorPeliculas();
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const ultima = localStorage.getItem("ultimaBusqueda");
+      const scroll = localStorage.getItem("scrollY");
+      const input = document.getElementById("search-input");
+      if (ultima && input) {
+        input.value = ultima;
+        filtrarPeliculas();
+      }
+      if (scroll) {
+        window.scrollTo(0, parseInt(scroll));
+      }
+      localStorage.removeItem("ultimaBusqueda");
+      localStorage.removeItem("scrollY");
     });
-  }
-</script>
 
+    document.querySelectorAll(".movie").forEach(peli => {
+      const htmlFile = peli.dataset.html;
+      if (htmlFile && htmlFile.trim() !== "") {
+        peli.classList.remove("locked");
+        const lockIcon = peli.querySelector(".lock-icon");
+        if (lockIcon) lockIcon.remove();
+        peli.addEventListener("click", () => {
+          localStorage.setItem("ultimaBusqueda", document.getElementById("search-input").value);
+          localStorage.setItem("scrollY", window.scrollY);
+          window.location.href = htmlFile;
+        });
+      }
+    });
 
+    document.querySelectorAll(".movie").forEach(peli => {
+      const fecha = peli.dataset.fecha;
+      if (fecha) {
+        const fechaCreacion = new Date(fecha);
+        const hoy = new Date();
+        const diasDiferencia = (hoy - fechaCreacion) / (1000 * 60 * 60 * 24);
+        if (diasDiferencia <= 5) {
+          const recien = document.createElement("span");
+          recien.className = "recien-tag";
+          recien.textContent = "Recién agregado";
+          peli.appendChild(recien);
+        }
+      }
+    });
 
+    function actualizarContadorPeliculas() {
+      const peliculasVisibles = document.querySelectorAll(".movie-grid .movie:not([style*='display: none'])").length;
+      const contador = document.getElementById("contador");
+      if (contador) contador.textContent = `(${peliculasVisibles})`;
+    }
+
+    window.addEventListener("DOMContentLoaded", actualizarContadorPeliculas);
+  </script>
 </body>
 </html>
+
