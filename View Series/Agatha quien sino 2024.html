@@ -199,14 +199,61 @@
   }
 
   .seasons-list li {
-    flex: 0 0 auto;
-    scroll-snap-align: start;
-    min-width: 160px;
-  }
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.05));
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: all 0.25s ease-in-out;
+}
+
+  .seasons-list li:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 25px rgba(255,45,91,0.2);
+  border-color: rgba(255,45,91,0.3);
+}
+
+  /* 🌈 Temporada seleccionada */
+.seasons-list li.active {
+  background: linear-gradient(135deg, rgba(255,45,91,0.25), rgba(255,45,91,0.1));
+  border: 1px solid rgba(255,45,91,0.5);
+  box-shadow: 0 0 25px rgba(255,45,91,0.4);
+  transform: scale(1.05);
+}
+
+  /* 🔥 Animación de entrada de episodios */
+.episodes-grid {
+  animation: fadeInGrid 0.4s ease-in;
+}
+
+  @keyframes fadeInGrid {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
   .seasons-list::-webkit-scrollbar {
     display: none; /* oculta scrollbar en móviles */
   }
+}
+
+    @keyframes pulseActive {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+    .seasons-list li.active::before {
+  content: "Temporada Activa";
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: bold;
+  padding: 3px 6px;
+  border-radius: 6px;
+  letter-spacing: 0.4px;
+  box-shadow: 0 0 10px rgba(255,45,91,0.5);
+  animation: pulseActive 2s infinite;
 }
 
 @media (max-width: 768px) {
@@ -1619,6 +1666,7 @@ closeModalX.addEventListener('click', () => {
 
 </body>
 </html>
+
 
 
 
