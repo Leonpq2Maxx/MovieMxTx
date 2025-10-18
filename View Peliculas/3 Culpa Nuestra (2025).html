@@ -387,6 +387,49 @@
   box-shadow: 0 4px 12px rgba(0,0,0,0.35);
 }
 
+    /* 🎬 Personalización elegante del control de progreso (icono incluido) */
+.plyr__progress input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 26px;
+  width: 26px;
+  border-radius: 50%;
+  background: #ff2d5b url("https://cdn.jsdelivr.net/gh/MaxiAssets/icons/play-icon.png") center/55% no-repeat;
+  /* 🔼 reemplazá la URL por la del ícono que subiste (puede ser tu GitHub, Dropbox o donde lo tengas alojado) */
+  border: 2px solid #fff;
+  box-shadow: 0 0 10px rgba(255,45,91,0.6);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.plyr__progress input[type=range]::-webkit-slider-thumb:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 18px rgba(255,45,91,0.9);
+}
+
+.plyr__progress input[type=range]::-moz-range-thumb {
+  height: 26px;
+  width: 26px;
+  border-radius: 50%;
+  background: #ff2d5b url("https://cdn.jsdelivr.net/gh/MaxiAssets/icons/play-icon.png") center/55% no-repeat;
+  border: 2px solid #fff;
+  box-shadow: 0 0 10px rgba(255,45,91,0.6);
+}
+
+/* Barra con gradiente y brillo */
+.plyr__progress input[type=range] {
+  background: linear-gradient(90deg, #ff2d5b, #ff5e7e);
+  height: 6px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(255,45,91,0.3);
+}
+
+/* Colores del tiempo */
+.plyr__time {
+  color: #ff5e7e !important;
+  font-weight: 600;
+  text-shadow: 0 0 6px rgba(255,45,91,0.6);
+}
+
 
   </style>
 </head>
@@ -980,6 +1023,7 @@ player.on('play', () => {
   
 </body>
 </html>
+
 
 
 
