@@ -1625,6 +1625,49 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+  <script>
+function actualizarBarraProgreso() {
+  const ultimo = JSON.parse(localStorage.getItem(`ultimoEpisodio_${SERIES_KEY}`) || 'null');
+  const tiempo = parseFloat(localStorage.getItem('ultimoTiempoReproduccion') || 0);
+
+  if (ultimo && tiempo > 0) {
+    const card = [...document.querySelectorAll('.episode-card')]
+      .find(c => c.querySelector('.ep-title').textContent.includes(ultimo.episodio));
+
+    if (card) {
+      if (!card.querySelector('.progress-bar-container')) {
+        const pbContainer = document.createElement('div');
+        pbContainer.className = 'progress-bar-container';
+        pbContainer.innerHTML = `
+          <div class="progress-bar"></div>
+          <span class="progress-label" style="
+            position:absolute;
+            right:8px;
+            bottom:8px;
+            color:#fff;
+            font-size:0.75rem;
+            background:rgba(0,0,0,0.5);
+            padding:2px 6px;
+            border-radius:4px;
+          "></span>
+        `;
+        card.style.position = "relative";
+        card.appendChild(pbContainer);
+      }
+
+      const barra = card.querySelector('.progress-bar');
+      const label = card.querySelector('.progress-label');
+
+      // Suponemos duración 45 minutos = 2700s (puedes cambiarlo)
+      const porcentaje = Math.min(100, (tiempo / 2700) * 100);
+      barra.style.width = porcentaje + '%';
+      label.textContent = `${porcentaje.toFixed(0)}%`;
+    }
+  }
+}
+</script>
+
+
 
   <style>
    #continue-modal .modal-box {
