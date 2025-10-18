@@ -387,48 +387,62 @@
   box-shadow: 0 4px 12px rgba(0,0,0,0.35);
 }
 
-    /* 🎬 Personalización elegante del control de progreso (icono incluido) */
+    /* 🎬 Versión ajustada y elegante del ícono del control */
 .plyr__progress input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  height: 26px;
-  width: 26px;
+  height: 18px;             /* 🔹 más chico para no romper la barra */
+  width: 18px;
   border-radius: 50%;
-  background: #ff2d5b url("https://cdn.jsdelivr.net/gh/MaxiAssets/icons/play-icon.png") center/55% no-repeat;
-  /* 🔼 reemplazá la URL por la del ícono que subiste (puede ser tu GitHub, Dropbox o donde lo tengas alojado) */
+  background: radial-gradient(circle at center, #ff2d5b 40%, #ff0037 100%);
   border: 2px solid #fff;
-  box-shadow: 0 0 10px rgba(255,45,91,0.6);
+  box-shadow: 0 0 6px rgba(255,45,91,0.6);
   cursor: pointer;
-  transition: all 0.3s ease;
+  position: relative;
+  transition: all 0.25s ease;
 }
 
-.plyr__progress input[type=range]::-webkit-slider-thumb:hover {
-  transform: scale(1.08);
-  box-shadow: 0 0 18px rgba(255,45,91,0.9);
+.plyr__progress input[type=range]::-webkit-slider-thumb::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 9px;
+  height: 9px;
+  background: url("../Logo MovieTx.png") center/contain no-repeat;
+  transform: translate(-50%, -50%);
 }
 
+/* Firefox */
 .plyr__progress input[type=range]::-moz-range-thumb {
-  height: 26px;
-  width: 26px;
+  height: 18px;
+  width: 18px;
   border-radius: 50%;
-  background: #ff2d5b url("../Logo MovieTx.png") center/55% no-repeat;
+  background: radial-gradient(circle at center, #ff2d5b 40%, #ff0037 100%);
   border: 2px solid #fff;
-  box-shadow: 0 0 10px rgba(255,45,91,0.6);
+  box-shadow: 0 0 6px rgba(255,45,91,0.6);
+  position: relative;
 }
 
-/* Barra con gradiente y brillo */
+/* 🔹 Barra de progreso */
 .plyr__progress input[type=range] {
   background: linear-gradient(90deg, #ff2d5b, #ff5e7e);
-  height: 6px;
+  height: 5px;
   border-radius: 10px;
-  box-shadow: 0 0 8px rgba(255,45,91,0.3);
+  box-shadow: 0 0 6px rgba(255,45,91,0.4);
 }
 
-/* Colores del tiempo */
+.plyr__progress input[type=range]:hover::-webkit-slider-thumb {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(255,45,91,0.9);
+}
+
+/* Tiempo y duración */
 .plyr__time {
   color: #ff5e7e !important;
   font-weight: 600;
-  text-shadow: 0 0 6px rgba(255,45,91,0.6);
+  text-shadow: 0 0 6px rgba(255,45,91,0.5);
 }
+
 
 
   </style>
@@ -1023,6 +1037,7 @@ player.on('play', () => {
   
 </body>
 </html>
+
 
 
 
