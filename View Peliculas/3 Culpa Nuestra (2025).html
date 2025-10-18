@@ -387,47 +387,57 @@
   box-shadow: 0 4px 12px rgba(0,0,0,0.35);
 }
 
-   /* 🎬 Thumb del reproductor con círculo + logo dentro */
+   /* 🎬 Thumb del reproductor: círculo blanco con logo centrado */
 .plyr__progress input[type="range"]::-webkit-slider-thumb {
-  width: 24px !important;
-  height: 24px !important;
-  background:
-    white center center no-repeat,
-    url("../Logo MovieTx.png") center center / 70% no-repeat;
+  width: 18px !important;
+  height: 18px !important;
+  background-color: #ffffff !important;
+  background-image: url("../Logo MovieTx.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 75% 75%;
   border-radius: 50% !important;
-  border: 2px solid #ff005d !important;
-  box-shadow: 0 0 6px rgba(255, 45, 91, 0.5);
+  border: 1px solid #ff005d !important;
+  box-shadow: 0 0 4px rgba(255, 45, 91, 0.5);
+  transform: translateY(0); /* Asegura centrado vertical */
   cursor: pointer;
 }
 
 .plyr__progress input[type="range"]::-moz-range-thumb {
-  width: 24px !important;
-  height: 24px !important;
-  background:
-    white center center no-repeat,
-    url("../Logo MovieTx.png") center center / 70% no-repeat;
+  width: 18px !important;
+  height: 18px !important;
+  background-color: #ffffff !important;
+  background-image: url("../Logo MovieTx.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 75% 75%;
   border-radius: 50% !important;
-  border: 2px solid #ff005d !important;
-  box-shadow: 0 0 6px rgba(255, 45, 91, 0.5);
+  border: 1px solid #ff005d !important;
+  box-shadow: 0 0 4px rgba(255, 45, 91, 0.5);
+  transform: translateY(0);
   cursor: pointer;
 }
 
 .plyr__progress input[type="range"]::-ms-thumb {
-  width: 24px !important;
-  height: 24px !important;
-  background:
-    white center center no-repeat,
-    url("../Logo MovieTx.png") center center / 70% no-repeat;
+  width: 18px !important;
+  height: 18px !important;
+  background-color: #ffffff !important;
+  background-image: url("../Logo MovieTx.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 75% 75%;
   border-radius: 50% !important;
-  border: 2px solid #ff005d !important;
-  box-shadow: 0 0 6px rgba(255, 45, 91, 0.5);
+  border: 1px solid #ff005d !important;
+  box-shadow: 0 0 4px rgba(255, 45, 91, 0.5);
+  transform: translateY(0);
   cursor: pointer;
 }
 
-/* 🔹 Mantener el fondo de progreso */
+/* 🔹 Mantiene el progreso con color de marca */
 .plyr__progress input[type="range"] {
   background: linear-gradient(to right, #ff005d var(--value, 0%), #444 var(--value, 0%)) !important;
 }
+
 
 
   </style>
@@ -1022,6 +1032,7 @@ player.on('play', () => {
   
 </body>
 </html>
+
 
 
 
