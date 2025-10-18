@@ -387,38 +387,44 @@
   box-shadow: 0 4px 12px rgba(0,0,0,0.35);
 }
 
-    /* 🎬 Personalización del thumb del reproductor con el logo MovieTx */
+   /* 🎬 Thumb del reproductor con círculo + logo dentro */
 .plyr__progress input[type="range"]::-webkit-slider-thumb {
-  background: url("../Logo MovieTx.png") no-repeat center center / contain !important;
-  width: 26px !important;
-  height: 26px !important;
-  border: none !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
+  width: 24px !important;
+  height: 24px !important;
+  background:
+    white center center no-repeat,
+    url("../Logo MovieTx.png") center center / 70% no-repeat;
+  border-radius: 50% !important;
+  border: 2px solid #ff005d !important;
+  box-shadow: 0 0 6px rgba(255, 45, 91, 0.5);
   cursor: pointer;
 }
 
 .plyr__progress input[type="range"]::-moz-range-thumb {
-  background: url("../Logo MovieTx.png") no-repeat center center / contain !important;
-  width: 26px !important;
-  height: 26px !important;
-  border: none !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
+  width: 24px !important;
+  height: 24px !important;
+  background:
+    white center center no-repeat,
+    url("../Logo MovieTx.png") center center / 70% no-repeat;
+  border-radius: 50% !important;
+  border: 2px solid #ff005d !important;
+  box-shadow: 0 0 6px rgba(255, 45, 91, 0.5);
   cursor: pointer;
 }
 
 .plyr__progress input[type="range"]::-ms-thumb {
-  background: url("../Logo MovieTx.png") no-repeat center center / contain !important;
-  width: 26px !important;
-  height: 26px !important;
-  border: none !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
+  width: 24px !important;
+  height: 24px !important;
+  background:
+    white center center no-repeat,
+    url("../Logo MovieTx.png") center center / 70% no-repeat;
+  border-radius: 50% !important;
+  border: 2px solid #ff005d !important;
+  box-shadow: 0 0 6px rgba(255, 45, 91, 0.5);
   cursor: pointer;
 }
 
-/* Asegura que el fondo gris de la barra siga visible */
+/* 🔹 Mantener el fondo de progreso */
 .plyr__progress input[type="range"] {
   background: linear-gradient(to right, #ff005d var(--value, 0%), #444 var(--value, 0%)) !important;
 }
@@ -1016,6 +1022,7 @@ player.on('play', () => {
   
 </body>
 </html>
+
 
 
 
