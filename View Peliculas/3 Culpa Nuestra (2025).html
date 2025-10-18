@@ -387,62 +387,41 @@
   box-shadow: 0 4px 12px rgba(0,0,0,0.35);
 }
 
-    /* 🎬 Versión ajustada y elegante del ícono del control */
-.plyr__progress input[type=range]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  height: 18px;             /* 🔹 más chico para no romper la barra */
-  width: 18px;
-  border-radius: 50%;
-  background: radial-gradient(circle at center, #ff2d5b 40%, #ff0037 100%);
-  border: 2px solid #fff;
-  box-shadow: 0 0 6px rgba(255,45,91,0.6);
+    /* 🎬 Personalización del thumb del reproductor con el logo MovieTx */
+.plyr__progress input[type="range"]::-webkit-slider-thumb {
+  background: url("Logo MovieTx.png") no-repeat center center / contain !important;
+  width: 26px !important;
+  height: 26px !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
   cursor: pointer;
-  position: relative;
-  transition: all 0.25s ease;
 }
 
-.plyr__progress input[type=range]::-webkit-slider-thumb::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 9px;
-  height: 9px;
-  background: url("../Logo MovieTx.png") center/contain no-repeat;
-  transform: translate(-50%, -50%);
+.plyr__progress input[type="range"]::-moz-range-thumb {
+  background: url("../Logo MovieTx.png") no-repeat center center / contain !important;
+  width: 26px !important;
+  height: 26px !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  cursor: pointer;
 }
 
-/* Firefox */
-.plyr__progress input[type=range]::-moz-range-thumb {
-  height: 18px;
-  width: 18px;
-  border-radius: 50%;
-  background: radial-gradient(circle at center, #ff2d5b 40%, #ff0037 100%);
-  border: 2px solid #fff;
-  box-shadow: 0 0 6px rgba(255,45,91,0.6);
-  position: relative;
+.plyr__progress input[type="range"]::-ms-thumb {
+  background: url("../Logo MovieTx.png") no-repeat center center / contain !important;
+  width: 26px !important;
+  height: 26px !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  cursor: pointer;
 }
 
-/* 🔹 Barra de progreso */
-.plyr__progress input[type=range] {
-  background: linear-gradient(90deg, #ff2d5b, #ff5e7e);
-  height: 5px;
-  border-radius: 10px;
-  box-shadow: 0 0 6px rgba(255,45,91,0.4);
+/* Asegura que el fondo gris de la barra siga visible */
+.plyr__progress input[type="range"] {
+  background: linear-gradient(to right, #ff005d var(--value, 0%), #444 var(--value, 0%)) !important;
 }
-
-.plyr__progress input[type=range]:hover::-webkit-slider-thumb {
-  transform: scale(1.1);
-  box-shadow: 0 0 10px rgba(255,45,91,0.9);
-}
-
-/* Tiempo y duración */
-.plyr__time {
-  color: #ff5e7e !important;
-  font-weight: 600;
-  text-shadow: 0 0 6px rgba(255,45,91,0.5);
-}
-
 
 
   </style>
@@ -1037,6 +1016,7 @@ player.on('play', () => {
   
 </body>
 </html>
+
 
 
 
