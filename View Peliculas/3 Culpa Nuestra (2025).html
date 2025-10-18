@@ -387,57 +387,41 @@
   box-shadow: 0 4px 12px rgba(0,0,0,0.35);
 }
 
-   /* 🎬 Thumb del reproductor: círculo blanco con logo centrado */
+    /* 🎬 Personalización del thumb del reproductor con el logo MovieTx */
 .plyr__progress input[type="range"]::-webkit-slider-thumb {
-  width: 18px !important;
-  height: 18px !important;
-  background-color: #ffffff !important;
-  background-image: url("../Logo MovieTx.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 75% 75%;
-  border-radius: 50% !important;
-  border: 1px solid #ff005d !important;
-  box-shadow: 0 0 4px rgba(255, 45, 91, 0.5);
-  transform: translateY(0); /* Asegura centrado vertical */
+  background: url("../Logo MovieTx.png") no-repeat center center / contain !important;
+  width: 26px !important;
+  height: 26px !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
   cursor: pointer;
 }
 
 .plyr__progress input[type="range"]::-moz-range-thumb {
-  width: 18px !important;
-  height: 18px !important;
-  background-color: #ffffff !important;
-  background-image: url("../Logo MovieTx.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 75% 75%;
-  border-radius: 50% !important;
-  border: 1px solid #ff005d !important;
-  box-shadow: 0 0 4px rgba(255, 45, 91, 0.5);
-  transform: translateY(0);
+  background: url("../Logo MovieTx.png") no-repeat center center / contain !important;
+  width: 26px !important;
+  height: 26px !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
   cursor: pointer;
 }
 
 .plyr__progress input[type="range"]::-ms-thumb {
-  width: 18px !important;
-  height: 18px !important;
-  background-color: #ffffff !important;
-  background-image: url("../Logo MovieTx.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 75% 75%;
-  border-radius: 50% !important;
-  border: 1px solid #ff005d !important;
-  box-shadow: 0 0 4px rgba(255, 45, 91, 0.5);
-  transform: translateY(0);
+  background: url("../Logo MovieTx.png") no-repeat center center / contain !important;
+  width: 26px !important;
+  height: 26px !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
   cursor: pointer;
 }
 
-/* 🔹 Mantiene el progreso con color de marca */
+/* Asegura que el fondo gris de la barra siga visible */
 .plyr__progress input[type="range"] {
   background: linear-gradient(to right, #ff005d var(--value, 0%), #444 var(--value, 0%)) !important;
 }
-
 
 
   </style>
@@ -1032,8 +1016,6 @@ player.on('play', () => {
   
 </body>
 </html>
-
-
 
 
 
