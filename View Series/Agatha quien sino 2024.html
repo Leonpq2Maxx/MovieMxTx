@@ -1881,6 +1881,267 @@ closeModalX.addEventListener('click', () => {
 </script>
 
 
+
+<!-- ======= INICIO: Mejoras integradas - Progreso persistente, animaciones y precarga ======= -->
+<style>
+/* Animaciones para la barra de progreso */
+.episode-card .progress-bar-container { opacity: 0; transform: translateY(6px); transition: opacity 320ms ease, transform 320ms cubic-bezier(.2,.9,.3,1); }
+.episode-card .progress-bar-container.visible { opacity: 1; transform: translateY(0); }
+.episode-card .progress-bar { height: 100%; width: 0%; transition: width 700ms cubic-bezier(.2,.9,.3,1); background: linear-gradient(90deg,#e50914,#2EA1F6); border-radius:4px; }
+
+/* Label encima de la barra */
+.episode-card .progress-label { font-size:0.75rem; font-weight:700; color:#fff; margin-left:8px; opacity:0.95; }
+
+/* Aparición/desaparición suave del contenedor de la barra */
+.progress-fade-in { animation: progressFadeIn 360ms ease forwards; }
+.progress-fade-out { animation: progressFadeOut 360ms ease forwards; }
+@keyframes progressFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes progressFadeOut { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(6px); } }
+
+/* Pequeño estilo para el mensaje de porcentaje si hace falta */
+.episode-card .progress-wrapper { display:flex; align-items:center; gap:8px; margin-top:8px; }
+</style>
+
+<script>
+(function(){
+  // Config
+  const SERIES_KEY = window.SERIES_KEY || "Agatha_Quien_Si_No_2024";
+  const MIN_VISIBLE_FRACTION = 0.001; // 0.1%
+  const SAVE_INTERVAL_MS = 4000; // guardar cada 4s
+  const DEFAULT_EP_DURATION_SECONDS = window.DEFAULT_EP_DURATION_SECONDS || 2700; // 45m fallback
+
+  // Utilidades
+  function safeParse(key, fallback) {
+    try { return JSON.parse(localStorage.getItem(key) || 'null') || fallback; } catch(e){ return fallback; }
+  }
+
+  // Guardar tiempos por episodio (map id -> seconds)
+  function saveEpisodeTime(id, seconds) {
+    if(!id) return;
+    const map = safeParse('tiempos_por_episode', {});
+    map[id] = seconds;
+    localStorage.setItem('tiempos_por_episode', JSON.stringify(map));
+  }
+  function removeEpisodeTime(id) {
+    const map = safeParse('tiempos_por_episode', {});
+    if(map[id]) { delete map[id]; localStorage.setItem('tiempos_por_episode', JSON.stringify(map)); }
+  }
+  function getEpisodeTime(id){ const map = safeParse('tiempos_por_episode', {}); return parseFloat(map[id]||0); }
+
+  // Crear/actualizar barra en una tarjeta de episodio
+  function ensureProgressBarOnCard(card, id, percentText) {
+    if(!card) return;
+    let wrapper = card.querySelector('.progress-wrapper');
+    if(!wrapper) {
+      wrapper = document.createElement('div');
+      wrapper.className = 'progress-wrapper';
+      const container = document.createElement('div');
+      container.className = 'progress-bar-container';
+      container.innerHTML = '<div class="progress-bar"></div>';
+      const label = document.createElement('span');
+      label.className = 'progress-label';
+      label.textContent = percentText || '0%';
+      wrapper.appendChild(container);
+      wrapper.appendChild(label);
+      card.appendChild(wrapper);
+      // small delay to allow CSS transition
+      requestAnimationFrame(()=>{ container.classList.add('visible'); });
+    }
+    const bar = card.querySelector('.progress-bar');
+    const label = card.querySelector('.progress-label');
+    if(bar) bar.style.width = (percentText ? percentText.replace('%','') : '0') + '%';
+    if(label) label.textContent = percentText || '0%';
+    return wrapper;
+  }
+
+  // Quitar barra con animacion
+  function removeProgressBarFromCard(card) {
+    if(!card) return;
+    const wrapper = card.querySelector('.progress-wrapper');
+    if(!wrapper) return;
+    const container = wrapper.querySelector('.progress-bar-container');
+    if(container) container.classList.remove('visible');
+    wrapper.classList.add('progress-fade-out');
+    setTimeout(()=>{ if(wrapper && wrapper.parentNode) wrapper.parentNode.removeChild(wrapper); }, 380);
+  }
+
+  // Determinar porcentaje basado en tiempo/duration
+  function computePercentage(time, duration) {
+    if(!duration || isNaN(duration) || duration <= 0) duration = DEFAULT_EP_DURATION_SECONDS;
+    return Math.max(0, Math.min(100, (time / duration) * 100));
+  }
+
+  // Actualiza todas las barras presentes en el DOM usando storage
+  function refreshAllProgressBars() {
+    const times = safeParse('tiempos_por_episode', {});
+    const cards = Array.from(document.querySelectorAll('.episode-card'));
+    cards.forEach(card => {
+      // intentar identificar id desde dataset o título
+      const datasetId = card.dataset && card.dataset.id;
+      let id = datasetId || null;
+      if(!id) {
+        const titleEl = card.querySelector('.ep-title');
+        if(titleEl) id = titleEl.textContent.trim().toLowerCase().replace(/\s+/g,'_');
+      }
+      const saved = id ? (parseFloat(times[id]||0) || 0) : 0;
+      // obtener duration si el video actual coincide con episodio (fallback)
+      const duration = (typeof document.querySelector === 'function' && document.querySelector('.vid1') && !isNaN(document.querySelector('.vid1').duration) && document.querySelector('.vid1').duration>0) ? document.querySelector('.vid1').duration : null;
+      const percent = computePercentage(saved, duration || DEFAULT_EP_DURATION_SECONDS);
+      if(percent >= (MIN_VISIBLE_FRACTION * 100)) {
+        ensureProgressBarOnCard(card, id, percent.toFixed(0) + '%');
+      } else {
+        // si existe y <0.1% quitar
+        const wrapper = card.querySelector('.progress-wrapper');
+        if(wrapper) removeProgressBarFromCard(card);
+      }
+    });
+  }
+
+  // Observador: cuando se añadan episodios al grid, refrescar barra para ellos
+  function attachEpisodesObserver() {
+    const grid = document.getElementById('episodes-grid');
+    if(!grid) return;
+    const mo = new MutationObserver((mutations) => {
+      let shouldRefresh = false;
+      for(const m of mutations) {
+        if(m.addedNodes && m.addedNodes.length) { shouldRefresh = true; break; }
+      }
+      if(shouldRefresh) {
+        // pequeña desincronizacion para permitir que el render termine
+        setTimeout(refreshAllProgressBars, 120);
+      }
+    });
+    mo.observe(grid, { childList: true, subtree: true });
+  }
+
+  // Guardado periódico del tiempo mientras el video corre
+  function attachPlayerSaver() {
+    const video = document.querySelector('.vid1');
+    if(!video) return;
+    // cada X ms guarda
+    setInterval(() => {
+      try {
+        if(!video.paused && !video.ended) {
+          // identificar episodio actual por ultimo guardado o por src
+          const ultimo = safeParse(`ultimoEpisodio_${SERIES_KEY}`, null);
+          let epId = ultimo && ultimo.id ? ultimo.id : null;
+          // si no hay id, crear a partir del src (hash)
+          if(!epId) {
+            const src = video.querySelector('source') ? video.querySelector('source').getAttribute('src') : video.currentSrc;
+            if(src) epId = 'src_' + btoa(src).slice(0,12);
+          }
+          if(epId) {
+            saveEpisodeTime(epId, video.currentTime);
+            // si el porcentaje alcanza 100% -> eliminar barra y limpieza
+            const dur = (!isNaN(video.duration) && video.duration>0) ? video.duration : DEFAULT_EP_DURATION_SECONDS;
+            const pct = computePercentage(video.currentTime, dur);
+            if(pct >= 99.9) {
+              // borrar progreso porque terminó
+              removeEpisodeTime(epId);
+              // actualizar UI: encontrar tarjeta correspondiente y remover barra
+              const cards = Array.from(document.querySelectorAll('.episode-card'));
+              cards.forEach(c => {
+                const title = c.querySelector('.ep-title') ? c.querySelector('.ep-title').textContent.trim() : '';
+                if(title && (epId === (c.dataset.id || '').toString() || title.toLowerCase().includes((ultimo && ultimo.episodio||'').toLowerCase()))) {
+                  removeProgressBarFromCard(c);
+                }
+              });
+            } else {
+              // actualizar visual en la tarjeta activa
+              refreshAllProgressBars();
+            }
+          }
+        }
+      } catch(e){ console.warn('Saver error', e); }
+    }, SAVE_INTERVAL_MS);
+  }
+
+  // Precarga/Render rápido de temporadas y episodios sin bloquear UI
+  function precacheSeasons() {
+    try {
+      const modal = document.getElementById('seasons-modal');
+      if(!modal) return;
+      // Si ya preparado por tu script, solo refrescar barras
+      if(modal.dataset.prepared === '1') {
+        // call render if exists
+        if(typeof window.renderSeasons === 'function') window.renderSeasons();
+        if(typeof window.selectSeason === 'function') window.selectSeason(0);
+        refreshAllProgressBars();
+        return;
+      }
+      // Intenta usar requestIdleCallback o fallback a setTimeout
+      const doPrep = () => {
+        if(typeof window.renderSeasons === 'function') {
+          try { window.renderSeasons(); } catch(e){ console.warn(e); }
+        }
+        if(typeof window.selectSeason === 'function') {
+          try { window.selectSeason(0); } catch(e){ console.warn(e); }
+        }
+        modal.dataset.prepared = '1';
+        // allow a tick then refresh bars
+        setTimeout(() => { refreshAllProgressBars(); }, 120);
+      };
+      if('requestIdleCallback' in window) requestIdleCallback(doPrep, {timeout:1000});
+      else setTimeout(doPrep, 300);
+    } catch(e){ console.warn('Precache error', e); }
+  }
+
+  // Hook: cuando se hace click en un episodio a reproducir, guardamos ultimo episodio y actualizamos UI inmediatamente
+  function attachEpisodeClickWatcher() {
+    document.addEventListener('click', (ev) => {
+      const btn = ev.target.closest && ev.target.closest('.play-btn');
+      if(!btn) return;
+      const href = btn.getAttribute('data-href') || btn.dataset.href;
+      // intentar identificar episodio id y title desde la tarjeta
+      const card = btn.closest('.episode-card');
+      let id = card && card.dataset && card.dataset.id ? card.dataset.id : null;
+      const title = card ? (card.querySelector('.ep-title') ? card.querySelector('.ep-title').textContent.trim() : '') : '';
+      // si no hay id, crear a partir del title
+      if(!id && title) id = title.trim().toLowerCase().replace(/\s+/g,'_');
+      if(id) {
+        const episodioInfo = {
+          temporada: document.getElementById('season-label') ? document.getElementById('season-label').textContent : 'Temporada',
+          episodio: title || btn.getAttribute('aria-label') || 'Episodio',
+          id: id
+        };
+        localStorage.setItem(`ultimoEpisodio_${SERIES_KEY}`, JSON.stringify(episodioInfo));
+        // marcar visual
+        document.querySelectorAll('.episode-card').forEach(c => c.classList.remove('viendo'));
+        if(card) card.classList.add('viendo');
+        // refresh bars quickly
+        setTimeout(refreshAllProgressBars, 120);
+      }
+    }, true);
+  }
+
+  // Inicialización general
+  function initEnhancements() {
+    try {
+      attachEpisodesObserver();
+      attachEpisodeClickWatcher();
+      attachPlayerSaver();
+      attachPlayerSaver(); // ensure attached
+      attachPlayerSaver(); // harmless multiple calls
+      attachPlayerSaver();
+      // precache seasons asap
+      precacheSeasons();
+      // refresh present cards
+      setTimeout(refreshAllProgressBars, 220);
+      // also refresh on visibility change
+      document.addEventListener('visibilitychange', () => { if(document.visibilityState === 'visible') refreshAllProgressBars(); });
+    } catch(e){ console.warn('Init enhancements error', e); }
+  }
+
+  // Run on DOMContentLoaded
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initEnhancements);
+  else initEnhancements();
+
+  // exposed for debugging
+  window.__enhanced_progress_refresh = refreshAllProgressBars;
+  window.__enhanced_precache = precacheSeasons;
+})();
+</script>
+<!-- ======= FIN: Mejoras integradas ======= -->
 </body>
 </html>
 
