@@ -443,6 +443,51 @@
 
   <!-- CONTINUAR -->
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const video = document.querySelector('video');
+
+    if (!video) return;
+
+    // Función para entrar en fullscreen
+    function enterFullscreen() {
+        if (video.requestFullscreen) video.requestFullscreen();
+        else if (video.webkitRequestFullscreen) video.webkitRequestFullscreen();
+        else if (video.msRequestFullscreen) video.msRequestFullscreen();
+        screen.orientation.lock('landscape').catch(()=>{});
+        document.body.style.backgroundColor = "black";
+    }
+
+    // Función para salir de fullscreen
+    function exitFullscreen() {
+        if (document.exitFullscreen) document.exitFullscreen();
+        else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+        else if (document.msExitFullscreen) document.msExitFullscreen();
+        screen.orientation.lock('portrait').catch(()=>{});
+        document.body.style.backgroundColor = "";
+    }
+
+    // Detectar orientación
+    window.addEventListener('orientationchange', function() {
+        if (window.orientation === 90 || window.orientation === -90) {
+            enterFullscreen();
+        } else {
+            exitFullscreen();
+        }
+    });
+
+    // Quitar controles no deseados (velocidad, ajustes)
+    const observer = new MutationObserver(() => {
+        document.querySelectorAll('button, select').forEach(el => {
+            if (el.textContent.includes('Velocidad') || el.textContent.includes('Ajustes')) {
+                el.remove();
+            }
+        });
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+});
+</script>  
+
   <style>
 /* 🔴 Modal Continuar Viendo estilo Netflix */
 #continue-modal {
