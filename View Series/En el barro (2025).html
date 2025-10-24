@@ -440,10 +440,113 @@
 </style>
 </head>
 
-<body ondragstart="return false;" ondrop="return false;">
+<body>
+
+
+<!-- 🔴 Pantalla de carga personalizada MovieTx (versión neón) -->
+<div id="loader-screen">
+  <div class="loader-content">
+    <div class="loader-circle">
+      <img src="Logo MovieTx.png" alt="Logo MovieTx" class="loader-logo">
+    </div>
+    <h1 class="loader-title">MovieTx</h1>
+    <p class="loader-sub">Cargando<span class="loading-dots"></span></p>
+    <p class="loader-msg">Por favor, espere</p>
+  </div>
+</div>
+
+<style>
+#loader-screen {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 10000;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+#loader-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+.loader-content {
+  text-align: center;
+}
+.loader-circle {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 6px solid transparent;
+  border-top: 6px solid #00aaff;
+  border-bottom: 6px solid #ff007f;
+  animation: spin 2s linear infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  box-shadow: 0 0 30px rgba(255, 0, 128, 0.5);
+}
+.loader-logo {
+  width: 100px;
+  height: auto;
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.loader-title {
+  font-size: 2.5rem;
+  color: #fff;
+  text-shadow: 0 0 10px #ff4da6, 0 0 20px #ff1a8c, 0 0 40px #ff007f;
+  font-weight: bold;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+.loader-sub {
+  font-size: 1.2rem;
+  color: #ccc;
+}
+.loading-dots::after {
+  content: '';
+  animation: dotPulse 1.5s infinite steps(4);
+}
+@keyframes dotPulse {
+  0% { content: ''; }
+  25% { content: '.'; }
+  50% { content: '..'; }
+  75% { content: '...'; }
+  100% { content: ''; }
+}
+.loader-msg {
+  font-size: 1rem;
+  color: #888;
+  margin-top: 10px;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const loader = document.getElementById('loader-screen');
+  const continueModal = document.getElementById('continue-modal');
+  if (continueModal) continueModal.style.display = 'none'; // Ocultamos modal al inicio
+
+  setTimeout(() => {
+    loader.classList.add('hidden');
+    setTimeout(() => {
+      if (continueModal) continueModal.style.display = ''; // Mostrar después del fade
+    }, 1200);
+  }, 10000); // 10 segundos
+});
+</script>
+<!-- 🔴 Fin pantalla de carga neón -->
+
+
+  <ondragstart="return false;" ondrop="return false;">
   
   <div class="player">
-    <video class="vid1 js-player" controls loading="lazy" poster="https://image.tmdb.org/t/p/original/bxPELhUZNgbFUN31EZTBC99wOHD.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+    <video class="vid1 js-player" controls loading="lazy" poster="https://image.tmdb.org/t/p/w780/bxPELhUZNgbFUN31EZTBC99wOHD.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
       <source src="" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
@@ -1140,24 +1243,24 @@ document.addEventListener("DOMContentLoaded", () => {
         <p>Rosario Tijeras</p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/original/eAy2tSlGtzseWfYemt398QrPtf2.jpg" alt="">
-        <p>El Marginal</p>
+        <img loading="lazy" src="" alt="">
+        <p></p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/original/kY0BogCM8SkNJ0MNiHB3VTM86Tz.jpg" alt="">
-        <p>Chucky</p>
+        <img loading="lazy" src="" alt="">
+        <p></p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/original/9CSTzX1pUrNLD7lsJ8h9hRFJtLQ.jpg" alt="">
-        <p>Duki: Desde el fin del mundo</p>
+        <img loading="lazy" src="" alt="">
+        <p></p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/original/8PT42NbjTZzYzCnPzg4NZzSW97n.jpg" alt="">
-        <p>Dragon Ball Z</p>
+        <img loading="lazy" src="" alt="">
+        <p></p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/original/wfxsizfb7NV9uwy9QCqqvfR20F2.jpg" alt="">
-        <p>Dr.House</p>
+        <img loading="lazy" src="" alt="">
+        <p></p>
       </a>
     </div>
   </div>
@@ -1566,137 +1669,6 @@ closeModalX.addEventListener('click', () => {
   });
 </script>
 
-
-
-<!-- 🔵 Pantalla de Carga Mejorada -->
-<div id="loading-screen">
-  <div class="loader-circle">
-    <img src="../Logo MovieTx.png" alt="Logo MovieTx" class="loader-logo">
-  </div>
-  <h2 class="loader-title">MovieTx</h2>
-  <div class="loading-text">
-    <p class="loading-dots">Cargando<span>.</span><span>.</span><span>.</span></p>
-    <small>Por favor, espere</small>
-  </div>
-</div>
-
-<style>
-#loading-screen {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(8px);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 100000;
-  transition: opacity 1s ease, visibility 1s ease;
-}
-#loading-screen.hidden {
-  opacity: 0;
-  visibility: hidden;
-}
-.loader-circle {
-  width: 120px; height: 120px;
-  border: 5px solid rgba(255,255,255,0.2);
-  border-top: 5px solid #ff2d5b;
-  border-radius: 50%;
-  animation: spin 2s linear infinite;
-  display: flex; justify-content: center; align-items: center;
-}
-.loader-logo {
-  width: 60px;
-  height: 60px;
-  object-fit: contain;
-}
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* 🔹 Texto MovieTx animado */
-.loader-title {
-  margin-top: 18px;
-  font-size: 1.8rem;
-  font-weight: 700;
-  background: linear-gradient(90deg, #ff2d5b, #ff5e7e, #ff2d5b);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: neonGlow 3s ease-in-out infinite, shine 4s linear infinite;
-  letter-spacing: 1px;
-  text-shadow: 0 0 10px rgba(255,45,91,0.8), 0 0 20px rgba(255,94,126,0.5);
-}
-@keyframes neonGlow {
-  0%,100% { text-shadow: 0 0 8px rgba(255,45,91,0.8), 0 0 20px rgba(255,94,126,0.5); }
-  50% { text-shadow: 0 0 16px rgba(255,94,126,1), 0 0 40px rgba(255,45,91,0.8); }
-}
-@keyframes shine {
-  from { background-position: 200% center; }
-  to { background-position: 0 center; }
-}
-
-/* 🔹 Texto Cargando... animado */
-.loading-text {
-  margin-top: 20px;
-  text-align: center;
-  color: #fff;
-  font-family: 'Roboto', sans-serif;
-  animation: fadeIn 1.5s ease;
-}
-.loading-text p {
-  font-size: 1.2rem;
-  margin-bottom: 5px;
-  text-shadow: 0 0 6px rgba(255,255,255,0.5);
-  letter-spacing: 1px;
-}
-.loading-text small {
-  font-size: 0.9rem;
-  opacity: 0.8;
-}
-.loading-dots span {
-  opacity: 0;
-  animation: dots 1.5s infinite;
-}
-.loading-dots span:nth-child(1) { animation-delay: 0s; }
-.loading-dots span:nth-child(2) { animation-delay: 0.3s; }
-.loading-dots span:nth-child(3) { animation-delay: 0.6s; }
-
-@keyframes dots {
-  0%, 20% { opacity: 0; }
-  50% { opacity: 1; }
-  100% { opacity: 0; }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-</style>
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  const loadingScreen = document.getElementById("loading-screen");
-  const continueModal = document.getElementById("continue-modal");
-
-  // Mostrar pantalla de carga
-  loadingScreen.classList.remove("hidden");
-
-  // Ocultar después de 10 segundos
-  setTimeout(() => {
-    loadingScreen.classList.add("hidden");
-
-    // Mostrar "Continuar viendo" después de 5 segundos más
-    setTimeout(() => {
-      if (continueModal) {
-        continueModal.classList.add("null");
-      }
-    }, 5000);
-  }, 10000);
-});
-</script>
 
 </body>
 </html>
