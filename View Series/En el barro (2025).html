@@ -447,7 +447,7 @@
 <div id="loader-screen">
   <div class="loader-content">
     <div class="loader-circle">
-      <img src="Logo MovieTx.png" alt="Logo MovieTx" class="loader-logo">
+      <img src="../Logo MovieTx.png" alt="Logo MovieTx" class="loader-logo">
     </div>
     <h1 class="loader-title">MovieTx</h1>
     <p class="loader-sub">Cargando<span class="loading-dots"></span></p>
@@ -1348,14 +1348,6 @@ player.on('play', () => {
     
     /* ACA VA LA NOMBRE, IMAGEN, GENERO, ARCHIVO DONDE GUARDAN SU HTML DE PELICULA Y EL TIEMPO */
     document.getElementById('btn-favorito').addEventListener('click', () => {
-      const nuevaPelicula = {
-        titulo: "En el barro",
-        imagen: "https://image.tmdb.org/t/p/w300/kKi1YdzQNM87Mcz7WxxclHbevwr.jpg",
-        genero: "Genero",
-        archivo: "../View Series/En el barro (2025).html",
-        tipo: "serie",
-        timestamp: Date.now()
-      };
 
       /* animacion de favoritos */
       const btn = document.getElementById('btn-favorito');
