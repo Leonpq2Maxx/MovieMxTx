@@ -443,7 +443,7 @@
 <body ondragstart="return false;" ondrop="return false;">
 <div id="loader-overlay">
   <div class="loader-circle">
-    <img src="../logo.png" alt="Logo" class="loader-logo"/>
+    <img src="logo.png" alt="Logo" class="loader-logo"/>
   </div>
   <div class="loader-text-main">Cargando...</div>
   <div class="loader-text-sub">Por favor espere</div>
@@ -888,7 +888,7 @@ const SERIES_KEY = "En_el_barra25";
       thumb: "https://image.tmdb.org/t/p/w780/v8xHeTkIBOl51yRp0zcAu2VYhdZ.jpg",
       desc: "Lanzada 2025 — 8 episodios",
       episodes: [
-        { id: "s1e1", title: "Episodio 1", time: "45m", thumb: "", href: "https://dl.dropbox.com/scl/fi/bawnnxf6ccjy765pzdsr1/En-el-barro-Cap-1.mp4?rlkey=xf38z7zwucx1747ox9ax1389z&st=" },
+        { id: "s1e1", title: "Episodio 1", time: "45m", thumb: "https://image.tmdb.org/t/p/original/7QirCB1o80NEFpQGlQRZerZbQEp.jpg", href: "https://dl.dropbox.com/scl/fi/bawnnxf6ccjy765pzdsr1/En-el-barro-Cap-1.mp4?rlkey=xf38z7zwucx1747ox9ax1389z&st=" },
         { id: "s1e2", title: "Episodio 2", time: "45m", thumb: "", href: "https://dl.dropbox.com/scl/fi/x63tx11kljnw75sh82f6x/En-el-barro-Cap-2.mp4?rlkey=twb14o7mk2rwvp52yxet5z0qn&st=" },
         { id: "s1e3", title: "Episodio 3", time: "45m", thumb: "", href: "https://dl.dropbox.com/scl/fi/uf3d7ix814z61eqlwmkwp/En-el-barro-Cap-3.mp4?rlkey=ridj4j6adxlz7huiz98mchy8m&st=" },
         { id: "s1e4", title: "Episodio 4", time: "45m", thumb: "", href: "" },
@@ -1148,24 +1148,24 @@ document.addEventListener("DOMContentLoaded", () => {
         <p>Rosario Tijeras</p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="" alt="">
-        <p></p>
+        <img loading="lazy" src="https://image.tmdb.org/t/p/original/6kmi6vmp6iOn4KzI7WfnVtAeJhU.jpg" alt="">
+        <p>Culpa Nuestra</p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="" alt="">
-        <p></p>
+        <img loading="lazy" src="https://image.tmdb.org/t/p/original/eAy2tSlGtzseWfYemt398QrPtf2.jpg" alt="">
+        <p>el marginal</p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="" alt="">
-        <p></p>
+        <img loading="lazy" src="https://image.tmdb.org/t/p/original/8PT42NbjTZzYzCnPzg4NZzSW97n.jpg" alt="">
+        <p>Dragon Ball Z</p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="" alt="">
-        <p></p>
+        <img loading="lazy" src="https://image.tmdb.org/t/p/original/kY0BogCM8SkNJ0MNiHB3VTM86Tz.jpg" alt="">
+        <p>Chuck</p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="" alt="">
-        <p></p>
+        <img loading="lazy" src="https://image.tmdb.org/t/p/original/jN50JvMxnVmctBeKxZenQ2qHyL6.jpg" alt="">
+        <p>Tevez</p>
       </a>
     </div>
   </div>
@@ -1594,14 +1594,39 @@ closeModalX.addEventListener('click', () => {
 @keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
 
 /* thumbnails */
-
+.episode-thumb{
+ width:60px;height:35px;object-fit:cover;border-radius:6px;margin-right:8px;flex-shrink:0;
+}
 .ep-content-row{display:flex;align-items:center;}
 </style>
 
 <script>
 (function(){
 // Enhance episodes to include thumbnail if provided
-function 
+function thumbEnhance(){
+ document.querySelectorAll('.episode-card').forEach(card=>{
+  const btn=card.querySelector('.play-btn');
+  if(!btn) return;
+  const epid=btn.dataset.epid;
+  if(card.querySelector('img.episode-thumb')) return;
+  const ep=Array.from(document.querySelectorAll('*')).find(e=>e.dataset && e.dataset.epid===epid);
+  const thumb=btn.dataset.thumb || '';
+  const img=document.createElement('img');
+  img.className='episode-thumb';
+  img.src=thumb||'';
+  const titleEl=card.querySelector('.ep-title');
+  if(titleEl){
+    titleEl.parentElement.classList.add('ep-content-row');
+    titleEl.parentElement.prepend(img);
+  }
+ });
+}
+
+// observe grid
+const grid=document.getElementById('episodes-grid');
+if(grid){
+ const obs=new MutationObserver(()=>thumbEnhance());
+ obs.observe(grid,{childList:true,subtree:true});
 }
 
 // Hide loader when all images loaded
@@ -1613,24 +1638,101 @@ window.addEventListener('load',()=>{
 });
 })();</script>
 
+<!-- 🔹 OPTIMIZACIÓN FINAL: Loader con contador circular + fade-out + retardo antes de “Continuar viendo” -->
+<style>
+#loader-overlay.fade-out {
+  animation: loaderFadeOut 0.8s ease forwards;
+}
+@keyframes loaderFadeOut {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(1.05); visibility: hidden; }
+}
+
+/* 🔴 Contador circular */
+.loader-timer {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  margin-top: 20px;
+}
+.loader-timer svg {
+  transform: rotate(-90deg);
+  width: 70px;
+  height: 70px;
+}
+.loader-timer circle {
+  fill: none;
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+.loader-timer .bg {
+  stroke: rgba(255, 255, 255, 0.1);
+}
+.loader-timer .progress {
+  stroke: #ff2d5b;
+  stroke-dasharray: 314; /* 2 * π * r (r=50) */
+  stroke-dashoffset: 314;
+  animation: progressAnim 5s linear forwards;
+}
+@keyframes progressAnim {
+  from { stroke-dashoffset: 314; }
+  to { stroke-dashoffset: 0; }
+}
+.loader-timer .timer-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1rem;
+  color: #fff;
+  font-weight: bold;
+}
+</style>
+
 <script>
-window.addEventListener('load',()=>{
- setTimeout(()=>{
-  const l=document.getElementById('loader-overlay');
-  if(l) l.style.display='none';
-
-  const ultimo = JSON.parse(localStorage.getItem('ultimoEpisodio_En_el_barra25')||'null');
+document.addEventListener('DOMContentLoaded', () => {
+  const loader = document.getElementById('loader-overlay');
   const modal = document.getElementById('continue-modal');
-  const info = document.getElementById('continue-info');
-  const time = parseFloat(localStorage.getItem('ultimoTiempoReproduccion')||0);
+  if (!loader) return;
 
-  if(ultimo){
-    info.textContent = `${ultimo.temporada} - ${ultimo.episodio} | Minuto ${(time/60).toFixed(1)}`;
-    modal.classList.add('active');
-  }
- },400);
+  // Crear contador circular dentro del loader
+  const timerContainer = document.createElement('div');
+  timerContainer.className = 'loader-timer';
+  timerContainer.innerHTML = `
+    <svg>
+      <circle class="bg" cx="35" cy="35" r="50"></circle>
+      <circle class="progress" cx="35" cy="35" r="50"></circle>
+    </svg>
+    <div class="timer-text">5</div>
+  `;
+  loader.appendChild(timerContainer);
+
+  const timerText = timerContainer.querySelector('.timer-text');
+
+  window.addEventListener('load', () => {
+    let count = 5;
+    const interval = setInterval(() => {
+      count--;
+      if (count >= 0) timerText.textContent = count;
+      if (count === 0) clearInterval(interval);
+    }, 1000);
+
+    // 🔸 Después de 5s, fade out del loader
+    setTimeout(() => {
+      loader.classList.add('fade-out');
+      loader.addEventListener('animationend', () => {
+        loader.style.display = 'none';
+        // 🔸 Luego de fade, mostrar modal “Continuar viendo” (si existe)
+        setTimeout(() => {
+          const ultimo = JSON.parse(localStorage.getItem('ultimoEpisodio_En_el_barra25') || 'null');
+          if (ultimo && modal) modal.classList.add('active');
+        }, 500);
+      }, { once: true });
+    }, 5000);
+  });
 });
 </script>
+
 </body>
 </html>
 
