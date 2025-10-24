@@ -435,26 +435,20 @@
 #continue-modal button:hover {
   background: #f6121d;
 }
-/* 🔴 Barra de progreso debajo de episodios */
-.episode-card .progress-bar-container {
-  width: 100%;
-  height: 5px;
-  background: rgba(255,255,255,0.1);
-  border-radius: 4px;
-  overflow: hidden;
-  margin-top: 6px;
-}
-.episode-card .progress-bar {
-  height: 100%;
-  background: #e50914;
-  width: 0%;
-  transition: width 0.3s ease;
-}
+
 
 </style>
 </head>
 
 <body ondragstart="return false;" ondrop="return false;">
+<div id="loader-overlay">
+  <div class="loader-circle">
+    <img src="../logo.png" alt="Logo" class="loader-logo"/>
+  </div>
+  <div class="loader-text-main">Cargando...</div>
+  <div class="loader-text-sub">Por favor espere</div>
+</div>
+
   
   <div class="player">
     <video class="vid1 js-player" controls loading="lazy" poster="https://image.tmdb.org/t/p/w780/bxPELhUZNgbFUN31EZTBC99wOHD.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
@@ -1349,7 +1343,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(() => {
     if (!videoElement.paused && !videoElement.ended) {
       localStorage.setItem('ultimoTiempoReproduccion', videoElement.currentTime);
-      actualizarBarraProgreso();
+      
     }
   }, 5000);
 
@@ -1377,28 +1371,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Mostrar barra de progreso debajo de cada episodio
-  function actualizarBarraProgreso(){
-    const ultimo = JSON.parse(localStorage.getItem(`ultimoEpisodio_${SERIES_KEY}`) || 'null');
-    const tiempo = parseFloat(localStorage.getItem('ultimoTiempoReproduccion') || 0);
-    if (ultimo && tiempo > 0) {
-      const card = [...document.querySelectorAll('.episode-card')]
-        .find(c => c.querySelector('.ep-title').textContent.includes(ultimo.episodio));
-      if (card) {
-        if (!card.querySelector('.progress-bar-container')) {
-          const pbContainer = document.createElement('div');
-          pbContainer.className = 'progress-bar-container';
-          pbContainer.innerHTML = '<div class="progress-bar"></div>';
-          card.appendChild(pbContainer);
-        }
-        const barra = card.querySelector('.progress-bar');
-        // Para calcular porcentaje, suponemos duración estándar 45 min = 2700s
-        const porcentaje = Math.min(100, (tiempo / 2700) * 100);
-        barra.style.width = porcentaje + '%';
-      }
-    }
-  }
-  actualizarBarraProgreso();
+  
 });
 </script>
 
@@ -1523,7 +1496,7 @@ closeModalX.addEventListener('click', () => {
   setInterval(() => {
     if (!videoElement.paused && !videoElement.ended) {
       localStorage.setItem('ultimoTiempoReproduccion', videoElement.currentTime);
-      actualizarBarraProgreso();
+      
     }
   }, 5000);
 
@@ -1551,28 +1524,7 @@ closeModalX.addEventListener('click', () => {
     }
   });
 
-  // Mostrar barra de progreso debajo de cada episodio
-  function actualizarBarraProgreso(){
-    const ultimo = JSON.parse(localStorage.getItem(`ultimoEpisodio_${SERIES_KEY}`) || 'null');
-    const tiempo = parseFloat(localStorage.getItem('ultimoTiempoReproduccion') || 0);
-    if (ultimo && tiempo > 0) {
-      const card = [...document.querySelectorAll('.episode-card')]
-        .find(c => c.querySelector('.ep-title').textContent.includes(ultimo.episodio));
-      if (card) {
-        if (!card.querySelector('.progress-bar-container')) {
-          const pbContainer = document.createElement('div');
-          pbContainer.className = 'progress-bar-container';
-          pbContainer.innerHTML = '<div class="progress-bar"></div>';
-          card.appendChild(pbContainer);
-        }
-        const barra = card.querySelector('.progress-bar');
-        // Para calcular porcentaje, suponemos duración estándar 45 min = 2700s
-        const porcentaje = Math.min(100, (tiempo / 2700) * 100);
-        barra.style.width = porcentaje + '%';
-      }
-    }
-  }
-  actualizarBarraProgreso();
+  
 });
 </script>
 
@@ -1623,6 +1575,62 @@ closeModalX.addEventListener('click', () => {
 </script>
 
 
+
+<style>
+#loader-overlay{
+ position:fixed;top:0;left:0;width:100%;height:100%;
+ background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);
+ display:flex;flex-direction:column;justify-content:center;align-items:center;
+ z-index:9999;
+}
+.loader-circle{
+ width:100px;height:100px;border-radius:50%;
+ display:flex;justify-content:center;align-items:center;
+ animation:spin 2s linear infinite;border:4px solid #ff2d5b;border-top-color:transparent;
+}
+.loader-logo{width:60%;height:60%;object-fit:contain;}
+.loader-text-main{color:#fff;font-size:1.2rem;margin-top:16px;font-weight:bold;}
+.loader-text-sub{color:#ccc;font-size:0.9rem;margin-top:4px;}
+@keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+
+/* thumbnails */
+
+.ep-content-row{display:flex;align-items:center;}
+</style>
+
+<script>
+(function(){
+// Enhance episodes to include thumbnail if provided
+function 
+}
+
+// Hide loader when all images loaded
+window.addEventListener('load',()=>{
+ setTimeout(()=>{
+  const l=document.getElementById('loader-overlay');
+  if(l) l.style.display='none';
+ },300);
+});
+})();</script>
+
+<script>
+window.addEventListener('load',()=>{
+ setTimeout(()=>{
+  const l=document.getElementById('loader-overlay');
+  if(l) l.style.display='none';
+
+  const ultimo = JSON.parse(localStorage.getItem('ultimoEpisodio_En_el_barra25')||'null');
+  const modal = document.getElementById('continue-modal');
+  const info = document.getElementById('continue-info');
+  const time = parseFloat(localStorage.getItem('ultimoTiempoReproduccion')||0);
+
+  if(ultimo){
+    info.textContent = `${ultimo.temporada} - ${ultimo.episodio} | Minuto ${(time/60).toFixed(1)}`;
+    modal.classList.add('active');
+  }
+ },400);
+});
+</script>
 </body>
 </html>
 
