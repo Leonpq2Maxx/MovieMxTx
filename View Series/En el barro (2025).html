@@ -442,38 +442,6 @@
 
 <body>
 
-  <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-  const video = document.querySelector('video');
-  
-  if (isMobile && video) {
-    video.addEventListener('play', async () => {
-      try {
-        if (video.requestFullscreen) {
-          await video.requestFullscreen();
-        } else if (video.webkitRequestFullscreen) {
-          await video.webkitRequestFullscreen(); // iOS
-        } else if (video.msRequestFullscreen) {
-          await video.msRequestFullscreen(); // Edge
-        }
-      } catch (err) {
-        console.warn("No se pudo activar pantalla completa:", err);
-      }
-    });
-
-    const salirFullscreen = () => {
-      if (document.fullscreenElement) {
-        document.exitFullscreen();
-      }
-    };
-
-    video.addEventListener('pause', salirFullscreen);
-    video.addEventListener('ended', salirFullscreen);
-  }
-});
-</script>
-
 
 <!-- 🔴 Pantalla de carga personalizada MovieTx (versión neón) -->
 <div id="loader-screen">
@@ -488,7 +456,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 
 <style>
-#loader-screen {
+#loader-screen 
   position: fixed;
   inset: 0;
   background: #000;
