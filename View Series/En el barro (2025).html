@@ -1641,17 +1641,24 @@ closeModalX.addEventListener('click', () => {
     let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
     
     if (indexHist === -1) {
-      historial.push({
-      titulo: historialTitulo,
-      imagen: historialImagen,
-      progreso: "Asistido 0 min",
-      archivo: historialArchivo,
-      tipo: "serie", // ✅ ya está
-      timestamp: Date.now()
-    });
-    localStorage.setItem('historial_usuarios', JSON.stringify(historial));
-    indexHist = historial.length - 1;
-    
+  historial.push({
+    titulo: historialTitulo,
+    imagen: historialImagen,
+    progreso: "Asistido 0 min",
+    archivo: historialArchivo,
+    tipo: "serie", ✅ ya está
+    timestamp: Date.now()
+  });
+  localStorage.setItem('historial_usuarios', JSON.stringify(historial));
+  indexHist = historial.length - 1;
+
+  // ✅ Mostrar mensaje solo si no estaba en historial, 5s después del loader (total 15s)
+  setTimeout(() => {
+    if (typeof mostrarModalFavoritos === 'function') {
+      mostrarModalFavoritos("✅ Agregado al historial");
+    }
+  }, 15000);
+}
 
   }
   setInterval(() => {
