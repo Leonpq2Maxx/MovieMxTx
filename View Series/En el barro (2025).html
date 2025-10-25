@@ -447,7 +447,7 @@
 <div id="loader-screen">
   <div class="loader-content">
     <div class="loader-circle">
-      <img src="Logo MovieTx.png" alt="Logo MovieTx" class="loader-logo">
+      <img src="../Logo MovieTx.png" alt="Logo MovieTx" class="loader-logo">
     </div>
     <h1 class="loader-title">MovieTx</h1>
     <p class="loader-sub">Cargando<span class="loading-dots"></span></p>
@@ -532,33 +532,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const continueModal = document.getElementById('continue-modal');
   if (continueModal) continueModal.style.display = 'none'; // Ocultamos modal al inicio
 
-  // ✅ Verificar si ya está en historial antes de mostrar el mensaje
-const yaEnHistorial = (() => {
-  try {
-    const h = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
-    return h.some(item => item.titulo === "En el barro");
-  } catch (e) {
-    return false;
-  }
-})();
-
-  
-  setTimeout(() => {loader.classList.add('hidden');
+  setTimeout(() => {
+    loader.classList.add('hidden');
     setTimeout(() => {
-      
       if (continueModal) continueModal.style.display = ''; // Mostrar después del fade
     }, 1200);
-    // ✅ Mostrar mensaje de historial 5s después del fade del loader
-     // ✅ Mostrar mensaje solo si NO está en historial
-if (!yaEnHistorial) {
-  setTimeout(() => {
-    if (typeof mostrarModalFavoritos === 'function') {
-      mostrarModalFavoritos("✅ Agregado al historial");
-    }
-  }, 15000);
-}
-
-  }, 10000); // 10 segundos
+  }, 5000); // 10 segundos
 });
 </script>
 <!-- 🔴 Fin pantalla de carga neón -->
@@ -1264,24 +1243,24 @@ document.addEventListener("DOMContentLoaded", () => {
         <p>Rosario Tijeras</p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="" alt="">
-        <p></p>
+        <img loading="lazy" src="https://image.tmdb.org/t/p/original/eAy2tSlGtzseWfYemt398QrPtf2.jpg" alt="">
+        <p>El Marginal</p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="" alt="">
-        <p></p>
+        <img loading="lazy" src="https://image.tmdb.org/t/p/original/kY0BogCM8SkNJ0MNiHB3VTM86Tz.jpg" alt="">
+        <p>Chucky</p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="" alt="">
-        <p></p>
+        <img loading="lazy" src="https://image.tmdb.org/t/p/original/9CSTzX1pUrNLD7lsJ8h9hRFJtLQ.jpg" alt="">
+        <p>Duki: Desde el fin del mundo</p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="" alt="">
-        <p></p>
+        <img loading="lazy" src="https://image.tmdb.org/t/p/original/8PT42NbjTZzYzCnPzg4NZzSW97n.jpg" alt="">
+        <p>Dragon Ball Z</p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="" alt="">
-        <p></p>
+        <img loading="lazy" src="https://image.tmdb.org/t/p/original/wfxsizfb7NV9uwy9QCqqvfR20F2.jpg" alt="">
+        <p>Dr.House</p>
       </a>
     </div>
   </div>
@@ -1369,14 +1348,6 @@ player.on('play', () => {
     
     /* ACA VA LA NOMBRE, IMAGEN, GENERO, ARCHIVO DONDE GUARDAN SU HTML DE PELICULA Y EL TIEMPO */
     document.getElementById('btn-favorito').addEventListener('click', () => {
-      const nuevaPelicula = {
-        titulo: "En el barro",
-        imagen: "https://image.tmdb.org/t/p/w300/kKi1YdzQNM87Mcz7WxxclHbevwr.jpg",
-        genero: "Genero",
-        archivo: "../View Series/En el barro (2025).html",
-        tipo: "serie",
-        timestamp: Date.now()
-      };
 
       /* animacion de favoritos */
       const btn = document.getElementById('btn-favorito');
@@ -1671,7 +1642,7 @@ closeModalX.addEventListener('click', () => {
     });
     localStorage.setItem('historial_usuarios', JSON.stringify(historial));
     indexHist = historial.length - 1;
-    
+    mostrarModalFavoritos("✅ Agregado al historial");
 
   }
   setInterval(() => {
