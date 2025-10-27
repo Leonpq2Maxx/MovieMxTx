@@ -413,6 +413,42 @@
 
 <body ondragstart="return false;" ondrop="return false;">
   
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const fullscreenBtn = document.querySelector('.plyr__control[data-plyr="fullscreen"]');
+  const videoContainer = document.querySelector('.player');
+
+  if (fullscreenBtn && videoContainer) {
+    fullscreenBtn.addEventListener('click', async () => {
+      try {
+        if (!document.fullscreenElement) {
+          // 🔹 Entra en pantalla completa
+          await videoContainer.requestFullscreen();
+
+          // 🔹 Forzar orientación horizontal
+          if (screen.orientation && screen.orientation.lock) {
+            await screen.orientation.lock('landscape');
+          }
+        } else {
+          // 🔹 Salir de pantalla completa
+          await document.exitFullscreen();
+
+          // 🔹 Volver a orientación vertical
+          if (screen.orientation && screen.orientation.unlock) {
+            screen.orientation.unlock();
+          } else {
+            await screen.orientation.lock('portrait').catch(()=>{});
+          }
+        }
+      } catch (err) {
+        console.warn('Error al cambiar modo fullscreen:', err);
+      }
+    });
+  }
+});
+</script>
+
+  
   <!-- 🔴 Pantalla de carga personalizada MovieTx (versión neón) -->
 <div id="loader-screen">
   <div class="loader-content">
