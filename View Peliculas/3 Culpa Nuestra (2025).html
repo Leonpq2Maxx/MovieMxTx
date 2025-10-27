@@ -386,87 +386,131 @@
   letter-spacing: 0.3px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.35);
 }
+/* 💎 Barra de progreso estilo "Neón líquido celeste" */
+.plyr__progress input[type="range"] {
+  height: 5px;
+  border-radius: 999px;
+  background: linear-gradient(270deg, #00c6ff, #00e0ff, #00c6ff);
+  background-size: 400% 400%;
+  animation: neonFlow 3s ease infinite;
+  box-shadow: 0 0 14px rgba(0, 230, 255, 0.6);
+  transition: all 0.3s ease;
+}
 
+.plyr__progress input[type="range"]:hover {
+  box-shadow: 0 0 20px rgba(0, 250, 255, 0.8);
+  transform: scaleY(1.1);
+}
+
+@keyframes neonFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
   </style>
 </head>
 
 <body ondragstart="return false;" ondrop="return false;">
   
-  <!-- 🎞️ Gestos táctiles para avanzar/retroceder -->
+  <!-- 🔴 Pantalla de carga personalizada MovieTx (versión neón) -->
+<div id="loader-screen">
+  <div class="loader-content">
+    <div class="loader-circle">
+      <img src="Logo MovieTx.png" alt="Logo MovieTx" class="loader-logo">
+    </div>
+    <h1 class="loader-title">MovieTx</h1>
+    <p class="loader-sub">Cargando<span class="loading-dots"></span></p>
+    <p class="loader-msg">Por favor, espere</p>
+  </div>
+</div>
+
 <style>
-#swipe-feedback {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 2rem;
-  color: #fff;
-  background: rgba(0, 0, 0, 0.6);
-  padding: 10px 20px;
-  border-radius: 10px;
-  display: none;
-  z-index: 50;
-  text-shadow: 0 0 8px #ff007f;
-  animation: fadeOut 1s forwards;
+#loader-screen {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 10000;
+  transition: opacity 1s ease, visibility 1s ease;
 }
-@keyframes fadeOut {
-  0% { opacity: 1; }
-  100% { opacity: 0; }
+#loader-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+.loader-content {
+  text-align: center;
+}
+.loader-circle {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 6px solid transparent;
+  border-top: 6px solid #00aaff;
+  border-bottom: 6px solid #ff007f;
+  animation: spin 2s linear infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  box-shadow: 0 0 30px rgba(255, 0, 128, 0.5);
+}
+.loader-logo {
+  width: 100px;
+  height: auto;
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.loader-title {
+  font-size: 2.5rem;
+  color: #fff;
+  text-shadow: 0 0 10px #ff4da6, 0 0 20px #ff1a8c, 0 0 40px #ff007f;
+  font-weight: bold;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+.loader-sub {
+  font-size: 1.2rem;
+  color: #ccc;
+}
+.loading-dots::after {
+  content: '';
+  animation: dotPulse 1.5s infinite steps(4);
+}
+@keyframes dotPulse {
+  0% { content: ''; }
+  25% { content: '.'; }
+  50% { content: '..'; }
+  75% { content: '...'; }
+  100% { content: ''; }
+}
+.loader-msg {
+  font-size: 1rem;
+  color: #888;
+  margin-top: 10px;
 }
 </style>
 
-<div id="swipe-feedback"></div>
-
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const video = document.querySelector("video");
-  const feedback = document.getElementById("swipe-feedback");
-  if (!video) return;
+document.addEventListener('DOMContentLoaded', () => {
+  const loader = document.getElementById('loader-screen');
+  const continueModal = document.getElementById('continue-modal');
+  if (continueModal) continueModal.style.display = 'none'; // Ocultamos modal al inicio
 
-  let startX = 0;
-  let isSwiping = false;
-
-  video.addEventListener("touchstart", (e) => {
-    startX = e.touches[0].clientX;
-    isSwiping = true;
-  });
-
-  video.addEventListener("touchmove", (e) => {
-    if (!isSwiping) return;
-    const deltaX = e.touches[0].clientX - startX;
-
-    // Sensibilidad del gesto (mínimo 60px)
-    if (Math.abs(deltaX) > 60) {
-      if (deltaX > 0) {
-        // Deslizó hacia la derecha → avanzar
-        video.currentTime = Math.min(video.duration, video.currentTime + 10);
-        mostrarFeedback("+10s ⏩");
-      } else {
-        // Deslizó hacia la izquierda → retroceder
-        video.currentTime = Math.max(0, video.currentTime - 10);
-        mostrarFeedback("⏪ -10s");
-      }
-      isSwiping = false; // Evita múltiples disparos por un mismo gesto
-    }
-  });
-
-  video.addEventListener("touchend", () => {
-    isSwiping = false;
-  });
-
-  function mostrarFeedback(texto) {
-    feedback.textContent = texto;
-    feedback.style.display = "block";
-    feedback.style.opacity = "1";
+  setTimeout(() => {
+    loader.classList.add('hidden');
     setTimeout(() => {
-      feedback.style.opacity = "0";
-      setTimeout(() => feedback.style.display = "none", 500);
-    }, 500);
-  }
+      if (continueModal) continueModal.style.display = ''; // Mostrar después del fade
+    }, 1200);
+  }, 5000); // 10 segundos
 });
 </script>
-
+<!-- 🔴 Fin pantalla de carga neón -->
   
  <style>
 #video-container {
@@ -525,9 +569,23 @@ document.addEventListener("DOMContentLoaded", () => {
   75% { content: '...'; }
   100% { content: ''; }
 }
+  
+  
 </style>
 
 <script>
+  <!-- Esste es el icono de pantalla grande -->
+  document.addEventListener('DOMContentLoaded', () => {
+  const fsBtn = document.querySelector('.plyr__control[data-plyr="fullscreen"]');
+  if (fsBtn) {
+    fsBtn.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="white" stroke-width="2">
+        <path d="M4 4h6M4 4v6M20 4h-6M20 4v6M4 20h6M4 20v-6M20 20h-6M20 20v-6"/>
+      </svg>
+    `;
+  }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   const video = document.querySelector('video');
   const loader = document.getElementById('player-loader');
@@ -581,8 +639,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <text x="4" y="17" fill="black" font-size="12" font-family="Arial, sans-serif" font-style="italic" font-weight="bold">HD</text>
       </svg>
       <span>1080P</span>
-    </div>
-    <span>🇪🇸</span>
+    </div>
   </div>
   
   <div class="info-pelicula">
@@ -1002,7 +1059,7 @@ document.addEventListener('DOMContentLoaded', () => {
       controls: [
         'rewind', 'play-large', 'play', 'fast-forward',
         'progress', 'current-time', 'duration', 'mute', 'volume',
-        'captions', 'settings', 'pip', 'airplay', 'fullscreen'
+        'captions', '', 'pip', 'airplay', 'fullscreen'
       ]
     });
 
