@@ -414,37 +414,31 @@
 <body ondragstart="return false;" ondrop="return false;">
   
   <script>
+// 🔹 Control de orientación y fullscreen integrado con Plyr
 document.addEventListener('DOMContentLoaded', () => {
-  const fullscreenBtn = document.querySelector('.plyr__control[data-plyr="fullscreen"]');
-  const videoContainer = document.querySelector('.player');
+  const playerElement = document.querySelector('.player');
+  if (!playerElement) return;
 
-  if (fullscreenBtn && videoContainer) {
-    fullscreenBtn.addEventListener('click', async () => {
-      try {
-        if (!document.fullscreenElement) {
-          // 🔹 Entra en pantalla completa
-          await videoContainer.requestFullscreen();
-
-          // 🔹 Forzar orientación horizontal
-          if (screen.orientation && screen.orientation.lock) {
-            await screen.orientation.lock('landscape');
-          }
-        } else {
-          // 🔹 Salir de pantalla completa
-          await document.exitFullscreen();
-
-          // 🔹 Volver a orientación vertical
-          if (screen.orientation && screen.orientation.unlock) {
-            screen.orientation.unlock();
-          } else {
-            await screen.orientation.lock('portrait').catch(()=>{});
-          }
+  // Detecta cuando entra o sale de fullscreen
+  document.addEventListener('fullscreenchange', async () => {
+    try {
+      if (document.fullscreenElement) {
+        // 🔸 Pantalla completa → forzar horizontal
+        if (screen.orientation && screen.orientation.lock) {
+          await screen.orientation.lock('landscape').catch(()=>{});
         }
-      } catch (err) {
-        console.warn('Error al cambiar modo fullscreen:', err);
+      } else {
+        // 🔸 Salió de pantalla completa → volver vertical
+        if (screen.orientation && screen.orientation.unlock) {
+          screen.orientation.unlock();
+        } else {
+          await screen.orientation.lock('portrait').catch(()=>{});
+        }
       }
-    });
-  }
+    } catch (e) {
+      console.warn('Error al manejar orientación:', e);
+    }
+  });
 });
 </script>
 
