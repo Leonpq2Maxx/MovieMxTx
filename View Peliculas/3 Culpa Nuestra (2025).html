@@ -387,49 +387,175 @@
   box-shadow: 0 4px 12px rgba(0,0,0,0.35);
 }
 
-    /* 🎬 Personalización del thumb del reproductor con el logo MovieTx */
-.plyr__progress input[type="range"]::-webkit-slider-thumb {
-  background: url("") no-repeat center center / contain !important;
-  width: 26px !important;
-  height: 26px !important;
-  border: none !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  cursor: pointer;
-}
-
-.plyr__progress input[type="range"]::-moz-range-thumb {
-  background: url("") no-repeat center center / contain !important;
-  width: 26px !important;
-  height: 26px !important;
-  border: none !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  cursor: pointer;
-}
-
-.plyr__progress input[type="range"]::-ms-thumb {
-  background: url("") no-repeat center center / contain !important;
-  width: 26px !important;
-  height: 26px !important;
-  border: none !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  cursor: pointer;
-}
-
-/* Asegura que el fondo gris de la barra siga visible */
-.plyr__progress input[type="range"] {
-  background: linear-gradient(to right, #ff005d var(--value, 0%), #444 var(--value, 0%)) !important;
-}
-
 
   </style>
 </head>
 
 <body ondragstart="return false;" ondrop="return false;">
   
+  <!-- 🎞️ Gestos táctiles para avanzar/retroceder -->
+<style>
+#swipe-feedback {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 10px 20px;
+  border-radius: 10px;
+  display: none;
+  z-index: 50;
+  text-shadow: 0 0 8px #ff007f;
+  animation: fadeOut 1s forwards;
+}
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+</style>
+
+<div id="swipe-feedback"></div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const video = document.querySelector("video");
+  const feedback = document.getElementById("swipe-feedback");
+  if (!video) return;
+
+  let startX = 0;
+  let isSwiping = false;
+
+  video.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+    isSwiping = true;
+  });
+
+  video.addEventListener("touchmove", (e) => {
+    if (!isSwiping) return;
+    const deltaX = e.touches[0].clientX - startX;
+
+    // Sensibilidad del gesto (mínimo 60px)
+    if (Math.abs(deltaX) > 60) {
+      if (deltaX > 0) {
+        // Deslizó hacia la derecha → avanzar
+        video.currentTime = Math.min(video.duration, video.currentTime + 10);
+        mostrarFeedback("+10s ⏩");
+      } else {
+        // Deslizó hacia la izquierda → retroceder
+        video.currentTime = Math.max(0, video.currentTime - 10);
+        mostrarFeedback("⏪ -10s");
+      }
+      isSwiping = false; // Evita múltiples disparos por un mismo gesto
+    }
+  });
+
+  video.addEventListener("touchend", () => {
+    isSwiping = false;
+  });
+
+  function mostrarFeedback(texto) {
+    feedback.textContent = texto;
+    feedback.style.display = "block";
+    feedback.style.opacity = "1";
+    setTimeout(() => {
+      feedback.style.opacity = "0";
+      setTimeout(() => feedback.style.display = "none", 500);
+    }, 500);
+  }
+});
+</script>
+
+  
+ <style>
+#video-container {
+  position: relative;
+  overflow: hidden;
+}
+
+#player-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+  border-radius: 8px;
+}
+
+.player-spinner {
+  width: 60px;
+  height: 60px;
+  border: 5px solid #222;
+  border-top: 5px solid #ff007f;
+  border-bottom: 5px solid #00aaff;
+  border-radius: 50%;
+  animation: spin 1.3s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.player-loading-text {
+  font-size: 1.2rem;
+  color: #fff;
+  text-align: center;
+  font-weight: 600;
+}
+
+.dots::after {
+  content: '';
+  animation: dotPulse 1.5s infinite steps(4);
+}
+
+@keyframes dotPulse {
+  0% { content: ''; }
+  25% { content: '.'; }
+  50% { content: '..'; }
+  75% { content: '...'; }
+  100% { content: ''; }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const video = document.querySelector('video');
+  const loader = document.getElementById('player-loader');
+  
+  if (video && loader) {
+    const showLoader = () => loader.style.display = 'flex';
+    const hideLoader = () => loader.style.display = 'none';
+    
+    // Mostrar cuando el video se está cargando o bufferizando
+    video.addEventListener('loadstart', showLoader);
+    video.addEventListener('waiting', showLoader);
+    
+    // Ocultar cuando está listo o reproduce
+    video.addEventListener('canplay', hideLoader);
+    video.addEventListener('playing', hideLoader);
+    video.addEventListener('pause', hideLoader);
+    video.addEventListener('ended', hideLoader);
+  }
+});
+</script>
+  
   <div class="player">
+    <!-- 🔵 Loader dentro del reproductor -->
+<div id="player-loader">
+  <div class="player-spinner"></div>
+  <p class="player-loading-text">Cargando<span class="dots"></span></p>
+</div>
+
     <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/7QirCB1o80NEFpQGlQRZerZbQEp.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
       <source src="https://dl.dropbox.com/scl/fi/1mv1wem69f14nfr4l73eu/Culpa.Nuestra.2025.1080P-Dual-Lat.mkv?rlkey=pmlgufabviceovbib0264li54&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
@@ -731,10 +857,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!favoritos.some(f => f.titulo === nuevaSerie.titulo)) {
       favoritos.push(nuevaSerie);
       localStorage.setItem('favoritos_detalles', JSON.stringify(favoritos));
-      mostrarModalFavoritos("⭐ Serie agregada a favoritos");
+      mostrarModalFavoritos("⭐ Pelicula agregada a favoritos");
       setTimeout(() => window.location.href = "favoritos.html", 1800);
     } else {
-      mostrarModalFavoritos("🎬 Esta serie ya está agregada en favoritos");
+      mostrarModalFavoritos("🎬 Esta pelicula ya está agregada en favoritos");
     }
   });
 </script>
@@ -1016,13 +1142,6 @@ player.on('play', () => {
   
 </body>
 </html>
-
-
-
-
-
-
-
 
 
 
