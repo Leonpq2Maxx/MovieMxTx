@@ -414,33 +414,12 @@
 
 <body ondragstart="return false;" ondrop="return false;">
   
-  <script>
-// 🔹 Control de orientación y fullscreen integrado con Plyr
-document.addEventListener('DOMContentLoaded', () => {
-  const playerElement = document.querySelector('.player');
-  if (!playerElement) return;
-
-  // Detecta cuando entra o sale de fullscreen
-  document.addEventListener('fullscreenchange', async () => {
-    try {
-      if (document.fullscreenElement) {
-        // 🔸 Pantalla completa → forzar horizontal
-        if (screen.orientation && screen.orientation.lock) {
-          await screen.orientation.lock('landscape').catch(()=>{});
-        }
-      } else {
-        // 🔸 Salió de pantalla completa → volver vertical
-        if (screen.orientation && screen.orientation.unlock) {
-          screen.orientation.unlock();
-        } else {
-          await screen.orientation.lock('portrait').catch(()=>{});
-        }
-      }
-    } catch (e) {
-      console.warn('Error al manejar orientación:', e);
-    }
+<script>
+  // 🔹 Evita volver a la página anterior y manda directo a index.html
+  window.history.pushState(null, null, window.location.href);
+  window.addEventListener('popstate', function () {
+    window.location.replace("../index.html"); // redirige al index
   });
-});
 </script>
 
   
@@ -528,6 +507,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </style>
 
 <script>
+  <!-- Pantalla de carga negra MovieTx-->
 document.addEventListener('DOMContentLoaded', () => {
   const loader = document.getElementById('loader-screen');
   const continueModal = document.getElementById('continue-modal');
@@ -1231,6 +1211,7 @@ player.on('play', () => {
   
 </body>
 </html>
+
 
 
 
