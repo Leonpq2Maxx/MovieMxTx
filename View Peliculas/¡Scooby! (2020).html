@@ -387,14 +387,236 @@
   box-shadow: 0 4px 12px rgba(0,0,0,0.35);
 }
 
+/* 💎 Barra de progreso estilo "Neón líquido celeste" */
+.plyr__progress input[type="range"] {
+  height: 5px;
+  border-radius: 999px;
+  background: linear-gradient(270deg, #00c6ff, #00e0ff, #00c6ff);
+  background-size: 400% 400%;
+  animation: neonFlow 3s ease infinite;
+  box-shadow: 0 0 14px rgba(0, 230, 255, 0.6);
+  transition: all 0.3s ease;
+}
+
+.plyr__progress input[type="range"]:hover {
+  box-shadow: 0 0 20px rgba(0, 250, 255, 0.8);
+  transform: scaleY(1.1);
+}
+
+@keyframes neonFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
   </style>
 </head>
 
 <body ondragstart="return false;" ondrop="return false;">
+
+  <!-- 🔴 Pantalla de carga personalizada MovieTx (versión neón) -->
+<div id="loader-screen">
+  <div class="loader-content">
+    <div class="loader-circle">
+      <img src="Logo MovieTx.png" alt="Logo MovieTx" class="loader-logo">
+    </div>
+    <h1 class="loader-title">MovieTx</h1>
+    <p class="loader-sub">Cargando<span class="loading-dots"></span></p>
+    <p class="loader-msg">Por favor, espere</p>
+  </div>
+</div>
+
+<style>
+#loader-screen {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 10000;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+#loader-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+.loader-content {
+  text-align: center;
+}
+.loader-circle {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 6px solid transparent;
+  border-top: 6px solid #00aaff;
+  border-bottom: 6px solid #ff007f;
+  animation: spin 2s linear infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  box-shadow: 0 0 30px rgba(255, 0, 128, 0.5);
+}
+.loader-logo {
+  width: 100px;
+  height: auto;
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.loader-title {
+  font-size: 2.5rem;
+  color: #fff;
+  text-shadow: 0 0 10px #ff4da6, 0 0 20px #ff1a8c, 0 0 40px #ff007f;
+  font-weight: bold;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+.loader-sub {
+  font-size: 1.2rem;
+  color: #ccc;
+}
+.loading-dots::after {
+  content: '';
+  animation: dotPulse 1.5s infinite steps(4);
+}
+@keyframes dotPulse {
+  0% { content: ''; }
+  25% { content: '.'; }
+  50% { content: '..'; }
+  75% { content: '...'; }
+  100% { content: ''; }
+}
+.loader-msg {
+  font-size: 1rem;
+  color: #888;
+  margin-top: 10px;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const loader = document.getElementById('loader-screen');
+  const continueModal = document.getElementById('continue-modal');
+  if (continueModal) continueModal.style.display = 'none'; // Ocultamos modal al inicio
+
+  setTimeout(() => {
+    loader.classList.add('hidden');
+    setTimeout(() => {
+      if (continueModal) continueModal.style.display = ''; // Mostrar después del fade
+    }, 1200);
+  }, 5000); // 10 segundos
+});
+</script>
+<!-- 🔴 Fin pantalla de carga neón -->
+  
+ <style>
+#video-container {
+  position: relative;
+  overflow: hidden;
+}
+
+#player-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+  border-radius: 8px;
+}
+
+.player-spinner {
+  width: 60px;
+  height: 60px;
+  border: 5px solid #222;
+  border-top: 5px solid #ff007f;
+  border-bottom: 5px solid #00aaff;
+  border-radius: 50%;
+  animation: spin 1.3s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.player-loading-text {
+  font-size: 1.2rem;
+  color: #fff;
+  text-align: center;
+  font-weight: 600;
+}
+
+.dots::after {
+  content: '';
+  animation: dotPulse 1.5s infinite steps(4);
+}
+
+@keyframes dotPulse {
+  0% { content: ''; }
+  25% { content: '.'; }
+  50% { content: '..'; }
+  75% { content: '...'; }
+  100% { content: ''; }
+}
+  
+  
+</style>
+
+<script>
+  // este es de Fullscreen //
+  document.addEventListener('DOMContentLoaded', () => {
+  const fsBtn = document.querySelector('.plyr__control[data-plyr="fullscreen"]');
+  if (fsBtn) {
+    fsBtn.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="white" stroke-width="2">
+        <path d="M4 4h6M4 4v6M20 4h-6M20 4v6M4 20h6M4 20v-6M20 20h-6M20 20v-6"/>
+      </svg>
+    `;
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const video = document.querySelector('video');
+  const loader = document.getElementById('player-loader');
+  
+  if (video && loader) {
+    const showLoader = () => loader.style.display = 'flex';
+    const hideLoader = () => loader.style.display = 'none';
+    
+    // Mostrar cuando el video se está cargando o bufferizando
+    video.addEventListener('loadstart', showLoader);
+    video.addEventListener('waiting', showLoader);
+    
+    // Ocultar cuando está listo o reproduce
+    video.addEventListener('canplay', hideLoader);
+    video.addEventListener('playing', hideLoader);rooo
+    video.addEventListener('pause', hideLoader);
+    video.addEventListener('ended', hideLoader);
+  }
+});
+</script>
   
   <div class="player">
-    <video class="vid1 js-player" loading="lazy" controls poster="https://image.tmdb.org/t/p/w780/sJjuXNHNT7PfzcgkqM3oSIkVOXB.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+    <!-- 🔵 Loader dentro del reproductor -->
+<div id="player-loader">
+  <div class="player-spinner"></div>
+  <p class="player-loading-text">Cargando<span class="dots"></span></p>
+</div>
+
+    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/original/sJjuXNHNT7PfzcgkqM3oSIkVOXB.jpg
+    " preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
       <source src="https://dl.dropbox.com/scl/fi/s17ns7ovwacflf5v7lxoe/Scoob.2020.1080p-dual-lat-cinecalidad.is.mp4?rlkey=kv09107fadgpq8d8t6eenjocq&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
@@ -407,7 +629,6 @@
 "></div>
 
 
-  <div id="resume-msg">✅ Reanudando donde lo dejaste: ¡Scooby!</div>
 
   <div class="info">
     <i class="fal fa-calendar-alt"></i><span>2020</span> <!--Aca va el año de estreno de pelicula-->
@@ -430,6 +651,14 @@
     <p class="sinopsis">
       Con cientos de casos resueltos y aventuras compartidas, Scooby y la pandilla se enfrentan al misterio más grande y desafiante de todos los tiempos: un complot para liberar al perro fantasma Cerberus en el mundo. Mientras compiten para detener esta escasez de perros global, la pandilla descubre que Scooby tiene un legado secreto y un destino épico más grande de lo que cualquiera podría haber imaginado.
     </p>
+
+    <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
+      <p><strong>Director:</strong> Nombre </p>
+      <p><strong>Reparto:</strong> Nombres de 3 actores</p>
+      <p><strong>Estreno:</strong> --/--/---- | <strong>Idioma:</strong>  🇲🇽.</p>
+    </div>
+
+    <br>
   
     <div class="acciones">
       <button id="btn-favorito">⭐ Agregar a Favoritos</button>
@@ -512,7 +741,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const continueInfo = document.getElementById('continue-info');
   const videoElement = document.querySelector('video');
 
-  const MOVIE_KEY = 'AGanar2018';
+  const MOVIE_KEY = 'Scooby_2020';
   const ultimoTiempo = localStorage.getItem(`ultimoTiempo_${MOVIE_KEY}`) || 0;
 
   // 🔹 Mostrar modal si hay progreso guardado
@@ -671,7 +900,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
       titulo: "¡Scooby!",
-      imagen: "https://image.tmdb.org/t/p/w300/tOhuq4RYr2Rt9TM7X4dkr7A9HSd.jpg",
+      imagen: "https://image.tmdb.org/t/p/original/tOhuq4RYr2Rt9TM7X4dkr7A9HSd.jpg",
       genero: "Animacion",
       archivo: "¡Scooby! (2020).html",
       tipo: "pelicula",
@@ -687,10 +916,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!favoritos.some(f => f.titulo === nuevaSerie.titulo)) {
       favoritos.push(nuevaSerie);
       localStorage.setItem('favoritos_detalles', JSON.stringify(favoritos));
-      mostrarModalFavoritos("⭐ Serie agregada a favoritos");
+      mostrarModalFavoritos("⭐ Pelicula agregada a favoritos");
       setTimeout(() => window.location.href = "favoritos.html", 1800);
     } else {
-      mostrarModalFavoritos("🎬 Esta serie ya está agregada en favoritos");
+      mostrarModalFavoritos("🎬 Esta pelicula ya está agregada en favoritos");
     }
   });
 </script>
@@ -779,34 +1008,32 @@ document.addEventListener('DOMContentLoaded', () => {
     
   </style>
 
-  <br>
-  
   <div class="recomendaciones">
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
       <a href="Scooby-Doo (2002).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/vX6NAkWHicHDgGYa192Kt47dPWI.jpg" alt="">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/original/vX6NAkWHicHDgGYa192Kt47dPWI.jpg" alt="">
         <p>Scooby-Doo</p>
       </a>
       <a href="Scooby-Doo 2 Desatado (2004).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/5anMa9cWwDL6JSvmkdbCpUsFIdu.jpg" alt="">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/original/5anMa9cWwDL6JSvmkdbCpUsFIdu.jpg" alt="">
         <p>Scooby-Doo 2: Desatado</p>
       </a>
       <a href="Scooby Doo Y Krypto también (2023).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/ntMOnvlYYnio7Fx3xqBu9B1Sz7f.jpg" alt="">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/original/ntMOnvlYYnio7Fx3xqBu9B1Sz7f.jpg" alt="">
         <p>Scooby crypto al rescate</p>
       </a>
       <a href="Sonic 3 La Peliculas (2025).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/j1O319PWd4OdrpqPY4uzFNh2JC.jpg" alt="">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/original/j1O319PWd4OdrpqPY4uzFNh2JC.jpg" alt="">
         <p>Sonic 3: La Pelicula</p>
       </a>
       <a href="Spider-Man Cruzando el Multiverso (2023).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/37WcNMgNOMxdhT87MFl7tq7FM1.jpg" alt="">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/original/37WcNMgNOMxdhT87MFl7tq7FM1.jpg" alt="">
         <p>Spider-Man: Cruzando el multiverso</p>
       </a>
       <a href="Intensamente 2 (2024) .html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/hbNrgcQjLkPcE56MLGUWSD5SO6V.jpg" alt="">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/original/hbNrgcQjLkPcE56MLGUWSD5SO6V.jpg" alt="">
         <p>Intensamente 2</p>
       </a>
     </div>
@@ -834,7 +1061,7 @@ document.addEventListener('DOMContentLoaded', () => {
       controls: [
         'rewind', 'play-large', 'play', 'fast-forward',
         'progress', 'current-time', 'duration', 'mute', 'volume',
-        'captions', 'settings', 'pip', 'airplay', 'fullscreen'
+        'captions', 'pip', 'airplay', 'fullscreen'
       ]
     });
 
@@ -936,8 +1163,9 @@ player.on('play', () => {
 
       /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
       const historialTitulo = "¡Scooby!";
-      const historialImagen = "https://image.tmdb.org/t/p/w300/tOhuq4RYr2Rt9TM7X4dkr7A9HSd.jpg";
+      const historialImagen = "https://image.tmdb.org/t/p/original/tOhuq4RYr2Rt9TM7X4dkr7A9HSd.jpg";
       const historialArchivo = "¡Scooby! (2020).html";
+
       let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
       let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
       
