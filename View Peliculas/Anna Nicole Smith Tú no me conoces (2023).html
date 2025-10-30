@@ -631,8 +631,8 @@ document.addEventListener('DOMContentLoaded', () => {
       <p class="player-loading-text">Cargando<span class="dots"></span></p>
     </div>
 
-    <video class="vid1 js-player" loading="lazy" controls poster="https://image.tmdb.org/t/p/w780/fH7kYS9qEOkhFQZc0Dcoa9MFjje.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
-      <source src="https://dl.dropbox.com/scl/fi/pvf8rt6u4k9a16wz4bnd6/After.Ever.Happy.2022.1080P-Dual-Lat.mp4?rlkey=pdgunohi7i4ljm49emvvz317t&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
+    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/nIXBaPRix53sq4W2KK8FazrGzc4.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+      <source src="https://dl.dropbox.com/scl/fi/y9jubtkn9hxk5fs1yokrf/Anna-nicole-2023.mp4?rlkey=k8cskscbcw2n2pdfvzomontjy&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
   <div id="episodio-actual" style="
@@ -645,9 +645,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>2023</span> <!--Aca va el año de estreno de pelicula-->
-    <i class="fal fa-clock"></i><span>1h 33min</span> <!--aca va cuanto dura-->
-    <i class="fal fa-thumbs-up"></i><span>69%</span> <!--aca va la calificacion-->
+    <i class="fal fa-calendar-alt"></i><span>2023</span>
+    <i class="fal fa-clock"></i><span>1h 56min</span>
+    <i class="fal fa-thumbs-up"></i><span>61%</span>
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
@@ -655,22 +655,22 @@ document.addEventListener('DOMContentLoaded', () => {
       </svg>
       <span>1080P</span>
     </div>
-    <span>🇲🇽</span>
+
   </div>
   
   <div class="info-pelicula">
-    <h1>After 4: Aquí acaba todo</h1>
-  <span class="genero-badge">Romamce • Drama</span>
+    <h1>Anna Nicole Smith Tú no me conoces</h1>
+  <span class="genero-badge">Documentacion</span>
   
-  <p class="sinopsis">
-    Hardin sigue luchando por seguir adelante. Agobiado por el bloqueo del escritor y la dolorosa ruptura con Tessa, Hardin viaja a Portugal en busca de una mujer a la que hizo daño en el pasado... y para encontrarse a sí mismo. Con la esperanza de recuperar a Tessa, se da cuenta de que necesita cambiar su forma de ser antes de poder comprometerse definitivamente.
-  </p>
+    <p class="sinopsis">
+      Traza un retrato de la vida de Anna Nicole Smith, desde sus años de fama como modelo hasta su trágica muerte, a través de su círculo más cercano.
+    </p>
 
-  <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
-    <p><strong>Director:</strong> Castille Landon</p>
-    <p><strong>Reparto:</strong> Hero Fiennes Tiffin, Josephine Langford, Mimi Keene</p>
-    <p><strong>Estreno:</strong> 00/00/0000 | <strong>Idioma:</strong> ------</p>
-  </div>
+    <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
+      <p><strong>Director:</strong> Úrsula Macfarlane</p>
+      <p><strong>Reparto:</strong> Anna Nicole Smith, Marilyn Grabowski, Patrik Simpson</p>
+      <p><strong>Estreno:</strong> 16/03/2023 | <strong>Idioma:</strong> Español Latino 🇲🇽</p>
+    </div>
 
     <br>
 
@@ -913,10 +913,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 🔹 Botón "Agregar a Favoritos"
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
-      titulo: "After 4: Aquí acaba todo",
-      imagen: "https://image.tmdb.org/t/p/w300/jO3VGQi5sHIj2BGS963g1F74yCq.jpg",
-      genero: "Romance",
-      archivo: "After 4 Aquí acaba todo (2023).html",
+      titulo: "Anna Nicole Smith: Tú no me conoces",
+      imagen: "https://image.tmdb.org/t/p/w300/mybL2Hd3PvsY7Qyjf7W6BKsoECu.jpg",
+      genero: "Documental",
+      archivo: "Anna Nicole Smith Tú no me conoces (2023).html",
       tipo: "pelicula",
       timestamp: Date.now()
     };
@@ -1022,29 +1022,29 @@ document.addEventListener('DOMContentLoaded', () => {
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
-      <a href="After 1 Aquí empieza todo (2019).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/5kZxlS9vLExy3hZA5GfNFg8oJgZ.jpg" alt="">
-        <p>After: Aquí empieza todo</p>
+      <a href="Cuiden a Maya (2023).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/rfI5sTEgJ1ozPMnA3BhZDvxnmAD.jpg" alt="">
+        <p>Cuiden a Maya</p>
       </a>
-      <a href="After 2 En mil pedazos (2020).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/8nPw22C41EUWXREWmY9iIivMXxm.jpg" alt="">
-        <p>After 2: En mil pedazos</p>
-      </a>
-      <a href="After 3 Amor infinito (2022).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/vcI9BD5kMmVI45Pzj5B1ZaGpFIR.jpg" alt="">
-        <p>After 3: Amor infinito</p>
-      </a>
-      <a href="Cincuenta sombras liberadas (2018).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/sM8hwgWZlmZf0h4aOkNopb3HBIo.jpg" alt="">
-        <p>Cincuenta sombras liberadas 3</p>
-      </a>
-      <a href="1 Culpa tuya (2024).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/1jvCVdlgInyItAUEvvvCakm1Yxz.jpg" alt="">
-        <p>Culpa tuya</p>
+      <a href="Frida (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/qfPjPZF2AqB2XnXPFcHlYtlQRS3.jpg" alt="">
+        <p>Frida</p>
       </a>
       <a href="Nahir (2024).html" class="serie">
         <img loading="lazy" src="https://image.tmdb.org/t/p/w300/w4TcFexTfo5X7NkvNSeTrRSu9Sj.jpg" alt="">
         <p>Nahir</p>
+      </a>
+      <a href="Nada que ver (2023).html.html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/ofnOwcG9l1DuGl7vB45JHsfSlR6.jpg" alt="">
+        <p>Nada que ver</p>
+      </a>
+      <a href="Eva (2021).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/bXZ3j3kQgCRZj7KD4Q5F9m5ABaQ.jpg" alt="">
+        <p>Eva</p>
+      </a>
+      <a href="Me vuelves loca (2023).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/pQeyfqLEDdY6x4P4Fl5r6jcstN4.jpg" alt="">
+        <p>Me vuelves loca</p>
       </a>
     </div>
   </div>
@@ -1172,9 +1172,9 @@ player.on('play', () => {
       const STORAGE_KEY = 'pos_' + videoSrc;
 
       /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
-      const historialTitulo = "After 4: Aquí acaba todo";
-      const historialImagen = "https://image.tmdb.org/t/p/w300/jO3VGQi5sHIj2BGS963g1F74yCq.jpg";
-      const historialArchivo = "After 4 Aquí acaba todo (2023).html";
+      const historialTitulo = "Anna Nicole Smith: Tú no me conoces";
+      const historialImagen = "https://image.tmdb.org/t/p/w300/mybL2Hd3PvsY7Qyjf7W6BKsoECu.jpg";
+      const historialArchivo = "Anna Nicole Smith Tú no me conoces (2023).html";
 
       let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
       let indexHist = historial.findIndex(item => item.titulo === historialTitulo);

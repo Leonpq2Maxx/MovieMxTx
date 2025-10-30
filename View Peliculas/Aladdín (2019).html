@@ -631,8 +631,8 @@ document.addEventListener('DOMContentLoaded', () => {
       <p class="player-loading-text">Cargando<span class="dots"></span></p>
     </div>
 
-    <video class="vid1 js-player" loading="lazy" controls poster="https://image.tmdb.org/t/p/w780/fH7kYS9qEOkhFQZc0Dcoa9MFjje.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
-      <source src="https://dl.dropbox.com/scl/fi/pvf8rt6u4k9a16wz4bnd6/After.Ever.Happy.2022.1080P-Dual-Lat.mp4?rlkey=pdgunohi7i4ljm49emvvz317t&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
+    <video class="vid1 js-player" loading="lazy" controls poster="https://image.tmdb.org/t/p/w780/oX056O8bAInZ75jGY9MacQ2VlsM.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+      <source src="https://dl.dropbox.com/scl/fi/acgrahd2zzcqgh5zo0hx9/Aladdin.2019.1080p-dual-lat-cinecalidad.to.mp4?rlkey=qtonjfh72uy6bvmjsad1kiadh&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
   <div id="episodio-actual" style="
@@ -645,9 +645,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>2023</span> <!--Aca va el año de estreno de pelicula-->
-    <i class="fal fa-clock"></i><span>1h 33min</span> <!--aca va cuanto dura-->
-    <i class="fal fa-thumbs-up"></i><span>69%</span> <!--aca va la calificacion-->
+    <i class="fal fa-calendar-alt"></i><span>2019</span> <!--Aca va el año de estreno de pelicula-->
+    <i class="fal fa-clock"></i><span>2h 00min</span> <!--aca va cuanto dura-->
+    <i class="fal fa-thumbs-up"></i><span>72%</span> <!--aca va la calificacion-->
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
@@ -655,22 +655,21 @@ document.addEventListener('DOMContentLoaded', () => {
       </svg>
       <span>1080P</span>
     </div>
-    <span>🇲🇽</span>
   </div>
   
   <div class="info-pelicula">
-    <h1>After 4: Aquí acaba todo</h1>
-  <span class="genero-badge">Romamce • Drama</span>
+    <h1>Aladdin</h1>
+  <span class="genero-badge">Aventura • Disney • Comedia • Fantasia</span>
   
-  <p class="sinopsis">
-    Hardin sigue luchando por seguir adelante. Agobiado por el bloqueo del escritor y la dolorosa ruptura con Tessa, Hardin viaja a Portugal en busca de una mujer a la que hizo daño en el pasado... y para encontrarse a sí mismo. Con la esperanza de recuperar a Tessa, se da cuenta de que necesita cambiar su forma de ser antes de poder comprometerse definitivamente.
-  </p>
+    <p class="sinopsis">
+      Aladdin es un adorable pero desafortunado ladronzuelo enamorado de la hija del Sultán, la princesa Jasmine. Para intentar conquistarla, acepta el desafío de Jafar, que consiste en entrar a una cueva en mitad del desierto para dar con una lámpara mágica que le concederá todos sus deseos. Allí es donde Aladdín conocerá al Genio, dando inicio a una aventura como nunca antes había imaginado.
+    </p>
 
-  <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
-    <p><strong>Director:</strong> Castille Landon</p>
-    <p><strong>Reparto:</strong> Hero Fiennes Tiffin, Josephine Langford, Mimi Keene</p>
-    <p><strong>Estreno:</strong> 00/00/0000 | <strong>Idioma:</strong> ------</p>
-  </div>
+    <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
+      <p><strong>Director:</strong> Guy Ritchie, Ritchie y John August,</p>
+      <p><strong>Reparto:</strong> Will Smith, Mena Massoud, Naomi Scott</p>
+      <p><strong>Estreno:</strong> 00/00/0000 | <strong>Idioma:</strong> Español Latino 🇲🇽</p>
+    </div>
 
     <br>
 
@@ -755,7 +754,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const continueInfo = document.getElementById('continue-info');
   const videoElement = document.querySelector('video');
 
-  const MOVIE_KEY = ' Nombre_de_pelicula'; /*Aca siempre con un _ para guardar su progresos etc...*/
+  const MOVIE_KEY = 'Aladdin_2019'; /*Aca siempre con un _ para guardar su progresos etc...*/
   const ultimoTiempo = localStorage.getItem(`ultimoTiempo_${MOVIE_KEY}`) || 0;
 
   // 🔹 Mostrar modal si hay progreso guardado
@@ -913,10 +912,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 🔹 Botón "Agregar a Favoritos"
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
-      titulo: "After 4: Aquí acaba todo",
-      imagen: "https://image.tmdb.org/t/p/w300/jO3VGQi5sHIj2BGS963g1F74yCq.jpg",
-      genero: "Romance",
-      archivo: "After 4 Aquí acaba todo (2023).html",
+      titulo: "Aladdín",
+      imagen: "https://image.tmdb.org/t/p/w300/fv9c5fsdxqUzkullgMB4cZja29y.jpg",
+      genero: "Disney",
+      archivo: "Aladdín (2019).html",
       tipo: "pelicula",
       timestamp: Date.now()
     };
@@ -1022,29 +1021,29 @@ document.addEventListener('DOMContentLoaded', () => {
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
-      <a href="After 1 Aquí empieza todo (2019).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/5kZxlS9vLExy3hZA5GfNFg8oJgZ.jpg" alt="">
-        <p>After: Aquí empieza todo</p>
+      <a href="Aladdin (1993).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/oakAd8syy7jNQ4ZoaAGCQkTqcOV.jpg" alt="">
+        <p>Aladdin</p>
       </a>
-      <a href="After 2 En mil pedazos (2020).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/8nPw22C41EUWXREWmY9iIivMXxm.jpg" alt="">
-        <p>After 2: En mil pedazos</p>
+      <a href="Aladdin 2 El retorno de Jafar (1994).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/tC54XTUu4NVsMeWdSofja2uye9c.jpg" alt="">
+        <p>Aladdin 2: El retorno de Jafar</p>
       </a>
-      <a href="After 3 Amor infinito (2022).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/vcI9BD5kMmVI45Pzj5B1ZaGpFIR.jpg" alt="">
-        <p>After 3: Amor infinito</p>
+      <a href="Aladdin 3 y el rey de los ladrones (1996).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/abWvjyJz4kcp1xDn28RwyXjoIds.jpg" alt="">
+        <p>Aladdin 3: El rey de los ladrones</p>
       </a>
-      <a href="Cincuenta sombras liberadas (2018).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/sM8hwgWZlmZf0h4aOkNopb3HBIo.jpg" alt="">
-        <p>Cincuenta sombras liberadas 3</p>
+      <a href="Intensamente 2 (2024) .html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/hbNrgcQjLkPcE56MLGUWSD5SO6V.jpg" alt="">
+        <p>Intensamente 2</p>
       </a>
-      <a href="1 Culpa tuya (2024).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/1jvCVdlgInyItAUEvvvCakm1Yxz.jpg" alt="">
-        <p>Culpa tuya</p>
+      <a href="Los Croods 1 (2013).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/p7lJkqHlK01nr0zNacunUFI5Qxy.jpg" alt="">
+        <p>Los Croods</p>
       </a>
-      <a href="Nahir (2024).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/w4TcFexTfo5X7NkvNSeTrRSu9Sj.jpg" alt="">
-        <p>Nahir</p>
+      <a href="Kung Fu panda 4 (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/xHeK1mttldtCEyWbPZbo9bSKUqd.jpg" alt="">
+        <p>Kung fu panda 4</p>
       </a>
     </div>
   </div>
@@ -1172,9 +1171,9 @@ player.on('play', () => {
       const STORAGE_KEY = 'pos_' + videoSrc;
 
       /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
-      const historialTitulo = "After 4: Aquí acaba todo";
-      const historialImagen = "https://image.tmdb.org/t/p/w300/jO3VGQi5sHIj2BGS963g1F74yCq.jpg";
-      const historialArchivo = "After 4 Aquí acaba todo (2023).html";
+      const historialTitulo = "Aladdín";
+      const historialImagen = "https://image.tmdb.org/t/p/w300/fv9c5fsdxqUzkullgMB4cZja29y.jpg";
+      const historialArchivo = "Aladdín (2019).html";
 
       let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
       let indexHist = historial.findIndex(item => item.titulo === historialTitulo);

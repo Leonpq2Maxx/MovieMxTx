@@ -631,8 +631,8 @@ document.addEventListener('DOMContentLoaded', () => {
       <p class="player-loading-text">Cargando<span class="dots"></span></p>
     </div>
 
-    <video class="vid1 js-player" loading="lazy" controls poster="https://image.tmdb.org/t/p/w780/fH7kYS9qEOkhFQZc0Dcoa9MFjje.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
-      <source src="https://dl.dropbox.com/scl/fi/pvf8rt6u4k9a16wz4bnd6/After.Ever.Happy.2022.1080P-Dual-Lat.mp4?rlkey=pdgunohi7i4ljm49emvvz317t&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
+    <video class="vid1 js-player" controls loading="lazy" poster="https://image.tmdb.org/t/p/w780/6ZcAuv5GBSSLF0LDLVLjTaT3Ucd.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+      <source src="https://dl.dropbox.com/scl/fi/rf3psyxozwy9y0p0f9lql/Alvin-y-las-ardillas-3.mp4?rlkey=0q8eim0a7lnckc25lw86l4co3&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
   <div id="episodio-actual" style="
@@ -644,10 +644,12 @@ document.addEventListener('DOMContentLoaded', () => {
 "></div>
 
 
+  <div id="resume-msg">✅ Reanudando donde lo dejaste: Nombre de pelicula</div>
+
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>2023</span> <!--Aca va el año de estreno de pelicula-->
-    <i class="fal fa-clock"></i><span>1h 33min</span> <!--aca va cuanto dura-->
-    <i class="fal fa-thumbs-up"></i><span>69%</span> <!--aca va la calificacion-->
+    <i class="fal fa-calendar-alt"></i><span>2011</span> <!--Aca va el año de estreno de pelicula-->
+    <i class="fal fa-clock"></i><span>1h 27min</span> <!--aca va cuanto dura-->
+    <i class="fal fa-thumbs-up"></i><span>87%</span> <!--aca va la calificacion-->
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
@@ -655,22 +657,21 @@ document.addEventListener('DOMContentLoaded', () => {
       </svg>
       <span>1080P</span>
     </div>
-    <span>🇲🇽</span>
   </div>
   
   <div class="info-pelicula">
-    <h1>After 4: Aquí acaba todo</h1>
-  <span class="genero-badge">Romamce • Drama</span>
+    <h1>Alvin y las ardillas 3</h1>
+  <span class="genero-badge">Animacion • Aventura • Comedia • Musical</span>
   
-  <p class="sinopsis">
-    Hardin sigue luchando por seguir adelante. Agobiado por el bloqueo del escritor y la dolorosa ruptura con Tessa, Hardin viaja a Portugal en busca de una mujer a la que hizo daño en el pasado... y para encontrarse a sí mismo. Con la esperanza de recuperar a Tessa, se da cuenta de que necesita cambiar su forma de ser antes de poder comprometerse definitivamente.
-  </p>
+    <p class="sinopsis">
+      Tercera entrega de la saga Alvin y las ardillas. Las ardillas se embarcan en un crucero de lujo y acaban en una isla desierta, pero pronto averiguarán que no está tan desierta como parece.
+    </p>
 
-  <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
-    <p><strong>Director:</strong> Castille Landon</p>
-    <p><strong>Reparto:</strong> Hero Fiennes Tiffin, Josephine Langford, Mimi Keene</p>
-    <p><strong>Estreno:</strong> 00/00/0000 | <strong>Idioma:</strong> ------</p>
-  </div>
+    <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
+      <p><strong>Director:</strong> </p>
+      <p><strong>Reparto:</strong> </p>
+      <p><strong>Estreno:</strong> 00/00/0000 | <strong>Idioma:</strong> Español Latino 🇲🇽</p>
+    </div>
 
     <br>
 
@@ -755,7 +756,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const continueInfo = document.getElementById('continue-info');
   const videoElement = document.querySelector('video');
 
-  const MOVIE_KEY = ' Nombre_de_pelicula'; /*Aca siempre con un _ para guardar su progresos etc...*/
+  const MOVIE_KEY = 'Alvin_Y_Las_Ardillas_3_2011'; /*Aca siempre con un _ para guardar su progresos etc...*/
   const ultimoTiempo = localStorage.getItem(`ultimoTiempo_${MOVIE_KEY}`) || 0;
 
   // 🔹 Mostrar modal si hay progreso guardado
@@ -913,10 +914,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 🔹 Botón "Agregar a Favoritos"
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
-      titulo: "After 4: Aquí acaba todo",
-      imagen: "https://image.tmdb.org/t/p/w300/jO3VGQi5sHIj2BGS963g1F74yCq.jpg",
-      genero: "Romance",
-      archivo: "After 4 Aquí acaba todo (2023).html",
+      titulo: "Alvin y las ardillas 3",
+      imagen: "https://image.tmdb.org/t/p/w300/a52ebjlDqvrjcKtFGDtQgNQLaGH.jpg",
+      genero: "Animacion",
+      archivo: "Alvin y las ardillas 3 (2011).html",
       tipo: "pelicula",
       timestamp: Date.now()
     };
@@ -1022,29 +1023,29 @@ document.addEventListener('DOMContentLoaded', () => {
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
-      <a href="After 1 Aquí empieza todo (2019).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/5kZxlS9vLExy3hZA5GfNFg8oJgZ.jpg" alt="">
-        <p>After: Aquí empieza todo</p>
+      <a href="Alvin y las ardillas (2007).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/jgvlT0DhzAQET6nkM6N1BVoGDSj.jpg" alt="">
+        <p>Alvin y las ardillas</p>
       </a>
-      <a href="After 2 En mil pedazos (2020).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/8nPw22C41EUWXREWmY9iIivMXxm.jpg" alt="">
-        <p>After 2: En mil pedazos</p>
+      <a href="Alvin y las ardillas 2 (2009).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/ye1MoMxdW6imx1BdytGxXYvj4BT.jpg" alt="">
+        <p>Alvin y las ardillas 2</p>
       </a>
-      <a href="After 3 Amor infinito (2022).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/vcI9BD5kMmVI45Pzj5B1ZaGpFIR.jpg" alt="">
-        <p>After 3: Amor infinito</p>
+      <a href="Alvin y las ardillas Fiesta sobre ruedas 4 (2015).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/isz4uh337srL6PIYiKXTS5Htssq.jpg" alt="">
+        <p>Alvin y las ardillas 4: Fiesta sobre ruedas</p>
       </a>
-      <a href="Cincuenta sombras liberadas (2018).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/sM8hwgWZlmZf0h4aOkNopb3HBIo.jpg" alt="">
-        <p>Cincuenta sombras liberadas 3</p>
+      <a href="Plankton (2025).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/fCvwQJVcbjNub2PiKzZmQXR7i1I.jpg" alt="">
+        <p>Plankton</p>
       </a>
-      <a href="1 Culpa tuya (2024).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/1jvCVdlgInyItAUEvvvCakm1Yxz.jpg" alt="">
-        <p>Culpa tuya</p>
+      <a href="El gato con botas (2011).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/1VmrC82zY4U33l9UHlZTWDB1asN.jpg" alt="">
+        <p>El gato con botas</p>
       </a>
-      <a href="Nahir (2024).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/w4TcFexTfo5X7NkvNSeTrRSu9Sj.jpg" alt="">
-        <p>Nahir</p>
+      <a href="Garfield (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/p6AbOJvMQhBmffd0PIv0u8ghWeY.jpg" alt="">
+        <p>Garfield: Fuera de casa</p>
       </a>
     </div>
   </div>
@@ -1172,9 +1173,9 @@ player.on('play', () => {
       const STORAGE_KEY = 'pos_' + videoSrc;
 
       /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
-      const historialTitulo = "After 4: Aquí acaba todo";
-      const historialImagen = "https://image.tmdb.org/t/p/w300/jO3VGQi5sHIj2BGS963g1F74yCq.jpg";
-      const historialArchivo = "After 4 Aquí acaba todo (2023).html";
+      const historialTitulo = "Alvin y las ardillas 3";
+      const historialImagen = "https://image.tmdb.org/t/p/w300/a52ebjlDqvrjcKtFGDtQgNQLaGH.jpg";
+      const historialArchivo = "Alvin y las ardillas 3 (2011).html";
 
       let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
       let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
@@ -1211,7 +1212,3 @@ player.on('play', () => {
   
 </body>
 </html>
-
-
-
-
