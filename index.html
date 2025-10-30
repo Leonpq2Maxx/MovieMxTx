@@ -535,24 +535,21 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
     <script>
-window.addEventListener("pageshow", function(event) {
-  // Si se accede al index desde otra página
-  if (event.persisted || performance.getEntriesByType("navigation")[0].type === "back_forward") {
-    // Reemplaza el historial actual por el index
-    history.pushState(null, "", "index.html");
-    window.addEventListener("popstate", function () {
-      // Si intenta retroceder, lo mantiene en el index
-      history.pushState(null, "", "index.html");
-    });
-  } else {
-    // Siempre que se entra al index, se limpia el historial
-    history.replaceState(null, "", "index.html");
-    window.addEventListener("popstate", function () {
-      history.pushState(null, "", "index.html");
-    });
-  }
+// --- Evita que el usuario retroceda desde el index ---
+window.history.pushState(null, "", window.location.href);
+window.addEventListener("popstate", function () {
+  // En lugar de retroceder, permanece en index.html
+  window.history.pushState(null, "", window.location.href);
 });
 </script>
+
+    <script>
+window.history.pushState(null, null, window.location.href);
+window.addEventListener("popstate", function () {
+  window.location.replace("index.html");
+});
+</script>
+
 
 
     <style>
