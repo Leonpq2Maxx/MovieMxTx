@@ -413,6 +413,24 @@
 </head>
 
 <body ondragstart="return false;" ondrop="return false;">
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const player = document.querySelector('.player'); // o el id de tu player
+  if (!player) return;
+
+  // Detectar rotación y corregir controles
+  window.addEventListener('orientationchange', () => {
+    setTimeout(() => {
+      // Si está en fullscreen, volver a pedirlo
+      if (document.fullscreenElement) {
+        document.exitFullscreen().then(() => {
+          player.requestFullscreen().catch(()=>{});
+        });
+      }
+    }, 500); // esperar medio segundo para que el navegador se estabilice
+  });
+});
+</script>
 
   <!-- 🔴 Pantalla de carga personalizada MovieTx (versión neón) -->
 <div id="loader-screen">
@@ -1198,6 +1216,7 @@ player.on('play', () => {
   
 </body>
 </html>
+
 
 
 
