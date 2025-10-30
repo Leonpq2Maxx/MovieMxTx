@@ -631,7 +631,7 @@ document.addEventListener('DOMContentLoaded', () => {
   <p class="player-loading-text">Cargando<span class="dots"></span></p>
 </div>
 
-    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/original/zwfec4vK1EvkQapE5wcYrB1BHov.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/zwfec4vK1EvkQapE5wcYrB1BHov.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
       <source src="https://dl.dropbox.com/scl/fi/0prsz81yb8pv74njs8d0j/The.miracle.season.2018.1080p-dual-lat-cinecalidad.to.mp4?rlkey=g97lmjjkt9ekh8stxzh6ci8g8&amp;st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
@@ -668,7 +668,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
       <p><strong>Director:</strong> Sean McNamara</p>
       <p><strong>Reparto:</strong> Helen Hunt, Erin Moriarty, William Hurt</p>
-      <p><strong>Estreno:</strong> 06/04/2018 | <strong>Idioma:</strong> Español Latino 🇲🇽.</p>
+      <p><strong>Estreno:</strong> 06/04/2018 | <strong>Idioma:</strong> Español Latino 🇲🇽</p>
     </div>
 
     <br>
@@ -913,7 +913,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
       titulo: "¡A Ganar!",
-      imagen: "https://image.tmdb.org/t/p/original/6GVYL9K2IBFrfIqwwFqMPu5DdC5.jpg",
+      imagen: "https://image.tmdb.org/t/p/w300/6GVYL9K2IBFrfIqwwFqMPu5DdC5.jpg",
       genero: "Drama",
       archivo: "¡A Ganar! (2018).html",
       tipo: "pelicula",
@@ -1022,27 +1022,27 @@ document.addEventListener('DOMContentLoaded', () => {
     <br/>
     <div class="series-grid">
       <a class="serie" href="Yo, Tonya (2017).html">
-        <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/original/aVWX0t95Igd8kKC3ejmtHCy1vX6.jpg"/>
+        <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w300/aVWX0t95Igd8kKC3ejmtHCy1vX6.jpg"/>
         <p>Yo, Tonya</p>
       </a>
       <a class="serie" href="Desaparecidos en la noche (2024).html">
-        <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/original/uyEFqfRezkNrxh9Lg8fj8IcbkHx.jpg"/>
+        <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w300/uyEFqfRezkNrxh9Lg8fj8IcbkHx.jpg"/>
         <p>Desaparecidos en la noche</p>
       </a>
       <a class="serie" href="Asesino serial (2024).html">
-        <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/original/gs9GQ9n95BdVE8Uv1ZKNS1bSwCf.jpg"/>
+        <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w300/gs9GQ9n95BdVE8Uv1ZKNS1bSwCf.jpg"/>
         <p>Asesino serial</p>
       </a>
       <a class="serie" href="Harta (2025).html">
-        <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/original/4d2PJ6QLAVd9w66E918JSWjkgs7.jpg"/>
+        <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w300/4d2PJ6QLAVd9w66E918JSWjkgs7.jpg"/>
         <p>Harta</p>
       </a>
       <a class="serie" href="La mitad de Ana (2025).html">
-        <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/original/c24RWnJzwAtWZ039o9u6K7c8jyw.jpg"/>
+        <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w300/c24RWnJzwAtWZ039o9u6K7c8jyw.jpg"/>
         <p>La mitad de Ana</p>
       </a>
       <a class="serie" href="El deseo de Ana (2021).html">
-        <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/original/89XUJQYBjlxayW7IBnlNoxn1bPg.jpg"/>
+        <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w300/89XUJQYBjlxayW7IBnlNoxn1bPg.jpg"/>
         <p>El deseo de Ana</p>
       </a>
     </div>
@@ -1172,7 +1172,7 @@ player.on('play', () => {
 
       /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
       const historialTitulo = "¡A Ganar!";
-      const historialImagen = "https://image.tmdb.org/t/p/original/6GVYL9K2IBFrfIqwwFqMPu5DdC5.jpg";
+      const historialImagen = "https://image.tmdb.org/t/p/w300/6GVYL9K2IBFrfIqwwFqMPu5DdC5.jpg";
       const historialArchivo = "¡A Ganar! (2018).html";
 
       let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');

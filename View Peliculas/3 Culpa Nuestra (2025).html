@@ -630,7 +630,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="player-spinner"></div>
       <p class="player-loading-text">Cargando<span class="dots"></span></p>
     </div>
-    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/original/7QirCB1o80NEFpQGlQRZerZbQEp.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/7QirCB1o80NEFpQGlQRZerZbQEp.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
       <source src="https://dl.dropbox.com/scl/fi/1mv1wem69f14nfr4l73eu/Culpa.Nuestra.2025.1080P-Dual-Lat.mkv?rlkey=pmlgufabviceovbib0264li54&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
@@ -668,7 +668,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
       <p><strong>Director:</strong> Domingo González</p>
       <p><strong>Reparto:</strong> Nicole Wallace, Gabriel Guevara, Gabriela Andrada</p>
-      <p><strong>Estreno:</strong> 16/10/2025 | <strong>Idioma:</strong> Español 🇪🇸.</p>
+      <p><strong>Estreno:</strong> 16/10/2025 | <strong>Idioma:</strong> Español 🇪🇸</p>
     </div>
 
     <br>
@@ -913,7 +913,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
       titulo: "Culpa nuestra",
-      imagen: "https://image.tmdb.org/t/p/original/6kmi6vmp6iOn4KzI7WfnVtAeJhU.jpg",
+      imagen: "https://image.tmdb.org/t/p/w300/6kmi6vmp6iOn4KzI7WfnVtAeJhU.jpg",
       genero: "Drama",
       archivo: "3 Culpa Nuestra (2025).html",
       tipo: "pelicula",
@@ -1022,27 +1022,27 @@ document.addEventListener('DOMContentLoaded', () => {
     <br/>
     <div class="series-grid">
       <a href="2 Culpa Mia (2025).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/original/q0HxfkF9eoa6wSVnzwMhuDSK7ba.jpg" alt="">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/q0HxfkF9eoa6wSVnzwMhuDSK7ba.jpg" alt="">
         <p>Culpa mía 2: Londres</p>
       </a>
       <a href="1 Culpa tuya (2024).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/original/1jvCVdlgInyItAUEvvvCakm1Yxz.jpg" alt="">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/1jvCVdlgInyItAUEvvvCakm1Yxz.jpg" alt="">
         <p>Culpa tuya</p>
       </a>
       <a href="Romper el circulo (2024).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/original/e0S9UXyuHE1JAoHZmyqRJISpyoS.jpg" alt="">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/e0S9UXyuHE1JAoHZmyqRJISpyoS.jpg" alt="">
         <p>Romper el circulo</p>
       </a>
       <a href="Anora (2024).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/original/tZCrWnyN4zEtJiFem5TFoYT8nxI.jpg" alt="">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/tZCrWnyN4zEtJiFem5TFoYT8nxI.jpg" alt="">
         <p>Anora</p>
       </a>
       <a href="Aladdin (1993).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/original/oakAd8syy7jNQ4ZoaAGCQkTqcOV.jpg" alt="">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/oakAd8syy7jNQ4ZoaAGCQkTqcOV.jpg" alt="">
         <p>Aladdin</p>
       </a>
       <a href="Sugar Baby (2024).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/original/uLbDZIDAbN6SIiBr7Z2eMZ9212S.jpg" alt="">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/uLbDZIDAbN6SIiBr7Z2eMZ9212S.jpg" alt="">
         <p>Sugar Baby</p>
       </a>
     </div>
@@ -1172,7 +1172,7 @@ player.on('play', () => {
 
       /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
       const historialTitulo = "Culpa nuestra";
-      const historialImagen = "https://image.tmdb.org/t/p/original/6kmi6vmp6iOn4KzI7WfnVtAeJhU.jpg";
+      const historialImagen = "https://image.tmdb.org/t/p/w300/6kmi6vmp6iOn4KzI7WfnVtAeJhU.jpg";
       const historialArchivo = "3 Culpa Nuestra (2025).html";
 
       let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');

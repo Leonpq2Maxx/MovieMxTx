@@ -631,7 +631,7 @@ document.addEventListener('DOMContentLoaded', () => {
   <p class="player-loading-text">Cargando<span class="dots"></span></p>
 </div>
 
-    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/original/k24eZq5I3jyz4htPkZCRpnUmBzE.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/k24eZq5I3jyz4htPkZCRpnUmBzE.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
       <source src="https://dl.dropbox.com/scl/fi/zm9h8doo7g7kwd0f7sm6c/Culpa-tuya-2024.mp4?rlkey=cfyicql2ul47jgli8g676mozv&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
@@ -913,7 +913,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
       titulo: "Culpa tuya",
-      imagen: "https://image.tmdb.org/t/p/original/1jvCVdlgInyItAUEvvvCakm1Yxz.jpg",
+      imagen: "https://image.tmdb.org/t/p/w300/1jvCVdlgInyItAUEvvvCakm1Yxz.jpg",
       genero: "Romance",
       archivo: "1 Culpa tuya (2024).html",
       tipo: "pelicula",
@@ -1022,27 +1022,27 @@ document.addEventListener('DOMContentLoaded', () => {
     <br/>
     <div class="series-grid">
       <a href="2 Culpa Mia (2025).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/original/q0HxfkF9eoa6wSVnzwMhuDSK7ba.jpg" alt="">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/q0HxfkF9eoa6wSVnzwMhuDSK7ba.jpg" alt="">
         <p>Culpa mía 2: Londres</p>
       </a>
       <a href="3 Culpa Nuestra (2025).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/original/6kmi6vmp6iOn4KzI7WfnVtAeJhU.jpg" alt="">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/6kmi6vmp6iOn4KzI7WfnVtAeJhU.jpg" alt="">
         <p>Culpa nuestra 3</p>
       </a>
-      <a href="After 1 Aquí empieza todo (2019).HTML" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/original/jO3VGQi5sHIj2BGS963g1F74yCq.jpg" alt="">
+      <a href="After 1 Aquí empieza todo (2019).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/jO3VGQi5sHIj2BGS963g1F74yCq.jpg" alt="">
         <p>After: Aquí empieza todo</p>
       </a>
       <a href="365 dias (2020).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/original/jz8T3hrU6GuMqSuQ4Rbd4MJUeaq.jpg" alt="">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/jz8T3hrU6GuMqSuQ4Rbd4MJUeaq.jpg" alt="">
         <p>365 Dias</p>
       </a>
       <a href="Cincuenta sombras de Grey (2015).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/original/mNZcZOIlTwDKd30xLnRR4p0ZELg.jpg" alt="">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/mNZcZOIlTwDKd30xLnRR4p0ZELg.jpg" alt="">
         <p>Cincuenta sombras de Grey</p>
       </a>
       <a href="Miller's Girl (2024).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/original/qz7BADRc32DYQCmgooJwI8UWRRC.jpg" alt="">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/qz7BADRc32DYQCmgooJwI8UWRRC.jpg" alt="">
         <p>Miller's Girl</p>
       </a>
     </div>
@@ -1172,7 +1172,7 @@ player.on('play', () => {
 
       /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
       const historialTitulo = "Culpa tuya";
-      const historialImagen = "https://image.tmdb.org/t/p/original/1jvCVdlgInyItAUEvvvCakm1Yxz.jpg";
+      const historialImagen = "https://image.tmdb.org/t/p/w300/1jvCVdlgInyItAUEvvvCakm1Yxz.jpg";
       const historialArchivo = "1 Culpa tuya (2024).html";
 
       let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
