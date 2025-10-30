@@ -387,15 +387,256 @@
   box-shadow: 0 4px 12px rgba(0,0,0,0.35);
 }
 
+/* 💎 Barra de progreso estilo "Neón líquido celeste" */
+.plyr__progress input[type="range"] {
+  height: 5px;
+  border-radius: 999px;
+  background: linear-gradient(270deg, #00c6ff, #00e0ff, #00c6ff);
+  background-size: 400% 400%;
+  animation: neonFlow 3s ease infinite;
+  box-shadow: 0 0 14px rgba(0, 230, 255, 0.6);
+  transition: all 0.3s ease;
+}
+
+.plyr__progress input[type="range"]:hover {
+  box-shadow: 0 0 20px rgba(0, 250, 255, 0.8);
+  transform: scaleY(1.1);
+}
+
+@keyframes neonFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
   </style>
 </head>
 
 <body ondragstart="return false;" ondrop="return false;">
+
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const player = document.querySelector('.player'); // o el id de tu player
+  if (!player) return;
+
+  // Detectar rotación y corregir controles
+  window.addEventListener('orientationchange', () => {
+    setTimeout(() => {
+      // Si está en fullscreen, volver a pedirlo
+      if (document.fullscreenElement) {
+        document.exitFullscreen().then(() => {
+          player.requestFullscreen().catch(()=>{});
+        });
+      }
+    }, 500); // esperar medio segundo para que el navegador se estabilice
+  });
+});
+</script>
+
+
+  <!-- 🔴 Pantalla de carga personalizada MovieTx (versión neón) -->
+<div id="loader-screen">
+  <div class="loader-content">
+    <div class="loader-circle">
+      <img src="../Logo Poster MovieTx PNG/Logo MovieTx.png" alt="Logo MovieTx" class="loader-logo">
+    </div>
+    <h1 class="loader-title">MovieTx</h1>
+    <p class="loader-sub">Cargando<span class="loading-dots"></span></p>
+    <p class="loader-msg">Por favor, espere</p>
+  </div>
+</div>
+
+<style>
+#loader-screen {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 10000;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+#loader-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+.loader-content {
+  text-align: center;
+}
+.loader-circle {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 6px solid transparent;
+  border-top: 6px solid #00aaff;
+  border-bottom: 6px solid #ff007f;
+  animation: spin 2s linear infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  box-shadow: 0 0 30px rgba(255, 0, 128, 0.5);
+}
+.loader-logo {
+  width: 100px;
+  height: auto;
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.loader-title {
+  font-size: 2.5rem;
+  color: #fff;
+  text-shadow: 0 0 10px #ff4da6, 0 0 20px #ff1a8c, 0 0 40px #ff007f;
+  font-weight: bold;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+.loader-sub {
+  font-size: 1.2rem;
+  color: #ccc;
+}
+.loading-dots::after {
+  content: '';
+  animation: dotPulse 1.5s infinite steps(4);
+}
+@keyframes dotPulse {
+  0% { content: ''; }
+  25% { content: '.'; }
+  50% { content: '..'; }
+  75% { content: '...'; }
+  100% { content: ''; }
+}
+.loader-msg {
+  font-size: 1rem;
+  color: #888;
+  margin-top: 10px;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const loader = document.getElementById('loader-screen');
+  const continueModal = document.getElementById('continue-modal');
+  if (continueModal) continueModal.style.display = 'none'; // Ocultamos modal al inicio
+
+  setTimeout(() => {
+    loader.classList.add('hidden');
+    setTimeout(() => {
+      if (continueModal) continueModal.style.display = ''; // Mostrar después del fade
+    }, 1200);
+  }, 5000); // 10 segundos
+});
+</script>
+<!-- 🔴 Fin pantalla de carga neón -->
+  
+ <style>
+#video-container {
+  position: relative;
+  overflow: hidden;
+}
+
+#player-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+  border-radius: 8px;
+}
+
+.player-spinner {
+  width: 43px; /*circulo de carga de reproductor estaba en 60*/
+  height: 43px; /*circulo de carga de reproductor estaba en 60*/
+  border: 5px solid #222;
+  border-top: 5px solid #ff007f;
+  border-bottom: 5px solid #00aaff;
+  border-radius: 50%;
+  animation: spin 1.3s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.player-loading-text {
+  font-size: 0.80rem; /*agrandar o achicar letra de cargando en el reproductor (estaba en 1.2)*/
+  color: #fff;
+  text-align: center;
+  font-weight: 600;
+}
+
+.dots::after {
+  content: '';
+  animation: dotPulse 1.5s infinite steps(4);
+}
+
+@keyframes dotPulse {
+  0% { content: ''; }
+  25% { content: '.'; }
+  50% { content: '..'; }
+  75% { content: '...'; }
+  100% { content: ''; }
+}
+  
+  
+</style>
+
+<script>
+  // este es de Fullscreen //
+  document.addEventListener('DOMContentLoaded', () => {
+  const fsBtn = document.querySelector('.plyr__control[data-plyr="fullscreen"]');
+  if (fsBtn) {
+    fsBtn.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="white" stroke-width="2">
+        <path d="M4 4h6M4 4v6M20 4h-6M20 4v6M4 20h6M4 20v-6M20 20h-6M20 20v-6"/>
+      </svg>
+    `;
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const video = document.querySelector('video');
+  const loader = document.getElementById('player-loader');
+  
+  if (video && loader) {
+    const showLoader = () => loader.style.display = 'flex';
+    const hideLoader = () => loader.style.display = 'none';
+    
+    // Mostrar cuando el video se está cargando o bufferizando
+    video.addEventListener('loadstart', showLoader);
+    video.addEventListener('waiting', showLoader);
+    
+    // Ocultar cuando está listo o reproduce
+    video.addEventListener('canplay', hideLoader);
+    video.addEventListener('playing', hideLoader);
+    video.addEventListener('pause', hideLoader);
+    video.addEventListener('ended', hideLoader);
+  }
+});
+</script>
   
   <div class="player">
-    <video class="vid1 js-player" loading="lazy" controls poster="https://image.tmdb.org/t/p/w780/8FH23n6noUWqeNBtcnmFhsrTTwD.jpg" preload="none">
-      <source src="https://dl.dropbox.com/scl/fi/f0ssvb8zrj6p2p30zgzrs/My.fault.london.2025.1080p-dual-lat-cinecalidad.rs.mp4?rlkey=ncm7to2oy0sfttbrp4ftlz6rg&st=" type="video/mp4">
+    <!-- 🔵 Loader dentro del reproductor -->
+<div id="player-loader">
+  <div class="player-spinner"></div>
+  <p class="player-loading-text">Cargando<span class="dots"></span></p>
+</div>
+
+    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/8FH23n6noUWqeNBtcnmFhsrTTwD.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+      <source src="https://dl.dropbox.com/scl/fi/f0ssvb8zrj6p2p30zgzrs/My.fault.london.2025.1080p-dual-lat-cinecalidad.rs.mp4?rlkey=ncm7to2oy0sfttbrp4ftlz6rg&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
   <div id="episodio-actual" style="
@@ -407,11 +648,9 @@
 "></div>
 
 
-  <div id="resume-msg">✅ Reanudando donde lo dejaste: Culpa mia: Londres</div>
-
   <div class="info">
     <i class="fal fa-calendar-alt"></i><span>2025</span> <!--Aca va el año de estreno de pelicula-->
-    <i class="fal fa-clock"></i><span>1h 22min</span> <!--aca va cuanto dura-->
+    <i class="fal fa-clock"></i><span>2h 00min</span> <!--aca va cuanto dura-->
     <i class="fal fa-thumbs-up"></i><span>76%</span> <!--aca va la calificacion-->
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -430,6 +669,14 @@
     <p class="sinopsis">
       Noah, de 18 años, se traslada de Estados Unidos a Londres con su madre, que se ha enamorado recientemente de William, un adinerado hombre de negocios británico. Noah conoce al hijo de William, el malote Nick. Pese a los esfuerzos de ambos por evitarlo, se sienten atraídos. Mientras Noah pasa el verano adaptándose a su nueva vida, su doloroso pasado la irá atrapando a la vez que se va enamorando.
     </p>
+
+    <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
+      <p><strong>Director:</strong> Domingo González</p>
+      <p><strong>Reparto:</strong> Nicole Wallace, Gabriel Guevara, Gabriela Andrada</p>
+      <p><strong>Estreno:</strong> 13/02/2025 | <strong>Idioma:</strong> Español 🇪🇸</p>
+    </div>
+
+    <br>
   
     <div class="acciones">
       <button id="btn-favorito">⭐ Agregar a Favoritos</button>
@@ -512,7 +759,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const continueInfo = document.getElementById('continue-info');
   const videoElement = document.querySelector('video');
 
-  const MOVIE_KEY = 'AGanar2018';
+  const MOVIE_KEY = ' Nombre_de_pelicula'; /*Aca siempre con un _ para guardar su progresos etc...*/
   const ultimoTiempo = localStorage.getItem(`ultimoTiempo_${MOVIE_KEY}`) || 0;
 
   // 🔹 Mostrar modal si hay progreso guardado
@@ -687,10 +934,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!favoritos.some(f => f.titulo === nuevaSerie.titulo)) {
       favoritos.push(nuevaSerie);
       localStorage.setItem('favoritos_detalles', JSON.stringify(favoritos));
-      mostrarModalFavoritos("⭐ Serie agregada a favoritos");
+      mostrarModalFavoritos("⭐ Pelicula agregada a favoritos");
       setTimeout(() => window.location.href = "favoritos.html", 1800);
     } else {
-      mostrarModalFavoritos("🎬 Esta serie ya está agregada en favoritos");
+      mostrarModalFavoritos("🎬 Esta pelicula ya está agregada en favoritos");
     }
   });
 </script>
@@ -779,12 +1026,14 @@ document.addEventListener('DOMContentLoaded', () => {
     
   </style>
 
-  <br>
-  
   <div class="recomendaciones">
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
+      <a href="El es asi 2021.html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/6kmi6vmp6iO4KzI7WfnVtAeJhU.jpg" alt="">
+        <p>Culpa nuestra 3</p>
+      </a>
       <a href="1 Culpa tuya (2024).html" class="serie">
         <img loading="lazy" src="https://image.tmdb.org/t/p/w300/1jvCVdlgInyItAUEvvvCakm1Yxz.jpg" alt="">
         <p>Culpa tuya</p>
@@ -796,10 +1045,6 @@ document.addEventListener('DOMContentLoaded', () => {
       <a href="After 4 Aquí acaba todo (2023).htm" class="serie">
         <img loading="lazy" src="https://image.tmdb.org/t/p/w300/jO3VGQi5sHIj2BGS963g1F74yCq.jpg" alt="">
         <p>After 4: Aquí acaba todo</p>
-      </a>
-      <a href="Cincuenta sombras liberadas (2018).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/sM8hwgWZlmZf0h4aOkNopb3HBIo.jpg" alt="">
-        <p>Cincuenta sombras liberadas</p>
       </a>
       <a href="Anora (2024).html" class="serie">
         <img loading="lazy" src="https://image.tmdb.org/t/p/w300/tZCrWnyN4zEtJiFem5TFoYT8nxI.jpg" alt="">
@@ -834,7 +1079,7 @@ document.addEventListener('DOMContentLoaded', () => {
       controls: [
         'rewind', 'play-large', 'play', 'fast-forward',
         'progress', 'current-time', 'duration', 'mute', 'volume',
-        'captions', 'settings', 'pip', 'airplay', 'fullscreen'
+        'captions', 'pip', 'airplay', 'fullscreen'
       ]
     });
 
@@ -974,3 +1219,7 @@ player.on('play', () => {
   
 </body>
 </html>
+
+
+
+
