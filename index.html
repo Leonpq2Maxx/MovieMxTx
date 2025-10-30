@@ -519,6 +519,34 @@ window.addEventListener('load', () => {
  
   <!-- FIN -->
   
+    <!-- Script de actualizar pagina -->
+    
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const refreshBtn = document.getElementById('refreshBtn');
+
+  if (refreshBtn) {
+    refreshBtn.addEventListener('click', () => {
+      // 🔄 Refresca la página directamente desde el servidor (sin cache)
+      location.reload(true);
+    });
+  }
+});
+</script>
+
+    <style>
+    #refreshBtn svg {
+  transition: transform 0.5s ease;
+  cursor: pointer;
+}
+
+#refreshBtn:active svg {
+  transform: rotate(360deg);
+}
+
+    </style>
+    
+    <!-- fin -->
     
 <script>/*<![CDATA[*/ (localStorage.getItem('mode')) === 'darkmode' ? document.querySelector('#mainCont').classList.add('drK') : document.querySelector('#mainCont').classList.remove('drK') /*]]>*/</script>
 <input class="prfI hidden" id="offPrf" type="checkbox"/>
@@ -547,6 +575,13 @@ window.addEventListener('load', () => {
 <div class="headP section" id="header-icon"><div class="widget TextList" data-version="2" id="TextList000">
 <ul class="headIc">
 <li class="isDrk">
+    <li class="isRefresh">
+  <label aria-label="Refresh" class="tRefresh tIc bIc" id="refreshBtn">
+    <svg class="line" viewBox="0 0 24 24">
+      <path d="M21 12a9 9 0 1 1-3-6.7V3h2v6h-6V7h3.6A7 7 0 1 0 12 19a7 7 0 0 0 7-7h2z"></path>
+    </svg>
+  </label>
+</li>
 <span aria-label="Dark" class="tDark tIc tDL bIc" onclick="darkMode()" role="button">
 <svg class="line" viewbox="0 0 24 24">
 <g class="d1"><path d="M183.72453,170.371a10.4306,10.4306,0,0,1-.8987,3.793,11.19849,11.19849,0,0,1-5.73738,5.72881,10.43255,10.43255,0,0,1-3.77582.89138,1.99388,1.99388,0,0,0-1.52447,3.18176,10.82936,10.82936,0,1,0,15.118-15.11819A1.99364,1.99364,0,0,0,183.72453,170.371Z" transform="translate(-169.3959 -166.45548)"></path></g>
