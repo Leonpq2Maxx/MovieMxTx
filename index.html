@@ -534,6 +534,27 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
+    <script>
+window.addEventListener("pageshow", function(event) {
+  // Si se accede al index desde otra página
+  if (event.persisted || performance.getEntriesByType("navigation")[0].type === "back_forward") {
+    // Reemplaza el historial actual por el index
+    history.pushState(null, "", "index.html");
+    window.addEventListener("popstate", function () {
+      // Si intenta retroceder, lo mantiene en el index
+      history.pushState(null, "", "index.html");
+    });
+  } else {
+    // Siempre que se entra al index, se limpia el historial
+    history.replaceState(null, "", "index.html");
+    window.addEventListener("popstate", function () {
+      history.pushState(null, "", "index.html");
+    });
+  }
+});
+</script>
+
+
     <style>
     #refreshBtn svg {
   transition: transform 0.5s ease;
