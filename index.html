@@ -535,20 +535,18 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
     <script>
-// --- Evita que el usuario retroceda desde el index ---
-window.history.pushState(null, "", window.location.href);
-window.addEventListener("popstate", function () {
-  // En lugar de retroceder, permanece en index.html
-  window.history.pushState(null, "", window.location.href);
+// 🚫 Bloquea totalmente el botón "Atrás" en el index
+window.addEventListener('load', function() {
+  // Empuja un estado falso al historial
+  history.pushState(null, '', window.location.href);
+
+  window.addEventListener('popstate', function(event) {
+    // Cuando el usuario toca "Atrás", volvemos al mismo lugar
+    history.pushState(null, '', window.location.href);
+  });
 });
 </script>
 
-    <script>
-window.history.pushState(null, null, window.location.href);
-window.addEventListener("popstate", function () {
-  window.location.replace("index.html");
-});
-</script>
 
 
 
