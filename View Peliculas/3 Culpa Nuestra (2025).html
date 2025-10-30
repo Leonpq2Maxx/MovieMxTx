@@ -413,21 +413,28 @@
 </head>
 
 <body ondragstart="return false;" ondrop="return false;">
-  
-<script>
-  // 🔹 Evita volver a la página anterior y manda directo a index.html
-  window.history.pushState(null, null, window.location.href);
-  window.addEventListener('popstate', function () {
-    window.location.replace("../index.html"); // redirige al index
-  });
+
+  <script>
+// 🔹 Evita volver a la página anterior
+// y manda directo a index.html al presionar atrás
+window.history.pushState(null, null, window.location.href);
+window.addEventListener('popstate', function () {
+  // Redirige directamente al index y reemplaza el historial
+  window.location.replace("../index.html");
+});
+
+// 🔹 Limpia el historial para que no se pueda regresar desde index
+if (window.performance && window.performance.navigation.type === 2) {
+  // Si se intenta volver con cache, redirige igual
+  window.location.replace("../index.html");
+}
 </script>
 
-  
   <!-- 🔴 Pantalla de carga personalizada MovieTx (versión neón) -->
 <div id="loader-screen">
   <div class="loader-content">
     <div class="loader-circle">
-      <img src="../Logo MovieTx.png" alt="Logo MovieTx" class="loader-logo">
+      <img src="../Logo Poster MovieTx PNG/Logo MovieTx.png" alt="Logo MovieTx" class="loader-logo">
     </div>
     <h1 class="loader-title">MovieTx</h1>
     <p class="loader-sub">Cargando<span class="loading-dots"></span></p>
@@ -507,7 +514,6 @@
 </style>
 
 <script>
-  <!-- Pantalla de carga negra MovieTx-->
 document.addEventListener('DOMContentLoaded', () => {
   const loader = document.getElementById('loader-screen');
   const continueModal = document.getElementById('continue-modal');
@@ -546,8 +552,8 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 .player-spinner {
-  width: 60px;
-  height: 60px;
+  width: 43px; /*circulo de carga de reproductor estaba en 60*/
+  height: 43px; /*circulo de carga de reproductor estaba en 60*/
   border: 5px solid #222;
   border-top: 5px solid #ff007f;
   border-bottom: 5px solid #00aaff;
@@ -562,7 +568,7 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 .player-loading-text {
-  font-size: 1.2rem;
+  font-size: 0.80rem; /*agrandar o achicar letra de cargando en el reproductor (estaba en 1.2)*/
   color: #fff;
   text-align: center;
   font-weight: 600;
@@ -585,7 +591,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </style>
 
 <script>
-  <!-- Esste es el icono de pantalla grande -->
+  // este es de Fullscreen //
   document.addEventListener('DOMContentLoaded', () => {
   const fsBtn = document.querySelector('.plyr__control[data-plyr="fullscreen"]');
   if (fsBtn) {
@@ -625,7 +631,7 @@ document.addEventListener('DOMContentLoaded', () => {
   <p class="player-loading-text">Cargando<span class="dots"></span></p>
 </div>
 
-    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/7QirCB1o80NEFpQGlQRZerZbQEp.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/original/7QirCB1o80NEFpQGlQRZerZbQEp.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
       <source src="https://dl.dropbox.com/scl/fi/1mv1wem69f14nfr4l73eu/Culpa.Nuestra.2025.1080P-Dual-Lat.mkv?rlkey=pmlgufabviceovbib0264li54&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
@@ -636,9 +642,6 @@ document.addEventListener('DOMContentLoaded', () => {
   font-weight:bold;
   color:#ff2d5b;
 "></div>
-
-
-  <div id="resume-msg">✅ Reanudando donde lo dejaste: Culpa nuestra</div>
 
   <div class="info">
     <i class="fal fa-calendar-alt"></i><span>2025</span> <!--Aca va el año de estreno de pelicula-->
@@ -910,7 +913,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
       titulo: "Culpa nuestra",
-      imagen: "https://image.tmdb.org/t/p/w300/6kmi6vmp6iOn4KzI7WfnVtAeJhU.jpg",
+      imagen: "https://image.tmdb.org/t/p/original/6kmi6vmp6iOn4KzI7WfnVtAeJhU.jpg",
       genero: "Drama",
       archivo: "3 Culpa Nuestra (2025).html",
       tipo: "pelicula",
@@ -952,10 +955,6 @@ document.addEventListener('DOMContentLoaded', () => {
     modal.querySelector('.modal-fav-backdrop').onclick = cerrarModal;
   }
 </script>
-
-
-  <br>
-
 
   <style>
     .titulo-flex {
@@ -1023,27 +1022,27 @@ document.addEventListener('DOMContentLoaded', () => {
     <br/>
     <div class="series-grid">
       <a href="2 Culpa Mia (2025).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/q0HxfkF9eoa6wSVnzwMhuDSK7ba.jpg" alt="">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/original/q0HxfkF9eoa6wSVnzwMhuDSK7ba.jpg" alt="">
         <p>Culpa mía 2: Londres</p>
       </a>
       <a href="1 Culpa tuya (2024).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/1jvCVdlgInyItAUEvvvCakm1Yxz.jpg" alt="">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/original/1jvCVdlgInyItAUEvvvCakm1Yxz.jpg" alt="">
         <p>Culpa tuya</p>
       </a>
       <a href="Romper el circulo (2024).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/e0S9UXyuHE1JAoHZmyqRJISpyoS.jpg" alt="">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/original/e0S9UXyuHE1JAoHZmyqRJISpyoS.jpg" alt="">
         <p>Romper el circulo</p>
       </a>
       <a href="Anora (2024).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/tZCrWnyN4zEtJiFem5TFoYT8nxI.jpg" alt="">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/original/tZCrWnyN4zEtJiFem5TFoYT8nxI.jpg" alt="">
         <p>Anora</p>
       </a>
       <a href="Aladdin (1993).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/oakAd8syy7jNQ4ZoaAGCQkTqcOV.jpg" alt="">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/original/oakAd8syy7jNQ4ZoaAGCQkTqcOV.jpg" alt="">
         <p>Aladdin</p>
       </a>
       <a href="Sugar Baby (2024).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/uLbDZIDAbN6SIiBr7Z2eMZ9212S.jpg" alt="">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/original/uLbDZIDAbN6SIiBr7Z2eMZ9212S.jpg" alt="">
         <p>Sugar Baby</p>
       </a>
     </div>
@@ -1071,7 +1070,7 @@ document.addEventListener('DOMContentLoaded', () => {
       controls: [
         'rewind', 'play-large', 'play', 'fast-forward',
         'progress', 'current-time', 'duration', 'mute', 'volume',
-        'captions', '', 'pip', 'airplay', 'fullscreen'
+        'captions', 'pip', 'airplay', 'fullscreen'
       ]
     });
 
@@ -1173,7 +1172,7 @@ player.on('play', () => {
 
       /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
       const historialTitulo = "Culpa nuestra";
-      const historialImagen = "https://image.tmdb.org/t/p/w300/6kmi6vmp6iOn4KzI7WfnVtAeJhU.jpg";
+      const historialImagen = "https://image.tmdb.org/t/p/original/6kmi6vmp6iOn4KzI7WfnVtAeJhU.jpg";
       const historialArchivo = "3 Culpa Nuestra (2025).html";
 
       let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
@@ -1211,8 +1210,6 @@ player.on('play', () => {
   
 </body>
 </html>
-
-
 
 
 

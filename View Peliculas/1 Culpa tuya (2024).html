@@ -956,10 +956,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 </script>
 
-
-  <br>
-
-
   <style>
     .titulo-flex {
       display: flex;
@@ -1211,86 +1207,6 @@ player.on('play', () => {
     }, 10000);
     });
   </script>
-
-
-<nav class="menu-inferior">
-  <a href="Menus Peliculas Series/Precio.html"><i class="fas fa-dollar-sign"></i><span>Precio</span></a>
-  <a href="View Peliculas/favoritos.html"><i class="fas fa-heart"></i><span>Favoritos</span></a>
-  <a href="Mostras Mas/Busqueda.html"><i class="fas fa-search"></i><span>Buscar</span></a>
-  <a href="Menus Peliculas Series/Compartir.html"><i class="fas fa-share-alt"></i><span>Compartir</span></a>
-  <a href="View Peliculas/historial_usuario.html"><i class="fas fa-history"></i><span>Historial</span></a>
-</nav>
-
-<style>
-@media (max-width: 768px) {
-  .menu-inferior {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: #111;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px 0;
-    z-index: 9999;
-    animation: slideUp 0.6s ease forwards;
-    transform: translateY(100%);
-    opacity: 0;
-  }
-
-  .menu-inferior a {
-    color: white;
-    text-decoration: none;
-    text-align: center;
-    font-size: 14px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: transform 0.2s, color 0.2s;
-  }
-
-  .menu-inferior a:active {
-    transform: scale(0.9);
-    color: #00eaff;
-  }
-
-  @keyframes slideUp {
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-}
-    
-.menu-inferior {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 60px;
-  background: #000;
-  border-top: 1px solid #333;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  z-index: 1000;
-}
-.menu-inferior a {
-  color: white;
-  text-decoration: none;
-  font-size: 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.menu-inferior a i {
-  font-size: 18px;
-}
-.menu-inferior span {
-  font-size: 10px;
-}
-</style>
   
 </body>
 </html>

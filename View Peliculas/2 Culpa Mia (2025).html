@@ -632,7 +632,7 @@ document.addEventListener('DOMContentLoaded', () => {
   <p class="player-loading-text">Cargando<span class="dots"></span></p>
 </div>
 
-    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/8FH23n6noUWqeNBtcnmFhsrTTwD.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/original/8FH23n6noUWqeNBtcnmFhsrTTwD.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
       <source src="https://dl.dropbox.com/scl/fi/f0ssvb8zrj6p2p30zgzrs/My.fault.london.2025.1080p-dual-lat-cinecalidad.rs.mp4?rlkey=ncm7to2oy0sfttbrp4ftlz6rg&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
@@ -915,7 +915,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
       titulo: "Culpa mia: Londres",
-      imagen: "https://image.tmdb.org/t/p/w300/q0HxfkF9eoa6wSVnzwMhuDSK7ba.jpg",
+      imagen: "https://image.tmdb.org/t/p/original/q0HxfkF9eoa6wSVnzwMhuDSK7ba.jpg",
       genero: "Romance, Drama",
       archivo: "2 Culpa Mia (2025).html",
       tipo: "pelicula",
@@ -957,10 +957,6 @@ document.addEventListener('DOMContentLoaded', () => {
     modal.querySelector('.modal-fav-backdrop').onclick = cerrarModal;
   }
 </script>
-
-
-  <br>
-
 
   <style>
     .titulo-flex {
@@ -1028,27 +1024,27 @@ document.addEventListener('DOMContentLoaded', () => {
     <br/>
     <div class="series-grid">
       <a href="El es asi 2021.html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/6kmi6vmp6iOn4KzI7WfnVtAeJhU.jpg" alt="">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/original/6kmi6vmp6iOn4KzI7WfnVtAeJhU.jpg" alt="">
         <p>Culpa nuestra 3</p>
       </a>
       <a href="1 Culpa tuya (2024).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/1jvCVdlgInyItAUEvvvCakm1Yxz.jpg" alt="">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/original/1jvCVdlgInyItAUEvvvCakm1Yxz.jpg" alt="">
         <p>Culpa tuya</p>
       </a>
       <a href="365 dias mas 3 (2022).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/mwcII5bXMeMTKyCejPuBPBTjmxu.jpg" alt="">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/original/mwcII5bXMeMTKyCejPuBPBTjmxu.jpg" alt="">
         <p>365 Dias 3: Mas</p>
       </a>
       <a href="After 4 Aquí acaba todo (2023).htm" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/jO3VGQi5sHIj2BGS963g1F74yCq.jpg" alt="">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/original/jO3VGQi5sHIj2BGS963g1F74yCq.jpg" alt="">
         <p>After 4: Aquí acaba todo</p>
       </a>
       <a href="Anora (2024).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/tZCrWnyN4zEtJiFem5TFoYT8nxI.jpg" alt="">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/original/tZCrWnyN4zEtJiFem5TFoYT8nxI.jpg" alt="">
         <p>Anora</p>
       </a>
       <a href="Un ladron romantico (2024).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/nif2JUyqNQBBmMYrDfmpTgwleOJ.jpg" alt="">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/original/nif2JUyqNQBBmMYrDfmpTgwleOJ.jpg" alt="">
         <p>Un ladrón romántico</p>
       </a>
     </div>
@@ -1178,7 +1174,7 @@ player.on('play', () => {
 
       /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
       const historialTitulo = "Culpa mia: Londres";
-      const historialImagen = "https://image.tmdb.org/t/p/w300/q0HxfkF9eoa6wSVnzwMhuDSK7ba.jpg";
+      const historialImagen = "https://image.tmdb.org/t/p/original/q0HxfkF9eoa6wSVnzwMhuDSK7ba.jpg";
       const historialArchivo = "2 Culpa Mia (2025).html";
 
       let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
