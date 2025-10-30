@@ -418,7 +418,7 @@
 <div id="loader-screen">
   <div class="loader-content">
     <div class="loader-circle">
-      <img src="Logo MovieTx.png" alt="Logo MovieTx" class="loader-logo">
+      <img src="../Logo Poster MovieTx PNG/Logo MovieTx.png" alt="Logo MovieTx" class="loader-logo">
     </div>
     <h1 class="loader-title">MovieTx</h1>
     <p class="loader-sub">Cargando<span class="loading-dots"></span></p>
@@ -536,8 +536,8 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 .player-spinner {
-  width: 60px;
-  height: 60px;
+  width: 43px; /*circulo de carga de reproductor estaba en 60*/
+  height: 43px; /*circulo de carga de reproductor estaba en 60*/
   border: 5px solid #222;
   border-top: 5px solid #ff007f;
   border-bottom: 5px solid #00aaff;
@@ -552,7 +552,7 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 .player-loading-text {
-  font-size: 1.2rem;
+  font-size: 0.80rem; /*agrandar o achicar letra de cargando en el reproductor (estaba en 1.2)*/
   color: #fff;
   text-align: center;
   font-weight: 600;
@@ -601,7 +601,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Ocultar cuando está listo o reproduce
     video.addEventListener('canplay', hideLoader);
-    video.addEventListener('playing', hideLoader);rooo
+    video.addEventListener('playing', hideLoader);
     video.addEventListener('pause', hideLoader);
     video.addEventListener('ended', hideLoader);
   }
@@ -615,8 +615,7 @@ document.addEventListener('DOMContentLoaded', () => {
   <p class="player-loading-text">Cargando<span class="dots"></span></p>
 </div>
 
-    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/original/sJjuXNHNT7PfzcgkqM3oSIkVOXB.jpg
-    " preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/original/sJjuXNHNT7PfzcgkqM3oSIkVOXB.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
       <source src="https://dl.dropbox.com/scl/fi/s17ns7ovwacflf5v7lxoe/Scoob.2020.1080p-dual-lat-cinecalidad.is.mp4?rlkey=kv09107fadgpq8d8t6eenjocq&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
@@ -627,7 +626,6 @@ document.addEventListener('DOMContentLoaded', () => {
   font-weight:bold;
   color:#ff2d5b;
 "></div>
-
 
 
   <div class="info">
@@ -643,6 +641,8 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
     <span>🇲🇽</span>
   </div>
+
+  </div>
   
   <div class="info-pelicula">
     <h1>¡Scooby!</h1>
@@ -653,13 +653,13 @@ document.addEventListener('DOMContentLoaded', () => {
     </p>
 
     <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
-      <p><strong>Director:</strong> Nombre </p>
-      <p><strong>Reparto:</strong> Nombres de 3 actores</p>
-      <p><strong>Estreno:</strong> --/--/---- | <strong>Idioma:</strong>  🇲🇽.</p>
+      <p><strong>Director:</strong> </p>
+      <p><strong>Reparto:</strong> </p>
+      <p><strong>Estreno:</strong> 00/00/0000 | <strong>Idioma:</strong> ------</p>
     </div>
 
     <br>
-  
+
     <div class="acciones">
       <button id="btn-favorito">⭐ Agregar a Favoritos</button>
     </div>
@@ -741,7 +741,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const continueInfo = document.getElementById('continue-info');
   const videoElement = document.querySelector('video');
 
-  const MOVIE_KEY = 'Scooby_2020';
+  const MOVIE_KEY = 'Scooby_2020'; /*Aca siempre con un _ para guardar su progresos etc...*/
   const ultimoTiempo = localStorage.getItem(`ultimoTiempo_${MOVIE_KEY}`) || 0;
 
   // 🔹 Mostrar modal si hay progreso guardado
@@ -1201,3 +1201,7 @@ player.on('play', () => {
   
 </body>
 </html>
+
+
+
+
