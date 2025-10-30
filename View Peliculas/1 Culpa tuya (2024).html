@@ -413,23 +413,21 @@
 </head>
 
 <body ondragstart="return false;" ondrop="return false;">
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const player = document.querySelector('.player'); // o el id de tu player
-  if (!player) return;
 
-  // Detectar rotación y corregir controles
-  window.addEventListener('orientationchange', () => {
-    setTimeout(() => {
-      // Si está en fullscreen, volver a pedirlo
-      if (document.fullscreenElement) {
-        document.exitFullscreen().then(() => {
-          player.requestFullscreen().catch(()=>{});
-        });
-      }
-    }, 500); // esperar medio segundo para que el navegador se estabilice
-  });
+  <script>
+// 🔹 Evita volver a la página anterior
+// y manda directo a index.html al presionar atrás
+window.history.pushState(null, null, window.location.href);
+window.addEventListener('popstate', function () {
+  // Redirige directamente al index y reemplaza el historial
+  window.location.replace("index.html");
 });
+
+// 🔹 Limpia el historial para que no se pueda regresar desde index
+if (window.performance && window.performance.navigation.type === 2) {
+  // Si se intenta volver con cache, redirige igual
+  window.location.replace("index.html");
+}
 </script>
 
   <!-- 🔴 Pantalla de carga personalizada MovieTx (versión neón) -->
@@ -670,7 +668,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
       <p><strong>Director:</strong> Domingo González</p>
       <p><strong>Reparto:</strong> Nicole Wallace, Gabriel Guevara, Gabriela Andrada</p>
-      <p><strong>Estreno:</strong> 18/12/2024 | <strong>Idioma:</strong> Español</p>
+      <p><strong>Estreno:</strong> 18/12/2024 | <strong>Idioma:</strong> Español 🇪🇸</p>
     </div>
 
     <br>
@@ -679,43 +677,6 @@ document.addEventListener('DOMContentLoaded', () => {
       <button id="btn-favorito">⭐ Agregar a Favoritos</button>
     </div>
   </div>
-
-  <script>
-// 🔹 Evita volver a la página anterior
-// y manda directo a index.html al presionar atrás
-window.history.pushState(null, null, window.location.href);
-window.addEventListener('popstate', function () {
-  // Redirige directamente al index y reemplaza el historial
-  window.location.replace("index.html");
-});
-
-// 🔹 Limpia el historial para que no se pueda regresar desde index
-if (window.performance && window.performance.navigation.type === 2) {
-  // Si se intenta volver con cache, redirige igual
-  window.location.replace("index.html");
-}
-</script>
-
-
-  <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const player = document.querySelector('.player'); // o el id de tu player
-  if (!player) return;
-
-  // Detectar rotación y corregir controles
-  window.addEventListener('orientationchange', () => {
-    setTimeout(() => {
-      // Si está en fullscreen, volver a pedirlo
-      if (document.fullscreenElement) {
-        document.exitFullscreen().then(() => {
-          player.requestFullscreen().catch(()=>{});
-        });
-      }
-    }, 500); // esperar medio segundo para que el navegador se estabilice
-  });
-});
-</script>
-
 
   <!-- CONTINUAR -->
 
@@ -1069,7 +1030,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <p>Culpa mía 2: Londres</p>
       </a>
       <a href="3 Culpa Nuestra (2025).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/original/6kmi6vmp6iO4KzI7WfnVtAeJhU.jpg" alt="">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/original/6kmi6vmp6iOn4KzI7WfnVtAeJhU.jpg" alt="">
         <p>Culpa nuestra 3</p>
       </a>
       <a href="After 1 Aquí empieza todo (2019).HTML" class="serie">
@@ -1253,9 +1214,6 @@ player.on('play', () => {
   
 </body>
 </html>
-
-
-
 
 
 

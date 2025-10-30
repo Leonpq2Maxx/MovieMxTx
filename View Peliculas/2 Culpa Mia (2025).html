@@ -415,22 +415,19 @@
 <body ondragstart="return false;" ondrop="return false;">
 
     <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const player = document.querySelector('.player'); // o el id de tu player
-  if (!player) return;
-
-  // Detectar rotación y corregir controles
-  window.addEventListener('orientationchange', () => {
-    setTimeout(() => {
-      // Si está en fullscreen, volver a pedirlo
-      if (document.fullscreenElement) {
-        document.exitFullscreen().then(() => {
-          player.requestFullscreen().catch(()=>{});
-        });
-      }
-    }, 500); // esperar medio segundo para que el navegador se estabilice
-  });
+// 🔹 Evita volver a la página anterior
+// y manda directo a index.html al presionar atrás
+window.history.pushState(null, null, window.location.href);
+window.addEventListener('popstate', function () {
+  // Redirige directamente al index y reemplaza el historial
+  window.location.replace("index.html");
 });
+
+// 🔹 Limpia el historial para que no se pueda regresar desde index
+if (window.performance && window.performance.navigation.type === 2) {
+  // Si se intenta volver con cache, redirige igual
+  window.location.replace("index.html");
+}
 </script>
 
 
@@ -759,7 +756,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const continueInfo = document.getElementById('continue-info');
   const videoElement = document.querySelector('video');
 
-  const MOVIE_KEY = ' Nombre_de_pelicula'; /*Aca siempre con un _ para guardar su progresos etc...*/
+  const MOVIE_KEY = 'Culpa_Mia_Londres_2025'; /*Aca siempre con un _ para guardar su progresos etc...*/
   const ultimoTiempo = localStorage.getItem(`ultimoTiempo_${MOVIE_KEY}`) || 0;
 
   // 🔹 Mostrar modal si hay progreso guardado
@@ -1031,7 +1028,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <br/>
     <div class="series-grid">
       <a href="El es asi 2021.html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/6kmi6vmp6iO4KzI7WfnVtAeJhU.jpg" alt="">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/6kmi6vmp6iOn4KzI7WfnVtAeJhU.jpg" alt="">
         <p>Culpa nuestra 3</p>
       </a>
       <a href="1 Culpa tuya (2024).html" class="serie">
