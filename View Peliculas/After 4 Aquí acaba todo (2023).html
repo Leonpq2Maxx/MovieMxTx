@@ -631,8 +631,8 @@ document.addEventListener('DOMContentLoaded', () => {
       <p class="player-loading-text">Cargando<span class="dots"></span></p>
     </div>
 
-    <video class="vid1 js-player" loading="lazy" controls poster="https://image.tmdb.org/t/p/w780/A81WfCAmydM880E9ZkULRjaX9QL.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
-      <source src="https://dl.dropbox.com/scl/fi/h3y5ye6hfqifjsqolfg0w/1978.2025.1080P-Lat.mkv?rlkey=fbvfj844uowkaro7wi6y6ifqb&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
+    <video class="vid1 js-player" loading="lazy" controls poster="https://image.tmdb.org/t/p/w780/fH7kYS9qEOkhFQZc0Dcoa9MFjje.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+      <source src="https://dl.dropbox.com/scl/fi/pvf8rt6u4k9a16wz4bnd6/After.Ever.Happy.2022.1080P-Dual-Lat.mp4?rlkey=pdgunohi7i4ljm49emvvz317t&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
   <div id="episodio-actual" style="
@@ -645,9 +645,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>2025</span> <!--Aca va el año de estreno de pelicula-->
-    <i class="fal fa-clock"></i><span>1h 16min</span> <!--aca va cuanto dura-->
-    <i class="fal fa-thumbs-up"></i><span>66%</span> <!--aca va la calificacion-->
+    <i class="fal fa-calendar-alt"></i><span>2023</span> <!--Aca va el año de estreno de pelicula-->
+    <i class="fal fa-clock"></i><span>1h 33min</span> <!--aca va cuanto dura-->
+    <i class="fal fa-thumbs-up"></i><span>69%</span> <!--aca va la calificacion-->
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
@@ -655,28 +655,27 @@ document.addEventListener('DOMContentLoaded', () => {
       </svg>
       <span>1080P</span>
     </div>
-
+    <span>🇲🇽</span>
   </div>
   
   <div class="info-pelicula">
-    <h1>1978</h1>
-  <span class="genero-badge">Terror</span>
+    <h1>After 4: Aquí acaba todo</h1>
+  <span class="genero-badge">Romamce • Drama</span>
   
-    <p class="sinopsis">
-      Durante la final del Mundial, en tiempos de dictadura militar, unos torturadores secuestran a un grupo de jóvenes. Lo que comienza como un interrogatorio inhumano se convierte en un verdadero tormento: han secuestrado a personas equivocadas. Eso no es todo, ya que pertenecen a una secta guiada por una fuerza desconocida y el centro clandestino de detención se convertirá en el mismísimo infierno.
-    </p>
+  <p class="sinopsis">
+    Hardin sigue luchando por seguir adelante. Agobiado por el bloqueo del escritor y la dolorosa ruptura con Tessa, Hardin viaja a Portugal en busca de una mujer a la que hizo daño en el pasado... y para encontrarse a sí mismo. Con la esperanza de recuperar a Tessa, se da cuenta de que necesita cambiar su forma de ser antes de poder comprometerse definitivamente.
+  </p>
 
-    <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
-      <p><strong>Director:</strong> Nicolás y Luciano Onetti</p>
-      <p><strong>Reparto:</strong> Agustín Pardella, Carlos Portaluppi, Mario Alarcón</p>
-      <p><strong>Estreno:</strong> 06/03/2025 | <strong>Idioma: </strong> Argentino 🇦🇷</p>
-    </div>
+  <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
+    <p><strong>Director:</strong> </p>
+    <p><strong>Reparto:</strong> </p>
+    <p><strong>Estreno:</strong> 00/00/0000 | <strong>Idioma:</strong> ------</p>
+  </div>
 
-    <br>
+  <br>
 
-    <div class="acciones">
-      <button id="btn-favorito">⭐ Agregar a Favoritos</button>
-    </div>
+  <div class="acciones">
+    <button id="btn-favorito">⭐ Agregar a Favoritos</button>
   </div>
 
   <!-- CONTINUAR -->
@@ -755,7 +754,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const continueInfo = document.getElementById('continue-info');
   const videoElement = document.querySelector('video');
 
-  const MOVIE_KEY = '1978_Argentina0'; /*Aca siempre con un _ para guardar su progresos etc...*/
+  const MOVIE_KEY = 'After_4_Aqui_Acaba_Todo_2023'; /*Aca siempre con un _ para guardar su progresos etc...*/
   const ultimoTiempo = localStorage.getItem(`ultimoTiempo_${MOVIE_KEY}`) || 0;
 
   // 🔹 Mostrar modal si hay progreso guardado
@@ -913,10 +912,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 🔹 Botón "Agregar a Favoritos"
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
-      titulo: "1978",
-      imagen: "https://image.tmdb.org/t/p/w300/iyKixwGhGRas1ppAih8E7SG5QDZ.jpg",
-      genero: "Terror",
-      archivo: "1978 (2025).html",
+      titulo: "After 4: Aquí acaba todo",
+      imagen: "https://image.tmdb.org/t/p/w300/jO3VGQi5sHIj2BGS963g1F74yCq.jpg",
+      genero: "Romance",
+      archivo: "After 4 Aquí acaba todo (2023).html",
       tipo: "pelicula",
       timestamp: Date.now()
     };
@@ -1022,29 +1021,29 @@ document.addEventListener('DOMContentLoaded', () => {
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
-      <a href="Annabelle (2014).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/jNFqmsulwUrhYQW3MvqzfMc7SdS.jpg" alt="">
-        <p>Annabelle</p>
+      <a href="After 1 Aquí empieza todo (2019).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/5kZxlS9vLExy3hZA5GfNFg8oJgZ.jpg" alt="">
+        <p>After: Aquí empieza todo</p>
       </a>
-      <a href="Baghead contacto con la muerte (2024).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/5ssaCHmqvTZDVZtcNhNZTzfb7Nj.jpg" alt="">
-        <p>Baghead: Contacto con la muerte</p>
+      <a href="After 2 En mil pedazos (2020).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/8nPw22C41EUWXREWmY9iIivMXxm.jpg" alt="">
+        <p>After 2: En mil pedazos</p>
       </a>
-      <a href="El conjuro 1 (2013).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/10ir0eISr3p1MF1mjZwGTx7u4vv.jpg" alt="">
-        <p>El conjuro</p>
+      <a href="After 3 Amor infinito (2022).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/vcI9BD5kMmVI45Pzj5B1ZaGpFIR.jpg" alt="">
+        <p>After 3: Amor infinito</p>
       </a>
-      <a href="Destino Final Lazos De Sangre (2025).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/pKaSLXmpT6oSRjnnFzGECPt0BRx.jpg" alt="">
-        <p>Destino final 6: Lazos de sangre</p>
+      <a href="Cincuenta sombras liberadas (2018).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/sM8hwgWZlmZf0h4aOkNopb3HBIo.jpg" alt="">
+        <p>Cincuenta sombras liberadas 3</p>
       </a>
-      <a href="Eliminado (2014).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/pzxHNiKjHL8Sz7DZ7POXXqohxet.jpg" alt="">
-        <p>Eliminar amigo</p>
+      <a href="1 Culpa tuya (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/1jvCVdlgInyItAUEvvvCakm1Yxz.jpg" alt="">
+        <p>Culpa tuya</p>
       </a>
-      <a href="En las profundidades del sena (2024).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/3Nr9KwcPMF31BGlOfHXeAJhO2dF.jpg" alt="">
-        <p>En las profundidades del Sena</p>
+      <a href="Nahir (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/w4TcFexTfo5X7NkvNSeTrRSu9Sj.jpg" alt="">
+        <p>Nahir</p>
       </a>
     </div>
   </div>
@@ -1172,9 +1171,9 @@ player.on('play', () => {
       const STORAGE_KEY = 'pos_' + videoSrc;
 
       /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
-      const historialTitulo = "1978";
-      const historialImagen = "https://image.tmdb.org/t/p/w300/iyKixwGhGRas1ppAih8E7SG5QDZ.jpg";
-      const historialArchivo = "1978 (2025).html";
+      const historialTitulo = "After 4: Aquí acaba todo";
+      const historialImagen = "https://image.tmdb.org/t/p/w300/jO3VGQi5sHIj2BGS963g1F74yCq.jpg";
+      const historialArchivo = "After 4 Aquí acaba todo (2023).html";
 
       let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
       let indexHist = historial.findIndex(item => item.titulo === historialTitulo);

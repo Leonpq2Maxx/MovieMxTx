@@ -631,8 +631,8 @@ document.addEventListener('DOMContentLoaded', () => {
       <p class="player-loading-text">Cargando<span class="dots"></span></p>
     </div>
 
-    <video class="vid1 js-player" loading="lazy" controls poster="https://image.tmdb.org/t/p/w780/A81WfCAmydM880E9ZkULRjaX9QL.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
-      <source src="https://dl.dropbox.com/scl/fi/h3y5ye6hfqifjsqolfg0w/1978.2025.1080P-Lat.mkv?rlkey=fbvfj844uowkaro7wi6y6ifqb&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
+    <video class="vid1 js-player" loading="lazy" controls poster="https://image.tmdb.org/t/p/w780/5OeY4U2rzePxWq2rkqMajUx2gz7.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+      <source src="https://dl.dropbox.com/scl/fi/vql4ijsfk0s5465s1bt6a/Aladdin.1992.1080p-dual-lat-cinecalidad.is.mp4?rlkey=tgeihruzajf0ovwpzpazjhhax&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
   <div id="episodio-actual" style="
@@ -645,9 +645,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>2025</span> <!--Aca va el año de estreno de pelicula-->
-    <i class="fal fa-clock"></i><span>1h 16min</span> <!--aca va cuanto dura-->
-    <i class="fal fa-thumbs-up"></i><span>66%</span> <!--aca va la calificacion-->
+    <i class="fal fa-calendar-alt"></i><span>1992</span> <!--Aca va el año de estreno de pelicula-->
+    <i class="fal fa-clock"></i><span>1h 30min</span> <!--aca va cuanto dura-->
+    <i class="fal fa-thumbs-up"></i><span>82%</span> <!--aca va la calificacion-->
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
@@ -655,21 +655,21 @@ document.addEventListener('DOMContentLoaded', () => {
       </svg>
       <span>1080P</span>
     </div>
-
+    <span></span>
   </div>
   
   <div class="info-pelicula">
-    <h1>1978</h1>
-  <span class="genero-badge">Terror</span>
+    <h1>Aladdin</h1>
+  <span class="genero-badge">Animacion • Aventura • Disney • Romance • Fantasia </span>
   
     <p class="sinopsis">
-      Durante la final del Mundial, en tiempos de dictadura militar, unos torturadores secuestran a un grupo de jóvenes. Lo que comienza como un interrogatorio inhumano se convierte en un verdadero tormento: han secuestrado a personas equivocadas. Eso no es todo, ya que pertenecen a una secta guiada por una fuerza desconocida y el centro clandestino de detención se convertirá en el mismísimo infierno.
+      Aladdín es un ingenioso joven que vive en una extrema pobreza, y que sueña con casarse con la bella hija del sultán, la princesa Jasmine. El destino interviene cuando el astuto visir del Sultán, Jafar, recluta a Aladdín para que le ayude a recuperar una lámpara mágica de las profundidades de la Cueva de las Maravillas. Aladdín encuentra una lámpara maravillosa con un genio dentro, y sus deseos comienzan a hacerse realidad.
     </p>
 
     <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
-      <p><strong>Director:</strong> Nicolás y Luciano Onetti</p>
-      <p><strong>Reparto:</strong> Agustín Pardella, Carlos Portaluppi, Mario Alarcón</p>
-      <p><strong>Estreno:</strong> 06/03/2025 | <strong>Idioma: </strong> Argentino 🇦🇷</p>
+      <p><strong>Director:</strong> Ron Clements, John Musker</p>
+      <p><strong>Reparto:</strong> Robin Williams, Scott Weinger, Linda Larkin</p>
+      <p><strong>Estreno:</strong> 25/11/1992 | <strong>Idioma:</strong> Español Latino 🇲🇽</p>
     </div>
 
     <br>
@@ -755,7 +755,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const continueInfo = document.getElementById('continue-info');
   const videoElement = document.querySelector('video');
 
-  const MOVIE_KEY = '1978_Argentina0'; /*Aca siempre con un _ para guardar su progresos etc...*/
+  const MOVIE_KEY = ' Nombre_de_pelicula'; /*Aca siempre con un _ para guardar su progresos etc...*/
   const ultimoTiempo = localStorage.getItem(`ultimoTiempo_${MOVIE_KEY}`) || 0;
 
   // 🔹 Mostrar modal si hay progreso guardado
@@ -913,10 +913,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 🔹 Botón "Agregar a Favoritos"
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
-      titulo: "1978",
-      imagen: "https://image.tmdb.org/t/p/w300/iyKixwGhGRas1ppAih8E7SG5QDZ.jpg",
-      genero: "Terror",
-      archivo: "1978 (2025).html",
+      titulo: "Aladdin",
+      imagen: "https://image.tmdb.org/t/p/w300/eLFfl7vS8dkeG1hKp5mwbm37V83.jpg",
+      genero: "Disney",
+      archivo: "Aladdin (1993).html",
       tipo: "pelicula",
       timestamp: Date.now()
     };
@@ -1022,32 +1022,241 @@ document.addEventListener('DOMContentLoaded', () => {
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
-      <a href="Annabelle (2014).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/jNFqmsulwUrhYQW3MvqzfMc7SdS.jpg" alt="">
-        <p>Annabelle</p>
+      <a href="Aladdin 2 El retorno de Jafar (1994).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/tC54XTUu4NVsMeWdSofja2uye9c.jpg" alt="">
+        <p>Aladdin 2: El retorno de Jafar</p>
       </a>
-      <a href="Baghead contacto con la muerte (2024).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/5ssaCHmqvTZDVZtcNhNZTzfb7Nj.jpg" alt="">
-        <p>Baghead: Contacto con la muerte</p>
+      <a href="Aladdin 3 y el rey de los ladrones (1996).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/icinYia0UBPDby1bxak4B44ntK3.jpg" alt="">
+        <p>Aladdin 3: El rey de los ladrones</p>
       </a>
-      <a href="El conjuro 1 (2013).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/10ir0eISr3p1MF1mjZwGTx7u4vv.jpg" alt="">
-        <p>El conjuro</p>
+      <a href="Aladdín (2019).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/fv9c5fsdxqUzkullgMB4cZja29y.jpg" alt="">
+        <p>Aladdin</p>
       </a>
-      <a href="Destino Final Lazos De Sangre (2025).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/pKaSLXmpT6oSRjnnFzGECPt0BRx.jpg" alt="">
-        <p>Destino final 6: Lazos de sangre</p>
+      <a href="Coco (2017).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/gGEsBPAijhVUFoiNpgZXqRVWJt2.jpg" alt="">
+        <p>Coco</p>
       </a>
-      <a href="Eliminado (2014).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/pzxHNiKjHL8Sz7DZ7POXXqohxet.jpg" alt="">
-        <p>Eliminar amigo</p>
+      <a href="Hércules (1997).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/dK9rNoC97tgX3xXg5zdxFisdfcp.jpg" alt="">
+        <p>Hercules</p>
       </a>
-      <a href="En las profundidades del sena (2024).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/3Nr9KwcPMF31BGlOfHXeAJhO2dF.jpg" alt="">
-        <p>En las profundidades del Sena</p>
+      <a href="Hotel Transilvania 3: Unas vacaciones monstruosas (2018)html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/gjAFM4xhA5vyLxxKMz38ujlUfDL.jpg" alt="">
+        <p>Hotel Transylvania 3</p>
       </a>
     </div>
   </div>
+
+  <!--ESTO ES PARA VERIFICAR LA EDAD NO BORRAR CONSERVALO NO INTERERIRA CON LOS DEMAS FUNCIONAMIENTOS-->
+
+  <div id="ageModal" class="age-modal hidden">
+    <div class="age-modal-content">
+      <span class="close-button" onclick="closeModal()">×</span>
+      <h2>¿Eres mayor de edad?</h2>
+    
+      <label for="birthyear">Año de nacimiento:</label>
+      <input type="number" id="birthyear" placeholder="Año" min="1900" max="2025" />
+    
+      <label for="age">Edad actual:</label>
+      <input type="number" id="age" placeholder="Edad" min="1" max="120" />
+    
+      <button id="confirmAgeBtn">Validar edad</button>
+      <p id="result-message"></p>
+    </div>
+  </div>
+  
+  <style>
+    .age-modal {
+      position: fixed;
+      z-index: 9999;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .age-modal-content {
+      background-color: #ffffff;
+      color: #000000;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      width: 300px;
+      position: relative;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+
+    .age-modal-content h2,
+    .age-modal-content label,
+    .age-modal-content p {
+      color: #000000;
+    }
+
+
+    .age-modal-content input {
+      width: 90%;
+      margin: 10px auto;
+      padding: 8px; 
+      display: block; 
+      background-color: #ffffff;  
+      color: #000000;
+      border: 1px solid #ccc; 
+      border-radius: 5px;
+    }
+
+
+    .age-modal-content input::placeholder {
+      color: #777;
+    }
+
+    /* Modo oscuro */
+
+    body.dark .age-modal-content,
+    .dark .age-modal-content {
+      background-color: #1e1e1e;
+      color: #f5f5f5;
+    }
+
+    body.dark .age-modal-content h2,
+    .dark .age-modal-content h2,
+    body.dark .age-modal-content label,
+    .dark .age-modal-content label,
+    body.dark .age-modal-content p,
+    .dark .age-modal-content p {
+      color: #f5f5f5;
+    }
+
+    body.dark .age-modal-content input,
+    .dark .age-modal-content input {
+      background-color: #2b2b2b;
+      color: #ffffff;
+      border: 1px solid #555;
+    }
+
+    body.dark .age-modal-content input::placeholder,
+    .dark .age-modal-content input::placeholder {
+      color: #ccc;
+    }
+
+    .age-modal-content button {
+      background: #0b57cf;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .age-modal-content button:hover {
+      background: #063ea3;
+    }
+
+    .close-button {
+      position: absolute;
+      right: 12px;
+      top: 8px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #888;
+      cursor: pointer;
+    }
+
+    .close-button:hover {
+      color: #000;
+    }
+
+    body.dark .close-button {
+      color: #aaa;
+    }
+
+    body.dark .close-button:hover {
+      color: #fff;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+  
+  <script>
+    let pendingRedirect = null;
+    function handleAdultLinkClick(event) {
+      const link = event.currentTarget;
+      const href = link.getAttribute('data-href');
+      const isAdult = link.getAttribute('data-adulto') === 'adulto';
+  
+      if (isAdult) {
+        event.preventDefault();
+        pendingRedirect = href;
+        openModal();
+      }
+    }
+    
+    function openModal() {
+      document.getElementById("ageModal").classList.remove("hidden");
+      document.getElementById("result-message").innerText = "";
+      document.getElementById("birthyear").value = "";
+      document.getElementById("age").value = "";
+    }
+    
+    function closeModal() {
+      document.getElementById("ageModal").classList.add("hidden");
+      pendingRedirect = null;
+    }
+
+    document.getElementById("confirmAgeBtn").addEventListener("click", function () {
+      const birthYear = parseInt(document.getElementById("birthyear").value);
+      const enteredAge = parseInt(document.getElementById("age").value);
+      const currentYear = new Date().getFullYear();
+      const calculatedAge = currentYear - birthYear;
+      const result = document.getElementById("result-message");
+  
+      if (
+        isNaN(birthYear) || isNaN(enteredAge) ||
+        birthYear > currentYear || birthYear < 1900 ||
+        enteredAge < 0 || enteredAge > 120
+      ) {
+        result.innerText = "Por favor completa los campos con valores válidos.";
+        result.style.color = "red";
+        return;
+      }
+  
+      if (enteredAge !== calculatedAge) {
+        result.innerText = "La edad no coincide con el año de nacimiento.";
+        result.style.color = "red";
+        return;
+      }
+  
+      if (enteredAge >= 18) {
+        result.innerText = "Acceso permitido. Redirigiendo...";
+        result.style.color = "green";
+        setTimeout(() => {
+          if (pendingRedirect) {
+            window.location.href = pendingRedirect;
+          }
+        }, 1500);
+      } else {
+        result.innerText = "No eres mayor de edad, vuelve a intentarlo más adelante.";
+        result.style.color = "red";
+      }
+    });
+    
+    // Activar verificación en todos los links con data-adulto
+    document.querySelectorAll('a[data-adulto="adulto"]').forEach(link => {
+      link.addEventListener('click', handleAdultLinkClick);
+    });
+  </script>
+
+  <!--FIN DE LA VERIFICACION PARA ADULTOS.-->
   
   <!-- ¡¡¡NO BORRAR ESTE SCRIPT ES DE FAVORITOS Y SI LO BORRAN AFECTARAN EL FUNCIONAMIENTO DE REPRODUCTOR Y FAVORITOS!!! -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.6.7/plyr.min.js">
@@ -1172,9 +1381,9 @@ player.on('play', () => {
       const STORAGE_KEY = 'pos_' + videoSrc;
 
       /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
-      const historialTitulo = "1978";
-      const historialImagen = "https://image.tmdb.org/t/p/w300/iyKixwGhGRas1ppAih8E7SG5QDZ.jpg";
-      const historialArchivo = "1978 (2025).html";
+      const historialTitulo = "Aladdin";
+      const historialImagen = "https://image.tmdb.org/t/p/w300/eLFfl7vS8dkeG1hKp5mwbm37V83.jpg";
+      const historialArchivo = "Aladdin (1993).html";
 
       let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
       let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
