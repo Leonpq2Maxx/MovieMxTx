@@ -535,27 +535,18 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
     <script>
-// Detectar si venimos desde una película
-const fromMovie = window.location.search.includes("from=movie");
-
-// Si venimos desde una película, limpiar historial completamente
-if (fromMovie) {
-  history.replaceState(null, '', 'index.html'); // quita el parámetro ?from=movie
-}
-
-// 🚫 Bloquear el botón atrás sin recargar
+// 🚫 Bloquea totalmente el botón "Atrás" en el index
 window.addEventListener('load', function() {
+  // Empuja un estado falso al historial
   history.pushState(null, '', window.location.href);
-  window.addEventListener('popstate', function() {
-    // vuelve a empujar el estado actual sin recargar
+
+  window.addEventListener('popstate', function(event) {
+    // Cuando el usuario toca "Atrás", volvemos al mismo lugar
     history.pushState(null, '', window.location.href);
   });
 });
 </script>
-
-
-
-
+<!-- ESTILO DE DE REFRECO-->
     <style>
     #refreshBtn svg {
   transition: transform 0.5s ease;
@@ -785,6 +776,11 @@ document.querySelectorAll('.menu-item').forEach(function(item) {
           </a>
         </li>
         <li class="slide">
+          <a href="View Peliculas/3 Culpa Nuestra (2025).html">
+            <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/original/8WhlNrtQdyUBnKrw5WBJnsDn1HE.jpg"/>
+          </a>
+        </li>
+        <li class="slide">
           <a href="View Peliculas/El Conjuro 4 El ultimo rito (2025).html">
             <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w780/cDNuAKzhfM6GQ8jce55jn9SQLY3.jpg" />
           </a>
@@ -802,11 +798,6 @@ document.querySelectorAll('.menu-item').forEach(function(item) {
         <li class="slide">
           <a href="View Peliculas/Thunderbolts (2025).html">
             <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w780/ffQJClNiOpoc0ywxBgY6y1vBuxC.jpg"/>
-          </a>
-        </li>
-        <li class="slide">
-          <a href="View Peliculas/Dragon Ball Super Super Hero (2022).html">
-            <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w780/xrpdStZbwhbhwZ5J9KCT6ak7blZ.jpg"/>
           </a>
         </li>
       </ul>
@@ -1080,35 +1071,42 @@ document.querySelectorAll('.card-link').forEach(link => {
   <h4 class="alignleft">Series 2025</h4><a href="Mostras Mas/Series Agregadas.html"><h4 class="alignright">Ver Todo</h4></a></div>
   <br/>
   <div class="scrollmenu">
-      <a class="card-link" data-href="">
+    <a class="card-link" data-href="View Series/IT Bienvenidos a Derry (2025).html">
+      <div class="xplus">
+        <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/vC6LSYC8uhZPkPM01L6HKrr1lMD.jpg"/>
+        <i>IT: Bienvenidos a Derry</i>
+        <span class="lock-icon">🔒</span>
+      </div>
+    </a>
+    <a class="card-link" data-href="">
       <div class="xplus">
         <img class="xaviec" loading="lazy" src="Rosario Tijeras.jpg"/>
         <i>Rosario Tijeras</i>
         <span class="lock-icon">🔒</span>
       </div>
     </a>
-      <a class="card-link" data-href="View Series/En el barro (2025).html">
+    <a class="card-link" data-href="View Series/En el barro (2025).html">
       <div class="xplus">
         <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/kKi1YdzQNM87Mcz7WxxclHbevwr.jpg"/>
         <i>En el barro</i>
         <span class="lock-icon">🔒</span>
       </div>
     </a>
-    <a class="card-link" data-href="View Series/Chespirito sin querer queriendo (2025).html">
+    <a class="card-link" data-href="">
       <div class="xplus">
         <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/rKPONjvDSn63blDzYrPOWvjWLoy.jpg"/>
         <i>Chespirito: Sin querer...</i>
         <span class="lock-icon">🔒</span>
       </div>
     </a>
-    <a class="card-link" data-href="View Series/El Juego Del Calamar (2021)">
+    <a class="card-link" data-href="">
       <div class="xplus">
         <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/xNvlt4jn2KbuKJoZ9UiVpm7lYjr.jpg"/>
         <i>El juego Del calamar</i>
         <span class="lock-icon">🔒</span>
       </div>
     </a>
-    <a class="card-link" data-href="View Series/Una buena familia americana (2025)">
+    <a class="card-link" data-href="">
       <div class="xplus">
         <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/aIAdaQ0R9G75h3iCckaoxQrHRH.jpg"/>
         <i>Una buena familia...</i>
@@ -1129,21 +1127,21 @@ document.querySelectorAll('.card-link').forEach(link => {
         <span class="lock-icon">🔒</span>
       </div>
     </a>
-    <a class="card-link" data-href="View Series/Dragon Ball Daima (2024).html">
+    <a class="card-link" data-href="">
       <div class="xplus">
         <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/uJw6nLCzQ8SftuCUJQNXTrvjlm4.jpg"/>
         <i>Dragon Ball Daima</i>
         <span class="lock-icon">🔒</span>
       </div>
     </a>
-    <a class="card-link" data-href="View Series/The Walking Dead The ones two live (2024).html">
+    <a class="card-link" data-href="">
       <div class="xplus">
         <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/yft2a3vnCblf6wmF6gTqgdKZUMi.jpg"/>
         <i>The Walking Dead: The...</i>
         <span class="lock-icon">🔒</span>
       </div>
     </a>
-    <a class="card-link" data-href="View Series/Agatha quien sino 2024.html">
+    <a class="card-link" data-href="">
       <div class="xplus">
         <img alt="" class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/nbkbguUUNWQZygVJKjODyELBQk9.jpg"/>
         <i>Agatha, ¿quién si no?</i>
@@ -1164,7 +1162,7 @@ document.querySelectorAll('.card-link').forEach(link => {
         <span class="lock-icon">🔒</span>
       </div>
     </a>
-      <a class="card-link" data-href="View Series/Dragon Ball Z (1989).html">
+      <a class="card-link" data-href="">
       <div class="xplus">
         <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/8PT42NbjTZzYzCnPzg4NZzSW97n.jpg"/>
         <i>Dragon Ball Z </i>
@@ -1178,7 +1176,7 @@ document.querySelectorAll('.card-link').forEach(link => {
         <span class="lock-icon">🔒</span>
       </div>
     </a>
-    <a class="card-link" data-href="View Series/The Walking Dead (2010).html">
+    <a class="card-link" data-href="">
       <div class="xplus">
         <img class="xaviec" loading="lazy" src="https://image.tmdb.org/t/p/w300/uYFK6OpX4HseiMPKYPznVXPwZX9.jpg"/>
         <i>The Walking Dead</i>
