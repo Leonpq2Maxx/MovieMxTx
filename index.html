@@ -394,7 +394,7 @@ i {
 <div id="loader-container">
   <div class="loader-content">
     <div class="logo-container">
-      <img src="Logo MovieTx.png" alt="MovieTx Logo" class="logo-movietx" />
+      <img src="Logo Poster MovieTx PNG/Logo MovieTx.png" alt="MovieTx Logo" class="logo-movietx" />
       <div class="reflejo"></div>
     </div>
     <h1 class="titulo-movietx">MovieTx</h1>
@@ -404,7 +404,7 @@ i {
     <br>
     <p class="texto-carga">Disfrutar mi aplicación de películas y series</p>
 <br>
-      <p class="texto-carga" style="text-align:center;color:#777;padding:20px 10px;border-top:1px solid rgba(255,255,255,0.1);margin-top:30px;">MovieTx © 2025 — Todos los derechos reservados</p>
+      <p class="texto-carga" style="text-align:center;color:#777;padding:20px 10px;border-top:1px solid rgba(255,255,255,0.1);margin-top:70px;">MovieTx © 2025 — Todos los derechos reservados</p>
   </div>
 </div>
 
@@ -535,32 +535,17 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
     <script>
-// ✅ Bloqueo total del botón atrás y recarga fantasma en index
-(function () {
-  // Limpia el historial previo y reemplaza el estado actual
-  history.pushState(null, "", location.href);
-  history.replaceState(null, "", location.href);
+// 🚫 Bloquea totalmente el botón "Atrás" en el index
+window.addEventListener('load', function() {
+  // Empuja un estado falso al historial
+  history.pushState(null, '', window.location.href);
 
-  // Si el usuario intenta retroceder, volvemos al mismo estado
-  window.addEventListener("popstate", function (event) {
-    history.pushState(null, "", location.href);
+  window.addEventListener('popstate', function(event) {
+    // Cuando el usuario toca "Atrás", volvemos al mismo lugar
+    history.pushState(null, '', window.location.href);
   });
-
-  // Previene recargas con F5 o retrocesos cacheados
-  window.addEventListener("pageshow", function (event) {
-    if (event.persisted) {
-      event.preventDefault();
-      history.pushState(null, "", location.href);
-    }
-  });
-
-  // Evita que el navegador use caché o recargue
-  window.onunload = function () { return null; };
-})();
+});
 </script>
-
-
-
 <!-- ESTILO DE DE REFRECO-->
     <style>
     #refreshBtn svg {
@@ -787,12 +772,12 @@ document.querySelectorAll('.menu-item').forEach(function(item) {
       <ul class="carousel-track">
         <li class="slide current-slide">
           <a href="View Series/IT Bienvenidos a Derry (2025).html">
-            <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/original/ybyObMOWerS5DgzaFbslvGi1ND3.jpg"/>
+            <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/original/8WhlNrtQdyUBnKrw5WBJnsDn1HE.jpg"/>
           </a>
         </li>
         <li class="slide">
           <a href="View Peliculas/3 Culpa Nuestra (2025).html">
-            <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w780/8WhlNrtQdyUBnKrw5WBJnsDn1HE.jpg"/>
+            <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/original/8WhlNrtQdyUBnKrw5WBJnsDn1HE.jpg"/>
           </a>
         </li>
         <li class="slide">
