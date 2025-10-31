@@ -535,13 +535,30 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
     <script>
-// ✅ Bloquea completamente el retroceso en index
-window.history.pushState(null, "", window.location.href);
-window.addEventListener("popstate", function (event) {
-  // En lugar de recargar o volver, mantenemos al usuario en el index
-  window.history.pushState(null, "", window.location.href);
-});
+// ✅ Bloqueo total del botón atrás y recarga fantasma en index
+(function () {
+  // Limpia el historial previo y reemplaza el estado actual
+  history.pushState(null, "", location.href);
+  history.replaceState(null, "", location.href);
+
+  // Si el usuario intenta retroceder, volvemos al mismo estado
+  window.addEventListener("popstate", function (event) {
+    history.pushState(null, "", location.href);
+  });
+
+  // Previene recargas con F5 o retrocesos cacheados
+  window.addEventListener("pageshow", function (event) {
+    if (event.persisted) {
+      event.preventDefault();
+      history.pushState(null, "", location.href);
+    }
+  });
+
+  // Evita que el navegador use caché o recargue
+  window.onunload = function () { return null; };
+})();
 </script>
+
 
 
 <!-- ESTILO DE DE REFRECO-->
