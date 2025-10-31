@@ -414,7 +414,38 @@
 
 <body ondragstart="return false;" ondrop="return false;">
 
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const player = new Plyr('#player'); // Asegurate que tu <video> tenga id="player"
+  const videoId = window.location.pathname.split('/').pop(); // usa el nombre del archivo como ID único
+  const savedTime = localStorage.getItem(`video-progress-${videoId}`);
 
+  // Si hay tiempo guardado, mostrar una opción para reanudar
+  if (savedTime && savedTime > 5) {
+    player.once('play', () => {
+      player.pause();
+      const resume = confirm('¿Reanudar desde donde lo dejaste?');
+      if (resume) {
+        player.currentTime = parseFloat(savedTime);
+      }
+      player.play();
+    });
+  }
+
+  // Guardar progreso en tiempo real
+  player.on('timeupdate', () => {
+    localStorage.setItem(`video-progress-${videoId}`, player.currentTime);
+  });
+
+  // Si el video finaliza, borrar el progreso
+  player.on('ended', () => {
+    localStorage.removeItem(`video-progress-${videoId}`);
+  });
+});
+</script>
+
+
+  
 <script>
 // 🔹 Evita volver a la página anterior
 // y manda directo a index.html al presionar atrás
@@ -1213,6 +1244,7 @@ player.on('play', () => {
   
 </body>
 </html>
+
 
 
 
