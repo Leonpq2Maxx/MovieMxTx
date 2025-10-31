@@ -416,14 +416,20 @@
 
 
 <script>
-// Cuando el usuario presiona atrás, redirige al index y limpia historial
+// 🔹 Evita volver a la página anterior
+// y manda directo a index.html al presionar atrás
 window.history.pushState(null, null, window.location.href);
-window.addEventListener("popstate", function () {
-  // Reemplaza por index y limpia historial para que no "recargue"
-  window.location.replace("index.html?from=movie");
+window.addEventListener('popstate', function () {
+  // Redirige directamente al index y reemplaza el historial
+  window.location.replace("../index.html");
 });
-</script>
 
+// 🔹 Limpia el historial para que no se pueda regresar desde index
+if (window.performance && window.performance.navigation.type === 2) {
+  // Si se intenta volver con cache, redirige igual
+  window.location.replace("../index.html");
+}
+</script>
 
 
 <!--FINN-->
@@ -1208,7 +1214,6 @@ player.on('play', () => {
   
 </body>
 </html>
-
 
 
 
