@@ -535,12 +535,24 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
     <script>
-  // Bloquear navegación hacia atrás sin recargar
-  window.history.pushState(null, "", window.location.href);
-  window.addEventListener("popstate", function (event) {
-    window.history.pushState(null, "", window.location.href);
+// Detectar si venimos desde una película
+const fromMovie = window.location.search.includes("from=movie");
+
+// Si venimos desde una película, limpiar historial completamente
+if (fromMovie) {
+  history.replaceState(null, '', 'index.html'); // quita el parámetro ?from=movie
+}
+
+// 🚫 Bloquear el botón atrás sin recargar
+window.addEventListener('load', function() {
+  history.pushState(null, '', window.location.href);
+  window.addEventListener('popstate', function() {
+    // vuelve a empujar el estado actual sin recargar
+    history.pushState(null, '', window.location.href);
   });
+});
 </script>
+
 
 
 
