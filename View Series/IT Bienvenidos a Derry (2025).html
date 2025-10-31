@@ -464,11 +464,19 @@
 <body ondragstart="return false;" ondrop="return false;">
 
  <script>
-// 🔙 Si el usuario presiona "Atrás" en una película, vuelve al index
+// 🔹 Evita volver a la página anterior
+// y manda directo a index.html al presionar atrás
 window.history.pushState(null, null, window.location.href);
-window.addEventListener("popstate", function () {
-  window.location.replace("index.html");
+window.addEventListener('popstate', function () {
+  // Redirige directamente al index y reemplaza el historial
+  window.location.replace("../index.html");
 });
+
+// 🔹 Limpia el historial para que no se pueda regresar desde index
+if (window.performance && window.performance.navigation.type === 2) {
+  // Si se intenta volver con cache, redirige igual
+  window.location.replace("../index.html");
+}
 </script>
 
   <!-- 🔴 Pantalla de carga personalizada MovieTx (versión neón) -->
@@ -674,7 +682,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <p class="player-loading-text">Cargando<span class="dots"></span></p>
     </div>
 
-    <video class="vid1 js-player" controls loading="lazy" poster="https://image.tmdb.org/t/p/w780/bxPELhUZNgbFUN31EZTBC99wOHD.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+    <video class="vid1 js-player" controls loading="lazy" poster="https://image.tmdb.org/t/p/w780/bZ7M9hqVoUZA0ySN3Ppdg5BE2wI.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
       <source src="" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
@@ -692,7 +700,7 @@ document.addEventListener('DOMContentLoaded', () => {
   <div class="info">
     <i class="fal fa-calendar-alt"></i><span>2025</span> <!--Aca va el año de estreno de pelicula-->
    <!--aca va cuanto dura-->
-    <i class="fal fa-thumbs-up"></i><span>80%</span> <!--aca va la calificacion-->
+    <i class="fal fa-thumbs-up"></i><span>89%</span> <!--aca va la calificacion-->
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
@@ -703,7 +711,7 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
   
   <div class="info-pelicula">
-    <h1>En el barro</h1>
+    <h1>IT: Bienvenidos a Derry</h1>
     <span class="genero-badge">Acción • Drama</span>
     <br>
     <br>
@@ -711,17 +719,17 @@ document.addEventListener('DOMContentLoaded', () => {
     <button id="open-seasons" class="seasons-open-btn">Ver Temporadas & Episodios</button>
     
     <p class="sinopsis">
-      Cinco prisioneras forjan un vínculo único después de un accidente mortal... hasta que la corrupción y las guerras territoriales dentro de una prisión despiadada amenazan con destruirlas.
+      En 1962, una pareja y su hijo se mudan a Derry, Maine, justo cuando un niño desaparece. Con su llegada, comienzan a suceder cosas muy malas en el pueblo.
     </p>
 
     <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
-      <p><strong>Director:</strong> Sebastián Ortega</p>
-      <p><strong>Reparto:</strong> Ana Garibaldi, Valentina Zenere, Rita Cortese</p>
-      <p><strong>Estreno:</strong> 14/08/2025 | <strong>Idioma:</strong> Argentino 🇦🇷</p>
+      <p><strong>Director:</strong> Andy Muschietti</p>
+      <p><strong>Reparto:</strong> Taylou Paige, Jovan Adepo, James Remar</p>
+      <p><strong>Estreno:</strong> 26/10/2025 | <strong>Idioma:</strong> Español Latino 🇲🇽</p>
     </div>
-
-    <br>
   
+    <br>
+
     <div class="acciones">
       <button id="btn-favorito">⭐ Agregar a Favoritos</button>
     </div>
@@ -829,10 +837,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 🔹 Botón "Agregar a Favoritos"
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
-      titulo: "En el barro",
-      imagen: "https://image.tmdb.org/t/p/w300/kKi1YdzQNM87Mcz7WxxclHbevwr.jpg",
-      genero: "Acción • Drama",
-      archivo: "../View Series/En el barro (2025).html",
+      titulo: "IT Bienvenidos a Derry",
+      imagen: "https://image.tmdb.org/t/p/w300/vC6LSYC8uhZPkPM01L6HKrr1lMD.jpg",
+      genero: "terror • Drama",
+      archivo: "../View Series/IT Bienvenidos a Derry (2025).html",
       tipo: "serie",
       timestamp: Date.now()
     };
@@ -914,7 +922,6 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
   </div>
 </div>
-  <br>
 <!-- ---------- ESTILOS (dark, moderno, responsive) ---------- -->
 <style>
   :root{
@@ -1115,17 +1122,11 @@ const SERIES_KEY = "En_el_barra25";
     {
       id: 1,
       title: "Temporada 1",
-      thumb: "https://image.tmdb.org/t/p/w780/v8xHeTkIBOl51yRp0zcAu2VYhdZ.jpg",
+      thumb: "https://image.tmdb.org/t/p/w780/ybyObMOWerS5DgzaFbslvGi1ND3.jpg",
       desc: "Lanzada 2025 — 8 episodios",
       episodes: [
-        { id: "s1e1", title: "Episodio 1", time: "45m", thumb: "https://image.tmdb.org/t/p/w300/7QirCB1o80NEFpQGlQRZerZbQEp.jpg", href: "https://dl.dropbox.com/scl/fi/bawnnxf6ccjy765pzdsr1/En-el-barro-Cap-1.mp4?rlkey=xf38z7zwucx1747ox9ax1389z&st=" },
-        { id: "s1e2", title: "Episodio 2", time: "45m", thumb: "", href: "https://dl.dropbox.com/scl/fi/x63tx11kljnw75sh82f6x/En-el-barro-Cap-2.mp4?rlkey=twb14o7mk2rwvp52yxet5z0qn&st=" },
-        { id: "s1e3", title: "Episodio 3", time: "45m", thumb: "", href: "https://dl.dropbox.com/scl/fi/uf3d7ix814z61eqlwmkwp/En-el-barro-Cap-3.mp4?rlkey=ridj4j6adxlz7huiz98mchy8m&st=" },
-        { id: "s1e4", title: "Episodio 4", time: "45m", thumb: "", href: "" },
-        { id: "s1e5", title: "Episodio 5", time: "45m", thumb: "", href: "" },
-        { id: "s1e6", title: "Episodio 6", time: "45m", thumb: "", href: "" },
-        { id: "s1e7", title: "Episodio 7", time: "45m", thumb: "", href: "" },
-        { id: "s1e8", title: "Episodio 8", time: "45m", thumb: "", href: "" },
+        { id: "s1e1", title: "Episodio 1", time: "45m", thumb: "", href: "" },
+        { id: "s1e2", title: "31/10/2025", time: "45m", thumb: "", href: "h" },
         // ... más episodios
       ]
     },
@@ -1373,29 +1374,29 @@ document.addEventListener("DOMContentLoaded", () => {
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
-      <a href="" class="serie">
-        <img loading="lazy" src="../Rosario Tijeras.jpg" alt="">
-        <p>Rosario Tijeras</p>
+      <a href="html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
+        <p>NOMBRE DE SERIE</p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/original/eAy2tSlGtzseWfYemt398QrPtf2.jpg" alt="">
-        <p>El Marginal</p>
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
+        <p>NOMBRE DE SERIE</p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/original/kY0BogCM8SkNJ0MNiHB3VTM86Tz.jpg" alt="">
-        <p>Chucky</p>
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
+        <p>NOMBRE DE SERIE</p>
       </a>
-      <a href="" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/original/9CSTzX1pUrNLD7lsJ8h9hRFJtLQ.jpg" alt="">
-        <p>Duki: Desde el fin del mundo</p>
+      <a href="E" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
+        <p>NOMBRE DE SERIE</p>
       </a>
-      <a href="" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/original/8PT42NbjTZzYzCnPzg4NZzSW97n.jpg" alt="">
-        <p>Dragon Ball Z</p>
+      <a href="#" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt=""> <!--EN CASO DE NO SER PARA ADULTOS UTILICE ESTAS 6 ESTRUCTURAS DEL CODIGO, LA DE ABAJO ES PARA ADULTOS. SI NO CONTIENES PELICULAS DE ADULTOS UTILIZA LAS 6 QUE DEJARE MARCADA CON NUMEROS DEL (1 AL 6) EN CASO DE TENER PELICULA DE ADULTOS UTILIZA EL DE ABAJO-->
+        <p>Nombre de SERIE</p>
       </a>
-      <a href="" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/original/wfxsizfb7NV9uwy9QCqqvfR20F2.jpg" alt="">
-        <p>Dr.House</p>
+      <a href="E" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
+        <p>NOMBRE DE SERIE</p>
       </a>
     </div>
   </div>
@@ -1767,9 +1768,9 @@ closeModalX.addEventListener('click', () => {
     const STORAGE_KEY = 'pos_' + videoSrc;
 
     /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
-    const historialTitulo = "En el barro";
-    const historialImagen = "https://image.tmdb.org/t/p/w300/kKi1YdzQNM87Mcz7WxxclHbevwr.jpg";
-    const historialArchivo = "../View Series/En el barro (2025).html";
+    const historialTitulo = "IT: Bienvenidos a Derry";
+    const historialImagen = "https://image.tmdb.org/t/p/w300/vC6LSYC8uhZPkPM01L6HKrr1lMD.jpg";
+    const historialArchivo = "../View Series/IT Bienvenidos a Derry (2025).html";
 
     let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
     let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
