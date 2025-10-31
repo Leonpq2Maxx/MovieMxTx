@@ -566,14 +566,18 @@ if (window.performance && window.performance.navigation.type === 2) {
 document.addEventListener('DOMContentLoaded', () => {
   const loader = document.getElementById('loader-screen');
   const continueModal = document.getElementById('continue-modal');
-  if (continueModal) continueModal.style.display = 'none'; // Ocultamos modal al inicio
+  if (continueModal) continueModal.style.display = 'none';
 
-  setTimeout(() => {
-    loader.classList.add('hidden');
+  // Espera a que todas las imágenes (y el resto del contenido visual) terminen de cargar
+  window.addEventListener('load', () => {
+    // Pequeño retardo opcional de 1 segundo para suavizar
     setTimeout(() => {
-      if (continueModal) continueModal.style.display = ''; // Mostrar después del fade
-    }, 1200);
-  }, 5000); // 10 segundos
+      loader.classList.add('hidden');
+      setTimeout(() => {
+        if (continueModal) continueModal.style.display = '';
+      }, 1200);
+    }, 1000);
+  });
 });
 </script>
 <!-- 🔴 Fin pantalla de carga neón -->
@@ -1374,29 +1378,29 @@ document.addEventListener("DOMContentLoaded", () => {
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
-      <a href="html" class="serie">
+      <a href="../View Peliculas/It (eso) 2014.html" class="serie">
         <img loading="lazy" src="https://image.tmdb.org/t/p/w300/kI2c93Ybv8C8seSJunNSlpepFPX.jpg" alt="">
         <p>It (Eso)</p>
       </a>
-      <a href="" class="serie">
+      <a href="../View Peliculas/It Capítulo 2 (2019).html" class="serie">
         <img loading="lazy" src="https://image.tmdb.org/t/p/w300/pxw6j2AwlUsw5iS4fCxPoCP0jPh.jpg" alt="">
         <p>It: Capitulo 2</p>
       </a>
-      <a href="" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
-        <p>NOMBRE DE SERIE</p>
+      <a href="../View Peliculas/El payaso del mal (2014).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/o4bNaBX6COOzgvWQGLSNuIbztvF.jpg" alt="">
+        <p>El payaso del mal</p>
       </a>
-      <a href="E" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
-        <p>NOMBRE DE SERIE</p>
+      <a href="../View Peliculas/Terrifier 3 Payaso (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/ju10W5gl3PPK3b7TjEmVOZap51I.jpg" alt="">
+        <p>Terrifier</p>
       </a>
-      <a href="#" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt=""> <!--EN CASO DE NO SER PARA ADULTOS UTILICE ESTAS 6 ESTRUCTURAS DEL CODIGO, LA DE ABAJO ES PARA ADULTOS. SI NO CONTIENES PELICULAS DE ADULTOS UTILIZA LAS 6 QUE DEJARE MARCADA CON NUMEROS DEL (1 AL 6) EN CASO DE TENER PELICULA DE ADULTOS UTILIZA EL DE ABAJO-->
-        <p>Nombre de SERIE</p>
+      <a href="../View Peliculas/Until Dawn Noche de terror (2025).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/vAYTXSUnQjmTFcm97BhROQav1wF.jpg" alt=""> <!--EN CASO DE NO SER PARA ADULTOS UTILICE ESTAS 6 ESTRUCTURAS DEL CODIGO, LA DE ABAJO ES PARA ADULTOS. SI NO CONTIENES PELICULAS DE ADULTOS UTILIZA LAS 6 QUE DEJARE MARCADA CON NUMEROS DEL (1 AL 6) EN CASO DE TENER PELICULA DE ADULTOS UTILIZA EL DE ABAJO-->
+        <p>Until Dawn: Noche de terror</p>
       </a>
-      <a href="E" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
-        <p>NOMBRE DE SERIE</p>
+      <a href="../View Peliculas/Háblame (2023).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/rS8fjd6dYcf64v3ZhAE6fKrxoaF.jpg" alt="">
+        <p>Háblame</p>
       </a>
     </div>
   </div>
