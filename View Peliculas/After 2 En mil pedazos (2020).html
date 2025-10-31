@@ -415,19 +415,11 @@
 <body ondragstart="return false;" ondrop="return false;">
   
   <script>
-// 🔹 Evita volver a la página anterior
-// y manda directo a index.html al presionar atrás
+// 🔙 Si el usuario presiona "Atrás" en una película, vuelve al index
 window.history.pushState(null, null, window.location.href);
-window.addEventListener('popstate', function () {
-  // Redirige directamente al index y reemplaza el historial
-  window.location.replace("../index.html");
+window.addEventListener("popstate", function () {
+  window.location.replace("index.html");
 });
-
-// 🔹 Limpia el historial para que no se pueda regresar desde index
-if (window.performance && window.performance.navigation.type === 2) {
-  // Si se intenta volver con cache, redirige igual
-  window.location.replace("../index.html");
-}
 </script>
 
   <!-- 🔴 Pantalla de carga personalizada MovieTx (versión neón) -->
@@ -667,9 +659,9 @@ document.addEventListener('DOMContentLoaded', () => {
     </p>
 
     <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
-      <p><strong>Director:</strong> </p>
-      <p><strong>Reparto:</strong> </p>
-      <p><strong>Estreno:</strong> 00/00/0000 | <strong>Idioma:</strong> ------</p>
+      <p><strong>Director:</strong> Roger Kumble</p>
+      <p><strong>Reparto:</strong> Josefina Langford, Hero Fiennes Tiffin, Luisa Lombard</p>
+      <p><strong>Estreno:</strong> 04/09/2020 | <strong>Idioma:</strong> Español Latino 🇲🇽</p>
     </div>
 
     <br>
