@@ -535,17 +535,13 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
     <script>
-// 🚫 Bloquea totalmente el botón "Atrás" en el index
-window.addEventListener('load', function() {
-  // Empuja un estado falso al historial
-  history.pushState(null, '', window.location.href);
-
-  window.addEventListener('popstate', function(event) {
-    // Cuando el usuario toca "Atrás", volvemos al mismo lugar
-    history.pushState(null, '', window.location.href);
-  });
+// 🔒 Bloquea totalmente el retroceso o recarga falsa en index
+window.history.pushState(null, "", window.location.href);
+window.addEventListener("popstate", function (event) {
+  window.history.pushState(null, "", window.location.href);
 });
 </script>
+
 <!-- ESTILO DE DE REFRECO-->
     <style>
     #refreshBtn svg {
