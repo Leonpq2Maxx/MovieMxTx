@@ -427,11 +427,6 @@ window.addEventListener('popstate', function () {
   window.location.replace("../index.html");
 });
 
-// 🔹 Limpia el historial para que no se pueda regresar desde index
-if (window.performance && window.performance.navigation.type === 2) {
-  // Si se intenta volver con cache, redirige igual
-  window.location.replace("../index.html");
-}
 </script>
 
 
