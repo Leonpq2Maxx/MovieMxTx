@@ -535,12 +535,14 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
     <script>
-// 🔒 Bloquea totalmente el retroceso o recarga falsa en index
+// ✅ Bloquea completamente el retroceso en index
 window.history.pushState(null, "", window.location.href);
 window.addEventListener("popstate", function (event) {
+  // En lugar de recargar o volver, mantenemos al usuario en el index
   window.history.pushState(null, "", window.location.href);
 });
 </script>
+
 
 <!-- ESTILO DE DE REFRECO-->
     <style>
