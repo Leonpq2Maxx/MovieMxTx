@@ -518,14 +518,18 @@ if (window.performance && window.performance.navigation.type === 2) {
 document.addEventListener('DOMContentLoaded', () => {
   const loader = document.getElementById('loader-screen');
   const continueModal = document.getElementById('continue-modal');
-  if (continueModal) continueModal.style.display = 'none'; // Ocultamos modal al inicio
+  if (continueModal) continueModal.style.display = 'none';
 
-  setTimeout(() => {
-    loader.classList.add('hidden');
+  // Espera a que todas las imágenes (y el resto del contenido visual) terminen de cargar
+  window.addEventListener('load', () => {
+    // Pequeño retardo opcional de 1 segundo para suavizar
     setTimeout(() => {
-      if (continueModal) continueModal.style.display = ''; // Mostrar después del fade
-    }, 1200);
-  }, 5000); // 10 segundos
+      loader.classList.add('hidden');
+      setTimeout(() => {
+        if (continueModal) continueModal.style.display = '';
+      }, 1200);
+    }, 1000);
+  });
 });
 </script>
 <!-- 🔴 Fin pantalla de carga neón -->

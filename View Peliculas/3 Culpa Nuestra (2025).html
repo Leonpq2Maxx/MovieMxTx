@@ -414,38 +414,7 @@
 
 <body ondragstart="return false;" ondrop="return false;">
 
-  <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const player = new Plyr('#player'); // Asegurate que tu <video> tenga id="player"
-  const videoId = window.location.pathname.split('/').pop(); // usa el nombre del archivo como ID único
-  const savedTime = localStorage.getItem(`video-progress-${videoId}`);
 
-  // Si hay tiempo guardado, mostrar una opción para reanudar
-  if (savedTime && savedTime > 5) {
-    player.once('play', () => {
-      player.pause();
-      const resume = confirm('¿Reanudar desde donde lo dejaste?');
-      if (resume) {
-        player.currentTime = parseFloat(savedTime);
-      }
-      player.play();
-    });
-  }
-
-  // Guardar progreso en tiempo real
-  player.on('timeupdate', () => {
-    localStorage.setItem(`video-progress-${videoId}`, player.currentTime);
-  });
-
-  // Si el video finaliza, borrar el progreso
-  player.on('ended', () => {
-    localStorage.removeItem(`video-progress-${videoId}`);
-  });
-});
-</script>
-
-
-  
 <script>
 // 🔹 Evita volver a la página anterior
 // y manda directo a index.html al presionar atrás
@@ -551,14 +520,18 @@ if (window.performance && window.performance.navigation.type === 2) {
 document.addEventListener('DOMContentLoaded', () => {
   const loader = document.getElementById('loader-screen');
   const continueModal = document.getElementById('continue-modal');
-  if (continueModal) continueModal.style.display = 'none'; // Ocultamos modal al inicio
+  if (continueModal) continueModal.style.display = 'none';
 
-  setTimeout(() => {
-    loader.classList.add('hidden');
+  // Espera a que todas las imágenes (y el resto del contenido visual) terminen de cargar
+  window.addEventListener('load', () => {
+    // Pequeño retardo opcional de 1 segundo para suavizar
     setTimeout(() => {
-      if (continueModal) continueModal.style.display = ''; // Mostrar después del fade
-    }, 1200);
-  }, 5000); // 10 segundos
+      loader.classList.add('hidden');
+      setTimeout(() => {
+        if (continueModal) continueModal.style.display = '';
+      }, 1200);
+    }, 1000);
+  });
 });
 </script>
 <!-- 🔴 Fin pantalla de carga neón -->
@@ -1244,7 +1217,6 @@ player.on('play', () => {
   
 </body>
 </html>
-
 
 
 

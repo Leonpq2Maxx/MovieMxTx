@@ -517,14 +517,18 @@ if (window.performance && window.performance.navigation.type === 2) {
 document.addEventListener('DOMContentLoaded', () => {
   const loader = document.getElementById('loader-screen');
   const continueModal = document.getElementById('continue-modal');
-  if (continueModal) continueModal.style.display = 'none'; // Ocultamos modal al inicio
+  if (continueModal) continueModal.style.display = 'none';
 
-  setTimeout(() => {
-    loader.classList.add('hidden');
+  // Espera a que todas las imágenes (y el resto del contenido visual) terminen de cargar
+  window.addEventListener('load', () => {
+    // Pequeño retardo opcional de 1 segundo para suavizar
     setTimeout(() => {
-      if (continueModal) continueModal.style.display = ''; // Mostrar después del fade
-    }, 1200);
-  }, 5000); // 10 segundos
+      loader.classList.add('hidden');
+      setTimeout(() => {
+        if (continueModal) continueModal.style.display = '';
+      }, 1200);
+    }, 1000);
+  });
 });
 </script>
 <!-- 🔴 Fin pantalla de carga neón -->
@@ -1038,9 +1042,9 @@ document.addEventListener('DOMContentLoaded', () => {
         <img loading="lazy" src="https://image.tmdb.org/t/p/w300/ofnOwcG9l1DuGl7vB45JHsfSlR6.jpg" alt="">
         <p>Nada que ver</p>
       </a>
-      <a href="Eva (2021).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/bXZ3j3kQgCRZj7KD4Q5F9m5ABaQ.jpg" alt="">
-        <p>Eva</p>
+      <a href="../View Series/IT Bienvenidos a Derry (2025).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/vC6LSYC8uhZPkPM01L6HKrr1lMD.jpg" alt="">
+        <p>IT: Bienvenidos a Derry</p>
       </a>
       <a href="Me vuelves loca (2023).html" class="serie">
         <img loading="lazy" src="https://image.tmdb.org/t/p/w300/pQeyfqLEDdY6x4P4Fl5r6jcstN4.jpg" alt="">
