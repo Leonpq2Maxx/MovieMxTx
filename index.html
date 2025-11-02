@@ -388,7 +388,107 @@ i {
 
 </head>
 <body class="oneGrd MN-2 mobS hdMn bD onIndx onHm" id="mainCont">
-    
+
+    <!-- Modal de salida -->
+<div id="exit-modal" class="exit-modal">
+  <div class="modal-content">
+    <button class="close-btn" id="close-exit-modal">✖</button>
+    <h3>¿Deseas salir de la aplicación?</h3>
+    <div class="buttons">
+      <button id="exit-yes">Sí</button>
+      <button id="exit-no">No</button>
+    </div>
+  </div>
+</div>
+
+<style>
+.exit-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(6px);
+  z-index: 99999;
+}
+.exit-modal.active { display: flex; }
+
+.modal-content {
+  background: #141414;
+  color: #fff;
+  border-radius: 12px;
+  padding: 30px 25px;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(229,9,20,0.5);
+  width: 90%;
+  max-width: 360px;
+  position: relative;
+}
+
+.modal-content h3 {
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  color: #ff2d5b;
+}
+
+.modal-content .buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.modal-content button {
+  background: linear-gradient(135deg, #ff2d5b, #ff5e7e);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 8px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.modal-content button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(255,45,91,0.6);
+}
+
+.close-btn {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+</style>
+
+<script>
+// Control del botón "Atrás" en index
+window.history.pushState(null, "", window.location.href);
+
+window.addEventListener("popstate", function () {
+  const modal = document.getElementById("exit-modal");
+  modal.classList.add("active");
+
+  document.getElementById("exit-yes").onclick = () => {
+    modal.classList.remove("active");
+    window.close(); // Cierra la pestaña o la app si está dentro de un WebView
+  };
+
+  document.getElementById("exit-no").onclick = () => {
+    modal.classList.remove("active");
+    window.history.pushState(null, "", window.location.href); // Evita salir
+  };
+
+  document.getElementById("close-exit-modal").onclick = () => {
+    modal.classList.remove("active");
+    window.history.pushState(null, "", window.location.href);
+  };
+});
+</script>
+
     
    <!-- Pantalla de carga MovieTx mejorada -->
 <div id="loader-container">
