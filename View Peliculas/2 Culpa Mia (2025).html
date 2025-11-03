@@ -415,27 +415,24 @@
 <body ondragstart="return false;" ondrop="return false;">
 
 <script>
-  (function() {
-    // Inserta un nuevo estado para evitar regresar a la película anterior
-    history.pushState({ noBack: true }, "", location.href);
+(function() {
+  // Bloquea completamente el retroceso normal
+  let bloqueando = false;
+  history.pushState(null, "", location.href);
 
-    window.addEventListener("popstate", function (event) {
-      // Si el usuario toca "Atrás", redirige directamente al index
-      if (event.state && event.state.noBack) {
-        location.replace("../index.html");
-      }
-    });
+  window.addEventListener("popstate", (e) => {
+    if (bloqueando) return;
+    bloqueando = true;
+    // Siempre redirige al index, nunca a la anterior
+    location.replace("../index.html");
+  });
 
-    // Evita versiones cacheadas o recargas fantasmas
-    window.addEventListener("pageshow", function (e) {
-      if (e.persisted) location.replace("../index.html");
-    });
-  })();
+  // Previene volver desde caché (iOS/Safari)
+  window.addEventListener("pageshow", (event) => {
+    if (event.persisted) location.replace("../index.html");
+  });
+})();
 </script>
-
-
-
-
 
 
   <!-- 🔴 Pantalla de carga personalizada MovieTx (versión neón) -->

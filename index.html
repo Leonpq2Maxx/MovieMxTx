@@ -550,14 +550,15 @@ document.addEventListener('DOMContentLoaded', () => {
     <!-- fin -->
 
 <script>
-  (function() {
-    // Evita que el index retroceda o cierre la sesión de navegación
+(function() {
+  // En el index no se puede retroceder ni salir
+  history.pushState(null, "", location.href);
+  window.addEventListener("popstate", (e) => {
     history.pushState(null, "", location.href);
-    window.onpopstate = function () {
-      history.pushState(null, "", location.href);
-    };
-  })();
+  });
+})();
 </script>
+
 
 
     
