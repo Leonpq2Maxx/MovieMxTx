@@ -551,10 +551,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <script>
 (function() {
-  // En el index no se puede retroceder ni salir
+  // Limpia historial y bloquea cualquier retroceso previo
   history.pushState(null, "", location.href);
-  window.addEventListener("popstate", (e) => {
+  history.pushState(null, "", location.href);
+
+  window.addEventListener("popstate", function () {
+    // Cuando el usuario intenta retroceder, se mantiene en el index
     history.pushState(null, "", location.href);
+  });
+
+  // Previene volver a páginas anteriores (borra historial anterior)
+  window.addEventListener("load", function() {
+    setTimeout(() => {
+      history.pushState(null, "", location.href);
+      history.go(-(history.length));
+    }, 100);
   });
 })();
 </script>
