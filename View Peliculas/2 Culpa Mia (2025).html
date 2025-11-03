@@ -415,22 +415,22 @@
 <body ondragstart="return false;" ondrop="return false;">
 
 <script>
-  // --- Bloquea el historial y redirige siempre al index al retroceder ---
-  window.addEventListener("load", () => {
-    // Limpia el historial actual
-    history.pushState(null, null, location.href);
-    window.onpopstate = () => {
-      location.replace("index.html"); // Redirige directamente al index
-    };
-  });
+  // --- En páginas de video ---
+  // Cuando el usuario toque atrás, lo manda SIEMPRE al index
+  history.pushState({ page: "video" }, "", window.location.href);
 
-  // --- Evita cargas fantasmas y reapariciones de caché ---
-  window.addEventListener("pageshow", (event) => {
-    if (event.persisted) {
-      location.replace("index.html");
+  window.addEventListener("popstate", (event) => {
+    if (event.state && event.state.page === "video") {
+      window.location.replace("../index.html");
     }
   });
+
+  // Evita recargas fantasmas o volver desde caché
+  window.addEventListener("pageshow", (e) => {
+    if (e.persisted) window.location.replace("../index.html");
+  });
 </script>
+
 
 
 
