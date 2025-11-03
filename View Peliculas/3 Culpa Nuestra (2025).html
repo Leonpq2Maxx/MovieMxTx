@@ -414,18 +414,20 @@
 
 <body ondragstart="return false;" ondrop="return false;">
 
-<script>
-// Bloquear el historial y mandar directo al index
-window.history.replaceState(null, "", window.location.href);
-window.history.pushState(null, "", window.location.href);
+<script>
+  // Evita cargas fantasma y limpia historial
+  window.history.pushState(null, "", window.location.href);
+  window.addEventListener("popstate", function () {
+    window.location.replace("index.html"); // redirige directo al index
+  });
 
-window.addEventListener("popstate", function () {
-  window.location.replace("../index.html"); // Redirige directo sin recarga fantasma
-});
+  // Limpia historial para evitar falsos retrocesos
+  window.addEventListener("pageshow", function (event) {
+    if (event.persisted) {
+      window.location.replace("index.html");
+    }
+  });
 </script>
-
-
-
 
 
   <!-- 🔴 Pantalla de carga personalizada MovieTx (versión neón) -->
