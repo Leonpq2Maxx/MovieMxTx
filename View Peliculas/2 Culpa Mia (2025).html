@@ -415,21 +415,25 @@
 <body ondragstart="return false;" ondrop="return false;">
 
 <script>
-  // --- En páginas de video ---
-  // Cuando el usuario toque atrás, lo manda SIEMPRE al index
-  history.pushState({ page: "video" }, "", window.location.href);
+  (function() {
+    // Inserta un nuevo estado para evitar regresar a la película anterior
+    history.pushState({ noBack: true }, "", location.href);
 
-  window.addEventListener("popstate", (event) => {
-    if (event.state && event.state.page === "video") {
-      window.location.replace("../index.html");
-    }
-  });
+    window.addEventListener("popstate", function (event) {
+      // Si el usuario toca "Atrás", redirige directamente al index
+      if (event.state && event.state.noBack) {
+        location.replace("index.html");
+      }
+    });
 
-  // Evita recargas fantasmas o volver desde caché
-  window.addEventListener("pageshow", (e) => {
-    if (e.persisted) window.location.replace("../index.html");
-  });
+    // Evita versiones cacheadas o recargas fantasmas
+    window.addEventListener("pageshow", function (e) {
+      if (e.persisted) location.replace("index.html");
+    });
+  })();
 </script>
+
+
 
 
 

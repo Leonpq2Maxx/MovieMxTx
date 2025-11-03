@@ -549,14 +549,16 @@ document.addEventListener('DOMContentLoaded', () => {
     
     <!-- fin -->
 
-    <script>
-  // --- En el index ---
-  // Bloquea el retroceso, no hace nada si intentan volver desde acá
-  history.pushState(null, "", location.href);
-  window.onpopstate = () => {
+<script>
+  (function() {
+    // Evita que el index retroceda o cierre la sesión de navegación
     history.pushState(null, "", location.href);
-  };
+    window.onpopstate = function () {
+      history.pushState(null, "", location.href);
+    };
+  })();
 </script>
+
 
     
 <script>/*<![CDATA[*/ (localStorage.getItem('mode')) === 'darkmode' ? document.querySelector('#mainCont').classList.add('drK') : document.querySelector('#mainCont').classList.remove('drK') /*]]>*/</script>
