@@ -422,13 +422,13 @@
     window.addEventListener("popstate", function (event) {
       // Si el usuario toca "Atrás", redirige directamente al index
       if (event.state && event.state.noBack) {
-        location.replace("index.html");
+        location.replace("../index.html");
       }
     });
 
     // Evita versiones cacheadas o recargas fantasmas
     window.addEventListener("pageshow", function (e) {
-      if (e.persisted) location.replace("index.html");
+      if (e.persisted) location.replace("../index.html");
     });
   })();
 </script>
