@@ -549,26 +549,45 @@ document.addEventListener('DOMContentLoaded', () => {
     
     <!-- fin -->
 
+
+<!--CODIGO BLOQUEAR RETROCESO-->
 <script>
-(function() {
-  // Limpia historial y bloquea cualquier retroceso previo
-  history.pushState(null, "", location.href);
-  history.pushState(null, "", location.href);
-
-  window.addEventListener("popstate", function () {
-    // Cuando el usuario intenta retroceder, se mantiene en el index
+  // 🔒 BLOQUEAR RETROCESO DESDE INDEX (PC + MÓVIL)
+  (function() {
+    // Empuja una entrada falsa al historial
     history.pushState(null, "", location.href);
-  });
 
-  // Previene volver a páginas anteriores (borra historial anterior)
-  window.addEventListener("load", function() {
-    setTimeout(() => {
+    // Cuando el usuario intenta retroceder
+    window.onpopstate = function() {
+      // Lo volvemos a empujar al mismo lugar
       history.pushState(null, "", location.href);
-      history.go(-(history.length));
-    }, 100);
-  });
-})();
+    };
+
+    // Evita retroceso con tecla "Backspace" cuando no está en un campo editable
+    document.addEventListener("keydown", function(e) {
+      const tag = e.target.tagName.toLowerCase();
+      if (e.key === "Backspace" && tag !== "input" && tag !== "textarea") {
+        e.preventDefault();
+      }
+    });
+
+    // Bloquea el botón físico de retroceso en móviles
+    window.addEventListener("load", function() {
+      history.pushState(null, "", location.href);
+      window.addEventListener("popstate", function() {
+        history.pushState(null, "", location.href);
+      });
+    });
+
+    // Seguridad extra: si por alguna razón intenta volver, redirige al mismo index
+    window.addEventListener("pageshow", function(event) {
+      if (event.persisted) {
+        window.location.replace("index.html");
+      }
+    });
+  })();
 </script>
+
 
 
 
