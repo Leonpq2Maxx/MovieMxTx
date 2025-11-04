@@ -436,8 +436,7 @@
   background: #f6121d;
 }
 
-
-/* 💎 Barra de progreso estilo "Neón líquido celeste" */
+/* 💎 Barra de progreso estilo "Neón líquido celeste" */
 .plyr__progress input[type="range"] {
   height: 5px;
   border-radius: 999px;
@@ -551,18 +550,14 @@
 document.addEventListener('DOMContentLoaded', () => {
   const loader = document.getElementById('loader-screen');
   const continueModal = document.getElementById('continue-modal');
-  if (continueModal) continueModal.style.display = 'none';
+  if (continueModal) continueModal.style.display = 'none'; // Ocultamos modal al inicio
 
-  // Espera a que todas las imágenes (y el resto del contenido visual) terminen de cargar
-  window.addEventListener('load', () => {
-    // Pequeño retardo opcional de 1 segundo para suavizar
+  setTimeout(() => {
+    loader.classList.add('hidden');
     setTimeout(() => {
-      loader.classList.add('hidden');
-      setTimeout(() => {
-        if (continueModal) continueModal.style.display = '';
-      }, 1200);
-    }, 1000);
-  });
+      if (continueModal) continueModal.style.display = ''; // Mostrar después del fade
+    }, 1200);
+  }, 10000); // 10 segundos
 });
 </script>
 <!-- 🔴 Fin pantalla de carga neón -->
@@ -591,8 +586,8 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 .player-spinner {
-  width: 43px;
-  height: 43px;
+  width: 60px;
+  height: 60px;
   border: 5px solid #222;
   border-top: 5px solid #ff007f;
   border-bottom: 5px solid #00aaff;
@@ -607,7 +602,7 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 .player-loading-text {
-  font-size: 0.80rem;
+  font-size: 1.2rem;
   color: #fff;
   text-align: center;
   font-weight: 600;
@@ -655,8 +650,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Ocultar cuando está listo o reproduce
     video.addEventListener('canplay', hideLoader);
-    video.addEventListener('loadeddata', hideLoader);
-    video.addEventListener('playing', hideLoader);
     video.addEventListener('playing', hideLoader);
     video.addEventListener('pause', hideLoader);
     video.addEventListener('ended', hideLoader);
@@ -698,6 +691,7 @@ document.addEventListener('DOMContentLoaded', () => {
       </svg>
       <span>1080P</span>
     </div>
+    <span>🇲🇽</span>
   </div>
   
   <div class="info-pelicula">
@@ -711,14 +705,6 @@ document.addEventListener('DOMContentLoaded', () => {
     <p class="sinopsis">
       Cinco prisioneras forjan un vínculo único después de un accidente mortal... hasta que la corrupción y las guerras territoriales dentro de una prisión despiadada amenazan con destruirlas.
     </p>
-
-    <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
-      <p><strong>Director:</strong> </p>
-      <p><strong>Reparto:</strong> </p>
-      <p><strong>Estreno:</strong> 00/00/0000 | <strong>Idioma:</strong> Argentino </p>
-    </div>
-  
-    <br>
   
     <div class="acciones">
       <button id="btn-favorito">⭐ Agregar a Favoritos</button>
