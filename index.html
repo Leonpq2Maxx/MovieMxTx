@@ -551,46 +551,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 <!--CODIGO BLOQUEAR RETROCESO-->
-<script>
-(function() {
-  // ✅ Bloquea retroceso sin generar cargas fantasmas
-  let ignorePop = false;
-
-  function lockBack() {
-    if (!ignorePop) {
-      ignorePop = true;
-      history.pushState(null, null, location.href);
-      setTimeout(() => (ignorePop = false), 50);
-    }
-  }
-
-  // Inicial: empuja una sola vez
-  history.pushState(null, null, location.href);
-
-  // Captura el retroceso y evita recarga visual
-  window.addEventListener("popstate", (event) => {
-    lockBack();
-  });
-
-  // Evita que al volver desde caché se vea como recarga
-  window.addEventListener("pageshow", (event) => {
-    if (event.persisted) {
-      lockBack();
-    }
-  });
-
-  // Bloquea tecla "Atrás" física en Android y backspace fuera de inputs
-  document.addEventListener("keydown", (e) => {
-    const tag = e.target.tagName.toLowerCase();
-    if (e.key === "Backspace" && tag !== "input" && tag !== "textarea") {
-      e.preventDefault();
-    }
-  });
-})();
-</script>
-
-
-
 
 
     
