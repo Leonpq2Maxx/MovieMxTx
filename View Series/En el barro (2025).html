@@ -463,19 +463,12 @@
 
 <body ondragstart="return false;" ondrop="return false;">
 
- <script>
-// 🔙 Si el usuario presiona "Atrás" en una película, vuelve al index
-window.history.pushState(null, null, window.location.href);
-window.addEventListener("popstate", function () {
-  window.location.replace("../index.html");
-});
-</script>
 
-  <!-- 🔴 Pantalla de carga personalizada MovieTx (versión neón) -->
+<!-- 🔴 Pantalla de carga personalizada MovieTx (versión neón) -->
 <div id="loader-screen">
   <div class="loader-content">
     <div class="loader-circle">
-      <img src="../Logo Poster MovieTx PNG/Logo MovieTx.png" alt="Logo MovieTx" class="loader-logo">
+      <img src="Logo MovieTx.png" alt="Logo MovieTx" class="loader-logo">
     </div>
     <h1 class="loader-title">MovieTx</h1>
     <p class="loader-sub">Cargando<span class="loading-dots"></span></p>
@@ -571,11 +564,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 1000);
   });
 });
-
 </script>
 <!-- 🔴 Fin pantalla de carga neón -->
+
   
- <style>
+    <style>
 #video-container {
   position: relative;
   overflow: hidden;
@@ -598,8 +591,8 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 .player-spinner {
-  width: 43px; /*circulo de carga de reproductor estaba en 60*/
-  height: 43px; /*circulo de carga de reproductor estaba en 60*/
+  width: 43px;
+  height: 43px;
   border: 5px solid #222;
   border-top: 5px solid #ff007f;
   border-bottom: 5px solid #00aaff;
@@ -614,7 +607,7 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 .player-loading-text {
-  font-size: 0.80rem; /*agrandar o achicar letra de cargando en el reproductor (estaba en 1.2)*/
+  font-size: 0.80rem;
   color: #fff;
   text-align: center;
   font-weight: 600;
@@ -632,13 +625,11 @@ document.addEventListener('DOMContentLoaded', () => {
   75% { content: '...'; }
   100% { content: ''; }
 }
-  
-  
 </style>
 
 <script>
   
-  // este es de Fullscreen //
+  <!-- Esste es el icono de pantalla grande -->
   document.addEventListener('DOMContentLoaded', () => {
   const fsBtn = document.querySelector('.plyr__control[data-plyr="fullscreen"]');
   if (fsBtn) {
@@ -674,10 +665,10 @@ document.addEventListener('DOMContentLoaded', () => {
     
   <div class="player">
     <!-- 🔵 Loader dentro del reproductor -->
-     <div id="player-loader">
-      <div class="player-spinner"></div>
-      <p class="player-loading-text">Cargando<span class="dots"></span></p>
-    </div>
+<div id="player-loader">
+  <div class="player-spinner"></div>
+  <p class="player-loading-text">Cargando<span class="dots"></span></p>
+</div>
 
     <video class="vid1 js-player" controls loading="lazy" poster="https://image.tmdb.org/t/p/w780/bxPELhUZNgbFUN31EZTBC99wOHD.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
       <source src="" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
@@ -705,6 +696,7 @@ document.addEventListener('DOMContentLoaded', () => {
       </svg>
       <span>1080P</span>
     </div>
+    <span>🇲🇽</span>
   </div>
   
   <div class="info-pelicula">
@@ -718,14 +710,6 @@ document.addEventListener('DOMContentLoaded', () => {
     <p class="sinopsis">
       Cinco prisioneras forjan un vínculo único después de un accidente mortal... hasta que la corrupción y las guerras territoriales dentro de una prisión despiadada amenazan con destruirlas.
     </p>
-
-    <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
-      <p><strong>Director:</strong> Sebastián Ortega</p>
-      <p><strong>Reparto:</strong> Ana Garibaldi, Valentina Zenere, Rita Cortese</p>
-      <p><strong>Estreno:</strong> 14/08/2025 | <strong>Idioma:</strong> Argentino 🇦🇷</p>
-    </div>
-
-    <br>
   
     <div class="acciones">
       <button id="btn-favorito">⭐ Agregar a Favoritos</button>
