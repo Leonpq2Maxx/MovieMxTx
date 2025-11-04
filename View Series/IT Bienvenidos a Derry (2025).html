@@ -657,10 +657,34 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
   
+document.addEventListener('DOMContentLoaded', () => {
+  const video = document.querySelector('video');
+  const loader = document.getElementById('player-loader');
+  
+  if (video && loader) {
+    const showLoader = () => loader.style.display = 'flex';
+    const hideLoader = () => loader.style.display = 'none';
+    
+    // Mostrar cuando el video se está cargando o bufferizando
+    video.addEventListener('loadstart', showLoader);
+    video.addEventListener('waiting', showLoader);
+    
+    // Ocultar cuando está listo o reproduce
+    video.addEventListener('canplay', hideLoader);
+    video.addEventListener('playing', hideLoader);
+    video.addEventListener('pause', hideLoader);
+    video.addEventListener('ended', hideLoader);
+  }
+});
 </script>
 
     
   <div class="player">
+    <!-- 🔵 Loader dentro del reproductor -->
+     <div id="player-loader">
+      <div class="player-spinner"></div>
+      <p class="player-loading-text">Cargando<span class="dots"></span></p>
+    </div>
 
     <video class="vid1 js-player" controls loading="lazy" poster="https://image.tmdb.org/t/p/w780/bZ7M9hqVoUZA0ySN3Ppdg5BE2wI.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
       <source src="" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
