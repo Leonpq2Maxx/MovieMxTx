@@ -643,6 +643,21 @@ document.addEventListener('DOMContentLoaded', () => {
   
 </style>
 
+<script>
+  
+  // este es de Fullscreen //
+  document.addEventListener('DOMContentLoaded', () => {
+  const fsBtn = document.querySelector('.plyr__control[data-plyr="fullscreen"]');
+  if (fsBtn) {
+    fsBtn.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="white" stroke-width="2">
+        <path d="M4 4h6M4 4v6M20 4h-6M20 4v6M4 20h6M4 20v-6M20 20h-6M20 20v-6"/>
+      </svg>
+    `;
+  }
+});
+  
+</script>
 
     
   <div class="player">
