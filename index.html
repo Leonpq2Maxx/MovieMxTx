@@ -552,26 +552,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <!--CODIGO BLOQUEAR RETROCESO-->
 <script>
-  // 🔒 BLOQUEAR RETROCESO DESDE INDEX (PC + MÓVIL)
+  // 🔒 Bloquear retroceso completamente desde index
   (function() {
-    // Empuja una entrada falsa al historial
+    // Inserta una entrada vacía en el historial
     history.pushState(null, "", location.href);
 
-    // Cuando el usuario intenta retroceder
+    // Evita retroceso en navegadores (PC y móvil)
     window.onpopstate = function() {
-      // Lo volvemos a empujar al mismo lugar
       history.pushState(null, "", location.href);
     };
 
-    // Evita retroceso con tecla "Backspace" cuando no está en un campo editable
-    document.addEventListener("keydown", function(e) {
-      const tag = e.target.tagName.toLowerCase();
-      if (e.key === "Backspace" && tag !== "input" && tag !== "textarea") {
-        e.preventDefault();
-      }
-    });
-
-    // Bloquea el botón físico de retroceso en móviles
+    // Previene el botón físico "atrás" en Android
     window.addEventListener("load", function() {
       history.pushState(null, "", location.href);
       window.addEventListener("popstate", function() {
@@ -579,14 +570,23 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Seguridad extra: si por alguna razón intenta volver, redirige al mismo index
+    // Evita recargas fantasma (cuando vuelve desde caché)
     window.addEventListener("pageshow", function(event) {
       if (event.persisted) {
-        window.location.replace("index.html");
+        history.pushState(null, "", location.href);
+      }
+    });
+
+    // Bloquea la tecla Backspace si no está en un campo editable
+    document.addEventListener("keydown", function(e) {
+      const tag = e.target.tagName.toLowerCase();
+      if (e.key === "Backspace" && tag !== "input" && tag !== "textarea") {
+        e.preventDefault();
       }
     });
   })();
 </script>
+
 
 
 
