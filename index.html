@@ -552,39 +552,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <!--CODIGO BLOQUEAR RETROCESO-->
 <script>
-  // 🔒 Bloquear retroceso completamente desde index
-  (function() {
-    // Inserta una entrada vacía en el historial
-    history.pushState(null, "", location.href);
+(function() {
+  // ✅ Bloquea retroceso sin generar cargas fantasmas
+  let ignorePop = false;
 
-    // Evita retroceso en navegadores (PC y móvil)
-    window.onpopstate = function() {
-      history.pushState(null, "", location.href);
-    };
+  function lockBack() {
+    if (!ignorePop) {
+      ignorePop = true;
+      history.pushState(null, null, location.href);
+      setTimeout(() => (ignorePop = false), 50);
+    }
+  }
 
-    // Previene el botón físico "atrás" en Android
-    window.addEventListener("load", function() {
-      history.pushState(null, "", location.href);
-      window.addEventListener("popstate", function() {
-        history.pushState(null, "", location.href);
-      });
-    });
+  // Inicial: empuja una sola vez
+  history.pushState(null, null, location.href);
 
-    // Evita recargas fantasma (cuando vuelve desde caché)
-    window.addEventListener("pageshow", function(event) {
-      if (event.persisted) {
-        history.pushState(null, "", location.href);
-      }
-    });
+  // Captura el retroceso y evita recarga visual
+  window.addEventListener("popstate", (event) => {
+    lockBack();
+  });
 
-    // Bloquea la tecla Backspace si no está en un campo editable
-    document.addEventListener("keydown", function(e) {
-      const tag = e.target.tagName.toLowerCase();
-      if (e.key === "Backspace" && tag !== "input" && tag !== "textarea") {
-        e.preventDefault();
-      }
-    });
-  })();
+  // Evita que al volver desde caché se vea como recarga
+  window.addEventListener("pageshow", (event) => {
+    if (event.persisted) {
+      lockBack();
+    }
+  });
+
+  // Bloquea tecla "Atrás" física en Android y backspace fuera de inputs
+  document.addEventListener("keydown", (e) => {
+    const tag = e.target.tagName.toLowerCase();
+    if (e.key === "Backspace" && tag !== "input" && tag !== "textarea") {
+      e.preventDefault();
+    }
+  });
+})();
 </script>
 
 
