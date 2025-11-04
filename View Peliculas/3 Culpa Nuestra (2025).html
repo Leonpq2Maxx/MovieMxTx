@@ -414,24 +414,17 @@
 
 <body ondragstart="return false;" ondrop="return false;">
 <script>
-(function() {
-  // Bloquea completamente el retroceso normal
-  let bloqueando = false;
-  history.pushState(null, "", location.href);
+  // Código único por página
+  const codigoPagina = "CULPANUESTRA2025";
 
-  window.addEventListener("popstate", (e) => {
-    if (bloqueando) return;
-    bloqueando = true;
-    // Siempre redirige al index, nunca a la anterior
-    location.replace("../index.html");
-  });
-
-  // Previene volver desde caché (iOS/Safari)
-  window.addEventListener("pageshow", (event) => {
-    if (event.persisted) location.replace("../index.html");
-  });
-})();
+  // Cuando el usuario intente retroceder
+  window.history.pushState(null, "", window.location.href);
+  window.onpopstate = function() {
+    // Redirige al index sin permitir retroceso
+    window.location.replace("../index.html");
+  };
 </script>
+
 
 
 
