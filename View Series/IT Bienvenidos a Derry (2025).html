@@ -662,7 +662,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const loader = document.getElementById('player-loader');
   
   if (video && loader) {
-    const showLoader = () => loader.style.display = 'flex';
+    const showLoader = () => {
+      // Solo mostrar si el video tiene un src real
+      if (video.currentSrc && video.currentSrc.trim() !== "") {
+        loader.style.display = 'flex';
+      }
+    };
     const hideLoader = () => loader.style.display = 'none';
     
     // Mostrar cuando el video se está cargando o bufferizando
@@ -676,6 +681,7 @@ document.addEventListener('DOMContentLoaded', () => {
     video.addEventListener('ended', hideLoader);
   }
 });
+
 </script>
 
     
