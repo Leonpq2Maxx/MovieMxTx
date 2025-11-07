@@ -1831,7 +1831,6 @@ closeModalX.addEventListener('click', () => {
         season.episodes = (season.episodes || []).map(ep => {
           // mantener valores existentes pero añadir defaults
           ep.thumb = ep.thumb && ep.thumb.trim() ? ep.thumb : DEFAULT_EP_THUMB;
-          ep.desc = ep.desc && ep.desc.trim() ? ep.desc : (ep.description || ep.overview || "Sin sinopsis disponible.");
           // durationSeconds: si ya existe mantener, si no intentar parsear ep.time como '45m'
           if (!ep.durationSeconds) {
             if (ep.durationSeconds === 0) ep.durationSeconds = 0;
@@ -2206,11 +2205,9 @@ closeModalX.addEventListener('click', () => {
         card.className='episode-card';
         if(ultimo&&ultimo.id===ep.id)card.classList.add('viendo');
         card.innerHTML=`
-          <div class="ep-thumb" style="background-image:url('${ep.thumb||'https://image.tmdb.org/t/p/original/2fOKVDoc2O3eZmBZesWPuE5kgPN.jpg'}');"></div>
           <div class="ep-meta">
             <div class="ep-title">${ep.title}</div>
             <div class="ep-time">${ep.time||''}</div>
-            <div class="ep-desc">${ep.desc||'Sinopsis no disponible.'}</div>
             <div class="ep-progress ${percent>0&&!prog.completed?'':'hidden'}" data-epid="${ep.id}">
               <div class="ep-progress-fill" style="width:${percent}%" data-epid="${ep.id}"></div>
             </div>
@@ -2294,7 +2291,6 @@ closeModalX.addEventListener('click', () => {
           <div class="ep-meta">
             <div class="ep-title">${ep.title}</div>
             <div class="ep-time">${ep.time||''}</div>
-            <div class="ep-desc">${ep.desc||'Sinopsis no disponible.'}</div>
             <div class="ep-progress ${percent>0&&!prog.completed?'':'hidden'}" data-epid="${ep.id}">
               <div class="ep-progress-fill" style="width:${percent}%" data-epid="${ep.id}"></div>
             </div>
@@ -2381,7 +2377,6 @@ closeModalX.addEventListener('click', () => {
           <div class="ep-meta">
             <div class="ep-title">${ep.title}</div>
             <div class="ep-time">${ep.time||''}</div>
-            <div class="ep-desc">${ep.desc||'Sinopsis no disponible.'}</div>
             <div class="ep-progress ${percent>0&&!prog.completed?'':'hidden'}" data-epid="${ep.id}">
               <div class="ep-progress-fill" style="width:${percent}%" data-epid="${ep.id}"></div>
               <div class="ep-progress-label" data-epid="${ep.id}">${percent}%</div>
@@ -2471,7 +2466,6 @@ closeModalX.addEventListener('click', () => {
           <div class="ep-meta">
             <div class="ep-title">${escapeHtml(ep.title)}</div>
             <div class="ep-time">${escapeHtml(ep.time||'')}</div>
-            <div class="ep-desc">${escapeHtml(ep.desc||'Sinopsis no disponible.')}</div>
 
             <div class="progress-row">
               <div class="ep-progress ${percent>0 && !prog.completed ? '' : 'hidden'}" data-epid="${ep.id}">
