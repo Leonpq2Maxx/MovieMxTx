@@ -635,7 +635,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <p class="player-loading-text">Cargando<span class="dots"></span></p>
     </div>
 
-    <video class="vid1 js-player" controls loading="lazy"poster="https://cinenacional.com/wp-content/uploads/2025/02/unnamed-7.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+    <video class="vid1 js-player" controls loading="lazy"poster="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRM6cZTgkPls3nj8-hu3mV9lwVvTSz4-gP1Gg&s" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
       <source src="https://dl.dropbox.com/scl/fi/hztorlebywiaqdapqabky/Cantar-Desnuda-2025.mp4?rlkey=2k9g57uwrkw3pvlbbk871fpp9&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
@@ -1284,7 +1284,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const player = new Plyr(videoElement, {
       controls: [
         'rewind', 'play-large', 'play', 'fast-forward',
-        'progress', 'current-time', 'duration', 'mute', 'volume',
+        'progress', 'current-time', 'duration', 'download', 'mute', 'volume',
         'captions', 'pip', 'airplay', 'fullscreen'
       ]
     });
@@ -1399,6 +1399,7 @@ player.on('play', () => {
         imagen: historialImagen,
         progreso: "Asistido 0 min",
         archivo: historialArchivo,
+        adulto: true,
         tipo: "pelicula", // ✅ ya está
         timestamp: Date.now()
       });
