@@ -635,8 +635,8 @@ document.addEventListener('DOMContentLoaded', () => {
       <p class="player-loading-text">Cargando<span class="dots"></span></p>
     </div>
 
-    <video class="vid1 js-player" loading="lazy" controls poster="https://image.tmdb.org/t/p/w780/b80Ql0yP3lushkYpv4zgS93yfdJ.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
-      <source src="https://dl.dropbox.com/scl/fi/lm34v9ne3qvjrjwnun40r/Al-rescate-a-fondo-de-bikini-arenita-2025-Mp4.mp4?rlkey=q1ipsn1xgcv2ymf9z6vas6ch4&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
+    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/f0ACHVpV707zqu4etZrXnWNdSgL.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+      <source src="https://dl.dropbox.com/scl/fi/iwe0m4idth0uvdpybb5r2/The.beekeeper.2024.1080p-dual-lat-cinecalidad.re.mp4?rlkey=2i1slz9vebdlhq0re9oh99u8m&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
   <div id="episodio-actual" style="
@@ -645,13 +645,12 @@ document.addEventListener('DOMContentLoaded', () => {
   font-size:1rem;
   font-weight:bold;
   color:#ff2d5b;
-"></div>
-
+"></div> 
 
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>2024</span> <!--Aca va el año de estreno de pelicula-->
-    <i class="fal fa-clock"></i><span>1h 26min</span> <!--aca va cuanto dura-->
-    <i class="fal fa-thumbs-up"></i><span>69%</span> <!--aca va la calificacion-->
+    <i class="fal fa-calendar-alt"></i><span>2024</span>
+    <i class="fal fa-clock"></i><span>1h 45min</span>
+    <i class="fal fa-thumbs-up"></i><span>75%</span>
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
@@ -659,20 +658,23 @@ document.addEventListener('DOMContentLoaded', () => {
       </svg>
       <span>1080P</span>
     </div>
+    <span></span>
+    </div>
+
   </div>
   
   <div class="info-pelicula">
-    <h1>Al rescate de fondo de Bikini: La película de Arenita Mejillas</h1>
-  <span class="genero-badge">Animacio • Familia • Aventura • Comedia</span>
+    <h1>Sentencia de muerte</h1>
+  <span class="genero-badge">Accion • Crimen • Suspenso</span>
   
     <p class="sinopsis">
-      Cuando Fondo de Bikini es arrastrado fuera del mar, la ardilla científica Arenita Mejillas y su amigo Bob Esponja se embarcan rumbo a Texas para salvar su ciudad.
-    </p></p>
+      La brutal campaña de venganza de Adam Clay adquiere tintes nacionales tras revelarse que es un antiguo agente de una poderosa organización clandestina conocida como "Beekeeper".
+    </p>
 
     <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
-      <p><strong>Director:</strong> Liza Johnson</p>
-      <p><strong>Reparto:</strong> Matty Cardarople, Bill Fagerbakke, Jill Talley</p>
-      <p><strong>Estreno:</strong> 02/08/2024 | <strong>Idioma:</strong> Español Latino 🇲🇽</p>
+      <p><strong>Director:</strong> </p>
+      <p><strong>Reparto:</strong> </p>
+      <p><strong>Estreno:</strong> 00/00/0000 | <strong>Idioma:</strong> Epañol Latino 🇲🇽</p>
     </div>
 
     <br>
@@ -758,7 +760,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const continueInfo = document.getElementById('continue-info');
   const videoElement = document.querySelector('video');
 
-  const MOVIE_KEY = 'Al_Rescate_De_Fondo_De_Bikini_2024'; /*Aca siempre con un _ para guardar su progresos etc...*/
+  const MOVIE_KEY = 'Sentencia_De_Muerte_2024'; /*Aca siempre con un _ para guardar su progresos etc...*/
   const ultimoTiempo = localStorage.getItem(`ultimoTiempo_${MOVIE_KEY}`) || 0;
 
   // 🔹 Mostrar modal si hay progreso guardado
@@ -916,10 +918,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 🔹 Botón "Agregar a Favoritos"
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
-      titulo: "Al rescate de Fondo de Bikini",
-      imagen: "https://image.tmdb.org/t/p/w300/7WfWEy1EIJj4nLR6PdE6A09TcOv.jpg",
-      genero: "Animacion",
-      archivo: "Al rescate de Fondo de Bikini La película de Arenita Mejillas (2024).html",
+      titulo: "Beekeeper: Sentencia de muerte",
+      imagen: "https://image.tmdb.org/t/p/w300/8hF8krJOG9SGMCwRNfzjsFVRcHE.jpg",
+      genero: "Accion",
+      archivo: "Beekeeper Sentencia de muerte (2024).html",
       tipo: "pelicula",
       timestamp: Date.now()
     };
@@ -1025,29 +1027,29 @@ document.addEventListener('DOMContentLoaded', () => {
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
-      <a href="Bob Esponja 1 La película (2004).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/CtISczftMz6g7kyk5uLxBben8b.jpg" alt="">
-        <p>Bob Esponja: La película</p>
+      <a href="Bala perdida 3 (2025).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/bSGXolaGLJZxueTXxEE2WsgEoNh.jpg" alt="">
+        <p>La bala perdida 3</p>
       </a>
-     <a href="Bob Esponja 2 Un héroe fuera del agua (2015).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/z5aphafm6OEcAq4jwOs5Ml9F384.jpg" alt="">
-        <p>Bob Esponja: Un héroe fuera del agua</p>
+      <a href="Duro de entrenar (2023).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/eA6FztxHGs43AS6v1TF7PwugEXQ.jpg" alt="">
+        <p>Duro de entrenar</p>
       </a>
-      <a href="Bob Esponja 3 Un héroe al rescate (2020).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/fi2pg2mtAZwhq3qVuAs6PztjnHT.jpg" alt="">
-        <p>Bob Esponja: Un héroe al rescate (2020)</p>
+      <a href="El planeta de los simios 2 Confrontacion (2014).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/yJXtXz8MFMeIfdoUHWjzTEuOhmK.jpg" alt="">
+        <p>El planeta de los simios: Confrontacion</p>
       </a>
-      <a href="Plankton (2025).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/fCvwQJVcbjNub2PiKzZmQXR7i1I.jpg" alt="">
-        <p>Plankton</p>
+      <a href="Extraterritorial (2025).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/7tWkxxiqraVx1IzYd4DHv6FIvhS.jpg" alt="">
+        <p>Extraterritorial</p>
       </a>
-      <a href="Super Mario Bros La Película (2023).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg" alt="">
-        <p>Super Mario Bros: La película</p>
+      <a href="Uncharted (2022).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/77dlklwA1VJOLCqIhhmkmS39BLH.jpg" alt="">
+        <p>Uncharted: Fuera Del Mapa</p>
       </a>
-      <a href="Spider-Man Un nuevo universo (2023).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/lWEUafLv3z00YB70ZInXLNnWRik.jpg" alt="">
-        <p>Spider-Man: Un nuevo universo</p>
+      <a href="Bad boys 1 Dos policías rebeldes (1995).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/ZYpSdXaTMFYCGbmVmXOFbdJmSv.jpg" alt="">
+        <p>Bad Boys: Dos policias rebeldes</p>
       </a>
     </div>
   </div>
@@ -1175,9 +1177,9 @@ player.on('play', () => {
       const STORAGE_KEY = 'pos_' + videoSrc;
 
       /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
-      const historialTitulo = "Al rescate de fondo de Bikini";
-      const historialImagen = "https://image.tmdb.org/t/p/w300/7WfWEy1EIJj4nLR6PdE6A09TcOv.jpg";
-      const historialArchivo = "Al rescate de Fondo de Bikini La película de Arenita Mejillas (2024).html";
+      const historialTitulo = "Beekeeper: Sentencia de muerte (2024)";
+      const historialImagen = "https://image.tmdb.org/t/p/w300/8hF8krJOG9SGMCwRNfzjsFVRcHE.jpg";
+      const historialArchivo = "Beekeeper Sentencia de muerte (2024).html";
 
       let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
       let indexHist = historial.findIndex(item => item.titulo === historialTitulo);

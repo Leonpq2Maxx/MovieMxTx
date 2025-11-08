@@ -635,8 +635,8 @@ document.addEventListener('DOMContentLoaded', () => {
       <p class="player-loading-text">Cargando<span class="dots"></span></p>
     </div>
 
-    <video class="vid1 js-player" loading="lazy" controls poster="https://image.tmdb.org/t/p/w780/b80Ql0yP3lushkYpv4zgS93yfdJ.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
-      <source src="https://dl.dropbox.com/scl/fi/lm34v9ne3qvjrjwnun40r/Al-rescate-a-fondo-de-bikini-arenita-2025-Mp4.mp4?rlkey=q1ipsn1xgcv2ymf9z6vas6ch4&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
+    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/tyfO9jHgkhypUFizRVYD0bytPjP.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+      <source src="https://dl.dropbox.com/scl/fi/alva123qrguovepzjw5mx/Blancanieves-2025.mp4?rlkey=xw3lhr9c1t7iuj9h6ue32c98d&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
   <div id="episodio-actual" style="
@@ -649,9 +649,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>2024</span> <!--Aca va el año de estreno de pelicula-->
-    <i class="fal fa-clock"></i><span>1h 26min</span> <!--aca va cuanto dura-->
-    <i class="fal fa-thumbs-up"></i><span>69%</span> <!--aca va la calificacion-->
+    <i class="fal fa-calendar-alt"></i><span>2025</span>
+    <i class="fal fa-clock"></i><span>1h 39min</span>
+    <i class="fal fa-thumbs-up"></i><span>80%</span>
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
@@ -659,20 +659,21 @@ document.addEventListener('DOMContentLoaded', () => {
       </svg>
       <span>1080P</span>
     </div>
+
   </div>
   
   <div class="info-pelicula">
-    <h1>Al rescate de fondo de Bikini: La película de Arenita Mejillas</h1>
-  <span class="genero-badge">Animacio • Familia • Aventura • Comedia</span>
+    <h1>Blancanieves</h1>
+  <span class="genero-badge">Animacion • Disney • Fantasia • Familia</span>
   
     <p class="sinopsis">
-      Cuando Fondo de Bikini es arrastrado fuera del mar, la ardilla científica Arenita Mejillas y su amigo Bob Esponja se embarcan rumbo a Texas para salvar su ciudad.
-    </p></p>
+      Tras la desaparición del benévolo Rey, la Reina Malvada dominó la otrora bella tierra con una vena cruel. La princesa Blancanieves huye del castillo cuando la Reina, celosa de su belleza interior, intenta matarla. En lo profundo del oscuro bosque, se topa con siete enanos mágicos y un joven bandido llamado Jonathan. Juntos, luchan por sobrevivir a la implacable persecución de la Reina y aspiran a recuperar el reino en el proceso.
+    </p>
 
     <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
-      <p><strong>Director:</strong> Liza Johnson</p>
-      <p><strong>Reparto:</strong> Matty Cardarople, Bill Fagerbakke, Jill Talley</p>
-      <p><strong>Estreno:</strong> 02/08/2024 | <strong>Idioma:</strong> Español Latino 🇲🇽</p>
+      <p><strong>Director:</strong> </p>
+      <p><strong>Reparto:</strong> </p>
+      <p><strong>Estreno:</strong> 00/00/0000 | <strong>Idioma:</strong> ------🇲🇽</p>
     </div>
 
     <br>
@@ -758,7 +759,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const continueInfo = document.getElementById('continue-info');
   const videoElement = document.querySelector('video');
 
-  const MOVIE_KEY = 'Al_Rescate_De_Fondo_De_Bikini_2024'; /*Aca siempre con un _ para guardar su progresos etc...*/
+  const MOVIE_KEY = 'Blanca_Nieves_2025'; /*Aca siempre con un _ para guardar su progresos etc...*/
   const ultimoTiempo = localStorage.getItem(`ultimoTiempo_${MOVIE_KEY}`) || 0;
 
   // 🔹 Mostrar modal si hay progreso guardado
@@ -916,10 +917,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 🔹 Botón "Agregar a Favoritos"
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
-      titulo: "Al rescate de Fondo de Bikini",
-      imagen: "https://image.tmdb.org/t/p/w300/7WfWEy1EIJj4nLR6PdE6A09TcOv.jpg",
-      genero: "Animacion",
-      archivo: "Al rescate de Fondo de Bikini La película de Arenita Mejillas (2024).html",
+      titulo: "Blancanieves",
+      imagen: "https://image.tmdb.org/t/p/w300/7FZhpH4YasGdvY4FUGQJhCusLeg.jpg",
+      genero: "Disney",
+      archivo: "Blancanieves (2025).html",
       tipo: "pelicula",
       timestamp: Date.now()
     };
@@ -1025,29 +1026,29 @@ document.addEventListener('DOMContentLoaded', () => {
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
-      <a href="Bob Esponja 1 La película (2004).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/CtISczftMz6g7kyk5uLxBben8b.jpg" alt="">
-        <p>Bob Esponja: La película</p>
+      <a href="Blancanieves y los siete enanitos (1938).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/wdA4lphQwywsPcEKj5sgQ9QSR55.jpg" alt="">
+        <p>Blancanieves y los siete enanitos</p>
       </a>
-     <a href="Bob Esponja 2 Un héroe fuera del agua (2015).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/z5aphafm6OEcAq4jwOs5Ml9F384.jpg" alt="">
-        <p>Bob Esponja: Un héroe fuera del agua</p>
+      <a href="Bambi: Una aventura en el bosque (2025).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/fvtIXQH4JcifptPe0J9GfLDIOAQ.jpg" alt="">
+        <p>Bambi: Una aventura en el bosque</p>
       </a>
-      <a href="Bob Esponja 3 Un héroe al rescate (2020).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/fi2pg2mtAZwhq3qVuAs6PztjnHT.jpg" alt="">
-        <p>Bob Esponja: Un héroe al rescate (2020)</p>
+      <a href="Elemental (2023).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/8riWcADI1ekEiBguVB9vkilhiQm.jpg" alt="">
+        <p>Elemental</p>
       </a>
-      <a href="Plankton (2025).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/fCvwQJVcbjNub2PiKzZmQXR7i1I.jpg" alt="">
-        <p>Plankton</p>
+      <a href="Pinocho (1940).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/sAluF7lNc4Mv3qxx1mmOgsfbr0C.jpg" alt="">
+        <p>Pinocho</p>
       </a>
-      <a href="Super Mario Bros La Película (2023).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg" alt="">
-        <p>Super Mario Bros: La película</p>
+      <a href="Wish El poder de los deseos (2023).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/rCCrG4swkxgFZflup56sx6ymk5i.jpg" alt="">
+        <p>Wish: El Poder De Los Deseos</p>
       </a>
-      <a href="Spider-Man Un nuevo universo (2023).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/lWEUafLv3z00YB70ZInXLNnWRik.jpg" alt="">
-        <p>Spider-Man: Un nuevo universo</p>
+      <a href="El gato con botas (2011).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/1VmrC82zY4U33l9UHlZTWDB1asN.jpg" alt="">
+        <p>El gato con botas</p>
       </a>
     </div>
   </div>
@@ -1175,9 +1176,9 @@ player.on('play', () => {
       const STORAGE_KEY = 'pos_' + videoSrc;
 
       /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
-      const historialTitulo = "Al rescate de fondo de Bikini";
-      const historialImagen = "https://image.tmdb.org/t/p/w300/7WfWEy1EIJj4nLR6PdE6A09TcOv.jpg";
-      const historialArchivo = "Al rescate de Fondo de Bikini La película de Arenita Mejillas (2024).html";
+      const historialTitulo = "Blancanieves";
+      const historialImagen = "https://image.tmdb.org/t/p/w300/7FZhpH4YasGdvY4FUGQJhCusLeg.jpg";
+      const historialArchivo = "Blancanieves (2025).html";
 
       let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
       let indexHist = historial.findIndex(item => item.titulo === historialTitulo);

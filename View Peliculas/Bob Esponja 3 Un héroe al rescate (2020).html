@@ -635,8 +635,8 @@ document.addEventListener('DOMContentLoaded', () => {
       <p class="player-loading-text">Cargando<span class="dots"></span></p>
     </div>
 
-    <video class="vid1 js-player" loading="lazy" controls poster="https://image.tmdb.org/t/p/w780/b80Ql0yP3lushkYpv4zgS93yfdJ.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
-      <source src="https://dl.dropbox.com/scl/fi/lm34v9ne3qvjrjwnun40r/Al-rescate-a-fondo-de-bikini-arenita-2025-Mp4.mp4?rlkey=q1ipsn1xgcv2ymf9z6vas6ch4&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
+    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/wu1uilmhM4TdluKi2ytfz8gidHf.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+      <source src="https://dl.dropbox.com/scl/fi/kqyva7e33se5cmxe8zgme/The.spongebob.movie.sponge.on.the.run.2020.1080p-dual-lat-cinecalidad.is.mp4?rlkey=d7ab7cve2mus26ve8yr4iwupe&st" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
   <div id="episodio-actual" style="
@@ -649,9 +649,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>2024</span> <!--Aca va el año de estreno de pelicula-->
-    <i class="fal fa-clock"></i><span>1h 26min</span> <!--aca va cuanto dura-->
-    <i class="fal fa-thumbs-up"></i><span>69%</span> <!--aca va la calificacion-->
+    <i class="fal fa-calendar-alt"></i><span>2020</span>
+    <i class="fal fa-clock"></i><span>1h 35min</span>
+    <i class="fal fa-thumbs-up"></i><span>74%</span>
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
@@ -659,20 +659,21 @@ document.addEventListener('DOMContentLoaded', () => {
       </svg>
       <span>1080P</span>
     </div>
+    <span></span>
   </div>
   
   <div class="info-pelicula">
-    <h1>Al rescate de fondo de Bikini: La película de Arenita Mejillas</h1>
-  <span class="genero-badge">Animacio • Familia • Aventura • Comedia</span>
+    <h1>Bob Esponja 3: Un héroe al rescate</h1>
+  <span class="genero-badge"> Animación • Aventura • Comedia • Familia</span>
   
     <p class="sinopsis">
-      Cuando Fondo de Bikini es arrastrado fuera del mar, la ardilla científica Arenita Mejillas y su amigo Bob Esponja se embarcan rumbo a Texas para salvar su ciudad.
-    </p></p>
+      Cuando desaparece su amigo Gary, Bob Esponja se embarca en una alocada misión con Patricio muy lejos de Fondo de Bikini para rescatarlo.  
+    </p>
 
     <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
-      <p><strong>Director:</strong> Liza Johnson</p>
-      <p><strong>Reparto:</strong> Matty Cardarople, Bill Fagerbakke, Jill Talley</p>
-      <p><strong>Estreno:</strong> 02/08/2024 | <strong>Idioma:</strong> Español Latino 🇲🇽</p>
+      <p><strong>Director:</strong> </p>
+      <p><strong>Reparto:</strong> </p>
+      <p><strong>Estreno:</strong> 00/00/0000 | <strong>Idioma:</strong> Español Latino 🇲🇽</p>
     </div>
 
     <br>
@@ -758,7 +759,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const continueInfo = document.getElementById('continue-info');
   const videoElement = document.querySelector('video');
 
-  const MOVIE_KEY = 'Al_Rescate_De_Fondo_De_Bikini_2024'; /*Aca siempre con un _ para guardar su progresos etc...*/
+  const MOVIE_KEY = 'Bob_Esponja_Un_Heroe_Al_Rescate_2020'; /*Aca siempre con un _ para guardar su progresos etc...*/
   const ultimoTiempo = localStorage.getItem(`ultimoTiempo_${MOVIE_KEY}`) || 0;
 
   // 🔹 Mostrar modal si hay progreso guardado
@@ -916,10 +917,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 🔹 Botón "Agregar a Favoritos"
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
-      titulo: "Al rescate de Fondo de Bikini",
-      imagen: "https://image.tmdb.org/t/p/w300/7WfWEy1EIJj4nLR6PdE6A09TcOv.jpg",
+      titulo: "Bob Esponja 3: Un héroe al rescate",
+      imagen: "https://image.tmdb.org/t/p/w300/fi2pg2mtAZwhq3qVuAs6PztjnHT.jpg",
       genero: "Animacion",
-      archivo: "Al rescate de Fondo de Bikini La película de Arenita Mejillas (2024).html",
+      archivo: "../View Peliculas/Bob Esponja 3 Un héroe al rescate (2020).html",
       tipo: "pelicula",
       timestamp: Date.now()
     };
@@ -1029,25 +1030,25 @@ document.addEventListener('DOMContentLoaded', () => {
         <img loading="lazy" src="https://image.tmdb.org/t/p/w300/CtISczftMz6g7kyk5uLxBben8b.jpg" alt="">
         <p>Bob Esponja: La película</p>
       </a>
-     <a href="Bob Esponja 2 Un héroe fuera del agua (2015).html" class="serie">
+      <a href="Bob Esponja 2 Un héroe fuera del agua (2015).html" class="serie">
         <img loading="lazy" src="https://image.tmdb.org/t/p/w300/z5aphafm6OEcAq4jwOs5Ml9F384.jpg" alt="">
-        <p>Bob Esponja: Un héroe fuera del agua</p>
+        <p>Bob Esponja 2: Un héroe fuera del agua</p>
       </a>
-      <a href="Bob Esponja 3 Un héroe al rescate (2020).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/fi2pg2mtAZwhq3qVuAs6PztjnHT.jpg" alt="">
-        <p>Bob Esponja: Un héroe al rescate (2020)</p>
+      <a href="Al rescate de Fondo de Bikini La película de Arenita Mejillas (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/7WfWEy1EIJj4nLR6PdE6A09TcOv.jpg" alt="">
+        <p>Al rescate de Fondo de Bikini</p>
       </a>
       <a href="Plankton (2025).html" class="serie">
         <img loading="lazy" src="https://image.tmdb.org/t/p/w300/fCvwQJVcbjNub2PiKzZmQXR7i1I.jpg" alt="">
         <p>Plankton</p>
       </a>
-      <a href="Super Mario Bros La Película (2023).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg" alt="">
-        <p>Super Mario Bros: La película</p>
+      <a href="Kung Fu panda 4 (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/xHeK1mttldtCEyWbPZbo9bSKUqd.jpg" alt="">
+        <p>Kung fu panda 4</p>
       </a>
-      <a href="Spider-Man Un nuevo universo (2023).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/lWEUafLv3z00YB70ZInXLNnWRik.jpg" alt="">
-        <p>Spider-Man: Un nuevo universo</p>
+      <a href="Los Croods 1 (2013).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/p7lJkqHlK01nr0zNacunUFI5Qxy.jpg" alt="">
+        <p>Los Croods</p>
       </a>
     </div>
   </div>
@@ -1175,9 +1176,9 @@ player.on('play', () => {
       const STORAGE_KEY = 'pos_' + videoSrc;
 
       /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
-      const historialTitulo = "Al rescate de fondo de Bikini";
-      const historialImagen = "https://image.tmdb.org/t/p/w300/7WfWEy1EIJj4nLR6PdE6A09TcOv.jpg";
-      const historialArchivo = "Al rescate de Fondo de Bikini La película de Arenita Mejillas (2024).html";
+      const historialTitulo = "Bob Esponja 3: Un héroe al rescate";
+      const historialImagen = "https://image.tmdb.org/t/p/w300/fi2pg2mtAZwhq3qVuAs6PztjnHT.jpg";
+      const historialArchivo = "Bob Esponja 3 Un héroe al rescate (2020).html";
 
       let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
       let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
@@ -1214,7 +1215,3 @@ player.on('play', () => {
   
 </body>
 </html>
-
-
-
-

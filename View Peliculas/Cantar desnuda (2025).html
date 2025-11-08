@@ -635,8 +635,8 @@ document.addEventListener('DOMContentLoaded', () => {
       <p class="player-loading-text">Cargando<span class="dots"></span></p>
     </div>
 
-    <video class="vid1 js-player" loading="lazy" controls poster="https://image.tmdb.org/t/p/w780/b80Ql0yP3lushkYpv4zgS93yfdJ.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
-      <source src="https://dl.dropbox.com/scl/fi/lm34v9ne3qvjrjwnun40r/Al-rescate-a-fondo-de-bikini-arenita-2025-Mp4.mp4?rlkey=q1ipsn1xgcv2ymf9z6vas6ch4&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
+    <video class="vid1 js-player" controls loading="lazy"poster="https://cinenacional.com/wp-content/uploads/2025/02/unnamed-7.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+      <source src="https://dl.dropbox.com/scl/fi/hztorlebywiaqdapqabky/Cantar-Desnuda-2025.mp4?rlkey=2k9g57uwrkw3pvlbbk871fpp9&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
   <div id="episodio-actual" style="
@@ -647,11 +647,11 @@ document.addEventListener('DOMContentLoaded', () => {
   color:#ff2d5b;
 "></div>
 
-
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>2024</span> <!--Aca va el año de estreno de pelicula-->
-    <i class="fal fa-clock"></i><span>1h 26min</span> <!--aca va cuanto dura-->
-    <i class="fal fa-thumbs-up"></i><span>69%</span> <!--aca va la calificacion-->
+    <i class="fal fa-calendar-alt"></i><span>2025</span> <!--Aca va el año de estreno de pelicula-->
+    <i class="fal fa-clock"></i><span>1h 05min</span> <!--aca va cuanto dura-->
+    <i class="fal fa-thumbs-up"></i><span>87%</span>  <!--aca va la calificacion-->
+    <i class="#"></i><span>+18</span> 
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
@@ -659,20 +659,21 @@ document.addEventListener('DOMContentLoaded', () => {
       </svg>
       <span>1080P</span>
     </div>
+
   </div>
   
   <div class="info-pelicula">
-    <h1>Al rescate de fondo de Bikini: La película de Arenita Mejillas</h1>
-  <span class="genero-badge">Animacio • Familia • Aventura • Comedia</span>
+    <h1>Cantar desnuda</h1>
+  <span class="genero-badge">Musical • Drama</span>
   
     <p class="sinopsis">
-      Cuando Fondo de Bikini es arrastrado fuera del mar, la ardilla científica Arenita Mejillas y su amigo Bob Esponja se embarcan rumbo a Texas para salvar su ciudad.
-    </p></p>
+      ¿Si hay la necesidad de pintar y dejarse pintar desnuda, o hacer una escultura o una danza, de interpretar desnuda en una obra de teatro y por supuesto, donde más, en cine, por qué no en la canción sobre todo si transmite pasión y entrega? Por primera vez en el mundo, creo que en la historia, Anikka lo hace. Quería hacer esta película desde hace más de diez años pero no contaba con ninguna gran cantante que necesitara también hacerla. Hasta que conocí a Anikka.
+    </p>
 
     <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
-      <p><strong>Director:</strong> Liza Johnson</p>
-      <p><strong>Reparto:</strong> Matty Cardarople, Bill Fagerbakke, Jill Talley</p>
-      <p><strong>Estreno:</strong> 02/08/2024 | <strong>Idioma:</strong> Español Latino 🇲🇽</p>
+      <p><strong>Director:</strong> </p>
+      <p><strong>Reparto:</strong> </p>
+      <p><strong>Estreno:</strong> 00/00/0000 | <strong>Idioma:</strong> Argentino 🇦🇷</p>
     </div>
 
     <br>
@@ -758,7 +759,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const continueInfo = document.getElementById('continue-info');
   const videoElement = document.querySelector('video');
 
-  const MOVIE_KEY = 'Al_Rescate_De_Fondo_De_Bikini_2024'; /*Aca siempre con un _ para guardar su progresos etc...*/
+  const MOVIE_KEY = 'Cantar_desnuda_2025'; /*Aca siempre con un _ para guardar su progresos etc...*/
   const ultimoTiempo = localStorage.getItem(`ultimoTiempo_${MOVIE_KEY}`) || 0;
 
   // 🔹 Mostrar modal si hay progreso guardado
@@ -916,11 +917,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // 🔹 Botón "Agregar a Favoritos"
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
-      titulo: "Al rescate de Fondo de Bikini",
-      imagen: "https://image.tmdb.org/t/p/w300/7WfWEy1EIJj4nLR6PdE6A09TcOv.jpg",
-      genero: "Animacion",
-      archivo: "Al rescate de Fondo de Bikini La película de Arenita Mejillas (2024).html",
+      titulo: "Cantar desnuda",
+      imagen: "https://cinepelayo.com/wp-content/uploads/2025/01/cartel-cantar-desnuda.jpg",
+      genero: "Musical",
+      archivo: "Cantar desnuda (2025).html",
       tipo: "pelicula",
+      adulto: true,
       timestamp: Date.now()
     };
 
@@ -1025,32 +1027,241 @@ document.addEventListener('DOMContentLoaded', () => {
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
-      <a href="Bob Esponja 1 La película (2004).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/CtISczftMz6g7kyk5uLxBben8b.jpg" alt="">
-        <p>Bob Esponja: La película</p>
+      <a href="CATO (2021).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/lTCsGvAjqBbqp7T5ziK28SeDfVT.jpg" alt="">
+        <p>CATO</p>
       </a>
-     <a href="Bob Esponja 2 Un héroe fuera del agua (2015).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/z5aphafm6OEcAq4jwOs5Ml9F384.jpg" alt="">
-        <p>Bob Esponja: Un héroe fuera del agua</p>
+      <a href="Banger (2025).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/x2pegSby27ebOwW361GJb1aKcxa.jpg" alt="">
+        <p>Banger</p>
       </a>
-      <a href="Bob Esponja 3 Un héroe al rescate (2020).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/fi2pg2mtAZwhq3qVuAs6PztjnHT.jpg" alt="">
-        <p>Bob Esponja: Un héroe al rescate (2020)</p>
+      <a class="serie" data-href="Vivir en Sevilla (1978).html" data-adulto="adulto">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/bGrSAgLWcqg752fPAJkTTtcNKYW.jpg" alt="">
+        <p>Vivir en Sevilla</p>
       </a>
-      <a href="Plankton (2025).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/fCvwQJVcbjNub2PiKzZmQXR7i1I.jpg" alt="">
-        <p>Plankton</p>
+      <a href="Freestyle (2023).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/8jwbiJB8Am1N9OsqaJs9vrGerlG.jpg" alt="">
+        <p>Freestyle</p>
       </a>
-      <a href="Super Mario Bros La Película (2023).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg" alt="">
-        <p>Super Mario Bros: La película</p>
+      <a class="serie" data-href="Deseaba llamarla sumisión (2025).html" data-adulto="adulto">
+        <img loading="lazy" src="https://cinepelayo.com/wp-content/uploads/2025/07/cartel-de-DLLSOcSNSLQQA.jpg" alt="">
+        <p>Deseaba llamarla Sumisión</p>
       </a>
-      <a href="Spider-Man Un nuevo universo (2023).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/lWEUafLv3z00YB70ZInXLNnWRik.jpg" alt="">
-        <p>Spider-Man: Un nuevo universo</p>
+      <a class="serie" data-href="Tu coño (2023).html" data-adulto="adulto">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/7QVwPedlx5lynEF6xGXfXAFJwKj.jpg" alt="">
+        <p>Tu coño</p>
       </a>
     </div>
   </div>
+
+  <!--ESTO ES PARA VERIFICAR LA EDAD NO BORRAR CONSERVALO NO INTERERIRA CON LOS DEMAS FUNCIONAMIENTOS-->
+
+  <div id="ageModal" class="age-modal hidden">
+    <div class="age-modal-content">
+      <span class="close-button" onclick="closeModal()">×</span>
+      <h2>¿Eres mayor de edad?</h2>
+    
+      <label for="birthyear">Año de nacimiento:</label>
+      <input type="number" id="birthyear" placeholder="Año" min="1900" max="2025" />
+    
+      <label for="age">Edad actual:</label>
+      <input type="number" id="age" placeholder="Edad" min="1" max="120" />
+    
+      <button id="confirmAgeBtn">Validar edad</button>
+      <p id="result-message"></p>
+    </div>
+  </div>
+  
+  <style>
+    .age-modal {
+      position: fixed;
+      z-index: 9999;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .age-modal-content {
+      background-color: #ffffff;
+      color: #000000;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      width: 300px;
+      position: relative;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+
+    .age-modal-content h2,
+    .age-modal-content label,
+    .age-modal-content p {
+      color: #000000;
+    }
+
+
+    .age-modal-content input {
+      width: 90%;
+      margin: 10px auto;
+      padding: 8px; 
+      display: block; 
+      background-color: #ffffff;  
+      color: #000000;
+      border: 1px solid #ccc; 
+      border-radius: 5px;
+    }
+
+
+    .age-modal-content input::placeholder {
+      color: #777;
+    }
+
+    /* Modo oscuro */
+
+    body.dark .age-modal-content,
+    .dark .age-modal-content {
+      background-color: #1e1e1e;
+      color: #f5f5f5;
+    }
+
+    body.dark .age-modal-content h2,
+    .dark .age-modal-content h2,
+    body.dark .age-modal-content label,
+    .dark .age-modal-content label,
+    body.dark .age-modal-content p,
+    .dark .age-modal-content p {
+      color: #f5f5f5;
+    }
+
+    body.dark .age-modal-content input,
+    .dark .age-modal-content input {
+      background-color: #2b2b2b;
+      color: #ffffff;
+      border: 1px solid #555;
+    }
+
+    body.dark .age-modal-content input::placeholder,
+    .dark .age-modal-content input::placeholder {
+      color: #ccc;
+    }
+
+    .age-modal-content button {
+      background: #0b57cf;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .age-modal-content button:hover {
+      background: #063ea3;
+    }
+
+    .close-button {
+      position: absolute;
+      right: 12px;
+      top: 8px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #888;
+      cursor: pointer;
+    }
+
+    .close-button:hover {
+      color: #000;
+    }
+
+    body.dark .close-button {
+      color: #aaa;
+    }
+
+    body.dark .close-button:hover {
+      color: #fff;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+  
+  <script>
+    let pendingRedirect = null;
+    function handleAdultLinkClick(event) {
+      const link = event.currentTarget;
+      const href = link.getAttribute('data-href');
+      const isAdult = link.getAttribute('data-adulto') === 'adulto';
+  
+      if (isAdult) {
+        event.preventDefault();
+        pendingRedirect = href;
+        openModal();
+      }
+    }
+    
+    function openModal() {
+      document.getElementById("ageModal").classList.remove("hidden");
+      document.getElementById("result-message").innerText = "";
+      document.getElementById("birthyear").value = "";
+      document.getElementById("age").value = "";
+    }
+    
+    function closeModal() {
+      document.getElementById("ageModal").classList.add("hidden");
+      pendingRedirect = null;
+    }
+
+    document.getElementById("confirmAgeBtn").addEventListener("click", function () {
+      const birthYear = parseInt(document.getElementById("birthyear").value);
+      const enteredAge = parseInt(document.getElementById("age").value);
+      const currentYear = new Date().getFullYear();
+      const calculatedAge = currentYear - birthYear;
+      const result = document.getElementById("result-message");
+  
+      if (
+        isNaN(birthYear) || isNaN(enteredAge) ||
+        birthYear > currentYear || birthYear < 1900 ||
+        enteredAge < 0 || enteredAge > 120
+      ) {
+        result.innerText = "Por favor completa los campos con valores válidos.";
+        result.style.color = "red";
+        return;
+      }
+  
+      if (enteredAge !== calculatedAge) {
+        result.innerText = "La edad no coincide con el año de nacimiento.";
+        result.style.color = "red";
+        return;
+      }
+  
+      if (enteredAge >= 18) {
+        result.innerText = "Acceso permitido. Redirigiendo...";
+        result.style.color = "green";
+        setTimeout(() => {
+          if (pendingRedirect) {
+            window.location.href = pendingRedirect;
+          }
+        }, 1500);
+      } else {
+        result.innerText = "No eres mayor de edad, vuelve a intentarlo más adelante.";
+        result.style.color = "red";
+      }
+    });
+    
+    // Activar verificación en todos los links con data-adulto
+    document.querySelectorAll('a[data-adulto="adulto"]').forEach(link => {
+      link.addEventListener('click', handleAdultLinkClick);
+    });
+  </script>
+
+  <!--FIN DE LA VERIFICACION PARA ADULTOS.-->
   
   <!-- ¡¡¡NO BORRAR ESTE SCRIPT ES DE FAVORITOS Y SI LO BORRAN AFECTARAN EL FUNCIONAMIENTO DE REPRODUCTOR Y FAVORITOS!!! -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.6.7/plyr.min.js">
@@ -1175,9 +1386,9 @@ player.on('play', () => {
       const STORAGE_KEY = 'pos_' + videoSrc;
 
       /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
-      const historialTitulo = "Al rescate de fondo de Bikini";
-      const historialImagen = "https://image.tmdb.org/t/p/w300/7WfWEy1EIJj4nLR6PdE6A09TcOv.jpg";
-      const historialArchivo = "Al rescate de Fondo de Bikini La película de Arenita Mejillas (2024).html";
+      const historialTitulo = "Cantar desnuda";
+      const historialImagen = "https://cinepelayo.com/wp-content/uploads/2025/01/cartel-cantar-desnuda.jpg";
+      const historialArchivo = "Cantar desnuda (2025).html";
 
       let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
       let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
@@ -1214,7 +1425,3 @@ player.on('play', () => {
   
 </body>
 </html>
-
-
-
-
