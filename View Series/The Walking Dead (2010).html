@@ -697,9 +697,9 @@ document.addEventListener('DOMContentLoaded', () => {
 "></div>
 
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>0000</span> <!--Aca va el año de estreno de pelicula-->
+    <i class="fal fa-calendar-alt"></i><span>2010</span> <!--Aca va el año de estreno de pelicula-->
    <!--aca va cuanto dura-->
-    <i class="fal fa-thumbs-up"></i><span>00%</span> <!--aca va la calificacion-->
+    <i class="fal fa-thumbs-up"></i><span>81%</span> <!--aca va la calificacion-->
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
@@ -722,9 +722,9 @@ document.addEventListener('DOMContentLoaded', () => {
     </p>
 
     <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
-      <p><strong>Director:</strong> 0000</p>
-      <p><strong>Reparto:</strong> ------</p>
-      <p><strong>Estreno:</strong> 00/00/0000 | <strong>Idioma:</strong> ----- 🇦🇷</p>
+      <p><strong>Director:</strong> Frank Darabont</p>
+      <p><strong>Reparto:</strong> Andrés Lincoln, Lauren Cohan, Norman Reedus</p>
+      <p><strong>Estreno:</strong> 31/10/2010 | <strong>Idioma:</strong> Español Latino 🇲🇽</p>
     </div>
 
     <br>
@@ -1991,9 +1991,9 @@ videoElement.addEventListener('ended', () => {
     const STORAGE_KEY = 'pos_' + videoSrc;
 
     /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
-    const historialTitulo = "Nombre de serie";
-    const historialImagen = "https://image.tmdb.org/t/p/w300/";
-    const historialArchivo = "../View Series/.html";
+    const historialTitulo = "The Walking Dead";
+    const historialImagen = "https://image.tmdb.org/t/p/w300/9iYinsg30olSCuDoH8VxtRN5gZx.jpg";
+    const historialArchivo = "../View Series/The Walking Dead (2010).html";
 
     let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
     let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
@@ -2481,15 +2481,21 @@ videoElement.addEventListener('ended', () => {
 
 .ep-percent {
   position: absolute;
-  left: 50%;
   top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   font-weight: 700;
-  font-size: 0.6rem;
-  color: #fff; /* 🔹 texto blanco */
+  font-size: 0.65rem;
+  color: #fff;
+  line-height: 1;              /* ✅ evita que el texto se vea desplazado */
+  height: 100%;                /* ✅ asegura centrado vertical */
+  display: flex;               /* ✅ usa flex para centrar perfecto */
+  align-items: center;         /* ✅ centra vertical */
+  justify-content: center;     /* ✅ centra horizontal */
   pointer-events: none;
   user-select: none;
 }
+
 
   .episode-card { display:flex; flex-direction:column; gap:10px; padding:14px; background:rgba(20,20,20,0.85); border-radius:10px; box-shadow:0 8px 24px rgba(0,0,0,0.4); transition:transform .2s ease, box-shadow .2s; }
   .episode-card:hover { transform:translateY(-2px); box-shadow:0 10px 30px rgba(255,45,91,0.2); }
@@ -2602,15 +2608,21 @@ videoElement.addEventListener('ended', () => {
 
 .ep-percent {
   position: absolute;
-  left: 50%;
   top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
   font-weight: 700;
-  font-size: 0.6rem;
-  color: #fff; /* 🔹 texto blanco */
+  font-size: 0.65rem;
+  color: #fff;
+  line-height: 1;              /* ✅ evita que el texto se vea desplazado */
+  height: 100%;                /* ✅ asegura centrado vertical */
+  display: flex;               /* ✅ usa flex para centrar perfecto */
+  align-items: center;         /* ✅ centra vertical */
+  justify-content: center;     /* ✅ centra horizontal */
   pointer-events: none;
   user-select: none;
 }
+
 
   `;
   const st=document.createElement('style'); st.innerHTML = css; document.head.appendChild(st);
