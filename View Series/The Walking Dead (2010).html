@@ -2479,23 +2479,19 @@ videoElement.addEventListener('ended', () => {
   position: relative;
 }
 
+/* centrado real del número */
 .ep-percent {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -45%); /* 🔹 ajusta leve balance visual */
   font-weight: 700;
   font-size: 0.65rem;
   color: #fff;
-  line-height: 1;              /* ✅ evita que el texto se vea desplazado */
-  height: 100%;                /* ✅ asegura centrado vertical */
-  display: flex;               /* ✅ usa flex para centrar perfecto */
-  align-items: center;         /* ✅ centra vertical */
-  justify-content: center;     /* ✅ centra horizontal */
+  line-height: 1;
   pointer-events: none;
   user-select: none;
 }
-
 
   .episode-card { display:flex; flex-direction:column; gap:10px; padding:14px; background:rgba(20,20,20,0.85); border-radius:10px; box-shadow:0 8px 24px rgba(0,0,0,0.4); transition:transform .2s ease, box-shadow .2s; }
   .episode-card:hover { transform:translateY(-2px); box-shadow:0 10px 30px rgba(255,45,91,0.2); }
@@ -2606,23 +2602,19 @@ videoElement.addEventListener('ended', () => {
   position: relative;
 }
 
+/* centrado real del número */
 .ep-percent {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -45%); /* 🔹 ajusta leve balance visual */
   font-weight: 700;
   font-size: 0.65rem;
   color: #fff;
-  line-height: 1;              /* ✅ evita que el texto se vea desplazado */
-  height: 100%;                /* ✅ asegura centrado vertical */
-  display: flex;               /* ✅ usa flex para centrar perfecto */
-  align-items: center;         /* ✅ centra vertical */
-  justify-content: center;     /* ✅ centra horizontal */
+  line-height: 1;
   pointer-events: none;
   user-select: none;
 }
-
 
   `;
   const st=document.createElement('style'); st.innerHTML = css; document.head.appendChild(st);
