@@ -439,7 +439,7 @@
 
 /* 💎 Barra de progreso estilo "Neón líquido celeste" */
 .plyr__progress input[type="range"] {
-  height: 5px;
+  height: 7px;
   border-radius: 999px;
   background: linear-gradient(270deg, #00c6ff, #00e0ff, #00c6ff);
   background-size: 400% 400%;
@@ -584,7 +584,7 @@ document.addEventListener('DOMContentLoaded', () => {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-48%, -48%);
   display: none;
   flex-direction: column;
   align-items: center;
@@ -722,7 +722,7 @@ document.addEventListener('DOMContentLoaded', () => {
     </p>
 
     <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
-      <p><strong>Director:</strong> 0000</p>
+      <p><strong>Director:</strong> 00www00</p>
       <p><strong>Reparto:</strong> ------</p>
       <p><strong>Estreno:</strong> 00/00/0000 | <strong>Idioma:</strong> ----- 🇦🇷</p>
     </div>
@@ -2460,37 +2460,28 @@ videoElement.addEventListener('ended', () => {
 <script>
 (function(){
   const css = `
-/* el contenedor de la barra debe ser relativo */
-.ep-progress {
-  position: relative;
-  height: 10px; /* grosor de la barra */
+  .ep-progress {
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 999px;
   overflow: hidden;
+  margin-top: 6px;
+  position: relative;
+  text-align: center;
 }
 
-/* el número de porcentaje perfectamente centrado */
 .ep-percent {
   position: absolute;
-  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  top: 50%;
+  transform: translate(-48%, -48%);
   font-weight: 700;
-  font-size: 0.7rem;
-  line-height: 1;
-  color: #fff;
+  font-size: 0.8rem;
+  color: #fff; /* 🔹 texto blanco */
   pointer-events: none;
   user-select: none;
-  text-shadow: 0 0 4px rgba(0, 0, 0, 0.5); /* mejora legibilidad */
 }
-
-/* en pantallas pequeñas el texto se ajusta levemente */
-@media (max-width: 600px) {
-  .ep-percent {
-    font-size: 0.6rem;
-    transform: translate(-50%, -52%); /* leve ajuste visual para móviles */
-  }
-}
-
 
 .ep-progress-fill {
   height: 100%;
@@ -2590,37 +2581,28 @@ videoElement.addEventListener('ended', () => {
 (function(){
   // CSS: percentage label to the right of bar
   const css = `
-/* el contenedor de la barra debe ser relativo */
-.ep-progress {
-  position: relative;
-  height: 10px; /* grosor de la barra */
+  .ep-progress {
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 999px;
   overflow: hidden;
+  margin-top: 6px;
+  position: relative;
+  text-align: center;
 }
 
-/* el número de porcentaje perfectamente centrado */
 .ep-percent {
   position: absolute;
-  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  top: 50%;
+  transform: translate(-48%, -48%);
   font-weight: 700;
-  font-size: 0.7rem;
-  line-height: 1;
-  color: #fff;
+  font-size: 0.8rem;
+  color: #fff; /* 🔹 texto blanco */
   pointer-events: none;
   user-select: none;
-  text-shadow: 0 0 4px rgba(0, 0, 0, 0.5); /* mejora legibilidad */
 }
-
-/* en pantallas pequeñas el texto se ajusta levemente */
-@media (max-width: 600px) {
-  .ep-percent {
-    font-size: 0.6rem;
-    transform: translate(-50%, -52%); /* leve ajuste visual para móviles */
-  }
-}
-
 
 .ep-progress-fill {
   height: 100%;
