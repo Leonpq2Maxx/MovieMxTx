@@ -439,7 +439,7 @@
 
 /* 💎 Barra de progreso estilo "Neón líquido celeste" */
 .plyr__progress input[type="range"] {
-  height: 5px;
+  height: 7px;
   border-radius: 999px;
   background: linear-gradient(270deg, #00c6ff, #00e0ff, #00c6ff);
   background-size: 400% 400%;
@@ -724,8 +724,9 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
       <p><strong>Director:</strong> Frank Darabont</p>
       <p><strong>Reparto:</strong> Andrés Lincoln, Lauren Cohan, Norman Reedus</p>
-      <p><strong>Estreno:</strong> 31/10/2010 | <strong>Idioma:</strong> Español Latino 🇲🇽</p>
+      <p><strong>Estreno:</strong> 31/10/2010 | <strong>Idioma:</strong> ----- 🇦🇷</p>
     </div>
+
 
     <br>
   
@@ -1597,7 +1598,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const player = new Plyr(videoElement, {
       controls: [
-        'rewind', 'play', 'fast-forward',
+        'rewind', 'play-large', 'play', 'fast-forward',
         'progress', 'current-time', 'duration', 'mute', 'volume',
         'captions', 'pip', 'airplay', 'fullscreen'
       ]
@@ -1991,9 +1992,9 @@ videoElement.addEventListener('ended', () => {
     const STORAGE_KEY = 'pos_' + videoSrc;
 
     /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
-    const historialTitulo = "The Walking Dead";
-    const historialImagen = "https://image.tmdb.org/t/p/w300/9iYinsg30olSCuDoH8VxtRN5gZx.jpg";
-    const historialArchivo = "../View Series/The Walking Dead (2010).html";
+    const historialTitulo = "Nombre de serie";
+    const historialImagen = "https://image.tmdb.org/t/p/w300/";
+    const historialArchivo = "../View Series/.html";
 
     let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
     let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
@@ -2479,16 +2480,14 @@ videoElement.addEventListener('ended', () => {
   position: relative;
 }
 
-/* centrado real del número */
 .ep-percent {
   position: absolute;
-  top: 50%;
   left: 50%;
-  transform: translate(-50%, -45%); /* 🔹 ajusta leve balance visual */
+  top: 50%;
+  transform: translate(-50%, -50%);
   font-weight: 700;
-  font-size: 0.60rem;
-  color: #fff;
-  line-height: 1;
+  font-size: 0.8rem;
+  color: #fff; /* 🔹 texto blanco */
   pointer-events: none;
   user-select: none;
 }
@@ -2602,16 +2601,14 @@ videoElement.addEventListener('ended', () => {
   position: relative;
 }
 
-/* centrado real del número */
 .ep-percent {
   position: absolute;
-  top: 50%;
   left: 50%;
-  transform: translate(-50%, -45%); /* 🔹 ajusta leve balance visual */
+  top: 50%;
+  transform: translate(-50%, -50%);
   font-weight: 700;
-  font-size: 0.60rem;
-  color: #fff;
-  line-height: 1;
+  font-size: 0.8rem;
+  color: #fff; /* 🔹 texto blanco */
   pointer-events: none;
   user-select: none;
 }
