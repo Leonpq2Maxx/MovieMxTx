@@ -439,7 +439,7 @@
 
 /* 💎 Barra de progreso estilo "Neón líquido celeste" */
 .plyr__progress input[type="range"] {
-  height: 7px;
+  height: 5px;
   border-radius: 999px;
   background: linear-gradient(270deg, #00c6ff, #00e0ff, #00c6ff);
   background-size: 400% 400%;
@@ -584,7 +584,7 @@ document.addEventListener('DOMContentLoaded', () => {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-48%, -48%);
+  transform: translate(-50%, -50%);
   display: none;
   flex-direction: column;
   align-items: center;
@@ -722,7 +722,7 @@ document.addEventListener('DOMContentLoaded', () => {
     </p>
 
     <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
-      <p><strong>Director:</strong> 00www00</p>
+      <p><strong>Director:</strong> 0000</p>
       <p><strong>Reparto:</strong> ------</p>
       <p><strong>Estreno:</strong> 00/00/0000 | <strong>Idioma:</strong> ----- 🇦🇷</p>
     </div>
@@ -2461,7 +2461,7 @@ videoElement.addEventListener('ended', () => {
 (function(){
   const css = `
   .ep-progress {
-  width: 100%;
+  width: 150%;
   height: 10px;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 999px;
@@ -2471,24 +2471,24 @@ videoElement.addEventListener('ended', () => {
   text-align: center;
 }
 
-.ep-percent {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-48%, -48%);
-  font-weight: 700;
-  font-size: 0.8rem;
-  color: #fff; /* 🔹 texto blanco */
-  pointer-events: none;
-  user-select: none;
-}
-
 .ep-progress-fill {
   height: 100%;
   width: 0%;
   background: linear-gradient(90deg, #ff2d5b, #00c6ff);
   transition: width 0.25s linear;
   position: relative;
+}
+
+.ep-percent {
+  position: absolute;
+  left: 55%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 700;
+  font-size: 0.5rem;
+  color: #fff; /* 🔹 texto blanco */
+  pointer-events: none;
+  user-select: none;
 }
 
   .episode-card { display:flex; flex-direction:column; gap:10px; padding:14px; background:rgba(20,20,20,0.85); border-radius:10px; box-shadow:0 8px 24px rgba(0,0,0,0.4); transition:transform .2s ease, box-shadow .2s; }
@@ -2582,7 +2582,7 @@ videoElement.addEventListener('ended', () => {
   // CSS: percentage label to the right of bar
   const css = `
   .ep-progress {
-  width: 100%;
+  width: 150%;
   height: 10px;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 999px;
@@ -2592,24 +2592,24 @@ videoElement.addEventListener('ended', () => {
   text-align: center;
 }
 
-.ep-percent {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-48%, -48%);
-  font-weight: 700;
-  font-size: 0.8rem;
-  color: #fff; /* 🔹 texto blanco */
-  pointer-events: none;
-  user-select: none;
-}
-
 .ep-progress-fill {
   height: 100%;
   width: 0%;
   background: linear-gradient(90deg, #ff2d5b, #00c6ff);
   transition: width 0.25s linear;
   position: relative;
+}
+
+.ep-percent {
+  position: absolute;
+  left: 55%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: 700;
+  font-size: 0.5rem;
+  color: #fff; /* 🔹 texto blanco */
+  pointer-events: none;
+  user-select: none;
 }
 
   `;
