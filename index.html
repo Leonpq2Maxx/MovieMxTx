@@ -773,38 +773,6 @@ document.querySelectorAll('.menu-item').forEach(function(item) {
 });
 </script>
 
-<script>
-// FIX: Evita que el carrusel quede en negro cuando el índice se desincroniza.
-(function(){
-  const track = document.getElementById("us_track");
-  const slides = () => track.querySelectorAll(".us_slide").length;
-
-  function fixCarouselPosition(){
-    const slideCount = slides();
-    const style = window.getComputedStyle(track);
-    const matrix = new WebKitCSSMatrix(style.transform);
-    const position = Math.abs(matrix.m41);
-
-    const slideWidth = track.clientWidth;
-    const currentIndex = Math.round(position / slideWidth);
-
-    // Si index se fue fuera de rango -> corregirlo
-    if (currentIndex >= slideCount || currentIndex < 0) {
-      const normalizedIndex = ((currentIndex % slideCount) + slideCount) % slideCount;
-      track.style.transition = "none";
-      track.style.transform = `translateX(-${normalizedIndex * 100}%)`;
-      requestAnimationFrame(() => {
-        track.style.transition = "";
-      });
-    }
-  }
-
-  // Revisa cada 200ms si el carrusel se rompió
-  setInterval(fixCarouselPosition, 200);
-})();
-</script>
-
-
 <!-- ======= NUEVO CARRUSEL INTEGRADO (us_carousel) ======= -->
 <div class="us_carousel_wrap" id="us_carousel_wrap" aria-label="Carrusel de imágenes">
   <div class="us_carousel" id="us_carousel">
@@ -3693,6 +3661,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const track = document.getElementById('us_track');
   if(!track) return;
   let slides = Array.from(track.querySelectorAll('.us_slide'));
+  let isMoving = false;
 
   // create clones for infinite effect
   const firstClone = slides[0].cloneNode(true);
@@ -3732,7 +3701,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let auto = true;
   let interval = setInterval(nextSlide, 4000);
   function nextSlide(){
-    if(!auto) return;
+    if(!auto || isMoving) return;
+    isMoving = true;
+
     index++;
     track.style.transition = 'transform 0.6s ease';
     track.style.transform = `translateX(-${index * 100}%)`;
@@ -3745,21 +3716,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // transitionend correction for clones
   track.addEventListener('transitionend', ()=>{
-    if(slides[index].isEqualNode(firstClone)){
-      track.classList.add('us_no_transition');
+    if (slides[index].isEqualNode(firstClone)) {
+      track.style.transition = 'none';
       index = 1;
       track.style.transform = `translateX(-${index * 100}%)`;
-      setTimeout(()=> track.classList.remove('us_no_transition'), 20);
+      setTimeout(()=> track.style.transition = '', 20);
     }
-    if(slides[index].isEqualNode(lastClone)){
-      track.classList.add('us_no_transition');
+    if (slides[index].isEqualNode(lastClone)) {
+      track.style.transition = 'none';
       index = slides.length - 2;
       track.style.transform = `translateX(-${index * 100}%)`;
-      setTimeout(()=> track.classList.remove('us_no_transition'), 20);
+      setTimeout(()=> track.style.transition = '', 20);
     }
-  });
-
-  // touch controls
+    isMoving = false;
+});
+// touch controls
   let startX = 0;
   track.addEventListener('touchstart', (e)=>{
     auto = false;
@@ -3768,17 +3739,22 @@ document.addEventListener("DOMContentLoaded", () => {
   }, {passive:true});
 
   track.addEventListener('touchend', (e)=>{
+    if (isMoving) return;
+
     const moveX = e.changedTouches[0].clientX - startX;
+    isMoving = true;
+
     if(moveX < -50) index++;
     else if(moveX > 50) index--;
+
     track.style.transition = 'transform 0.6s ease';
     track.style.transform = `translateX(-${index * 100}%)`;
+
     updateDots();
     auto = true;
     resetAutoplay();
-  });
-
-  // On resize ensure transform matches slide width units (works with percent)
+});
+// On resize ensure transform matches slide width units (works with percent)
   window.addEventListener('resize', ()=>{
     track.style.transition = 'none';
     track.style.transform = `translateX(-${index * 100}%)`;
