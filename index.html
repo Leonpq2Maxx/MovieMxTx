@@ -761,16 +761,138 @@ document.querySelectorAll('.menu-item').forEach(function(item) {
 <div class="us_carousel_wrap" id="us_carousel_wrap" aria-label="Carrusel de imágenes">
   <div class="us_carousel" id="us_carousel">
     <div class="us_track" id="us_track">
-      <a href="View Series/IT Bienvenidos a Derry (2025).html"><img class="us_slide" loading="lazy" src="https://image.tmdb.org/t/p/original/ybyObMOWerS5DgzaFbslvGi1ND3.jpg" alt="Slide 1"></a>
-      <a href=""><img class="us_slide" loading="lazy" src="https://image.tmdb.org/t/p/w780/8WhlNrtQdyUBnKrw5WBJnsDn1HE.jpg" alt="Slide 2"></a>
-      <a href=""><img class="us_slide" loading="lazy" src="https://image.tmdb.org/t/p/w780/cDNuAKzhfM6GQ8jce55jn9SQLY3.jpg" alt="Slide 3"></a>
-      <a href=""><img class="us_slide" loading="lazy" src="https://image.tmdb.org/t/p/w780/ok6h85su874ANLaqJNJgTj0CUCv.jpg" alt="Slide 4"></a>
-      <a href=""><img class="us_slide" loading="lazy" src="https://image.tmdb.org/t/p/w780/8zge4c86ek0ghDLbyApwcWdZpQd.jpg" alt="Slide 5"></a>
-      <a href=""><img class="us_slide" loading="lazy" src="https://image.tmdb.org/t/p/w780/ffQJClNiOpoc0ywxBgY6y1vBuxC.jpg" alt="Slide 6"></a>
+      <img class="us_slide" loading="lazy" src="https://image.tmdb.org/t/p/original/ybyObMOWerS5DgzaFbslvGi1ND3.jpg" alt="Slide 1">
+      <img class="us_slide" loading="lazy" src="https://image.tmdb.org/t/p/w780/8WhlNrtQdyUBnKrw5WBJnsDn1HE.jpg" alt="Slide 2">
+      <img class="us_slide" loading="lazy" src="https://image.tmdb.org/t/p/w780/cDNuAKzhfM6GQ8jce55jn9SQLY3.jpg" alt="Slide 3">
+      <img class="us_slide" loading="lazy" src="https://image.tmdb.org/t/p/w780/ok6h85su874ANLaqJNJgTj0CUCv.jpg" alt="Slide 4">
+      <img class="us_slide" loading="lazy" src="https://image.tmdb.org/t/p/w780/8zge4c86ek0ghDLbyApwcWdZpQd.jpg" alt="Slide 5">
+      <img class="us_slide" loading="lazy" src="https://image.tmdb.org/t/p/w780/ffQJClNiOpoc0ywxBgY6y1vBuxC.jpg" alt="Slide 6">
     </div>
     <div class="us_dots" id="us_dots" aria-hidden="false"></div>
   </div>
 </div>
+
+<!-- =======  ENLACES DE PELICULAS Y SERIES DESDE EL CARRUSEL. ======= -->
+<script>
+/*
+  Script: us_carousel -> click/tap-to-navigate by alt text
+  - No cambia la estructura del carrusel.
+  - Usa mappingAltToUrl para asignar alt -> destino.
+  - Si la imagen tiene atributo data-link se usa ese primero.
+*/
+
+(function(){
+  // Mapeo: ajustar aquí los targets según tus alt exactos
+  const mappingAltToUrl = {
+    "Slide 1": "View Series/IT Bienvenidos a Derry (2025).html",
+    "Slide 2": "View Peliculas/3 Culpa Nuestra (2025).html",
+    "Slide 3": "View Peliculas/El Conjuro 4 El ultimo rito (2025).html",
+    "Slide 4": "View Peliculas/Megan 2 (2025).html",
+    "Slide 5": "View Peliculas/Cómo entrenar a tu dragón (2025.html)",
+    "Slide 6": "View Peliculas/Thunderbolts (2025).html"
+  };
+
+  // Selector de slides - mantiene compatibilidad con tu carrusel
+  const slides = Array.from(document.querySelectorAll('.us_slide'));
+
+  if(!slides.length) return;
+
+  slides.forEach(img => {
+    // Si prefieres, agrega data-link directamente al <img> y se usará
+    // <img class="us_slide" data-link="View Peliculas/..." ...>
+
+    // --- Click (ratón) ---
+    img.addEventListener('click', (e) => {
+      // Si el evento fue parte de un arrastre (drag), cancela.
+      // (no queremos interferir con el swipe del carousel)
+      if (img._wasDragged) {
+        img._wasDragged = false;
+        return;
+      }
+      handleNavigate(img);
+    });
+
+    // --- Touch (para móviles): detecta swipe vs tap ---
+    let startX = 0, startY = 0, startT = 0;
+    const MAX_MOVE = 20; // px tolerancia para considerar un "tap"
+    const MAX_TIME = 400; // ms tolerancia temporal para tap
+
+    img.addEventListener('touchstart', (ev) => {
+      const t = ev.touches[0];
+      startX = t.clientX;
+      startY = t.clientY;
+      startT = Date.now();
+      img._wasDragged = false;
+    }, {passive:true});
+
+    img.addEventListener('touchmove', (ev) => {
+      const t = ev.touches[0];
+      const dx = Math.abs(t.clientX - startX);
+      const dy = Math.abs(t.clientY - startY);
+      if (dx > MAX_MOVE || dy > MAX_MOVE) {
+        // marcar que hubo movimiento para que click/tap no dispare navegación
+        img._wasDragged = true;
+      }
+    }, {passive:true});
+
+    img.addEventListener('touchend', (ev) => {
+      const dt = Date.now() - startT;
+      if (img._wasDragged) {
+        // si se arrastró, no navegar — pero dejamos el flag para el click handler también
+        return;
+      }
+      if (dt <= MAX_TIME) {
+        // Es un tap corto -> navegar
+        handleNavigate(img);
+      }
+    });
+
+    // --- evita que clicks por ejemplo en elementos internos hagan doble-navegación ---
+    img.addEventListener('auxclick', (e) => {
+      // evita middle-clicks inesperados (opcional)
+      e.preventDefault();
+    });
+  });
+
+  // Navegación centralizada
+  function handleNavigate(img){
+    // Prioridad: data-link en la propia imagen
+    const dl = img.getAttribute('data-link');
+    if (dl && dl.trim() !== "") {
+      navigateTo(dl);
+      return;
+    }
+
+    // Usa el alt como identificador
+    const alt = (img.getAttribute('alt') || "").trim();
+    if (alt && mappingAltToUrl.hasOwnProperty(alt)) {
+      navigateTo(mappingAltToUrl[alt]);
+      return;
+    }
+
+    // Si no hay mapping, opcional: intentar buscar por texto en aria-label o title
+    const title = (img.getAttribute('title') || "").trim();
+    if (title && mappingAltToUrl.hasOwnProperty(title)) {
+      navigateTo(mappingAltToUrl[title]);
+      return;
+    }
+
+    // fallback: si no hay destino definido, no hace nada (o abrir en nuevo tab)
+    console.warn('us_carousel: no hay destino definido para imagen con alt="' + alt + '". Añade data-link o actualiza mappingAltToUrl.');
+  }
+
+  // Navegación segura (puedes cambiar _blank a same-window si querés)
+  function navigateTo(href){
+    if(!href) return;
+    // Si es relativo y quieres mismo comportamiento que un <a>, usamos location.href
+    window.location.href = href;
+    // Si preferís abrir en nueva pestaña:
+    // window.open(href, '_blank');
+  }
+
+})();
+</script>
+
 <!-- ======= FIN NUEVO CARRUSEL ======= -->
 </div></div>
 
