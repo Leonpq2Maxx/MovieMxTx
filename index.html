@@ -608,6 +608,56 @@ document.addEventListener('DOMContentLoaded', () => {
 <div class="wPrf tm">
 </div>
 </div></div></div></div></div>
+
+<!-- AGREGAR ESTO ANTES DE </body> -->
+<script>
+/* Función para alternar modo oscuro/claro */
+function darkMode() {
+  try {
+    const root = document.getElementById('mainCont') || document.documentElement;
+    const btn = document.querySelector('.tDark') || document.querySelector('[aria-label="Dark"]');
+
+    // Alterna la clase que ya usas para modo oscuro
+    const isDark = root.classList.toggle('drK');
+
+    // Guarda elección
+    localStorage.setItem('mode', isDark ? 'darkmode' : 'lightmode');
+
+    // Para accesibilidad: indica estado pulsado
+    if (btn) btn.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+
+    // Pequeña animación al icono (giro)
+    const svg = btn && btn.querySelector('svg');
+    if (svg) {
+      svg.style.transition = 'transform 300ms ease';
+      svg.style.transform = 'rotate(20deg)';
+      setTimeout(() => { svg.style.transform = ''; }, 300);
+    }
+  } catch (e) {
+    console.error('darkMode error:', e);
+  }
+}
+
+/* Asegurar que el atributo aria-pressed refleje el estado al cargar */
+document.addEventListener('DOMContentLoaded', () => {
+  const root = document.getElementById('mainCont') || document.documentElement;
+  const btn = document.querySelector('.tDark') || document.querySelector('[aria-label="Dark"]');
+  const isDarkStored = localStorage.getItem('mode') === 'darkmode';
+  if (isDarkStored) root.classList.add('drK'); else root.classList.remove('drK');
+  if (btn) btn.setAttribute('aria-pressed', isDarkStored ? 'true' : 'false');
+
+  // También permite cambiar con la tecla Enter/Espacio cuando el span tiene role="button"
+  if (btn) {
+    btn.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Enter' || ev.key === ' ') {
+        ev.preventDefault();
+        darkMode();
+      }
+    });
+  }
+});
+</script>
+
 </header>
 
 <div class="mainIn">
