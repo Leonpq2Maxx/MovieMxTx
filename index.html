@@ -36,52 +36,6 @@
         color: white;
     }
 
-.slider-container {
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-}
-.slide {
-  flex: 0 0 100%;
-  transition: transform 0.5s ease-in-out;
-}
-.slider-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.6);
-  color: white;
-  border: none;
-  font-size: 2rem;
-  z-index: 10;
-  cursor: pointer;
-  padding: 0 10px;
-}
-.slider-btn.prev { left: 10px; }
-.slider-btn.next { right: 10px; }
-        
-.slider-dots {
-  position: absolute;
-  bottom: 15px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 8px;
-  z-index: 20;
-}
-.slider-dots .dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: white;
-  opacity: 0.5;
-  cursor: pointer;
-}
-.slider-dots .dot.active {
-  opacity: 1;
-  background: #ff4081;
-}
         </style>
 <style>
     /* Variable color */
@@ -386,27 +340,34 @@ i {
 }
 </style>
 
+
+<style>
+
+/* ======= CSS NAMESPACE: us_carousel (no conflict) ======= */
+.us_carousel_wrap { width:100%; overflow:hidden; position:relative; margin: 18px 0; }
+.us_carousel { position:relative; width:100%; overflow:hidden; }
+.us_track { display:flex; transition: transform 0.6s ease; will-change: transform; }
+.us_slide { width:100%; flex-shrink:0; object-fit:cover; height:55vh; }
+
+/* Dots */
+.us_dots { position:absolute; left:50%; bottom:14px; transform:translateX(-50%); display:flex; gap:8px; z-index:50; }
+.us_dots button { width:10px; height:10px; border-radius:50%; border: none; background: rgba(255,255,255,0.45); padding:0; cursor:pointer; transition: transform .2s, background .2s; }
+.us_dots button[aria-pressed="true"] { background: #f7b500; transform: scale(1.15); }
+
+/* No-transition helper */
+.us_no_transition { transition: none !important; }
+
+/* Responsive adjustments */
+@media (max-width:1024px) { .us_slide { height:50vh; } }
+@media (max-width:768px) { .us_slide { height:35vh; } .us_dots { bottom:12px; } }
+@media (max-width:480px) { .us_slide { height:25vh; } .us_dots { gap:6px; } }
+
+</style>
 </head>
 <body class="oneGrd MN-2 mobS hdMn bD onIndx onHm" id="mainCont">
     
     
-   <!-- Pantalla de carga MovieTx mejorada -->
-<div id="loader-container">
-  <div class="loader-content">
-    <div class="logo-container">
-      <img src="Logo Poster MovieTx PNG/Logo MovieTx.png" alt="MovieTx Logo" class="logo-movietx" />
-      <div class="reflejo"></div>
-    </div>
-    <h1 class="titulo-movietx">MovieTx</h1>
-    <div class="barra-externa">
-      <div class="barra-interna"></div>
-    </div>
-    <br>
-    <p class="texto-carga">Disfrutar mi aplicación de películas y series</p>
-<br>
-      <p class="texto-carga" style="text-align:center;color:#777;padding:20px 10px;border-top:1px solid rgba(255,255,255,0.1);margin-top:200px;">MovieTx © 2025 — Todos los derechos reservados</p>
-  </div>
-</div>
+
 
     
 
@@ -648,6 +609,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 </div></div></div></div></div>
 </header>
+
 <div class="mainIn">
 <div class="blogMn">
 <div class="mnBr">
@@ -797,162 +759,23 @@ document.querySelectorAll('.menu-item').forEach(function(item) {
 });
 </script>
 
-<br/>
-
-<div class="carousel">
-  <button class="prev">❮</button>
-    <div class="carousel-track-container">
-      <ul class="carousel-track">
-        <li class="slide current-slide">
-          <a href="View Series/IT Bienvenidos a Derry (2025).html">
-            <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/original/ybyObMOWerS5DgzaFbslvGi1ND3.jpg"/>
-          </a>
-        </li>
-        <li class="slide">
-          <a href="View Peliculas/3 Culpa Nuestra (2025).html">
-            <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w780/8WhlNrtQdyUBnKrw5WBJnsDn1HE.jpg"/>
-          </a>
-        </li>
-        <li class="slide">
-          <a href="View Peliculas/El Conjuro 4 El ultimo rito (2025).html">
-            <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w780/cDNuAKzhfM6GQ8jce55jn9SQLY3.jpg" />
-          </a>
-        </li>
-        <li class="slide">
-          <a href="View Peliculas/Megan 2 (2025).html">
-            <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w780/ok6h85su874ANLaqJNJgTj0CUCv.jpg" />
-          </a>
-        </li>
-        <li class="slide ">
-          <a href="View Peliculas/Cómo entrenar a tu dragón (2025.html)">
-            <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w780/8zge4c86ek0ghDLbyApwcWdZpQd.jpg" />
-          </a>
-        </li>
-        <li class="slide">
-          <a href="View Peliculas/Thunderbolts (2025).html">
-            <img alt="" loading="lazy" src="https://image.tmdb.org/t/p/w780/ffQJClNiOpoc0ywxBgY6y1vBuxC.jpg"/>
-          </a>
-        </li>
-      </ul>
+<!-- ======= NUEVO CARRUSEL INTEGRADO (us_carousel) ======= -->
+<div class="us_carousel_wrap" id="us_carousel_wrap" aria-label="Carrusel de imágenes">
+  <div class="us_carousel" id="us_carousel">
+    <div class="us_track" id="us_track">
+      <img class="us_slide" loading="lazy" src="https://image.tmdb.org/t/p/original/ybyObMOWerS5DgzaFbslvGi1ND3.jpg" alt="Slide 1">
+      <img class="us_slide" loading="lazy" src="https://image.tmdb.org/t/p/original/8WhlNrtQdyUBnKrw5WBJnsDn1HE.jpg" alt="Slide 2">
+      <img class="us_slide" loading="lazy" src="https://image.tmdb.org/t/p/original/cDNuAKzhfM6GQ8jce55jn9SQLY3.jpg" alt="Slide 3">
+      <img class="us_slide" loading="lazy" src="https://image.tmdb.org/t/p/original/ok6h85su874ANLaqJNJgTj0CUCv.jpg" alt="Slide 4">
+      <img class="us_slide" loading="lazy" src="https://image.tmdb.org/t/p/original/8zge4c86ek0ghDLbyApwcWdZpQd.jpg" alt="Slide 5">
+      <img class="us_slide" loading="lazy" src="https://image.tmdb.org/t/p/original/ffQJClNiOpoc0ywxBgY6y1vBuxC.jpg" alt="Slide 6">
     </div>
-    <div class="slider-dots" id="sliderDots"><span class="dot active" data-index="0"></span><span class="dot" data-index="1"></span><span class="dot" data-index="2"></span><span class="dot" data-index="3"></span><span class="dot" data-index="4"></span><span class="dot" data-index="5"></span></div>
-  <button class="next">❯</button>
+    <div class="us_dots" id="us_dots" aria-hidden="false"></div>
+  </div>
 </div>
+<!-- ======= FIN NUEVO CARRUSEL ======= -->
 </div></div>
-<style>
-.slider-dots .dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: white;
-  opacity: 0.5;
-  cursor: pointer;
-  transition: transform 0.3s ease, background-color 0.3s ease;
-  animation: pulseDot 2s infinite;
-}
-.slide {
-  flex: 0 0 100%;
-  will-change: transform;
-}
-.slider-dots .dot:hover {
-  transform: scale(1.3);
-}
-.slider-dots .dot.active {
-  opacity: 1;
-  background: #ff4081;
-  animation: bounceDot 0.6s;
-}
-@keyframes pulseDot {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-}
-@keyframes bounceDot {
-  0% {
-    transform: scale(1.2);
-  }
-  50% {
-    transform: scale(0.9);
-  }
-  100% {
-    transform: scale(1);
-  }
 
-  .slider-dots.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-
-}
-
-
-</style>
-<script>
-  const sliderDots = document.getElementById("sliderDots");
-  const navToggle = document.getElementById("offNav");
-
-  function updateDotsVisibility() {
-    if (navToggle.checked) {
-      sliderDots.classList.add("hidden");
-    } else {
-      sliderDots.classList.remove("hidden");
-    }
-  }
-
-  navToggle.addEventListener("change", updateDotsVisibility);
-  updateDotsVisibility(); // correr al cargar
-</script>
-<style>
-  .carousel {
-  position: relative;
-  overflow: hidden;
-  max-width: 100%;
-  margin: auto;
-}
-
-.carousel-track-container {
-  overflow: hidden;
-}
-
-.carousel-track {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
-  padding: 0;
-  margin: 0;
-}
-
-.slide {
-  min-width: 100%;
-  list-style: none;
-}
-
-.slide img {
-  width: 100%;
-  display: block;
-}
-
-button.prev,
-button.next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.5);
-  border: none;
-  color: white;
-  font-size: 1.20rem; /*ESTABA EN 2rem, ESTO ES PARA AGRANDAR EL BOTON EN EL CARRUSEL*/
-  cursor: pointer;
-  z-index: 10;
-  padding: 10px;
-  border-radius: 50%;
-}
-
-button.prev { left: 10px; }
-button.next { right: 10px; }
-
-</style>
 <!--CANDADO DE IMAGEN CUANDO NO PONGAS EL ENLACE ESTE NO SE QUITARA, CUANDO LO PONGAS ESTA DESAPARECERA (CSS)-->
 <style>
   .xplus {
@@ -3573,7 +3396,6 @@ document.querySelectorAll('.card-link').forEach(link => {
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-<script src="https://dl.dropbox.com/s/x2to4fmvv2ftcqn/xscript.js"></script>
 
 <!-- Menú Inferior Fijo -->
 
@@ -3655,126 +3477,8 @@ document.querySelectorAll('.card-link').forEach(link => {
   font-size: 10px;
 }
 </style>
+
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const slides = document.querySelectorAll(".slide");
-  const next = document.querySelector(".slider-btn.next");
-  const prev = document.querySelector(".slider-btn.prev");
-  const slides = document.querySelectorAll('.slide');
-const totalSlides = slides.length;
-  let current = 0;
-
-  function updateSlider() {
-    slides.forEach((slide, i) => {
-      slide.style.transform = `translateX(${(i - current) * 100}%)`;
-    });
-  }
-
-  next.addEventListener("click", () => {
-    current = (current + 1) % slides.length;
-    updateSlider();
-  });
-
-  prev.addEventListener("click", () => {
-    current = (current - 1 + slides.length) % slides.length;
-    updateSlider();
-  });
-
-  updateSlider();
-});
-    </script><script>
-document.addEventListener("DOMContentLoaded", () => {
-  const slides = document.querySelectorAll(".slide");
-  const dots = document.querySelectorAll(".slider-dots .dot");
-  const next = document.querySelector(".slider-btn.next");
-  const prev = document.querySelector(".slider-btn.prev");
-  let current = 0;
-
-  function updateSlider() {
-    slides.forEach((slide, i) => {
-      slide.style.transform = `translateX(${(i - current) * 100}%)`;
-    });
-    dots.forEach(dot => dot.classList.remove("active"));
-    if (dots[current]) dots[current].classList.add("active");
-  }
-
-  next.addEventListener("click", () => {
-    current = (current + 1) % slides.length;
-    updateSlider();
-  });
-
-  prev.addEventListener("click", () => {
-    current = (current - 1 + slides.length) % slides.length;
-    updateSlider();
-  });
-
-  dots.forEach(dot => {
-    dot.addEventListener("click", () => {
-      current = parseInt(dot.dataset.index);
-      updateSlider();
-    });
-  });
-
-  updateSlider();
-});
-    </script><script>
-const track = document.querySelector('.carousel-track');
-const slides = Array.from(track.children);
-const nextButton = document.querySelector('.next');
-const prevButton = document.querySelector('.prev');
-const dots = document.querySelectorAll('.dot');
-let currentIndex = 0;
-let autoPlayInterval;
-
-function updateSlider() {
-  const slideWidth = slides[0].getBoundingClientRect().width;
-  track.style.transform = `translateX(-${slideWidth * currentIndex}px)`;
-  document.querySelector('.dot.active')?.classList.remove('active');
-  dots[currentIndex].classList.add('active');
-}
-
-function moveToSlide(index) {
-  currentIndex = index;
-  updateSlider();
-}
-
-function moveSlide(step) {
-  currentIndex = (currentIndex + step + slides.length) % slides.length;
-  updateSlider();
-}
-
-dots.forEach(dot => {
-  dot.addEventListener('click', () => {
-    moveToSlide(Number(dot.dataset.index));
-    stopAutoplay();
-  });
-});
-
-nextButton.addEventListener('click', () => {
-  moveSlide(1);
-  stopAutoplay();
-});
-
-prevButton.addEventListener('click', () => {
-  moveSlide(-1);
-  stopAutoplay();
-});
-
-function startAutoplay() {
-  autoPlayInterval = setInterval(() => moveSlide(1), 5000);
-}
-
-function stopAutoplay() {
-  clearInterval(autoPlayInterval);
-}
-
-document.querySelector('.carousel').addEventListener('mouseenter', stopAutoplay);
-document.querySelector('.carousel').addEventListener('mouseleave', startAutoplay);
-
-window.addEventListener('resize', updateSlider);
-updateSlider();
-startAutoplay();
-</script></br><script>
 document.querySelectorAll('.card-link').forEach(link => {
   const dataHref = link.getAttribute('data-href');
   if (!dataHref || dataHref.trim() === "") {
@@ -3813,5 +3517,107 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
+
+<script>
+
+/* ======= JS NAMESPACE: us_carousel (no conflict) ======= */
+(function(){
+  const track = document.getElementById('us_track');
+  if(!track) return;
+  let slides = Array.from(track.querySelectorAll('.us_slide'));
+
+  // create clones for infinite effect
+  const firstClone = slides[0].cloneNode(true);
+  const lastClone = slides[slides.length -1].cloneNode(true);
+  track.appendChild(firstClone);
+  track.insertBefore(lastClone, slides[0]);
+  slides = Array.from(track.querySelectorAll('.us_slide'));
+
+  let index = 1;
+  track.style.transform = `translateX(-${index * 100}%)`;
+
+  // setup dots based on real slides count (exclude clones)
+  const realCount = slides.length - 2;
+  const dotsContainer = document.getElementById('us_dots');
+  for(let i=0;i<realCount;i++){
+    const btn = document.createElement('button');
+    btn.setAttribute('aria-label', 'ir a slide ' + (i+1));
+    btn.dataset.index = i;
+    btn.setAttribute('aria-pressed', i===0 ? 'true' : 'false');
+    btn.addEventListener('click', ()=> {
+      index = i + 1; // compensate clones
+      track.style.transition = 'transform 0.6s ease';
+      track.style.transform = `translateX(-${index * 100}%)`;
+      updateDots();
+      resetAutoplay();
+    });
+    dotsContainer.appendChild(btn);
+  }
+
+  const dots = Array.from(dotsContainer.querySelectorAll('button'));
+  function updateDots(){
+    const realIndex = (index - 1 + realCount) % realCount;
+    dots.forEach((d, i)=> d.setAttribute('aria-pressed', i===realIndex ? 'true' : 'false'));
+  }
+
+  // autoplay
+  let auto = true;
+  let interval = setInterval(nextSlide, 4000);
+  function nextSlide(){
+    if(!auto) return;
+    index++;
+    track.style.transition = 'transform 0.6s ease';
+    track.style.transform = `translateX(-${index * 100}%)`;
+    updateDots();
+  }
+  function resetAutoplay(){
+    clearInterval(interval);
+    interval = setInterval(nextSlide, 4000);
+  }
+
+  // transitionend correction for clones
+  track.addEventListener('transitionend', ()=>{
+    if(slides[index].isEqualNode(firstClone)){
+      track.classList.add('us_no_transition');
+      index = 1;
+      track.style.transform = `translateX(-${index * 100}%)`;
+      setTimeout(()=> track.classList.remove('us_no_transition'), 20);
+    }
+    if(slides[index].isEqualNode(lastClone)){
+      track.classList.add('us_no_transition');
+      index = slides.length - 2;
+      track.style.transform = `translateX(-${index * 100}%)`;
+      setTimeout(()=> track.classList.remove('us_no_transition'), 20);
+    }
+  });
+
+  // touch controls
+  let startX = 0;
+  track.addEventListener('touchstart', (e)=>{
+    auto = false;
+    clearInterval(interval);
+    startX = e.touches[0].clientX;
+  }, {passive:true});
+
+  track.addEventListener('touchend', (e)=>{
+    const moveX = e.changedTouches[0].clientX - startX;
+    if(moveX < -50) index++;
+    else if(moveX > 50) index--;
+    track.style.transition = 'transform 0.6s ease';
+    track.style.transform = `translateX(-${index * 100}%)`;
+    updateDots();
+    auto = true;
+    resetAutoplay();
+  });
+
+  // On resize ensure transform matches slide width units (works with percent)
+  window.addEventListener('resize', ()=>{
+    track.style.transition = 'none';
+    track.style.transform = `translateX(-${index * 100}%)`;
+    setTimeout(()=> track.style.transition = 'transform 0.6s ease', 20);
+  });
+})();
+
+</script>
 </body>
 </html>
