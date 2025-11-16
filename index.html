@@ -402,8 +402,9 @@ body.loading {
   inset: 0;
   background: linear-gradient(160deg, #000 0%, #001a2b 60%, #003d5c 100%);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: center; /* ESTO CENTRA TODO */
   color: white;
   font-family: 'Poppins', sans-serif;
   z-index: 99999;
@@ -413,8 +414,8 @@ body.loading {
 /* Contenido centrado */
 .loader-content {
   text-align: center;
-  animation: fadeIn 0.8s ease forwards;
   opacity: 0;
+  animation: fadeOpacity 0.7s ease forwards; /* SOLO OPACIDAD */
 }
 
 @keyframes fadeIn {
@@ -423,11 +424,6 @@ body.loading {
 }
 
 /* Logo sin reflejo */
-.logo-movietx {
-  width: 160px;
-  margin-bottom: 10px;
-  filter: drop-shadow(0 0 12px #008cff);
-}
 
 /* Título */
 .titulo-movietx {
@@ -445,6 +441,18 @@ body.loading {
   0% { background-position: 0%; }
   100% { background-position: 200%; }
 }
+@keyframes fadeOpacity {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.logo-movietx {
+  width: 160px;
+  margin: 0 auto 10px auto; /* CENTRO SIN MOVIMIENTO */
+  display: block;
+  filter: drop-shadow(0 0 12px #008cff);
+}
+
 
 /* Barra */
 .barra-externa {
@@ -500,58 +508,64 @@ document.addEventListener("DOMContentLoaded", () => {
     const porcentajeTexto = document.getElementById("porcentaje");
     const loader = document.getElementById("loader-container");
 
-    const imagenes = Array.from(document.images);
-    let totalItems = imagenes.length + 3; // puedes agregar más si cargas API
-    let itemsCargados = 0;
+    let progreso = 0;
 
-    function actualizarLoader() {
-        let progreso = Math.round((itemsCargados / totalItems) * 100);
+    function actualizarLoader(valor) {
+        progreso = Math.min(100, valor);
         barra.style.width = progreso + "%";
         porcentajeTexto.innerText = progreso + "%";
+    }
 
-        if (progreso >= 100) {
+    function finalizarLoader() {
+        actualizarLoader(100);
+
+        setTimeout(() => {
+            loader.style.opacity = "0";
             setTimeout(() => {
-                loader.style.opacity = "0";
-                setTimeout(() => {
-                    loader.remove();
-                    document.body.classList.remove("loading");
+                loader.remove();
+                document.body.classList.remove("loading");
 
-                    // RE-ACTIVAR CARRUSEL (si usas Swiper)
-                    if (window.miCarruselSwiper) {
-                        miCarruselSwiper.autoplay.start();
-                    }
+                // Activar carrusel si existe
+                if (window.miCarruselSwiper) {
+                    miCarruselSwiper.autoplay.start();
+                }
 
-                }, 1000);
-            }, 300);
-        }
+            }, 800);
+        }, 300);
     }
 
-    // Contar imágenes
-    imagenes.forEach(img => {
-        if (img.complete) {
-            itemsCargados++; actualizarLoader();
-        } else {
-            img.onload = () => { itemsCargados++; actualizarLoader(); };
-            img.onerror = () => { itemsCargados++; actualizarLoader(); };
-        }
-    });
+    // ==========================================
+    // 1 — Carga de lo esencial (logo)
+    // ==========================================
+    const logo = document.querySelector(".logo-movietx");
 
-    // Simular funciones pesadas
-    function tareaPesada() {
-        return new Promise(resolve => setTimeout(resolve, 800));
+    if (logo.complete) {
+        actualizarLoader(40);
+    } else {
+        logo.onload = () => actualizarLoader(40);
+        logo.onerror = () => actualizarLoader(40);
     }
 
-    Promise.all([
-        tareaPesada(),
-        tareaPesada(),
-        tareaPesada()
-    ]).then(() => {
-        itemsCargados += 3;
-        actualizarLoader();
-    });
+    // ==========================================
+    // 2 — Avance "inteligente" del loader
+    // ==========================================
+    let anim = setInterval(() => {
+        if (progreso < 90) {
+            actualizarLoader(progreso + 5);
+        }
+    }, 120);
+
+    // ==========================================
+    // 3 — Tiempo máximo (Turbo Loader)
+    // ==========================================
+    setTimeout(() => {
+        clearInterval(anim);
+        finalizarLoader();
+    }, 1500); // 1.5 segundos máximo
 
 });
 </script>
+
 
 
  
