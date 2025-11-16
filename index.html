@@ -371,128 +371,189 @@ i {
    <!-- Pantalla de carga MovieTx mejorada -->
 <div id="loader-container">
   <div class="loader-content">
-    <div class="logo-container">
-      <img src="Logo Poster MovieTx PNG/Logo MovieTx.png" alt="MovieTx Logo" class="logo-movietx" />
-      <div class="reflejo"></div>
-    </div>
+
+    <img src="Logo MovieTx.png" class="logo-movietx" alt="MovieTx">
+
     <h1 class="titulo-movietx">MovieTx</h1>
+
     <div class="barra-externa">
-      <div class="barra-interna"></div>
+      <div class="barra-interna" id="barra"></div>
     </div>
-    <br>
-    <p class="texto-carga">Disfrutar mi aplicación de películas y series</p>
-<br>
-      <p class="texto-carga" style="text-align:center;color:#777;padding:20px 10px;border-top:1px solid rgba(255,255,255,0.1);margin-top:200px;">MovieTx © 2025 — Todos los derechos reservados</p>
+
+    <p class="porcentaje" id="porcentaje">0%</p>
+
+    <p class="texto-carga">Cargando tu experiencia...</p>
+
+    <p class="footer-loader">MovieTx © 2025 — Todos los derechos reservados</p>
+
   </div>
 </div>
-    
 
 <style>
+
+/* BLOQUEAR SCROLL MIENTRAS CARGA */
+body.loading {
+  overflow: hidden;
+}
+
+/* Pantalla completa */
 #loader-container {
   position: fixed;
   inset: 0;
-  background: #000;
+  background: linear-gradient(160deg, #000 0%, #001a2b 60%, #003d5c 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
   color: white;
   font-family: 'Poppins', sans-serif;
   z-index: 99999;
+  transition: opacity 1s ease;
+}
+
+/* Contenido centrado */
+.loader-content {
   text-align: center;
+  animation: fadeIn 0.8s ease forwards;
+  opacity: 0;
 }
-.logo-container {
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
-  border-radius: 10px;
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
+
+/* Logo sin reflejo */
 .logo-movietx {
-  width: 150px;
-  display: block;
-  filter: drop-shadow(0 0 10px #fff);
+  width: 160px;
+  margin-bottom: 10px;
+  filter: drop-shadow(0 0 12px #008cff);
 }
-.reflejo {
-  position: absolute;
-  top: 0;
-  left: -75%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(120deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.1) 100%);
-  animation: reflejoLogo 2s linear infinite;
-  transform: skewX(-25deg);
-}
-@keyframes reflejoLogo {
-  0% { left: -75%; }
-  100% { left: 125%; }
-}
+
+/* Título */
 .titulo-movietx {
-  font-size: 2.2em;
+  font-size: 2.4em;
   font-weight: bold;
-  margin-top: 15px;
+  margin: 10px 0 25px;
   background: linear-gradient(90deg, #fff, #00bfff, #fff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-size: 200%;
   animation: brilloTexto 3s linear infinite;
 }
+
+/* Animación texto */
 @keyframes brilloTexto {
   0% { background-position: 0%; }
   100% { background-position: 200%; }
 }
+
+/* Barra */
 .barra-externa {
-  width: 220px;
-  height: 8px;
-  background: rgba(255,255,255,0.2);
+  width: 260px;
+  height: 10px;
+  background: rgba(255,255,255,0.15);
   border-radius: 20px;
-  margin: 25px auto 10px auto;
+  margin: 0 auto;
   overflow: hidden;
-  box-shadow: 0 0 10px #00bfff;
 }
+
 .barra-interna {
   width: 0%;
   height: 100%;
   background: #00bfff;
-  box-shadow: 0 0 20px #00bfff;
+  box-shadow: 0 0 15px #00bfff;
   border-radius: 20px;
-  animation: cargaBarra 4s ease-in-out infinite;
+  transition: width 0.3s ease-out;
 }
-@keyframes cargaBarra {
-  0% { width: 0%; }
-  50% { width: 100%; }
-  100% { width: 0%; }
+
+/* Porcentaje */
+.porcentaje {
+  margin-top: 8px;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #00bfff;
 }
+
+/* Texto */
 .texto-carga {
-  position: relative;
   font-size: 1em;
   color: #ddd;
-  text-align: center;
-  margin-top: 60px; /* más abajo */
-  opacity: 0;
-  animation: fadeUp 3s ease-out 1s forwards, reflejoTexto 4s linear infinite 3s;
-  background: linear-gradient(90deg, #fff, #00bfff, #fff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-size: 200%;
+  margin-top: 40px;
+  opacity: 0.8;
 }
-@keyframes fadeUp {
-  0% { transform: translateY(40px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
+
+/* Footer */
+.footer-loader {
+  margin-top: 100px;
+  color: #777;
+  font-size: 0.9em;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 20px;
 }
-@keyframes reflejoTexto {
-  0% { background-position: 0%; }
-  100% { background-position: 200%; }
-}
+
 </style>
 
 <script>
-window.addEventListener('load', () => {
-  const loader = document.getElementById('loader-container');
-  loader.style.transition = 'opacity 1s ease';
-  loader.style.opacity = '0';
-  setTimeout(() => loader.remove(), 1000);
+document.body.classList.add("loading");
+
+document.addEventListener("DOMContentLoaded", () => {
+    const barra = document.getElementById("barra");
+    const porcentajeTexto = document.getElementById("porcentaje");
+    const loader = document.getElementById("loader-container");
+
+    const imagenes = Array.from(document.images);
+    let totalItems = imagenes.length + 3; // puedes agregar más si cargas API
+    let itemsCargados = 0;
+
+    function actualizarLoader() {
+        let progreso = Math.round((itemsCargados / totalItems) * 100);
+        barra.style.width = progreso + "%";
+        porcentajeTexto.innerText = progreso + "%";
+
+        if (progreso >= 100) {
+            setTimeout(() => {
+                loader.style.opacity = "0";
+                setTimeout(() => {
+                    loader.remove();
+                    document.body.classList.remove("loading");
+
+                    // RE-ACTIVAR CARRUSEL (si usas Swiper)
+                    if (window.miCarruselSwiper) {
+                        miCarruselSwiper.autoplay.start();
+                    }
+
+                }, 1000);
+            }, 300);
+        }
+    }
+
+    // Contar imágenes
+    imagenes.forEach(img => {
+        if (img.complete) {
+            itemsCargados++; actualizarLoader();
+        } else {
+            img.onload = () => { itemsCargados++; actualizarLoader(); };
+            img.onerror = () => { itemsCargados++; actualizarLoader(); };
+        }
+    });
+
+    // Simular funciones pesadas
+    function tareaPesada() {
+        return new Promise(resolve => setTimeout(resolve, 800));
+    }
+
+    Promise.all([
+        tareaPesada(),
+        tareaPesada(),
+        tareaPesada()
+    ]).then(() => {
+        itemsCargados += 3;
+        actualizarLoader();
+    });
+
 });
 </script>
+
+
  
   <!-- FIN -->
   
