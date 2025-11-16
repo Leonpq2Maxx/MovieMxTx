@@ -635,8 +635,8 @@ document.addEventListener('DOMContentLoaded', () => {
       <p class="player-loading-text">Cargando<span class="dots"></span></p>
     </div>
 
-    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/6ZnHQKcqQ8nmfP6woZu2v5EtXoW.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
-      <source src="https://dl.dropbox.com/scl/fi/hh1xgnzlbp108s5sidez3/Bob-esponja-2004.mp4?rlkey=jtpfvtdn2c3e6h55tnwxe73wq&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
+    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/kpyXnnyO7UiK7FZFHJ5Ae7DRAIF.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+      <source src="https://dl.dropbox.com/scl/fi/nlmf2cb0g4wxq5mdqcmm5/Karol-G-2025.mp4?rlkey=v1l0fty9ixu3s7n8jaup71qbg&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
   <div id="episodio-actual" style="
@@ -647,10 +647,11 @@ document.addEventListener('DOMContentLoaded', () => {
   color:#ff2d5b;
 "></div>
 
+
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>2004</span>
-    <i class="fal fa-clock"></i><span>1h 24min</span>
-    <i class="fal fa-thumbs-up"></i><span>70%</span>
+    <i class="fal fa-calendar-alt"></i><span>2025</span> <!--Aca va el año de estreno de pelicula-->
+    <i class="fal fa-clock"></i><span>1H 48Min</span> <!--aca va cuanto dura-->
+    <i class="fal fa-thumbs-up"></i><span>82%</span> <!--aca va la calificacion-->
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
@@ -658,25 +659,21 @@ document.addEventListener('DOMContentLoaded', () => {
       </svg>
       <span>1080P</span>
     </div>
-    <span></span>
-    <h3></h3>
-    <div class="genero-badge">///</div>
-      
 
   </div>
   
   <div class="info-pelicula">
-    <h1>Bob Esponja: La película</h1>
-  <span class="genero-badge"> Animación • Aventura • Familia • Comedia</span>
+    <h1>Karol G: Mañana fue muy bonito</h1>
+  <span class="genero-badge">Musical • Documental</span>
   
     <p class="sinopsis">
-      Hay problemas en Bikini Bottom: la corona del Rey Neptuno ha desaparecido y las sospechas recaen en el Sr. Krabs. Junto a Patrick, su mejor amigo, Bob Esponja marcha a la peligrosa Ciudad de Shell para rescatar la corona de Neptuno y salvar al Sr. Krabs.
+      Karol G descorre el telón de su ascenso al estrellato mientras navega por una gira de estadios con entradas agotadas, creando nueva música y lanzando un nuevo álbum.
     </p>
 
     <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
-      <p><strong>Director:</strong> Stephen Hillenburg</p>
-      <p><strong>Reparto:</strong> Cliff Burton, Tom Kenny, Rodger Bumpass</p>
-      <p><strong>Estreno:</strong> 19/11/2004 | <strong>Idioma:</strong> Español Latino 🇲🇽</p>
+      <p><strong>Director:</strong> Cristina Constantini</p>
+      <p><strong>Reparto:</strong> Karol G</p>
+      <p><strong>Estreno:</strong> 08/05/2025 | <strong>Idioma:</strong> ------</p>
     </div>
 
     <br>
@@ -762,7 +759,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const continueInfo = document.getElementById('continue-info');
   const videoElement = document.querySelector('video');
 
-  const MOVIE_KEY = 'Bob_Esponja_La_Pelicula_2004'; /*Aca siempre con un _ para guardar su progresos etc...*/
+  const MOVIE_KEY = 'Karol_G_Mañana_fue_Muy_Bonito_2025'; /*Aca siempre con un _ para guardar su progresos etc...*/
   const ultimoTiempo = localStorage.getItem(`ultimoTiempo_${MOVIE_KEY}`) || 0;
 
   // 🔹 Mostrar modal si hay progreso guardado
@@ -920,10 +917,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 🔹 Botón "Agregar a Favoritos"
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
-      titulo: "Bob Esponja: La película",
-      imagen: "https://image.tmdb.org/t/p/w300/j4Sqs3SKNaJ4chdKXS1qqUlaWyW.jpg",
-      genero: "Animacion",
-      archivo: "Bob Esponja 1 La película (2004).html",
+      titulo: "Karol G: Mañana fue muy bonito",
+      imagen: "https://image.tmdb.org/t/p/w300/5aXoQYwaQ7JJVUWclHAEXJgiS2M.jpg",
+      genero: "Drama",
+      archivo: "Karol G Mañana fue muy bonito (2025).html",
       tipo: "pelicula",
       timestamp: Date.now()
     };
@@ -1029,29 +1026,29 @@ document.addEventListener('DOMContentLoaded', () => {
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
-      <a href="Bob Esponja 2 Un héroe fuera del agua (2015).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/z5aphafm6OEcAq4jwOs5Ml9F384.jpg" alt="">
-        <p>Bob Esponja: Un héroe fuera del agua</p>
+      <a href="html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/lTCsGvAjqBbqp7T5ziK28SeDfVT.jpg" alt="">
+        <p>CATO</p>
       </a>
-      <a href="Bob Esponja 3 Un héroe al rescate (2020).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/fi2pg2mtAZwhq3qVuAs6PztjnHT.jpg" alt="">
-        <p>Bob Esponja: Un héroe al rescate (2020)</p>
+      <a href="Blancanieves (2025).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/7FZhpH4YasGdvY4FUGQJhCusLeg.jpg" alt="">
+        <p>Blancanieves</p>
       </a>
-      <a href="Al rescate de Fondo de Bikini La película de Arenita Mejillas (2024).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/7WfWEy1EIJj4nLR6PdE6A09TcOv.jpg" alt="">
-        <p>Al rescate de Fondo de Bikini</p>
+      <a href="Wonka (2023).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/qhb1qOilapbapxWQn9jtRCMwXJF.jpg" alt="">
+        <p>Wonka</p>
       </a>
-      <a href="Plankton (2025).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/fCvwQJVcbjNub2PiKzZmQXR7i1I.jpg" alt="">
-        <p>Plankton</p>
+      <a href="Barbie (2023).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/iuFNMS8U5cb6xfzi51Dbkovj7vM.jpg" alt="">
+        <p>Barbie</p>
       </a>
-      <a href="Madagascar 2 (2008).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/zYbvSjajQrb2jU9rUo5Mt06stPd.jpg" alt="">
-        <p>Madagascar 2</p>
+      <a href="Nahir (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/w4TcFexTfo5X7NkvNSeTrRSu9Sj.jpg" alt=""> <!--EN CASO DE NO SER PARA ADULTOS UTILICE ESTAS 6 ESTRUCTURAS DEL CODIGO, LA DE ABAJO ES PARA ADULTOS. SI NO CONTIENES PELICULAS DE ADULTOS UTILIZA LAS 6 QUE DEJARE MARCADA CON NUMEROS DEL (1 AL 6) EN CASO DE TENER PELICULA DE ADULTOS UTILIZA EL DE ABAJO-->
+        <p>Nahir</p>
       </a>
-      <a href="Mi villano favorito (2010).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/7ml02WwUzz4jlZJdiEI4ZIYHj1J.jpg" alt="">
-        <p>Mi villano favorito</p>
+      <a class="serie" href="Bob Esponja 1 La película (2004).html"> <!--data-href=".html" data-adulto="adulto" si es para adulto debes conservar estas etiquetas-->
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/j4Sqs3SKNaJ4chdKXS1qqUlaWyW.jpg" alt="">
+        <p>Bob Esponja: La película</p>
       </a>
     </div>
   </div>
@@ -1076,7 +1073,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const player = new Plyr(videoElement, {
       controls: [
-        'rewind', 'play-large', 'play', 'fast-forward',
+        'rewind', 'play', 'fast-forward',
         'progress', 'current-time', 'duration', 'mute', 'volume',
         'captions', 'pip', 'airplay', 'fullscreen'
       ]
@@ -1179,9 +1176,9 @@ player.on('play', () => {
       const STORAGE_KEY = 'pos_' + videoSrc;
 
       /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
-      const historialTitulo = "Bob Esponja: La película";
-      const historialImagen = "https://image.tmdb.org/t/p/w300/j4Sqs3SKNaJ4chdKXS1qqUlaWyW.jpg";
-      const historialArchivo = "Bob Esponja 1 La película (2004).html";
+      const historialTitulo = "Karol G: Mañana fue muy bonito";
+      const historialImagen = "https://image.tmdb.org/t/p/w300/5aXoQYwaQ7JJVUWclHAEXJgiS2M.jpg";
+      const historialArchivo = "Karol G Mañana fue muy bonito (2025).html";
 
       let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
       let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
