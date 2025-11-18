@@ -458,73 +458,6 @@
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
-
-/* === Barra de progreso adaptada a todas las pantallas === */
-.ep-progress {
-  width: 150%;
-  height: 10px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 999px;
-  overflow: hidden;
-  margin-top: 6px;
-  position: relative;
-  text-align: center;
-}
-
-.ep-progress-fill {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, #ff2d5b, #00c6ff);
-  transition: width 0.25s linear;
-  position: relative;
-}
-
-.ep-percent {
-  position: absolute;
-  left: 55%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  font-weight: 700;
-  font-size: 0.5rem;
-  color: #fff;
-  pointer-events: none;
-  user-select: none;
-}
-
-/* === Responsividad === */
-@media (max-width: 480px) { /* teléfonos pequeños */
-  .ep-progress {
-    width: 100%;
-    height: 8px;
-  }
-  .ep-percent {
-    font-size: 0.45rem;
-    left: 50%;
-  }
-}
-
-@media (min-width: 481px) and (max-width: 1024px) { /* tablets / móviles grandes */
-  .ep-progress {
-    width: 120%;
-    height: 9px;
-  }
-  .ep-percent {
-    font-size: 0.55rem;
-    left: 52%;
-  }
-}
-
-@media (min-width: 1025px) { /* pantallas grandes / PC */
-  .ep-progress {
-    width: 150%;
-    height: 10px;
-  }
-  .ep-percent {
-    font-size: 0.6rem;
-    left: 55%;
-  }
-}
-
 </style>
 </head>
 
@@ -1207,7 +1140,7 @@ const SERIES_KEY = "Nombre de serie";
       thumb: "https://image.tmdb.org/t/p/w780/ugndFTbGW9G4iGOu0H5zE6NDp85.jpg",
       desc: "Lanzada 2011 — 0 episodios",
       episodes: [
-        { id: "s1e1", title: "Episodio 1", time: "45m", thumb: "", href: "" },
+        { id: "s1e1", title: "Episodio 1", time: "45m", thumb: "", href: "https://pomf2.lain.la/f/ofq1mlqu.mp4" },
         { id: "s1e2", title: "Episodio 2", time: "45m", thumb: "", href: "" },
         { id: "s1e3", title: "Episodio 3", time: "45m", thumb: "", href: "" },
         { id: "s1e4", title: "Episodio 4", time: "45m", thumb: "", href: "" },
@@ -1664,9 +1597,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const player = new Plyr(videoElement, {
       controls: [
-        'rewind', 'play-large', 'play', 'fast-forward',
+        'rewind', 'play', 'fast-forward',
         'progress', 'current-time', 'duration', 'mute', 'volume',
-        'captions', 'pip', 'airplay', 'fullscreen'
+        'captions', 'airplay', 'fullscreen'
       ]
     });
 
