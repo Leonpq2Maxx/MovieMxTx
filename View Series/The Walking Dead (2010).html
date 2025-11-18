@@ -1308,7 +1308,9 @@ const SERIES_KEY = "Nombre de serie";
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
     renderSeasons();
-    selectSeason(0);
+    const savedSeason = localStorage.getItem('ultimaTemporada');
+selectSeason(savedSeason !== null ? parseInt(savedSeason) : 0);
+
     // foco
     closeBtn.focus();
   }
@@ -1348,6 +1350,8 @@ const SERIES_KEY = "Nombre de serie";
   // seleccionar temporada
   function selectSeason(index){
     activeSeasonIndex = index;
+    localStorage.setItem('ultimaTemporada', index);  // 👈 Guardar selección de temporada
+
     // actualizar clases
     Array.from(seasonsListUL.children).forEach((li, i) => {
       li.classList.toggle('active', i === index);
