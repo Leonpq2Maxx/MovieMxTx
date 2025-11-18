@@ -1407,16 +1407,6 @@ selectSeason(savedSeason !== null ? parseInt(savedSeason) : 0);
     Array.from(seasonsListUL.children).forEach((li, i) => {
       li.classList.toggle('active', i === index);
     });
-    // 🔹 Deslizar automáticamente hasta la temporada seleccionada
-const activeSeasonElement = seasonsListUL.children[index];
-if (activeSeasonElement) {
-  activeSeasonElement.scrollIntoView({
-    behavior: 'smooth',
-    block: 'nearest',
-    inline: 'center'
-  });
-}
-
     const season = seasonsData[index];
     seasonLabel.textContent = season.title;
     seasonDesc.textContent = `— ${season.episodes.length} episodios`;
