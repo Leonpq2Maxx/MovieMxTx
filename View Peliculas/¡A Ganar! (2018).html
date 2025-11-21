@@ -4,6 +4,9 @@
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <title>MovieTx - Reproductor</title>
+  <meta name="screen-orientation" content="portrait">
+<meta name="x5-orientation" content="portrait">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <link href="https://fonts.googleapis.com/css2?family=PT+Sans&amp;family=Roboto&amp;display=swap" rel="stylesheet"/>
   <link href="https://cdn.jsdelivr.net/gh/CDNSFree2/Plyr/plyr.css" rel="stylesheet"/>
   <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet"/>
@@ -413,6 +416,31 @@
 </head>
 
 <body ondragstart="return false;" ondrop="return false;">
+  <style>
+  body {
+    transform: rotate(0deg) !important;
+  }
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  // Detectar entrada y salida de fullscreen
+  player.on('enterfullscreen', () => {
+      // Permitir horizontal solo cuando está fullscreen
+      screen.orientation.unlock();
+  });
+
+  player.on('exitfullscreen', () => {
+      // Volver a bloquear la pantalla en vertical
+      try {
+          screen.orientation.lock("portrait");
+      } catch (e) {
+          console.log("El navegador no permite bloqueo pero no afecta.");
+      }
+  });
+});
+</script>
+
 
   <script>
 // 🔹 Evita volver a la página anterior
@@ -430,7 +458,6 @@ if (window.performance && window.performance.navigation.type === 2) {
 }
 </script>
 
-  <!-- 🔴 Pantalla de carga personalizada MovieTx (versión neón) -->
 <!-- 🔵 Pantalla de carga idéntica al index + barra profesional -->
 
 <div id="loader-screen">
