@@ -1258,16 +1258,28 @@ player.on('play', () => {
         indexHist = historial.length - 1;
     
         const loader = document.getElementById("loader-screen");
-    
-        const observer = new MutationObserver(() => {
-          
-          if (loader.classList.contains("hidden")) {
-            mostrarModalFavoritos("✅ Agregado al historial");
-            observer.disconnect();
-          }
-        });
 
-        observer.observe(loader, { attributes: true });
+// Chequeo rápido cada 200ms hasta que el loader desaparezca
+const esperarLoader = setInterval(() => {
+  const estilo = getComputedStyle(loader);
+
+  if (
+    loader.classList.contains("hidden") ||
+    estilo.opacity === "0" ||
+    estilo.display === "none" ||
+    estilo.visibility === "hidden"
+  ) {
+    mostrarModalFavoritos("✅ Agregado al historial");
+    clearInterval(esperarLoader);
+  }
+}, 200);
+
+// Fallback máximo por si algo falla
+setTimeout(() => {
+  mostrarModalFavoritos("✅ Agregado al historial");
+  clearInterval(esperarLoader);
+}, 3000);
+
       }
 
   // ✅ Ahora el intervalo SÍ está dentro del DOMContentLoaded
