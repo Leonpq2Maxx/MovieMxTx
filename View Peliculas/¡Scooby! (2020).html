@@ -1232,60 +1232,65 @@ player.on('play', () => {
     document.addEventListener('DOMContentLoaded', () => {
       const videoElement = document.querySelector('.vid1');
       if (!videoElement) return;
-
+  
       const videoSrc = videoElement.querySelector('source').getAttribute('src');
       const STORAGE_KEY = 'pos_' + videoSrc;
-
-      /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
+ 
       const historialTitulo = "¡Scooby!";
       const historialImagen = "https://image.tmdb.org/t/p/w300/tOhuq4RYr2Rt9TM7X4dkr7A9HSd.jpg";
       const historialArchivo = "¡Scooby! (2020).html";
+  
+      let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
+      let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
+  
+      if (indexHist === -1) {
+        
+        historial.push({
+          titulo: historialTitulo,
+          imagen: historialImagen,
+          progreso: "Asistido 0 min",
+          archivo: historialArchivo,
+          tipo: "pelicula",
+          timestamp: Date.now()
+        });
+    
+        localStorage.setItem('historial_usuarios', JSON.stringify(historial));
+        indexHist = historial.length - 1;
+    
+        const loader = document.getElementById("loader-screen");
+    
+        const observer = new MutationObserver(() => {
+          
+          if (loader.classList.contains("hidden")) {
+            mostrarModalFavoritos("✅ Agregado al historial");
+            observer.disconnect();
+          }
+        });
+
+        observer.observe(loader, { attributes: true });
+      }
+
+  // ✅ Ahora el intervalo SÍ está dentro del DOMContentLoaded
+  setInterval(() => {
+    if (!videoElement.paused && !videoElement.ended) {
+      const minutos = Math.floor(videoElement.currentTime / 60);
 
       let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
       let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
-      
-      if (indexHist === -1) {
-  historial.push({
-    titulo: historialTitulo,
-    imagen: historialImagen,
-    progreso: "Asistido 0 min",
-    archivo: historialArchivo,
-    tipo: "pelicula",
-    timestamp: Date.now()
-  });
-  localStorage.setItem('historial_usuarios', JSON.stringify(historial));
-  indexHist = historial.length - 1;
 
-  // 🔥 Espera a que desaparezca la pantalla de carga antes de mostrar el mensaje
-  const loader = document.getElementById("loader-screen");
-
-  const observer = new MutationObserver(() => {
-    if (loader.classList.contains("hidden")) {
-      mostrarModalFavoritos("✅ Agregado al historial");
-      observer.disconnect();
-    }
-  });
-
-  observer.observe(loader, { attributes: true });
-}
-
-
-    }
-    setInterval(() => {
-      if (!videoElement.paused && !videoElement.ended) {
-        historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
-        indexHist = historial.findIndex(item => item.titulo === historialTitulo);
-        if (indexHist !== -1) {
-          const minutos = Math.floor(videoElement.currentTime / 60);
-          historial[indexHist].progreso = `Asistido ${minutos} min`;
-          historial[indexHist].timestamp = Date.now(); // ✅ esto asegura que suba al principio
-          localStorage.setItem('historial_usuarios', JSON.stringify(historial));
-        }
-        localStorage.setItem(STORAGE_KEY, videoElement.currentTime);
+      if (indexHist !== -1) {
+        historial[indexHist].progreso = `Asistido ${minutos} min`;
+        historial[indexHist].timestamp = Date.now();
+        localStorage.setItem('historial_usuarios', JSON.stringify(historial));
       }
-    }, 10000);
-    });
-  </script>
+
+      localStorage.setItem(STORAGE_KEY, videoElement.currentTime);
+    }
+  }, 10000);
+
+});
+</script>
+
   
 </body>
 </html>
