@@ -430,19 +430,27 @@ if (window.performance && window.performance.navigation.type === 2) {
 }
 </script>
 
-  <!-- 🔴 Pantalla de carga personalizada MovieTx (versión neón) -->
 <div id="loader-screen">
   <div class="loader-content">
     <div class="loader-circle">
       <img src="../Logo Poster MovieTx PNG/Logo MovieTx.png" alt="Logo MovieTx" class="loader-logo">
     </div>
+
     <h1 class="loader-title">MovieTx</h1>
     <p class="loader-sub">Cargando<span class="loading-dots"></span></p>
     <p class="loader-msg">Por favor, espere</p>
+
+    <!-- 🔥 Nueva barra de carga profesional -->
+    <div class="loading-bar">
+      <div class="loading-fill" id="loading-fill"></div>
+      <div class="loading-percent" id="loading-percent">0%</div>
+    </div>
+
   </div>
 </div>
 
 <style>
+/* COPIA EXACTA DEL INDEX (NO SE TOCA) */
 #loader-screen {
   position: fixed;
   inset: 0;
@@ -458,9 +466,8 @@ if (window.performance && window.performance.navigation.type === 2) {
   opacity: 0;
   visibility: hidden;
 }
-.loader-content {
-  text-align: center;
-}
+.loader-content { text-align: center; }
+
 .loader-circle {
   width: 180px;
   height: 180px;
@@ -475,14 +482,14 @@ if (window.performance && window.performance.navigation.type === 2) {
   margin-bottom: 20px;
   box-shadow: 0 0 30px rgba(255, 0, 128, 0.5);
 }
-.loader-logo {
-  width: 100px;
-  height: auto;
-}
+
+.loader-logo { width: 100px; }
+
 @keyframes spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
 .loader-title {
   font-size: 2.5rem;
   color: #fff;
@@ -491,14 +498,9 @@ if (window.performance && window.performance.navigation.type === 2) {
   margin-bottom: 10px;
   letter-spacing: 2px;
 }
-.loader-sub {
-  font-size: 1.2rem;
-  color: #ccc;
-}
-.loading-dots::after {
-  content: '';
-  animation: dotPulse 1.5s infinite steps(4);
-}
+
+.loader-sub { font-size: 1.2rem; color: #ccc; }
+.loading-dots::after { content: ''; animation: dotPulse 1.5s steps(4) infinite; }
 @keyframes dotPulse {
   0% { content: ''; }
   25% { content: '.'; }
@@ -506,29 +508,87 @@ if (window.performance && window.performance.navigation.type === 2) {
   75% { content: '...'; }
   100% { content: ''; }
 }
-.loader-msg {
-  font-size: 1rem;
-  color: #888;
-  margin-top: 10px;
+.loader-msg { font-size: 1rem; color: #888; margin-top: 10px; }
+
+/* 🔥 NUEVA BARRA PROFESIONAL (MISMO ESTILO DE COLOR) */
+.loading-bar {
+  width: 75%;
+  height: 16px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 10px;
+  margin: 22px auto 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.loading-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #00aaff, #ff007f);
+  transition: width 0.3s ease;
+}
+
+.loading-percent {
+  position: absolute;
+  inset: 0;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
 }
 </style>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
+
   const loader = document.getElementById('loader-screen');
   const continueModal = document.getElementById('continue-modal');
   if (continueModal) continueModal.style.display = 'none';
+  const bar = document.getElementById('loading-fill');
+  const percent = document.getElementById('loading-percent');
 
-  // Espera a que todas las imágenes (y el resto del contenido visual) terminen de cargar
-  window.addEventListener('load', () => {
+  let totalImages = document.images.length;
+  let loaded = 0;
+
+  if (totalImages === 0) {
+    totalImages = 1;
+    loaded = 1;
+  }
+
+  function updateLoader() {
+    loaded++;
+    let p = Math.floor((loaded / totalImages) * 100);
+
+    bar.style.width = p + "%";
+    percent.textContent = p + "%";
+
+    if (p >= 100) {
+      setTimeout(() => {
+        loader.classList.add("hidden");
+      }, 600);
+    }
+  }
+
+   window.addEventListener('load', () => {
     // Pequeño retardo opcional de 1 segundo para suavizar
     setTimeout(() => {
       loader.classList.add('hidden');
       setTimeout(() => {
         if (continueModal) continueModal.style.display = '';
-      }, 1200);
-    }, 1000);
+      }, 700); /*1200*/
+    }, 200); /*1000*/
   });
+
+  for (let img of document.images) {
+    if (img.complete) updateLoader();
+    else {
+      img.addEventListener("load", updateLoader);
+      img.addEventListener("error", updateLoader);
+    }
+  }
 });
 </script>
 <!-- 🔴 Fin pantalla de carga neón -->
@@ -1185,17 +1245,30 @@ player.on('play', () => {
       let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
       
       if (indexHist === -1) {
-        historial.push({
-        titulo: historialTitulo,
-        imagen: historialImagen,
-        progreso: "Asistido 0 min",
-        archivo: historialArchivo,
-        tipo: "pelicula", // ✅ ya está
-        timestamp: Date.now()
-      });
-      localStorage.setItem('historial_usuarios', JSON.stringify(historial));
-      indexHist = historial.length - 1;
+  historial.push({
+    titulo: historialTitulo,
+    imagen: historialImagen,
+    progreso: "Asistido 0 min",
+    archivo: historialArchivo,
+    tipo: "pelicula",
+    timestamp: Date.now()
+  });
+  localStorage.setItem('historial_usuarios', JSON.stringify(historial));
+  indexHist = historial.length - 1;
+
+  // 🔥 Espera a que desaparezca la pantalla de carga antes de mostrar el mensaje
+  const loader = document.getElementById("loader-screen");
+
+  const observer = new MutationObserver(() => {
+    if (loader.classList.contains("hidden")) {
       mostrarModalFavoritos("✅ Agregado al historial");
+      observer.disconnect();
+    }
+  });
+
+  observer.observe(loader, { attributes: true });
+}
+
 
     }
     setInterval(() => {
