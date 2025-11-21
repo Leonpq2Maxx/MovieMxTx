@@ -1230,80 +1230,78 @@ player.on('play', () => {
   
   
   <script>
-document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => {
+      const videoElement = document.querySelector('.vid1');
+      if (!videoElement) return;
+  
+      const videoSrc = videoElement.querySelector('source').getAttribute('src');
+      const STORAGE_KEY = 'pos_' + videoSrc;
 
-  const videoElement = document.querySelector('.vid1');
-  if (!videoElement) return;
-
-  const videoSrc = videoElement.querySelector('source').getAttribute('src');
-  const STORAGE_KEY = 'pos_' + videoSrc;
-
-  // DATOS DEL HISTORIAL
-  const historialTitulo = "¡Scooby!";
-  const historialImagen = "https://image.tmdb.org/t/p/w300/tOhuq4RYr2Rt9TM7X4dkr7A9HSd.jpg";
-  const historialArchivo = "¡Scooby! (2020).html";
-
-  let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
-  let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
-
-  // SOLO AGREGAR UNA VEZ
-  if (indexHist === -1) {
-
-    historial.push({
-      titulo: historialTitulo,
-      imagen: historialImagen,
-      progreso: "Asistido 0 min",
-      archivo: historialArchivo,
-      tipo: "pelicula",
-      timestamp: Date.now()
-    });
-
-    localStorage.setItem('historial_usuarios', JSON.stringify(historial));
-
-    const loader = document.getElementById("loader-screen");
-
-    // 🔥 Escuchar hasta que el loader DESAPAREZCA realmente
-    const esperar = setInterval(() => {
-      const style = getComputedStyle(loader);
-
-      if (
-        loader.classList.contains("hidden") ||
-        style.opacity === "0" ||
-        style.visibility === "hidden"
-      ) {
-        mostrarModalFavoritos("✅ Agregado al historial");
-        clearInterval(esperar);
-      }
-    }, 150);
-
-    // Fallback por si el loader tarda más
-    setTimeout(() => {
-      mostrarModalFavoritos("✅ Agregado al historial");
-      clearInterval(esperar);
-    }, 3500);
-  }
-
-  // GUARDAR AVANCE CADA 10s
-  setInterval(() => {
-    if (!videoElement.paused && !videoElement.ended) {
-
-      const minutos = Math.floor(videoElement.currentTime / 60);
+      // DATOS DEL HISTORIAL
+  
+      const historialTitulo = "¡Scooby!";
+      const historialImagen = "https://image.tmdb.org/t/p/w300/tOhuq4RYr2Rt9TM7X4dkr7A9HSd.jpg";
+      const historialArchivo = "¡Scooby! (2020).html";
 
       let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
       let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
-
-      if (indexHist !== -1) {
-        historial[indexHist].progreso = `Asistido ${minutos} min`;
-        historial[indexHist].timestamp = Date.now();
+      
+      // SOLO AGREGAR UNA VEZ
+      if (indexHist === -1) {
+        historial.push({
+          titulo: historialTitulo,
+          imagen: historialImagen,
+          progreso: "Asistido 0 min",
+          archivo: historialArchivo,
+          tipo: "pelicula",
+          timestamp: Date.now()
+        });
+    
         localStorage.setItem('historial_usuarios', JSON.stringify(historial));
+
+        const loader = document.getElementById("loader-screen");
+
+        // 🔥 Escuchar hasta que el loader DESAPAREZCA realmente
+    
+        const esperar = setInterval(() => {
+          const style = getComputedStyle(loader);
+      
+          if (
+            loader.classList.contains("hidden") ||
+            style.opacity === "0" ||
+            style.visibility === "hidden"
+          ) {
+            mostrarModalFavoritos("✅ Agregado al historial");
+            clearInterval(esperar);
+          }
+        }, 150);
+    
+        // Fallback por si el loader tarda más
+    
+        setTimeout(() => {
+          mostrarModalFavoritos("✅ Agregado al historial");
+          clearInterval(esperar);
+        }, 3500);
       }
-
-      localStorage.setItem(STORAGE_KEY, videoElement.currentTime);
-    }
-  }, 10000);
-
-});
-</script>
+      // GUARDAR AVANCE CADA 10s
+  
+      setInterval(() => {
+        if (!videoElement.paused && !videoElement.ended) {
+          const minutos = Math.floor(videoElement.currentTime / 60);
+      
+          let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
+          let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
+      
+          if (indexHist !== -1) {
+            historial[indexHist].progreso = `Asistido ${minutos} min`;
+            historial[indexHist].timestamp = Date.now();
+            localStorage.setItem('historial_usuarios', JSON.stringify(historial));
+          }
+          localStorage.setItem(STORAGE_KEY, videoElement.currentTime);
+        }
+      }, 10000);
+    });
+  </script>
 
 
   
