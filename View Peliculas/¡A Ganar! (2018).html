@@ -416,30 +416,6 @@
 </head>
 
 <body ondragstart="return false;" ondrop="return false;">
-  <style>
-  body {
-    transform: rotate(0deg) !important;
-  }
-</style>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-
-  // Detectar entrada y salida de fullscreen
-  player.on('enterfullscreen', () => {
-      // Permitir horizontal solo cuando está fullscreen
-      screen.orientation.unlock();
-  });
-
-  player.on('exitfullscreen', () => {
-      // Volver a bloquear la pantalla en vertical
-      try {
-          screen.orientation.lock("portrait");
-      } catch (e) {
-          console.log("El navegador no permite bloqueo pero no afecta.");
-      }
-  });
-});
-</script>
 
 
   <script>
