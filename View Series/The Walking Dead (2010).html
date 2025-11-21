@@ -2077,49 +2077,73 @@ videoElement.addEventListener('ended', () => {
 </script>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const videoElement = document.querySelector('.vid1');
-    if (!videoElement) return;
+document.addEventListener('DOMContentLoaded', () => {
 
-    const videoSrc = videoElement.querySelector('source').getAttribute('src');
-    const STORAGE_KEY = 'pos_' + videoSrc;
+  const videoElement = document.querySelector('.vid1');
+  if (!videoElement) return;
 
-    /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
-    const historialTitulo = "The Walking Dead";
-    const historialImagen = "https://image.tmdb.org/t/p/w300/9iYinsg30olSCuDoH8VxtRN5gZx.jpg";
-    const historialArchivo = "../View Series/The Walking Dead (2010).html";
+  const videoSrc = videoElement.querySelector('source').getAttribute('src');
+  const STORAGE_KEY = 'pos_' + videoSrc;
 
-    let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
-    let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
-    
-    if (indexHist === -1) {
-      historial.push({
+  // DATOS DEL HISTORIAL
+  const historialTitulo = "The Walking Dead";
+  const historialImagen = "https://image.tmdb.org/t/p/w300/9iYinsg30olSCuDoH8VxtRN5gZx.jpg";
+  const historialArchivo = "../View Series/The Walking Dead (2010).html";
+
+  let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
+  let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
+
+  // SOLO AGREGAR UNA VEZ
+  if (indexHist === -1) {
+
+    historial.push({
       titulo: historialTitulo,
       imagen: historialImagen,
       progreso: "Asistido 0 min",
       archivo: historialArchivo,
-      tipo: "serie", // ✅ ya está
+      tipo: "serie",
       timestamp: Date.now()
     });
-    localStorage.setItem('historial_usuarios', JSON.stringify(historial));
-    indexHist = historial.length - 1;
-    mostrarModalFavoritos("✅ Agregado al historial");
 
+    localStorage.setItem('historial_usuarios', JSON.stringify(historial));
+
+    const loader = document.getElementById("loader-screen");
+
+    // 🔥 Escuchar hasta que el loader DESAPAREZCA realmente
+    const esperar = setInterval(() => {
+      const style = getComputedStyle(loader);
+
+      if (
+        loader.classList.contains("hidden") ||
+        style.opacity === "0" ||
+        style.visibility === "hidden"
+      ) {
+        mostrarModalFavoritos("✅ Agregado al historial");
+        clearInterval(esperar);
+      }
+    }, 150);
   }
+
+  // GUARDAR AVANCE CADA 10s
   setInterval(() => {
     if (!videoElement.paused && !videoElement.ended) {
-      historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
-      indexHist = historial.findIndex(item => item.titulo === historialTitulo);
+
+      const minutos = Math.floor(videoElement.currentTime / 60);
+
+      let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
+      let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
+
       if (indexHist !== -1) {
-        const minutos = Math.floor(videoElement.currentTime / 60);
         historial[indexHist].progreso = `Asistido ${minutos} min`;
-        historial[indexHist].timestamp = Date.now(); // ✅ esto asegura que suba al principio
+        historial[indexHist].timestamp = Date.now();
         localStorage.setItem('historial_usuarios', JSON.stringify(historial));
       }
+
       localStorage.setItem(STORAGE_KEY, videoElement.currentTime);
     }
   }, 10000);
-  });
+
+});
 </script>
 
 
