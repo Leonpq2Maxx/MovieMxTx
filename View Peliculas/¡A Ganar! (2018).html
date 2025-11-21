@@ -432,6 +432,7 @@ if (window.performance && window.performance.navigation.type === 2) {
 
   <!-- 🔴 Pantalla de carga personalizada MovieTx (versión neón) -->
 <!-- 🔵 Pantalla de carga idéntica al index + barra profesional -->
+
 <div id="loader-screen">
   <div class="loader-content">
     <div class="loader-circle">
@@ -547,6 +548,8 @@ if (window.performance && window.performance.navigation.type === 2) {
 document.addEventListener("DOMContentLoaded", () => {
 
   const loader = document.getElementById('loader-screen');
+  const continueModal = document.getElementById('continue-modal');
+  if (continueModal) continueModal.style.display = 'none';
   const bar = document.getElementById('loading-fill');
   const percent = document.getElementById('loading-percent');
 
@@ -572,6 +575,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+   window.addEventListener('load', () => {
+    // Pequeño retardo opcional de 1 segundo para suavizar
+    setTimeout(() => {
+      loader.classList.add('hidden');
+      setTimeout(() => {
+        if (continueModal) continueModal.style.display = '';
+      }, 700); /*1200*/
+    }, 200); /*1000*/
+  });
+
   for (let img of document.images) {
     if (img.complete) updateLoader();
     else {
@@ -581,7 +594,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 </script>
-
 <!-- 🔴 Fin pantalla de carga neón -->
   
  <style>
