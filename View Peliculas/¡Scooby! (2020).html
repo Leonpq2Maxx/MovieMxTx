@@ -1263,32 +1263,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const loader = document.getElementById("loader-screen");
 
     // 🔥 Escuchar hasta que el loader DESAPAREZCA realmente
-    let mensajeMostrado = false;
+    const esperar = setInterval(() => {
+      const style = getComputedStyle(loader);
 
-const esperar = setInterval(() => {
-  const style = getComputedStyle(loader);
-
-  if (
-    !mensajeMostrado &&
-    (loader.classList.contains("hidden") ||
-     style.opacity === "0" ||
-     style.visibility === "hidden")
-  ) {
-    mensajeMostrado = true;
-    mostrarModalFavoritos("✅ Agregado al historial");
-    clearInterval(esperar);
-  }
-}, 150);
-
-// Fallback por si el loader tarda demasiado
-setTimeout(() => {
-  if (!mensajeMostrado) {
-    mensajeMostrado = true;
-    mostrarModalFavoritos("✅ Agregado al historial");
-  }
-  clearInterval(esperar);
-}, 3500);
-
+      if (
+        loader.classList.contains("hidden") ||
+        style.opacity === "0" ||
+        style.visibility === "hidden"
+      ) {
+        mostrarModalFavoritos("✅ Agregado al historial");
+        clearInterval(esperar);
+      }
+    }, 150);
   }
 
   // GUARDAR AVANCE CADA 10s
