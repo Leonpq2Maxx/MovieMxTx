@@ -472,28 +472,18 @@ window.addEventListener("popstate", function () {
 </script>
 
   <!-- 🔴 Pantalla de carga personalizada MovieTx (versión neón) -->
-<!-- 🔵 Pantalla de carga idéntica al index + barra profesional -->
 <div id="loader-screen">
   <div class="loader-content">
     <div class="loader-circle">
       <img src="../Logo Poster MovieTx PNG/Logo MovieTx.png" alt="Logo MovieTx" class="loader-logo">
     </div>
-
     <h1 class="loader-title">MovieTx</h1>
     <p class="loader-sub">Cargando<span class="loading-dots"></span></p>
     <p class="loader-msg">Por favor, espere</p>
-
-    <!-- 🔥 Nueva barra de carga profesional -->
-    <div class="loading-bar">
-      <div class="loading-fill" id="loading-fill"></div>
-      <div class="loading-percent" id="loading-percent">0%</div>
-    </div>
-
   </div>
 </div>
 
 <style>
-/* COPIA EXACTA DEL INDEX (NO SE TOCA) */
 #loader-screen {
   position: fixed;
   inset: 0;
@@ -509,8 +499,9 @@ window.addEventListener("popstate", function () {
   opacity: 0;
   visibility: hidden;
 }
-.loader-content { text-align: center; }
-
+.loader-content {
+  text-align: center;
+}
 .loader-circle {
   width: 180px;
   height: 180px;
@@ -525,14 +516,14 @@ window.addEventListener("popstate", function () {
   margin-bottom: 20px;
   box-shadow: 0 0 30px rgba(255, 0, 128, 0.5);
 }
-
-.loader-logo { width: 100px; }
-
+.loader-logo {
+  width: 100px;
+  height: auto;
+}
 @keyframes spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
-
 .loader-title {
   font-size: 2.5rem;
   color: #fff;
@@ -541,9 +532,14 @@ window.addEventListener("popstate", function () {
   margin-bottom: 10px;
   letter-spacing: 2px;
 }
-
-.loader-sub { font-size: 1.2rem; color: #ccc; }
-.loading-dots::after { content: ''; animation: dotPulse 1.5s steps(4) infinite; }
+.loader-sub {
+  font-size: 1.2rem;
+  color: #ccc;
+}
+.loading-dots::after {
+  content: '';
+  animation: dotPulse 1.5s infinite steps(4);
+}
 @keyframes dotPulse {
   0% { content: ''; }
   25% { content: '.'; }
@@ -551,78 +547,31 @@ window.addEventListener("popstate", function () {
   75% { content: '...'; }
   100% { content: ''; }
 }
-.loader-msg { font-size: 1rem; color: #888; margin-top: 10px; }
-
-/* 🔥 NUEVA BARRA PROFESIONAL (MISMO ESTILO DE COLOR) */
-.loading-bar {
-  width: 75%;
-  height: 16px;
-  background: rgba(255,255,255,0.12);
-  border-radius: 10px;
-  margin: 22px auto 0;
-  position: relative;
-  overflow: hidden;
-}
-
-.loading-fill {
-  width: 0%;
-  height: 100%;
-  background: linear-gradient(90deg, #00aaff, #ff007f);
-  transition: width 0.3s ease;
-}
-
-.loading-percent {
-  position: absolute;
-  inset: 0;
-  color: #fff;
-  font-size: 12px;
-  font-weight: bold;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  pointer-events: none;
+.loader-msg {
+  font-size: 1rem;
+  color: #888;
+  margin-top: 10px;
 }
 </style>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-
+document.addEventListener('DOMContentLoaded', () => {
   const loader = document.getElementById('loader-screen');
-  const bar = document.getElementById('loading-fill');
-  const percent = document.getElementById('loading-percent');
+  const continueModal = document.getElementById('continue-modal');
+  if (continueModal) continueModal.style.display = 'none';
 
-  let totalImages = document.images.length;
-  let loaded = 0;
-
-  if (totalImages === 0) {
-    totalImages = 1;
-    loaded = 1;
-  }
-
-  function updateLoader() {
-    loaded++;
-    let p = Math.floor((loaded / totalImages) * 100);
-
-    bar.style.width = p + "%";
-    percent.textContent = p + "%";
-
-    if (p >= 100) {
+  // Espera a que todas las imágenes (y el resto del contenido visual) terminen de cargar
+  window.addEventListener('load', () => {
+    // Pequeño retardo opcional de 1 segundo para suavizar
+    setTimeout(() => {
+      loader.classList.add('hidden');
       setTimeout(() => {
-        loader.classList.add("hidden");
-      }, 600);
-    }
-  }
-
-  for (let img of document.images) {
-    if (img.complete) updateLoader();
-    else {
-      img.addEventListener("load", updateLoader);
-      img.addEventListener("error", updateLoader);
-    }
-  }
+        if (continueModal) continueModal.style.display = '';
+      }, 1200);
+    }, 1000);
+  });
 });
 </script>
-
 <!-- 🔴 Fin pantalla de carga neón -->
   
  <style>
@@ -975,6 +924,12 @@ document.addEventListener('DOMContentLoaded', () => {
   <br>
 <!-- ---------- ESTILOS (dark, moderno, responsive) ---------- -->
 <style>
+
+.seasons-list {
+  scroll-behavior: smooth;
+}
+
+
   :root{
     --bg:#040406;
     --panel:#0b0b0d;
@@ -1166,7 +1121,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <!-- ---------- SCRIPT: datos + interacción ---------- -->
 <script>
-const SERIES_KEY = "Nombre de serie";
+const SERIES_KEY = "The_Walking_dead_2010";
 
   /* ---------- Datos: cambia esto por tu contenido real ---------- */
   const seasonsData = [
@@ -1174,7 +1129,7 @@ const SERIES_KEY = "Nombre de serie";
       id: 1,
       title: "Temporada 1",
       thumb: "https://image.tmdb.org/t/p/w780/dhdzMtQJOAiTJr3Bhcxval2ZT2T.jpg",
-      desc: "Lanzada 2010— 0 episodios",
+      desc: "Lanzada 2010— 6 episodios",
       episodes: [
         { id: "s1e1", title: "Episodio 1", time: "45m", thumb: "", href: "https://pomf2.lain.la/f/suvf9w98.mp4" },
         { id: "s1e2", title: "Episodio 2", time: "45m", thumb: "", href: "https://pomf2.lain.la/f/4f4e75d7.mp4" },
@@ -1356,19 +1311,28 @@ const SERIES_KEY = "Nombre de serie";
 
   // Inicia modal
   function openModal(){
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-    renderSeasons();
-    const savedSeason = localStorage.getItem('ultimaTemporada');
-selectSeason(savedSeason !== null ? parseInt(savedSeason) : 0);
+  modal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  renderSeasons();
 
-    // foco
-    closeBtn.focus();
-  }
+  const savedSeason = localStorage.getItem('ultimaTemporada');
+  selectSeason(savedSeason !== null ? parseInt(savedSeason) : 0); // 👈 restaura selección
+
+  closeBtn.focus();
+}
+
   function closeModal(){
     modal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
   }
+
+  document.addEventListener("DOMContentLoaded", () => {
+  const savedSeason = localStorage.getItem('ultimaTemporada');
+  if (savedSeason !== null) {
+    activeSeasonIndex = parseInt(savedSeason);
+  }
+});
+
 
   openBtn.addEventListener('click', openModal);
   closeBtn.addEventListener('click', closeModal);
@@ -1401,12 +1365,12 @@ selectSeason(savedSeason !== null ? parseInt(savedSeason) : 0);
   // seleccionar temporada
   function selectSeason(index){
     activeSeasonIndex = index;
-    localStorage.setItem('ultimaTemporada', index);  // 👈 Guardar selección de temporada
-
     // actualizar clases
     Array.from(seasonsListUL.children).forEach((li, i) => {
       li.classList.toggle('active', i === index);
     });
+    localStorage.setItem('ultimaTemporada', index);  // 👈 Guardar selección de temporada
+
     const season = seasonsData[index];
     seasonLabel.textContent = season.title;
     seasonDesc.textContent = `— ${season.episodes.length} episodios`;
@@ -1416,6 +1380,19 @@ selectSeason(savedSeason !== null ? parseInt(savedSeason) : 0);
     seriesTitle.textContent = "Tu Serie Favorita";
     seriesSub.textContent = `${season.title} • ${season.desc}`;
     epSearch.value = '';
+
+    // 📌 Deslizar automáticamente la temporada seleccionada al centro
+setTimeout(() => {
+  const activeSeasonElement = seasonsListUL.children[index];
+  if (activeSeasonElement && activeSeasonElement.scrollIntoView) {
+    activeSeasonElement.scrollIntoView({
+      behavior: 'smooth',
+      block: 'nearest',
+      inline: 'center'
+    });
+  }
+}, 100);
+
   }
 
   // render episodios
@@ -1654,7 +1631,7 @@ document.addEventListener("DOMContentLoaded", () => {
       controls: [
         'rewind', 'play', 'fast-forward',
         'progress', 'current-time', 'duration', 'mute', 'volume',
-        'captions', 'airplay', 'fullscreen'
+        'captions', 'pip', 'airplay', 'fullscreen'
       ]
     });
 
