@@ -529,6 +529,7 @@ document.getElementById("confirmAgeBtn").addEventListener("click", function () {
   background: transparent;
   opacity: 0;
   transition: .2s;
+  z-index: 5;
 }
 
 .item.selected .item-select-circle {
@@ -571,6 +572,7 @@ let selectMode=false;
 let longPressTimer=null;
 
 function activateSelectMode(){
+  if(selectMode) return;
   selectMode=true;
   document.querySelectorAll(".item-select-circle").forEach(e=>e.style.opacity="1");
   document.getElementById("selectBar").style.display="flex";
@@ -584,38 +586,47 @@ function exitSelectMode(){
 }
 
 document.addEventListener("DOMContentLoaded", ()=>{
-  const items=document.querySelectorAll(".item");
+  function setupListeners(){
+    const items=document.querySelectorAll(".item");
+    items.forEach((item)=>{
+      let clickable=item.querySelector("div");
+      let circle=document.createElement("div");
+      circle.className="item-select-circle";
+      item.appendChild(circle);
 
-  items.forEach((item, index)=>{
-    let pressArea = item.querySelector("div");
+      clickable.addEventListener("touchstart", ()=>{
+        longPressTimer=setTimeout(()=>{
+          activateSelectMode();
+          try { navigator.vibrate(50); } catch(e){}
+        },600);
+      });
 
-    let circle=document.createElement("div");
-    circle.className="item-select-circle";
-    item.appendChild(circle);
+      clickable.addEventListener("touchend",()=>clearTimeout(longPressTimer));
+      clickable.addEventListener("touchmove",()=>clearTimeout(longPressTimer));
 
-    pressArea.addEventListener("mousedown", ()=>{
-      longPressTimer=setTimeout(()=>{
-        activateSelectMode();
-      },600);
+      clickable.addEventListener("click",(e)=>{
+        if(selectMode){
+          e.preventDefault();
+          item.classList.toggle("selected");
+        }
+      });
     });
+  }
 
-    pressArea.addEventListener("mouseup",()=>clearTimeout(longPressTimer));
-    pressArea.addEventListener("mouseleave",()=>clearTimeout(longPressTimer));
+  setupListeners();
 
-    pressArea.addEventListener("click",(e)=>{
-      if(selectMode){
-        e.preventDefault();
-        item.classList.toggle("selected");
-      }
-    });
-  });
+  const originalRender = window.renderHistorial;
+  window.renderHistorial = function(){
+    originalRender();
+    setTimeout(()=>setupListeners(),50);
+  };
 
   document.getElementById("cancelSelect").onclick=()=>exitSelectMode();
 
   document.getElementById("deleteSelected").onclick=()=>{
-    const selected=document.querySelectorAll(".item.selected");
-    let indices=[...selected].map(el=>[...items].indexOf(el)).sort((a,b)=>b-a);
-
+    const items=[...document.querySelectorAll(".item")];
+    const selected=[...document.querySelectorAll(".item.selected")];
+    let indices=selected.map(el=>items.indexOf(el)).sort((a,b)=>b-a);
     indices.forEach(i=>historial.splice(i,1));
     localStorage.setItem("historial_usuarios", JSON.stringify(historial));
     renderHistorial();
