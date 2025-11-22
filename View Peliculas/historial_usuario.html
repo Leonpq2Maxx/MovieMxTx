@@ -221,103 +221,276 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 <!-- 🔴 Fin pantalla de carga neón -->
 
+<!-- Reemplaza tu header por este (o integra los cambios: agregado boton trash-multi) -->
 <header>
-<i class="fas fa-arrow-left" onclick="history.back()"></i>
-<span>Historial</span>
-<i class="fas fa-trash-alt" onclick="limpiarHistorial()"></i>
+  <i class="fas fa-arrow-left" onclick="history.back()"></i>
+  <span id="header-title">Historial</span>
+  <!-- botón para eliminar seleccionados (aparece solo en modo selección) -->
+  <i id="trash-multi" class="fas fa-trash-alt" style="display:none; cursor:pointer;" onclick="confirmarEliminarSeleccionados()"></i>
+  <!-- botón original para limpiar todo -->
+  <i id="trash-all" class="fas fa-trash-alt" onclick="limpiarHistorial()"></i>
 </header>
-<h2>Última semana</h2>
-<div class="grid" id="historial-container"></div>
-<div id="mensaje-confirmacion"></div>
-<div id="modal-confirmacion" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:99999;align-items:center;justify-content:center;">
-<div style="background:#1e1e1e;padding:20px;border-radius:10px;max-width:80%;text-align:center;color:#fff;">
-<p id="modal-mensaje"></p>
-<div style="margin-top:15px;">
-<button id="btn-cancelar" style="margin-right:10px;background:#444;color:white;border:none;padding:8px 16px;border-radius:5px;cursor:pointer;">Cancelar</button>
-<button id="btn-confirmar" style="background:crimson;color:white;border:none;padding:8px 16px;border-radius:5px;cursor:pointer;">Eliminar</button>
-</div>
-</div>
-</div>
+
+<!-- Agrega estos estilos CSS a tu <style> principal -->
+<style>
+/* estado de tarjeta seleccionada */
+.item.selected {
+  outline: 3px solid rgba(0, 170, 255, 0.9);
+  transform: scale(0.995);
+}
+.item .select-overlay {
+  position: absolute;
+  inset: 6px;
+  border-radius: 8px;
+  display:flex;
+  align-items:flex-start;
+  justify-content:flex-end;
+  pointer-events: none;
+}
+.item .select-overlay .check {
+  pointer-events: auto;
+  background: rgba(0,0,0,0.6);
+  color: #00ffae;
+  padding: 6px;
+  border-radius: 50%;
+  margin: 8px;
+  font-size: 0.9rem;
+  display: none;
+  border: 1px solid rgba(0,255,170,0.2);
+}
+.item.selected .select-overlay .check {
+  display: block;
+}
+
+/* ocultar botón eliminar por tarjeta cuando está en modo selección (opcional) */
+.item .delete-btn.hide-when-select {
+  display: inline-block;
+}
+.selection-mode .item .delete-btn.hide-when-select {
+  display: none;
+}
+
+/* indicador modo selección en header */
+#header-title.selection-active::after {
+  content: " — Seleccionando";
+  font-size: 0.85rem;
+  color: #00ffae;
+  margin-left: 8px;
+}
+
+/* pequeño ajuste visual para toque largo */
+.item.touching {
+  opacity: 0.9;
+  transform: translateY(1px);
+}
+</style>
+
+<!-- Reemplaza o añade este script (remplaza el renderHistorial y añade la lógica de selección) -->
 <script>
-    let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
-    const LIMITE_HISTORIAL = 21; // ACA ES PARA AUMENTAR EL NUMERO DE TARJETAS DE PELICULAS SI QUIERES AUMENTAR PARA QUE SE VEAN 30 ES ASI POR EJEMPLO: SI QUIERES QUE SEAN 30 DEBES CAMBIAR EL "2" Y PONER "3"
-    let ultimoEliminado = null;
-    let pendienteEliminarIndex = null;
-    let pendienteEliminarTitulo = null;
+  // Variables nuevas
+  let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
+  const LIMITE_HISTORIAL = 21;
+  let seleccionados = new Set();
+  let selectionMode = false;
+  let longPressTimers = new Map(); // index -> timerId
+  const LONG_PRESS_DURATION = 600; // ms, puedes ajustar
 
-    historial.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
-    while (historial.length > LIMITE_HISTORIAL) historial.pop();
-    localStorage.setItem('historial_usuarios', JSON.stringify(historial));
+  // ordenar y recortar (igual que antes)
+  historial.sort((a,b)=> (b.timestamp||0)-(a.timestamp||0));
+  while (historial.length > LIMITE_HISTORIAL) historial.pop();
+  localStorage.setItem('historial_usuarios', JSON.stringify(historial));
 
-    function mostrarMensaje(texto, conDeshacer = false) {
-      const mensaje = document.getElementById('mensaje-confirmacion');
-      mensaje.innerHTML = texto;
-      mensaje.style.display = 'block';
-      mensaje.style.opacity = '1';
-      setTimeout(() => {
-        mensaje.style.opacity = '0';
-        setTimeout(() => mensaje.style.display = 'none', 500);
-      }, 3000);
-    }
-
-    function eliminarItem(index, titulo) {
-      pendienteEliminarIndex = index;
-      pendienteEliminarTitulo = titulo;
-      document.getElementById('modal-mensaje').textContent = `¿Eliminar "${titulo}" del historial?`;
-      document.getElementById('modal-confirmacion').style.display = 'flex';
-    }
-
-    function limpiarHistorial() {
-      pendienteEliminarIndex = 'all';
-      pendienteEliminarTitulo = 'todo el historial';
-      document.getElementById('modal-mensaje').textContent = `¿Eliminar todo el historial?`;
-      document.getElementById('modal-confirmacion').style.display = 'flex';
-    }
-
-    document.getElementById('btn-cancelar').onclick = () => {
-      pendienteEliminarIndex = null;
-      pendienteEliminarTitulo = null;
-      document.getElementById('modal-confirmacion').style.display = 'none';
-    };
-
-    document.getElementById('btn-confirmar').onclick = () => {
-      if (pendienteEliminarIndex === 'all') {
-        localStorage.removeItem('historial_usuarios');
-        historial = [];
-        renderHistorial();
-        mostrarMensaje('🧹 Historial eliminado');
-      } else if (pendienteEliminarIndex !== null) {
-        ultimoEliminado = historial.splice(pendienteEliminarIndex, 1)[0];
-        localStorage.setItem('historial_usuarios', JSON.stringify(historial));
-        renderHistorial();
-        mostrarMensaje(`🗑️ Eliminado: ${pendienteEliminarTitulo}`, true);
-      }
-      document.getElementById('modal-confirmacion').style.display = 'none';
-    };
-
-    function renderHistorial() {
-      const container = document.getElementById('historial-container');
-      container.innerHTML = '';
-      historial.forEach((item, index) => {
-        const div = document.createElement('div');
-        div.className = 'item';
-        div.innerHTML = `
-          <div onclick="verificarAcceso('${item.archivo}', ${item.adulto === true})" style="text-decoration: none; color: inherit;">
-            <div style="position: relative;">
-              <img src="${item.imagen}" alt="${item.titulo}">
-              <div class="capitulo">${item.progreso}</div>
-              ${item.tipo ? `<div class="etiqueta">${item.tipo === 'serie' ? 'Serie' : 'Película'}</div>` : ''}
-            </div>
-            <div class="item-title">${item.titulo}</div>
-          </div>
-          <button class="delete-btn" onclick="eliminarItem(${index}, '${item.titulo.replace(/'/g, "\'")}')">×</button>
-        `;
-        container.appendChild(div);
-      });
-    }
-
+  // ---------- utilidades selección ----------
+  function entrarModoSeleccion() {
+    selectionMode = true;
+    document.body.classList.add('selection-mode');
+    document.getElementById('trash-multi').style.display = 'inline-block';
+    document.getElementById('trash-all').style.display = 'none';
+    document.getElementById('header-title').classList.add('selection-active');
+    renderHistorial(); // para actualizar botones/estados visuales
+  }
+  function salirModoSeleccion() {
+    selectionMode = false;
+    seleccionados.clear();
+    document.body.classList.remove('selection-mode');
+    document.getElementById('trash-multi').style.display = 'none';
+    document.getElementById('trash-all').style.display = 'inline-block';
+    document.getElementById('header-title').classList.remove('selection-active');
     renderHistorial();
-  </script>
+  }
+  function toggleSeleccion(index) {
+    if (seleccionados.has(index)) seleccionados.delete(index);
+    else seleccionados.add(index);
+    // si no queda ninguno, salimos del modo selección automáticamente
+    if (seleccionados.size === 0) {
+      // opcional: si quieres mantener el modo hasta que el usuario cancele, comenta la siguiente línea
+      // salirModoSeleccion();
+    }
+    renderHistorial();
+  }
+
+  // ---------- eliminar seleccionados ----------
+  function confirmarEliminarSeleccionados() {
+    if (seleccionados.size === 0) return;
+    const titulos = Array.from(seleccionados).map(i => historial[i]?.titulo).filter(Boolean);
+    pendienteEliminarIndex = 'multiple';
+    pendienteEliminarTitulo = `(${titulos.length}) elementos seleccionados`;
+    document.getElementById('modal-mensaje').textContent = `¿Eliminar ${titulos.length} elementos seleccionados?`;
+    document.getElementById('modal-confirmacion').style.display = 'flex';
+  }
+
+  // modifica el handler de confirmar para soportar 'multiple'
+  document.getElementById('btn-confirmar').onclick = () => {
+    if (pendienteEliminarIndex === 'all') {
+      localStorage.removeItem('historial_usuarios');
+      historial = [];
+      renderHistorial();
+      mostrarMensaje('🧹 Historial eliminado');
+    } else if (pendienteEliminarIndex === 'multiple') {
+      // eliminamos índices seleccionados (orden descendente para no desordenar)
+      const indices = Array.from(seleccionados).sort((a,b)=>b-a);
+      const eliminados = [];
+      for (const i of indices) {
+        if (historial[i]) eliminados.push(historial.splice(i,1)[0]);
+      }
+      localStorage.setItem('historial_usuarios', JSON.stringify(historial));
+      mostrarMensaje(`🗑️ Eliminados: ${eliminados.length}`);
+      salirModoSeleccion();
+      renderHistorial();
+    } else if (pendienteEliminarIndex !== null) {
+      ultimoEliminado = historial.splice(pendienteEliminarIndex, 1)[0];
+      localStorage.setItem('historial_usuarios', JSON.stringify(historial));
+      renderHistorial();
+      mostrarMensaje(`🗑️ Eliminado: ${pendienteEliminarTitulo}`, true);
+    }
+    pendienteEliminarIndex = null;
+    pendienteEliminarTitulo = null;
+    document.getElementById('modal-confirmacion').style.display = 'none';
+  };
+
+  // ---------- Render con control de long-press ----------
+  function renderHistorial() {
+    const container = document.getElementById('historial-container');
+    container.innerHTML = '';
+    historial.forEach((item, index) => {
+      const div = document.createElement('div');
+      div.className = 'item';
+      if (seleccionados.has(index)) div.classList.add('selected');
+
+      // contenido principal (evitar onclick directo en wrapper para controlar taps)
+      div.innerHTML = `
+        <div class="card-inner" style="text-decoration:none;color:inherit;">
+          <div style="position: relative;">
+            <img src="${item.imagen}" alt="${item.titulo}">
+            <div class="capitulo">${item.progreso}</div>
+            ${item.tipo ? `<div class="etiqueta">${item.tipo === 'serie' ? 'Serie' : 'Película'}</div>` : ''}
+            <div class="select-overlay"><div class="check">✓</div></div>
+          </div>
+          <div class="item-title">${item.titulo}</div>
+        </div>
+        <button class="delete-btn hide-when-select" title="Eliminar" onclick="eliminarItem(${index}, '${(item.titulo||'').replace(/'/g, "\\'")}')">×</button>
+      `;
+
+      // eventos táctiles y mouse (long press)
+      // Touch events
+      div.addEventListener('touchstart', (e) => {
+        // inicio timer de long press
+        if (longPressTimers.has(index)) clearTimeout(longPressTimers.get(index));
+        const t = setTimeout(() => {
+          // al activar long-press, entramos en modo selección si no estamos
+          if (!selectionMode) entrarModoSeleccion();
+          toggleSeleccion(index);
+        }, LONG_PRESS_DURATION);
+        longPressTimers.set(index, t);
+        div.classList.add('touching');
+      }, {passive:true});
+
+      div.addEventListener('touchend', (e) => {
+        // si se soltó antes del longpress -> comportamiento normal
+        if (longPressTimers.has(index)) {
+          clearTimeout(longPressTimers.get(index));
+          longPressTimers.delete(index);
+          // si estamos en modo selección, un tap breve togglea selección
+          if (selectionMode) {
+            toggleSeleccion(index);
+          } else {
+            // navegación normal (solo si el target no fue el botón eliminar)
+            // usamos verificarAcceso original
+            verificarAcceso(item.archivo, item.adulto === true);
+          }
+        }
+        div.classList.remove('touching');
+      });
+
+      div.addEventListener('touchmove', (e) => {
+        // si se mueve el dedo cancelamos el longpress
+        if (longPressTimers.has(index)) {
+          clearTimeout(longPressTimers.get(index));
+          longPressTimers.delete(index);
+        }
+        div.classList.remove('touching');
+      }, {passive:true});
+
+      // Mouse events (para probar en desktop)
+      let mouseTimer = null;
+      div.addEventListener('mousedown', (e) => {
+        // evitar conflicto si clic en delete-btn
+        if (e.target.closest('.delete-btn')) return;
+        mouseTimer = setTimeout(() => {
+          if (!selectionMode) entrarModoSeleccion();
+          toggleSeleccion(index);
+        }, LONG_PRESS_DURATION);
+        div.classList.add('touching');
+      });
+      div.addEventListener('mouseup', (e) => {
+        if (mouseTimer) {
+          clearTimeout(mouseTimer);
+          mouseTimer = null;
+          if (selectionMode) {
+            toggleSeleccion(index);
+          } else {
+            if (!e.target.closest('.delete-btn')) verificarAcceso(item.archivo, item.adulto === true);
+          }
+        }
+        div.classList.remove('touching');
+      });
+      div.addEventListener('mouseleave', () => {
+        if (mouseTimer) {
+          clearTimeout(mouseTimer);
+          mouseTimer = null;
+        }
+        div.classList.remove('touching');
+      });
+
+      container.appendChild(div);
+    });
+  }
+
+  // llamada inicial
+  renderHistorial();
+
+  // Si quieres permitir cancelar modo selección con back button o con toque fuera:
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && selectionMode) salirModoSeleccion();
+  });
+
+  // si el usuario toca en cualquier espacio vacío fuera de tarjetas (en móvil)
+  document.addEventListener('click', (e) => {
+    if (!selectionMode) return;
+    // si el click no está dentro de una .item, salimos del modo selección
+    if (!e.target.closest('.item')) salirModoSeleccion();
+  });
+
+  // conservar tus funciones existentes (mostrarMensaje, eliminarItem, limpiarHistorial, verificarAcceso, modal edad)
+  // Nota: eliminarItem ya está definida más arriba en tu archivo original; si no, la incluimos:
+  function eliminarItem(index, titulo) {
+    pendienteEliminarIndex = index;
+    pendienteEliminarTitulo = titulo;
+    document.getElementById('modal-mensaje').textContent = `¿Eliminar "${titulo}" del historial?`;
+    document.getElementById('modal-confirmacion').style.display = 'flex';
+  }
+</script>
+
 
   <!-- Modal flotante de edad -->
 <div id="ageModal" class="age-modal hidden">
@@ -514,127 +687,6 @@ document.getElementById("confirmAgeBtn").addEventListener("click", function () {
   }
 });
 </script>
-
-
-
-<style>
-.item-select-circle {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  border: 2px solid #00aaff;
-  background: transparent;
-  opacity: 0;
-  transition: .2s;
-  z-index: 5;
-}
-
-.item.selected .item-select-circle {
-  background:#00aaff;
-}
-
-.selection-bar {
-  position: fixed;
-  bottom: 15px;
-  left: 50%;
-  transform: translateX(-50%);
-  background:#1e1e1e;
-  padding: 10px 25px;
-  border-radius:14px;
-  display:none;
-  gap:20px;
-  z-index:9999;
-}
-
-.selection-bar button {
-  background:#ff0055;
-  border:none;
-  padding:8px 16px;
-  color:white;
-  border-radius:6px;
-  font-size:1rem;
-}
-.selection-bar .cancel-btn {
-  background:#444;
-}
-</style>
-
-<div class="selection-bar" id="selectBar">
-  <button id="deleteSelected">Eliminar seleccionados</button>
-  <button class="cancel-btn" id="cancelSelect">Cancelar</button>
-</div>
-
-<script>
-let selectMode=false;
-let longPressTimer=null;
-
-function activateSelectMode(){
-  if(selectMode) return;
-  selectMode=true;
-  document.querySelectorAll(".item-select-circle").forEach(e=>e.style.opacity="1");
-  document.getElementById("selectBar").style.display="flex";
-}
-
-function exitSelectMode(){
-  selectMode=false;
-  document.querySelectorAll(".item-select-circle").forEach(e=>e.style.opacity="0");
-  document.querySelectorAll(".item").forEach(e=>e.classList.remove("selected"));
-  document.getElementById("selectBar").style.display="none";
-}
-
-document.addEventListener("DOMContentLoaded", ()=>{
-  function setupListeners(){
-    const items=document.querySelectorAll(".item");
-    items.forEach((item)=>{
-      let clickable=item.querySelector("div");
-      let circle=document.createElement("div");
-      circle.className="item-select-circle";
-      item.appendChild(circle);
-
-      clickable.addEventListener("touchstart", ()=>{
-        longPressTimer=setTimeout(()=>{
-          activateSelectMode();
-          try { navigator.vibrate(50); } catch(e){}
-        },600);
-      });
-
-      clickable.addEventListener("touchend",()=>clearTimeout(longPressTimer));
-      clickable.addEventListener("touchmove",()=>clearTimeout(longPressTimer));
-
-      clickable.addEventListener("click",(e)=>{
-        if(selectMode){
-          e.preventDefault();
-          item.classList.toggle("selected");
-        }
-      });
-    });
-  }
-
-  setupListeners();
-
-  const originalRender = window.renderHistorial;
-  window.renderHistorial = function(){
-    originalRender();
-    setTimeout(()=>setupListeners(),50);
-  };
-
-  document.getElementById("cancelSelect").onclick=()=>exitSelectMode();
-
-  document.getElementById("deleteSelected").onclick=()=>{
-    const items=[...document.querySelectorAll(".item")];
-    const selected=[...document.querySelectorAll(".item.selected")];
-    let indices=selected.map(el=>items.indexOf(el)).sort((a,b)=>b-a);
-    indices.forEach(i=>historial.splice(i,1));
-    localStorage.setItem("historial_usuarios", JSON.stringify(historial));
-    renderHistorial();
-    exitSelectMode();
-  };
-});
-</script>
-
 
 </body>
 </html>
