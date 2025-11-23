@@ -1,557 +1,527 @@
+
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
 <meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Historial — MovieTx</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Historial</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto&amp;display=swap" rel="stylesheet"/>
 <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet"/>
 <style>
-  :root{
-    --bg:#0f0f10;
-    --card:#141414;
-    --muted:#9aa0a6;
-    --accent1:#00aaff;
-    --accent2:#ff007f;
-    --glass: rgba(255,255,255,0.04);
-    --success:#2ecc71;
-    --danger:#ff4858;
-  }
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #121212;
+      color: white;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px;
+      background-color: #1e1e1e;
+      font-size: 1.2rem;
+    }
+    header i {
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+    h2 {
+      padding: 15px;
+      font-size: 1.2rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      padding: 0 15px 30px;
+    }
+    .item {
+      background-color: #1a1a1a;
+      border-radius: 10px;
+      overflow: hidden;
+      font-size: 0.6rem;
+      position: relative;
+    }
+    .item img {
+      width: 100%;
+      height: 180px; /* o 240px */ /*ACA ES EL LARGO DE LA IMAGEN*/
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .item .etiqueta {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: #e91e63;
+      color: white;
+      font-size: 0.7rem;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
 
-  *{box-sizing:border-box}
-  body{
-    margin:0;
-    font-family:'Roboto', sans-serif;
-    background:var(--bg);
-    color:#fff;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
+    .capitulo {
+      background: rgba(0, 0, 0, 0.7);
+      color: #00ffae;
+      padding: 3px 6px;
+      font-size: 0.75rem;
+      position: absolute;
+      bottom: 35px;
+      left: 5px;
+      border-radius: 5px;
+    }
+    .item-title {
+      padding: 8px;
+      text-align: center;
+    }
+    .delete-btn {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: rgba(255, 0, 0, 0.8);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      font-size: 0.8rem;
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+    }
+    #mensaje-confirmacion {
+      display: none;
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.85);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 1rem;
+      z-index: 9999;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+      transition: opacity 0.5s ease;
+    }
+  
+@media screen and (orientation: landscape) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
   }
-
-  /* Header */
-  header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:14px 16px;
-    background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
-    border-bottom:1px solid rgba(255,255,255,0.03);
-    position:sticky;
-    top:0;
-    z-index:50;
+  .item img {
+    height: 120px !important;
+    object-fit: contain !important;
+    background-color: #000;
+    width: 100%;
   }
-  header i { font-size:1.1rem; cursor:pointer; color:#ddd }
-  header span{ font-weight:700; letter-spacing:0.2px }
-
-  h2{ padding:16px; margin:0; font-size:1rem; color:var(--muted) }
-
-  /* Grid */
-  .grid-wrap{ padding:0 16px 60px }
-  .grid{
-    display:grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap:14px;
-    transition:all .3s ease;
+  .item {
+    padding-bottom: 5px;
   }
-
-  @media (max-width:900px){
-    .grid{ grid-template-columns: repeat(2, 1fr) }
-  }
-  @media (max-width:520px){
-    .grid{ grid-template-columns: 1fr }
-  }
-
-  /* Card */
-  .item{
-    background:var(--card);
-    border-radius:10px;
-    overflow:visible;
-    position:relative;
-    min-height:230px;
-    transform-origin:center bottom;
-    will-change:transform, box-shadow;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.35);
-    transition: transform .28s cubic-bezier(.2,.8,.2,1), box-shadow .28s;
-    display:flex;
-    flex-direction:column;
-    user-select:none;
-  }
-
-  /* skeleton state */
-  .item.skel{
-    background: linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.03), rgba(255,255,255,0.02));
-    min-height:200px;
-    position:relative;
-    overflow:hidden;
-  }
-  .sk-bar{height:10px;background:rgba(255,255,255,0.03);border-radius:6px;margin:12px}
-
-  .thumb{
-    position:relative;
-    border-radius:8px 8px 0 0;
-    overflow:hidden;
-    height:160px;
-    background:linear-gradient(180deg, #0b0b0b, #111);
-  }
-  .thumb img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-    transition: transform .35s ease, filter .35s;
-    transform-origin:center center;
-  }
-
-  /* overlay play button */
-  .play-overlay{
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    width:62px;height:62px;border-radius:50%;
-    display:flex;align-items:center;justify-content:center;
-    background: linear-gradient(135deg,var(--accent1),var(--accent2));
-    box-shadow: 0 8px 30px rgba(255,0,128,0.12);
-    opacity:0;pointer-events:none;
-    transition:opacity .18s, transform .18s;
-  }
-  .play-overlay i{ font-size:22px; color:#fff; margin-left:4px; }
-
-  .meta{
-    padding:10px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:8px;
-  }
-  .item-title{ flex:1; font-weight:600; font-size:0.95rem; text-align:center; color:#fff; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; padding:2px 6px }
-
-  /* etiqueta tipo */
-  .etiqueta{
-    position:absolute;
-    top:10px; left:10px;
-    background: linear-gradient(90deg,var(--accent1),var(--accent2));
-    color:white;
-    padding:6px 8px;
-    border-radius:6px;
-    font-size:0.72rem;
-    font-weight:600;
-    box-shadow:0 8px 20px rgba(0,0,0,0.35);
-  }
-
-  /* progress bar overlay bottom of thumb */
-  .progress-wrap{
-    position:absolute;
-    left:0; right:0; bottom:0;
-    padding:8px 10px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:8px;
-    background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0.55));
-  }
-  .progress{
-    height:6px;
-    background: rgba(255,255,255,0.08);
-    border-radius:6px;
-    flex:1;
-    margin-right:10px;
-    overflow:hidden;
-  }
-  .progress > i{
-    display:block;
-    height:100%;
-    width:0%;
-    background: linear-gradient(90deg,var(--accent1),var(--accent2));
-    transition: width .4s ease;
-  }
-  .progress-text{ font-size:0.72rem; color:#cfeffb; white-space:nowrap; }
-
-  /* delete btn floating */
-  .delete-btn{
-    position:absolute;
-    top:10px; right:10px;
-    width:36px;height:36px;border-radius:50%;
-    border:none;background:rgba(0,0,0,0.45);
-    color:#fff; font-weight:700; font-size:1.05rem;
-    display:flex;align-items:center;justify-content:center;
-    transition:transform .2s;
-    z-index:6;
-    cursor:pointer;
-  }
-
-  /* on hover effects */
-  .item:hover{
-    transform:translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-  }
-  .item:hover .thumb img{ transform: scale(1.06) }
-  .item:hover .play-overlay{ opacity:1; pointer-events:auto; transform: translate(-50%,-50%) scale(1) }
-
-  /* modal modern */
-  #modal-confirmacion{
-    display:none;
-    position:fixed; inset:0; z-index:9999;
-    align-items:center; justify-content:center;
-    background: rgba(0,0,0,0.5);
-    -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
-  }
-  #modal-confirmacion .card{
-    width:92%; max-width:420px;
-    background:linear-gradient(180deg,#111,#141414);
-    padding:18px; border-radius:12px; color:#fff;
-    box-shadow:0 10px 40px rgba(0,0,0,0.6);
-    transform:translateY(8px);
-    animation:modalIn .26s cubic-bezier(.2,.9,.3,1);
-  }
-  @keyframes modalIn{ from{opacity:0; transform:translateY(20px)} to{opacity:1; transform:translateY(0)} }
-  .modal-actions{ display:flex; gap:12px; justify-content:flex-end; margin-top:14px }
-
-  .btn {
-    padding:8px 12px;border-radius:8px;border:0; cursor:pointer;
-    font-weight:600;
-  }
-  .btn-cancel{ background:rgba(255,255,255,0.06); color:#ddd }
-  .btn-delete{ background:var(--danger); color:#fff }
-
-  /* Toast */
-  #mensaje-confirmacion{
-    position:fixed; left:50%; bottom:28px; transform:translateX(-50%);
-    background: rgba(17,17,17,0.9); color:#fff; padding:10px 16px; border-radius:10px;
-    box-shadow:0 8px 30px rgba(0,0,0,0.6); z-index:9998; opacity:0; pointer-events:none;
-    transition:opacity .25s, transform .25s;
-  }
-  #mensaje-confirmacion.show{ opacity:1; pointer-events:auto; transform:translateX(-50%) translateY(-6px) }
-
-  /* age modal */
-  .age-modal{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; z-index:9997; background:rgba(0,0,0,0.45); backdrop-filter: blur(4px); }
-  .age-modal-content{ background:#fff; color:#000; padding:18px; border-radius:10px; width:320px; max-width:92%;}
-  .age-modal-content input{ width:100%; padding:8px; border-radius:6px; border:1px solid #ddd; margin-top:8px; }
-
-  /* swipe delete visual (mobile) */
-  .item.swiping{ transition:none; }
-  .swipe-trash{
-    position:absolute; inset:0; right:-80px; width:80px; display:flex; align-items:center; justify-content:center; color:#fff;
-    background:linear-gradient(180deg, #ff5a6f, #ff2f4b); border-radius:8px;
-  }
-
-  /* small helpers */
-  .center{ display:flex; align-items:center; justify-content:center }
-  .muted{ color:var(--muted) }
-
-  /* stagger animation on load */
-  .grid .item{ opacity:0; transform: translateY(16px) scale(.995); animation:enterCard .45s forwards; }
-  .grid .item:nth-child(1){ animation-delay:.06s }
-  .grid .item:nth-child(2){ animation-delay:.10s }
-  .grid .item:nth-child(3){ animation-delay:.14s }
-  .grid .item:nth-child(4){ animation-delay:.18s }
-  .grid .item:nth-child(5){ animation-delay:.22s }
-  .grid .item:nth-child(6){ animation-delay:.26s }
-  @keyframes enterCard{ to{ opacity:1; transform:translateY(0) scale(1) } }
-
+}
 </style>
 </head>
 <body>
 
-<header>
-  <i class="fas fa-arrow-left" onclick="history.back()"></i>
-  <span>Historial</span>
-  <i class="fas fa-trash-alt" title="Limpiar historial" onclick="limpiarHistorial()"></i>
-</header>
+  <!-- 🔴 Pantalla de carga personalizada MovieTx (versión neón) -->
+<div id="loader-screen">
+  <div class="loader-content">
+    <div class="loader-circle">
+      <img src="../Logo Poster MovieTx PNG/Logo MovieTx.png" alt="Logo MovieTx" class="loader-logo">
+    </div>
 
-<h2 class="muted">Última semana</h2>
+    <h1 class="loader-title">MovieTx</h1>
+    <p class="loader-sub">Cargando<span class="loading-dots"></span></p>
+    <p class="loader-msg">Por favor, espere</p>
 
-<!-- Skeleton / Loader -->
-<div id="skeleton" style="padding:0 16px 20px">
-  <div class="grid" id="skeleton-grid">
-    <!-- JS will populate skeleton cards -->
+    <!-- 🔥 Nueva barra de carga profesional -->
+    <div class="loading-bar">
+      <div class="loading-fill" id="loading-fill"></div>
+      <div class="loading-percent" id="loading-percent">0%</div>
+    </div>
+
   </div>
 </div>
 
-<div class="grid-wrap">
-  <div class="grid" id="historial-container" aria-live="polite"></div>
-</div>
+<style>
+#loader-screen {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 10000;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+#loader-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+.loader-content { text-align: center; }
 
-<!-- Toast -->
-<div id="mensaje-confirmacion" role="status" aria-live="polite"></div>
+.loader-circle {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 6px solid transparent;
+  border-top: 6px solid #00aaff;
+  border-bottom: 6px solid #ff007f;
+  animation: spin 2s linear infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  box-shadow: 0 0 30px rgba(255, 0, 128, 0.5);
+}
 
-<!-- Modal confirm -->
-<div id="modal-confirmacion" aria-hidden="true">
-  <div class="card">
-    <div id="modal-mensaje" style="font-size:0.98rem"></div>
-    <div class="modal-actions">
-      <button class="btn btn-cancel" id="btn-cancelar">Cancelar</button>
-      <button class="btn btn-delete" id="btn-confirmar">Eliminar</button>
-    </div>
-  </div>
-</div>
+.loader-logo { width: 100px; }
 
-<!-- Age modal -->
-<div id="ageModal" class="age-modal" style="display:none;">
-  <div class="age-modal-content">
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <strong>Validar edad</strong>
-      <span style="cursor:pointer;color:#666" onclick="closeModal()">✕</span>
-    </div>
-    <p style="margin:10px 0 4px">Introduce tu año de nacimiento</p>
-    <input type="number" id="birthyear" placeholder="Año" min="1900" max="2025" />
-    <p style="margin:8px 0 4px">o tu edad</p>
-    <input type="number" id="age" placeholder="Edad" min="1" max="120" />
-    <div style="margin-top:12px; display:flex; gap:8px; justify-content:flex-end">
-      <button class="btn btn-cancel" onclick="closeModal()">Cancelar</button>
-      <button class="btn" id="confirmAgeBtn" style="background:linear-gradient(90deg,var(--accent1),var(--accent2)); color:#fff">Validar</button>
-    </div>
-    <p id="result-message" style="margin-top:8px"></p>
-  </div>
-</div>
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.loader-title {
+  font-size: 2.5rem;
+  color: #fff;
+  text-shadow: 0 0 10px #ff4da6, 0 0 20px #ff1a8c, 0 0 40px #ff007f;
+  font-weight: bold;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+
+.loader-sub { font-size: 1.2rem; color: #ccc; }
+.loading-dots::after { content: ''; animation: dotPulse 1.5s steps(4) infinite; }
+@keyframes dotPulse {
+  0% { content: ''; }
+  25% { content: '.'; }
+  50% { content: '..'; }
+  75% { content: '...'; }
+  100% { content: ''; }
+}
+.loader-msg { font-size: 1rem; color: #888; margin-top: 10px; }
+
+/* 🔥 NUEVA BARRA PROFESIONAL (MISMO ESTILO DE COLOR) */
+.loading-bar {
+  width: 75%;
+  height: 16px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 10px;
+  margin: 22px auto 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.loading-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #00aaff, #ff007f);
+  transition: width 0.3s ease;
+}
+
+.loading-percent {
+  position: absolute;
+  inset: 0;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+</style>
 
 <script>
-/* ---------------------------
-  Datos: historial desde localStorage
-  Estructura esperada de cada item:
-  { titulo, imagen, archivo, progreso (ej: "S1:E3 - 12%"), porcentaje (0-100), tipo: 'serie'|'pelicula', adulto: boolean, timestamp }
---------------------------- */
+document.addEventListener("DOMContentLoaded", () => {
 
-let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
-const LIMITE_HISTORIAL = 50;
-let ultimoEliminado = null;
-let deshacerTimer = null;
-let pendienteEliminarIndex = null;
-let pendienteEliminarTitulo = null;
-let pendingRedirect = null;
+  const loader = document.getElementById('loader-screen');
+  const continueModal = document.getElementById('continue-modal');
+  if (continueModal) continueModal.style.display = 'none';
+  const bar = document.getElementById('loading-fill');
+  const percent = document.getElementById('loading-percent');
 
-// Safety: ensure array
-if (!Array.isArray(historial)) historial = [];
+  let totalImages = document.images.length;
+  let loaded = 0;
 
-historial.sort((a,b) => (b.timestamp||0) - (a.timestamp||0));
-while (historial.length > LIMITE_HISTORIAL) historial.pop();
-localStorage.setItem('historial_usuarios', JSON.stringify(historial));
-
-/* ---------- SKELETON LOAD ---------- */
-const skeletonGrid = document.getElementById('skeleton-grid');
-function renderSkeleton(n=6){
-  skeletonGrid.innerHTML = '';
-  for(let i=0;i<n;i++){
-    const sk = document.createElement('div');
-    sk.className = 'item skel';
-    sk.innerHTML = `
-      <div style="padding:12px">
-        <div class="thumb" style="height:140px; background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.04));"></div>
-        <div class="sk-bar" style="margin-top:10px"></div>
-        <div class="sk-bar" style="width:70%"></div>
-      </div>`;
-    skeletonGrid.appendChild(sk);
-  }
-}
-renderSkeleton(6);
-
-/* ---------- RENDER HISTORIAL ---------- */
-
-const container = document.getElementById('historial-container');
-function ordenarHistorial(arr){
-  // reglas:
-  // 1) en curso (porcentaje entre 1 y 99) primero
-  // 2) luego por timestamp descendente
-  // 3) luego finalizados (100)
-  const copy = [...arr];
-  copy.sort((a,b)=>{
-    const pa = (typeof a.porcentaje === 'number') ? a.porcentaje : (parseInt(a.porcentaje) || 0);
-    const pb = (typeof b.porcentaje === 'number') ? b.porcentaje : (parseInt(b.porcentaje) || 0);
-    const inCourseA = pa>0 && pa<100;
-    const inCourseB = pb>0 && pb<100;
-    if(inCourseA !== inCourseB) return inCourseA? -1: 1;
-    if(pa===100 && pb!==100) return 1;
-    if(pb===100 && pa!==100) return -1;
-    return (b.timestamp||0) - (a.timestamp||0);
-  });
-  return copy;
-}
-
-function crearCard(item, index){
-  const div = document.createElement('div');
-  div.className = 'item';
-  div.dataset.index = index;
-  // allow swipe data
-  div.innerHTML = `
-    <div style="position:relative;">
-      ${ item.tipo ? `<div class="etiqueta">${item.tipo === 'serie' ? 'Serie' : 'Película'}</div>` : '' }
-      <div class="thumb">
-        <img loading="lazy" src="${item.imagen}" alt="${escapeHtml(item.titulo)}" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22240%22 height=%22140%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%230f0f0f%22/></svg>'">
-        <div class="play-overlay" title="Reproducir">
-          <i class="fas fa-play"></i>
-        </div>
-        <div class="progress-wrap">
-          <div class="progress"><i style="width:${(item.porcentaje||0)}%"></i></div>
-          <div class="progress-text">${item.progreso || ((item.porcentaje||0) + '%')}</div>
-        </div>
-      </div>
-    </div>
-    <div class="meta">
-      <div class="item-title">${escapeHtml(item.titulo)}</div>
-      <button class="delete-btn" title="Eliminar">×</button>
-    </div>
-    <div class="swipe-trash" style="display:none"><i class="fas fa-trash-alt"></i></div>
-  `;
-
-  // Play overlay click
-  div.querySelector('.play-overlay').addEventListener('click', (e)=>{
-    e.stopPropagation();
-    verificarAcceso(item.archivo, item.adulto === true);
-  });
-
-  // whole card click (play)
-  div.addEventListener('click', (e)=>{
-    // avoid click when interacting swipe or delete
-    if(div.classList.contains('swiping')) return;
-    verificarAcceso(item.archivo, item.adulto === true);
-  });
-
-  // delete btn
-  div.querySelector('.delete-btn').addEventListener('click', (ev)=>{
-    ev.stopPropagation();
-    eliminarItem(index, item.titulo);
-  });
-
-  // swipe-to-delete (touch)
-  addSwipeHandlers(div, index, item.titulo);
-
-  return div;
-}
-
-function renderHistorial(){
-  // show skeleton while images load
-  container.innerHTML = '';
-  if(!historial || historial.length===0){
-    container.innerHTML = `<div style="padding:30px;text-align:center;color:var(--muted)">No hay historial aún.</div>`;
-    hideSkeleton();
-    return;
+  if (totalImages === 0) {
+    totalImages = 1;
+    loaded = 1;
   }
 
-  const ordenado = ordenarHistorial(historial);
-  // render
-  ordenado.forEach((item, idx)=>{
-    // compute index in original array for deletion mapping
-    const originalIndex = historial.findIndex(x => x.timestamp === item.timestamp && x.titulo === item.titulo && x.archivo === item.archivo);
-    const card = crearCard(item, originalIndex);
-    container.appendChild(card);
-  });
+  function updateLoader() {
+    loaded++;
+    let p = Math.floor((loaded / totalImages) * 100);
 
-  // wait for images loaded, then hide skeleton
-  const imgs = container.querySelectorAll('img');
-  let count = 0;
-  if(imgs.length===0) hideSkeleton();
-  imgs.forEach(img=>{
-    if(img.complete) {
-      count++;
-      if(count===imgs.length) hideSkeleton();
-    } else {
-      img.addEventListener('load', ()=>{
-        count++;
-        if(count===imgs.length) hideSkeleton();
-      });
-      img.addEventListener('error', ()=>{
-        count++;
-        if(count===imgs.length) hideSkeleton();
-      });
+    bar.style.width = p + "%";
+    percent.textContent = p + "%";
+
+    if (p >= 100) {
+      setTimeout(() => {
+        loader.classList.add("hidden");
+      }, 600);
     }
+  }
+
+   window.addEventListener('load', () => {
+    // Pequeño retardo opcional de 1 segundo para suavizar
+    setTimeout(() => {
+      loader.classList.add('hidden');
+      setTimeout(() => {
+        if (continueModal) continueModal.style.display = '';
+      }, 700); /*1200*/
+    }, 200); /*1000*/
   });
-}
 
-function hideSkeleton(){
-  const sk = document.getElementById('skeleton');
-  if(sk) sk.style.display = 'none';
-}
-
-/* helpers */
-function escapeHtml(text){
-  if(!text) return '';
-  return text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-/* startup render */
-setTimeout(renderHistorial, 400); // small delay so skeleton shows
-
-/* ---------- ELIMINAR ITEM ---------- */
-function mostrarToast(text, undo=false){
-  const t = document.getElementById('mensaje-confirmacion');
-  t.textContent = text;
-  t.classList.add('show');
-  if(undo){
-    const undoBtn = document.createElement('button');
-    undoBtn.textContent = ' Deshacer';
-    undoBtn.style.marginLeft = '10px';
-    undoBtn.style.background = 'transparent';
-    undoBtn.style.border = 'none';
-    undoBtn.style.color = '#8ee1ff';
-    undoBtn.style.cursor = 'pointer';
-    undoBtn.onclick = ()=> {
-      if(ultimoEliminado){
-        historial.splice(ultimoEliminado.index, 0, ultimoEliminado.item);
-        localStorage.setItem('historial_usuarios', JSON.stringify(historial));
-        renderHistorial();
-      }
-      clearTimeout(deshacerTimer);
-      t.classList.remove('show');
-    };
-    t.appendChild(undoBtn);
-  }
-  clearTimeout(deshacerTimer);
-  deshacerTimer = setTimeout(()=> t.classList.remove('show'), 5000);
-}
-
-function eliminarItem(index, titulo){
-  pendienteEliminarIndex = index;
-  pendienteEliminarTitulo = titulo;
-  document.getElementById('modal-mensaje').textContent = `¿Eliminar "${titulo}" del historial?`;
-  document.getElementById('modal-confirmacion').style.display = 'flex';
-  document.getElementById('modal-confirmacion').setAttribute('aria-hidden','false');
-}
-
-document.getElementById('btn-cancelar').onclick = ()=>{
-  pendienteEliminarIndex = null;
-  pendienteEliminarTitulo = null;
-  document.getElementById('modal-confirmacion').style.display = 'none';
-  document.getElementById('modal-confirmacion').setAttribute('aria-hidden','true');
-};
-
-document.getElementById('btn-confirmar').onclick = ()=>{
-  if(pendienteEliminarIndex !== null && pendienteEliminarIndex !== undefined){
-    // save for undo
-    const removed = historial.splice(pendienteEliminarIndex, 1)[0];
-    ultimoEliminado = { item: removed, index: pendienteEliminarIndex };
-    localStorage.setItem('historial_usuarios', JSON.stringify(historial));
-    renderHistorial();
-    mostrarToast(`Eliminado: ${pendienteEliminarTitulo}`, true);
-  }
-  pendienteEliminarIndex = null;
-  pendienteEliminarTitulo = null;
-  document.getElementById('modal-confirmacion').style.display = 'none';
-  document.getElementById('modal-confirmacion').setAttribute('aria-hidden','true');
-};
-
-/* limpiar todo */
-function limpiarHistorial(){
-  pendienteEliminarIndex = 'all';
-  pendienteEliminarTitulo = 'todo el historial';
-  document.getElementById('modal-mensaje').textContent = `¿Eliminar todo el historial?`;
-  document.getElementById('modal-confirmacion').style.display = 'flex';
-  document.getElementById('modal-confirmacion').setAttribute('aria-hidden','false');
-}
-document.getElementById('btn-confirmar').addEventListener('click', ()=>{
-  if(pendienteEliminarIndex==='all'){
-    // store copy for undo
-    ultimoEliminado = { item: historial.slice(), index: 'all' };
-    historial = [];
-    localStorage.removeItem('historial_usuarios');
-    renderHistorial();
-    mostrarToast('Historial eliminado', true);
-    pendienteEliminarIndex = null;
+  for (let img of document.images) {
+    if (img.complete) updateLoader();
+    else {
+      img.addEventListener("load", updateLoader);
+      img.addEventListener("error", updateLoader);
+    }
   }
 });
+</script>
+<!-- 🔴 Fin pantalla de carga neón -->
 
-/* ---------- AGE MODAL ---------- */
-function verificarAcceso(url, requiereEdad){
-  if(requiereEdad){
+<header>
+<i class="fas fa-arrow-left" onclick="history.back()"></i>
+<span>Historial</span>
+<i class="fas fa-trash-alt" onclick="limpiarHistorial()"></i>
+</header>
+<h2>Última semana</h2>
+<div class="grid" id="historial-container"></div>
+<div id="mensaje-confirmacion"></div>
+<div id="modal-confirmacion" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:99999;align-items:center;justify-content:center;">
+<div style="background:#1e1e1e;padding:20px;border-radius:10px;max-width:80%;text-align:center;color:#fff;">
+<p id="modal-mensaje"></p>
+<div style="margin-top:15px;">
+<button id="btn-cancelar" style="margin-right:10px;background:#444;color:white;border:none;padding:8px 16px;border-radius:5px;cursor:pointer;">Cancelar</button>
+<button id="btn-confirmar" style="background:crimson;color:white;border:none;padding:8px 16px;border-radius:5px;cursor:pointer;">Eliminar</button>
+</div>
+</div>
+</div>
+<script>
+    let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
+    const LIMITE_HISTORIAL = 21; // ACA ES PARA AUMENTAR EL NUMERO DE TARJETAS DE PELICULAS SI QUIERES AUMENTAR PARA QUE SE VEAN 30 ES ASI POR EJEMPLO: SI QUIERES QUE SEAN 30 DEBES CAMBIAR EL "2" Y PONER "3"
+    let ultimoEliminado = null;
+    let pendienteEliminarIndex = null;
+    let pendienteEliminarTitulo = null;
+
+    historial.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+    while (historial.length > LIMITE_HISTORIAL) historial.pop();
+    localStorage.setItem('historial_usuarios', JSON.stringify(historial));
+
+    function mostrarMensaje(texto, conDeshacer = false) {
+      const mensaje = document.getElementById('mensaje-confirmacion');
+      mensaje.innerHTML = texto;
+      mensaje.style.display = 'block';
+      mensaje.style.opacity = '1';
+      setTimeout(() => {
+        mensaje.style.opacity = '0';
+        setTimeout(() => mensaje.style.display = 'none', 500);
+      }, 3000);
+    }
+
+    function eliminarItem(index, titulo) {
+      pendienteEliminarIndex = index;
+      pendienteEliminarTitulo = titulo;
+      document.getElementById('modal-mensaje').textContent = `¿Eliminar "${titulo}" del historial?`;
+      document.getElementById('modal-confirmacion').style.display = 'flex';
+    }
+
+    function limpiarHistorial() {
+      pendienteEliminarIndex = 'all';
+      pendienteEliminarTitulo = 'todo el historial';
+      document.getElementById('modal-mensaje').textContent = `¿Eliminar todo el historial?`;
+      document.getElementById('modal-confirmacion').style.display = 'flex';
+    }
+
+    document.getElementById('btn-cancelar').onclick = () => {
+      pendienteEliminarIndex = null;
+      pendienteEliminarTitulo = null;
+      document.getElementById('modal-confirmacion').style.display = 'none';
+    };
+
+    document.getElementById('btn-confirmar').onclick = () => {
+      if (pendienteEliminarIndex === 'all') {
+        localStorage.removeItem('historial_usuarios');
+        historial = [];
+        renderHistorial();
+        mostrarMensaje('🧹 Historial eliminado');
+      } else if (pendienteEliminarIndex !== null) {
+        ultimoEliminado = historial.splice(pendienteEliminarIndex, 1)[0];
+        localStorage.setItem('historial_usuarios', JSON.stringify(historial));
+        renderHistorial();
+        mostrarMensaje(` Eliminado: ${pendienteEliminarTitulo}`, true);
+      }
+      document.getElementById('modal-confirmacion').style.display = 'none';
+    };
+
+    function renderHistorial() {
+      const container = document.getElementById('historial-container');
+      container.innerHTML = '';
+      historial.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.className = 'item';
+        div.innerHTML = `
+          <div onclick="verificarAcceso('${item.archivo}', ${item.adulto === true})" style="text-decoration: none; color: inherit;">
+            <div style="position: relative;">
+              <img src="${item.imagen}" alt="${item.titulo}">
+              <div class="capitulo">${item.progreso}</div>
+              ${item.tipo ? `<div class="etiqueta">${item.tipo === 'serie' ? 'Serie' : 'Película'}</div>` : ''}
+            </div>
+            <div class="item-title">${item.titulo}</div>
+          </div>
+          <button class="delete-btn" onclick="eliminarItem(${index}, '${item.titulo.replace(/'/g, "\'")}')">×</button>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    renderHistorial();
+  </script>
+
+  <!-- Modal flotante de edad -->
+<div id="ageModal" class="age-modal hidden">
+  <div class="age-modal-content">
+    <span class="close-button" onclick="closeModal()">×</span>
+    <h2>¿Eres mayor de edad?</h2>
+    <label for="birthyear">Año de nacimiento:</label>
+    <input type="number" id="birthyear" placeholder="Año" min="1900" max="2025" />
+    <label for="age">Edad</label>
+    <input type="number" id="age" placeholder="Edad" min="1" max="120" />
+    <button id="confirmAgeBtn">Validar edad</button>
+    <p id="result-message"></p>
+  </div>
+</div>
+
+<style>
+    .age-modal {
+      position: fixed;
+      z-index: 9999;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .age-modal-content {
+      background-color: #ffffff;
+      color: #000000;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      width: 300px;
+      position: relative;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+
+    .age-modal-content h2,
+    .age-modal-content label,
+    .age-modal-content p {
+      color: #000000;
+    }
+
+
+    .age-modal-content input {
+      width: 90%;
+      margin: 10px auto;
+      padding: 8px; 
+      display: block; 
+      background-color: #ffffff;  
+      color: #000000;
+      border: 1px solid #ccc; 
+      border-radius: 5px;
+    }
+
+
+    .age-modal-content input::placeholder {
+      color: #777;
+    }
+
+    /* Modo oscuro */
+
+    body.dark .age-modal-content,
+    .dark .age-modal-content {
+      background-color: #1e1e1e;
+      color: #f5f5f5;
+    }
+
+    body.dark .age-modal-content h2,
+    .dark .age-modal-content h2,
+    body.dark .age-modal-content label,
+    .dark .age-modal-content label,
+    body.dark .age-modal-content p,
+    .dark .age-modal-content p {
+      color: #f5f5f5;
+    }
+
+    body.dark .age-modal-content input,
+    .dark .age-modal-content input {
+      background-color: #2b2b2b;
+      color: #ffffff;
+      border: 1px solid #555;
+    }
+
+    body.dark .age-modal-content input::placeholder,
+    .dark .age-modal-content input::placeholder {
+      color: #ccc;
+    }
+
+    .age-modal-content button {
+      background: #0b57cf;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .age-modal-content button:hover {
+      background: #063ea3;
+    }
+
+    .close-button {
+      position: absolute;
+      right: 12px;
+      top: 8px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #888;
+      cursor: pointer;
+    }
+
+    .close-button:hover {
+      color: #000;
+    }
+
+    body.dark .close-button {
+      color: #aaa;
+    }
+
+    body.dark .close-button:hover {
+      color: #fff;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+
+<script>
+let pendingRedirect = null;
+
+function verificarAcceso(url, requiereEdad) {
+  if (requiereEdad) {
     pendingRedirect = url;
     openModal();
   } else {
@@ -559,163 +529,54 @@ function verificarAcceso(url, requiereEdad){
   }
 }
 
-function openModal(){
-  document.getElementById('ageModal').style.display = 'flex';
-  document.getElementById('result-message').textContent = '';
-  document.getElementById('birthyear').value = '';
-  document.getElementById('age').value = '';
+function openModal() {
+  document.getElementById("ageModal").classList.remove("hidden");
+  document.getElementById("result-message").innerText = "";
+  document.getElementById("birthyear").value = "";
+  document.getElementById("age").value = "";
 }
 
-function closeModal(){
-  document.getElementById('ageModal').style.display = 'none';
+function closeModal() {
+  document.getElementById("ageModal").classList.add("hidden");
   pendingRedirect = null;
 }
 
-document.getElementById('confirmAgeBtn').addEventListener('click', function () {
+document.getElementById("confirmAgeBtn").addEventListener("click", function () {
   const birthYear = parseInt(document.getElementById("birthyear").value);
   const enteredAge = parseInt(document.getElementById("age").value);
   const currentYear = new Date().getFullYear();
-  const calculatedAge = birthYear ? (currentYear - birthYear) : null;
+  const calculatedAge = currentYear - birthYear;
   const result = document.getElementById("result-message");
 
-  if((isNaN(birthYear) && isNaN(enteredAge)) || (birthYear && (birthYear>currentYear || birthYear<1900)) || (enteredAge && (enteredAge<0 || enteredAge>120))){
-    result.textContent = "Por favor completa los campos con valores válidos.";
+  if (
+    isNaN(birthYear) || isNaN(enteredAge) ||
+    birthYear > currentYear || birthYear < 1900 ||
+    enteredAge < 0 || enteredAge > 120
+  ) {
+    result.innerText = "Por favor completa los campos con valores válidos.";
     result.style.color = "red";
     return;
   }
 
-  if(!isNaN(enteredAge) && calculatedAge && enteredAge !== calculatedAge){
-    // if both provided and mismatching
-    if(!isNaN(birthYear)){
-      result.textContent = "La edad no coincide con el año de nacimiento.";
-      result.style.color = "red";
-      return;
-    }
+  if (enteredAge !== calculatedAge) {
+    result.innerText = "La edad no coincide con el año de nacimiento.";
+    result.style.color = "red";
+    return;
   }
 
-  const finalAge = !isNaN(enteredAge) ? enteredAge : calculatedAge;
-  if(finalAge>=18){
-    result.textContent = "Acceso permitido. Redirigiendo...";
+  if (enteredAge >= 18) {
+    result.innerText = "Acceso permitido. Redirigiendo...";
     result.style.color = "green";
-    setTimeout(()=>{
-      if(pendingRedirect) window.location.href = pendingRedirect;
-    },800);
+    setTimeout(() => {
+      if (pendingRedirect) {
+        window.location.href = pendingRedirect;
+      }
+    }, 1500);
   } else {
-    result.textContent = "No eres mayor de edad.";
+    result.innerText = "No eres mayor de edad, vuelve a intentarlo más adelante.";
     result.style.color = "red";
   }
 });
-
-/* ---------- SWIPE HANDLERS (mobile) ---------- */
-function addSwipeHandlers(el, index, title){
-  let startX = 0, currentX = 0, touching = false;
-  const threshold = 60; // px to reveal delete
-  const maxReveal = 80;
-
-  function onStart(e){
-    touching = true;
-    el.classList.add('swiping');
-    startX = (e.touches ? e.touches[0].clientX : e.clientX);
-    currentX = startX;
-    el.style.transition = 'none';
-  }
-  function onMove(e){
-    if(!touching) return;
-    currentX = (e.touches ? e.touches[0].clientX : e.clientX);
-    let dx = currentX - startX;
-    // only allow left swipe
-    if(dx < 0){
-      dx = Math.max(dx, -maxReveal);
-      el.style.transform = `translateX(${dx}px)`;
-      // show red trash if passed threshold
-      const trash = el.querySelector('.swipe-trash');
-      if(trash) trash.style.display = Math.abs(dx) > 6 ? 'flex' : 'none';
-    }
-  }
-  function onEnd(e){
-    touching = false;
-    el.classList.remove('swiping');
-    el.style.transition = 'transform .25s ease';
-    let dx = currentX - startX;
-    if(dx < -threshold){
-      // reveal and keep small offset
-      el.style.transform = `translateX(-80px)`;
-      // Show confirm delete
-      setTimeout(()=> {
-        eliminarItem(index, title);
-      }, 180);
-    } else {
-      el.style.transform = `translateX(0)`;
-      const trash = el.querySelector('.swipe-trash');
-      if(trash) trash.style.display = 'none';
-    }
-  }
-
-  // Desktop: allow mouse drag as optional
-  el.addEventListener('touchstart', onStart, {passive:true});
-  el.addEventListener('touchmove', onMove, {passive:true});
-  el.addEventListener('touchend', onEnd);
-  el.addEventListener('mousedown', (e)=> onStart(e));
-  window.addEventListener('mousemove', (e)=> onMove(e));
-  window.addEventListener('mouseup', (e)=> onEnd(e));
-}
-
-/* ---------- Sync placeholder (Google Sheets / backend) ---------- */
-/*
-  Si querés sincronizar el historial con Google Sheets o tu backend,
-  expone un endpoint (por ejemplo con Google Apps Script o API) y pon la URL
-  en `SYNC_ENDPOINT`. Luego descomenta las llamadas a syncToServer() donde
-  lo necesites.
-
-  Ejemplo de Apps Script: crear un WebApp que reciba POST con JSON y
-  escriba en la hoja. Luego la URL sería la del web app (debe permitir CORS o usar doGet/doPost).
-*/
-
-const SYNC_ENDPOINT = ''; // <-- coloca aquí tu endpoint si querés sincronizar
-async function syncToServer(payload){
-  if(!SYNC_ENDPOINT) return;
-  try{
-    await fetch(SYNC_ENDPOINT, {
-      method:'POST',
-      headers:{ 'Content-Type':'application/json' },
-      body: JSON.stringify(payload)
-    });
-    // respuesta manejable aquí
-  }catch(err){
-    console.warn('Sync error', err);
-  }
-}
-
-/* ejemplo: después de eliminar / modificar podrías llamar:
-   syncToServer({ action: 'update_historial', data: historial });
-*/
-
-/* ---------- Utilities for testing (dev) ---------- */
-/*
-  Para probar el diseño sin datos reales, descomenta la siguiente
-  función y carga la página. O añade objetos en localStorage manualmente.
-*/
-
-// function seedDemo(){
-//   const demo = [];
-//   for(let i=1;i<=8;i++){
-//     demo.push({
-//       titulo: 'Demo Título ' + i,
-//       imagen: 'https://picsum.photos/seed/movietx'+i+'/640/360',
-//       archivo: 'https://example.com/play/'+i,
-//       progreso: i%3===0? 'Finalizado': (i*10)+'% visto',
-//       porcentaje: (i%3===0?100:(i*10)),
-//       tipo: i%2===0? 'serie' : 'pelicula',
-//       adulto: i%4===0,
-//       timestamp: Date.now() - i*1000*60*60
-//     });
-//   }
-//   localStorage.setItem('historial_usuarios', JSON.stringify(demo));
-//   location.reload();
-// }
-// seedDemo(); // descomentar para pruebas
-
-/* fin del script */
 </script>
 
 </body>
