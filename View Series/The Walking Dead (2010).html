@@ -1682,6 +1682,41 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       window.location.href = "../View Peliculas/favoritos.html";
     });
+
+
+
+    // ✅ Bloquear siempre en vertical al entrar
+if (screen.orientation && screen.orientation.lock) {
+    screen.orientation.lock("portrait").catch(() => {});
+}
+
+// ✅ Botón fullscreen (o tu función fullscreen)
+async function enterFullscreen() {
+    const elem = document.documentElement;
+
+    if (elem.requestFullscreen) {
+        await elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) {
+        await elem.webkitRequestFullscreen();
+    }
+
+    // ✅ Permitir rotación en fullscreen
+    if (screen.orientation && screen.orientation.lock) {
+        screen.orientation.unlock?.();
+        screen.orientation.lock("landscape").catch(() => {});
+    }
+}
+
+// ✅ Detectar salida de fullscreen
+document.addEventListener("fullscreenchange", () => {
+    if (!document.fullscreenElement) {
+        // ✅ Volver a vertical automáticamente
+        if (screen.orientation && screen.orientation.lock) {
+            screen.orientation.lock("portrait").catch(() => {});
+        }
+    }
+});
+
   </script>
   
   <script>
@@ -1691,9 +1726,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const player = new Plyr(videoElement, {
       controls: [
-        'rewind', 'play', 'fast-forward',
+        'rewind', 'play', 'play-large', 'fast-forward',
         'progress', 'current-time', 'duration', 'mute', 'volume',
-        'captions', 'pip', 'airplay', 'fullscreen'
+        'captions', 'airplay', 'fullscreen'
       ]
     });
 
@@ -2121,7 +2156,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mostrarModalFavoritos("✅ Agregado al historial");
         clearInterval(esperar);
       }
-    }, 1000);
+    }, 150);
   }
 
   // GUARDAR AVANCE CADA 10s
@@ -2597,30 +2632,63 @@ document.addEventListener('DOMContentLoaded', () => {
   position: relative;
 }
 
+
 .ep-percent {
   position: absolute;
   left: 55%;
   top: 50%;
   transform: translate(-50%, -50%);
   font-weight: 700;
-  font-size: 0.5rem;
-  color: #fff; /* 🔹 texto blanco */
+  font-size: clamp(0.45rem, 2.2vw, 1rem);
+  color: #fff;
   pointer-events: none;
   user-select: none;
+  white-space: nowrap;
 }
 
-@media screen and (max-width: 480px) {
-.ep-percent {
-  position: absolute;
-  left: 55%;
-  top: 51%;
-  transform: translate(-50%, -50%);
-  font-weight: 700;
-  font-size: 0.5rem;
-  color: #fff; /* 🔹 texto blanco */
-  pointer-events: none;
-  user-select: none;
+/* ✅ Móviles pequeños (Android chicos / iPhone SE) */
+@media screen and (max-width: 400px) {
+  .ep-percent {
+    font-size: clamp(0.55rem, 3vw, 0.85rem);
+    top: 49%;
+  }
 }
+
+/* ✅ Móviles estándar */
+@media screen and (max-width: 600px) {
+  .ep-percent {
+    font-size: clamp(0.6rem, 3vw, 1rem);
+  }
+}
+
+/* ✅ Tablets */
+@media screen and (max-width: 900px) {
+  .ep-percent {
+    font-size: clamp(0.6rem, 1.3vw, 1.3rem);
+    left: 55%;
+    top: 50%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .ep-percent {
+    font-size: clamp(0.1rem, 1.1vw, 0.6rem);
+    left: 57%;
+    top: 47%;
+  }
+}
+
+
+
+/* ✅ PC / TV */
+@media screen and (min-width: 1200px) {
+  .ep-percent {
+    font-size: clamp(0.1rem, 1.1vw, 0.6rem);
+    left: 55%;
+    top: 46%;
+  }
+}
+
 
   .episode-card { display:flex; flex-direction:column; gap:10px; padding:14px; background:rgba(20,20,20,0.85); border-radius:10px; box-shadow:0 8px 24px rgba(0,0,0,0.4); transition:transform .2s ease, box-shadow .2s; }
   .episode-card:hover { transform:translateY(-2px); box-shadow:0 10px 30px rgba(255,45,91,0.2); }
@@ -2738,24 +2806,55 @@ document.addEventListener('DOMContentLoaded', () => {
   top: 50%;
   transform: translate(-50%, -50%);
   font-weight: 700;
-  font-size: 0.5rem;
-  color: #fff; /* 🔹 texto blanco */
+  font-size: clamp(0.45rem, 2.2vw, 1rem);
+  color: #fff;
   pointer-events: none;
   user-select: none;
+  white-space: nowrap;
 }
 
-@media screen and (max-width: 480px) {
-.ep-percent {
-  position: absolute;
-  left: 55%;
-  top: 51%;
-  transform: translate(-50%, -50%);
-  font-weight: 700;
-  font-size: 0.5rem;
-  color: #fff; /* 🔹 texto blanco */
-  pointer-events: none;
-  user-select: none;
+/* ✅ Móviles pequeños (Android chicos / iPhone SE) */
+@media screen and (max-width: 400px) {
+  .ep-percent {
+    font-size: clamp(0.55rem, 3vw, 0.85rem);
+    top: 49%;
+  }
 }
+
+/* ✅ Móviles estándar */
+@media screen and (max-width: 600px) {
+  .ep-percent {
+    font-size: clamp(0.6rem, 3vw, 1rem);
+  }
+}
+
+/* ✅ Tablets */
+@media screen and (max-width: 900px) {
+  .ep-percent {
+    font-size: clamp(0.6rem, 1.3vw, 1.3rem);
+    left: 55%;
+    top: 50%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .ep-percent {
+    font-size: clamp(0.1rem, 1.1vw, 0.6rem);
+    left: 57%;
+    top: 47%;
+  }
+}
+
+
+/* ✅ PC / TV */
+@media screen and (min-width: 1200px) {
+  .ep-percent {
+    font-size: clamp(0.1rem, 1.1vw, 0.6rem);
+    left: 55%;
+    top: 46%;
+  }
+}
+
 
   `;
   const st=document.createElement('style'); st.innerHTML = css; document.head.appendChild(st);
