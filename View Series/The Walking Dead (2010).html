@@ -463,6 +463,49 @@
 
 <body ondragstart="return false;" ondrop="return false;">
 
+  <style>
+    /* ✅ Siempre vertical */
+@media screen and (orientation: landscape) {
+  body {
+    transform: rotate(90deg);
+    transform-origin: left top;
+    width: 100vh;
+    height: 100vw;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+}
+
+  </style>
+
+  <script>
+    async function enterFullscreen() {
+    const elem = document.documentElement;
+
+    if (elem.requestFullscreen) {
+        await elem.requestFullscreen();
+    }
+
+    // ✅ ahora sí permitir landscape
+    if (screen.orientation && screen.orientation.lock) {
+        screen.orientation.unlock?.();
+        screen.orientation.lock("landscape").catch(() => {});
+    }
+}
+
+document.addEventListener("fullscreenchange", () => {
+    if (!document.fullscreenElement) {
+        // ✅ volver a vertical
+        if (screen.orientation && screen.orientation.lock) {
+            screen.orientation.lock("portrait").catch(() => {});
+        }
+    }
+});
+
+  </script>
+
  <script>
 // 🔙 Si el usuario presiona "Atrás" en una película, vuelve al index
 window.history.pushState(null, null, window.location.href);
@@ -1682,41 +1725,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       window.location.href = "../View Peliculas/favoritos.html";
     });
-
-
-
-    // ✅ Bloquear siempre en vertical al entrar
-if (screen.orientation && screen.orientation.lock) {
-    screen.orientation.lock("portrait").catch(() => {});
-}
-
-// ✅ Botón fullscreen (o tu función fullscreen)
-async function enterFullscreen() {
-    const elem = document.documentElement;
-
-    if (elem.requestFullscreen) {
-        await elem.requestFullscreen();
-    } else if (elem.webkitRequestFullscreen) {
-        await elem.webkitRequestFullscreen();
-    }
-
-    // ✅ Permitir rotación en fullscreen
-    if (screen.orientation && screen.orientation.lock) {
-        screen.orientation.unlock?.();
-        screen.orientation.lock("landscape").catch(() => {});
-    }
-}
-
-// ✅ Detectar salida de fullscreen
-document.addEventListener("fullscreenchange", () => {
-    if (!document.fullscreenElement) {
-        // ✅ Volver a vertical automáticamente
-        if (screen.orientation && screen.orientation.lock) {
-            screen.orientation.lock("portrait").catch(() => {});
-        }
-    }
-});
-
   </script>
   
   <script>
@@ -2654,6 +2662,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 }
 
+
 /* ✅ Móviles estándar */
 @media screen and (max-width: 600px) {
   .ep-percent {
@@ -2666,7 +2675,7 @@ document.addEventListener('DOMContentLoaded', () => {
   .ep-percent {
     font-size: clamp(0.6rem, 1.3vw, 1.3rem);
     left: 55%;
-    top: 50%;
+    top: 51%;
   }
 }
 
@@ -2821,6 +2830,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 }
 
+
 /* ✅ Móviles estándar */
 @media screen and (max-width: 600px) {
   .ep-percent {
@@ -2833,7 +2843,7 @@ document.addEventListener('DOMContentLoaded', () => {
   .ep-percent {
     font-size: clamp(0.6rem, 1.3vw, 1.3rem);
     left: 55%;
-    top: 50%;
+    top: 51%;
   }
 }
 
