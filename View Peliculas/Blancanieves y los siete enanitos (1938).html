@@ -5,6 +5,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <title>MovieTx - Reproductor</title>
   <link href="https://fonts.googleapis.com/css2?family=PT+Sans&amp;family=Roboto&amp;display=swap" rel="stylesheet"/>
+  <link rel="icon" type="image/png" href="../Logo Poster MovieTx PNG/Logo MovieTx.png">
   <link href="https://cdn.jsdelivr.net/gh/CDNSFree2/Plyr/plyr.css" rel="stylesheet"/>
   <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet"/>
   <style>
@@ -180,241 +181,268 @@
     #btn-favorito.animado {
       animation: pop 0.3s ease;
     }
-/* --- Mejor experiencia deslizable en móvil --- */
-@media (max-width: 880px) {
-  /* Lista de temporadas horizontal deslizable */
-  .seasons-list {
-    display: flex;
-    overflow-x: auto;
-    gap: 12px;
-    padding: 8px;
-    -webkit-overflow-scrolling: touch; /* suavidad en iOS */
-    scroll-snap-type: x mandatory;
-  }
+    /* --- Mejor experiencia deslizable en móvil --- */
+    @media (max-width: 880px) {
+  
+      /* Lista de temporadas horizontal deslizable */
+  
+      .seasons-list {
+        display: flex;    
+        overflow-x: auto;   
+        gap: 12px;   
+        padding: 8px;   
+        -webkit-overflow-scrolling: touch; /* suavidad en iOS */   
+        scroll-snap-type: x mandatory;
+      }
 
-  .seasons-list ul {
-    flex-direction: row;
-    gap: 12px;
-    width: max-content;
-  }
+  
+      .seasons-list ul {
+        flex-direction: row;
+        gap: 12px;
+        width: max-content;
+      }
 
-  .seasons-list li {
-    flex: 0 0 auto;
-    scroll-snap-align: start;
-    min-width: 160px;
-  }
+      .seasons-list li {
+        flex: 0 0 auto;
+        scroll-snap-align: start;
+        min-width: 160px;
+      }
 
-  .seasons-list::-webkit-scrollbar {
-    display: none; /* oculta scrollbar en móviles */
-  }
-}
+  
+      .seasons-list::-webkit-scrollbar {
+        display: none; /* oculta scrollbar en móviles */
+      }
+    }
 
-@media (max-width: 768px) {
-  /* Episodios también deslizable si hay muchos */
-  .episodes-grid {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 12px !important;
-  padding: 8px !important;
-  overflow-x: visible !important;
-  overflow-y: auto !important;
-}
 
-  .episodes-grid::-webkit-scrollbar {
-    display: none;
-  }
+    @media (max-width: 768px) {
+      /* Episodios también deslizable si hay muchos */
+      .episodes-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        padding: 8px !important;
+        overflow-x: visible !important;
+        overflow-y: auto !important;
+      }
 
-  .episode-card {
-  flex: none !important;
-  width: 100% !important;
-  align-items: center !important;
-}
-}
-/* Estilo para episodio en reproducción */
-.episode-card.viendo {
-  border: 2px solid var(--accent);
-  background: rgba(255, 45, 91, 0.08);
-  box-shadow: 0 0 12px rgba(255,45,91,0.6);
-  position: relative;
-}
+      .episodes-grid::-webkit-scrollbar {
+        display: none;
+      }
+  
+      .episode-card {
+        flex: none !important;
+        width: 100% !important;
+        align-items: center !important;
+      }
+    }
 
-.episode-card.viendo::after {
-  content: "▶ Viendo ahora";
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  background: var(--accent);
-  color: #fff;
-  font-size: 0.7rem;
-  font-weight: 600;
-  padding: 3px 6px;
-  border-radius: 6px;
-}
-#btn-favorito {
-  background: linear-gradient(135deg, #ff2d55, #ff5e7e);
-  color: white;
-  padding: 12px 22px;
-  border: none;
-  border-radius: 999px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
-  box-shadow: 0 8px 20px rgba(255, 45, 91, 0.35);
-}
+    /* Estilo para episodio en reproducción */
 
-#btn-favorito:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 28px rgba(255, 45, 91, 0.55);
-}
+    .episode-card.viendo {
+  
+      border: 2px solid var(--accent);
+  
+      background: rgba(255, 45, 91, 0.08);
+ 
+      box-shadow: 0 0 12px rgba(255,45,91,0.6);
+  
+      position: relative;
 
-#btn-favorito::after {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255, 255, 255, 0.25),
-    transparent
-  );
-  transform: rotate(25deg);
-  animation: shine 3s infinite;
-}
+    }
 
-@keyframes shine {
-  0% { transform: translateX(-100%) rotate(25deg); }
-  50% { transform: translateX(100%) rotate(25deg); }
-  100% { transform: translateX(100%) rotate(25deg); }
-}
-.info-pelicula {
-  text-align: center;
-  margin-top: 20px;
-  color: #fff;
-}
+    .episode-card.viendo::after {
+      content: "▶ Viendo ahora";
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 3px 6px;
+      border-radius: 6px;
+    }
 
-.sinopsis {
-  font-size: 1rem;
-  color: #bbb;
-  max-width: 600px;
-  margin: 10px auto 20px;
-}
+    #btn-favorito {
+      background: linear-gradient(135deg, #ff2d55, #ff5e7e);
+      color: white;
+      padding: 12px 22px;
+      border: none;
+      border-radius: 999px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+      box-shadow: 0 8px 20px rgba(255, 45, 91, 0.35);
+    }
 
-.acciones {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  flex-wrap: wrap;
-}
+    #btn-favorito:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(255, 45, 91, 0.55);
+    }
 
-.play-btn {
-  background: linear-gradient(135deg, #1db954, #1ed760);
-  color: white;
-  padding: 12px 22px;
-  border: none;
-  border-radius: 999px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
-  box-shadow: 0 8px 20px rgba(29, 185, 84, 0.35);
-}
 
-.play-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 28px rgba(29, 185, 84, 0.55);
-}
+    #btn-favorito::after {
+      content: ""; 
+      position: absolute; 
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+      120deg,
+      transparent,
+      rgba(255, 255, 255, 0.25),
+      transparent
+      );
+      transform: rotate(25deg);
+      animation: shine 3s infinite;
+    }
 
-#btn-favorito {
-  background: linear-gradient(135deg, #ff2d55, #ff5e7e);
-  color: white;
-  padding: 12px 22px;
-  border: none;
-  border-radius: 999px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
-  box-shadow: 0 8px 20px rgba(255, 45, 91, 0.35);
-}
+    @keyframes shine {
+      0% { transform: translateX(-100%) rotate(25deg); }
+      50% { transform: translateX(100%) rotate(25deg); }
+      100% { transform: translateX(100%) rotate(25deg); }
+    }
+    .info-pelicula {
+      text-align: center;
+      margin-top: 20px;
+      color: #fff;
+    }
 
-#btn-favorito:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 28px rgba(255, 45, 91, 0.55);
-}
+    .sinopsis {
+      font-size: 1rem;
+      color: #bbb;
+      max-width: 600px;
+      margin: 10px auto 20px;
+    }
 
-#btn-favorito::after {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255, 255, 255, 0.25),
-    transparent
-  );
-  transform: rotate(25deg);
-  animation: shine 3s infinite;
-}
+    .acciones {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
 
-@keyframes shine {
-  0% { transform: translateX(-100%) rotate(25deg); }
-  50% { transform: translateX(100%) rotate(25deg); }
-  100% { transform: translateX(100%) rotate(25deg); }
-}
-  .season-episode-tag {
-  display: inline-block;
-  margin-top: 8px;
-  margin-bottom: 14px;
-  padding: 6px 14px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
-  border: 1px solid rgba(255,255,255,0.15);
-  color: #9ad0ff;
-  font-weight: 600;
-  font-size: 0.9rem;
-  letter-spacing: 0.3px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
-}
 
-/* 💎 Barra de progreso estilo "Neón líquido celeste" */
-.plyr__progress input[type="range"] {
-  height: 5px;
-  border-radius: 999px;
-  background: linear-gradient(270deg, #00c6ff, #00e0ff, #00c6ff);
-  background-size: 400% 400%;
-  animation: neonFlow 3s ease infinite;
-  box-shadow: 0 0 14px rgba(0, 230, 255, 0.6);
-  transition: all 0.3s ease;
-}
+    .play-btn {
+      background: linear-gradient(135deg, #1db954, #1ed760);
+      color: white;
+      padding: 12px 22px;
+      border: none;
+      border-radius: 999px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+      box-shadow: 0 8px 20px rgba(29, 185, 84, 0.35);
+    }
 
-.plyr__progress input[type="range"]:hover {
-  box-shadow: 0 0 20px rgba(0, 250, 255, 0.8);
-  transform: scaleY(1.1);
-}
 
-@keyframes neonFlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+    .play-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(29, 185, 84, 0.55);
+    }
+
+
+    #btn-favorito {
+      background: linear-gradient(135deg, #ff2d55, #ff5e7e);
+      color: white;
+      padding: 12px 22px;
+      border: none;
+      border-radius: 999px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+      box-shadow: 0 8px 20px rgba(255, 45, 91, 0.35);
+    }
+
+
+    #btn-favorito:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(255, 45, 91, 0.55);
+    }
+
+
+    #btn-favorito::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+      120deg,
+      transparent,
+      rgba(255, 255, 255, 0.25),
+      transparent
+      );
+      transform: rotate(25deg);  
+      animation: shine 3s infinite;
+    }
+
+
+    @keyframes shine {
+      0% { transform: translateX(-100%) rotate(25deg); } 
+      50% { transform: translateX(100%) rotate(25deg); }
+      100% { transform: translateX(100%) rotate(25deg); }
+
+    }
+  
+    .season-episode-tag {
+      display: inline-block;
+      margin-top: 8px;
+      margin-bottom: 14px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #9ad0ff;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.3px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+    }
+
+
+
+    /* 💎 Barra de progreso estilo "Neón líquido celeste" */
+
+    .plyr__progress input[type="range"] {
+      height: 5px;
+      border-radius: 999px;
+      background: linear-gradient(270deg, #00c6ff, #00e0ff, #00c6ff);
+      background-size: 400% 400%;
+      animation: neonFlow 3s ease infinite;
+      box-shadow: 0 0 14px rgba(0, 230, 255, 0.6);
+      transition: all 0.3s ease;
+    }
+
+
+    .plyr__progress input[type="range"]:hover {
+      box-shadow: 0 0 20px rgba(0, 250, 255, 0.8);
+      transform: scaleY(1.1);
+    }
+
+
+    @keyframes neonFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
   </style>
 </head>
 
 <body ondragstart="return false;" ondrop="return false;">
   
-  <script>
+<script>
 // 🔹 Evita volver a la página anterior
 // y manda directo a index.html al presionar atrás
 window.history.pushState(null, null, window.location.href);
@@ -430,15 +458,22 @@ if (window.performance && window.performance.navigation.type === 2) {
 }
 </script>
 
-  <!-- 🔴 Pantalla de carga personalizada MovieTx (versión neón) -->
 <div id="loader-screen">
   <div class="loader-content">
     <div class="loader-circle">
       <img src="../Logo Poster MovieTx PNG/Logo MovieTx.png" alt="Logo MovieTx" class="loader-logo">
     </div>
+
     <h1 class="loader-title">MovieTx</h1>
     <p class="loader-sub">Cargando<span class="loading-dots"></span></p>
     <p class="loader-msg">Por favor, espere</p>
+
+    <!-- 🔥 Nueva barra de carga profesional -->
+    <div class="loading-bar">
+      <div class="loading-fill" id="loading-fill"></div>
+      <div class="loading-percent" id="loading-percent">0%</div>
+    </div>
+
   </div>
 </div>
 
@@ -458,9 +493,8 @@ if (window.performance && window.performance.navigation.type === 2) {
   opacity: 0;
   visibility: hidden;
 }
-.loader-content {
-  text-align: center;
-}
+.loader-content { text-align: center; }
+
 .loader-circle {
   width: 180px;
   height: 180px;
@@ -475,14 +509,14 @@ if (window.performance && window.performance.navigation.type === 2) {
   margin-bottom: 20px;
   box-shadow: 0 0 30px rgba(255, 0, 128, 0.5);
 }
-.loader-logo {
-  width: 100px;
-  height: auto;
-}
+
+.loader-logo { width: 100px; }
+
 @keyframes spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
 .loader-title {
   font-size: 2.5rem;
   color: #fff;
@@ -491,14 +525,9 @@ if (window.performance && window.performance.navigation.type === 2) {
   margin-bottom: 10px;
   letter-spacing: 2px;
 }
-.loader-sub {
-  font-size: 1.2rem;
-  color: #ccc;
-}
-.loading-dots::after {
-  content: '';
-  animation: dotPulse 1.5s infinite steps(4);
-}
+
+.loader-sub { font-size: 1.2rem; color: #ccc; }
+.loading-dots::after { content: ''; animation: dotPulse 1.5s steps(4) infinite; }
 @keyframes dotPulse {
   0% { content: ''; }
   25% { content: '.'; }
@@ -506,29 +535,87 @@ if (window.performance && window.performance.navigation.type === 2) {
   75% { content: '...'; }
   100% { content: ''; }
 }
-.loader-msg {
-  font-size: 1rem;
-  color: #888;
-  margin-top: 10px;
+.loader-msg { font-size: 1rem; color: #888; margin-top: 10px; }
+
+/* 🔥 NUEVA BARRA PROFESIONAL (MISMO ESTILO DE COLOR) */
+.loading-bar {
+  width: 75%;
+  height: 16px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 10px;
+  margin: 22px auto 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.loading-fill {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #00aaff, #ff007f);
+  transition: width 0.3s ease;
+}
+
+.loading-percent {
+  position: absolute;
+  inset: 0;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
 }
 </style>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
+
   const loader = document.getElementById('loader-screen');
   const continueModal = document.getElementById('continue-modal');
   if (continueModal) continueModal.style.display = 'none';
+  const bar = document.getElementById('loading-fill');
+  const percent = document.getElementById('loading-percent');
 
-  // Espera a que todas las imágenes (y el resto del contenido visual) terminen de cargar
-  window.addEventListener('load', () => {
+  let totalImages = document.images.length;
+  let loaded = 0;
+
+  if (totalImages === 0) {
+    totalImages = 1;
+    loaded = 1;
+  }
+
+  function updateLoader() {
+    loaded++;
+    let p = Math.floor((loaded / totalImages) * 100);
+
+    bar.style.width = p + "%";
+    percent.textContent = p + "%";
+
+    if (p >= 100) {
+      setTimeout(() => {
+        loader.classList.add("hidden");
+      }, 600);
+    }
+  }
+
+   window.addEventListener('load', () => {
     // Pequeño retardo opcional de 1 segundo para suavizar
     setTimeout(() => {
       loader.classList.add('hidden');
       setTimeout(() => {
         if (continueModal) continueModal.style.display = '';
-      }, 1200);
-    }, 1000);
+      }, 700); /*1200*/
+    }, 200); /*1000*/
   });
+
+  for (let img of document.images) {
+    if (img.complete) updateLoader();
+    else {
+      img.addEventListener("load", updateLoader);
+      img.addEventListener("error", updateLoader);
+    }
+  }
 });
 </script>
 <!-- 🔴 Fin pantalla de carga neón -->
@@ -936,7 +1023,7 @@ document.addEventListener('DOMContentLoaded', () => {
       mostrarModalFavoritos("⭐ Pelicula agregada a favoritos");
       setTimeout(() => window.location.href = "favoritos.html", 1800);
     } else {
-      mostrarModalFavoritos("🎬 Esta pelicula ya está agregada en favoritos");
+      mostrarModalFavoritos(" Esta pelicula ya está agregada en favoritos");
     }
   });
 </script>
@@ -1074,7 +1161,7 @@ document.addEventListener('DOMContentLoaded', () => {
       controls: [
         'rewind', 'play-large', 'play', 'fast-forward',
         'progress', 'current-time', 'duration', 'mute', 'volume',
-        'captions', 'pip', 'airplay', 'fullscreen'
+        'captions', 'airplay', 'fullscreen'
       ]
     });
 
@@ -1165,52 +1252,77 @@ player.on('play', () => {
       }, 3000);
     }
   </script>
-  
+
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const videoElement = document.querySelector('.vid1');
-      if (!videoElement) return;
+document.addEventListener('DOMContentLoaded', () => {
 
-      const videoSrc = videoElement.querySelector('source').getAttribute('src');
-      const STORAGE_KEY = 'pos_' + videoSrc;
+  const videoElement = document.querySelector('.vid1');
+  if (!videoElement) return;
 
-      /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
-      const historialTitulo = "Blancanieves y los siete enanitos";
-      const historialImagen = "https://image.tmdb.org/t/p/w300/wdA4lphQwywsPcEKj5sgQ9QSR55.jpg";
-      const historialArchivo = "Blancanieves y los siete enanitos (1938).html";
+  const videoSrc = videoElement.querySelector('source').getAttribute('src');
+  const STORAGE_KEY = 'pos_' + videoSrc;
+
+  // DATOS DEL HISTORIAL
+  const historialTitulo = "Blancanieves y los siete enanitos";
+  const historialImagen = "https://image.tmdb.org/t/p/w300/wdA4lphQwywsPcEKj5sgQ9QSR55.jpg";
+  const historialArchivo = "Blancanieves y los siete enanitos (1938).html";
+
+  let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
+  let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
+
+  // SOLO AGREGAR UNA VEZ
+  if (indexHist === -1) {
+
+    historial.push({
+      titulo: historialTitulo,
+      imagen: historialImagen,
+      progreso: "Asistido 0 min",
+      archivo: historialArchivo,
+      tipo: "pelicula",
+      timestamp: Date.now()
+    });
+
+    localStorage.setItem('historial_usuarios', JSON.stringify(historial));
+
+    const loader = document.getElementById("loader-screen");
+
+    // 🔥 Escuchar hasta que el loader DESAPAREZCA realmente
+    const esperar = setInterval(() => {
+      const style = getComputedStyle(loader);
+
+      if (
+        loader.classList.contains("hidden") ||
+        style.opacity === "0" ||
+        style.visibility === "hidden"
+      ) {
+        mostrarModalFavoritos("✅ Agregado al historial");
+        clearInterval(esperar);
+      }
+    }, 150);
+  }
+
+  // GUARDAR AVANCE CADA 10s
+  setInterval(() => {
+    if (!videoElement.paused && !videoElement.ended) {
+
+      const minutos = Math.floor(videoElement.currentTime / 60);
 
       let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
       let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
-      
-      if (indexHist === -1) {
-        historial.push({
-        titulo: historialTitulo,
-        imagen: historialImagen,
-        progreso: "Asistido 0 min",
-        archivo: historialArchivo,
-        tipo: "pelicula", // ✅ ya está
-        timestamp: Date.now()
-      });
-      localStorage.setItem('historial_usuarios', JSON.stringify(historial));
-      indexHist = historial.length - 1;
-      mostrarModalFavoritos("✅ Agregado al historial");
 
-    }
-    setInterval(() => {
-      if (!videoElement.paused && !videoElement.ended) {
-        historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
-        indexHist = historial.findIndex(item => item.titulo === historialTitulo);
-        if (indexHist !== -1) {
-          const minutos = Math.floor(videoElement.currentTime / 60);
-          historial[indexHist].progreso = `Asistido ${minutos} min`;
-          historial[indexHist].timestamp = Date.now(); // ✅ esto asegura que suba al principio
-          localStorage.setItem('historial_usuarios', JSON.stringify(historial));
-        }
-        localStorage.setItem(STORAGE_KEY, videoElement.currentTime);
+      if (indexHist !== -1) {
+        historial[indexHist].progreso = `Asistido ${minutos} min`;
+        historial[indexHist].timestamp = Date.now();
+        localStorage.setItem('historial_usuarios', JSON.stringify(historial));
       }
-    }, 10000);
-    });
-  </script>
+
+      localStorage.setItem(STORAGE_KEY, videoElement.currentTime);
+    }
+  }, 10000);
+
+});
+</script>
+
   
 </body>
 </html>

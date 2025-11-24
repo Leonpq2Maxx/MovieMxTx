@@ -722,8 +722,8 @@ document.addEventListener('DOMContentLoaded', () => {
       <p class="player-loading-text">Cargando<span class="dots"></span></p>
     </div>
 
-    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/f0ACHVpV707zqu4etZrXnWNdSgL.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
-      <source src="https://dl.dropbox.com/scl/fi/iwe0m4idth0uvdpybb5r2/The.beekeeper.2024.1080p-dual-lat-cinecalidad.re.mp4?rlkey=2i1slz9vebdlhq0re9oh99u8m&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
+    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/9dWH18IZf0KdGx0kJaONzWcmD69.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+      <source src="https://dl.dropbox.com/scl/fi/789jnn4bk1fpilkgxpgkh/Fifty.shades.darker.2017.1080P-Dual-Lat.mp4?rlkey=c5e9pgc9i97kuf7y1tri8z062&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
   <div id="episodio-actual" style="
@@ -732,12 +732,12 @@ document.addEventListener('DOMContentLoaded', () => {
   font-size:1rem;
   font-weight:bold;
   color:#ff2d5b;
-"></div> 
+"></div>
 
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>2024</span>
-    <i class="fal fa-clock"></i><span>1h 45min</span>
-    <i class="fal fa-thumbs-up"></i><span>75%</span>
+    <i class="fal fa-calendar-alt"></i><span>2017</span>
+    <i class="fal fa-clock"></i><span>1h 55min</span>
+    <i class="fal fa-thumbs-up"></i><span>84%</span>
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
@@ -749,17 +749,17 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
   
   <div class="info-pelicula">
-    <h1>Sentencia de muerte</h1>
-  <span class="genero-badge">Accion • Crimen • Suspenso</span>
+    <h1>Cincuenta sombras 2: Más oscuras</h1>
+  <span class="genero-badge">Romance • Drama</span>
   
     <p class="sinopsis">
-      La brutal campaña de venganza de Adam Clay adquiere tintes nacionales tras revelarse que es un antiguo agente de una poderosa organización clandestina conocida como "Beekeeper".
+      Cuando Christian Grey, que se siente herido, intenta convencer a Anastasia Steele de que vuelva a formar parte de su vida, ella le exige un nuevo acuerdo antes de aceptar. Pero cuando la pareja empieza a ser más confiada y a tener una cierta estabilidad, aparecen mujeres del pasado de Christian decididas a frenar en seco sus esperanzas de un futuro juntos...
     </p>
 
     <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
-      <p><strong>Director:</strong> David Ayer</p>
-      <p><strong>Reparto:</strong> Jason Statham, Emmey Raver- Lampman, Josh Hutcherson</p>
-      <p><strong>Estreno:</strong> 12/01/2024 | <strong>Idioma:</strong> Epañol Latino 🇲🇽</p>
+      <p><strong>Director:</strong> </p>
+      <p><strong>Reparto:</strong> </p>
+      <p><strong>Estreno:</strong> 00/00/0000 | <strong>Idioma:</strong> ------</p>
     </div>
 
     <br>
@@ -845,7 +845,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const continueInfo = document.getElementById('continue-info');
   const videoElement = document.querySelector('video');
 
-  const MOVIE_KEY = 'Sentencia_De_Muerte_2024'; /*Aca siempre con un _ para guardar su progresos etc...*/
+  const MOVIE_KEY = 'Cincuenta_sombras_2_Más_oscuras'; /*Aca siempre con un _ para guardar su progresos etc...*/
   const ultimoTiempo = localStorage.getItem(`ultimoTiempo_${MOVIE_KEY}`) || 0;
 
   // 🔹 Mostrar modal si hay progreso guardado
@@ -1003,10 +1003,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 🔹 Botón "Agregar a Favoritos"
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
-      titulo: "Beekeeper: Sentencia de muerte",
-      imagen: "https://image.tmdb.org/t/p/w300/8hF8krJOG9SGMCwRNfzjsFVRcHE.jpg",
-      genero: "Accion",
-      archivo: "Beekeeper Sentencia de muerte (2024).html",
+      titulo: "Cincuenta sombras 2: Más oscuras",
+      imagen: "https://image.tmdb.org/t/p/w300/jvBAQOg2ObZKYXZGxYSz3Fkr7Qt.jpg",
+      genero: "Romance",
+      archivo: "Cincuenta sombras más oscuras (2017).html",
       tipo: "pelicula",
       timestamp: Date.now()
     };
@@ -1112,29 +1112,29 @@ document.addEventListener('DOMContentLoaded', () => {
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
-      <a href="Bala perdida 3 (2025).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/bSGXolaGLJZxueTXxEE2WsgEoNh.jpg" alt="">
-        <p>La bala perdida 3</p>
+      <a href="Cincuenta sombras de Grey (2015).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/mNZcZOIlTwDKd30xLnRR4p0ZELg.jpg" alt="">
+        <p>Cincuenta sombras de Grey</p>
       </a>
-      <a href="Duro de entrenar (2023).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/eA6FztxHGs43AS6v1TF7PwugEXQ.jpg" alt="">
-        <p>Duro de entrenar</p>
+      <a href="Cincuenta sombras liberadas (2018).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/sM8hwgWZlmZf0h4aOkNopb3HBIo.jpg" alt="">
+        <p>Cincuenta sombras 3: Liberadas</p>
       </a>
-      <a href="El planeta de los simios 2 Confrontacion (2014).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/yJXtXz8MFMeIfdoUHWjzTEuOhmK.jpg" alt="">
-        <p>El planeta de los simios: Confrontacion</p>
+      <a href="Miller's Girl (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/qz7BADRc32DYQCmgooJwI8UWRRC.jpg" alt="">
+        <p>Miller's Girl</p>
       </a>
-      <a href="Extraterritorial (2025).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/7tWkxxiqraVx1IzYd4DHv6FIvhS.jpg" alt="">
-        <p>Extraterritorial</p>
+      <a href="Un ladron romantico (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/nif2JUyqNQBBmMYrDfmpTgwleOJ.jpg" alt="">
+        <p>Un ladrón romántico</p>
       </a>
-      <a href="Uncharted (2022).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/77dlklwA1VJOLCqIhhmkmS39BLH.jpg" alt="">
-        <p>Uncharted: Fuera Del Mapa</p>
+      <a href="Anora (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/tZCrWnyN4zEtJiFem5TFoYT8nxI.jpg" alt="">
+        <p>Anora</p>
       </a>
-      <a href="Bad boys 1 Dos policías rebeldes (1995).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/ZYpSdXaTMFYCGbmVmXOFbdJmSv.jpg" alt="">
-        <p>Bad Boys: Dos policias rebeldes</p>
+      <a href="After 3 Amor infinito (2022).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/vcI9BD5kMmVI45Pzj5B1ZaGpFIR.jpg" alt="">
+        <p>After 3: Amor infinito</p>
       </a>
     </div>
   </div>
@@ -1252,7 +1252,8 @@ player.on('play', () => {
       }, 3000);
     }
   </script>
-
+  
+  
   <script>
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -1263,9 +1264,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const STORAGE_KEY = 'pos_' + videoSrc;
 
   // DATOS DEL HISTORIAL
-  const historialTitulo = "Beekeeper: Sentencia de muerte (2024)";
-  const historialImagen = "https://image.tmdb.org/t/p/w300/8hF8krJOG9SGMCwRNfzjsFVRcHE.jpg";
-  const historialArchivo = "Beekeeper Sentencia de muerte (2024).html";
+  const historialTitulo = "Cincuenta sombras 2: Más oscuras";
+  const historialImagen = "https://image.tmdb.org/t/p/w300/jvBAQOg2ObZKYXZGxYSz3Fkr7Qt.jpg";
+  const historialArchivo = "Cincuenta sombras más oscuras (2017).html";
 
   let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
   let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
@@ -1322,6 +1323,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 </script>
+
 
   
 </body>

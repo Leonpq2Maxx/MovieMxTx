@@ -722,8 +722,8 @@ document.addEventListener('DOMContentLoaded', () => {
       <p class="player-loading-text">Cargando<span class="dots"></span></p>
     </div>
 
-    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/f0ACHVpV707zqu4etZrXnWNdSgL.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
-      <source src="https://dl.dropbox.com/scl/fi/iwe0m4idth0uvdpybb5r2/The.beekeeper.2024.1080p-dual-lat-cinecalidad.re.mp4?rlkey=2i1slz9vebdlhq0re9oh99u8m&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
+    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/dMWVeuVce8ZLKLI0xpVevihEwm8.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+      <source src="https://dl.dropbox.com/scl/fi/lz8v83q3nayi9uur98kyv/Pet.sematary.2019.1080p-dual-lat-cinecalidad.to.mp4?rlkey=cn2p2d3xp84onffr4bybdb9vj&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
   <div id="episodio-actual" style="
@@ -732,12 +732,13 @@ document.addEventListener('DOMContentLoaded', () => {
   font-size:1rem;
   font-weight:bold;
   color:#ff2d5b;
-"></div> 
+"></div>
+
 
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>2024</span>
-    <i class="fal fa-clock"></i><span>1h 45min</span>
-    <i class="fal fa-thumbs-up"></i><span>75%</span>
+    <i class="fal fa-calendar-alt"></i><span>2019</span> <!--Aca va el año de estreno de pelicula-->
+    <i class="fal fa-clock"></i><span>1h 45min</span> <!--aca va cuanto dura-->
+    <i class="fal fa-thumbs-up"></i><span>57%</span> <!--aca va la calificacion-->
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
@@ -749,17 +750,17 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
   
   <div class="info-pelicula">
-    <h1>Sentencia de muerte</h1>
-  <span class="genero-badge">Accion • Crimen • Suspenso</span>
+    <h1>Cementerio de animales</h1>
+  <span class="genero-badge">Terror • isterio</span>
   
     <p class="sinopsis">
-      La brutal campaña de venganza de Adam Clay adquiere tintes nacionales tras revelarse que es un antiguo agente de una poderosa organización clandestina conocida como "Beekeeper".
+      El doctor Louis Creed (Clarke) se muda con su mujer Racher (Seimetz) y sus dos hijos pequeños de Boston a un pueblecito de Maine, cerca del nuevo hogar de la familia descubrirá una terreno misterioso escondido entre los árboles. Cuando la tragedia llega, Louis hablará con su nuevo vecino, Jud Crandall (Lithgow), desencadenando una peligrosa reacción en cadena que desatará un mal de horribles consecuencias.
     </p>
 
     <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
-      <p><strong>Director:</strong> David Ayer</p>
-      <p><strong>Reparto:</strong> Jason Statham, Emmey Raver- Lampman, Josh Hutcherson</p>
-      <p><strong>Estreno:</strong> 12/01/2024 | <strong>Idioma:</strong> Epañol Latino 🇲🇽</p>
+      <p><strong>Director:</strong> Kevin Kolsch Y Dennis Widmyer</p>
+      <p><strong>Reparto:</strong> Jasin Clarke, Amy Seimetz, John Lithgow</p>
+      <p><strong>Estreno:</strong> 04/04/2019 | <strong>Idioma:</strong> Español Latino 🇲🇽</p>
     </div>
 
     <br>
@@ -845,7 +846,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const continueInfo = document.getElementById('continue-info');
   const videoElement = document.querySelector('video');
 
-  const MOVIE_KEY = 'Sentencia_De_Muerte_2024'; /*Aca siempre con un _ para guardar su progresos etc...*/
+  const MOVIE_KEY = 'Cementerio_De_Animales_1_2019'; /*Aca siempre con un _ para guardar su progresos etc...*/
   const ultimoTiempo = localStorage.getItem(`ultimoTiempo_${MOVIE_KEY}`) || 0;
 
   // 🔹 Mostrar modal si hay progreso guardado
@@ -1003,10 +1004,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 🔹 Botón "Agregar a Favoritos"
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
-      titulo: "Beekeeper: Sentencia de muerte",
-      imagen: "https://image.tmdb.org/t/p/w300/8hF8krJOG9SGMCwRNfzjsFVRcHE.jpg",
-      genero: "Accion",
-      archivo: "Beekeeper Sentencia de muerte (2024).html",
+      titulo: "Cementerio de animales",
+      imagen: "https://image.tmdb.org/t/p/w300/vnw6g9c7qzNdzvpQhwWGRzBxwM0.jpg",
+      genero: "Terror",
+      archivo: "Cementerio de animales (2019).html",
       tipo: "pelicula",
       timestamp: Date.now()
     };
@@ -1112,29 +1113,29 @@ document.addEventListener('DOMContentLoaded', () => {
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
-      <a href="Bala perdida 3 (2025).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/bSGXolaGLJZxueTXxEE2WsgEoNh.jpg" alt="">
-        <p>La bala perdida 3</p>
+      <a href="Cementerio de animales Los orígenes 2 (2023).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/h6OOcYnuYVoaQQm3zGIYJ7XfTuo.jpg" alt="">
+        <p>Cementerio de animales 2: Los orígenes</p>
       </a>
-      <a href="Duro de entrenar (2023).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/eA6FztxHGs43AS6v1TF7PwugEXQ.jpg" alt="">
-        <p>Duro de entrenar</p>
+      <a href="Until Dawn Noche de terror (2025).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/vAYTXSUnQjmTFcm97BhROQav1wF.jpg" alt="">
+        <p>Until Dawn: Noche de terror</p>
       </a>
-      <a href="El planeta de los simios 2 Confrontacion (2014).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/yJXtXz8MFMeIfdoUHWjzTEuOhmK.jpg" alt="">
-        <p>El planeta de los simios: Confrontacion</p>
+      <a href="Un lugar en silencio 1 (2018).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/hE51vC3iZJCqFecLzIO1Q4eYXqK.jpg" alt="">
+        <p>Un lugar en silencio</p>
       </a>
-      <a href="Extraterritorial (2025).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/7tWkxxiqraVx1IzYd4DHv6FIvhS.jpg" alt="">
-        <p>Extraterritorial</p>
+      <a href="Terrifier 3 Payaso (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/63xYQj1BwRFielxsBDXvHIJyXVm.jpg" alt="">
+        <p>Terrifier 3</p>
       </a>
-      <a href="Uncharted (2022).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/77dlklwA1VJOLCqIhhmkmS39BLH.jpg" alt="">
-        <p>Uncharted: Fuera Del Mapa</p>
+      <a href="Sonrie (2022).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/hQTl9lp8rKY7qKQSudsdd8Duo8K.jpg" alt="">
+        <p>Sonríe</p>
       </a>
-      <a href="Bad boys 1 Dos policías rebeldes (1995).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/ZYpSdXaTMFYCGbmVmXOFbdJmSv.jpg" alt="">
-        <p>Bad Boys: Dos policias rebeldes</p>
+      <a href="Poseída (2025).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/t9MqBGo9BWainDLms66YLiDr5aS.jpg" alt="">
+        <p>Poseída</p>
       </a>
     </div>
   </div>
@@ -1159,7 +1160,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const player = new Plyr(videoElement, {
       controls: [
-        'rewind', 'play-large', 'play', 'fast-forward',
+        'rewind', 'play', 'fast-forward',
         'progress', 'current-time', 'duration', 'mute', 'volume',
         'captions', 'airplay', 'fullscreen'
       ]
@@ -1252,8 +1253,8 @@ player.on('play', () => {
       }, 3000);
     }
   </script>
-
-  <script>
+  
+   <script>
 document.addEventListener('DOMContentLoaded', () => {
 
   const videoElement = document.querySelector('.vid1');
@@ -1263,9 +1264,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const STORAGE_KEY = 'pos_' + videoSrc;
 
   // DATOS DEL HISTORIAL
-  const historialTitulo = "Beekeeper: Sentencia de muerte (2024)";
-  const historialImagen = "https://image.tmdb.org/t/p/w300/8hF8krJOG9SGMCwRNfzjsFVRcHE.jpg";
-  const historialArchivo = "Beekeeper Sentencia de muerte (2024).html";
+  const historialTitulo = "Cementerio de animales";
+  const historialImagen = "https://image.tmdb.org/t/p/w300/vnw6g9c7qzNdzvpQhwWGRzBxwM0.jpg";
+  const historialArchivo = "Cementerio de animales (2019).html";
 
   let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
   let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
@@ -1322,7 +1323,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 </script>
-
   
 </body>
 </html>
