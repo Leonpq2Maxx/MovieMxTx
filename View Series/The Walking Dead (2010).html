@@ -464,26 +464,27 @@
 <body ondragstart="return false;" ondrop="return false;">
 
   <style>
-    /* ✅ Siempre vertical */
-/* ✅ Bloquear landscape sin rotar la página */
-@media screen and (orientation: landscape) {
-  body {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #000; /* o tu color */
-  }
-
-  #contenido, .main, .wrapper {
-    display: none !important;
-  }
+   html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
+/* ✅ bloquear landscape manteniendo vertical */
+@media screen and (orientation: landscape) {
+  html {
+    width: 100vh;
+    height: 100vw;
+    transform: rotate(90deg);
+    transform-origin: center center;
+  }
+
+  body {
+    width: 100vh;
+    height: 100vw;
+    overflow: hidden;
+  }
+}
 
   </style>
 
