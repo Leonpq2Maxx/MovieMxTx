@@ -463,57 +463,6 @@
 
 <body ondragstart="return false;" ondrop="return false;">
 
-  <style>
-   html, body {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-/* ✅ bloquear landscape manteniendo vertical */
-@media screen and (orientation: landscape) {
-  html {
-    width: 100vh;
-    height: 100vw;
-    transform: rotate(90deg);
-    transform-origin: center center;
-  }
-
-  body {
-    width: 100vh;
-    height: 100vw;
-    overflow: hidden;
-  }
-}
-
-  </style>
-
-  <script>
-    async function enterFullscreen() {
-    const elem = document.documentElement;
-
-    if (elem.requestFullscreen) {
-        await elem.requestFullscreen();
-    }
-
-    // ✅ ahora sí permitir landscape
-    if (screen.orientation && screen.orientation.lock) {
-        screen.orientation.unlock?.();
-        screen.orientation.lock("landscape").catch(() => {});
-    }
-}
-
-document.addEventListener("fullscreenchange", () => {
-    if (!document.fullscreenElement) {
-        // ✅ volver a vertical
-        if (screen.orientation && screen.orientation.lock) {
-            screen.orientation.lock("portrait").catch(() => {});
-        }
-    }
-});
-
-  </script>
-
  <script>
 // 🔙 Si el usuario presiona "Atrás" en una película, vuelve al index
 window.history.pushState(null, null, window.location.href);
