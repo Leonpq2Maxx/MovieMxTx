@@ -724,6 +724,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/keIqryt6u5qGVThjrzFURMsRTri.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
       <source src="https://dl.dropbox.com/scl/fi/m3ii7qi3wogk7etwssiqp/Boruto-Uzumaki-2015.mp4?rlkey=o5bj6l9w6u5k3qyqjsiw49no2&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
+      <!-- Subtítulos -->
+  <track kind="subtitles" srclang="es" src="boruto-naruto-the-movie.vtt" label="Español" default crossorigin="anonymous">
+<track kind="subtitles" srclang="en" src="subtitles-en.vtt" label="English" crossorigin="anonymous">
     </video>
   </div>
   <div id="episodio-actual" style="
@@ -1137,6 +1140,17 @@ document.addEventListener('DOMContentLoaded', () => {
       </a>
     </div>
   </div>
+  <style>
+    .plyr__controls button[data-plyr="captions"] {
+  color: #00ffd0 !important;
+}
+
+.plyr--captions-active button[data-plyr="captions"] {
+  color: #ff007f !important;
+  filter: drop-shadow(0 0 8px #ff007f);
+}
+
+  </style>
   
   <!-- ¡¡¡NO BORRAR ESTE SCRIPT ES DE FAVORITOS Y SI LO BORRAN AFECTARAN EL FUNCIONAMIENTO DE REPRODUCTOR Y FAVORITOS!!! -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.6.7/plyr.min.js">
@@ -1157,12 +1171,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const STORAGE_KEY = 'pos_' + videoSrc;
 
     const player = new Plyr(videoElement, {
-      controls: [
-        'rewind', 'play-large', 'play', 'fast-forward',
-        'progress', 'current-time', 'duration', 'mute', 'volume',
-        'captions', 'airplay', 'fullscreen'
-      ]
-    });
+  controls: [
+    'rewind', 'play-large', 'play', 'fast-forward',
+    'progress', 'current-time', 'duration',
+    'mute', 'volume', 'captions', 'airplay', 'fullscreen'
+  ],
+  captions: {
+    active: false,       // <-- Inactivo al inicio
+    language: 'auto',    // <-- Detecta idioma automáticamente
+    update: true         // <-- Cambia los subtítulos si hay más de uno
+  },
+  
+});
+// Activar subtítulos
+player.toggleCaptions(true);
+
+// Desactivar subtítulos
+player.toggleCaptions(false);
+
+// También se puede alternar manualmente:
+player.toggleCaptions();
+
 
     // ✅ Reanudar episodio al presionar Play
 player.on('play', () => {
@@ -1323,5 +1352,69 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
   
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const videoElement = document.querySelector('video');
+  if(!videoElement) return;
+  // Wait until Plyr script is available
+  function initPlyr(){
+    if (typeof Plyr === 'undefined') {
+      return setTimeout(initPlyr, 100);
+    }
+    const player = new Plyr(videoElement, {
+      controls: [
+        'rewind', 'play-large', 'play', 'fast-forward',
+        'progress', 'current-time', 'duration',
+        'mute', 'volume', 'captions', 'airplay', 'fullscreen'
+      ],
+      captions: { active: false, language: 'es', update: true },
+      disableContextMenu: false,
+    });
+
+    player.on('ready', () => {
+      const tracks = videoElement.textTracks;
+      // ensure tracks hidden initially
+      for (let i = 0; i < tracks.length; i++) {
+        try { tracks[i].mode = 'hidden'; } catch(e){}
+      }
+      // Attach manual toggle to captions button to ensure show/hide works reliably
+      const ccBtn = document.querySelector('.plyr__controls [data-plyr="captions"]');
+      if (ccBtn) {
+        ccBtn.addEventListener('click', () => {
+          // If Plyr opens menu, we still toggle: if any track showing -> hide all, else show first available
+          let anyShowing = false;
+          for (let i = 0; i < tracks.length; i++) {
+            if (tracks[i].mode === 'showing') { anyShowing = true; break; }
+          }
+          if (anyShowing) {
+            for (let i = 0; i < tracks.length; i++) try{ tracks[i].mode = 'hidden'; }catch(e){}
+            // update aria/state classes
+            document.querySelectorAll('.plyr__controls [data-plyr="captions"]').forEach(el => el.classList.remove('plyr__captions-enabled'));
+          } else {
+            // try to enable track matching player.language or first track
+            let enabled = false;
+            for (let i = 0; i < tracks.length; i++) {
+              const lang = tracks[i].language || tracks[i].srclang || '';
+              if (lang && lang.toLowerCase().startsWith('es')) {
+                try{ tracks[i].mode = 'showing'; enabled = true; break; }catch(e){}
+              }
+            }
+            if(!enabled && tracks.length>0){
+              try{ tracks[0].mode = 'showing'; }catch(e){}
+            }
+            document.querySelectorAll('.plyr__controls [data-plyr="captions"]').forEach(el => el.classList.add('plyr__captions-enabled'));
+          }
+        });
+      }
+      // expose for debugging
+      window._player_tracks = videoElement.textTracks;
+    });
+
+  }
+  initPlyr();
+});
+</script>
+
 </body>
 </html>
