@@ -722,8 +722,8 @@ document.addEventListener('DOMContentLoaded', () => {
       <p class="player-loading-text">Cargando<span class="dots"></span></p>
     </div>
 
-    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/f6TCICUC8OSBtZDKgg18T6PjfIM.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
-      <source src="https://dl.dropbox.com/scl/fi/0jllkqnacl4shcm9twz2x/Deadpool.and.wolverine.2024.1080p-dual-lat-cinecalidad.re.mp4?rlkey=z10p865x2422x67z41cg3pu30&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
+    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/vYqt6kb4lcF8wwqsMMaULkP9OEn.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+      <source src="https://dl.dropbox.com/scl/fi/ej548y6fqwu5y93wzgjvg/Moana.2.2024.1080P-Dual-Lat.mkv?rlkey=egjrop2zd3y0ivtnpuxnsweo5&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
   <div id="episodio-actual" style="
@@ -735,9 +735,9 @@ document.addEventListener('DOMContentLoaded', () => {
 "></div>
 
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>2024</span>
-    <i class="fal fa-clock"></i><span>2h 07min</span>
-    <i class="fal fa-thumbs-up"></i><span>87%</span>
+    <i class="fal fa-calendar-alt"></i><span>2024</span> <!--Aca va el año de estreno de pelicula-->
+    <i class="fal fa-clock"></i><span>1h 39min</span> <!--aca va cuanto dura-->
+    <i class="fal fa-thumbs-up"></i><span>88%</span> <!--aca va la calificacion-->
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
@@ -745,21 +745,21 @@ document.addEventListener('DOMContentLoaded', () => {
       </svg>
       <span>1080P</span>
     </div>
-  
+
   </div>
   
   <div class="info-pelicula">
-    <h1>Deadpool y Wolverine</h1>
-  <span class="genero-badge">Acción • Comedia • Ciencia ficción • Marvel</span>
+    <h1>Moana 2</h1>
+  <span class="genero-badge">Animación • Aventura • Familia • Comedia</span>
   
     <p class="sinopsis">
-      Un apático Wade Wilson se afana en la vida civil tras dejar atrás sus días como Deadpool, un mercenario moralmente flexible. Pero cuando su mundo natal se enfrenta a una amenaza existencial, Wade debe volver a vestirse a regañadientes con un Lobezno aún más reacio a ayudar.
+      Tras recibir una inesperada llamada de sus antepasados, Vaiana debe viajar a los lejanos mares de Oceanía y adentrarse en peligrosas aguas perdidas para vivir una aventura sin precedentes. 
     </p>
 
     <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
       <p><strong>Director:</strong> </p>
       <p><strong>Reparto:</strong> </p>
-      <p><strong>Estreno:</strong> 00/00/0000 | <strong>Idioma:</strong> Español Latino 🇲🇽</p>
+      <p><strong>Estreno:</strong> 00/00/0000 | <strong>Idioma:</strong> ------</p>
     </div>
 
     <br>
@@ -845,7 +845,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const continueInfo = document.getElementById('continue-info');
   const videoElement = document.querySelector('video');
 
-  const MOVIE_KEY = 'Deadpool_Wolverine_2024'; /*Aca siempre con un _ para guardar su progresos etc...*/
+  const MOVIE_KEY = 'Moana_2_2024'; /*Aca siempre con un _ para guardar su progresos etc...*/
   const ultimoTiempo = localStorage.getItem(`ultimoTiempo_${MOVIE_KEY}`) || 0;
 
   // 🔹 Mostrar modal si hay progreso guardado
@@ -1003,10 +1003,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 🔹 Botón "Agregar a Favoritos"
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
-      titulo: "Deadpool y Wolverine",
-      imagen: "https://image.tmdb.org/t/p/w300/hAn57Hu13UU2Klw5wZszNlWngQr.jpg",
-      genero: "marvel",
-      archivo: "Deadpool y Wolverine (2024).html",
+      titulo: "Moana 2",
+      imagen: "https://image.tmdb.org/t/p/w300/9yfI8gGG96Dgf9bf7VT3XCRX30T.jpg",
+      genero: "Disney",
+      archivo: "Moana 2 (2024).html"
       tipo: "pelicula",
       timestamp: Date.now()
     };
@@ -1112,29 +1112,29 @@ document.addEventListener('DOMContentLoaded', () => {
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
-      <a href="Deadpool 1 (2016).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/7BYksRLQ9HtZbUtanhAIdeQO9eD.jpg" alt="">
-        <p>Deadpool</p>
+      <a href="Moana 1 (2018).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/a4Jj3Tk2AZvmUYWx0H92HGfktKo.jpg" alt="">
+        <p>Moana</p>
       </a>
-      <a href="Deadpool 2 (2018).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/jA4DpT3ywxfchnTfMBiouBhq9nU.jpg" alt="">
-        <p>Deadpool 2</p>
+      <a href="Kung Fu panda 4 (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/xHeK1mttldtCEyWbPZbo9bSKUqd.jpg" alt="">
+        <p>Kung Fu Panda 4</p>
       </a>
-      <a href="Doctor Strange en el multiverso de la locura (2022).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg" alt="">
-        <p>Doctor Strange: En el Multiverso de la Locura</p>
+      <a href="Intensamente 2 (2024) .html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/hbNrgcQjLkPcE56MLGUWSD5SO6V.jpg" alt="">
+        <p>Intensamente 2</p>
       </a>
-      <a href="Venom 3 ultimo baile (2024).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/bHB8Fv28cOk5sNxRwWaLoT6Pnrv.jpg" alt="">
-        <p>Venom 3: El ultimo baile</p>
+      <a href="Robot Salvaje (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/dE8Cwtnb31637ygPHTVDxFkg8K4.jpg" alt="">
+        <p>Robot salvaje</p>
       </a>
-      <a href="" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/fx68UQgQvAOJZoRtMVigRkOozcQ.jpg" alt="">
-        <p>Thor 3: Ragnarok</p>
+      <a href="Mufasa El rey león (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/lk4NNdeQrb6zbRSogDSdE6qmjk8.jpg" alt="">
+        <p>Mufasa: El rey león</p>
       </a>
-      <a href="Los vengadores endgame (2019).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/br6krBFpaYmCSglLBWRuhui7tPc.jpg" alt="">
-        <p>Los vengadores: Endgame</p>
+      <a href="Minecraft (2025).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/bpGgV1GH2XYqZn02WW1C94sMBkQ.jpg" alt="">
+        <p>Minecraft: La Pelicula</p>
       </a>
     </div>
   </div>
@@ -1253,8 +1253,8 @@ player.on('play', () => {
     }
   </script>
   
-
-   <script>
+  
+  <script>
 document.addEventListener('DOMContentLoaded', () => {
 
   const videoElement = document.querySelector('.vid1');
@@ -1264,9 +1264,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const STORAGE_KEY = 'pos_' + videoSrc;
 
   // DATOS DEL HISTORIAL
-  const historialTitulo = "Deadpool y Wolverine";
-  const historialImagen = "https://image.tmdb.org/t/p/w300/hAn57Hu13UU2Klw5wZszNlWngQr.jpg";
-  const historialArchivo = "Deadpool y Wolverine (2024).html";
+  const historialTitulo = "Moana 2";
+  const historialImagen = "https://image.tmdb.org/t/p/w300/9yfI8gGG96Dgf9bf7VT3XCRX30T.jpg";
+  const historialArchivo = "Moana 2 (2024).html";
 
   let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
   let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
@@ -1323,6 +1323,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 </script>
+
+
   
 </body>
 </html>

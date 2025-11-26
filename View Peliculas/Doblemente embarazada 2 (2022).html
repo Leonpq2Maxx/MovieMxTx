@@ -5,6 +5,467 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <title>MovieTx - Reproductor</title>
   <link href="https://fonts.googleapis.com/css2?family=PT+Sans&amp;family=Roboto&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/gh/CDNSFree2/Plyr/plyr.css" rel="stylesheet"/>
+  <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet"/>
+  <style>
+    :root {
+      --plyr-color-main: #ff0000;
+      --plyr-video-control-color:rgb(255, 255, 255);
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      outline: none;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    body {
+      background-color: #000;
+      font-family: 'PT Sans', sans-serif;
+      color: #fff;
+    }
+    .player {
+      position: relative;
+      padding-top: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
+      overflow: hidden;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+    .player video,
+    .player iframe,
+    .player .plyr {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      border: 1px solid rgba(16, 235, 255, 0.461);
+      border-radius: 10px;
+      margin: 10px;
+      font-size: 14px;
+    }
+    .info i {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .hd-tag {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hd-tag svg {
+      border-radius: 4px;
+    }
+    .titulo, .sinopsis {
+      padding: 10px;
+    }
+    .titulo h3, .titulo h4, .sinopsis h4 {
+      font-family: 'Kanit', sans-serif;
+      margin-bottom: 5px;
+    }
+    .recomendaciones {
+      padding: 10px;
+    }
+    .series-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 15px;
+      text-align: center;
+    }
+    .serie {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: white;
+    }
+
+    .serie img {
+      width: 120px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .serie p {
+      margin-top: 5px;
+    }
+
+    html { font-size: 100%; }
+    body { font-size: 1rem; }
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.5rem; }
+    h3, h4 { font-size: 1.2rem; }
+
+    @media screen and (max-width: 768px) {
+      body { font-size: 1.05rem; }
+      h1 { font-size: 1.5rem; }
+      h2 { font-size: 1.3rem; }
+      h3, h4 { font-size: 1.1rem; }
+      .info, .sinopsis p, .serie p {
+        font-size: 0.80rem !important; /*estaba en 1rem*/
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      body { font-size: 1.1rem; }
+      h1 { font-size: 1.4rem; }
+      h2 { font-size: 1.2rem; }
+      h3, h4 { font-size: 0.80rem; } /*estaba en 1rem*/
+    }
+
+    body, p, h1, h2, h3, h4, h5, h6, span, a, .titulo, .sinopsis, .recomendaciones, .serie {
+      font-style: italic;
+    }
+
+    .info, .info *, .info span, .info i {
+      font-style: normal !important;
+    }
+
+    #resume-msg {
+      display: none;
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.85);
+      padding: 10px 20px;
+      color: #0f0;
+      border-radius: 8px;
+      z-index: 9999;
+      font-weight: bold;
+      max-width: 90%;
+      font-size: 1rem;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+
+    #resume-msg.visible {
+      display: block;
+      opacity: 1;
+    }
+
+    @media (max-width: 480px) {
+      #resume-msg {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+      }
+    }
+
+    #genero-texto.colapsado {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ACA ES LA ANIMACION DE FAVORITOS */
+    @keyframes pop {
+      0%   { transform: scale(1); }
+      50%  { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+    
+    #btn-favorito.animado {
+      animation: pop 0.3s ease;
+    }
+
+  </style>
+</head>
+
+<body ondragstart="return false;" ondrop="return false;">
+  
+  <div class="player">
+    <video class="vid1 js-player" controls loading="lazy" poster="https://image.tmdb.org/t/p/w780/yeJSP5gfboPSood5gU3iL3bP7TA.jpg" preload="none">
+      <source src="Link de pelicula" type="video/mp4">
+    </video>
+  </div>
+
+  <div id="resume-msg">✅ Reanudando donde lo dejaste: Doblemente embarazada 2</div>
+
+  <div class="info">
+    <i class="fal fa-calendar-alt"></i><span>2022</span>
+    <i class="fal fa-clock"></i><span>1h 39min</span>
+    <i class="fal fa-thumbs-up"></i><span>76%</span>
+    <div class="hd-tag">
+      <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <rect width="24" height="24" rx="4" fill="white" />
+        <text x="4" y="17" fill="black" font-size="12" font-family="Arial, sans-serif" font-style="italic" font-weight="bold">HD</text>
+      </svg>
+      <span>1080P</span>
+    </div>
+    <span>🇲🇽</span>
+  </div>
+
+  <div class="titulo-flex">
+    <h3>Doblemente embarazada 2</h3>
+    <div class="genero-badge">Comedia</div>
+  </div>
+
+  <style>
+    .titulo-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .genero-badge {
+      padding: 4px 10px;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 0, 81, 1);
+      border: 1px solid rgba(255, 0, 81, 1);
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-style: normal;
+      max-width: 135px;          /* Limita el ancho máximo */
+      white-space: nowrap;       /* No saltar de línea */
+      overflow: hidden;          /* Oculta el exceso */
+      text-overflow: ellipsis;   /* Agrega los ... */
+    }
+  </style>
+
+  <div class="sinopsis">
+    <h4>
+      Sinopsis:
+    </h4>
+    <p>
+      Los papás de Luna y Sol sienten que sus hijas necesitan una figura materna, y por ello viajan a Acapulco con sus novias para decidir quién de las dos sería la mejor para el puesto.
+    </p>
+  </div>
+
+  <!-- NO BORRAR ES EL BOTON DEL FAVORITOS -->
+  <div style="text-align: center; margin-top: 15px;">
+    <button id="btn-favorito" style="
+      background: #ff4444;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 20px;
+      font-size: 1rem;
+      cursor: pointer;
+    ">
+      ⭐ Favoritos
+    </button>
+  </div>
+
+  <br>
+
+  <div class="recomendaciones">
+    <h4>Podría interesarte:</h4>
+    <br/>
+    <div class="series-grid">
+      <a href="Doblemente embarazada (2019).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/xcTppRqJBs6gUFgg010tZGQLxyr.jpg" alt="">
+        <p>Doblemente embarazada</p>
+      </a>
+      <a href="Barbie (2023).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/iuFNMS8U5cb6xfzi51Dbkovj7vM.jpg" alt="">
+        <p>Barbie</p>
+      </a>
+      <a href="Donde esta el fantasma 2 (2014).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/vRbDuqlmGPM9wGZ3VwbrjQu16Oa.jpg" alt="">
+        <p>¿Donde esta el fantasma? 2</p>
+      </a>
+      <a href="Diario de mi vagina (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/hyFKdAN5Dl93mt2JHfcfvIyf38g.jpg" alt="">
+        <p>Diario de mi Vagina</p>
+      </a>
+      <a href="Mi abuelo es un peligro (2016).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/7r9pn1g3lY95DjiwzxpmNqlJzeO.jpg" alt="">
+        <p>Mi abuelo es un peligro</p>
+      </a>
+      <a href="Nonnas (2025).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/6YsEHhqgT6c8nJlS1TL1Zyrxwgw.jpg" alt="">
+        <p>Nonnas</p>
+      </a>
+    </div>
+  </div>
+  
+  <!-- ¡¡¡NO BORRAR ESTE SCRIPT ES DE FAVORITOS Y SI LO BORRAN AFECTARAN EL FUNCIONAMIENTO DE REPRODUCTOR Y FAVORITOS!!! -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.6.7/plyr.min.js">
+    document.getElementById('btn-favorito').addEventListener('click', () => {
+
+      let favoritos = JSON.parse(localStorage.getItem('favoritos_detalles') || '[]');
+      if (!favoritos.some(f => f.titulo === nuevaPelicula.titulo)) {
+        favoritos.push(nuevaPelicula);
+        localStorage.setItem('favoritos_detalles', JSON.stringify(favoritos));
+      }
+      window.location.href = "favoritos.html";
+    });
+  </script>
+  
+  <script>
+    const videoElement = document.querySelector('.vid1');
+    const videoSrc = videoElement.querySelector('source').getAttribute('src');
+    const STORAGE_KEY = 'pos_' + videoSrc;
+
+    const player = new Plyr(videoElement, {
+      controls: [
+        'rewind', 'play-large', 'play', 'fast-forward',
+        'progress', 'current-time', 'duration', 'mute', 'volume',
+        'captions', 'settings', 'pip', 'airplay', 'fullscreen'
+      ]
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedTime = localStorage.getItem(STORAGE_KEY);
+      if (savedTime && parseFloat(savedTime) > 10) {
+        videoElement.currentTime = parseFloat(savedTime);
+        const msg = document.getElementById('resume-msg');
+        msg.classList.add('visible');
+        setTimeout(() => msg.classList.remove('visible'), 5000);
+      }
+
+      const controls = document.querySelector('.plyr__controls');
+      if (controls && !document.getElementById('custom-rewind')) {
+        const rewindBtn = document.createElement('button');
+        rewindBtn.id = 'custom-rewind';
+        rewindBtn.className = 'plyr__control';
+        rewindBtn.setAttribute('aria-label', 'Retroceder 10 segundos');
+        rewindBtn.innerHTML = '<i class="fas fa-undo"></i>';
+        rewindBtn.onclick = () => {
+          videoElement.currentTime = 0;
+        };
+        controls.insertBefore(rewindBtn, controls.firstChild);
+      }
+    });
+    
+    setInterval(() => {
+      if (!videoElement.paused && !videoElement.ended) {
+        localStorage.setItem(STORAGE_KEY, videoElement.currentTime);
+      }
+    }, 5000);
+    
+    /* ACA VA LA NOMBRE, IMAGEN, GENERO, ARCHIVO DONDE GUARDAN SU HTML DE PELICULA Y EL TIEMPO */
+    document.getElementById('btn-favorito').addEventListener('click', () => {
+      const nuevaPelicula = {
+        titulo: "Doblemente embarazada 2",
+        imagen: "https://image.tmdb.org/t/p/w300/mNkAOFyb4TV2gTSc92jx2O9evtj.jpg",
+        genero: "comedia",
+        archivo: "Doblemente embarazada 2 (2022).html",
+        tipo: "pelicula",
+        timestamp: Date.now()
+      };
+
+      /* animacion de favoritos */
+      const btn = document.getElementById('btn-favorito');
+      btn.classList.add('animado');
+      setTimeout(() => btn.classList.remove('animado'), 300);
+      mostrarMensaje("⭐ Agregado a Favoritos");
+
+      let favoritos = JSON.parse(localStorage.getItem('favoritos_detalles') || '[]');
+      if (!favoritos.some(f => f.titulo === nuevaPelicula.titulo)) {
+        favoritos.push(nuevaPelicula);
+        localStorage.setItem('favoritos_detalles', JSON.stringify(favoritos));
+      }
+      window.location.href = "favoritos.html";
+    });
+  </script>
+
+  <!--Aca va el mensaje que se ha agregado al historial-->
+  <div id="mensaje-confirmacion" style="
+    display: none;
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    z-index: 9999;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    transition: opacity 0.5s ease;">
+  </div>
+
+  <script>
+    function mostrarMensaje(texto) {
+      const mensaje = document.getElementById('mensaje-confirmacion');
+      mensaje.textContent = texto;
+      mensaje.style.display = 'block';
+      mensaje.style.opacity = '1';
+      setTimeout(() => {
+        mensaje.style.opacity = '0';
+        setTimeout(() => mensaje.style.display = 'none', 500);
+      }, 3000);
+    }
+  </script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const videoElement = document.querySelector('.vid1');
+      if (!videoElement) return;
+
+      const videoSrc = videoElement.querySelector('source').getAttribute('src');
+      const STORAGE_KEY = 'pos_' + videoSrc;
+
+      /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
+      const historialTitulo = "Doblemente embarazada 2";
+      const historialImagen = "https://image.tmdb.org/t/p/w300/mNkAOFyb4TV2gTSc92jx2O9evtj.jpg";
+      const historialArchivo = "Doblemente embarazada 2 (2022).html";
+
+      let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
+      let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
+      
+      if (indexHist === -1) {
+        historial.push({
+        titulo: historialTitulo,
+        imagen: historialImagen,
+        progreso: "Asistido 0 min",
+        archivo: historialArchivo,
+        tipo: "pelicula", // ✅ ya está
+        // timestamp: Date.now()
+      });
+      localStorage.setItem('historial_usuarios', JSON.stringify(historial));
+      indexHist = historial.length - 1;
+      mostrarMensaje('✅ Agregado al historial');
+    }
+    setInterval(() => {
+      if (!videoElement.paused && !videoElement.ended) {
+        historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
+        indexHist = historial.findIndex(item => item.titulo === historialTitulo);
+        if (indexHist !== -1) {
+          const minutos = Math.floor(videoElement.currentTime / 60);
+          historial[indexHist].progreso = `Asistido ${minutos} min`;
+          historial[indexHist].timestamp = Date.now(); // ✅ esto asegura que suba al principio
+          localStorage.setItem('historial_usuarios', JSON.stringify(historial));
+        }
+        localStorage.setItem(STORAGE_KEY, videoElement.currentTime);
+      }
+    }, 10000);
+    });
+  </script>
+</body>
+</html>
+
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>MovieTx - Reproductor</title>
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans&amp;family=Roboto&amp;display=swap" rel="stylesheet"/>
   <link rel="icon" type="image/png" href="../Logo Poster MovieTx PNG/Logo MovieTx.png">
   <link href="https://cdn.jsdelivr.net/gh/CDNSFree2/Plyr/plyr.css" rel="stylesheet"/>
   <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet"/>
@@ -722,8 +1183,8 @@ document.addEventListener('DOMContentLoaded', () => {
       <p class="player-loading-text">Cargando<span class="dots"></span></p>
     </div>
 
-    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/f6TCICUC8OSBtZDKgg18T6PjfIM.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
-      <source src="https://dl.dropbox.com/scl/fi/0jllkqnacl4shcm9twz2x/Deadpool.and.wolverine.2024.1080p-dual-lat-cinecalidad.re.mp4?rlkey=z10p865x2422x67z41cg3pu30&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
+    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+      <source src="Link de pelicula" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
   <div id="episodio-actual" style="
@@ -735,31 +1196,40 @@ document.addEventListener('DOMContentLoaded', () => {
 "></div>
 
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>2024</span>
-    <i class="fal fa-clock"></i><span>2h 07min</span>
-    <i class="fal fa-thumbs-up"></i><span>87%</span>
+    <i class="fal fa-calendar-alt"></i><span>0000</span> <!--Aca va el año de estreno de pelicula-->
+    <i class="fal fa-clock"></i><span>0h 00min</span> <!--aca va cuanto dura-->
+    <i class="fal fa-thumbs-up"></i><span>00%</span> <!--aca va la calificacion-->
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
         <text x="4" y="17" fill="black" font-size="12" font-family="Arial, sans-serif" font-style="italic" font-weight="bold">HD</text>
       </svg>
+      <!-- CAMARA-->
+      <div style="display: flex; align-items: center; gap: 6px;">
+        <!-- Ícono de cámara en SVG -->
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 5H16.83L15 3H9L7.17 5H4C2.9 5 2 5.9 2 7V19C2 20.1 2.9 21 4 21H20C21.1 21 22 20.1 22 19V7C22 5.9 21.1 5 20 5ZM12 17C9.79 17 8 15.21 8 13C8 10.79 9.79 9 12 9C14.21 9 16 10.79 16 13C16 15.21 14.21 17 12 17Z"/>
+        </svg>
+        <!-- Texto CAM -->
+        <span style="color: white; font-size: 14px; font-family: sans-serif;">CAM</span>
+      </div>
       <span>1080P</span>
     </div>
-  
+
   </div>
   
   <div class="info-pelicula">
-    <h1>Deadpool y Wolverine</h1>
-  <span class="genero-badge">Acción • Comedia • Ciencia ficción • Marvel</span>
+    <h1>Nombre de pelicula</h1>
+  <span class="genero-badge">Genero • Genero</span>
   
     <p class="sinopsis">
-      Un apático Wade Wilson se afana en la vida civil tras dejar atrás sus días como Deadpool, un mercenario moralmente flexible. Pero cuando su mundo natal se enfrenta a una amenaza existencial, Wade debe volver a vestirse a regañadientes con un Lobezno aún más reacio a ayudar.
+      Sinopsis
     </p>
 
     <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
       <p><strong>Director:</strong> </p>
       <p><strong>Reparto:</strong> </p>
-      <p><strong>Estreno:</strong> 00/00/0000 | <strong>Idioma:</strong> Español Latino 🇲🇽</p>
+      <p><strong>Estreno:</strong> 00/00/0000 | <strong>Idioma:</strong> ------</p>
     </div>
 
     <br>
@@ -845,7 +1315,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const continueInfo = document.getElementById('continue-info');
   const videoElement = document.querySelector('video');
 
-  const MOVIE_KEY = 'Deadpool_Wolverine_2024'; /*Aca siempre con un _ para guardar su progresos etc...*/
+  const MOVIE_KEY = 'Nombre_De_Pelicula'; /*Aca siempre con un _ para guardar su progresos etc...*/
   const ultimoTiempo = localStorage.getItem(`ultimoTiempo_${MOVIE_KEY}`) || 0;
 
   // 🔹 Mostrar modal si hay progreso guardado
@@ -1003,10 +1473,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 🔹 Botón "Agregar a Favoritos"
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
-      titulo: "Deadpool y Wolverine",
-      imagen: "https://image.tmdb.org/t/p/w300/hAn57Hu13UU2Klw5wZszNlWngQr.jpg",
-      genero: "marvel",
-      archivo: "Deadpool y Wolverine (2024).html",
+      titulo: "Nombre de pelicula",
+      imagen: "https://image.tmdb.org/t/p/w300/",
+      genero: "Drama",
+      archivo: "Nombre de pelicula.html",
       tipo: "pelicula",
       timestamp: Date.now()
     };
@@ -1112,32 +1582,241 @@ document.addEventListener('DOMContentLoaded', () => {
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
-      <a href="Deadpool 1 (2016).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/7BYksRLQ9HtZbUtanhAIdeQO9eD.jpg" alt="">
-        <p>Deadpool</p>
-      </a>
-      <a href="Deadpool 2 (2018).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/jA4DpT3ywxfchnTfMBiouBhq9nU.jpg" alt="">
-        <p>Deadpool 2</p>
-      </a>
-      <a href="Doctor Strange en el multiverso de la locura (2022).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg" alt="">
-        <p>Doctor Strange: En el Multiverso de la Locura</p>
-      </a>
-      <a href="Venom 3 ultimo baile (2024).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/bHB8Fv28cOk5sNxRwWaLoT6Pnrv.jpg" alt="">
-        <p>Venom 3: El ultimo baile</p>
+      <a href="html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
+        <p>NOMBRE DE PELICULA</p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/fx68UQgQvAOJZoRtMVigRkOozcQ.jpg" alt="">
-        <p>Thor 3: Ragnarok</p>
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
+        <p>NOMBRE DE PELICULA</p>
       </a>
-      <a href="Los vengadores endgame (2019).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/br6krBFpaYmCSglLBWRuhui7tPc.jpg" alt="">
-        <p>Los vengadores: Endgame</p>
+      <a href="" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
+        <p>NOMBRE DE PELICULA</p>
+      </a>
+      <a href="E" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
+        <p>NOMBRE DE PELICULA</p>
+      </a>
+      <a href="#" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt=""> <!--EN CASO DE NO SER PARA ADULTOS UTILICE ESTAS 6 ESTRUCTURAS DEL CODIGO, LA DE ABAJO ES PARA ADULTOS. SI NO CONTIENES PELICULAS DE ADULTOS UTILIZA LAS 6 QUE DEJARE MARCADA CON NUMEROS DEL (1 AL 6) EN CASO DE TENER PELICULA DE ADULTOS UTILIZA EL DE ABAJO-->
+        <p>Nombre de pelicula</p>
+      </a>
+      <a class="serie" data-href=".html" data-adulto="adulto"> <!--data-href=".html" data-adulto="adulto" si es para adulto debes conservar estas etiquetas-->
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
+        <p>SI PARA MAYORES DE EDAD UTILICE ESTE</p>
       </a>
     </div>
   </div>
+
+  <!--ESTO ES PARA VERIFICAR LA EDAD NO BORRAR CONSERVALO NO INTERERIRA CON LOS DEMAS FUNCIONAMIENTOS-->
+
+  <div id="ageModal" class="age-modal hidden">
+    <div class="age-modal-content">
+      <span class="close-button" onclick="closeModal()">×</span>
+      <h2>¿Eres mayor de edad?</h2>
+    
+      <label for="birthyear">Año de nacimiento:</label>
+      <input type="number" id="birthyear" placeholder="Año" min="1900" max="2025" />
+    
+      <label for="age">Edad actual:</label>
+      <input type="number" id="age" placeholder="Edad" min="1" max="120" />
+    
+      <button id="confirmAgeBtn">Validar edad</button>
+      <p id="result-message"></p>
+    </div>
+  </div>
+  
+  <style>
+    .age-modal {
+      position: fixed;
+      z-index: 9999;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .age-modal-content {
+      background-color: #ffffff;
+      color: #000000;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      width: 300px;
+      position: relative;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+
+    .age-modal-content h2,
+    .age-modal-content label,
+    .age-modal-content p {
+      color: #000000;
+    }
+
+
+    .age-modal-content input {
+      width: 90%;
+      margin: 10px auto;
+      padding: 8px; 
+      display: block; 
+      background-color: #ffffff;  
+      color: #000000;
+      border: 1px solid #ccc; 
+      border-radius: 5px;
+    }
+
+
+    .age-modal-content input::placeholder {
+      color: #777;
+    }
+
+    /* Modo oscuro */
+
+    body.dark .age-modal-content,
+    .dark .age-modal-content {
+      background-color: #1e1e1e;
+      color: #f5f5f5;
+    }
+
+    body.dark .age-modal-content h2,
+    .dark .age-modal-content h2,
+    body.dark .age-modal-content label,
+    .dark .age-modal-content label,
+    body.dark .age-modal-content p,
+    .dark .age-modal-content p {
+      color: #f5f5f5;
+    }
+
+    body.dark .age-modal-content input,
+    .dark .age-modal-content input {
+      background-color: #2b2b2b;
+      color: #ffffff;
+      border: 1px solid #555;
+    }
+
+    body.dark .age-modal-content input::placeholder,
+    .dark .age-modal-content input::placeholder {
+      color: #ccc;
+    }
+
+    .age-modal-content button {
+      background: #0b57cf;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .age-modal-content button:hover {
+      background: #063ea3;
+    }
+
+    .close-button {
+      position: absolute;
+      right: 12px;
+      top: 8px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #888;
+      cursor: pointer;
+    }
+
+    .close-button:hover {
+      color: #000;
+    }
+
+    body.dark .close-button {
+      color: #aaa;
+    }
+
+    body.dark .close-button:hover {
+      color: #fff;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+  
+  <script>
+    let pendingRedirect = null;
+    function handleAdultLinkClick(event) {
+      const link = event.currentTarget;
+      const href = link.getAttribute('data-href');
+      const isAdult = link.getAttribute('data-adulto') === 'adulto';
+  
+      if (isAdult) {
+        event.preventDefault();
+        pendingRedirect = href;
+        openModal();
+      }
+    }
+    
+    function openModal() {
+      document.getElementById("ageModal").classList.remove("hidden");
+      document.getElementById("result-message").innerText = "";
+      document.getElementById("birthyear").value = "";
+      document.getElementById("age").value = "";
+    }
+    
+    function closeModal() {
+      document.getElementById("ageModal").classList.add("hidden");
+      pendingRedirect = null;
+    }
+
+    document.getElementById("confirmAgeBtn").addEventListener("click", function () {
+      const birthYear = parseInt(document.getElementById("birthyear").value);
+      const enteredAge = parseInt(document.getElementById("age").value);
+      const currentYear = new Date().getFullYear();
+      const calculatedAge = currentYear - birthYear;
+      const result = document.getElementById("result-message");
+  
+      if (
+        isNaN(birthYear) || isNaN(enteredAge) ||
+        birthYear > currentYear || birthYear < 1900 ||
+        enteredAge < 0 || enteredAge > 120
+      ) {
+        result.innerText = "Por favor completa los campos con valores válidos.";
+        result.style.color = "red";
+        return;
+      }
+  
+      if (enteredAge !== calculatedAge) {
+        result.innerText = "La edad no coincide con el año de nacimiento.";
+        result.style.color = "red";
+        return;
+      }
+  
+      if (enteredAge >= 18) {
+        result.innerText = "Acceso permitido. Redirigiendo...";
+        result.style.color = "green";
+        setTimeout(() => {
+          if (pendingRedirect) {
+            window.location.href = pendingRedirect;
+          }
+        }, 1500);
+      } else {
+        result.innerText = "No eres mayor de edad, vuelve a intentarlo más adelante.";
+        result.style.color = "red";
+      }
+    });
+    
+    // Activar verificación en todos los links con data-adulto
+    document.querySelectorAll('a[data-adulto="adulto"]').forEach(link => {
+      link.addEventListener('click', handleAdultLinkClick);
+    });
+  </script>
+
+  <!--FIN DE LA VERIFICACION PARA ADULTOS.-->
   
   <!-- ¡¡¡NO BORRAR ESTE SCRIPT ES DE FAVORITOS Y SI LO BORRAN AFECTARAN EL FUNCIONAMIENTO DE REPRODUCTOR Y FAVORITOS!!! -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.6.7/plyr.min.js">
@@ -1253,8 +1932,8 @@ player.on('play', () => {
     }
   </script>
   
-
-   <script>
+  
+  <script>
 document.addEventListener('DOMContentLoaded', () => {
 
   const videoElement = document.querySelector('.vid1');
@@ -1264,9 +1943,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const STORAGE_KEY = 'pos_' + videoSrc;
 
   // DATOS DEL HISTORIAL
-  const historialTitulo = "Deadpool y Wolverine";
-  const historialImagen = "https://image.tmdb.org/t/p/w300/hAn57Hu13UU2Klw5wZszNlWngQr.jpg";
-  const historialArchivo = "Deadpool y Wolverine (2024).html";
+  const historialTitulo = "Nombre de pelicula";
+  const historialImagen = "https://image.tmdb.org/t/p/w300/";
+  const historialArchivo = ".html";
 
   let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
   let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
@@ -1323,6 +2002,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 </script>
+
+
   
 </body>
 </html>

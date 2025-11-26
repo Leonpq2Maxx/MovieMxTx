@@ -722,8 +722,8 @@ document.addEventListener('DOMContentLoaded', () => {
       <p class="player-loading-text">Cargando<span class="dots"></span></p>
     </div>
 
-    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/f6TCICUC8OSBtZDKgg18T6PjfIM.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
-      <source src="https://dl.dropbox.com/scl/fi/0jllkqnacl4shcm9twz2x/Deadpool.and.wolverine.2024.1080p-dual-lat-cinecalidad.re.mp4?rlkey=z10p865x2422x67z41cg3pu30&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
+    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/xKWKsL7VgaN5Ep697TB3H03lglM.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+      <source src="https://dl.dropbox.com/scl/fi/xvnts72ky3wm8pfcbeqs8/Como-matar-a-mama.2023.1080p.LAT.cinecalidad.com.mx.mp4?rlkey=rradp9eh0b5lhd091btqk0kxm&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
   <div id="episodio-actual" style="
@@ -735,9 +735,9 @@ document.addEventListener('DOMContentLoaded', () => {
 "></div>
 
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>2024</span>
-    <i class="fal fa-clock"></i><span>2h 07min</span>
-    <i class="fal fa-thumbs-up"></i><span>87%</span>
+    <i class="fal fa-calendar-alt"></i><span>2023</span> <!--Aca va el año de estreno de pelicula-->
+    <i class="fal fa-clock"></i><span>1h 39min</span> <!--aca va cuanto dura-->
+    <i class="fal fa-thumbs-up"></i><span>72%</span> <!--aca va la calificacion-->
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
@@ -745,15 +745,15 @@ document.addEventListener('DOMContentLoaded', () => {
       </svg>
       <span>1080P</span>
     </div>
-  
+
   </div>
   
   <div class="info-pelicula">
-    <h1>Deadpool y Wolverine</h1>
-  <span class="genero-badge">Acción • Comedia • Ciencia ficción • Marvel</span>
+    <h1>¿Cómo matar a mamá?</h1>
+  <span class="genero-badge">Comedia • Drama</span>
   
     <p class="sinopsis">
-      Un apático Wade Wilson se afana en la vida civil tras dejar atrás sus días como Deadpool, un mercenario moralmente flexible. Pero cuando su mundo natal se enfrenta a una amenaza existencial, Wade debe volver a vestirse a regañadientes con un Lobezno aún más reacio a ayudar.
+      Luego de enterarse de una verdad irreversible, Camila, Teté y Margo deben abandonar sus ajetreadas vidas para idear un plan para acabar con la vida de su madre Rosalinda.
     </p>
 
     <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
@@ -845,7 +845,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const continueInfo = document.getElementById('continue-info');
   const videoElement = document.querySelector('video');
 
-  const MOVIE_KEY = 'Deadpool_Wolverine_2024'; /*Aca siempre con un _ para guardar su progresos etc...*/
+  const MOVIE_KEY = 'Cómo_matar_a_mamá_2023'; /*Aca siempre con un _ para guardar su progresos etc...*/
   const ultimoTiempo = localStorage.getItem(`ultimoTiempo_${MOVIE_KEY}`) || 0;
 
   // 🔹 Mostrar modal si hay progreso guardado
@@ -1003,10 +1003,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 🔹 Botón "Agregar a Favoritos"
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
-      titulo: "Deadpool y Wolverine",
-      imagen: "https://image.tmdb.org/t/p/w300/hAn57Hu13UU2Klw5wZszNlWngQr.jpg",
-      genero: "marvel",
-      archivo: "Deadpool y Wolverine (2024).html",
+      titulo: "¿Cómo matar a mamá?",
+      imagen: "https://image.tmdb.org/t/p/w300/zQch27gPbimK96vtbrEq4jFHg2D.jpg",
+      genero: "Drama",
+      archivo: "Cómo matar a mamá (2023).html",
       tipo: "pelicula",
       timestamp: Date.now()
     };
@@ -1112,29 +1112,29 @@ document.addEventListener('DOMContentLoaded', () => {
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
-      <a href="Deadpool 1 (2016).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/7BYksRLQ9HtZbUtanhAIdeQO9eD.jpg" alt="">
-        <p>Deadpool</p>
-      </a>
-      <a href="Deadpool 2 (2018).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/jA4DpT3ywxfchnTfMBiouBhq9nU.jpg" alt="">
-        <p>Deadpool 2</p>
-      </a>
-      <a href="Doctor Strange en el multiverso de la locura (2022).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg" alt="">
-        <p>Doctor Strange: En el Multiverso de la Locura</p>
-      </a>
-      <a href="Venom 3 ultimo baile (2024).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/bHB8Fv28cOk5sNxRwWaLoT6Pnrv.jpg" alt="">
-        <p>Venom 3: El ultimo baile</p>
+      <a href="" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/iuFNMS8U5cb6xfzi51Dbkovj7vM.jpg" alt="">
+        <p>Barbie</p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/fx68UQgQvAOJZoRtMVigRkOozcQ.jpg" alt="">
-        <p>Thor 3: Ragnarok</p>
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/jCerTXgMp5iiSoJofwkKskp2w45.jpg" alt="">
+        <p>Chicas malas</p>
       </a>
-      <a href="Los vengadores endgame (2019).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/br6krBFpaYmCSglLBWRuhui7tPc.jpg" alt="">
-        <p>Los vengadores: Endgame</p>
+      <a href="" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/6YsEHhqgT6c8nJlS1TL1Zyrxwgw.jpg" alt="">
+        <p>Nonnas</p>
+      </a>
+      <a href="" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/5dliMQ2ODbGNoq0hlefdnuXQxMw.jpg" alt="">
+        <p>Unos suegros de armas tomar</p>
+      </a>
+      <a href="" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/uyEFqfRezkNrxh9Lg8fj8IcbkHx.jpg" alt="">
+        <p>Desaparecidos en la noche</p>
+      </a>
+      <a href="" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/1E4WCgTodyS7zo8pSp1gZlPO0th.jpg" alt="">
+        <p>Echo Valley</p>
       </a>
     </div>
   </div>
@@ -1253,8 +1253,8 @@ player.on('play', () => {
     }
   </script>
   
-
-   <script>
+  
+  <script>
 document.addEventListener('DOMContentLoaded', () => {
 
   const videoElement = document.querySelector('.vid1');
@@ -1264,9 +1264,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const STORAGE_KEY = 'pos_' + videoSrc;
 
   // DATOS DEL HISTORIAL
-  const historialTitulo = "Deadpool y Wolverine";
-  const historialImagen = "https://image.tmdb.org/t/p/w300/hAn57Hu13UU2Klw5wZszNlWngQr.jpg";
-  const historialArchivo = "Deadpool y Wolverine (2024).html";
+  const historialTitulo = "¿Cómo matar a mamá?";
+  const historialImagen = "https://image.tmdb.org/t/p/w300/zQch27gPbimK96vtbrEq4jFHg2D.jpg";
+  const historialArchivo = "Cómo matar a mamá (2023).html";
 
   let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
   let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
@@ -1323,6 +1323,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 </script>
+
+
   
 </body>
 </html>
