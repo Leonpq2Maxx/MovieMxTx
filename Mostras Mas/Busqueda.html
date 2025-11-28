@@ -1255,7 +1255,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   localStorage.setItem("ultimaBusqueda", texto);
 
-  const palabras = texto.split(" ").filter(p => p.length > 0);
+  const palabras = texto.split(" ").filter(p => p.length > 0); // separa palabras
   const peliculas = document.querySelectorAll(".movie");
   let visibles = 0;
 
@@ -1265,13 +1265,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const anio = (peli.dataset.anio || "").toLowerCase();
     const tipo = (peli.dataset.tipo || "").toLowerCase();
 
+    // unir todo
     const contenido = `${titulo} ${genero} ${anio} ${tipo}`;
 
-    // Ahora busca palabra exacta, no letras dentro de otras palabras
-    const visible = palabras.every(palabra => {
-      const regex = new RegExp(`\\b${palabra}\\b`, 'i');
-      return regex.test(contenido);
-    });
+    // comprobar que TODAS las palabras coincidan
+    const visible = palabras.every(palabra => contenido.includes(palabra));
 
     peli.style.display = visible ? "block" : "none";
     if (visible) visibles++;
@@ -1281,7 +1279,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   actualizarContadorPeliculas();
 }
-
 
     window.addEventListener("DOMContentLoaded", () => {
       const ultima = localStorage.getItem("ultimaBusqueda");
