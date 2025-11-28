@@ -758,10 +758,10 @@ document.addEventListener('DOMContentLoaded', () => {
 "></div>
 
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>2010</span> <!--Aca va el año de estreno de pelicula-->
+    <i class="fal fa-calendar-alt"></i><span id="year-span">2010</span> <!--Aca va el año de estreno de pelicula-->
    <!--aca va cuanto dura-->
     <i class="fal fa-thumbs-up"></i><span>87%</span> <!--aca va la calificacion-->
-    <i class="fal fa-tv"></i><span>Tp10</span>
+    <i class="fal fa-tv"></i><span>Tp11</span>
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
@@ -918,7 +918,7 @@ document.addEventListener('DOMContentLoaded', () => {
       mostrarModalFavoritos("⭐ Serie agregada a favoritos");
       setTimeout(() => window.location.href = "../View Peliculas/favoritos.html", 1800);
     } else {
-      mostrarModalFavoritos("🎬 Esta serie ya está agregada en favoritos");
+      mostrarModalFavoritos(" Esta serie ya está agregada en favoritos");
     }
   });
 </script>
@@ -1191,7 +1191,7 @@ const SERIES_KEY = "The_Walking_dead_2010";
       id: 1,
       title: "Temporada 1",
       thumb: "https://image.tmdb.org/t/p/w780/dhdzMtQJOAiTJr3Bhcxval2ZT2T.jpg",
-      desc: "Lanzada 2010— 6 episodios",
+      desc: "Lanzada 2010 — 6 episodios",
       episodes: [
         { id: "s1e1", title: "Episodio 1", time: "45m", thumb: "", href: "https://pomf2.lain.la/f/suvf9w98.mp4" },
         { id: "s1e2", title: "Episodio 2", time: "45m", thumb: "", href: "https://pomf2.lain.la/f/4f4e75d7.mp4" },
@@ -1223,27 +1223,27 @@ const SERIES_KEY = "The_Walking_dead_2010";
       thumb: "https://image.tmdb.org/t/p/w780/qpUAdvHZDe7Cl7X2uHO3K8swW6A.jpg",
       desc: "Lanzada 2012 — 0 episodios",
       episodes: [
-        { id: "s1e1", title: "Episodio 1", time: "45m", thumb: "", href: "" },
-        { id: "s1e2", title: "Episodio 2", time: "45m", thumb: "", href: "" },
-        { id: "s1e3", title: "Episodio 3", time: "45m", thumb: "", href: "" },
-        { id: "s1e4", title: "Episodio 4", time: "45m", thumb: "", href: "" },
-        { id: "s1e5", title: "Episodio 5", time: "45m", thumb: "", href: "" },
-        { id: "s1e6", title: "Episodio 6", time: "45m", thumb: "", href: "" },
+        { id: "s3e1", title: "Episodio 1", time: "45m", thumb: "", href: "" },
+        { id: "s3e2", title: "Episodio 2", time: "45m", thumb: "", href: "" },
+        { id: "s3e3", title: "Episodio 3", time: "45m", thumb: "", href: "" },
+        { id: "s3e4", title: "Episodio 4", time: "45m", thumb: "", href: "" },
+        { id: "s3e5", title: "Episodio 5", time: "45m", thumb: "", href: "" },
+        { id: "s3e6", title: "Episodio 6", time: "45m", thumb: "", href: "" },
         // ... más episodios
       ]
     },
     {
       id: 4,
       title: "Temporada 4",
-      thumb: "https://image.tmdb.org/t/p/original/A83DXTc7mUBoIzkGNMZg4tZxdid.jpg",
+      thumb: "https://image.tmdb.org/t/p/w780/A83DXTc7mUBoIzkGNMZg4tZxdid.jpg",
       desc: "Lanzada 2013 — 0 episodios",
       episodes: [
-        { id: "s1e1", title: "Episodio 1", time: "45m", thumb: "", href: "" },
-        { id: "s1e2", title: "Episodio 2", time: "45m", thumb: "", href: "" },
-        { id: "s1e3", title: "Episodio 3", time: "45m", thumb: "", href: "" },
-        { id: "s1e4", title: "Episodio 4", time: "45m", thumb: "", href: "" },
-        { id: "s1e5", title: "Episodio 5", time: "45m", thumb: "", href: "" },
-        { id: "s1e6", title: "Episodio 6", time: "45m", thumb: "", href: "" },
+        { id: "s4e1", title: "Episodio 1", time: "45m", thumb: "", href: "" },
+        { id: "s4e2", title: "Episodio 2", time: "45m", thumb: "", href: "" },
+        { id: "s4e3", title: "Episodio 3", time: "45m", thumb: "", href: "" },
+        { id: "s4e4", title: "Episodio 4", time: "45m", thumb: "", href: "" },
+        { id: "s4e5", title: "Episodio 5", time: "45m", thumb: "", href: "" },
+        { id: "s4e6", title: "Episodio 6", time: "45m", thumb: "", href: "" },
         // ... más episodios
       ]
     },
@@ -1253,12 +1253,12 @@ const SERIES_KEY = "The_Walking_dead_2010";
       thumb: "https://image.tmdb.org/t/p/w780/lhX3Oy5KmckDhhJAiqdQTfFLd4F.jpg",
       desc: "Lanzada 2013 — 0 episodios",
       episodes: [
-        { id: "s1e1", title: "Episodio 1", time: "45m", thumb: "", href: "" },
-        { id: "s1e2", title: "Episodio 2", time: "45m", thumb: "", href: "" },
-        { id: "s1e3", title: "Episodio 3", time: "45m", thumb: "", href: "" },
-        { id: "s1e4", title: "Episodio 4", time: "45m", thumb: "", href: "" },
-        { id: "s1e5", title: "Episodio 5", time: "45m", thumb: "", href: "" },
-        { id: "s1e6", title: "Episodio 6", time: "45m", thumb: "", href: "" },
+        { id: "s5e1", title: "Episodio 1", time: "45m", thumb: "", href: "" },
+        { id: "s5e2", title: "Episodio 2", time: "45m", thumb: "", href: "" },
+        { id: "s5e3", title: "Episodio 3", time: "45m", thumb: "", href: "" },
+        { id: "s5e4", title: "Episodio 4", time: "45m", thumb: "", href: "" },
+        { id: "s5e5", title: "Episodio 5", time: "45m", thumb: "", href: "" },
+        { id: "s5e6", title: "Episodio 6", time: "45m", thumb: "", href: "" },
         // ... más episodios
       ]
     },
@@ -1268,12 +1268,12 @@ const SERIES_KEY = "The_Walking_dead_2010";
       thumb: "https://image.tmdb.org/t/p/w780/3ynZzFOTXVKgN9zaIXLehZCKKfY.jpg",
       desc: "Lanzada 2024 — 0 episodios",
       episodes: [
-        { id: "s1e1", title: "Episodio 1", time: "45m", thumb: "", href: "" },
-        { id: "s1e2", title: "Episodio 2", time: "45m", thumb: "", href: "" },
-        { id: "s1e3", title: "Episodio 3", time: "45m", thumb: "", href: "" },
-        { id: "s1e4", title: "Episodio 4", time: "45m", thumb: "", href: "" },
-        { id: "s1e5", title: "Episodio 5", time: "45m", thumb: "", href: "" },
-        { id: "s1e6", title: "Episodio 6", time: "45m", thumb: "", href: "" },
+        { id: "s6e1", title: "Episodio 1", time: "45m", thumb: "", href: "" },
+        { id: "s6e2", title: "Episodio 2", time: "45m", thumb: "", href: "" },
+        { id: "s6e3", title: "Episodio 3", time: "45m", thumb: "", href: "" },
+        { id: "s6e4", title: "Episodio 4", time: "45m", thumb: "", href: "" },
+        { id: "s6e5", title: "Episodio 5", time: "45m", thumb: "", href: "" },
+        { id: "s6e6", title: "Episodio 6", time: "45m", thumb: "", href: "" },
         // ... más episodios
       ]
     },
@@ -1283,27 +1283,27 @@ const SERIES_KEY = "The_Walking_dead_2010";
       thumb: "https://image.tmdb.org/t/p/w780/wY3KAlS1VgyOc5rJ6kBierv1iKW.jpg",
       desc: "Lanzada 2012 — 0 episodios",
       episodes: [
-        { id: "s1e1", title: "Episodio 1", time: "45m", thumb: "", href: "" },
-        { id: "s1e2", title: "Episodio 2", time: "45m", thumb: "", href: "" },
-        { id: "s1e3", title: "Episodio 3", time: "45m", thumb: "", href: "" },
-        { id: "s1e4", title: "Episodio 4", time: "45m", thumb: "", href: "" },
-        { id: "s1e5", title: "Episodio 5", time: "45m", thumb: "", href: "" },
-        { id: "s1e6", title: "Episodio 6", time: "45m", thumb: "", href: "" },
+        { id: "s7e1", title: "Episodio 1", time: "45m", thumb: "", href: "" },
+        { id: "s7e2", title: "Episodio 2", time: "45m", thumb: "", href: "" },
+        { id: "s7e3", title: "Episodio 3", time: "45m", thumb: "", href: "" },
+        { id: "s7e4", title: "Episodio 4", time: "45m", thumb: "", href: "" },
+        { id: "s7e5", title: "Episodio 5", time: "45m", thumb: "", href: "" },
+        { id: "s7e6", title: "Episodio 6", time: "45m", thumb: "", href: "" },
         // ... más episodios
       ]
     },
     {
       id: 8,
       title: "Temporada 8",
-      thumb: "https://image.tmdb.org/t/p/original/xVzvD5BPAU4HpleFSo8QOdHkndo.jpg",
+      thumb: "https://image.tmdb.org/t/p/w780/xVzvD5BPAU4HpleFSo8QOdHkndo.jpg",
       desc: "Lanzada 202 — 0 episodios",
       episodes: [
-        { id: "s1e1", title: "Episodio 1", time: "45m", thumb: "", href: "" },
-        { id: "s1e2", title: "Episodio 2", time: "45m", thumb: "", href: "" },
-        { id: "s1e3", title: "Episodio 3", time: "45m", thumb: "", href: "" },
-        { id: "s1e4", title: "Episodio 4", time: "45m", thumb: "", href: "" },
-        { id: "s1e5", title: "Episodio 5", time: "45m", thumb: "", href: "" },
-        { id: "s1e6", title: "Episodio 6", time: "45m", thumb: "", href: "" },
+        { id: "s8e1", title: "Episodio 1", time: "45m", thumb: "", href: "" },
+        { id: "s8e2", title: "Episodio 2", time: "45m", thumb: "", href: "" },
+        { id: "s8e3", title: "Episodio 3", time: "45m", thumb: "", href: "" },
+        { id: "s8e4", title: "Episodio 4", time: "45m", thumb: "", href: "" },
+        { id: "s8e5", title: "Episodio 5", time: "45m", thumb: "", href: "" },
+        { id: "s8e6", title: "Episodio 6", time: "45m", thumb: "", href: "" },
         // ... más episodios
       ]
     },
@@ -1313,12 +1313,12 @@ const SERIES_KEY = "The_Walking_dead_2010";
       thumb: "https://image.tmdb.org/t/p/w780/xOdA6paXYAWURfNNdYk7Oz62mxA.jpg",
       desc: "Lanzada 20 — 0 episodios",
       episodes: [
-        { id: "s1e1", title: "Episodio 1", time: "45m", thumb: "", href: "" },
-        { id: "s1e2", title: "Episodio 2", time: "45m", thumb: "", href: "" },
-        { id: "s1e3", title: "Episodio 3", time: "45m", thumb: "", href: "" },
-        { id: "s1e4", title: "Episodio 4", time: "45m", thumb: "", href: "" },
-        { id: "s1e5", title: "Episodio 5", time: "45m", thumb: "", href: "" },
-        { id: "s1e6", title: "Episodio 6", time: "45m", thumb: "", href: "" },
+        { id: "s9e1", title: "Episodio 1", time: "45m", thumb: "", href: "" },
+        { id: "s9e2", title: "Episodio 2", time: "45m", thumb: "", href: "" },
+        { id: "s9e3", title: "Episodio 3", time: "45m", thumb: "", href: "" },
+        { id: "s9e4", title: "Episodio 4", time: "45m", thumb: "", href: "" },
+        { id: "s9e5", title: "Episodio 5", time: "45m", thumb: "", href: "" },
+        { id: "s9e6", title: "Episodio 6", time: "45m", thumb: "", href: "" },
         // ... más episodios
       ]
     },
@@ -1328,27 +1328,27 @@ const SERIES_KEY = "The_Walking_dead_2010";
       thumb: "https://image.tmdb.org/t/p/w780/wvdWb5kTQipdMDqCclC6Y3zr4j3.jpg",
       desc: "Lanzada 20 — 0 episodios",
       episodes: [
-        { id: "s1e1", title: "Episodio 1", time: "45m", thumb: "", href: "" },
-        { id: "s1e2", title: "Episodio 2", time: "45m", thumb: "", href: "" },
-        { id: "s1e3", title: "Episodio 3", time: "45m", thumb: "", href: "" },
-        { id: "s1e4", title: "Episodio 4", time: "45m", thumb: "", href: "" },
-        { id: "s1e5", title: "Episodio 5", time: "45m", thumb: "", href: "" },
-        { id: "s1e6", title: "Episodio 6", time: "45m", thumb: "", href: "" },
+        { id: "s10e1", title: "Episodio 1", time: "45m", thumb: "", href: "" },
+        { id: "s10e2", title: "Episodio 2", time: "45m", thumb: "", href: "" },
+        { id: "s10e3", title: "Episodio 3", time: "45m", thumb: "", href: "" },
+        { id: "s10e4", title: "Episodio 4", time: "45m", thumb: "", href: "" },
+        { id: "s10e5", title: "Episodio 5", time: "45m", thumb: "", href: "" },
+        { id: "s10e6", title: "Episodio 6", time: "45m", thumb: "", href: "" },
         // ... más episodios
       ]
     },
     {
       id: 11,
       title: "Temporada 11",
-      thumb: "https://image.tmdb.org/t/p/original/r7zUXadc1saFFSWz8lbUx7q9bkG.jpg",
+      thumb: "https://image.tmdb.org/t/p/w780/r7zUXadc1saFFSWz8lbUx7q9bkG.jpg",
       desc: "Lanzada 202 — 0 episodios",
       episodes: [
-        { id: "s1e1", title: "Episodio 1", time: "45m", thumb: "", href: "" },
-        { id: "s1e2", title: "Episodio 2", time: "45m", thumb: "", href: "" },
-        { id: "s1e3", title: "Episodio 3", time: "45m", thumb: "", href: "" },
-        { id: "s1e4", title: "Episodio 4", time: "45m", thumb: "", href: "" },
-        { id: "s1e5", title: "Episodio 5", time: "45m", thumb: "", href: "" },
-        { id: "s1e6", title: "Episodio 6", time: "45m", thumb: "", href: "" },
+        { id: "s11e1", title: "Episodio 1", time: "45m", thumb: "", href: "" },
+        { id: "s11e2", title: "Episodio 2", time: "45m", thumb: "", href: "" },
+        { id: "s11e3", title: "Episodio 3", time: "45m", thumb: "", href: "" },
+        { id: "s11e4", title: "Episodio 4", time: "45m", thumb: "", href: "" },
+        { id: "s11e5", title: "Episodio 5", time: "45m", thumb: "", href: "" },
+        { id: "s11e6", title: "Episodio 6", time: "45m", thumb: "", href: "" },
         // ... más episodios
       ]
     },
@@ -1434,6 +1434,12 @@ const SERIES_KEY = "The_Walking_dead_2010";
     localStorage.setItem('ultimaTemporada', index);  // 👈 Guardar selección de temporada
 
     const season = seasonsData[index];
+    // 🟢 Actualizar el año automáticamente
+    const yearMatch = season.desc.match(/(\d{4})/);
+    if (yearMatch) {
+      document.getElementById("year-span").textContent = yearMatch[1];
+    }
+
     seasonLabel.textContent = season.title;
     seasonDesc.textContent = `— ${season.episodes.length} episodios`;
     // render episodios
@@ -1654,11 +1660,11 @@ document.addEventListener("DOMContentLoaded", () => {
       </a>
       <a href="" class="serie">
         <img loading="lazy" src="https://image.tmdb.org/t/p/w300/yd8cDZG4XjNRk7jfEWy18KH07d2.jpg" alt="">
-        <p>Fear the Walking Dead</p>
+        <p>Fear The Walking Dead</p>
       </a>
       <a href="" class="serie">
         <img loading="lazy" src="https://image.tmdb.org/t/p/w300/ugdiqJsceA9slg2k4Uu6VKegaw8.jpg" alt="">
-        <p>The Walking Dead: Dead City</p>
+        <p>The Walking Dead: Dead city</p>
       </a>
       <a href="" class="serie">
         <img loading="lazy" src="https://image.tmdb.org/t/p/w300/6HanIV2hTLE2w7A5bI1KJb3bTL7.jpg" alt="">
@@ -1666,7 +1672,7 @@ document.addEventListener("DOMContentLoaded", () => {
       </a>
       <a href="" class="serie">
         <img loading="lazy" src="https://image.tmdb.org/t/p/w300/zRMUHvTgQ79zteQafNI46Nd9XFm.jpg" alt="">
-        <p>Tales of the Walking Dead</p>
+        <p>Tales Of The Walking Dead</p>
       </a>
     </div>
   </div>
@@ -1691,7 +1697,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const player = new Plyr(videoElement, {
       controls: [
-        'rewind', 'play', 'play-large', 'fast-forward',
+        'rewind', 'play-large', 'play', 'fast-forward',
         'progress', 'current-time', 'duration', 'mute', 'volume',
         'captions', 'airplay', 'fullscreen'
       ]
@@ -1975,15 +1981,9 @@ document.addEventListener('DOMContentLoaded', () => {
   btnContinuar.addEventListener('click', () => {
     if (ultimo) {
       const closeModalX = document.getElementById('close-continue-modal');
-closeModalX.addEventListener('click', () => {
-  modal.classList.remove('active');
-});
-
-      const closeModalX = document.getElementById('close-continue-modal');
-closeModalX.addEventListener('click', () => {
-  modal.classList.remove('active');
-});
-
+      closeModalX.addEventListener('click', () => {
+        modal.classList.remove('active');
+      });
 
       const season = seasonsData.find(s => s.title === ultimo.temporada);
       const ep = season ? season.episodes.find(e => e.id === ultimo.id) : null;
