@@ -33,7 +33,14 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 5px;
       padding: 0 12px 30px;
+      margin-top: 20px; /* 🔥 NUEVO: separa las tarjetas del header */
     }
+    @media screen and (max-width: 3000px) {
+  .grid {
+    margin-top: 25px;
+  }
+}
+
     .item {
       background-color: #000000;
       border-radius: 10px;
