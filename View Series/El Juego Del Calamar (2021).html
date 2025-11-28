@@ -746,7 +746,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <p class="player-loading-text">Cargando<span class="dots"></span></p>
     </div>
 
-    <video class="vid1 js-player" controls loading="lazy" poster="https://image.tmdb.org/t/p/w780/wJoPsjcJkMAr7ifNqo7qlNXDzil.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+    <video class="vid1 js-player" controls loading="lazy" poster="https://image.tmdb.org/t/p/w780/" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
       <source src="" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
@@ -759,9 +759,9 @@ document.addEventListener('DOMContentLoaded', () => {
 "></div>
 
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>2021</span> <!--Aca va el año de estreno de pelicula-->
+    <i class="fal fa-calendar-alt"></i><span id="year-span">0000</span> <!--Aca va el año de estreno de pelicula-->
    <!--aca va cuanto dura-->
-    <i class="fal fa-thumbs-up"></i><span>82%</span> <!--aca va la calificacion-->
+    <i class="fal fa-thumbs-up"></i><span>00%</span> <!--aca va la calificacion-->
     <i class="fal fa-tv"></i><span>Tp00</span>
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -773,21 +773,21 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
   
   <div class="info-pelicula">
-    <h1>El Juego Del Calamar</h1>
-    <span class="genero-badge">Accion • Drama • Asesinato  </span>
+    <h1>Nombre de serie</h1>
+    <span class="genero-badge">Genero • Genero</span>
     <br>
     <br>
     <!-- Botón para abrir el modal -->
     <button id="open-seasons" class="seasons-open-btn">Ver Temporadas & Episodios</button>
     
     <p class="sinopsis">
-      Cientos de personas con problemas de dinero aceptan una invitación rarísima para competir en juegos infantiles. Dentro los esperan un tentador premio y desafíos letales.
+      Sinopsis
     </p>
 
     <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
-      <p><strong>Director:</strong> </p>
-      <p><strong>Reparto:</strong> </p>
-      <p><strong>Estreno:</strong> 00/00/0000 | <strong>Idioma:</strong> Español Latino 🇲🇽</p>
+      <p><strong>Director:</strong> Frank Darabont</p>
+      <p><strong>Reparto:</strong> Andrés Lincoln, Norman Reedus, Lauren Cohan</p>
+      <p><strong>Estreno:</strong> 31/10/2010 | <strong>Idioma:</strong> Español Latino 🇲🇽</p>
     </div>
 
     <br>
@@ -899,10 +899,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 🔹 Botón "Agregar a Favoritos"
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
-      titulo: "El juego del calamar",
-      imagen: "https://image.tmdb.org/t/p/w300/m2o9vamnvtseVG7HgcFeSEoJ8HR.jpg",
+      titulo: "Nombre de serie",
+      imagen: "https://image.tmdb.org/t/p/w300/",
       genero: "Genero",
-      archivo: "../View Series/El Juego Del Calamar (2021).html",
+      archivo: "../View Series/.html",
       tipo: "serie",
       timestamp: Date.now()
     };
@@ -1184,7 +1184,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <!-- ---------- SCRIPT: datos + interacción ---------- -->
 <script>
-const SERIES_KEY = "El_Juego_del_Calamar_2021";
+const SERIES_KEY = "nombre_de_serie";
 
   /* ---------- Datos: cambia esto por tu contenido real ---------- */
   const seasonsData = [
@@ -1192,7 +1192,7 @@ const SERIES_KEY = "El_Juego_del_Calamar_2021";
       id: 1,
       title: "Temporada 1",
       thumb: "https://image.tmdb.org/t/p/w780/",
-      desc: "Lanzada 2010 — 6 episodios",
+      desc: "Lanzada 2021 — 6 episodios",
       episodes: [
         { id: "s1e1", title: "Episodio 1", time: "45m", thumb: "", href: "https://pomf2.lain.la/f/ms1jmsqt.mp4" },
         { id: "s1e2", title: "Episodio 2", time: "45m", thumb: "", href: "https://pomf2.lain.la/f/qt4mljp.mp4" },
@@ -1209,8 +1209,8 @@ const SERIES_KEY = "El_Juego_del_Calamar_2021";
     {
       id: 2,
       title: "Temporada 2",
-      thumb: "Imagen",
-      desc: "Lanzada 2024 — 7 episodios",
+      thumb: "https://image.tmdb.org/t/p/w780/",
+      desc: "Lanzada 2024 — 0 episodios",
       episodes: [
         { id: "s2e1", title: "Episodio 1", time: "45m", thumb: "", href: "https://pomf2.lain.la/f/ms26sodv.mp4" },
         { id: "s2e2", title: "Episodio 2", time: "45m", thumb: "", href: "https://pomf2.lain.la/f/vh3a6css.mp4" },
@@ -1222,10 +1222,11 @@ const SERIES_KEY = "El_Juego_del_Calamar_2021";
         // ... más episodios
       ]
     },
+
     {
-      id: 1,
+      id: 3,
       title: "Temporada 3",
-      thumb: "Imagen",
+      thumb: "https://image.tmdb.org/t/p/w780/",
       desc: "Lanzada 2025 — 6 episodios",
       episodes: [
         { id: "s3e1", title: "Episodio 1", time: "45m", thumb: "", href: "https://dl.dropbox.com/scl/fi/6vque8yn2d81v084pfqwv/El-juego-del-calamar-T3-C1-2025.mp4?rlkey=yp1jrx2x4ec489c63m6nyfo82&st=" },
@@ -1237,7 +1238,6 @@ const SERIES_KEY = "El_Juego_del_Calamar_2021";
         // ... más episodios
       ]
     },
-
 
   ];
   /* ----------------------------------------------------------- */
@@ -1325,6 +1325,7 @@ const SERIES_KEY = "El_Juego_del_Calamar_2021";
     if (yearMatch) {
       document.getElementById("year-span").textContent = yearMatch[1];
     }
+
     seasonLabel.textContent = season.title;
     seasonDesc.textContent = `— ${season.episodes.length} episodios`;
     // render episodios
@@ -1535,29 +1536,29 @@ document.addEventListener("DOMContentLoaded", () => {
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
-      <a href="" class="serie">
-        <img loading="lazy" src="" alt="">
-        <p>Pruebaaaa</p>
+      <a href="html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
+        <p>NOMBRE DE PELICULA</p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="" alt="">
-        <p></p>
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
+        <p>NOMBRE DE PELICULA</p>
       </a>
       <a href="" class="serie">
-        <img loading="lazy" src="" alt="">
-        <p></p>
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
+        <p>NOMBRE DE PELICULA</p>
       </a>
-      <a href="" class="serie">
-        <img loading="lazy" src="" alt="">
-        <p></p>
+      <a href="E" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
+        <p>NOMBRE DE PELICULA</p>
       </a>
-      <a href="" class="serie">
-        <img loading="lazy" src="" alt="">
-        <p></p>
+      <a href="#" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt=""> <!--EN CASO DE NO SER PARA ADULTOS UTILICE ESTAS 6 ESTRUCTURAS DEL CODIGO, LA DE ABAJO ES PARA ADULTOS. SI NO CONTIENES PELICULAS DE ADULTOS UTILIZA LAS 6 QUE DEJARE MARCADA CON NUMEROS DEL (1 AL 6) EN CASO DE TENER PELICULA DE ADULTOS UTILIZA EL DE ABAJO-->
+        <p>Nombre de pelicula</p>
       </a>
-      <a href="" class="serie">
-        <img loading="lazy" src="" alt="">
-        <p></p>
+      <a class="serie" href=".html"> <!--data-href=".html" data-adulto="adulto" si es para adulto debes conservar estas etiquetas-->
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/" alt="">
+        <p>SI PARA MAYORES DE EDAD UTILICE ESTE</p>
       </a>
     </div>
   </div>
@@ -1971,9 +1972,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const STORAGE_KEY = 'pos_' + videoSrc;
 
   // DATOS DEL HISTORIAL
-  const historialTitulo = "El juego del calamar";
-  const historialImagen = "https://image.tmdb.org/t/p/w300/m2o9vamnvtseVG7HgcFeSEoJ8HR.jpg";
-  const historialArchivo = "../View Series/El Juego Del Calamar (2021).html";
+  const historialTitulo = "Nombre de serie";
+  const historialImagen = "https://image.tmdb.org/t/p/w300/";
+  const historialArchivo = "../View Series/.html";
 
   let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
   let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
