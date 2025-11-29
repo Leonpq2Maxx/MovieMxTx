@@ -394,24 +394,32 @@ body {
 }
 
 /* ========================= */
-/* ✅ ETIQUETA BAJA CUANDO SELECCIONA */
+/* ✅ BAJAR ETIQUETA SI ESTÁ SELECCIONADO */
 /* ========================= */
 
-/* Siempre abajo del selector cuando está seleccionado */
 .item.selected .category-badge {
-  top: 32px;
-  left: 5px;
+  top: 30px !important;
 }
 
-/* Selector siempre arriba de la etiqueta */
+/* Fijamos bien el selector arriba */
 .selector {
-  z-index: 20;
+  top: 6px !important;
+  left: 6px !important;
+  z-index: 30;
 }
 
-/* Etiqueta debajo del selector */
-.category-badge {
-  z-index: 10;
-  pointer-events: none;
+/* Bajamos un poco más si querés más aire */
+@media (max-width: 480px) {
+  .item.selected .category-badge {
+    top: 35px !important;
+  }
+}
+
+/* Escritorio */
+@media (min-width: 768px) {
+  .item.selected .category-badge {
+    top: 38px !important;
+  }
 }
 
   </style>
