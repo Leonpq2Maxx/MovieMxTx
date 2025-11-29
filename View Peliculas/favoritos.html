@@ -393,6 +393,26 @@ body {
   padding-bottom: env(safe-area-inset-bottom);
 }
 
+/* ========================= */
+/* ✅ ETIQUETA BAJA CUANDO SELECCIONA */
+/* ========================= */
+
+/* Siempre abajo del selector cuando está seleccionado */
+.item.selected .category-badge {
+  top: 32px;
+  left: 5px;
+}
+
+/* Selector siempre arriba de la etiqueta */
+.selector {
+  z-index: 20;
+}
+
+/* Etiqueta debajo del selector */
+.category-badge {
+  z-index: 10;
+  pointer-events: none;
+}
 
   </style>
 </head>
