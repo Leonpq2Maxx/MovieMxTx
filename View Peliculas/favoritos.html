@@ -95,16 +95,17 @@
     }
 
     .selector {
-      position: absolute;
-      top: 5px;
-      left: 5px;
-      width: 20px;
-      height: 20px;
-      border-radius: 4px;
-      background: #000a;
-      border: 1px solid #fff;
-      display: none;
-    }
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  background: #000a;
+  border: 1px solid #fff;
+  z-index: 20; /* ✅ arriba de la etiqueta */
+}
+
 
     .item.selected .selector {
       background: #00ff99;
@@ -231,9 +232,9 @@
     }
     .category-badge {
   position: absolute;
-  top: 6px;
+  top: 34px;               /* ✅ SIEMPRE abajo del selector */
   left: 6px;
-  z-index: 5;
+  z-index: 10;
   background: rgba(0,0,0,0.75);
   padding: 3px 6px;
   font-size: .55rem;
@@ -241,6 +242,7 @@
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: .5px;
+  pointer-events: none;
 }
 
 
