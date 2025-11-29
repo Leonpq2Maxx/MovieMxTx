@@ -393,63 +393,6 @@ body {
   padding-bottom: env(safe-area-inset-bottom);
 }
 
-/* ========================= */
-/* ✅ BAJAR ETIQUETA SI ESTÁ SELECCIONADO */
-/* ========================= */
-
-.item.selected .category-badge {
-  top: 30px !important;
-}
-
-/* Fijamos bien el selector arriba */
-.selector {
-  top: 6px !important;
-  left: 6px !important;
-  z-index: 30;
-}
-
-/* Bajamos un poco más si querés más aire */
-@media (max-width: 480px) {
-  .item.selected .category-badge {
-    top: 35px !important;
-  }
-}
-
-/* Escritorio */
-@media (min-width: 768px) {
-  .item.selected .category-badge {
-    top: 38px !important;
-  }
-}
-/* ========================= */
-/* ✅ CUANDO ESTÁ EN MODO SELECCIÓN */
-/* ========================= */
-
-body.select-mode .category-badge {
-  top: 32px !important;
-}
-
-/* Selector bien arriba */
-.selector {
-  top: 6px !important;
-  left: 6px !important;
-  z-index: 30;
-}
-
-/* Desktop más aire */
-@media (min-width: 768px) {
-  body.select-mode .category-badge {
-    top: 38px !important;
-  }
-}
-
-/* Móvil */
-@media (max-width: 480px) {
-  body.select-mode .category-badge {
-    top: 34px !important;
-  }
-}
-
 
   </style>
 </head>
@@ -650,7 +593,6 @@ div.innerHTML = `
 
   function activarSeleccionMultiple() {
   multiMode = true;
-  document.body.classList.add("select-mode");
 
   document.querySelectorAll(".item").forEach(item => {
     item.classList.remove("selected");
