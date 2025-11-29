@@ -229,16 +229,186 @@
       cursor: pointer;
       width: 100%;
     }
+    .category-badge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  z-index: 5;
+  background: rgba(0,0,0,0.75);
+  padding: 3px 6px;
+  font-size: .55rem;
+  border-radius: 6px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+
+
+.category-pelicula {
+  background: #e50914;
+}
+
+.category-serie {
+  background: #1db954;
+}
+
+/* ========================= */
+/* 📱 CELULARES PEQUEÑOS */
+/* ========================= */
+@media (max-width: 360px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+
+  .item img {
+    height: 150px;
+  }
+
+  .item-title {
+    font-size: 0.5rem;
+  }
+
+  .item-info {
+    font-size: 0.45rem;
+  }
+
+  .search-box,
+  .order-box {
+    font-size: 0.75rem;
+    padding: 8px;
+  }
+}
+
+/* ========================= */
+/* 📱 CELULARES GRANDES */
+/* ========================= */
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .item img {
+    height: 170px;
+  }
+
+  .item-title {
+    font-size: 0.6rem;
+  }
+
+  .item-info {
+    font-size: 0.5rem;
+  }
+}
+
+/* ========================= */
+/* 📲 TABLETS */
+/* ========================= */
+@media (min-width: 481px) and (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .item img {
+    height: 190px;
+  }
+
+  .item-title {
+    font-size: 0.65rem;
+  }
+
+  .item-info {
+    font-size: 0.55rem;
+  }
+}
+
+/* ========================= */
+/* 💻 NOTEBOOKS Y PCs */
+/* ========================= */
+@media (min-width: 769px) and (max-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* ========================= */
+/* 📺 PANTALLAS GRANDES */
+/* ========================= */
+@media (min-width: 1201px) {
+  .grid {
+    grid-template-columns: repeat(7, 1fr);
+  }
+
+  .item img {
+    height: 240px;
+  }
+
+  .item-title {
+    font-size: 0.75rem;
+  }
+
+  .item-info {
+    font-size: 0.6rem;
+  }
+}
+
+/* ========================= */
+/* 💻 MODAL ELIMINAR EN PC */
+/* ========================= */
+@media (min-width: 1024px) {
+  .delete-box {
+    max-width: 200px;
+    width: 40%;
+    padding: 30px;
+    border-radius: 18px;
+  }
+
+  .delete-img {
+      width: 80%;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+
+  .delete-title {
+    font-size: 1.4rem;
+  }
+
+  .delete-text {
+    font-size: 1rem;
+  }
+
+  .btn-delete {
+    font-size: 1rem;
+    padding: 14px;
+  }
+
+  .close-delete {
+    font-size: 10px;
+    padding: 6px 10px;
+  }
+}
+
+
+body {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+
   </style>
 </head>
 
 <body>
+  
 
   <input id="buscar" class="search-box" placeholder="Buscar favoritos...">
 
   <button id="openOrderMenu" class="order-box">
     Ordenar: Más recientes
   </button>
+
+  <p id="noResultsMsg" style="display:none;color:#aaa;text-align:center;margin-top:20px;">
+  No se encuentra su Película o Serie en favoritos
+</p>
 
   <!-- Modal ordenar -->
   <div id="orderModal" class="modal-order">
@@ -282,30 +452,64 @@
   let seleccionados = [];
   let indexAEliminar = null;
 
+  function asegurarTimestamp() {
+  let base = Date.now() - favoritos.length * 1000;
+
+  favoritos.forEach((item, i) => {
+    if (!item.timestamp) {
+      item.timestamp = base + i * 1000; // escalonado real
+    }
+  });
+
+  localStorage.setItem("favoritos_detalles", JSON.stringify(favoritos));
+}
+
   function renderFavoritos() {
+    if (openOrderMenu.innerText.includes("recientes")) {
+  favoritos.sort((a, b) => b.timestamp - a.timestamp);
+} else {
+  favoritos.sort((a, b) => a.timestamp - b.timestamp);
+}
     const container = document.getElementById("favoritos-container");
     container.innerHTML = "";
 
     favoritos.forEach((item, index) => {
       let extraInfo = "";
 
-      if (openOrderMenu.innerText.includes("recientes")) {
-        if (index === 0) extraInfo = "Más reciente";
-        if (index === favoritos.length - 1) extraInfo = "Más antiguo";
-      } else {
-        if (index === 0) extraInfo = "Más antiguo";
-        if (index === favoritos.length - 1) extraInfo = "Más reciente";
-      }
+      // TIEMPO REAL
+const ahora = Date.now();
+const edad = ahora - item.timestamp;
+
+// Recién agregado = menos de 24 horas
+if (edad < 24 * 60 * 60 * 1000) {
+  extraInfo = "Reciente";
+}
+
+// Más antiguo = más de 15 días
+if (edad > 15 * 24 * 60 * 60 * 1000) {
+  extraInfo = "Antiguo";
+}
+
 
       const div = document.createElement("div");
       div.className = "item";
-      div.innerHTML = `
-        <div class="selector"></div>
-        <img src="${item.imagen}">
-        <div class="item-title">${item.titulo}</div>
-        <div class="item-info">${extraInfo}</div>
-        <button class="delete-btn" onclick="eliminarFavorito(${index})">×</button>
-      `;
+      const tipo = item.tipo ? item.tipo.toLowerCase() : "pelicula";
+
+div.innerHTML = `
+  <div class="selector"></div>
+
+  <img src="${item.imagen}">
+  
+  <div class="category-badge category-${tipo}">
+    ${tipo.toUpperCase()}
+  </div>
+
+  <div class="item-title">${item.titulo}</div>
+  <div class="item-info">${extraInfo}</div>
+  <button class="delete-btn" onclick="event.stopPropagation(); eliminarFavorito(${index})">×</button>
+
+`;
+
 
       div.onclick = (e) => {
         if (multiMode) {
@@ -327,12 +531,24 @@
   }
 
   buscar.oninput = e => {
-    const term = normalizar(e.target.value);
-    document.querySelectorAll(".item").forEach(card => {
-      const title = normalizar(card.querySelector(".item-title").innerText);
-      card.style.display = title.includes(term) ? "" : "none";
-    });
-  };
+  const term = normalizar(e.target.value);
+  let visibles = 0;
+
+  document.querySelectorAll(".item").forEach(card => {
+    const title = normalizar(card.querySelector(".item-title").innerText);
+
+    if (title.includes(term)) {
+      card.style.display = "";
+      visibles++;
+    } else {
+      card.style.display = "none";
+    }
+  });
+
+  document.getElementById("noResultsMsg").style.display =
+    visibles === 0 ? "block" : "none";
+};
+
 
   openOrderMenu.onclick = () => orderModal.style.display = "flex";
   document.querySelector(".close-order").onclick = () => orderModal.style.display = "none";
@@ -390,10 +606,19 @@
   seleccionados = [];
 }
 
-  function openPreview(item) { alert("Preview pendiente"); }
+  function openPreview(item) {
+  if (item.archivo) {
+    window.location.href = item.archivo;
+  } else {
+    alert("Archivo no encontrado");
+  }
+}
   function closePreview() {}
 
-  renderFavoritos();
+  asegurarTimestamp();
+favoritos.sort((a, b) => b.timestamp - a.timestamp); // ✅ ordenar al cargar
+renderFavoritos();
+
 </script>
 
 <script>
