@@ -330,12 +330,8 @@ div.innerHTML = `
     div.addEventListener("click", e=>{
       if(multiMode){
         div.classList.toggle("selected");
-        if(div.classList.contains("selected")) {
-    seleccionados.push(item.timestamp);
-} else {
-    seleccionados = seleccionados.filter(t => t !== item.timestamp);
-}
-
+        if(div.classList.contains("selected")) seleccionados.push(index);
+        else seleccionados = seleccionados.filter(i=>i!==index);
       } else {
         openPreview(item);
       }
@@ -386,20 +382,7 @@ document.getElementById("cancelDelete").onclick = () => {
 document.getElementById("confirmDelete").onclick = () => {
   if(indexAEliminar !== null){
     favoritos.splice(indexAEliminar,1);
-    document.getElementById("multiDeleteBtn").onclick = ()=>{
-  
-  // Elimina por timestamp, NO por índice
-  favoritos = favoritos.filter(fav => !seleccionados.includes(fav.timestamp));
-
-  localStorage.setItem("favoritos_detalles", JSON.stringify(favoritos));
-
-  seleccionados = [];
-  multiMode = false;
-  document.getElementById("multiDeleteBtn").style.display="none";
-
-  renderFavoritos();
-};
-
+    localStorage.setItem("favoritos_detalles", JSON.stringify(favoritos));
     renderFavoritos();
   }
   document.getElementById("deleteModal").style.display = "none";
