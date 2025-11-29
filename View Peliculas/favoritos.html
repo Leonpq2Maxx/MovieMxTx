@@ -392,6 +392,22 @@
 body {
   padding-bottom: env(safe-area-inset-bottom);
 }
+/* ========================= */
+/* ✅ MODO SELECCIÓN ACTIVO */
+/* ========================= */
+
+/* Cuando está activado el modo selector múltiple */
+.multi-select-active .category-badge {
+  top: 32px;
+  transition: top 0.2s ease;
+}
+
+/* Escritorio */
+@media (min-width: 768px) {
+  .multi-select-active .category-badge {
+    top: 38px;
+  }
+}
 
 
   </style>
@@ -594,6 +610,9 @@ div.innerHTML = `
   function activarSeleccionMultiple() {
   multiMode = true;
 
+  // Clase global visual
+  document.body.classList.add("multi-select-active");
+
   document.querySelectorAll(".item").forEach(item => {
     item.classList.remove("selected");
   });
@@ -605,6 +624,7 @@ div.innerHTML = `
 
   seleccionados = [];
 }
+
 
   function openPreview(item) {
   if (item.archivo) {
@@ -625,6 +645,9 @@ renderFavoritos();
   document.getElementById("cancelSelectBtn").onclick = () => {
   multiMode = false;
   seleccionados = [];
+
+  document.body.classList.remove("multi-select-active");
+
 
   // Quitar selección visual
   document.querySelectorAll(".item").forEach(item => {
