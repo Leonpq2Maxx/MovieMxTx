@@ -459,14 +459,24 @@ function activarMulti(){
   cancelSelectBtn.style.display="inline-block";
 }
 
-cancelSelectBtn.onclick=()=>{
-  multiMode=false;
-  seleccionados=[];
+cancelSelectBtn.onclick = () => {
+  multiMode = false;
+  seleccionados = [];
+
   document.body.classList.remove("multi-select-active");
-  document.querySelectorAll(".selector").forEach(x=>x.style.display="none");
-  multiDeleteBtn.style.display="none";
-  cancelSelectBtn.style.display="none";
+
+  // ✅ limpiar visualmente todas las tarjetas
+  document.querySelectorAll(".item").forEach(card => {
+    card.classList.remove("selected");
+  });
+
+  // ✅ ocultar selectores
+  document.querySelectorAll(".selector").forEach(x => x.style.display = "none");
+
+  multiDeleteBtn.style.display = "none";
+  cancelSelectBtn.style.display = "none";
 };
+
 
 multiDeleteBtn.onclick=()=>{
   historial=historial.filter((_,i)=>!seleccionados.includes(i));
