@@ -107,7 +107,7 @@
     }
 
     .item.selected .selector {
-      background: #ff007f;
+      background: #00ff99;
       display: block;
     }
 
@@ -409,6 +409,13 @@ body {
   }
 }
 
+/* 🔥 Estilo para opción seleccionada */
+.order-option.active {
+  background: #ff0033 !important;
+  color: white !important;
+  transform: scale(1.03);
+  box-shadow: 0 0 12px rgba(255, 0, 51, 0.7);
+}
 
   </style>
 </head>
@@ -570,21 +577,31 @@ div.innerHTML = `
   document.querySelector(".close-order").onclick = () => orderModal.style.display = "none";
 
   document.querySelectorAll(".order-option").forEach(btn => {
-    btn.onclick = () => {
-      const value = btn.dataset.value;
+  btn.onclick = () => {
 
-      if (value === "recientes") {
-        favoritos.sort((a, b) => b.timestamp - a.timestamp);
-        openOrderMenu.innerText = "Ordenar: Más recientes";
-      } else {
-        favoritos.sort((a, b) => a.timestamp - b.timestamp);
-        openOrderMenu.innerText = "Ordenar: Más antiguos";
-      }
+    // Quitar la selección actual
+    document.querySelectorAll(".order-option").forEach(o =>
+      o.classList.remove("active")
+    );
 
-      renderFavoritos();
-      orderModal.style.display = "none";
-    };
-  });
+    // Activar la opción pulsada
+    btn.classList.add("active");
+
+    const value = btn.dataset.value;
+
+    if (value === "recientes") {
+      favoritos.sort((a, b) => b.timestamp - a.timestamp);
+      openOrderMenu.innerText = "Ordenar: Más recientes";
+    } else {
+      favoritos.sort((a, b) => a.timestamp - b.timestamp);
+      openOrderMenu.innerText = "Ordenar: Más antiguos";
+    }
+
+    renderFavoritos();
+    orderModal.style.display = "none";
+  };
+});
+
 
   function eliminarFavorito(i) {
     indexAEliminar = i;
@@ -638,6 +655,9 @@ div.innerHTML = `
   asegurarTimestamp();
 favoritos.sort((a, b) => b.timestamp - a.timestamp); // ✅ ordenar al cargar
 renderFavoritos();
+// Marcar opción por defecto
+document.querySelector('.order-option[data-value="recientes"]')
+  .classList.add("active");
 
 </script>
 
