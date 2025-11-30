@@ -97,7 +97,18 @@
     }
 
     .serie p {
-      margin-top: 5px;
+      margin-top: 6px;
+      font-size: 14px;
+      line-height: 1.2; 
+      max-width: 120px;       /* mismo ancho que la imagen */
+      height: 32px;           /* controla 2 líneas */ 
+      overflow: hidden;
+      text-overflow: ellipsis; 
+      display: -webkit-box;   /* soporte para iPhone */
+      -webkit-line-clamp: 2;  /* límite de 2 líneas */
+      -webkit-box-orient: vertical;
+      white-space: normal;
+      text-align: center;
     }
 
     html { font-size: 100%; }
@@ -1003,7 +1014,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 🔹 Botón "Agregar a Favoritos"
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
-      titulo: "Culpa mia: Londres",
+      titulo: "Culpa mia 2: Londres",
       imagen: "https://image.tmdb.org/t/p/original/q0HxfkF9eoa6wSVnzwMhuDSK7ba.jpg",
       genero: "Romance, Drama",
       archivo: "2 Culpa Mia (2025).html",
@@ -1263,7 +1274,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const STORAGE_KEY = 'pos_' + videoSrc;
 
   // DATOS DEL HISTORIAL
- const historialTitulo = "Culpa mia: Londres";
+ const historialTitulo = "Culpa mia 2: Londres";
  const historialImagen = "https://image.tmdb.org/t/p/original/q0HxfkF9eoa6wSVnzwMhuDSK7ba.jpg";
  const historialArchivo = "2 Culpa Mia (2025).html";
 

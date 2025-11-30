@@ -97,7 +97,18 @@
     }
 
     .serie p {
-      margin-top: 5px;
+      margin-top: 6px;
+      font-size: 14px;
+      line-height: 1.2; 
+      max-width: 120px;       /* mismo ancho que la imagen */
+      height: 32px;           /* controla 2 líneas */ 
+      overflow: hidden;
+      text-overflow: ellipsis; 
+      display: -webkit-box;   /* soporte para iPhone */
+      -webkit-line-clamp: 2;  /* límite de 2 líneas */
+      -webkit-box-orient: vertical;
+      white-space: normal;
+      text-align: center;
     }
 
     html { font-size: 100%; }
@@ -1007,7 +1018,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
       titulo: "Annabelle 2: La creación",
-      imagen: "https://image.tmdb.org/t/p/w300/x0pekWNy7GS37bm30zuxWNLPXj8.jpg",
+      imagen: "https://image.tmdb.org/t/p/original/x0pekWNy7GS37bm30zuxWNLPXj8.jpg",
       genero: "Drama",
       archivo: "Annabelle 2 la creacion 2 (2017).html",
       tipo: "pelicula",
@@ -1267,7 +1278,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // DATOS DEL HISTORIAL
    const historialTitulo = "Annabelle 2: La creación";
-   const historialImagen = "https://image.tmdb.org/t/p/w300/x0pekWNy7GS37bm30zuxWNLPXj8.jpg";
+   const historialImagen = "https://image.tmdb.org/t/p/original/x0pekWNy7GS37bm30zuxWNLPXj8.jpg";
    const historialArchivo = "Annabelle 2 la creacion 2 (2017).html";
 
   let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');

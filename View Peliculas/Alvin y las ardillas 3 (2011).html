@@ -97,7 +97,18 @@
     }
 
     .serie p {
-      margin-top: 5px;
+      margin-top: 6px;
+      font-size: 14px;
+      line-height: 1.2; 
+      max-width: 120px;       /* mismo ancho que la imagen */
+      height: 32px;           /* controla 2 líneas */ 
+      overflow: hidden;
+      text-overflow: ellipsis; 
+      display: -webkit-box;   /* soporte para iPhone */
+      -webkit-line-clamp: 2;  /* límite de 2 líneas */
+      -webkit-box-orient: vertical;
+      white-space: normal;
+      text-align: center;
     }
 
     html { font-size: 100%; }
@@ -1003,7 +1014,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
       titulo: "Alvin y las ardillas 3",
-      imagen: "https://image.tmdb.org/t/p/w300/a52ebjlDqvrjcKtFGDtQgNQLaGH.jpg",
+      imagen: "https://image.tmdb.org/t/p/original/a52ebjlDqvrjcKtFGDtQgNQLaGH.jpg",
       genero: "Animacion",
       archivo: "Alvin y las ardillas 3 (2011).html",
       tipo: "pelicula",
@@ -1264,7 +1275,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // DATOS DEL HISTORIAL
 
   const historialTitulo = "Alvin y las ardillas 3";
-  const historialImagen = "https://image.tmdb.org/t/p/w300/a52ebjlDqvrjcKtFGDtQgNQLaGH.jpg";
+  const historialImagen = "https://image.tmdb.org/t/p/original/a52ebjlDqvrjcKtFGDtQgNQLaGH.jpg";
   const historialArchivo = "Alvin y las ardillas 3 (2011).html";
 
   let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');

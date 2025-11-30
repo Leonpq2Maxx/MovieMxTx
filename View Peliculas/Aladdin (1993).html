@@ -97,7 +97,18 @@
     }
 
     .serie p {
-      margin-top: 5px;
+      margin-top: 6px;
+      font-size: 14px;
+      line-height: 1.2; 
+      max-width: 120px;       /* mismo ancho que la imagen */
+      height: 32px;           /* controla 2 líneas */ 
+      overflow: hidden;
+      text-overflow: ellipsis; 
+      display: -webkit-box;   /* soporte para iPhone */
+      -webkit-line-clamp: 2;  /* límite de 2 líneas */
+      -webkit-box-orient: vertical;
+      white-space: normal;
+      text-align: center;
     }
 
     html { font-size: 100%; }
@@ -1005,7 +1016,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
       titulo: "Aladdin",
-      imagen: "https://image.tmdb.org/t/p/w300/eLFfl7vS8dkeG1hKp5mwbm37V83.jpg",
+      imagen: "https://image.tmdb.org/t/p/original/eLFfl7vS8dkeG1hKp5mwbm37V83.jpg",
       genero: "Disney",
       archivo: "Aladdin (1993).html",
       tipo: "pelicula",
@@ -1139,215 +1150,6 @@ document.addEventListener('DOMContentLoaded', () => {
       </a>
     </div>
   </div>
-
-  <!--ESTO ES PARA VERIFICAR LA EDAD NO BORRAR CONSERVALO NO INTERERIRA CON LOS DEMAS FUNCIONAMIENTOS-->
-
-  <div id="ageModal" class="age-modal hidden">
-    <div class="age-modal-content">
-      <span class="close-button" onclick="closeModal()">×</span>
-      <h2>¿Eres mayor de edad?</h2>
-    
-      <label for="birthyear">Año de nacimiento:</label>
-      <input type="number" id="birthyear" placeholder="Año" min="1900" max="2025" />
-    
-      <label for="age">Edad actual:</label>
-      <input type="number" id="age" placeholder="Edad" min="1" max="120" />
-    
-      <button id="confirmAgeBtn">Validar edad</button>
-      <p id="result-message"></p>
-    </div>
-  </div>
-  
-  <style>
-    .age-modal {
-      position: fixed;
-      z-index: 9999;
-      left: 0; top: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.4);
-      -webkit-backdrop-filter: blur(6px);
-      backdrop-filter: blur(6px);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .age-modal-content {
-      background-color: #ffffff;
-      color: #000000;
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-      width: 300px;
-      position: relative;
-      transition: background-color 0.3s ease, color 0.3s ease;
-      box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    }
-
-
-    .age-modal-content h2,
-    .age-modal-content label,
-    .age-modal-content p {
-      color: #000000;
-    }
-
-
-    .age-modal-content input {
-      width: 90%;
-      margin: 10px auto;
-      padding: 8px; 
-      display: block; 
-      background-color: #ffffff;  
-      color: #000000;
-      border: 1px solid #ccc; 
-      border-radius: 5px;
-    }
-
-
-    .age-modal-content input::placeholder {
-      color: #777;
-    }
-
-    /* Modo oscuro */
-
-    body.dark .age-modal-content,
-    .dark .age-modal-content {
-      background-color: #1e1e1e;
-      color: #f5f5f5;
-    }
-
-    body.dark .age-modal-content h2,
-    .dark .age-modal-content h2,
-    body.dark .age-modal-content label,
-    .dark .age-modal-content label,
-    body.dark .age-modal-content p,
-    .dark .age-modal-content p {
-      color: #f5f5f5;
-    }
-
-    body.dark .age-modal-content input,
-    .dark .age-modal-content input {
-      background-color: #2b2b2b;
-      color: #ffffff;
-      border: 1px solid #555;
-    }
-
-    body.dark .age-modal-content input::placeholder,
-    .dark .age-modal-content input::placeholder {
-      color: #ccc;
-    }
-
-    .age-modal-content button {
-      background: #0b57cf;
-      color: white;
-      border: none;
-      padding: 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
-    .age-modal-content button:hover {
-      background: #063ea3;
-    }
-
-    .close-button {
-      position: absolute;
-      right: 12px;
-      top: 8px;
-      font-size: 20px;
-      font-weight: bold;
-      color: #888;
-      cursor: pointer;
-    }
-
-    .close-button:hover {
-      color: #000;
-    }
-
-    body.dark .close-button {
-      color: #aaa;
-    }
-
-    body.dark .close-button:hover {
-      color: #fff;
-    }
-
-    .hidden {
-      display: none;
-    }
-  </style>
-  
-  <script>
-    let pendingRedirect = null;
-    function handleAdultLinkClick(event) {
-      const link = event.currentTarget;
-      const href = link.getAttribute('data-href');
-      const isAdult = link.getAttribute('data-adulto') === 'adulto';
-  
-      if (isAdult) {
-        event.preventDefault();
-        pendingRedirect = href;
-        openModal();
-      }
-    }
-    
-    function openModal() {
-      document.getElementById("ageModal").classList.remove("hidden");
-      document.getElementById("result-message").innerText = "";
-      document.getElementById("birthyear").value = "";
-      document.getElementById("age").value = "";
-    }
-    
-    function closeModal() {
-      document.getElementById("ageModal").classList.add("hidden");
-      pendingRedirect = null;
-    }
-
-    document.getElementById("confirmAgeBtn").addEventListener("click", function () {
-      const birthYear = parseInt(document.getElementById("birthyear").value);
-      const enteredAge = parseInt(document.getElementById("age").value);
-      const currentYear = new Date().getFullYear();
-      const calculatedAge = currentYear - birthYear;
-      const result = document.getElementById("result-message");
-  
-      if (
-        isNaN(birthYear) || isNaN(enteredAge) ||
-        birthYear > currentYear || birthYear < 1900 ||
-        enteredAge < 0 || enteredAge > 120
-      ) {
-        result.innerText = "Por favor completa los campos con valores válidos.";
-        result.style.color = "red";
-        return;
-      }
-  
-      if (enteredAge !== calculatedAge) {
-        result.innerText = "La edad no coincide con el año de nacimiento.";
-        result.style.color = "red";
-        return;
-      }
-  
-      if (enteredAge >= 18) {
-        result.innerText = "Acceso permitido. Redirigiendo...";
-        result.style.color = "green";
-        setTimeout(() => {
-          if (pendingRedirect) {
-            window.location.href = pendingRedirect;
-          }
-        }, 1500);
-      } else {
-        result.innerText = "No eres mayor de edad, vuelve a intentarlo más adelante.";
-        result.style.color = "red";
-      }
-    });
-    
-    // Activar verificación en todos los links con data-adulto
-    document.querySelectorAll('a[data-adulto="adulto"]').forEach(link => {
-      link.addEventListener('click', handleAdultLinkClick);
-    });
-  </script>
-
-  <!--FIN DE LA VERIFICACION PARA ADULTOS.-->
   
   <!-- ¡¡¡NO BORRAR ESTE SCRIPT ES DE FAVORITOS Y SI LO BORRAN AFECTARAN EL FUNCIONAMIENTO DE REPRODUCTOR Y FAVORITOS!!! -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.6.7/plyr.min.js">
@@ -1474,7 +1276,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // DATOS DEL HISTORIAL
    const historialTitulo = "Aladdin";
-   const historialImagen = "https://image.tmdb.org/t/p/w300/eLFfl7vS8dkeG1hKp5mwbm37V83.jpg";
+   const historialImagen = "https://image.tmdb.org/t/p/original/eLFfl7vS8dkeG1hKp5mwbm37V83.jpg";
    const historialArchivo = "Aladdin (1993).html";
 
   let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');

@@ -97,7 +97,18 @@
     }
 
     .serie p {
-      margin-top: 5px;
+      margin-top: 6px;
+      font-size: 14px;
+      line-height: 1.2; 
+      max-width: 120px;       /* mismo ancho que la imagen */
+      height: 32px;           /* controla 2 líneas */ 
+      overflow: hidden;
+      text-overflow: ellipsis; 
+      display: -webkit-box;   /* soporte para iPhone */
+      -webkit-line-clamp: 2;  /* límite de 2 líneas */
+      -webkit-box-orient: vertical;
+      white-space: normal;
+      text-align: center;
     }
 
     html { font-size: 100%; }
@@ -1004,7 +1015,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
       titulo: "Aladdin 3: El rey de los ladrones",
-      imagen: "https://image.tmdb.org/t/p/w300/abWvjyJz4kcp1xDn28RwyXjoIds.jpg",
+      imagen: "https://image.tmdb.org/t/p/original/abWvjyJz4kcp1xDn28RwyXjoIds.jpg",
       genero: "Disney",
       archivo: "Aladdin 3 y el rey de los ladrones (1996).html",
       tipo: "pelicula",
@@ -1264,7 +1275,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // DATOS DEL HISTORIAL
   const historialTitulo = "Aladdin 3: El rey de los ladrones";
-  const historialImagen = "https://image.tmdb.org/t/p/w300/abWvjyJz4kcp1xDn28RwyXjoIds.jpg";
+  const historialImagen = "https://image.tmdb.org/t/p/original/abWvjyJz4kcp1xDn28RwyXjoIds.jpg";
   const historialArchivo = "Aladdin 3 y el rey de los ladrones (1996).html";
 
   let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
