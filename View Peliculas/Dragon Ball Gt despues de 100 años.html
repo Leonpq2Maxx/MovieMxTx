@@ -97,8 +97,20 @@
     }
 
     .serie p {
-      margin-top: 5px;
-    }
+  margin-top: 6px;
+  font-size: 14px;
+  line-height: 1.2;
+  max-width: 120px;       /* mismo ancho que la imagen */
+  height: 32px;           /* controla 2 líneas */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;   /* soporte para iPhone */
+  -webkit-line-clamp: 2;  /* límite de 2 líneas */
+  -webkit-box-orient: vertical;
+  white-space: normal;
+  text-align: center;
+}
+
 
     html { font-size: 100%; }
     body { font-size: 1rem; }
@@ -722,8 +734,8 @@ document.addEventListener('DOMContentLoaded', () => {
       <p class="player-loading-text">Cargando<span class="dots"></span></p>
     </div>
 
-    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/eIk878ea0umT07VbWYpeH0GTid8.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
-      <source src="https://dl.dropbox.com/scl/fi/0dnvfyz78ouo5w3t39k5x/Detonante-2024.1080p-dual-lat.mp4?rlkey=meddp3xkkb5d3x4tbb0xem533&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
+    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/sLCN5b2WYsYkWMrMMCnRHGv1VEO.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+      <source src="https://dl.dropbox.com/scl/fi/h6q0a27m2a2pnqusgn70f/Dragon-ball-gt-100a-os.mp4?rlkey=ymjozpox8hov55usqzu343oxz&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
   <div id="episodio-actual" style="
@@ -735,9 +747,9 @@ document.addEventListener('DOMContentLoaded', () => {
 "></div>
 
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>2024</span>
-    <i class="fal fa-clock"></i><span>1h 47min</span>
-    <i class="fal fa-thumbs-up"></i><span>57%</span>
+    <i class="fal fa-calendar-alt"></i><span>1887</span>
+    <i class="fal fa-clock"></i><span>45min</span>
+    <i class="fal fa-thumbs-up"></i><span>67%</span>
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
@@ -749,11 +761,11 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
   
   <div class="info-pelicula">
-    <h1>Detonantes</h1>
-  <span class="genero-badge">Accion</span>
+    <h1>Dragon Ball GT: 100 años después</h1>
+  <span class="genero-badge">Anime • Animacion • Accion • Ciencia Ficcion</span>
   
     <p class="sinopsis">
-      Una soldado de las fuerzas especiales descubre una peligrosa conspiración cuando regresa a casa en busca de respuestas sobre la muerte de su padre.
+      La historia se sitúa a 100 años después del final de DBGT. La nieta de Goku, Pan, es ahora la abuelita de Goku Jr. (que vendría siendo el tatataranieto de Goku) quien tiene un carácter débil y no conoce su gran poder. Al enfermar Pan, Goku Jr. decide armarse de valor y salir a buscar las bolas de dragón. Por el camino se enfrentará a numerosos peligros que le harán descubrir el gran poder que lleva dentro.
     </p>
 
     <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
@@ -845,7 +857,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const continueInfo = document.getElementById('continue-info');
   const videoElement = document.querySelector('video');
 
-  const MOVIE_KEY = 'Detonante_2024'; /*Aca siempre con un _ para guardar su progresos etc...*/
+  const MOVIE_KEY = 'Dragon_Ball_Z_Gt_Despues_de_cien_Años_1998'; /*Aca siempre con un _ para guardar su progresos etc...*/
   const ultimoTiempo = localStorage.getItem(`ultimoTiempo_${MOVIE_KEY}`) || 0;
 
   // 🔹 Mostrar modal si hay progreso guardado
@@ -1003,11 +1015,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 🔹 Botón "Agregar a Favoritos"
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
-      const nuevaPelicula = {
-      titulo: "Detonantes",
-      imagen: "https://image.tmdb.org/t/p/w300/mOXgCNK2PKf7xlpsZzybMscFsqm.jpg",
-      genero: "accion",
-      archivo: "Detonante (2024).html",
+      titulo: "Dragon Ball GT: 100 años después",
+      imagen: "https://image.tmdb.org/t/p/original/izZaeWcWDir9PvuSwaITV1E1rA8.jpg",
+      genero: "anime",
+      archivo: "Dragon Ball Gt despues de 100 años.html",
       tipo: "pelicula",
       timestamp: Date.now()
     };
@@ -1113,29 +1124,30 @@ document.addEventListener('DOMContentLoaded', () => {
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
-      <a href="Damsel (2024).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/gh7oa9IKlu5yMveemyJkzLfopuB.jpg" alt="">
-        <p>Damsel</p>
+      <a href="Dragon Ball Super Super Hero (2022).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/o3a2yc2zkmdsq9wZ6Hnyu3jfLcC.jpg" alt="">
+        <p>Dragon Ball Super: Super Hero</p>
       </a>
-      <a href="Bala perdida 3 (2025).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/bSGXolaGLJZxueTXxEE2WsgEoNh.jpg" alt="">
-        <p>La bala perdida 3</p>
+      <a href="Dragon Ball Z El poder invensible.html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/qanX5FNg7w7DfjLqwGHZJtiF0Ri.jpg" alt="">
+        <p>Dragon Ball Z: El poder Invencible</p>
       </a>
-      <a href="Alarum Código Letal (2025).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/d3QFYKpEY2LSSTh70C227Z2mlwB.jpg" alt="">
-        <p>Alarum: Código Letal</p>
+      <a href="Dragon Ball Z Devuelvamen a mi gohan.html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/koo5d4CdZd0sxcxxTgxXUHMSY10.jpg" alt="">
+        <p>Dragon Ball Z: Devuélvanme a mi Gohan</p>
       </a>
-      <a href="Uncharted (2022).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/77dlklwA1VJOLCqIhhmkmS39BLH.jpg" alt="">
-        <p>Uncharted: Fuera Del Mapa</p>
+      <a href="Dragon Ball Z El ataque del dragón (1995).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/7uRu9EA3nie0n2mlVDDLlTI3IzC.jpg" alt="">
+        <p>Dragon Ball Z: El ataque del dragon</p>
       </a>
-      <a href="Beekeeper Sentencia de muerte (2024).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/8hF8krJOG9SGMCwRNfzjsFVRcHE.jpg" alt="">
-        <p>Sentencia de muerte</p>
+      <a href="Dragon Ball Z Los rivales mas poderosos.html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/uqTSXqjaSgSAT2lCv3GyZeodQPG.jpg" alt="">
+        <p>Dragon Ball Z: Los rivales mas poderosos</p>
       </a>
-      <a href="La fuente de la eterna juventud (2025).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/nJ9qnZLhmj6wD3NgOe6lKoXJQMx.jpg" alt="">
-        <p>La fuente de la eterna juventud</p>
+      <a href="Dragon Ball Z El regreso de cooler.html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/zJn14ySh0NTZCOIReQZiWE1fkje.jpg" alt="">
+        <p>Dragon Ball Z: El regreso de Cooler</p>
+      </a>
     </div>
   </div>
   
@@ -1264,9 +1276,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const STORAGE_KEY = 'pos_' + videoSrc;
 
   // DATOS DEL HISTORIAL
-  const historialTitulo = "Detonantes";
-  const historialImagen = "https://image.tmdb.org/t/p/w300/mOXgCNK2PKf7xlpsZzybMscFsqm.jpg";
-  const historialArchivo = "Detonante (2024).html";
+  const historialTitulo = "Dragon Ball GT: 100 años después";
+  const historialImagen = "https://image.tmdb.org/t/p/original/izZaeWcWDir9PvuSwaITV1E1rA8.jpg";
+  const historialArchivo = "Dragon Ball Gt despues de 100 años.html";
 
   let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
   let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
@@ -1328,7 +1340,5 @@ document.addEventListener('DOMContentLoaded', () => {
   
 </body>
 </html>
-
-
 
 
