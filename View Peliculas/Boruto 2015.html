@@ -736,9 +736,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/keIqryt6u5qGVThjrzFURMsRTri.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
       <source src="https://dl.dropbox.com/scl/fi/m3ii7qi3wogk7etwssiqp/Boruto-Uzumaki-2015.mp4?rlkey=o5bj6l9w6u5k3qyqjsiw49no2&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
-      <!-- Subtítulos -->
-  <track kind="subtitles" srclang="es" src="boruto-naruto-the-movie.vtt" label="Español" default crossorigin="anonymous">
-<track kind="subtitles" srclang="en" src="subtitles-en.vtt" label="English" crossorigin="anonymous">
     </video>
   </div>
   <div id="episodio-actual" style="
@@ -1181,28 +1178,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const videoElement = document.querySelector('.vid1');
     const videoSrc = videoElement.querySelector('source').getAttribute('src');
     const STORAGE_KEY = 'pos_' + videoSrc;
-
+    
     const player = new Plyr(videoElement, {
-  controls: [
-    'rewind', 'play-large', 'play', 'fast-forward',
-    'progress', 'current-time', 'duration',
-    'mute', 'volume', 'captions', 'airplay', 'fullscreen'
-  ],
-  captions: {
-    active: false,       // <-- Inactivo al inicio
-    language: 'auto',    // <-- Detecta idioma automáticamente
-    update: true         // <-- Cambia los subtítulos si hay más de uno
-  },
+      controls: [
+        'rewind', 'play-large', 'play', 'fast-forward',
+        'progress', 'current-time', 'duration',
+        'mute', 'volume', 'captions', 'airplay', 'fullscreen'
+      ]
   
-});
-// Activar subtítulos
-player.toggleCaptions(true);
-
-// Desactivar subtítulos
-player.toggleCaptions(false);
-
-// También se puede alternar manualmente:
-player.toggleCaptions();
+    });
 
 
     // ✅ Reanudar episodio al presionar Play
