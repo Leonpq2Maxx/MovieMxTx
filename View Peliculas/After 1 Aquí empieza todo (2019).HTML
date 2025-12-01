@@ -111,6 +111,7 @@
       text-align: center;
     }
 
+
     html { font-size: 100%; }
     body { font-size: 1rem; }
     h1 { font-size: 2rem; }
@@ -857,7 +858,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const continueInfo = document.getElementById('continue-info');
   const videoElement = document.querySelector('video');
 
-  const MOVIE_KEY = 'After_1_Aqui_Empieza_Todo_2019'; /*Aca siempre con un _ para guardar su progresos etc...*/
+  const MOVIE_KEY = 'After_1_Aqui_Empieza_todo_1_2019'; /*Aca siempre con un _ para guardar su progresos etc...*/
   const ultimoTiempo = localStorage.getItem(`ultimoTiempo_${MOVIE_KEY}`) || 0;
 
   // 🔹 Mostrar modal si hay progreso guardado
@@ -1016,7 +1017,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
       titulo: "After: Aqui empieza todo",
-      imagen: "https://image.tmdb.org/t/p/original/5kZxlS9vLExy3hZA5GfNFg8oJgZ.jpg",
+      imagen: "https://image.tmdb.org/t/p/w300/5kZxlS9vLExy3hZA5GfNFg8oJgZ.jpg",
       genero: "Romance",
       archivo: "After 1 Aquí empieza todo (2019).html",
       tipo: "pelicula",
@@ -1265,7 +1266,8 @@ player.on('play', () => {
     }
   </script>
   
- <script>
+  
+  <script>
 document.addEventListener('DOMContentLoaded', () => {
 
   const videoElement = document.querySelector('.vid1');
@@ -1276,8 +1278,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // DATOS DEL HISTORIAL
   const historialTitulo = "After: Aqui empieza todo";
-  const historialImagen = "https://image.tmdb.org/t/p/original/5kZxlS9vLExy3hZA5GfNFg8oJgZ.jpg";
-  const historialArchivo = "After 1 Aquí empieza todo (2019).html";    
+  const historialImagen = "https://image.tmdb.org/t/p/w300/5kZxlS9vLExy3hZA5GfNFg8oJgZ.jpg";
+  const historialArchivo = "After 1 Aquí empieza todo (2019).html";   
 
   let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
   let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
@@ -1334,7 +1336,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 </script>
+
+
   
 </body>
 </html>
+
+
+
 

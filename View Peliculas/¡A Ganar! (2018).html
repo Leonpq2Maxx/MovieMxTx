@@ -727,175 +727,23 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
   
   <div class="player">
-  <div id="player-loader">
-    <div class="player-spinner"></div>
-    <p class="player-loading-text">Cargando<span class="dots"></span></p>
-  </div>
-
-  <div class="custom-player">
-    <video id="videoPlayer" poster="https://image.tmdb.org/t/p/w780/zwfec4vK1EvkQapE5wcYrB1BHov.jpg" preload="none">
-      <source src="https://dl.dropbox.com/scl/fi/0prsz81yb8pv74njs8d0j/The.miracle.season.2018.1080p-dual-lat-cinecalidad.to.mp4" type="video/mp4">
-    </video>
-
-    <!-- Controles Táctiles -->
-    <div class="controls">
-      <button id="playPause" class="control-btn">⏯</button>
-      <input type="range" id="seekBar" class="seek-bar" value="0">
-      <button id="fullScreen" class="control-btn">⛶</button>
+    <!-- 🔵 Loader dentro del reproductor -->
+     <div id="player-loader">
+      <div class="player-spinner"></div>
+      <p class="player-loading-text">Cargando<span class="dots"></span></p>
     </div>
 
-    <!-- Adelantar / Retroceder táctil -->
-    <div class="skip-back">⏪ -10s</div>
-    <div class="skip-forward">+10s ⏩</div>
+    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/zwfec4vK1EvkQapE5wcYrB1BHov.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+      <source src="https://dl.dropbox.com/scl/fi/0prsz81yb8pv74njs8d0j/The.miracle.season.2018.1080p-dual-lat-cinecalidad.to.mp4?rlkey=g97lmjjkt9ekh8stxzh6ci8g8&amp;st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
+    </video>
   </div>
-</div>
-
-<style>
-  .custom-player {
-  position: relative;
-  max-width: 100%;
-  width: 100%;
-  margin: auto;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-#videoPlayer {
-  width: 100%;
-  max-height: 75vh;
-  border-radius: 10px;
-  background: black;
-}
-
-/* Controles base */
-.controls {
-  position: absolute;
-  bottom: 10px;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-  opacity: 0;
-  transition: opacity 0.4s;
-}
-
-.custom-player:hover .controls,
-.custom-player.touch-active .controls {
-  opacity: 1;
-}
-
-.control-btn {
-  background: rgba(0,0,0,0.6);
-  border: none;
-  padding: 10px;
-  color: white;
-  font-size: 1.4rem;
-  border-radius: 8px;
-}
-
-/* Barra de progreso táctil */
-.seek-bar {
-  width: 50%;
-  height: 6px;
-  appearance: none;
-  background: #ddd;
-  border-radius: 5px;
-}
-
-.seek-bar::-webkit-slider-thumb {
-  appearance: none;
-  width: 14px;
-  height: 14px;
-  background: #ff2d5b;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-/* Adelantar y retroceder */
-.skip-back, .skip-forward {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.4);
-  color: white;
-  padding: 15px;
-  font-size: 1.2rem;
-  border-radius: 50%;
-  opacity: 0;
-  transition: opacity 0.5s;
-}
-
-.skip-back { left: 10%; }
-.skip-forward { right: 10%; }
-
-.skip-active {
-  opacity: 1 !important;
-}
-
-@media (max-width: 768px) {
-  .control-btn { font-size: 1.2rem; padding: 8px; }
-  .seek-bar { width: 45%; }
-}
-
-</style>
-
-
-<script>
-  const video = document.getElementById("videoPlayer");
-const playPauseBtn = document.getElementById("playPause");
-const seekBar = document.getElementById("seekBar");
-const fullScreenBtn = document.getElementById("fullScreen");
-const player = document.querySelector(".custom-player");
-const skipBack = document.querySelector(".skip-back");
-const skipForward = document.querySelector(".skip-forward");
-
-// Play y pause
-playPauseBtn.addEventListener("click", () => {
-  video.paused ? video.play() : video.pause();
-});
-
-// Actualizar icono play/pause
-video.addEventListener("play", () => playPauseBtn.textContent = "⏸");
-video.addEventListener("pause", () => playPauseBtn.textContent = "▶️");
-
-// Actualizar barra de progreso
-video.addEventListener("timeupdate", () => {
-  seekBar.value = (video.currentTime / video.duration) * 100;
-});
-
-// Saltar al mover la barra
-seekBar.addEventListener("input", (e) => {
-  video.currentTime = (e.target.value / 100) * video.duration;
-});
-
-// Pantalla completa
-fullScreenBtn.addEventListener("click", () => {
-  if (!document.fullscreenElement) player.requestFullscreen();
-  else document.exitFullscreen();
-});
-
-// Doble toque para adelantar/retroceder
-video.addEventListener("dblclick", (e) => {
-  if (e.offsetX < video.clientWidth / 2) {
-    video.currentTime -= 10;
-    skipBack.classList.add("skip-active");
-    setTimeout(() => skipBack.classList.remove("skip-active"), 800);
-  } else {
-    video.currentTime += 10;
-    skipForward.classList.add("skip-active");
-    setTimeout(() => skipForward.classList.remove("skip-active"), 800);
-  }
-});
-
-// Ocultar controles después de tocar (móvil)
-player.addEventListener("touchstart", () => {
-  player.classList.add("touch-active");
-  setTimeout(() => player.classList.remove("touch-active"), 3000);
-});
-
-</script>
+  <div id="episodio-actual" style="
+  text-align:center;
+  margin:10px;
+  font-size:1rem;
+  font-weight:bold;
+  color:#ff2d5b;
+"></div>
 
 
   <div class="info">

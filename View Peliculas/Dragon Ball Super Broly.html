@@ -734,8 +734,8 @@ document.addEventListener('DOMContentLoaded', () => {
       <p class="player-loading-text">Cargando<span class="dots"></span></p>
     </div>
 
-    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/rBF9AumHuVdANpraeB8GoAYyN5x.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
-      <source src="https://dl.dropbox.com/scl/fi/inbncscoq93wyr90a74wa/Final.destination.2000.1080p-dual-lat-cinecalidad.rs.mp4?rlkey=i7r5fi99tzdcyia328uph64cb&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
+    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/6OTRuxpwUUGbmCX3MKP25dOmo59.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+      <source src="https://ia801905.us.archive.org/22/items/dragon-ball-super-broly/Dragon%20Ball%20Super%3A%20Broly.mp4" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
   <div id="episodio-actual" style="
@@ -747,9 +747,9 @@ document.addEventListener('DOMContentLoaded', () => {
 "></div>
 
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>2000</span>
-    <i class="fal fa-clock"></i><span>1h 38min</span>
-    <i class="fal fa-thumbs-up"></i><span>66%</span>
+    <i class="fal fa-calendar-alt"></i><span>2018</span>
+    <i class="fal fa-clock"></i><span>1h 41min</span>
+    <i class="fal fa-thumbs-up"></i><span>90%</span>
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
@@ -761,11 +761,11 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
   
   <div class="info-pelicula">
-    <h1>Destino final</h1>
-  <span class="genero-badge">Terror</span>
+    <h1>Dragon Ball Super: Broly</h1>
+  <span class="genero-badge">Anime • Animacion • Accion • Ciencia Ficcion</span>
   
     <p class="sinopsis">
-      Al subir a un avión con destino a Paris, junto con sus compañeros de clase, Alex tiene una premonición, por lo que desembarca justo antes de despegar junto a seis de sus amigos y una profesora. Poco después el aparato explota en el aire. El grupo de supervivientes se verá perseguido por la dama de la guadaña, la propia muerte, que no se dará por vencida.
+      La Tierra vive en paz después de que concluyó el Torneo de Fuerza. Luego de darse cuenta que los Universos aún tienen muchos guerreros poderosos, Gokú pasa todos los días entrenando para alcanzar un nivel de pelea mayor. Un día Gokú y Vegeta enfrentan a un nuevo saiyajin llamado “Broly”, a quien nunca antes han visto. Supuestamente, los saiyajin fueron arrasados durante la destrucción del planeta Vegeta; entonces ¿qué hace uno de ellos en la Tierra? Este encuentro entre tres saiyajin, que han tenido destinos diferentes, se convierte en una batalla estupenda, con Freezer (que ha vuelto del infierno) atrapado en medio de ellos.    
     </p>
 
     <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
@@ -857,7 +857,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const continueInfo = document.getElementById('continue-info');
   const videoElement = document.querySelector('video');
 
-  const MOVIE_KEY = 'Destino_Final_1_2000'; /*Aca siempre con un _ para guardar su progresos etc...*/
+  const MOVIE_KEY = 'Dragon_Ball_Super_Broly_2018'; /*Aca siempre con un _ para guardar su progresos etc...*/
   const ultimoTiempo = localStorage.getItem(`ultimoTiempo_${MOVIE_KEY}`) || 0;
 
   // 🔹 Mostrar modal si hay progreso guardado
@@ -1015,10 +1015,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 🔹 Botón "Agregar a Favoritos"
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
-      titulo: "Destino final",
-      imagen: "https://image.tmdb.org/t/p/w300/2g4Jz0Jr54aYCpFLWKYDo5VZvzN.jpg",
-      genero: "terror",
-      archivo: "Destino final (2000).html",
+      titulo: "Dragon Ball Super: Broly",
+      imagen: "https://image.tmdb.org/t/p/w300/6JilEC1SON8tWIRHcdJzf4uVBpX.jpg",
+      genero: "ANIME",
+      archivo: "Dragon Ball Super Broly.html",
       tipo: "pelicula",
       timestamp: Date.now()
     };
@@ -1124,29 +1124,29 @@ document.addEventListener('DOMContentLoaded', () => {
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
-      <a href="Destino final 2 (2003).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/w1dJluO5aKK7Puz7qNXoQeUh4Cb.jpg" alt="">
-        <p>Destino final 2</p>
+      <a href="Dragon Ball Super Super Hero (2022).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/o3a2yc2zkmdsq9wZ6Hnyu3jfLcC.jpg" alt="">
+        <p>Dragon Ball Super: Super Hero</p>
       </a>
-      <a href="Destino final 3 (2006).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/p7ARuNKUGPGvkBiDtIDvAzYzonX.jpg" alt="">
-        <p>Destino final 3</p>
+      <a href="Dragon Ball Z El poder invensible.html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/qanX5FNg7w7DfjLqwGHZJtiF0Ri.jpg" alt="">
+        <p>Dragon Ball Z: El poder Invencible</p>
       </a>
-      <a href="Destino final 4 (2009).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/5vxXrr1MqGsT4NNeRITpfDnl4Rq.jpg" alt="">
-        <p>Destino final 4</p>
+      <a href="Dragon Ball Z El regreso del guerrero legendario.html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/iwvMmddNNf6DVLq3CBe8hhpHUgE.jpg" alt="">
+        <p>Dragon Ball Z: El regreso Del guerrero legendario</p>
       </a>
-      <a href="Destino final 5 (2011).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/Akx1Po4ZLetOWfYJhQf75tbhTtK.jpg" alt="">
-        <p>Destino final 5</p>
+      <a href="Dragon Ball Z El combate final.html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/gYcZAjYdTUGVf5oyqO2CawwuBla.jpg" alt="">
+        <p>Dragon Ball Z: El combate final</p>
       </a>
-      <a href="Destino Final Lazos De Sangre (2025).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/f0156SDAw1GfrdZnSbSwkOst9aO.jpg" alt="">
-        <p>Destino final 6: Lazos de sangre</p>
+      <a href="Dragon Ball Z Los rivales mas poderosos.html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/uqTSXqjaSgSAT2lCv3GyZeodQPG.jpg" alt="">
+        <p>Dragon Ball Z: Los rivales mas poderosos</p>
       </a>
-      <a href="Un lugar en silencio 1 (2018).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/hE51vC3iZJCqFecLzIO1Q4eYXqK.jpg" alt="">
-        <p>Un lugar en silencio</p>
+      <a href="Dragon Ball El camino hacia el poder (1996).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/2PiRMHl7QDwuB0rAw0GjVHVb847.jpg" alt="">
+        <p>Dragon Ball: El camino hacia el poder</p>
       </a>
     </div>
   </div>
@@ -1276,9 +1276,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const STORAGE_KEY = 'pos_' + videoSrc;
 
   // DATOS DEL HISTORIAL
-  const historialTitulo = "Destino final";
-  const historialImagen = "https://image.tmdb.org/t/p/w300/2g4Jz0Jr54aYCpFLWKYDo5VZvzN.jpg";
-  const historialArchivo = "Destino final (2000).html";
+  const historialTitulo = "Dragon Ball Super: Broly";
+  const historialImagen = "https://image.tmdb.org/t/p/w300/6JilEC1SON8tWIRHcdJzf4uVBpX.jpg";
+  const historialArchivo = "Dragon Ball Super Broly.html";
 
   let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
   let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
@@ -1340,3 +1340,5 @@ document.addEventListener('DOMContentLoaded', () => {
   
 </body>
 </html>
+
+

@@ -97,8 +97,20 @@
     }
 
     .serie p {
-      margin-top: 5px;
+      margin-top: 6px;
+      font-size: 14px;
+      line-height: 1.2; 
+      max-width: 120px;       /* mismo ancho que la imagen */
+      height: 32px;           /* controla 2 líneas */ 
+      overflow: hidden;
+      text-overflow: ellipsis; 
+      display: -webkit-box;   /* soporte para iPhone */
+      -webkit-line-clamp: 2;  /* límite de 2 líneas */
+      -webkit-box-orient: vertical;
+      white-space: normal;
+      text-align: center;
     }
+
 
     html { font-size: 100%; }
     body { font-size: 1rem; }
@@ -845,7 +857,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const continueInfo = document.getElementById('continue-info');
   const videoElement = document.querySelector('video');
 
-  const MOVIE_KEY = 'Banger_2025'; /*Aca siempre con un _ para guardar su progresos etc...*/
+  const MOVIE_KEY = 'Bangeer_1_2025'; /*Aca siempre con un _ para guardar su progresos etc...*/
   const ultimoTiempo = localStorage.getItem(`ultimoTiempo_${MOVIE_KEY}`) || 0;
 
   // 🔹 Mostrar modal si hay progreso guardado
@@ -1253,52 +1265,7 @@ player.on('play', () => {
     }
   </script>
   
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const videoElement = document.querySelector('.vid1');
-      if (!videoElement) return;
-
-      const videoSrc = videoElement.querySelector('source').getAttribute('src');
-      const STORAGE_KEY = 'pos_' + videoSrc;
-
-      /*ACA VA EL NOMBRE, IMAGEN, HTML DONDE ESTA UBICADO SU HTML (HISTORIAL)*/
-      const historialTitulo = "Banger";
-      const historialImagen = "https://image.tmdb.org/t/p/w300/x2pegSby27ebOwW361GJb1aKcxa.jpg";
-      const historialArchivo = "Banger (2025).html";
-
-      let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
-      let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
-      
-      if (indexHist === -1) {
-        historial.push({
-        titulo: historialTitulo,
-        imagen: historialImagen,
-        progreso: "Asistido 0 min",
-        archivo: historialArchivo,
-        tipo: "pelicula", // ✅ ya está
-        timestamp: Date.now()
-      });
-      localStorage.setItem('historial_usuarios', JSON.stringify(historial));
-      indexHist = historial.length - 1;
-      mostrarModalFavoritos("✅ Agregado al historial");
-
-    }
-    setInterval(() => {
-      if (!videoElement.paused && !videoElement.ended) {
-        historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
-        indexHist = historial.findIndex(item => item.titulo === historialTitulo);
-        if (indexHist !== -1) {
-          const minutos = Math.floor(videoElement.currentTime / 60);
-          historial[indexHist].progreso = `Asistido ${minutos} min`;
-          historial[indexHist].timestamp = Date.now(); // ✅ esto asegura que suba al principio
-          localStorage.setItem('historial_usuarios', JSON.stringify(historial));
-        }
-        localStorage.setItem(STORAGE_KEY, videoElement.currentTime);
-      }
-    }, 10000);
-    });
-  </script>
-
+  
   <script>
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -1309,9 +1276,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const STORAGE_KEY = 'pos_' + videoSrc;
 
   // DATOS DEL HISTORIAL
-  const historialTitulo = "Nombre de pelicula";
-  const historialImagen = "https://image.tmdb.org/t/p/w300/";
-  const historialArchivo = ".html";
+  const historialTitulo = "Banger";
+  const historialImagen = "https://image.tmdb.org/t/p/w300/x2pegSby27ebOwW361GJb1aKcxa.jpg";
+  const historialArchivo = "Banger (2025).html";
 
   let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
   let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
@@ -1368,6 +1335,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 </script>
+
 
   
 </body>

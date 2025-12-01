@@ -97,8 +97,20 @@
     }
 
     .serie p {
-      margin-top: 5px;
+      margin-top: 6px;
+      font-size: 14px;
+      line-height: 1.2; 
+      max-width: 120px;       /* mismo ancho que la imagen */
+      height: 32px;           /* controla 2 líneas */ 
+      overflow: hidden;
+      text-overflow: ellipsis; 
+      display: -webkit-box;   /* soporte para iPhone */
+      -webkit-line-clamp: 2;  /* límite de 2 líneas */
+      -webkit-box-orient: vertical;
+      white-space: normal;
+      text-align: center;
     }
+
 
     html { font-size: 100%; }
     body { font-size: 1rem; }
@@ -845,7 +857,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const continueInfo = document.getElementById('continue-info');
   const videoElement = document.querySelector('video');
 
-  const MOVIE_KEY = 'Detonante_2024'; /*Aca siempre con un _ para guardar su progresos etc...*/
+  const MOVIE_KEY = 'Detonante_12_2024'; /*Aca siempre con un _ para guardar su progresos etc...*/
   const ultimoTiempo = localStorage.getItem(`ultimoTiempo_${MOVIE_KEY}`) || 0;
 
   // 🔹 Mostrar modal si hay progreso guardado
@@ -1003,7 +1015,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // 🔹 Botón "Agregar a Favoritos"
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
-      const nuevaPelicula = {
       titulo: "Detonantes",
       imagen: "https://image.tmdb.org/t/p/w300/mOXgCNK2PKf7xlpsZzybMscFsqm.jpg",
       genero: "accion",
@@ -1136,6 +1147,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <a href="La fuente de la eterna juventud (2025).html" class="serie">
         <img loading="lazy" src="https://image.tmdb.org/t/p/w300/nJ9qnZLhmj6wD3NgOe6lKoXJQMx.jpg" alt="">
         <p>La fuente de la eterna juventud</p>
+      </a>
     </div>
   </div>
   

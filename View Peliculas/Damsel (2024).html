@@ -8,7 +8,7 @@
   <link rel="icon" type="image/png" href="../Logo Poster MovieTx PNG/Logo MovieTx.png">
   <link href="https://cdn.jsdelivr.net/gh/CDNSFree2/Plyr/plyr.css" rel="stylesheet"/>
   <link href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" rel="stylesheet"/>
-  <style>
+ <style>
     :root {
       --plyr-color-main: #ff0000;
       --plyr-video-control-color:rgb(255, 255, 255);
@@ -97,8 +97,20 @@
     }
 
     .serie p {
-      margin-top: 5px;
+      margin-top: 6px;
+      font-size: 14px;
+      line-height: 1.2; 
+      max-width: 120px;       /* mismo ancho que la imagen */
+      height: 32px;           /* controla 2 líneas */ 
+      overflow: hidden;
+      text-overflow: ellipsis; 
+      display: -webkit-box;   /* soporte para iPhone */
+      -webkit-line-clamp: 2;  /* límite de 2 líneas */
+      -webkit-box-orient: vertical;
+      white-space: normal;
+      text-align: center;
     }
+
 
     html { font-size: 100%; }
     body { font-size: 1rem; }

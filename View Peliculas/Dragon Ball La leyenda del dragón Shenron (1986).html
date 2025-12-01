@@ -734,8 +734,8 @@ document.addEventListener('DOMContentLoaded', () => {
       <p class="player-loading-text">Cargando<span class="dots"></span></p>
     </div>
 
-    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/rBF9AumHuVdANpraeB8GoAYyN5x.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
-      <source src="https://dl.dropbox.com/scl/fi/inbncscoq93wyr90a74wa/Final.destination.2000.1080p-dual-lat-cinecalidad.rs.mp4?rlkey=i7r5fi99tzdcyia328uph64cb&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
+    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/ydBG5pa3p3wsVktrFza2WNI55yw.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+      <source src="https://dl.dropbox.com/scl/fi/s3lv2gz361hor0u0g1drg/Dragon-Ball-La-leyenda-de-shen-long.mp4?rlkey=t11dh1yqgqhzyfepifw6v6g3t&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
   <div id="episodio-actual" style="
@@ -747,9 +747,9 @@ document.addEventListener('DOMContentLoaded', () => {
 "></div>
 
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>2000</span>
-    <i class="fal fa-clock"></i><span>1h 38min</span>
-    <i class="fal fa-thumbs-up"></i><span>66%</span>
+    <i class="fal fa-calendar-alt"></i><span>1986</span>
+    <i class="fal fa-clock"></i><span>56min</span>
+    <i class="fal fa-thumbs-up"></i><span>68%</span>
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
@@ -761,11 +761,11 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
   
   <div class="info-pelicula">
-    <h1>Destino final</h1>
-  <span class="genero-badge">Terror</span>
+    <h1>Dragon Ball: La leyenda del dragón Shenron</h1>
+  <span class="genero-badge">Anime • Animacion • Accion • Ciencia Ficcion</span>
   
     <p class="sinopsis">
-      Al subir a un avión con destino a Paris, junto con sus compañeros de clase, Alex tiene una premonición, por lo que desembarca justo antes de despegar junto a seis de sus amigos y una profesora. Poco después el aparato explota en el aire. El grupo de supervivientes se verá perseguido por la dama de la guadaña, la propia muerte, que no se dará por vencida.
+      Primera película animada de Dragon Ball. Viene a ser un resumen de los primeros capítulos de la serie, pese a incorporar algunos cambios. Cuenta la leyenda que hay siete esferas de dragón desparramadas por toda la Tierra. Aquél que logre juntarlas podrá invocar al dragón Shen-Ron que es capaz de cumplir cualquier deseo. Acompaña a Goku, Bulma, Oolong, Yamcha y Puar en esta fantástica aventura mientras enfrentan al ambicioso Rey Gourmeth quien tiene oprimido a su pueblo. Esta película es la base que utilizaron en 1989 para hacer "Dragon Ball: Comienza la magia".
     </p>
 
     <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
@@ -857,7 +857,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const continueInfo = document.getElementById('continue-info');
   const videoElement = document.querySelector('video');
 
-  const MOVIE_KEY = 'Destino_Final_1_2000'; /*Aca siempre con un _ para guardar su progresos etc...*/
+  const MOVIE_KEY = 'Dragon_Ball_Z_La_Leyenda_Del_dragon_Shenron_1986'; /*Aca siempre con un _ para guardar su progresos etc...*/
   const ultimoTiempo = localStorage.getItem(`ultimoTiempo_${MOVIE_KEY}`) || 0;
 
   // 🔹 Mostrar modal si hay progreso guardado
@@ -1015,10 +1015,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 🔹 Botón "Agregar a Favoritos"
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
-      titulo: "Destino final",
-      imagen: "https://image.tmdb.org/t/p/w300/2g4Jz0Jr54aYCpFLWKYDo5VZvzN.jpg",
-      genero: "terror",
-      archivo: "Destino final (2000).html",
+      titulo: "Dragon Ball: La leyenda del dragón Shenron",
+      imagen: "https://image.tmdb.org/t/p/w300/5uvaNiQ1rq08rAJgg5NyXQdBC58.jpg",
+      genero: "anime",
+      archivo: "Dragon Ball La leyenda del dragón Shenron (1986).html",
       tipo: "pelicula",
       timestamp: Date.now()
     };
@@ -1124,29 +1124,29 @@ document.addEventListener('DOMContentLoaded', () => {
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
-      <a href="Destino final 2 (2003).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/w1dJluO5aKK7Puz7qNXoQeUh4Cb.jpg" alt="">
-        <p>Destino final 2</p>
+      <a href="Dragon Ball Z La Batalla De Los Dioses.html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/cIyPFIeSKNTiWU9Zny0c0IVPQRY.jpg" alt="">
+        <p>Dragon Ball Z La Batalla De Los Dioses</p>
       </a>
-      <a href="Destino final 3 (2006).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/p7ARuNKUGPGvkBiDtIDvAzYzonX.jpg" alt="">
-        <p>Destino final 3</p>
+      <a href="Dragon Ball Z El combate final.html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/gYcZAjYdTUGVf5oyqO2CawwuBla.jpg" alt="">
+        <p>Dragon Ball Z: El combate final</p>
       </a>
-      <a href="Destino final 4 (2009).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/5vxXrr1MqGsT4NNeRITpfDnl4Rq.jpg" alt="">
-        <p>Destino final 4</p>
+      <a href="Dragon Ball Super Super Hero (2022).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/o3a2yc2zkmdsq9wZ6Hnyu3jfLcC.jpg" alt="">
+        <p>Dragon Ball Super: Super Hero</p>
       </a>
-      <a href="Destino final 5 (2011).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/Akx1Po4ZLetOWfYJhQf75tbhTtK.jpg" alt="">
-        <p>Destino final 5</p>
+      <a href="Dragon Ball Z La galaxia corre peligro (1993).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/oAUr61gawC5q4LlxtmfrIwKeGco.jpg" alt="">
+        <p>Dragon Ball Z: La galaxia corre peligro</p>
       </a>
-      <a href="Destino Final Lazos De Sangre (2025).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/f0156SDAw1GfrdZnSbSwkOst9aO.jpg" alt="">
-        <p>Destino final 6: Lazos de sangre</p>
+      <a href="Dragon Ball Z Devuelvamen a mi gohan.html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/koo5d4CdZd0sxcxxTgxXUHMSY10.jpg" alt="">
+        <p>Dragon Ball Z: Devuélvanme a mi Gohan</p>
       </a>
-      <a href="Un lugar en silencio 1 (2018).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/hE51vC3iZJCqFecLzIO1Q4eYXqK.jpg" alt="">
-        <p>Un lugar en silencio</p>
+      <a href="Dragon Ball Z El ataque del dragón (1995).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/7uRu9EA3nie0n2mlVDDLlTI3IzC.jpg" alt="">
+        <p>Dragon Ball Z: El ataque del dragon</p>
       </a>
     </div>
   </div>
@@ -1276,9 +1276,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const STORAGE_KEY = 'pos_' + videoSrc;
 
   // DATOS DEL HISTORIAL
-  const historialTitulo = "Destino final";
-  const historialImagen = "https://image.tmdb.org/t/p/w300/2g4Jz0Jr54aYCpFLWKYDo5VZvzN.jpg";
-  const historialArchivo = "Destino final (2000).html";
+  const historialTitulo = "Dragon Ball: La leyenda del dragón Shenron";
+  const historialImagen = "https://image.tmdb.org/t/p/w300/5uvaNiQ1rq08rAJgg5NyXQdBC58.jpg";
+  const historialArchivo = "Dragon Ball La leyenda del dragón Shenron (1986).html";
 
   let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
   let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
@@ -1340,3 +1340,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
 </body>
 </html>
+
+
+
+
