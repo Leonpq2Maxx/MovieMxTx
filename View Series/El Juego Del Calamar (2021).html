@@ -228,7 +228,7 @@
   .episode-card {
   flex: none !important;
   width: 100% !important;
-  align-items: center !important;
+  align-items: left !important;  /*center estaba puesto*/
 }
 }
 /* Estilo para episodio en reproducción */
@@ -1079,7 +1079,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   .episodes-grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap:12px; padding-top:6px; }
   .episode-card{
-    display:flex; gap:12px; align-items:center; padding:10px; border-radius:10px; background:var(--card); border:1px solid rgba(255,255,255,0.02);
+    display:flex; gap:12px; align-items:left; padding:10px; border-radius:10px; background:var(--card); border:1px solid rgba(255,255,255,0.02);
     cursor:pointer; transition: transform .16s ease, box-shadow .16s;
   }
   .episode-card:hover{ transform: translateY(-6px); box-shadow: 0 18px 40px rgba(2,8,20,0.6); }
@@ -2516,7 +2516,7 @@ document.addEventListener('DOMContentLoaded', () => {
 @media screen and (max-width: 900px) {
   .ep-percent {
     font-size: clamp(0.6rem, 1.3vw, 1.3rem);
-    left: 55%;
+    left: 21%;
     top: 51%;
   }
 }
@@ -2535,8 +2535,8 @@ document.addEventListener('DOMContentLoaded', () => {
 @media screen and (min-width: 1200px) {
   .ep-percent {
     font-size: clamp(0.1rem, 1.1vw, 0.6rem);
-    left: 55%;
-    top: 46%;
+    left: 23%;
+    top: 47%;
   }
 }
 
@@ -2684,8 +2684,8 @@ document.addEventListener('DOMContentLoaded', () => {
 @media screen and (max-width: 900px) {
   .ep-percent {
     font-size: clamp(0.6rem, 1.3vw, 1.3rem);
-    left: 55%;
-    top: 51%;
+    left: 21%;
+    top: 50%;
   }
 }
 
@@ -2702,8 +2702,8 @@ document.addEventListener('DOMContentLoaded', () => {
 @media screen and (min-width: 1200px) {
   .ep-percent {
     font-size: clamp(0.1rem, 1.1vw, 0.6rem);
-    left: 55%;
-    top: 46%;
+    left: 23%;
+    top: 47%;
   }
 }
 
