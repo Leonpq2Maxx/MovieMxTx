@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Admin - MovieTx</title>
+
+<style>
+body{margin:0;font-family:Arial;background:#000;color:#fff}
+.wrap{max-width:980px;margin:20px auto;padding:16px}
+h2{margin:0}
+input,button{
+  padding:10px;margin-top:8px;border-radius:6px;border:0;
+  background:#121214;color:#fff
+}
+.small{font-size:13px;color:#bbb}
+
+/* tabla de comprobantes */
+.card{
+  background:#0f0f10;padding:12px;border-radius:8px;margin-top:10px;
+  border:1px solid #1f1f1f
+}
+.actions button{
+  margin-right:8px;padding:8px 10px;border-radius:6px;border:0;cursor:pointer
+}
+.approve{background:#2d8a2d;color:#fff}
+.reject{background:#b02d2d;color:#fff}
+.copy{background:#e5a600;color:#111}
+.previewImg{max-width:140px;border-radius:6px}
+.profileRound{
+  width:80px;height:80px;border-radius:50%;object-fit:cover;
+  border:3px solid #333;margin-bottom:6px
+}
+
+/* panel lateral */
+.panelBox{margin-top:22px;padding:14px;background:#0f0f10;border-radius:8px}
+
+/* móvil */
+@media(max-width:600px){
+  .previewImg{max-width:100%}
+}
+
+/* =============================================
+      LOGIN ADMIN – ESTILO ADAPTADO A MÓVILES
+============================================= */
+
+.loginBox{
+  width:100%;
+  max-width:430px;
+  margin:20px auto;
+  background:#0f0f10;
+  padding:24px;
+  border-radius:14px;
+  box-shadow:0 0 14px rgba(0,0,0,0.45);
+}
+
+.loginBox strong{
+  display:block;
+  font-size:20px;
+  margin-bottom:14px;
+  text-align:center;
+}
+
+.loginBox input{
+  width:93%;
+  padding:14px;
+  border-radius:10px;
+  background:#121214;
+  border:0;
+  color:#fff;
+  font-size:16px;
+  margin-top:12px;
+}
+
+.loginBox button{
+  width:100%;
+  padding:14px;
+  border-radius:10px;
+  background:#e50914;
+  border:0;
+  font-size:17px;
+  font-weight:bold;
+  color:#fff;
+  margin-top:16px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.loginBox button:hover{
+  background:#f6121e;
+}
+
+.exitAdminBtn{
+  background:#333 !important;
+  color:#fff !important;
+  margin-top:12px !important;
+  font-size:16px;
+  padding:14px;
+  border-radius:10px;
+}
+
+.small{
+  text-align:center;
+  margin-top:12px;
+  font-size:14px;
+  color:#aaa;
+}
+
+
+/* =============================================
+     RESPONSIVE ESPECIAL – MÓVILES PEQUEÑOS
+============================================= */
+
+@media(max-width:360px){
+  .loginBox{
+    padding:18px;
+  }
+
+  .loginBox strong{
+    font-size:17px;
+  }
+
+  .loginBox input{
+    padding:12px;
+    font-size:14px;
+  }
+
+  .loginBox button{
+    padding:12px;
+    font-size:15px;
+  }
+
+  .exitAdminBtn{
+    padding:12px;
+    font-size:14px;
+  }
+}
+
+
+/* =============================================
+     RESPONSIVE – MÓVILES MEDIANOS (360–480px)
+============================================= */
+
+@media(min-width:360px) and (max-width:480px){
+  .loginBox{
+    padding:20px;
+  }
+  .loginBox strong{
+    font-size:18px;
+  }
+  .loginBox input,
+  .loginBox button{
+    font-size:15px;
+  }
+}
+
+
+/* =============================================
+     RESPONSIVE – MÓVILES GRANDES (480–600px)
+============================================= */
+
+@media(min-width:480px) and (max-width:600px){
+  .loginBox{
+    max-width:430px;
+  }
+  .loginBox strong{
+    font-size:20px;
+  }
+}
+
+
+/* =============================================
+     TABLETS (600–900px)
+============================================= */
+
+@media(min-width:600px) and (max-width:900px){
+  .loginBox{
+    max-width:480px;
+    padding:28px;
+  }
+  .loginBox strong{
+    font-size:22px;
+  }
+  .loginBox input,
+  .loginBox button{
+    font-size:18px;
+  }
+}
+
+
+/* =============================================
+     PC (900px+)
+============================================= */
+
+@media(min-width:900px){
+  .loginBox{
+    max-width:500px;
+    padding:32px;
+  }
+  .loginBox strong{
+    font-size:24px;
+  }
+}
+
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px;
+  background:#0b0b0c;
+  border-radius:10px;
+  margin-bottom:20px;
+  flex-wrap:wrap;
+}
+
+/* Título del panel */
+.header h2{
+  margin:0;
+  font-size:22px;
+}
+
+/* Caja de login */
+
+
+
+#adminPass{
+  font-size:16px;
+}
+
+/* Botón entrar */
+
+/* Botón salir del admin */
+
+/* Texto pequeño */
+.small{
+  margin-top:10px;
+  font-size:14px;
+  color:#bbb;
+  text-align:center;
+}
+
+/* ============================= */
+/*    RESPONSIVE BREAKPOINTS     */
+/* ============================= */
+
+/* Pantallas pequeñas (teléfonos 320–380px) */
+@media(max-width:380px){
+  .header{
+    flex-direction:column;
+    gap:6px;
+    text-align:center;
+  }
+  .header h2{
+    font-size:18px;
+  }
+
+}
+
+/* Teléfonos medianos (400–600px) */
+@media(min-width:400px) and (max-width:600px){
+  .header h2{
+    font-size:20px;
+  }
+
+}
+
+/* Tablets (600–900px) */
+@media(min-width:600px) and (max-width:900px){
+  .header h2{
+    font-size:24px;
+  }
+
+}
+
+/* Pantallas grandes (PC) */
+@media(min-width:900px){
+  .header h2{
+    font-size:26px;
+  }
+
+}
+
+/* ===== MODAL DE SALIDA ===== */
+
+.modal-admin{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.65);
+  backdrop-filter:blur(6px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+
+.modal-content-admin{
+  background:#0f0f10;
+  padding:22px;
+  width:90%;
+  max-width:340px;
+  border-radius:12px;
+  text-align:center;
+  border:1px solid #333;
+  animation:popAdmin .25s ease;
+}
+
+.modal-content-admin h3{
+  margin:0 0 8px;
+  font-size:20px;
+}
+
+.modal-content-admin p{
+  font-size:15px;
+  color:#bbb;
+  margin-bottom:16px;
+}
+
+.btn-confirm{
+  width:100%;
+  padding:12px;
+  border:0;
+  border-radius:8px;
+  background:#e50914;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+  margin-bottom:10px;
+  font-size:16px;
+}
+
+.btn-cancel{
+  width:100%;
+  padding:12px;
+  border:0;
+  border-radius:8px;
+  background:#444;
+  color:#fff;
+  cursor:pointer;
+  font-size:16px;
+}
+
+@keyframes popAdmin{
+  from{transform:scale(.85);opacity:0;}
+  to{transform:scale(1);opacity:1;}
+}
+
+/* Responsive */
+@media(max-width:360px){
+  .modal-content-admin{
+    padding:18px;
+  }
+  .btn-confirm,
+  .btn-cancel{
+    font-size:14px;
+    padding:10px;
+  }
+}
+.refreshBtn{
+  width: 100%;
+  padding: 12px;
+  margin-top: -10px;
+  margin-bottom: 20px;
+  background: #1d1d1f;
+  color: #fff;
+  border: 0;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.refreshBtn:hover{
+  background:#2a2a2d;
+}
+
+/* móviles pequeños */
+@media(max-width:380px){
+  .refreshBtn{
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 6px;
+  }
+}
+
+/* móviles medianos */
+@media(min-width:380px) and (max-width:600px){
+  .refreshBtn{
+    font-size: 15px;
+  }
+}
+
+/* tablets */
+@media(min-width:600px) and (max-width:900px){
+  .refreshBtn{
+    font-size: 17px;
+    padding: 14px;
+  }
+}
+
+/* PC */
+@media(min-width:900px){
+  .refreshBtn{
+    max-width: 300px;
+    font-size: 17px;
+  }
+}
+
+
+#toastBox{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 999999;
+}
+
+.toast{
+  padding: 12px 16px;
+  background: #0f0f10;
+  border-left: 4px solid #e50914;
+  color: #fff;
+  font-size: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  animation: showToast .3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toast.success{
+  border-left-color: #2ecc71;
+}
+
+.toast.warning{
+  border-left-color: #f1c40f;
+}
+
+.toast.error{
+  border-left-color: #e74c3c;
+}
+
+@keyframes showToast{
+  from{opacity:0; transform: translateY(20px);}
+  to{opacity:1; transform: translateY(0);}
+}
+
+/* Responsive */
+@media(max-width: 600px){
+  #toastBox{
+    right: 10px;
+    left: 10px;
+    bottom: 10px;
+  }
+
+  .toast{
+    width: 100%;
+    font-size: 14px;
+  }
+}
+
+.modal-content-admin{
+  background:#0f0f10;
+  padding:22px;
+  width:90%;
+  max-width:340px;
+  border-radius:12px;
+  text-align:center;
+  border:1px solid #933;
+  animation:fadePop .25s ease;
+}
+
+@keyframes fadePop{
+  from{opacity:0; transform:scale(.85);}
+  to{opacity:1; transform:scale(1);}
+}
+
+.manualTag{
+  display:inline-block;
+  margin-top:6px;
+  padding:4px 8px;
+  background:#e5a600;
+  color:#000;
+  font-size:12px;
+  border-radius:6px;
+  font-weight:bold;
+}
+
+</style>
+</head>
+
+<body>
+  <script>
+    // AUTO LOGIN ADMIN SI HAY SESIÓN GUARDADA
+window.addEventListener("load", () => {
+  if(localStorage.getItem("adminSession") === "true"){
+    loginArea.style.display = "none";
+    panel.style.display   = "block";
+    adminArea.innerHTML = '<div class="small">Admin conectado</div>';
+    loadList();
+    loadActiveUsers();
+    loadPasswordRequests(); // ← AQUI
+  }
+});
+
+
+function toast(message, type = "success"){
+  const box = document.getElementById("toastBox");
+
+  const div = document.createElement("div");
+  div.className = "toast " + type;
+  div.innerHTML = message;
+
+  box.appendChild(div);
+
+  setTimeout(() => {
+    div.style.opacity = "0";
+    div.style.transform = "translateY(20px)";
+    setTimeout(() => div.remove(), 200);
+  }, 3000);
+}
+
+
+  </script>
+<div class="wrap">
+
+  <div class="header">
+    <h2>Panel de administración - MovieTx</h2>
+    <div id="adminArea"></div>
+  </div>
+
+
+  <!-- LOGIN ADMIN -->
+  <div id="loginArea" class="loginBox">
+    <strong>Ingresar como administrador</strong>
+    <input id="adminPass" placeholder="Contraseña admin" />
+    <button onclick="adminLogin()">Entrar</button>
+    <button onclick="exitAdmin()" class="exitAdminBtn">Salir del Admin</button>
+    <div class="small">Usa la contraseña segura.</div>
+  </div>
+
+  <!-- MODAL ELIMINAR USUARIO -->
+<div id="deleteUserModal" class="modal-admin">
+  <div class="modal-content-admin" style="border:1px solid #933;">
+    <h3 style="color:#ff4444">Eliminar usuario</h3>
+    <p>¿Seguro que deseas borrar este usuario y todos sus datos?</p>
+
+    <button class="btn-confirm" style="background:#d62828" onclick="confirmDeleteUser()">
+      Sí, eliminar usuario
+    </button>
+
+    <button class="btn-cancel" onclick="closeDeleteUserModal()">
+      Cancelar
+    </button>
+  </div>
+</div>
+
+
+  <!-- MODAL DE SALIDA DEL ADMIN -->
+<div id="exitAdminModal" class="modal-admin">
+  <div class="modal-content-admin">
+    <h3>Salir del panel admin</h3>
+    <p>¿Seguro que deseas cerrar la sesión de administrador?</p>
+
+    <button class="btn-confirm" onclick="confirmExitAdmin()">Sí, cerrar sesión</button>
+    <button class="btn-cancel" onclick="closeExitModal()">Cancelar</button>
+  </div>
+</div>
+
+<div id="toastBox"></div>
+
+
+
+  <!-- PANEL ADMIN -->
+  <div id="panel" style="display:none">
+
+
+    <!-- EDITAR USUARIO -->
+<div class="panelBox">
+  <button class="refreshBtn" onclick="refreshAdmin()">
+  🔄 Actualizar panel
+</button>
+<br>
+  <strong>Editar usuario</strong><br>
+
+  <input id="editEmail" placeholder="Email del usuario a editar">
+
+  <label style="font-size:13px;color:#bbb;margin-top:6px;display:block;">Nueva contraseña:</label>
+  <input id="newPass" placeholder="Nueva contraseña">
+
+  <label style="font-size:13px;color:#bbb;margin-top:6px;display:block;">Cambiar foto de perfil:</label>
+  <input id="newPic" type="file" accept="image/*">
+
+  <button onclick="updateUser()">Guardar cambios</button>
+
+  <div id="editMsg" class="small" style="margin-top:8px"></div>
+
+  <button onclick="deleteUser()" style="background:#b02d2d;margin-top:10px;width:100%">
+  Eliminar usuario
+</button>
+
+</div>
+
+<div class="panelBox">
+      <strong>Solicitudes de cambio de contraseña</strong>
+      <div id="passRequests"></div>
+    </div>
+
+    <div id="passModal" class="modal-admin">
+      <div class="modal-content-admin">
+        <h3>Cambiar contraseña</h3>
+        <p id="passModalEmail"></p>
+        <input id="newAdminPass" placeholder="Nueva contraseña" style="width:100%;padding:12px;margin-top:10px;color:#fff;background:#111;border-radius:6px;border:1px solid #333">
+        <button class="btn-confirm" onclick="confirmPassChange()">Guardar nueva contraseña</button>
+        <button class="btn-cancel" onclick="closePassChange()">Cancelar</button>
+      </div>
+    </div>
+
+
+    <!-- BUSCADOR -->
+    <div class="panelBox">
+      <strong>Buscar usuario por email</strong>
+      <input id="searchEmail" placeholder="email del usuario" />
+      <button onclick="searchUser()">Buscar</button>
+      <div id="searchResult" class="small" style="margin-top:10px"></div>
+    </div>
+
+    <!-- FILTRO -->
+    <div class="panelBox">
+      <strong>Filtrar comprobantes</strong>
+      <select id="filter" onchange="loadList()">
+        <option value="all">Todos</option>
+        <option value="pending">Pendientes</option>
+        <option value="approved">Aprobados</option>
+        <option value="rejected">Rechazados</option>
+        <option value="manual">Manuales</option>
+      </select>
+    </div>
+
+    <!-- LISTA DE VERIFICACIONES -->
+    <div class="panelBox">
+      <strong>Verificaciones</strong>
+      <div id="list"></div>
+    </div>
+
+    <!-- USUARIOS ACTIVOS -->
+    <div class="panelBox">
+      <strong>Usuarios activos</strong>
+      <div id="activeUsers"></div>
+    </div>
+
+    <!-- GENERADOR MANUAL -->
+    <div class="panelBox">
+      <strong>Generar código manual</strong>
+      <input id="genEmail" placeholder="email del usuario" />
+      <button onclick="genCode()">Generar</button>
+      <div id="lastCode" class="small"></div>
+    </div>
+
+    <div class="panelBox">
+  <strong>Cuentas vencidas (+30 días)</strong>
+
+  <button onclick="loadExpiredUsers()" 
+          style="width:100%;margin-top:10px;background:#7a0000;color:#fff;
+                 padding:12px;border-radius:8px;font-weight:bold;">
+    📛 Mostrar cuentas vencidas
+  </button>
+
+  <div id="expiredUsers" style="margin-top:10px"></div>
+</div>
+
+
+    <button onclick="logoutAdmin()" style="background:#444;margin-top:16px;width:100%">Cerrar admin</button>
+
+  </div>
+
+</div>
+
+<script>
+const ADMIN_PASSWORD = "adminmovie53_HD";
+
+function refreshAdmin(){
+  const btn = document.querySelector(".refreshBtn");
+  btn.style.opacity = "0.6";
+
+  setTimeout(()=>{
+    location.reload();
+  },150);
+}
+
+
+
+/* LOGIN */
+function adminLogin(){
+
+  const val = adminPass.value;
+  if(val === ADMIN_PASSWORD){
+  localStorage.setItem("adminSession", "true");
+    loginArea.style.display='none';
+    panel.style.display='block';
+    adminArea.innerHTML = '<div class="small">Admin conectado</div>';
+    loadList();
+    loadActiveUsers();
+  } else {
+  toast("❌ Contraseña incorrecta", "error");
+  adminPass.style.border = "1px solid #e74c3c";
+  adminPass.style.background = "#1a0a0a";
+  setTimeout(()=>{
+    adminPass.style.border = "none";
+    adminPass.style.background = "#121214";
+  }, 1200);
+}
+}
+
+/* BUSCAR USUARIO POR EMAIL */
+function searchUser(){
+  const email = searchEmail.value.trim().toLowerCase();
+  const msg = document.getElementById("searchResult");
+
+  let user = JSON.parse(localStorage.getItem("user") || "null");
+  const ver = JSON.parse(localStorage.getItem("verifications") || "[]");
+
+  msg.innerHTML = "Buscando...";
+
+  document.getElementById("editEmail").value = email;
+
+  // 🔍 1 — BUSCAR EN USER ACTUAL
+  if(user && user.email.toLowerCase() === email){
+    msg.innerHTML = `
+      <strong>${user.email}</strong><br>
+      Estado: ${user.active ? "Activo" : "Inactivo"}<br>
+      Vence: ${new Date(user.expire).toLocaleString()}<br>
+      <img src="${user.profilePic || 'default.png'}" style="width:80px;height:80px;border-radius:50%;margin-top:8px"><br>
+      <button onclick="forceOff()">Forzar desactivación</button>
+    `;
+    return;
+  }
+
+  // 🔍 2 — BUSCAR EN VERIFICATIONS COMPLETO
+  const found = ver.find(v => v.email.toLowerCase() === email);
+
+  if(found){
+    msg.innerHTML = `
+      <strong>${found.email}</strong><br>
+      Nombre: ${found.name}<br>
+      Estado último pago: ${found.status}<br>
+      <img src="${found.profilePic || 'default.png'}"
+           style="width:80px;height:80px;border-radius:50%;margin-top:8px"><br>
+    `;
+    return;
+  }
+
+  msg.innerHTML = "❌ No se encontró ningún usuario.";
+}
+
+
+
+/* FORZAR DESACTIVACIÓN */
+function forceOff(){
+  let user = JSON.parse(localStorage.getItem("user"));
+  user.active = false;
+  localStorage.setItem("user", JSON.stringify(user));
+  alert("Usuario desactivado.");
+  loadActiveUsers();
+}
+
+/* FILTRAR + LISTA */
+function loadList(){
+  const list = document.getElementById('list');
+  const filter = document.getElementById('filter').value;
+
+  const ver = JSON.parse(localStorage.getItem('verifications') || '[]');
+  list.innerHTML = "";
+
+  let filtered = ver;
+
+  // ---- FILTRO NORMAL ----
+  if(filter !== "all" && filter !== "manual"){
+    filtered = ver.filter(v => v.status === filter);
+  }
+
+  // ---- FILTRO MANUAL ----
+  if(filter === "manual"){
+    filtered = ver.filter(v => v.manual === true);
+  }
+
+  if(!filtered.length){
+    list.innerHTML = '<div class="small">Sin resultados.</div>';
+    return;
+  }
+
+  filtered.forEach(v=>{
+    const el = document.createElement("div");
+    el.className="card";
+
+    el.innerHTML = `
+      <div style="display:flex;gap:16px;flex-wrap:wrap">
+
+        <div>
+          ${v.profilePic 
+  ? `<img class="profileRound" src="${v.profilePic}">` 
+  : `<div style="width:80px;height:80px;border-radius:50%;background:#222;display:flex;align-items:center;justify-content:center;font-size:12px;color:#666">Sin foto</div>`
+}
+
+        </div>
+
+        <div style="flex:1">
+          <strong>${v.name}</strong><br>
+          <span class="small">${v.email}</span><br>
+          <span class="small">ID: ${v.payId}</span><br>
+          <span class="small">4 dígitos: ${v.last4}</span><br>
+          <span class="small">Estado: ${v.status}</span><br>
+          ${v.manual ? `<span class="manualTag">Manual</span>` : ""}
+        </div>
+
+        <div>
+          <img class="previewImg" src="${v.img}">
+        </div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;justify-content:space-between">
+        <span class="small">${new Date(v.created).toLocaleString()}</span>
+        <div>
+          <button class="approve" onclick="approve('${v.id}')">Aprobar</button>
+          <button class="reject" onclick="reject('${v.id}')">Rechazar</button>
+        </div>
+      </div>
+    `;
+
+    list.appendChild(el);
+  });
+}
+
+
+/* APROBAR */
+function approve(id){
+  const ver = JSON.parse(localStorage.getItem('verifications') || '[]');
+  let user = JSON.parse(localStorage.getItem("user") || "null");
+
+  const v = ver.find(x=>x.id===id);
+  if(!v) return;
+
+  v.status = "approved";
+  v.expire = Date.now() + (30 * 24 * 60 * 60 * 1000); // ← GUARDAR VENCIMIENTO
+
+
+  // GENERAR CÓDIGO
+  const code = "MTX-" + Math.random().toString(36).substring(2,10).toUpperCase();
+  v.code = code;
+
+  // ACTIVAR USUARIO
+  if(user && user.email === v.email){
+      user.active = true;
+      user.expire = Date.now() + (30*24*60*60*1000);
+      user.profilePic = v.profilePic;
+      localStorage.setItem("user", JSON.stringify(user));
+  }
+
+  // Si no es el user actual → NO lo pisamos (IMPORTANTE)
+  
+  navigator.clipboard.writeText(code);
+  toast("Aprobado ✓ Código copiado", "success");
+
+  localStorage.setItem("verifications", JSON.stringify(ver));
+  loadList();
+  loadActiveUsers();
+}
+
+
+/* RECHAZAR */
+function reject(id){
+  const ver = JSON.parse(localStorage.getItem('verifications') || '[]');
+  const v = ver.find(x=>x.id===id);
+  if(!v) return;
+
+  v.status="rejected";
+  localStorage.setItem("verifications", JSON.stringify(ver));
+  loadList();
+}
+
+/* PANEL USUARIOS ACTIVOS */
+function loadActiveUsers(){
+  const box = activeUsers;
+  const user = JSON.parse(localStorage.getItem("user") || "null");
+
+  if(!user || !user.active){
+    box.innerHTML = "<div class='small'>Ningún usuario activo.</div>";
+    return;
+  }
+
+  box.innerHTML = `
+    <img src="${user.profilePic || 'default.png'}"
+         style="width:80px;height:80px;border-radius:50%;margin-bottom:6px;border:3px solid #333">
+    <br>
+    <strong>${user.email}</strong><br>
+    Vence el: ${new Date(user.expire).toLocaleString()}<br>
+    <button onclick="forceOff()">Forzar desactivación</button>
+  `;
+}
+
+
+/* GENERAR MANUAL */
+/* GENERAR MANUAL */
+function genCode(){
+  const email = genEmail.value.trim();
+  const ver = JSON.parse(localStorage.getItem("verifications") || "[]");
+
+  if(!email.includes("@")){
+      toast("❌ Escribe un email válido", "error");
+      return;
+  }
+
+  const code = "MTX-"+Math.random().toString(36).substring(2,10).toUpperCase();
+
+  const newUser = {
+    id:"manual-"+Date.now(),
+    email,
+    name: email.split("@")[0],
+    payId:"manual",
+    last4:"xxxx",
+    img:"",             // comprobante vacío
+    profilePic:"",      // foto vacía
+    status:"approved",
+    created:Date.now(),
+    code,
+    manual: true,
+    expire: Date.now() + (30*24*60*60*1000)
+  };
+
+  // guardar en verifications (IMPORTANTE)
+  ver.push(newUser);
+  localStorage.setItem("verifications", JSON.stringify(ver));
+
+  // CREAR / ACTUALIZAR USUARIO DEL LOGIN
+  localStorage.setItem("user", JSON.stringify({
+      email,
+      pass: "1234",
+      active: true,
+      expire: Date.now() + (30*24*60*60*1000),
+      profilePic: "",
+  }));
+
+  navigator.clipboard.writeText(code);
+
+  lastCode.innerHTML = `
+    <span style="
+      color:#2ecc71;
+      font-weight:bold;
+      display:block;
+      margin-top:8px;
+    ">
+      Código generado: ${code}
+    </span>
+  `;
+
+  toast("Código copiado ✔", "success");
+}
+
+
+/* CERRAR ADMIN */
+function logoutAdmin(){
+  panel.style.display='none';
+  loginArea.style.display='block';
+  adminPass.value="";
+  adminArea.innerHTML="";
+}
+</script>
+<script>
+  /* EDITAR USUARIO COMPLETO */
+
+  function updateUser(){
+  const email = document.getElementById("editEmail").value.trim().toLowerCase();
+  const newPass = document.getElementById("newPass").value.trim();
+  const newPicInput = document.getElementById("newPic");
+  const msg = document.getElementById("editMsg");
+
+  let user = JSON.parse(localStorage.getItem("user") || "null");
+  let ver = JSON.parse(localStorage.getItem("verifications") || "[]");
+
+  let edited = false;
+
+  /* ============================================
+        1 — EDITAR USUARIO ACTUAL LOGIN.USER
+     ============================================ */
+  if(user && user.email.toLowerCase() === email){
+
+    if(newPass.length > 0){
+      user.pass = newPass;
+      edited = true;
+    }
+
+    if(newPicInput.files.length > 0){
+      const file = newPicInput.files[0];
+      const reader = new FileReader();
+
+      reader.onload = ev => {
+        user.profilePic = ev.target.result;
+
+        // *** ACTUALIZAR TAMBIÉN EN VERIFICATIONS ***
+        let i = ver.findIndex(v => v.email.toLowerCase() === email);
+        if(i !== -1){
+          ver[i].profilePic = ev.target.result;
+          localStorage.setItem("verifications", JSON.stringify(ver));
+        }
+
+        localStorage.setItem("user", JSON.stringify(user));
+        msg.innerHTML = "✔ Foto actualizada correctamente.";
+        loadList();
+        loadActiveUsers();
+      };
+
+      reader.readAsDataURL(file);
+      return;
+    }
+
+    localStorage.setItem("user", JSON.stringify(user));
+    msg.innerHTML = "✔ Contraseña actualizada.";
+    return;
+  }
+
+  /* ======================================================
+        2 — EDITAR USUARIO EN VERIFICATIONS (PAGOS MANUAL)
+     ====================================================== */
+
+  let index = ver.findIndex(v => v.email.toLowerCase() === email);
+
+  if(index !== -1){
+
+    if(newPass.length > 0){
+      ver[index].pass = newPass;
+      edited = true;
+    }
+
+    if(newPicInput.files.length > 0){
+      const file = newPicInput.files[0];
+      const reader = new FileReader();
+
+      reader.onload = ev => {
+        ver[index].profilePic = ev.target.result;
+
+        localStorage.setItem("verifications", JSON.stringify(ver));
+        msg.innerHTML = "✔ Editado correctamente (verificaciones).";
+        loadList();
+        loadActiveUsers();
+      };
+
+      reader.readAsDataURL(file);
+      return;
+    }
+
+    localStorage.setItem("verifications", JSON.stringify(ver));
+    msg.innerHTML = "✔ Contraseña actualizada (verificaciones).";
+    return;
+  }
+
+  /* ======================
+        3 — NO EXISTE
+     ====================== */
+  msg.innerHTML = "❌ Usuario no encontrado.";
+}
+
+
+
+/* ELIMINAR USUARIO COMPLETO */
+
+
+// abrir modal
+function exitAdmin(){
+  document.getElementById("exitAdminModal").style.display = "flex";
+}
+
+// cerrar modal sin salir
+function closeExitModal(){
+  document.getElementById("exitAdminModal").style.display = "none";
+}
+
+// confirmar salida
+function confirmExitAdmin(){
+  localStorage.removeItem("adminSession");
+  document.getElementById("exitAdminModal").style.display = "none";
+  location.href = "index.html";
+}
+
+function deleteUser(){
+  const email = document.getElementById("editEmail").value.trim().toLowerCase();
+  const msg = document.getElementById("editMsg");
+
+  if(!email){
+    msg.innerHTML = "❌ Primero buscá un usuario para eliminar.";
+    return;
+  }
+
+  // abrir modal
+  document.getElementById("deleteUserModal").style.display = "flex";
+}
+
+function closeDeleteUserModal(){
+  document.getElementById("deleteUserModal").style.display = "none";
+}
+
+function confirmDeleteUser(){
+  const email = document.getElementById("editEmail").value.trim().toLowerCase();
+  const msg = document.getElementById("editMsg");
+
+  // cerrar modal
+  document.getElementById("deleteUserModal").style.display = "none";
+
+  // eliminar usuario actual
+  let user = JSON.parse(localStorage.getItem("user") || "null");
+  if(user && user.email.toLowerCase() === email){
+    localStorage.removeItem("user");
+  }
+
+  // eliminar sus verificaciones
+  let ver = JSON.parse(localStorage.getItem("verifications") || "[]");
+  ver = ver.filter(v => v.email.toLowerCase() !== email);
+  localStorage.setItem("verifications", JSON.stringify(ver));
+
+  msg.innerHTML = "✔ Usuario eliminado correctamente.";
+  toast("Usuario eliminado ✔", "success");
+}
+
+
+/*CONTRASEÑA DESDE LOGIN*/
+
+function loadPasswordRequests(){
+    const box = document.getElementById("passRequests");
+    let reqs = JSON.parse(localStorage.getItem("passwordRequests") || "[]");
+
+    if(!reqs.length){
+        box.innerHTML = "<div class='small'>No hay solicitudes.</div>";
+        return;
+    }
+
+    box.innerHTML = "";
+
+    reqs.forEach(r => {
+        const div = document.createElement("div");
+        div.className = "card";
+
+        div.innerHTML = `
+            <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+                <img src="${r.profilePic}" class="profileRound">
+                <div style="flex:1">
+                    <strong>${r.email}</strong><br>
+                    <span class="small">Vence: ${new Date(r.expire).toLocaleString()}</span><br>
+                    <span class="small">${r.message}</span><br>
+                    <span class="small">${new Date(r.created).toLocaleString()}</span>
+                </div>
+
+                <button style="background:#3498db;color:white;padding:8px 10px;border-radius:6px;border:0;cursor:pointer"
+                        onclick="openPassChangeModal('${r.email}', '${r.id}')">
+                    Cambiar contraseña
+                </button>
+            </div>
+        `;
+
+        box.appendChild(div);
+    });
+}
+
+let passChangeEmail = "";
+let passChangeId = "";
+
+function openPassChangeModal(email, reqId){
+    passChangeEmail = email;
+    passChangeId = reqId;
+    document.getElementById("passModalEmail").innerHTML = email;
+    document.getElementById("passModal").style.display = "flex";
+}
+
+function closePassChange(){
+    document.getElementById("passModal").style.display = "none";
+}
+
+function confirmPassChange(){
+    let newP = document.getElementById("newAdminPass").value.trim();
+
+    if(newP.length < 4){
+        return toast("❌ La contraseña es muy corta", "error");
+    }
+
+    // actualizar usuario
+    let user = JSON.parse(localStorage.getItem("user") || "null");
+
+    if(user && user.email === passChangeEmail){
+        user.pass = newP;
+        localStorage.setItem("user", JSON.stringify(user));
+    }
+
+    // borrar solicitud
+    let reqs = JSON.parse(localStorage.getItem("passwordRequests") || "[]");
+    reqs = reqs.filter(x => x.id !== passChangeId);
+    localStorage.setItem("passwordRequests", JSON.stringify(reqs));
+
+    document.getElementById("passModal").style.display = "none";
+    loadPasswordRequests();
+
+    toast("✔ Contraseña actualizada correctamente.", "success");
+}
+
+</script>
+
+<script>
+  /* ==============================
+      LISTAR CUENTAS VENCIDAS
+============================== */
+function loadExpiredUsers(){
+    const box = document.getElementById("expiredUsers");
+    let ver = JSON.parse(localStorage.getItem("verifications") || "[]");
+
+    const now = Date.now();
+
+    let expired = ver.filter(u => u.expire && u.expire < now);
+
+    if(!expired.length){
+        box.innerHTML = "<div class='small'>No hay cuentas vencidas.</div>";
+        return;
+    }
+
+    box.innerHTML = "";
+
+    expired.forEach(u=>{
+        const div = document.createElement("div");
+        div.className = "card";
+
+        div.innerHTML = `
+    <div style="display:flex;gap:16px;flex-wrap:wrap">
+        <img src="${u.profilePic || 'default.png'}" 
+             class="profileRound">
+
+        <div style="flex:1">
+            <strong>${u.email}</strong><br>
+            <span class="small">${u.name || ''}</span><br>
+            <span class="small" style="color:#ff4444">
+              Vencido el: ${new Date(u.expire).toLocaleString()}
+            </span><br>
+            ${u.manual ? `<span class="manualTag">Manual</span>` : ""}
+        </div>
+    </div>
+
+    <button onclick="reactivateUser('${u.id}')"
+            style="width:100%;margin-top:10px;background:#2d8a2d;
+                   padding:10px;border-radius:6px;color:#fff;
+                   font-weight:bold;">
+      🔄 Reactivar (+30 días)
+    </button>
+
+    <button onclick="deleteExpiredUser('${u.id}')"
+            style="width:100%;margin-top:10px;background:#b02d2d;
+                   padding:10px;border-radius:6px;color:#fff;
+                   font-weight:bold;">
+      ❌ Eliminar usuario
+    </button>
+`;
+
+
+        box.appendChild(div);
+    });
+}
+
+
+/* ==============================
+      REACTIVAR CUENTA
+============================== */
+function reactivateUser(id){
+    let ver = JSON.parse(localStorage.getItem("verifications") || "[]");
+
+    let u = ver.find(v => v.id === id);
+    if(!u) return;
+
+    // renovar 30 días
+    u.expire = Date.now() + (30*24*60*60*1000);
+    u.status = "approved";
+
+    // generar nuevo código opcional
+    const code = "MTX-" + Math.random().toString(36).substring(2,10).toUpperCase();
+    u.code = code;
+
+    // copiar código
+    navigator.clipboard.writeText(code);
+
+    localStorage.setItem("verifications", JSON.stringify(ver));
+
+    toast("✔ Cuenta reactivada y código copiado", "success");
+
+    loadExpiredUsers();  // refrescar vista
+}
+/* ==============================
+      ELIMINAR CUENTA VENCIDA
+============================== */
+function deleteExpiredUser(id){
+    let ver = JSON.parse(localStorage.getItem("verifications") || "[]");
+    let user = JSON.parse(localStorage.getItem("user") || "null");
+
+    // buscar usuario vencido
+    let u = ver.find(v => v.id === id);
+    if(!u) return;
+
+    // confirmar
+    if(!confirm(`¿Eliminar definitivamente la cuenta de:\n${u.email}?`)){
+        return;
+    }
+
+    // eliminar de verifications[]
+    ver = ver.filter(v => v.id !== id);
+    localStorage.setItem("verifications", JSON.stringify(ver));
+
+    // si es el usuario logueado → borrar también
+    if(user && user.email.toLowerCase() === u.email.toLowerCase()){
+        localStorage.removeItem("user");
+    }
+
+    toast("✔ Usuario vencido eliminado", "success");
+
+    loadExpiredUsers(); // refrescar listado
+}
+
+</script>
+</body>
+</html>
