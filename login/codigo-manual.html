@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Acceso Manual - MovieTx</title>
+
+<style>
+body{
+  margin:0;
+  background:#000;
+  color:#fff;
+  font-family:Arial;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:100vh;
+}
+
+.box{
+  width:360px;
+  padding:26px;
+  background:#0f0f0f;
+  border-radius:12px;
+  box-shadow:0 0 20px rgba(0,0,0,0.6);
+}
+
+h2{margin:0 0 10px;}
+
+input{
+  width:100%;
+  padding:12px;
+  background:#121214;
+  border:0;
+  border-radius:6px;
+  color:#fff;
+  margin-top:10px;
+}
+
+/* Caja de contraseña con icono */
+.passBox{
+  position:relative;
+  width:100%;
+}
+
+.passBox input{
+  width:91%;
+  padding-right:45px;
+  margin-top:10px;
+}
+
+.togglePass{
+  position:absolute;
+  right:12px;
+  top:50%;
+  transform:translateY(-50%);
+  cursor:pointer;
+  font-size:18px;
+  color:#bbb;
+  user-select:none;
+}
+
+/* Olvidé mi contraseña */
+.forgot{
+  margin-top:8px;
+  font-size:13px;
+  color:#ff4444;
+  cursor:pointer;
+  text-align:right;
+}
+
+.forgot:hover{
+  text-decoration:underline;
+}
+
+button{
+  width:100%;
+  padding:12px;
+  background:#e50914;
+  border:0;
+  border-radius:6px;
+  margin-top:14px;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.profilePic{
+  width:100px;
+  height:100px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid #333;
+  margin-bottom:12px;
+}
+
+#toastBox{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  z-index:99999;
+}
+
+.toast{
+  padding:12px 14px;
+  background:#111;
+  border-left:4px solid #e50914;
+  color:#fff;
+  border-radius:8px;
+  box-shadow:0 0 12px rgba(0,0,0,.5);
+}
+
+.toast.success{border-left-color:#2ecc71;}
+.toast.error{border-left-color:#e74c3c;}
+.toast.warning{border-left-color:#f1c40f;}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+  <div id="userPicArea" style="text-align:center;"></div>
+
+  <h2>Acceso Manual</h2>
+
+  <!-- EMAIL -->
+  <input id="email" type="email" placeholder="Correo electrónico" oninput="loadUserPicture()">
+
+  <!-- CONTRASEÑA -->
+  <div class="passBox">
+    <input id="pass" type="password" placeholder="Contraseña">
+    <span class="togglePass" onclick="togglePassword()">👁️</span>
+  </div>
+
+  <!-- OLVIDE CONTRASEÑA -->
+  <div class="forgot" onclick="forgotPass()">¿Olvidaste tu contraseña?</div>
+
+  <!-- CÓDIGO MANUAL -->
+  <input id="code" type="text" placeholder="Código manual">
+
+  <button onclick="loginManual()">Ingresar</button>
+
+  <div style="margin-top:12px;text-align:center;color:#bbb;cursor:pointer;"
+       onclick="location.href='index.html'">
+       Volver al login
+  </div>
+
+</div>
+
+<div id="toastBox"></div>
+
+<script>
+// Detectar si viene un código manual via URL
+const url = new URLSearchParams(window.location.search);
+
+const email = url.get("email");
+const code  = url.get("code");
+const expire = url.get("expire");
+
+if(email && code){
+  
+  // Guardar usuario local en el dispositivo
+  const userData = {
+    email: email,
+    active: true,
+    code: code,
+    expire: parseInt(expire),
+    profilePic: localStorage.getItem("tempProfilePic") || ""
+  };
+
+  document.getElementById("lastCode").innerHTML = `
+  <a href="codigo-manual.html?email=${email}&code=${code}&expire=${newUser.expire}">
+    Abrir Código Manual
+  </a>
+`;
+
+  localStorage.setItem("user", JSON.stringify(userData));
+
+  // Mostrar confirmación
+  document.getElementById("result").innerHTML = `
+    <h3>¡Código Activado!</h3>
+    Email: ${email}<br>
+    Código: ${code}<br>
+    Vence: ${new Date(parseInt(expire)).toLocaleString()}
+  `;
+}
+</script>
+
+
+<script>
+function toast(msg, type="error"){
+  const box=document.getElementById("toastBox");
+  const t=document.createElement("div");
+  t.className="toast "+type;
+  t.innerHTML=msg;
+  box.appendChild(t);
+  setTimeout(()=>{
+    t.style.opacity="0";
+    t.style.transform="translateY(20px)";
+    setTimeout(()=>t.remove(),200);
+  },3000);
+}
+
+/* ============================
+      VER / OCULTAR CONTRASEÑA
+   ============================*/
+function togglePassword(){
+  const pass=document.getElementById("pass");
+  const btn=document.querySelector(".togglePass");
+
+  if(pass.type==="password"){
+    pass.type="text";
+    btn.textContent="🙈";
+  } else {
+    pass.type="password";
+    btn.textContent="👁️";
+  }
+}
+
+/* ============================
+      OLVIDE CONTRASEÑA
+   ============================*/
+function forgotPass(){
+  const email=document.getElementById("email").value.trim();
+
+  if(email.length < 5){
+    return toast("⚠️ Escribe tu email antes de recuperar la contraseña.", "warning");
+  }
+
+  let ver = JSON.parse(localStorage.getItem("verifications")||"[]");
+  const user = ver.find(x=>x.email.toLowerCase()===email && x.manual);
+
+  if(!user){
+    return toast("❌ Este email no pertenece a un usuario manual.", "error");
+  }
+
+  const req={
+    id:"req-"+Date.now(),
+    email:user.email,
+    profilePic:user.profilePic || "",
+    message:"Solicitud de cambio de contraseña (Acceso Manual)",
+    created:Date.now()
+  };
+
+  let all = JSON.parse(localStorage.getItem("passwordRequests")||"[]");
+  all.push(req);
+  localStorage.setItem("passwordRequests",JSON.stringify(all));
+
+  toast("📩 Solicitud enviada correctamente.", "success");
+}
+
+/* ============================
+     CARGAR FOTO AUTOMÁTICA
+   ============================*/
+function loadUserPicture(){
+  const email = document.getElementById("email").value.trim().toLowerCase();
+  const ver = JSON.parse(localStorage.getItem("verifications") || "[]");
+
+  const found = ver.find(x => x.email.toLowerCase() === email && x.manual);
+
+  if(found && found.profilePic){
+    document.getElementById("userPicArea").innerHTML =
+      `<img class="profilePic" src="${found.profilePic}">`;
+  } else {
+    document.getElementById("userPicArea").innerHTML = "";
+  }
+}
+
+/* ============================
+        LOGIN MANUAL
+   ============================*/
+function loginManual(){
+  const email = document.getElementById("email").value.trim().toLowerCase();
+  const pass  = document.getElementById("pass").value.trim();
+  const code  = document.getElementById("code").value.trim();
+
+  let ver = JSON.parse(localStorage.getItem("verifications") || "[]");
+
+  const user = ver.find(u => u.email.toLowerCase() === email && u.manual);
+
+  if(!user){
+    return toast("❌ No existe un usuario manual con ese email.","error");
+  }
+
+  if(user.pass !== pass){
+    return toast("❌ Contraseña incorrecta.","error");
+  }
+
+  // Si aún no verificó el código
+  if(!user.codeVerified){
+
+    if(code.length < 3){
+      return toast("⚠️ Debes ingresar el código manual.","warning");
+    }
+
+    if(code !== user.code){
+      return toast("❌ Código manual incorrecto.","error");
+    }
+
+    user.codeVerified = true;
+    localStorage.setItem("verifications", JSON.stringify(ver));
+  }
+
+  // Crear sesión
+  localStorage.setItem("user", JSON.stringify({
+    email : user.email,
+    pass  : user.pass,
+    active: true,
+    expire: Date.now() + (30*24*60*60*1000),
+    profilePic: user.profilePic || ""
+  }));
+
+  toast("✔ Acceso manual correcto.","success");
+
+  setTimeout(()=> location.href="index.html",700);
+}
+</script>
+
+</body>
+</html>

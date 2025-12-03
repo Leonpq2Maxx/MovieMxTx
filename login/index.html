@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Login - MovieTx</title>
+<style>
+:root{/*simple*/}
+body{margin:0;font-family:Arial, Helvetica, sans-serif;background:#000;color:#fff;display:flex;align-items:center;justify-content:center;height:100vh}
+.box{width:360px;padding:26px;background:linear-gradient(180deg,#0b0b0c,#111);border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,.7)}
+.logo{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.appicon{width:56px;height:56px;border-radius:8px;background:linear-gradient(135deg,#1f1f1f,#2b2b2b);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px}
+h2{margin:0 0 8px 0}
+input{width:100%;padding:12px;margin-top:10px;border-radius:6px;border:0;background:#121214;color:#fff}
+button{width:100%;padding:12px;margin-top:14px;border-radius:6px;border:0;background:#e50914;color:#fff;font-weight:700;cursor:pointer}
+.small{text-align:center;margin-top:10px;color:#bbb;cursor:pointer}
+.info{font-size:13px;color:#bbb;margin-top:10px}
+
+/* -------- MODAL DEL CREADOR -------- */
+.creator-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.creator-box {
+  width: 320px;
+  padding: 20px;
+  background: #111;
+  border-radius: 10px;
+  text-align: center;
+  animation: pop .25s ease;
+  border: 1px solid #333;
+}
+
+.creator-box h3 {
+  margin: 0 0 6px;
+}
+
+.creator-box p {
+  color: #bbb;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.creator-box input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 6px;
+  border: none;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 14px;
+}
+
+.creator-box button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  border-radius: 6px;
+  border: none;
+  background: #e50914;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.creator-box .cancel {
+  margin-top: 10px;
+  cursor: pointer;
+  color: #888;
+  font-size: 14px;
+}
+
+@keyframes pop {
+  from { transform: scale(.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+/* ============================
+        TOAST MESSAGES
+=============================*/
+#toastBox{
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 99999;
+}
+
+.toast{
+  padding: 12px 14px;
+  background: #111;
+  border-left: 4px solid #e50914;
+  color: #fff;
+  font-size: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0,0,0,.5);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: showToast .3s ease;
+}
+
+.toast.success{ border-left-color:#2ecc71; }
+.toast.warning{ border-left-color:#f1c40f; }
+.toast.error{ border-left-color:#e74c3c; }
+
+@keyframes showToast{
+  from { opacity:0; transform: translateY(20px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+
+/* MOBILE */
+@media(max-width:600px){
+  #toastBox{
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+  }
+  .toast{
+    width:100%;
+    font-size:14px;
+  }
+}
+
+/* Ícono MovieTx */
+.appicon{
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #111;
+  box-shadow: 0 0 10px rgba(255,255,255,0.05);
+}
+
+.appicon img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Móviles pequeños */
+@media(max-width: 380px){
+  .appicon{
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+  }
+}
+
+/* Móviles medianos */
+@media(min-width: 380px) and (max-width: 600px){
+  .appicon{
+    width: 54px;
+    height: 54px;
+  }
+}
+
+/* Tablets */
+@media(min-width: 600px) and (max-width: 900px){
+  .appicon{
+    width: 68px;
+    height: 68px;
+  }
+}
+
+/* PC */
+@media(min-width: 900px){
+  .appicon{
+    width: 74px;
+    height: 74px;
+  }
+}
+/* Caja de contraseña con icono */
+.passBox{
+  position: relative;
+  width: 100%;
+}
+
+.passBox input{
+  width: 91%;
+  padding-right: 45px;
+}
+
+.togglePass{
+  position: absolute;
+  right: 10px;
+  top: 56%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+  color: #bbb;
+  user-select: none;
+}
+
+.togglePass:active{
+  transform: translateY(-50%) scale(0.9);
+}
+
+/* Olvidé mi contraseña */
+.forgot{
+  margin-top: 8px;
+  font-size: 13px;
+  color: #ff4444;
+  cursor: pointer;
+  text-align: right;
+}
+
+.forgot:hover{
+  text-decoration: underline;
+}
+
+/* Móviles pequeños */
+@media(max-width: 380px){
+  .togglePass{
+    font-size: 16px;
+  }
+}
+
+</style>
+</head>
+<body>
+  <script>
+    const user = JSON.parse(localStorage.getItem("user") || "null");
+if (user && user.isCreator) {
+    console.log("Acceso del creador permitido.");
+    // no redirecciona ni bloquea
+}
+
+  </script>
+<div class="box">
+  <div id="profileArea" style="text-align:center;margin-bottom:15px;">
+</div>
+
+<script>
+const u = JSON.parse(localStorage.getItem("user")||"null");
+if(u && u.profilePic){
+  document.getElementById("profileArea").innerHTML =
+    `<img src="${u.profilePic}" style="width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid #333">`;
+}
+</script>
+
+  <div class="logo">
+    <div class="appicon">
+      <img src="Logo Poster MovieTx PNG/Logo MovieTx.png" alt="MovieTx Logo">
+    </div>
+
+    <div>
+      <h2>MovieTx</h2>
+      <div class="info">Accede con tu cuenta. Si no pagaste, te pediremos el comprobante.</div>
+    </div>
+  </div>
+
+  <input id="email" type="email" placeholder="Correo electrónico" oninput="loadUserPictureLogin()">
+  <div class="passBox">
+  <input id="pass" type="password" placeholder="Contraseña" />
+  <span class="togglePass" onclick="togglePassword()">👁️</span>
+</div>
+<div class="forgot" onclick="forgotPass()">
+  ¿Olvidaste tu contraseña?
+</div>
+
+  <button onclick="login()">Entrar</button>
+  <button onclick="location.href='codigo-manual.html'" 
+        style="background:#1d1d1f;margin-top:10px;">
+  Acceso Manual
+</button>
+
+
+  <div class="small" onclick="location.href='registro.html'">¿No tienes cuenta? Regístrate</div>
+  <br>
+  <div class="small" onclick="location.href='pago.html'">Ir a Pago</div>
+  <br>
+  <div style="margin-top:12px;font-size:12px;color:#bbb">¿Eres admin? <a href="admin.html" style="color:#fff">Panel admin</a></div>
+  <br>
+  <div class="small" onclick="creatorAccess()" style="color:#ff4444">
+  🔑 Acceso del creador
+</div>
+  <!--<div class="small" onclick="creatorAccess()" style="color:#ff4444">Acceso creador</div>-->
+<!-- MODAL ACCESO CREADOR -->
+<div id="creatorModal" class="creator-modal">
+  <div class="creator-box">
+    <h3>Acceso del Creador</h3>
+    <p>Ingresa la clave secreta para acceder sin pago.</p>
+    <input id="creatorKey" type="password" placeholder="Clave del creador">
+    
+    <button onclick="verifyCreatorKey()">Entrar</button>
+    <div class="cancel" onclick="closeCreatorModal()">Cancelar</div>
+  </div>
+</div>
+
+</div>
+
+<div id="toastBox"></div>
+
+<script>
+window.onload = function(){
+  try {
+    const user = JSON.parse(localStorage.getItem('user') || 'null');
+    if(user && user.active && Date.now() < user.expire) {
+      location.href = 'inicio.html';
+    }
+  } catch(e){ console.error(e) }
+}
+
+function login(){
+  const email = document.getElementById('email').value.trim().toLowerCase();
+  const pass  = document.getElementById('pass').value.trim();
+
+  /* obtener usuario principal */
+  let user = JSON.parse(localStorage.getItem("user") || "null");
+
+  /* obtener lista de usuarios (manuales + aprobados) */
+  let ver = JSON.parse(localStorage.getItem("verifications") || "[]");
+
+  /* ============================
+       1 — BUSCAR USUARIO
+     ============================ */
+
+  let loginUser = null;
+
+  // A: usuario principal
+  if(user && user.email.toLowerCase() === email){
+    loginUser = user;
+  }
+
+  // B: usuarios creados en admin
+  if(!loginUser){
+    const found = ver.find(x => x.email.toLowerCase() === email);
+    if(found){
+      loginUser = found;
+    }
+  }
+
+  // C: si NO existe en ninguno
+  if(!loginUser){
+    return toast("⚠️ No existe ninguna cuenta con ese correo.", "warning");
+  }
+
+  /* ============================
+       2 — VALIDAR CONTRASEÑA
+     ============================ */
+
+  if(loginUser.pass !== pass){
+    return toast("❌ Contraseña incorrecta.", "error");
+  }
+
+  /* ============================
+       3 — VALIDAR ACTIVACIÓN
+     ============================ */
+
+  if(!loginUser.active){
+    return location.href = "pago.html?needpay=1";
+  }
+
+  if(Date.now() > loginUser.expire){
+    toast("⏳ Tu cuenta venció. Debes pagar nuevamente.", "warning");
+    return location.href = "pago.html?needpay=1";
+  }
+
+  /* ============================
+       4 — INICIAR SESIÓN CORRECTAMENTE
+     ============================ */
+
+  // convertir el usuario encontrado en "usuario actual"
+  localStorage.setItem("user", JSON.stringify({
+    email: loginUser.email,
+    pass: loginUser.pass,
+    active: loginUser.active,
+    expire: loginUser.expire,
+    profilePic: loginUser.profilePic || ""
+  }));
+
+  location.href = "inicio.html";
+}
+
+
+
+// ---- ACCESO DEL CREADOR ---- //
+
+function creatorAccess() {
+    document.getElementById("creatorModal").style.display = "flex";
+}
+
+function closeCreatorModal() {
+    document.getElementById("creatorModal").style.display = "none";
+}
+
+function verifyCreatorKey() {
+    const SECRET_KEY = "CreadorMaxi_HD53"; 
+    const key = document.getElementById("creatorKey").value.trim();
+
+    if (key === SECRET_KEY) {
+
+        const creator = {
+            email: "creador@movietx",
+            name: "Creador",
+            isCreator: true,
+            active: true,
+            expire: 9999999999999
+        };
+
+        localStorage.setItem("user", JSON.stringify(creator));
+
+        toast("👑 Acceso autorizado, bienvenido creador.", "success");
+
+        setTimeout(()=> location.href = "inicio.html", 800);
+
+    } else {
+        toast("❌ Clave incorrecta.", "error");
+    }
+}
+
+function toast(msg, type="error"){
+    const box = document.getElementById("toastBox");
+    const t = document.createElement("div");
+    t.className = "toast " + type;
+    t.innerHTML = msg;
+
+    box.appendChild(t);
+
+    setTimeout(() => {
+        t.style.opacity = "0";
+        t.style.transform = "translateY(20px)";
+        setTimeout(()=> t.remove(), 200);
+    }, 3000);
+}
+
+
+/*VER CONTRASEÑA*/
+function togglePassword(){
+    const pass = document.getElementById("pass");
+    const toggle = document.querySelector(".togglePass");
+
+    if(pass.type === "password"){
+        pass.type = "text";
+        toggle.textContent = "🙈";
+    } else {
+        pass.type = "password";
+        toggle.textContent = "👁️";
+    }
+}
+
+function forgotPass(){
+    const email = document.getElementById("email").value.trim();
+    const user = JSON.parse(localStorage.getItem("user") || "null");
+
+    // si no escribió email
+    if(email.length < 5){
+        return toast("⚠️ Escribe tu email antes de recuperar la contraseña.", "warning");
+    }
+
+    // si no coincide con email guardado
+    if(!user || user.email !== email){
+        return toast("❌ Este email no está registrado.", "error");
+    }
+
+    // crear solicitud
+    const req = {
+        id: "req-" + Date.now(),
+        email: user.email,
+        expire: user.expire,
+        message: "El usuario quiere cambiar su contraseña",
+        profilePic: user.profilePic || "",
+        created: Date.now()
+    };
+
+    let all = JSON.parse(localStorage.getItem("passwordRequests") || "[]");
+    all.push(req);
+    localStorage.setItem("passwordRequests", JSON.stringify(all));
+
+    toast("📩 Solicitud enviada correctamente. El admin lo verá pronto.", "success");
+}
+
+/* ================================
+    MOSTRAR FOTO AL ESCRIBIR EMAIL
+================================ */
+function loadUserPictureLogin() {
+    const email = document.getElementById("email").value.trim().toLowerCase();
+    const profileArea = document.getElementById("profileArea");
+
+    if (!email || email.length < 5) {
+        profileArea.innerHTML = "";
+        return;
+    }
+
+    // usuario principal
+    const mainUser = JSON.parse(localStorage.getItem("user") || "null");
+
+    if (mainUser && mainUser.email.toLowerCase() === email && mainUser.profilePic) {
+        profileArea.innerHTML = `
+            <img src="${mainUser.profilePic}" 
+                 style="width:100px;height:100px;border-radius:50%;
+                        object-fit:cover;border:3px solid #333;">
+        `;
+        return;
+    }
+
+    // usuarios creados en admin (manuales + aprobados)
+    let ver = JSON.parse(localStorage.getItem("verifications") || "[]");
+
+    const found = ver.find(
+        u => u.email.toLowerCase() === email && u.profilePic
+    );
+
+    if (found) {
+        profileArea.innerHTML = `
+            <img src="${found.profilePic}" 
+                 style="width:100px;height:100px;border-radius:50%;
+                        object-fit:cover;border:3px solid #333;">
+        `;
+    } else {
+        profileArea.innerHTML = "";
+    }
+}
+
+</script>
+</body>
+</html>
