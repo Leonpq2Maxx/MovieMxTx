@@ -630,13 +630,91 @@ document.addEventListener("DOMContentLoaded", () => {
     <label for="clave">Clave de acceso (solo adultos):</label>
     <input type="password" id="clave" placeholder="Clave secreta" />
 
+    <button id="resetClaveBtn" style="background:#444;margin-top:10px;">
+      Olvidé mi clave
+    </button>
+
+
     <button id="confirmAgeBtn">Validar acceso</button>
 
     <p id="result-message"></p>
   </div>
 </div>
 
+<!-- MODAL RESET CLAVE -->
+<div id="resetModal" class="modal">
+  <div class="modal-content">
+    <h2>Restablecer clave</h2>
+    <p>¿Deseás borrar tu clave y crear una nueva?</p>
+    <div class="modal-buttons">
+      <button id="cancelReset">Cancelar</button>
+      <button id="confirmReset">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL ALERTA -->
+<div id="alertModal" class="modal">
+  <div class="modal-content">
+    <p id="alertTexto"></p>
+    <button id="closeAlert">Aceptar</button>
+  </div>
+</div>
+
+
 <style>
+
+/*MODAL DE VLAVE*/
+
+.modal {
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+
+.modal-content {
+  background:#121212;
+  color:#fff;
+  padding:25px;
+  border-radius:12px;
+  width:90%;
+  max-width:350px;
+  text-align:center;
+  box-shadow:0 0 15px rgba(0,0,0,.5);
+}
+
+.modal-buttons {
+  margin-top:15px;
+  display:flex;
+  justify-content:space-between;
+}
+
+.modal-buttons button,
+#closeAlert {
+  padding:8px 14px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  background:#333;
+  color:#fff;
+}
+
+#confirmReset {
+  background:#d63030;
+}
+
+.modal-buttons button:hover,
+#closeAlert:hover {
+  opacity:.85;
+}
+
+
+/*FIN*/
+
   .age-modal {
     position: fixed;
     z-index: 9999;
@@ -742,6 +820,40 @@ document.addEventListener("DOMContentLoaded", () => {
     display: none;
   }
 </style>
+
+<script>
+const resetModal = document.getElementById("resetModal");
+const alertModal = document.getElementById("alertModal");
+const alertTexto = document.getElementById("alertTexto");
+
+document.getElementById("resetClaveBtn").addEventListener("click", () => {
+  resetModal.style.display = "flex";
+});
+
+document.getElementById("cancelReset").onclick = () => {
+  resetModal.style.display = "none";
+};
+
+document.getElementById("confirmReset").onclick = () => {
+  localStorage.removeItem("claveAdultos");
+  claveGuardada = null;
+
+  resetModal.style.display = "none";
+  showAlert("Clave eliminada. Ahora podés crear una nueva.");
+  openModal();
+};
+
+document.getElementById("closeAlert").onclick = () => {
+  alertModal.style.display = "none";
+};
+
+function showAlert(msg) {
+  alertTexto.textContent = msg;
+  alertModal.style.display = "flex";
+}
+
+
+</script>
 
 <script>
 let pendingRedirect = null;
@@ -1015,12 +1127,21 @@ div.innerHTML = `
 
 
   function openPreview(item) {
-  if (item.archivo) {
-    window.location.href = item.archivo;
-  } else {
+  if (!item.archivo) {
     alert("Archivo no encontrado");
+    return;
   }
+
+  // ➤ Si es contenido adulto → activar verificación
+  if (item.adulto === true) {
+    verificarAcceso(item.archivo, true);
+    return;
+  }
+
+  // ➤ Si NO es adulto → entra directo
+  window.location.href = item.archivo;
 }
+
   function closePreview() {}
 
   asegurarTimestamp();
