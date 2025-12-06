@@ -812,43 +812,50 @@ document.addEventListener('DOMContentLoaded', () => {
     border: 1px solid red !important; /* Mantiene borde rubio */
 }
 
+.menu-item.active {
+  color: #ff3c3c !important;
+  font-weight: 700;
+  border-bottom: 2px solid #ff3c3c;
+}
+
+
 
 </style>
-<!--SCRIPT QUE HACE FUNCIONAR AL INTERACTUAR CON EL MENU-->
-<script>
-document.querySelectorAll('.menu-item').forEach(function(item) {
-    item.addEventListener('click', function() {
-        // Eliminar clase activa de todos
-        document.querySelectorAll('.menu-item').forEach(function(el) {
-            el.classList.remove('active');
-        });
 
-        // Activar el que se clickea
-        this.classList.add('active');
-    });
+<script>
+// ===============================
+//  📌 SISTEMA DE MENÚ PERFECTO
+//  - Se marca al hacer clic
+//  - No se borra solo
+//  - No recuerda la sección
+//  - Al refrescar → vuelve a Inicio
+// ===============================
+
+// Todos los botones del menú
+const botonesMenu = document.querySelectorAll(".menu-item");
+
+// Marca un menú por ID
+function activarMenu(id) {
+  botonesMenu.forEach(btn => btn.classList.remove("active"));
+  const boton = document.getElementById(id);
+  if (boton) boton.classList.add("active");
+}
+
+// CLICK → marcar la sección actual
+botonesMenu.forEach(boton => {
+  boton.addEventListener("click", () => {
+    activarMenu(boton.id);
+  });
 });
 
-</script>
-<!--esto hace que desaparezca al interactuar con la pagina-->
-<script>
-let timeout;
+// REFRESCAR PÁGINA → volver a Inicio SIEMPRE
+window.addEventListener("DOMContentLoaded", () => {
+  activarMenu("inicio");
 
-document.querySelectorAll('.menu-item').forEach(function(item) {
-    item.addEventListener('click', function() {
-        // Eliminar clase activa de todos
-        document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
-
-        // Activar el clickeado
-        this.classList.add('active');
-
-        // Limpiar timeout previo
-        clearTimeout(timeout);
-
-        // Desactivar después de 2 segundos
-        timeout = setTimeout(() => {
-            this.classList.remove('active');
-        }, 2000); // 2000 ms = 2 segundos
-    });
+  // Si usás carga dinámica de contenido:
+  if (typeof loadContent === "function") {
+    loadContent("inicio.html");
+  }
 });
 </script>
 
@@ -4138,13 +4145,563 @@ activarCandados();
 }
 </style>
 
+<!--VERIFICACION DE EDAD-->
+
+<!-- Modal flotante de edad + clave -->
+<div id="ageModal" class="age-modal hidden">
+  <div class="age-modal-content">
+    <span class="close-button" onclick="closeModal()">×</span>
+
+    <h2>Verificación de Edad</h2>
+
+    <label for="birthyear">Año de nacimiento:</label>
+    <input type="number" id="birthyear" placeholder="Año" min="1900" max="2030" />
+
+    <label for="age">Edad actual:</label>
+    <input type="number" id="age" placeholder="----" min="1" max="120" />
+
+    <label for="clave">Clave de acceso (solo adultos):</label>
+    <input type="password" id="clave" placeholder="Clave secreta" />
+
+    <button id="resetClaveBtn" style="background:#444;margin-top:10px;">
+      Olvidé mi clave
+    </button>
 
 
+    <button id="confirmAgeBtn">Validar acceso</button>
+
+    <p id="result-message"></p>
+  </div>
+</div>
+
+<!-- MODAL RESET CLAVE -->
+<div id="resetModal" class="modal">
+  <div class="modal-content">
+    <h2>Restablecer clave</h2>
+    <p>¿Deseás borrar tu clave y crear una nueva?</p>
+    <div class="modal-buttons">
+      <button id="cancelReset">Cancelar</button>
+      <button id="confirmReset">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL ALERTA -->
+<div id="alertModal" class="modal">
+  <div class="modal-content">
+    <p id="alertTexto"></p>
+    <button id="closeAlert">Aceptar</button>
+  </div>
+</div>
 
 
+<style>
+
+/*MODAL DE VLAVE*/
+
+.modal {
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+
+.modal-content {
+  background:#121212;
+  color:#fff;
+  padding:25px;
+  border-radius:12px;
+  width:90%;
+  max-width:350px;
+  text-align:center;
+  box-shadow:0 0 15px rgba(0,0,0,.5);
+}
+
+.modal-buttons {
+  margin-top:15px;
+  display:flex;
+  justify-content:space-between;
+}
+
+.modal-buttons button,
+#closeAlert {
+  padding:8px 14px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  background:#333;
+  color:#fff;
+}
+
+#confirmReset {
+  background:#d63030;
+}
+
+.modal-buttons button:hover,
+#closeAlert:hover {
+  opacity:.85;
+}
 
 
+/*FIN*/
 
+  .age-modal {
+    position: fixed;
+    z-index: 9999;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(6px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeInBg 0.4s ease;
+  }
+
+  .age-modal-content {
+    width: 320px;
+    background: #141414;
+    padding: 25px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 0 25px rgba(255,0,0,0.25);
+    color: white;
+    position: relative;
+    animation: popup 0.35s ease;
+  }
+
+  @keyframes popup {
+    from { transform: scale(0.85); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  @keyframes fadeInBg {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .age-modal-content h2 {
+    margin-bottom: 15px;
+    font-size: 22px;
+    color: #ff3c3c;
+  }
+
+  .age-modal-content label {
+    text-align: left;
+    display: block;
+    margin: 10px 0 5px;
+    font-size: 14px;
+    opacity: 0.9;
+  }
+
+  .age-modal-content input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    background: #1f1f1f;
+    border: 1px solid #333;
+    color: white;
+    outline: none;
+    font-size: 15px;
+    transition: 0.2s;
+  }
+
+  .age-modal-content input:focus {
+    border-color: #ff3c3c;
+    box-shadow: 0 0 5px rgba(255,60,60,0.6);
+  }
+
+  .age-modal-content button {
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px;
+    background: #ff3c3c;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.2s ease;
+  }
+
+  .age-modal-content button:hover {
+    background: #ff5555;
+    transform: scale(1.03);
+  }
+
+  .close-button {
+    position: absolute;
+    right: 14px;
+    top: 10px;
+    font-size: 22px;
+    cursor: pointer;
+    color: #bbb;
+  }
+
+  .close-button:hover {
+    color: white;
+  }
+
+  #result-message {
+    margin-top: 12px;
+    font-size: 14px;
+    min-height: 20px;
+  }
+
+  .hidden {
+    display: none;
+  }
+</style>
+
+<script>
+const resetModal = document.getElementById("resetModal");
+const alertModal = document.getElementById("alertModal");
+const alertTexto = document.getElementById("alertTexto");
+
+document.getElementById("resetClaveBtn").addEventListener("click", () => {
+  resetModal.style.display = "flex";
+});
+
+document.getElementById("cancelReset").onclick = () => {
+  resetModal.style.display = "none";
+};
+
+document.getElementById("confirmReset").onclick = () => {
+  localStorage.removeItem("claveAdultos");
+  claveGuardada = null;
+
+  resetModal.style.display = "none";
+  showAlert("Clave eliminada. Ahora podés crear una nueva.");
+  openModal();
+};
+
+document.getElementById("closeAlert").onclick = () => {
+  alertModal.style.display = "none";
+};
+
+function showAlert(msg) {
+  alertTexto.textContent = msg;
+  alertModal.style.display = "flex";
+}
+
+
+</script>
+
+
+<script>
+let pendingRedirect = null;
+
+// 🔎 Revisamos si ya existe una clave guardada
+let claveGuardada = localStorage.getItem("claveAdultos") || null;
+
+function verificarAcceso(url, requiereEdad) {
+  if (requiereEdad) {
+    pendingRedirect = url;
+    openModal();
+  } else {
+    location.assign(url);
+  }
+}
+
+function openModal() {
+  document.getElementById("ageModal").classList.remove("hidden");
+  document.getElementById("result-message").innerText = "";
+  document.getElementById("birthyear").value = "";
+  document.getElementById("age").value = "";
+  document.getElementById("clave").value = "";
+
+  // Si ya existe clave → cambia texto del label
+  if (claveGuardada) {
+    document.querySelector("label[for='clave']").innerText = "Ingresa tu clave:";
+    document.getElementById("clave").placeholder = "Clave guardada";
+  } else {
+    document.querySelector("label[for='clave']").innerText = "Crea una clave:";
+    document.getElementById("clave").placeholder = "Nueva clave";
+  }
+}
+
+function closeModal() {
+  document.getElementById("ageModal").classList.add("hidden");
+  pendingRedirect = null;
+}
+
+document.getElementById("confirmAgeBtn").addEventListener("click", function () {
+  const birthYear = parseInt(document.getElementById("birthyear").value);
+  const enteredAge = parseInt(document.getElementById("age").value);
+  const claveIngresada = document.getElementById("clave").value;
+  const currentYear = new Date().getFullYear();
+  const calculatedAge = currentYear - birthYear;
+  const result = document.getElementById("result-message");
+
+  result.style.color = "red";
+
+  if (!birthYear || !enteredAge || !claveIngresada) {
+    result.textContent = "Completa todos los campos.";
+    return;
+  }
+
+  if (enteredAge !== calculatedAge) {
+    result.textContent = "La edad no coincide con el año de nacimiento.";
+    return;
+  }
+
+  if (enteredAge < 18) {
+    result.textContent = "Debes ser mayor de edad.";
+    return;
+  }
+
+  // 🔐 Si NO hay clave guardada ⇒ Crear clave nueva
+  if (!claveGuardada) {
+    localStorage.setItem("claveAdultos", claveIngresada);
+    claveGuardada = claveIngresada;
+
+    result.style.color = "lime";
+    result.textContent = "Clave creada y acceso autorizado. Entrando...";
+
+    setTimeout(() => {
+      if (pendingRedirect) window.location.href = pendingRedirect;
+    }, 1200);
+    return;
+  }
+
+  // 🔐 Si SÍ existe clave ⇒ Comprobar
+  if (claveIngresada !== claveGuardada) {
+    result.textContent = "Clave incorrecta.";
+    return;
+  }
+
+  // ✔ Clave correcta y edad OK → entra
+  result.style.color = "lime";
+  result.textContent = "Acceso autorizado. Entrando...";
+
+  setTimeout(() => {
+    if (pendingRedirect) window.location.href = pendingRedirect;
+  }, 1200);
+});
+</script>
+
+<script>
+  function normalizar(str) {
+    if (!str) return "";
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+  }
+
+  let favoritos = JSON.parse(localStorage.getItem('favoritos_detalles') || '[]');
+  let multiMode = false;
+  let seleccionados = [];
+  let indexAEliminar = null;
+
+  function asegurarTimestamp() {
+  let base = Date.now() - favoritos.length * 1000;
+
+  favoritos.forEach((item, i) => {
+    if (!item.timestamp) {
+      item.timestamp = base + i * 1000; // escalonado real
+    }
+  });
+
+  localStorage.setItem("favoritos_detalles", JSON.stringify(favoritos));
+}
+
+  function renderFavoritos() {
+    if (openOrderMenu.innerText.includes("recientes")) {
+  favoritos.sort((a, b) => b.timestamp - a.timestamp);
+} else {
+  favoritos.sort((a, b) => a.timestamp - b.timestamp);
+}
+    const container = document.getElementById("favoritos-container");
+    container.innerHTML = "";
+
+    favoritos.forEach((item, index) => {
+      let extraInfo = "";
+
+      // TIEMPO REAL
+const ahora = Date.now();
+const edad = ahora - item.timestamp;
+
+// Recién agregado = menos de 24 horas
+if (edad < 24 * 60 * 60 * 1000) {
+  extraInfo = "Reciente";
+}
+
+// Más antiguo = más de 15 días
+if (edad > 15 * 24 * 60 * 60 * 1000) {
+  extraInfo = "Antiguo";
+}
+
+
+      const div = document.createElement("div");
+      div.className = "item";
+      const tipo = item.tipo ? item.tipo.toLowerCase() : "pelicula";
+
+div.innerHTML = `
+  <div class="selector"></div>
+
+  <img src="${item.imagen}">
+  
+  <div class="category-badge category-${tipo}">
+    ${tipo.toUpperCase()}
+  </div>
+
+  <div class="item-title">${item.titulo}</div>
+  <div class="item-info">${extraInfo}</div>
+  <button class="delete-btn" onclick="event.stopPropagation(); eliminarFavorito(${index})">×</button>
+
+`;
+
+
+      div.onclick = (e) => {
+        if (multiMode) {
+          div.classList.toggle("selected");
+          if (div.classList.contains("selected")) seleccionados.push(index);
+          else seleccionados = seleccionados.filter(i => i !== index);
+        } else {
+          openPreview(item);
+        }
+      };
+
+      div.oncontextmenu = (e) => {
+        e.preventDefault();
+        activarSeleccionMultiple();
+      };
+
+      container.appendChild(div);
+    });
+  }
+
+  buscar.oninput = e => {
+  const term = normalizar(e.target.value);
+  let visibles = 0;
+
+  document.querySelectorAll(".item").forEach(card => {
+    const title = normalizar(card.querySelector(".item-title").innerText);
+
+    if (title.includes(term)) {
+      card.style.display = "";
+      visibles++;
+    } else {
+      card.style.display = "none";
+    }
+  });
+
+  document.getElementById("noResultsMsg").style.display =
+    visibles === 0 ? "block" : "none";
+};
+
+
+  openOrderMenu.onclick = () => orderModal.style.display = "flex";
+  document.querySelector(".close-order").onclick = () => orderModal.style.display = "none";
+
+  document.querySelectorAll(".order-option").forEach(btn => {
+  btn.onclick = () => {
+
+    // Quitar la selección actual
+    document.querySelectorAll(".order-option").forEach(o =>
+      o.classList.remove("active")
+    );
+
+    // Activar la opción pulsada
+    btn.classList.add("active");
+
+    const value = btn.dataset.value;
+
+    if (value === "recientes") {
+      favoritos.sort((a, b) => b.timestamp - a.timestamp);
+      openOrderMenu.innerText = "Ordenar: Más recientes";
+    } else {
+      favoritos.sort((a, b) => a.timestamp - b.timestamp);
+      openOrderMenu.innerText = "Ordenar: Más antiguos";
+    }
+
+    renderFavoritos();
+    orderModal.style.display = "none";
+  };
+});
+
+
+  function eliminarFavorito(i) {
+    indexAEliminar = i;
+    deleteImg.src = favoritos[i].imagen;
+    deleteTitle.innerText = favoritos[i].titulo;
+    deleteModal.style.display = "flex";
+  }
+
+  cancelDelete.onclick = () => {
+    indexAEliminar = null;
+    deleteModal.style.display = "none";
+  };
+
+  confirmDelete.onclick = () => {
+    if (indexAEliminar !== null) {
+      favoritos.splice(indexAEliminar, 1);
+      localStorage.setItem("favoritos_detalles", JSON.stringify(favoritos));
+      renderFavoritos();
+    }
+    deleteModal.style.display = "none";
+  };
+
+  function activarSeleccionMultiple() {
+  multiMode = true;
+
+  // Clase global visual
+  document.body.classList.add("multi-select-active");
+
+  document.querySelectorAll(".item").forEach(item => {
+    item.classList.remove("selected");
+  });
+
+  document.querySelectorAll(".selector").forEach(s => s.style.display = "block");
+
+  document.getElementById("multiDeleteBtn").style.display = "inline-block";
+  document.getElementById("cancelSelectBtn").style.display = "inline-block";
+
+  seleccionados = [];
+}
+
+
+  function openPreview(item) {
+  if (!item.archivo) {
+    alert("Archivo no encontrado");
+    return;
+  }
+
+  // ➤ Si es contenido adulto → activar verificación
+  if (item.adulto === true) {
+    verificarAcceso(item.archivo, true);
+    return;
+  }
+
+  // ➤ Si NO es adulto → entra directo
+  window.location.href = item.archivo;
+}
+
+  function closePreview() {}
+
+  asegurarTimestamp();
+favoritos.sort((a, b) => b.timestamp - a.timestamp); // ✅ ordenar al cargar
+renderFavoritos();
+// Marcar opción por defecto
+document.querySelector('.order-option[data-value="recientes"]')
+  .classList.add("active");
+
+</script>
+
+<script>
+function handleAdultLinkClick(e) {
+    e.preventDefault();
+
+    // si tu tarjeta usa data-href
+    const url = e.currentTarget.getAttribute("data-href") 
+                || e.currentTarget.getAttribute("href");
+
+    // usar tu sistema de verificación real
+    verificarAcceso(url, true);
+}
+</script>
+
+
+<!--fin-->
 <br/>
 
 <br/><br/>
