@@ -85,18 +85,32 @@
       font-size: 0.6rem;
       color: #f5f5f5;
     }
-    .movie .tag, .movie .year-tag {
+
+    /*PELICULA*/
+    .movie .pelicula, .movie .year-tag {
       position: absolute;
       z-index: 2;
-      color: white;
+      color: rgba(255, 32, 143, 0.838);
       font-weight: bold;
-      background: rgb(255, 32, 143);
+      background: rgba(255, 255, 255, 0.838);
       padding: 2px 6px;
       font-size: 0.7rem;
       border-radius: 3px;
     }
-    .movie .tag { top: 5px; left: 5px; }
+
+    .movie .year-tegg {
+      position: absolute;
+      z-index: 2;
+      color: rgb(255, 32, 143);
+      font-weight: bold;
+      background: rgba(255, 255, 255, 0.838);
+      padding: 2px 6px;
+      font-size: 0.6rem;
+      border-radius: 3px;
+    }
+    .movie .pelicula { top: 5px; left: 5px; }
     .movie .year-tag { top: 25px; left: 5px; }
+    .movie .year-tegg { top: 47px; left: 5px; }
     .movie .lock-icon {
       position: absolute;
       top: 5px;
@@ -112,6 +126,54 @@
       color: white;
       animation: bounce 1s infinite;
     }
+    /*FIN*/
+
+    /*PELICULA*/
+    .movie .SerieHd, .movie .year-tog {
+      position: absolute;
+      z-index: 2;
+      color: rgba(255, 255, 255, 0.838);
+      font-weight: bold;
+      background: rgba(255, 0, 136, 0.838);
+      padding: 2px 6px;
+      font-size: 0.7rem;
+      border-radius: 3px;
+    }
+
+    .movie .year-tagg {
+      position: absolute;
+      z-index: 2;
+      color: rgba(255, 255, 255, 0.838);
+      font-weight: bold;
+      background: rgba(255, 0, 136, 0.838);
+      padding: 2px 6px;
+      font-size: 0.6rem;
+      border-radius: 3px;
+    }
+
+    .movie .SerieHd { top: 5px; left: 5px; }
+    .movie .year-tog { top: 25px; left: 5px; }
+    .movie .year-tagg { top: 47px; left: 5px; }
+    .movie .lock-icon {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      width: 28px;
+      height: 28px;
+      background: rgba(0,0,0,0.6);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: white;
+      animation: bounce 1s infinite;
+    }
+
+    /*FIN*/
+
+
+    
     @keyframes bounce { 0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);} }
     .movie .recien-tag {
       position: absolute;
@@ -307,937 +369,1165 @@ document.addEventListener("DOMContentLoaded", () => {
   <header>
     <h1>Buscador <span id="contador" style="font-size: 1rem; font-weight: normal; color: #bbb;"></span></h1>
   </header>
+
   <div class="search-box">
     <input type="text" id="search-input" placeholder="Buscar por nombre, género o año..." oninput="filtrarPeliculas()"> <!--ESTABA PUESTO "Buscar por nombre, género o año..." -->
   </div>
+
   <div class="movie-grid" id="movie-grid">
-<div class="movie locked" data-titulo="demon slayer kimetsu no yaiba – castillo infinito" data-genero="anime animacion fantasia accion" data-anio="2025" data-html="../View Peliculas/Demon Slayer Kimetsu no Yaiba Infinity Castle (2025).html" data-fecha="2025-11-24">
-      <span class="tag">Pelicula</span>
+
+    <div class="movie locked" data-tipo="pelicula" data-titulo="zootopia 2" data-genero="animacion aventura comedia familia infantil niños disney" data-anio="2025" data-html="../View Peliculas/Zootopia 2 (2025).html" data-fecha="2025-12-02">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2025</span>
+      <span class="year-tegg">HD</span>
+      <span class="year-tegg">CAM</span>
+      <img src="https://image.tmdb.org/t/p/w300/3Wg1LBCiTEXTxRrkNKOqJyyIFyF.jpg">
+      <span class="lock-icon">🔒</span>
+      <p>Zootopia 2</p>
+    </div>
+    
+    <div class="movie locked" data-tipo="pelicula" data-titulo="demon slayer kimetsu no yaiba – castillo infinito" data-genero="anime animacion fantasia accion" data-anio="2025" data-html="../View Peliculas/Demon Slayer Kimetsu no Yaiba Infinity Castle (2025).html" data-fecha="2025-11-02">
+      <span class="pelicula">Pelicula</span>
+      <span class="year-tag">2025</span>
+      <span class="year-tegg">HD</span>
+      <span class="year-tegg">CAM</span>
       <img src="https://image.tmdb.org/t/p/w300/fWVSwgjpT2D78VUh6X8UBd2rorW.jpg">
       <span class="lock-icon">🔒</span>
       <p>Demon Slayer: Kimetsu no Yaiba – Castillo Infinito</p>
     </div>
-
-    <div class="movie locked" data-titulo="it bienvenidos a derry serie" data-tipo="serie" data-genero="terror suspenso misterio payaso" data-anio="2025" data-html="../View Series/IT Bienvenidos a Derry (2025).html" data-fecha="2025-10-31">
-      <span class="tag">Serie</span>
-      <span class="year-tag">2025</span>
+    
+    <div class="movie locked" data-tipo="serie" data-titulo="it bienvenidos a derry serie" data-tipo="serie" data-genero="terror suspenso misterio payaso" data-anio="2025" data-html="../View Series/IT Bienvenidos a Derry (2025).html" data-fecha="2025-10-31">
+      <span class="SerieHd">Serie</span>
+      <span class="year-tog">2025</span>
+      <span class="year-tagg">CAM</span>
       <img src="https://image.tmdb.org/t/p/w300/vC6LSYC8uhZPkPM01L6HKrr1lMD.jpg">
       <span class="lock-icon">🔒</span>
       <p>IT: Bienvenidos a Derry</p>
     </div>
-   <!-- 
-   
-    
-
+<!-- 
     <div class="movie locked" data-titulo="el conjuro 4 el ultimo rito el culjuro" data-genero="Terror" data-anio="2025" data-html="../View Peliculas/El Conjuro 4 El ultimo rito (2025).html" data-fecha="2025-10-07">
-      <span class="tag">Pelicula</span>
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2025</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/dyW5mX4wwDoZWgTYObx6pg9V0i9.jpg">
       <span class="lock-icon">🔒</span>
       <p>El conjuro 4: El ultimo rito</p>
     </div>
 
     <div class="movie locked" data-titulo="en el barro serie" data-genero="drama argentina serie" data-anio="2025" data-html="../View Series/En el barro (2025).html" data-fecha="2025-10-09">
-      <span class="tag">Serie</span>
-      <span class="year-tag">2025</span>
+      <span class="SerieHd">Serie</span>
+      <span class="year-tog">2025</span>
+      <span class="year-tagg">CAM</span>
       <img src="https://image.tmdb.org/t/p/w300/kKi1YdzQNM87Mcz7WxxclHbevwr.jpg">
       <span class="lock-icon">🔒</span>
       <p>En el barro</p>
     </div>
     -->
 
-    <div class="movie locked" data-titulo="destino final 6 lazos de sangre" data-genero="terror" data-anio="2025" data-html="../View Peliculas/Destino Final Lazos De Sangre (2025).html" data-fecha="2025-11-26">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="destino final 6 lazos de sangre" data-genero="terror" data-anio="2025" data-html="../View Peliculas/Destino Final Lazos De Sangre (2025).html" data-fecha="2025-11-26">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2025</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/f0156SDAw1GfrdZnSbSwkOst9aO.jpg">
       <span class="lock-icon">🔒</span>
       <p>Destino final 6: Lazos de sangre</p>
     </div>
 
-    <div class="movie locked" data-titulo="capitan america 4 un nuevo mundo" data-genero="heroes marvel ciencia ficcion accion" data-anio="2025" data-html="../View Peliculas/Capitan america el nuevo mundo (2025).html" data-fecha="2025-11-16">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="capitan america 4 un nuevo mundo" data-genero="heroes marvel ciencia ficcion accion" data-anio="2025" data-html="../View Peliculas/Capitan america el nuevo mundo (2025).html" data-fecha="2025-11-16">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2025</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/pVMSRyAiye7gZ8NtuCt1qgbspY9.jpg">
       <span class="lock-icon">🔒</span>
       <p>Capitán América 4: Un nuevo mundo</p>
     </div>
 
-    <div class="movie locked" data-titulo="almas marcadas rule + shaw" data-genero="romance drama" data-anio="2025" data-html="../View Peliculas/Almas marcadas Rule + Shaw (2025).html" data-fecha="2025-10-12">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="almas marcadas rule + shaw" data-genero="romance drama" data-anio="2025" data-html="../View Peliculas/Almas marcadas Rule + Shaw (2025).html" data-fecha="2025-10-12">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2025</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/6rFgrN5k4c1HrVoyr0zNDdH4bK5.jpg">
       <span class="lock-icon">🔒</span>
       <p>Almas marcadas: Rule + Shaw</p>
     </div>
 
-    <div class="movie locked" data-titulo="culpa nuestra" data-genero="romance drama" data-anio="2025" data-html="../View Peliculas/3 Culpa Nuestra (2025).html" data-fecha="2025-11-23">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="culpa nuestra" data-genero="romance drama" data-anio="2025" data-html="../View Peliculas/3 Culpa Nuestra (2025).html" data-fecha="2025-11-23">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2025</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/6kmi6vmp6iOn4KzI7WfnVtAeJhU.jpg">
       <span class="lock-icon">🔒</span>
       <p>Culpa Nuestra</p>
     </div>
 
-    <div class="movie locked" data-titulo="como entrenar a tu dragon" data-genero="aventura ciencia ficcion familia" data-anio="2025" data-html="../View Peliculas/Como entrenar a tu dragon (2025).html" data-fecha="2025-11-25">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="como entrenar a tu dragon" data-genero="aventura ciencia ficcion familia" data-anio="2025" data-html="../View Peliculas/Como entrenar a tu dragon (2025).html" data-fecha="2025-11-25">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2025</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/xLsMLfE0t0eyc8km2hAeSayUBa3.jpg">
       <span class="lock-icon">🔒</span>
       <p>Como entrenar a tu dragón</p>
     </div>
 
-     <div class="movie locked" data-titulo="karol g mañana fue muy bonito" data-genero="musical documental" data-anio="2025" data-html="../View Peliculas/Karol G Mañana fue muy bonito (2025).html" data-fecha="2025-11-16">
-      <span class="tag">Pelicula</span>
+     <div class="movie locked" data-tipo="pelicula" data-titulo="karol g mañana fue muy bonito" data-genero="musical documental" data-anio="2025" data-html="../View Peliculas/Karol G Mañana fue muy bonito (2025).html" data-fecha="2025-11-16">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2025</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/5aXoQYwaQ7JJVUWclHAEXJgiS2M.jpg">
       <span class="lock-icon">🔒</span>
       <p>Karol G: Mañana fue muy bonito</p>
     </div>
 
-    <div class="movie locked" data-titulo="blancanieves y los siete enanitos" data-tipo="pelicula" data-genero="animacion fantasia familia disney princesas" data-anio="2025" data-html="../View Peliculas/Blancanieves (2025).html" data-fecha="2025-11-08">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="blancanieves y los siete enanitos" data-tipo="pelicula" data-genero="animacion fantasia familia disney princesas" data-anio="2025" data-html="../View Peliculas/Blancanieves (2025).html" data-fecha="2025-11-08">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2025</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/7FZhpH4YasGdvY4FUGQJhCusLeg.jpg">
       <span class="lock-icon">🔒</span>
       <p>Blancanieves</p>
     </div>
 
-    <div class="movie locked" data-titulo="culpa mia londres 2" data-genero="romance drama" data-anio="2025" data-html="../View Peliculas/2 Culpa Mia (2025).html" data-fecha="2025-10-08">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="culpa mia londres 2" data-genero="romance drama" data-anio="2025" data-html="../View Peliculas/2 Culpa Mia (2025).html" data-fecha="2025-10-08">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2025</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/q0HxfkF9eoa6wSVnzwMhuDSK7ba.jpg">
       <span class="lock-icon">🔒</span>
       <p>Culpa mia: Londres</p>
     </div>
 
-    <div class="movie locked" data-titulo="corazon delator" data-genero="drama romance" data-anio="2025" data-html="../View Peliculas/Corazón delator (2025).html" data-fecha="2025-11-25">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="corazon delator" data-genero="drama romance" data-anio="2025" data-html="../View Peliculas/Corazón delator (2025).html" data-fecha="2025-11-25">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2025</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/5XgEqq8KJVW0R0NhDZCdBV2Pjr0.jpg">
       <span class="lock-icon">🔒</span>
       <p>Corazón delator</p>
     </div>
 
-    <div class="movie locked" data-titulo="contraataque" data-genero="accion suspenso" data-anio="2025" data-html="../View Peliculas/Contraataque (2025).html" data-fecha="2025-11-25">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="contraataque" data-genero="accion suspenso" data-anio="2025" data-html="../View Peliculas/Contraataque (2025).html" data-fecha="2025-11-25">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2025</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/kxnFdLJhi37ZVFDCL1ka0yeQVU5.jpg">
       <span class="lock-icon">🔒</span>
       <p>Contraataque</p>
     </div>
 
-    <div class="movie locked" data-titulo="bala perdida 3" data-genero="accion suspenso crimen" data-anio="2025" data-html="../View Peliculas/Bala perdida 3 (2025).html" data-fecha="2025-11-02">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="bala perdida 3" data-genero="accion suspenso crimen" data-anio="2025" data-html="../View Peliculas/Bala perdida 3 (2025).html" data-fecha="2025-11-02">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2025</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/bSGXolaGLJZxueTXxEE2WsgEoNh.jpg">
       <span class="lock-icon">🔒</span>
       <p>Bala perdida 3</p>
     </div>
 
-    <div class="movie locked" data-titulo="1978 argentina" data-genero="terror argentina" data-anio="2025" data-html="../View Peliculas/1978 (2025).html" data-fecha="2025-10-08">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="1978 argentina" data-genero="terror argentina" data-anio="2025" data-html="../View Peliculas/1978 (2025).html" data-fecha="2025-10-08">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2025</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/iyKixwGhGRas1ppAih8E7SG5QDZ.jpg">
       <span class="lock-icon">🔒</span>
       <p>1978</p>
     </div>
 
-    <div class="movie locked" data-titulo="amateur" data-genero="accion suspenso" data-anio="2025" data-html="../View Peliculas/Amateur (2025).html" data-fecha="2025-30-10">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="amateur" data-genero="accion suspenso" data-anio="2025" data-html="../View Peliculas/Amateur (2025).html" data-fecha="2025-30-10">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2025</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/xzM5pMCIyp8jkGtsFBGcPlRhVBc.jpg">
       <span class="lock-icon">🔒</span>
       <p>Amateur</p>
     </div>
 
-    <div class="movie locked" data-titulo="cantar desnuda" data-genero="musica adulto porno documental" data-anio="2025" data-html="../View Peliculas/Cantar desnuda (2025).html" data-fecha="2025-11-08">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="cantar desnuda" data-genero="musica adulto porno documental" data-anio="2025" data-html="../View Peliculas/Cantar desnuda (2025).html" data-fecha="2025-11-08">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2025</span>
+      <span class="year-tegg">HD</span>
       <img src="https://cinepelayo.com/wp-content/uploads/2025/01/cartel-cantar-desnuda.jpg">
       <span class="lock-icon">🔒</span>
       <p>Cantar desnuda</p>
     </div>
 
-    <div class="movie locked" data-titulo="banger" data-genero="musical comedia pelicula" data-anio="2025" data-html="../View Peliculas/Banger (2025).html" data-fecha="2025-11-02">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="banger" data-genero="musical comedia pelicula" data-anio="2025" data-html="../View Peliculas/Banger (2025).html" data-fecha="2025-11-02">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2025</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/x2pegSby27ebOwW361GJb1aKcxa.jpg">
       <span class="lock-icon">🔒</span>
       <p>Banger</p>
     </div>
 
-    <div class="movie locked" data-titulo="alarum codigo letal" data-genero="accion suspenso crimen" data-anio="2025" data-html="../View Peliculas/Alarum Código Letal (2025).html" data-fecha="2025-10-12">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="alarum codigo letal" data-genero="accion suspenso crimen" data-anio="2025" data-html="../View Peliculas/Alarum Código Letal (2025).html" data-fecha="2025-10-12">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2025</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/d3QFYKpEY2LSSTh70C227Z2mlwB.jpg">
       <span class="lock-icon">🔒</span>
       <p>Alarum: Código letal</p>
     </div>
 
-    <div class="movie locked" data-titulo="moana 2" data-genero="animacion aventura disney" data-anio="2024" data-html="../View Peliculas/Moana 2 (2024).html" data-fecha="2025-11-26">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="moana 2" data-genero="animacion aventura disney" data-anio="2024" data-html="../View Peliculas/Moana 2 (2024).html" data-fecha="2025-11-26">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2024</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/9yfI8gGG96Dgf9bf7VT3XCRX30T.jpg">
       <span class="lock-icon">🔒</span>
       <p>Moana 2</p>
     </div>
 
-    <div class="movie locked" data-titulo="bambi una vida en el bosque" data-genero="aventura documental familia disney" data-anio="2024" data-html="../View Peliculas/Bambi una vida en el bosque (2024).html" data-fecha="2025-11-02">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="bambi una vida en el bosque" data-genero="aventura documental familia disney" data-anio="2024" data-html="../View Peliculas/Bambi una vida en el bosque (2024).html" data-fecha="2025-11-02">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2024</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/fvtIXQH4JcifptPe0J9GfLDIOAQ.jpg">
       <span class="lock-icon">🔒</span>
       <p>Bambi: Una vida en el bosque</p>
     </div>
 
-    <div class="movie locked" data-titulo="deadpool 3 y wolverine" data-genero="accion heroes marvel ciencia ficcion" data-anio="2024" data-html="../View Peliculas/Deadpool y Wolverine (2024).html" data-fecha="2025-11-08">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="deadpool 3 y wolverine" data-genero="accion heroes marvel ciencia ficcion" data-anio="2024" data-html="../View Peliculas/Deadpool y Wolverine (2024).html" data-fecha="2025-11-08">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2024</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/hAn57Hu13UU2Klw5wZszNlWngQr.jpg">
       <span class="lock-icon">🔒</span>
       <p>Deadpool y Wolverine</p>
     </div>
 
-    <div class="movie locked" data-titulo="baki hanma vs kengan ashura" data-genero="animacion anime fantasia" data-anio="2024" data-html="../View Peliculas/Baki Hanma vs. Kengan Ashura (2024).html" data-fecha="2025-11-02">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="baki hanma vs kengan ashura" data-genero="animacion anime fantasia" data-anio="2024" data-html="../View Peliculas/Baki Hanma vs. Kengan Ashura (2024).html" data-fecha="2025-11-02">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2024</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/etbHJxil0wHvYOCmibzFLsMcl2C.jpg">
       <span class="lock-icon">🔒</span>
       <p>Baki Hanma VS Kengan Ashura</p>
     </div>
 
-    <div class="movie locked" data-titulo="azrael" data-genero="terror suspenso" data-anio="2024" data-html="../View Peliculas/Azrael (2024).html" data-fecha="2025-11-01">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="azrael" data-genero="terror suspenso" data-anio="2024" data-html="../View Peliculas/Azrael (2024).html" data-fecha="2025-11-01">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2024</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/oRZZDhHrxIqvXAuDgQLalm7vlrN.jpg">
       <span class="lock-icon">🔒</span>
       <p>Azrael</p>
     </div>
 
-    <div class="movie locked" data-titulo="chicas malas" data-genero="drama comedia" data-anio="2024" data-html="../View Peliculas/Chicas malas (2024).html" data-fecha="2025-11-25">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="chicas malas" data-genero="drama comedia" data-anio="2024" data-html="../View Peliculas/Chicas malas (2024).html" data-fecha="2025-11-25">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2024</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/jCerTXgMp5iiSoJofwkKskp2w45.jpg">
       <span class="lock-icon">🔒</span>
       <p>Chicas malas</p>
     </div>
 
-    <div class="movie locked" data-titulo="babygirl deseo prohibido" data-genero="romance" data-anio="2024" data-html="../View Peliculas/Babygirl (2024).html" data-fecha="2025-11-01">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="babygirl deseo prohibido" data-genero="romance" data-anio="2024" data-html="../View Peliculas/Babygirl (2024).html" data-fecha="2025-11-01">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2024</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/fCCZlnzf6yEGGO9UEdVADRVvfhM.jpg">
       <span class="lock-icon">🔒</span>
       <p>Babygirl: Deseo prohibido</p>
     </div>
 
-    <div class="movie locked" data-titulo="beekeeper sentencia de muerte" data-genero="accion crimen suspenso" data-anio="2024" data-html="../View Peliculas/Beekeeper Sentencia de muerte (2024).html" data-fecha="2025-11-08">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="beekeeper sentencia de muerte" data-genero="accion crimen suspenso" data-anio="2024" data-html="../View Peliculas/Beekeeper Sentencia de muerte (2024).html" data-fecha="2025-11-08">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2024</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/8hF8krJOG9SGMCwRNfzjsFVRcHE.jpg">
       <span class="lock-icon">🔒</span>
       <p>Beekeeper: Sentencia de muerte</p>
     </div>
 
-    <div class="movie locked" data-titulo="anora" data-genero="drama romance" data-anio="2024" data-html="../View Peliculas/Anora (2024).html" data-fecha="2025-11-01">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="anora" data-genero="drama romance" data-anio="2024" data-html="../View Peliculas/Anora (2024).html" data-fecha="2025-11-01">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2024</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/tZCrWnyN4zEtJiFem5TFoYT8nxI.jpg">
       <span class="lock-icon">🔒</span>
       <p>Anora</p>
     </div>
 
-    <div class="movie locked" data-titulo="damsel" data-genero="drama accion fantasia" data-anio="2024" data-html="../View Peliculas/Damsel (2024).html" data-fecha="2025-11-26">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="damsel" data-genero="drama accion fantasia" data-anio="2024" data-html="../View Peliculas/Damsel (2024).html" data-fecha="2025-11-26">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2024</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/gh7oa9IKlu5yMveemyJkzLfopuB.jpg">
       <span class="lock-icon">🔒</span>
       <p>Damsel</p>
     </div>
 
-    <div class="movie locked" data-titulo="atrapados en lo profundo del mar atrapados en el abismo" data-genero="terror suspenso tiburones" data-anio="2024" data-html="../View Peliculas/Atrapados en lo Profundo Atrapados en el abismo (2024).html" data-fecha="2025-11-01">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="atrapados en lo profundo del mar atrapados en el abismo" data-genero="terror suspenso tiburones" data-anio="2024" data-html="../View Peliculas/Atrapados en lo Profundo Atrapados en el abismo (2024).html" data-fecha="2025-11-01">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2024</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/fSY6BYUZMObTIzPfRBlhuAb5lsd.jpg">
       <span class="lock-icon">🔒</span>
       <p>Atrapados en lo Profundo</p>
     </div>
 
-    <div class="movie locked" data-titulo="asesino serial" data-genero="crimen suspenso terror" data-anio="2024" data-html="../View Peliculas/Asesino serial (2024).html" data-fecha="2025-11-01">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="asesino serial" data-genero="crimen suspenso terror" data-anio="2024" data-html="../View Peliculas/Asesino serial (2024).html" data-fecha="2025-11-01">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2024</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/gs9GQ9n95BdVE8Uv1ZKNS1bSwCf.jpg">
       <span class="lock-icon">🔒</span>
       <p>Asesino serial</p>
     </div>
 
-    <div class="movie locked" data-titulo="60 minutos" data-genero="accion mma peleas " data-anio="2024" data-html="../View Peliculas/60 Minutos (2024).html" data-fecha="2025-10-08">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="diario de mi vagina" data-genero="drama" data-anio="2024" data-html="../View Peliculas/Diario de mi vagina (2024).html" data-fecha="2025-11-30">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2024</span>
-      <img src="https://image.tmdb.org/t/p/w300/cND79ZWPFINDtkA8uwmQo1gnPPE.jpg">
+      <span class="year-tegg">HD</span>
+      <img src="https://image.tmdb.org/t/p/w300/7PzGmlaai6mRUslfrdBhfXjfA1J.jpg">
       <span class="lock-icon">🔒</span>
-      <p>60 Minutos</p>
+      <p>Diario de mi vagina</p>
     </div>
 
-    <div class="movie locked" data-titulo="culpa tuya 1" data-genero="drama romance" data-anio="2024" data-html="../View Peliculas/1 Culpa tuya (2024).html" data-fecha="2025-10-09">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="60 minutos" data-genero="accion mma peleas " data-anio="2024" data-html="../View Peliculas/60 Minutos (2024).html" data-fecha="2025-10-08">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2024</span>
+      <span class="year-tegg">HD</span>
+      <img src="https://image.tmdb.org/t/p/w300/cND79ZWPFINDtkA8uwmQo1gnPPE.jpg">
+      <span class="lock-icon">🔒</span>
+      <p>60 Minutos acechados por el mal</p>
+    </div>
+
+    <div class="movie locked" data-tipo="pelicula" data-titulo="Detonantes" data-genero="accion" data-anio="2024" data-html="../View Peliculas/Detonante (2024).html" data-fecha="2025-11-30">
+      <span class="pelicula">Pelicula</span>
+      <span class="year-tag">2024</span>
+      <span class="year-tegg">HD</span>
+      <img src="https://image.tmdb.org/t/p/w300/mOXgCNK2PKf7xlpsZzybMscFsqm.jpg">
+      <span class="lock-icon">🔒</span>
+      <p>Detonantes</p>
+    </div>
+
+    <div class="movie locked" data-tipo="pelicula" data-titulo="culpa tuya 1" data-genero="drama romance" data-anio="2024" data-html="../View Peliculas/1 Culpa tuya (2024).html" data-fecha="2025-10-09">
+      <span class="pelicula">Pelicula</span>
+      <span class="year-tag">2024</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/1jvCVdlgInyItAUEvvvCakm1Yxz.jpg">
       <span class="lock-icon">🔒</span>
       <p>Culpa tuya</p>
     </div>
 
-    <div class="movie locked" data-titulo="codigo 8 parte 2" data-genero="accion crimen ciencia ficcion" data-anio="2024" data-html="../View Peliculas/Codigo 8 (Parte 2) (2024).html" data-fecha="2025-11-25">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="codigo 8 parte 2" data-genero="accion crimen ciencia ficcion" data-anio="2024" data-html="../View Peliculas/Codigo 8 (Parte 2) (2024).html" data-fecha="2025-11-25">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2024</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/dg6WrJUIQLU4pssA4ZucGfdOj8.jpg">
       <span class="lock-icon">🔒</span>
       <p>Codigo 8 - Parte 2</p>
     </div>
 
-    <div class="movie locked" data-titulo="desaparecidos en la noche" data-genero="drama misterio suspenso" data-anio="2024" data-html="../View Peliculas/Desaparecidos en la noche (2024).html" data-fecha="2025-11-26">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="desaparecidos en la noche" data-genero="drama misterio suspenso" data-anio="2024" data-html="../View Peliculas/Desaparecidos en la noche (2024).html" data-fecha="2025-11-26">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2024</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/uyEFqfRezkNrxh9Lg8fj8IcbkHx.jpg">
       <span class="lock-icon">🔒</span>
       <p>Desaparecidos en la noche</p>
     </div>
 
-    <div class="movie locked" data-titulo="abigail" data-genero="terror" data-anio="2024" data-html="../View Peliculas/Abigail (2024).html" data-fecha="2025-10-08">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="abigail" data-genero="terror" data-anio="2024" data-html="../View Peliculas/Abigail (2024).html" data-fecha="2025-10-08">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2024</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/kmB9grIf2fvpwwsDmNMN0XFz1tT.jpg">
       <span class="lock-icon">🔒</span>
       <p>Abigail</p>
     </div>
 
-    <div class="movie locked" data-titulo="Al rescate de fondo de Bikini" data-genero="animacion aventura comedia familia" data-anio="2024" data-html="../View Peliculas/Al rescate de Fondo de Bikini La película de Arenita Mejillas (2024).html" data-fecha="2025-10-12">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked"  data-tipo="pelicula"data-titulo="Al rescate de fondo de Bikini" data-genero="animacion aventura comedia familia" data-anio="2024" data-html="../View Peliculas/Al rescate de Fondo de Bikini La película de Arenita Mejillas (2024).html" data-fecha="2025-10-12">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2024</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/7WfWEy1EIJj4nLR6PdE6A09TcOv.jpg">
       <span class="lock-icon">🔒</span>
       <p>Al rescate de fondo de Bikini</p>
     </div>
 
-    <div class="movie locked" data-titulo="desafiantes rivales" data-genero="drama romance" data-anio="2024" data-html="../View Peliculas/Desafiante Rivales (2024).html" data-fecha="2025-11-26">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="desafiantes rivales" data-genero="drama romance" data-anio="2024" data-html="../View Peliculas/Desafiante Rivales (2024).html" data-fecha="2025-11-26">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2024</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/Aiqfn4XtXUPr7QNsDsAKNQ1aOKV.jpg">
       <span class="lock-icon">🔒</span>
       <p>Desafiantes Rivales</p>
     </div>
 
-    <div class="movie locked" data-titulo="bad boys 4 hasta la muerte" data-genero="comedia accion crimen" data-anio="2024" data-html="../View Peliculas/Bad Boys 4 Hasta La Muerte.(2024).html" data-fecha="2025-11-02">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="bad boys 4 hasta la muerte" data-genero="comedia accion crimen" data-anio="2024" data-html="../View Peliculas/Bad Boys 4 Hasta La Muerte.(2024).html" data-fecha="2025-11-02">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2024</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/25PVk2NFoZoCnaqxb4nSQqwxNd7.jpg">
       <span class="lock-icon">🔒</span>
       <p>Bad boys 4: Hasta la muerte</p>
     </div>
 
-    <div class="movie locked" data-titulo="baghead contacto con la muerte" data-genero="terror suspenso misterio" data-anio="2024" data-html="../View Peliculas/Baghead contacto con la muerte (2024).html" data-fecha="2025-11-02">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="baghead contacto con la muerte" data-genero="terror suspenso misterio" data-anio="2024" data-html="../View Peliculas/Baghead contacto con la muerte (2024).html" data-fecha="2025-11-02">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2024</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/5ssaCHmqvTZDVZtcNhNZTzfb7Nj.jpg">
       <span class="lock-icon">🔒</span>
       <p>Baghead: Contacto con la muerte</p>
     </div>
 
-    <div class="movie locked" data-titulo="after 4 aquí acaba todo" data-genero="romance drama" data-anio="2023" data-html="../View Peliculas/After 4 Aquí acaba todo (2023).html" data-fecha="2025-10-12">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="after 4 aquí acaba todo" data-genero="romance drama" data-anio="2023" data-html="../View Peliculas/After 4 Aquí acaba todo (2023).html" data-fecha="2025-10-12">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2023</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/jO3VGQi5sHIj2BGS963g1F74yCq.jpg">
       <span class="lock-icon">🔒</span>
       <p>After 4: Aquí acaba todo</p>
     </div>
 
-    <div class="movie locked" data-titulo="como matar a mama" data-genero="comedia drama" data-anio="2023" data-html="../View Peliculas/Cómo matar a mamá (2023).html" data-fecha="2025-11-25">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="como matar a mama" data-genero="comedia drama" data-anio="2023" data-html="../View Peliculas/Cómo matar a mamá (2023).html" data-fecha="2025-11-25">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2023</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/zQch27gPbimK96vtbrEq4jFHg2D.jpg">
       <span class="lock-icon">🔒</span>
       <p>¿Cómo matar a mamá?</p>
     </div>
 
-    <div class="movie locked" data-titulo="blue Beetle" data-genero="accion heroe ciencia ficcion" data-anio="2023" data-html="../View Peliculas/Blue Beetle (2023).html" data-fecha="2025-11-08">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="blue Beetle" data-genero="accion heroe ciencia ficcion" data-anio="2023" data-html="../View Peliculas/Blue Beetle (2023).html" data-fecha="2025-11-08">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2023</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/z5mkvXYNRauSzHdZgxAj6MzrLTY.jpg">
       <span class="lock-icon">🔒</span>
       <p>Blue Beetle</p>
     </div>
 
-    <div class="movie locked" data-titulo="anna nicole smith tu no me conoces" data-genero="documentacion" data-anio="2023" data-html="../View Peliculas/Anna Nicole Smith Tú no me conoces (2023).html" data-fecha="2025-30-10">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="anna nicole smith tu no me conoces" data-genero="documentacion" data-anio="2023" data-html="../View Peliculas/Anna Nicole Smith Tú no me conoces (2023).html" data-fecha="2025-30-10">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2023</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/mybL2Hd3PvsY7Qyjf7W6BKsoECu.jpg">
       <span class="lock-icon">🔒</span>
       <p>Anna Nicole Smith: Tú no me conoces</p>
     </div>
 
-    <div class="movie locked" data-titulo="cementerio de animales 2" data-genero="terror misterio sobrentural" data-anio="2023" data-html="../View Peliculas/Cementerio de animales Los orígenes 2 (2023).html" data-fecha="2025-11-17">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="cementerio de animales 2" data-genero="terror misterio sobrentural" data-anio="2023" data-html="../View Peliculas/Cementerio de animales Los orígenes 2 (2023).html" data-fecha="2025-11-17">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2023</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/h6OOcYnuYVoaQQm3zGIYJ7XfTuo.jpg">
       <span class="lock-icon">🔒</span>
       <p>Cementerio de animales 2</p>
     </div>
 
-    <div class="movie locked" data-titulo="crater un viaje inolvidable" data-genero="accion disney aventura fantasia ciencia ficcion" data-anio="2023" data-html="../View Peliculas/Cráter Un viaje inolvidable (2023).html" data-fecha="2025-11-26">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="crater un viaje inolvidable" data-genero="accion disney aventura fantasia ciencia ficcion" data-anio="2023" data-html="../View Peliculas/Cráter Un viaje inolvidable (2023).html" data-fecha="2025-11-26">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2023</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/ppEvMrq2nvV9DfBHuCRilf2MBnm.jpg">
       <span class="lock-icon">🔒</span>
       <p>Cráter: Un viaje inolvidable</p>
     </div>
 
-    <div class="movie locked" data-titulo="barbie" data-genero="comedia aventura musical" data-anio="2023" data-html="../View Peliculas/Barbie (2023).html" data-fecha="2025-11-02">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="barbie" data-genero="comedia aventura musical" data-anio="2023" data-html="../View Peliculas/Barbie (2023).html" data-fecha="2025-11-02">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2023</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/iuFNMS8U5cb6xfzi51Dbkovj7vM.jpg">
       <span class="lock-icon">🔒</span>
       <p>Barbie</p>
     </div>
 
-    <div class="movie locked" data-titulo="after 3 amor infinito" data-genero="romance drama" data-anio="2022" data-html="../View Peliculas/After 3 Amor infinito (2022).html" data-fecha="2025-10-12">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="after 3 amor infinito" data-genero="romance drama" data-anio="2022" data-html="../View Peliculas/After 3 Amor infinito (2022).html" data-fecha="2025-10-12">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2022</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/vcI9BD5kMmVI45Pzj5B1ZaGpFIR.jpg">
       <span class="lock-icon">🔒</span>
       <p>After 3: Amor infinito</p>
     </div>
 
-    <div class="movie locked" data-titulo="365 dias 3 mas" data-genero="romance drama" data-anio="2022" data-html="../View Peliculas/365 dias mas 3 (2022).html" data-fecha="2025-10-08">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="365 dias 3 mas" data-genero="romance drama" data-anio="2022" data-html="../View Peliculas/365 dias mas 3 (2022).html" data-fecha="2025-10-08">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2022</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/mwcII5bXMeMTKyCejPuBPBTjmxu.jpg">
       <span class="lock-icon">🔒</span>
       <p>365 Dias 3: Mas</p>
     </div>
 
-    <div class="movie locked" data-titulo="lightyear" data-genero="animacion aventura familia disney toy story" data-anio="2022" data-html="../View Peliculas/Buzz Lightyear (2022).html" data-fecha="2025-11-08">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="lightyear" data-genero="animacion aventura familia disney toy story" data-anio="2022" data-html="../View Peliculas/Buzz Lightyear (2022).html" data-fecha="2025-11-08">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2022</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/65WFr1ZMAbEniIh4jEhbRG9OHHN.jpg">
       <span class="lock-icon">🔒</span>
       <p>Lightyear</p>
     </div>
     <!--
-    <div class="movie locked" data-titulo="doctor strange 2 el multiverso de la locura" data-genero="accion marvel" data-anio="2022" data-html="../View Peliculas/Doctor Strange en el multiverso de la locura (2022).html" data-fecha="2025-11-26">
-      <span class="tag">Pelicula</span>
+
+    <div class="movie locked" data-tipo="pelicula" data-titulo="doblemente embarazada 2" data-genero="comedia" data-anio="2022" data-html="../View Peliculas/Doblemente embarazada 2 (2022).html" data-fecha="2025-11-30">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2022</span>
+      <span class="year-tegg">HD</span>
+      <img src="https://image.tmdb.org/t/p/w300/mNkAOFyb4TV2gTSc92jx2O9evtj.jpg">
+      <span class="lock-icon">🔒</span>
+      <p>Doblemente embarazada 2</p>
+    </div>
+
+    <div class="movie locked" data-tipo="pelicula" data-titulo="doctor strange 2 el multiverso de la locura" data-genero="accion marvel" data-anio="2022" data-html="../View Peliculas/Doctor Strange en el multiverso de la locura (2022).html" data-fecha="2025-11-26">
+      <span class="pelicula">Pelicula</span>
+      <span class="year-tag">2022</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/qd7NMF0SyUCx5IS6nTOOUPdTwvB.jpg">
       <span class="lock-icon">🔒</span>
       <p>Doctor Strange 2: El multiverso de la locura</p>
     </div>
     -->
-    <div class="movie locked" data-titulo="365 dias 2 aquel dia " data-genero="romance drama" data-anio="2022" data-html="../View Peliculas/365 Dias 2 Aquel dia (2022).html" data-fecha="2025-10-08">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="365 dias 2 aquel dia " data-genero="romance drama" data-anio="2022" data-html="../View Peliculas/365 Dias 2 Aquel dia (2022).html" data-fecha="2025-10-08">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2022</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/k3J2GdYxhR6U2RfsHZOsmHVKW7m.jpg">
       <span class="lock-icon">🔒</span>
       <p>365 Dias 2: Aquel dia</p>
     </div>
 
-    <div class="movie locked" data-titulo="cato" data-genero="musical drama" data-anio="2021" data-html="../View Peliculas/CATO (2021).html" data-fecha="2025-11-16">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="cato" data-genero="musical drama" data-anio="2021" data-html="../View Peliculas/CATO (2021).html" data-fecha="2025-11-16">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2021</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/lTCsGvAjqBbqp7T5ziK28SeDfVT.jpg">
       <span class="lock-icon">🔒</span>
       <p>CATO</p>
     </div>
 
-    <div class="movie locked" data-titulo="scooby ¡scooby!" data-genero="animacion aventura" data-anio="2020" data-html="../View Peliculas/¡Scooby! (2020).html" data-fecha="2025-10-09">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="serie" data-titulo="el juego del calamar" data-tipo="serie" data-genero="accion drama crimen" data-anio="2021" data-html="../View Series/El Juego Del Calamar (2021).html" data-fecha="2025-11-27">
+      <span class="pelicula">Serie</span>
+      <span class="year-tag">2021</span>
+      <span class="year-tegg">HD</span>
+      <img src="https://image.tmdb.org/t/p/w300/xNvlt4jn2KbuKJoZ9UiVpm7lYjr.jpg">
+      <span class="lock-icon">🔒</span>
+      <p>El juego del calamar</p>
+    </div>
+
+    <div class="movie locked" data-tipo="pelicula" data-titulo="scooby ¡scooby!" data-genero="animacion aventura" data-anio="2020" data-html="../View Peliculas/¡Scooby! (2020).html" data-fecha="2025-10-09">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2020</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/tOhuq4RYr2Rt9TM7X4dkr7A9HSd.jpg">
       <span class="lock-icon">🔒</span>
       <p>¡Scooby!</p>
     </div>
 
-    <div class="movie locked" data-titulo="bob esponja 3 un heroe al rescate" data-genero="animacion aventura fantasia" data-anio="2020" data-html="../View Peliculas/Bob Esponja 3 Un héroe al rescate (2020).html" data-fecha="2025-11-08">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="bob esponja 3 un heroe al rescate" data-genero="animacion aventura fantasia" data-anio="2020" data-html="../View Peliculas/Bob Esponja 3 Un héroe al rescate (2020).html" data-fecha="2025-11-08">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2020</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/fi2pg2mtAZwhq3qVuAs6PztjnHT.jpg">
       <span class="lock-icon">🔒</span>
       <p>Bob Esponja 3: Un héroe al rescate</p>
     </div>
 
-    <div class="movie locked" data-titulo="after 2 en mil pedazos" data-genero="romance drama" data-anio="2020" data-html="../View Peliculas/After 2 En mil pedazos (2020).html" data-fecha="2025-10-12">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="after 2 en mil pedazos" data-genero="romance drama" data-anio="2020" data-html="../View Peliculas/After 2 En mil pedazos (2020).html" data-fecha="2025-10-12">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2020</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/8nPw22C41EUWXREWmY9iIivMXxm.jpg">
       <span class="lock-icon">🔒</span>
       <p>After 2: En mil pedazos</p>
     </div>
 
-    <div class="movie locked" data-titulo="365 dias 1" data-genero="romance drama" data-anio="2020" data-html="../View Peliculas/365 dias (2020).html" data-fecha="2025-10-08">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="365 dias 1" data-genero="romance drama" data-anio="2020" data-html="../View Peliculas/365 dias (2020).html" data-fecha="2025-10-08">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2020</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/jz8T3hrU6GuMqSuQ4Rbd4MJUeaq.jpg">
       <span class="lock-icon">🔒</span>
       <p>365 Dias</p>
     </div>
 
-    <div class="movie locked" data-titulo="belleza negra" data-genero="drama caballo disney" data-anio="2020" data-html="../View Peliculas/Belleza Negra (2020).html" data-fecha="2025-11-08">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="belleza negra" data-genero="drama caballo disney" data-anio="2020" data-html="../View Peliculas/Belleza Negra (2020).html" data-fecha="2025-11-08">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2020</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/d3wE2OAmWsuuE4IOp6i8iSeRYy4.jpg">
       <span class="lock-icon">🔒</span>
       <p>Belleza negra</p>
     </div>
 
-    <div class="movie locked" data-titulo="bad boys 3 para siempre" data-genero="comedia accion crimen" data-anio="2020" data-html="../View Peliculas/Bad boys 3 para siempre (2020).html" data-fecha="2025-11-02">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="bad boys 3 para siempre" data-genero="comedia accion crimen" data-anio="2020" data-html="../View Peliculas/Bad boys 3 para siempre (2020).html" data-fecha="2025-11-02">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2020</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/5XR7Pbo8qdwdpOIsFtWJOEiOJD6.jpg">
       <span class="lock-icon">🔒</span>
       <p>Bad boys 3: Para siempre</p>
     </div>
 
-    <div class="movie locked" data-titulo="aladdin" data-genero="aventura disney comedia fantasia" data-anio="2019" data-html="../View Peliculas/Aladdín (2019).html" data-fecha="2025-10-12">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="aladdin" data-genero="aventura disney comedia fantasia" data-anio="2019" data-html="../View Peliculas/Aladdín (2019).html" data-fecha="2025-10-12">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2019</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/fv9c5fsdxqUzkullgMB4cZja29y.jpg">
       <span class="lock-icon">🔒</span>
       <p>Aladdin</p>
     </div>
 
-    <div class="movie locked" data-titulo="como entrenar a tu dragon 3" data-genero="animacion aventura fantasia familia" data-anio="2019" data-html="../View Peliculas/Cómo entrenar a tu dragón 3 (2019).html" data-fecha="2025-11-25">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="como entrenar a tu dragon 3" data-genero="animacion aventura fantasia familia" data-anio="2019" data-html="../View Peliculas/Cómo entrenar a tu dragón 3 (2019).html" data-fecha="2025-11-25">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2019</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/rBQ9RVg6Zpo5aasWWOWmjET5Hah.jpg">
       <span class="lock-icon">🔒</span>
       <p>Cómo entrenar a tu dragón 3</p>
     </div>
 
-    <div class="movie locked" data-titulo="cementerio de animales 1" data-genero="terror misterio sobrentural" data-anio="2019" data-html="../View Peliculas/Cementerio de animales (2019).html" data-fecha="2025-11-17">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="cementerio de animales 1" data-genero="terror misterio sobrentural" data-anio="2019" data-html="../View Peliculas/Cementerio de animales (2019).html" data-fecha="2025-11-17">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2019</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/vnw6g9c7qzNdzvpQhwWGRzBxwM0.jpg">
       <span class="lock-icon">🔒</span>
       <p>Cementerio de animales</p>
     </div>
 
-    <div class="movie locked" data-titulo="codigo 8 parte 1" data-genero="accion crimen ciencia ficcion" data-anio="2019" data-html="../View Peliculas/Codigo 8 (Parte 1) (2019).html" data-fecha="2025-11-25">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="codigo 8 parte 1" data-genero="accion crimen ciencia ficcion" data-anio="2019" data-html="../View Peliculas/Codigo 8 (Parte 1) (2019).html" data-fecha="2025-11-25">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2019</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/ubXn3H2PWkoqH9TIBrWRJSKzuaD.jpg">
       <span class="lock-icon">🔒</span>
       <p>Codigo 8 - Parte 1</p>
     </div>
 
-    <div class="movie locked" data-titulo="after 1 aqui empieza todo" data-genero="romance drama" data-anio="2019" data-html="../View Peliculas/After 1 Aquí empieza todo (2019).html" data-fecha="2025-10-08">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="after 1 aqui empieza todo" data-genero="romance drama" data-anio="2019" data-html="../View Peliculas/After 1 Aquí empieza todo (2019).html" data-fecha="2025-10-08">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2019</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/5kZxlS9vLExy3hZA5GfNFg8oJgZ.jpg">
       <span class="lock-icon">🔒</span>
       <p>After: Aqui empieza todo</p>
     </div>
 
-    <div class="movie locked" data-titulo="anabelle annabelle 3 vuelve a casa" data-genero="terror" data-anio="2019" data-html="../View Peliculas/Annabelle 3 viene a casa (2019).html" data-fecha="2025-11-01">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="anabelle annabelle 3 vuelve a casa" data-genero="terror" data-anio="2019" data-html="../View Peliculas/Annabelle 3 viene a casa (2019).html" data-fecha="2025-11-01">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2019</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/3ZZB2UHGK2iqj4XYgmivkeCgGJn.jpg">
       <span class="lock-icon">🔒</span>
       <p>Annabelle 3: Vuelve a casa</p>
     </div>
 
-     <div class="movie locked" data-titulo="deadpool 2" data-genero="accion marvel comedia" data-anio="2018" data-html="../View Peliculas/Deadpool 2 (2018).html" data-fecha="2025-11-26">
-      <span class="tag">Pelicula</span>
+    <!--
+    <div class="movie locked" data-tipo="pelicula" data-titulo="doblemente embarazada embarazo" data-genero="comedia" data-anio="2019" data-html="../View Peliculas/Doblemente embarazada (2019).html" data-fecha="2025-11-30">
+      <span class="pelicula">Pelicula</span>
+      <span class="year-tag">2019</span>
+      <span class="year-tegg">HD</span>
+      <img src="https://image.tmdb.org/t/p/w300/xcTppRqJBs6gUFgg010tZGQLxyr.jpg">
+      <span class="lock-icon">🔒</span>
+      <p>Doblemente embarazada</p>
+    </div>
+    -->
+
+    <div class="movie locked" data-tipo="pelicula" data-titulo="dragon ball dragon ball z super broly" data-genero="animacion anime ciencia ficcion accion" data-anio="2018" data-html="../View Peliculas/Dragon Ball Super Broly.html" data-fecha="2025-12-01">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2018</span>
+      <span class="year-tegg">HD</span>
+      <img src="https://image.tmdb.org/t/p/w300/6JilEC1SON8tWIRHcdJzf4uVBpX.jpg">
+      <span class="lock-icon">🔒</span>
+      <p>Dragon Ball Super: Broly</p>
+    </div>
+
+    <div class="movie locked" data-tipo="pelicula" data-titulo="deadpool 2" data-genero="accion marvel comedia" data-anio="2018" data-html="../View Peliculas/Deadpool 2 (2018).html" data-fecha="2025-11-26">
+      <span class="pelicula">Pelicula</span>
+      <span class="year-tag">2018</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/jA4DpT3ywxfchnTfMBiouBhq9nU.jpg">
       <span class="lock-icon">🔒</span>
       <p>Deadpool 2</p>
     </div>
 
-    <div class="movie locked" data-titulo="a ganar" data-genero="drama" data-anio="2018" data-html="../View Peliculas/¡A Ganar! (2018).html" data-fecha="2025-10-08">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="a ganar" data-genero="drama" data-anio="2018" data-html="../View Peliculas/¡A Ganar! (2018).html" data-fecha="2025-10-08">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2018</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/6GVYL9K2IBFrfIqwwFqMPu5DdC5.jpg">
       <span class="lock-icon">🔒</span>
       <p>¡A Ganar!</p>
     </div>
 
-    <div class="movie locked" data-titulo="moana" data-genero="animacion aventura disney" data-anio="2018" data-html="../View Peliculas/Moana 1 (2018).html" data-fecha="2025-11-26">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="moana" data-genero="animacion aventura disney" data-anio="2018" data-html="../View Peliculas/Moana 1 (2018).html" data-fecha="2025-11-26">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2018</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/a4Jj3Tk2AZvmUYWx0H92HGfktKo.jpg">
       <span class="lock-icon">🔒</span>
       <p>Moana</p>
     </div>
 
-    <div class="movie locked" data-titulo="cincuenta sombras de grey 3 liberadas" data-genero="romance drama" data-anio="2018" data-html="../View Peliculas/Cincuenta sombras liberadas (2018).html" data-fecha="2025-11-24">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="cincuenta sombras de grey 3 liberadas" data-genero="romance drama" data-anio="2018" data-html="../View Peliculas/Cincuenta sombras liberadas (2018).html" data-fecha="2025-11-24">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2018</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/sM8hwgWZlmZf0h4aOkNopb3HBIo.jpg">
       <span class="lock-icon">🔒</span>
       <p>Cincuentas sombras 3: Liberadas</p>
     </div>
 
-    <div class="movie locked" data-titulo="cars 3" data-genero="animacion disney familia aventura" data-anio="2017" data-html="../View Peliculas/Cars 3 (2017).html" data-fecha="2025-11-16">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="cars 3" data-genero="animacion disney familia aventura" data-anio="2017" data-html="../View Peliculas/Cars 3 (2017).html" data-fecha="2025-11-16">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2017</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/ucGU1HyLfxoQwuq22VWwq55m0cH.jpg">
       <span class="lock-icon">🔒</span>
       <p>Cars 3</p>
     </div>
 
-    <div class="movie locked" data-titulo="anabelle annabelle 2 la creacion" data-genero="terror" data-anio="2017" data-html="../View Peliculas/Annabelle 2 la creacion 2 (2017).html" data-fecha="2025-11-01">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="anabelle annabelle 2 la creacion" data-genero="terror" data-anio="2017" data-html="../View Peliculas/Annabelle 2 la creacion 2 (2017).html" data-fecha="2025-11-01">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2017</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/x0pekWNy7GS37bm30zuxWNLPXj8.jpg">
       <span class="lock-icon">🔒</span>
       <p>Annabelle 2: La creación</p>
     </div>
 
-     <div class="movie locked" data-titulo="coco" data-genero="animacion disney familia aventura musical" data-anio="2017" data-html="../View Peliculas/Coco (2017).html" data-fecha="2025-11-34">
-      <span class="tag">Pelicula</span>
+     <div class="movie locked" data-tipo="pelicula" data-titulo="coco" data-genero="animacion disney familia aventura musical" data-anio="2017" data-html="../View Peliculas/Coco (2017).html" data-fecha="2025-11-34">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2017</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/yAvisTUocxmXQZQJZ521dL9a36p.jpg">
       <span class="lock-icon">🔒</span>
       <p>Coco</p>
     </div>
 
-    <div class="movie locked" data-titulo="cincuenta sombras de grey 2 mas oscuras" data-genero="romance drama" data-anio="2017" data-html="../View Peliculas/Cincuenta sombras más oscuras (2017).html" data-fecha="2025-11-24">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="cincuenta sombras de grey 2 mas oscuras" data-genero="romance drama" data-anio="2017" data-html="../View Peliculas/Cincuenta sombras más oscuras (2017).html" data-fecha="2025-11-24">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2017</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/jvBAQOg2ObZKYXZGxYSz3Fkr7Qt.jpg">
       <span class="lock-icon">🔒</span>
       <p>Cincuenta sombras 2: Más oscurass</p>
     </div>
 
-    <div class="movie locked" data-titulo="capitan america 3 civil war" data-genero="heroes marvel accion ciencia ficcion" data-anio="2016" data-html="../View Peliculas/Capitán América Civil War (2016).html" data-fecha="2025-11-16">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="capitan america 3 civil war" data-genero="heroes marvel accion ciencia ficcion" data-anio="2016" data-html="../View Peliculas/Capitán América Civil War (2016).html" data-fecha="2025-11-16">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2016</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/fwqAK9Vlh14mWMX3GNMi11P8XR4.jpg">
       <span class="lock-icon">🔒</span>
       <p>Capitán América 3: Civil War</p>
     </div>
 
-    <div class="movie locked" data-titulo="doctor strange el hechicero supremo" data-genero="accion marvel" data-anio="2016" data-html="../View Peliculas/Doctor Strange (2016).html" data-fecha="2025-11-26">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="doctor strange el hechicero supremo" data-genero="accion marvel" data-anio="2016" data-html="../View Peliculas/Doctor Strange (2016).html" data-fecha="2025-11-26">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2016</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/sOsvKTJS0XwtfLsNMO3C0CVWJ4u.jpg">
       <span class="lock-icon">🔒</span>
       <p>Doctor Strange: El hechicero supremo</p>
     </div>
 
-    <div class="movie locked" data-titulo="deadpool" data-genero="accion marvel comedia" data-anio="2016" data-html="../View Peliculas/Deadpool 1 (2016).html" data-fecha="2025-11-26">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="deadpool" data-genero="accion marvel comedia" data-anio="2016" data-html="../View Peliculas/Deadpool 1 (2016).html" data-fecha="2025-11-26">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2016</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/7BYksRLQ9HtZbUtanhAIdeQO9eD.jpg">
       <span class="lock-icon">🔒</span>
       <p>Deadpool</p>
     </div>
 
-     <div class="movie locked" data-titulo="boruto naruto shippuden" data-tipo="pelicula" data-genero="animacion anime accion" data-anio="2015" data-html="../View Peliculas/Boruto 2015.html" data-fecha="2025-11-08">
-      <span class="tag">Pelicula</span>
+     <div class="movie locked" data-tipo="pelicula" data-titulo="boruto naruto shippuden" data-tipo="pelicula" data-genero="animacion anime accion" data-anio="2015" data-html="../View Peliculas/Boruto 2015.html" data-fecha="2025-11-08">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2015</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/t9F4Yzi8rZO8Rn55ceyQPAofrI9.jpg">
       <span class="lock-icon">🔒</span>
       <p>Boruto: La Película</p>
     </div>
 
-    <div class="movie locked" data-titulo="corazones de acero" data-genero="accion guerra belica" data-anio="2015" data-html="../View Peliculas/Corazones de acero (2016).html" data-fecha="2025-11-26">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="corazones de acero" data-genero="accion guerra belica" data-anio="2015" data-html="../View Peliculas/Corazones de acero (2016).html" data-fecha="2025-11-26">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2015</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/kbtH5G8L8REzy72LkLmKYoBVaGv.jpg">
       <span class="lock-icon">🔒</span>
       <p>Corazones de acero</p>
     </div>
 
-    <div class="movie locked" data-titulo="alvin y las ardillas fiesta sobre ruedas" data-genero="animacion comedia aventura musical" data-anio="2015" data-html="../View Peliculas/Alvin y las ardillas Fiesta sobre ruedas 4 (2015).html" data-fecha="2025-30-10">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="alvin y las ardillas fiesta sobre ruedas" data-genero="animacion comedia aventura musical" data-anio="2015" data-html="../View Peliculas/Alvin y las ardillas Fiesta sobre ruedas 4 (2015).html" data-fecha="2025-30-10">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2015</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/isz4uh337srL6PIYiKXTS5Htssq.jpg">
       <span class="lock-icon">🔒</span>
       <p>Alvin y las ardillas: Fiesta sobre ruedas</p>
     </div>
 
-    <div class="movie locked" data-titulo="bob Esponja 2 un heroe fuera del agua" data-genero="animacion aventura comedia familia" data-anio="2015" data-html="../View Peliculas/Bob Esponja 2 Un héroe fuera del agua (2015).html" data-fecha="2025-11-08">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="bob Esponja 2 un heroe fuera del agua" data-genero="animacion aventura comedia familia" data-anio="2015" data-html="../View Peliculas/Bob Esponja 2 Un héroe fuera del agua (2015).html" data-fecha="2025-11-08">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2015</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/j4Sqs3SKNaJ4chdKXS1qqUlaWyW.jpg">
       <span class="lock-icon">🔒</span>
       <p>Bob Esponja 2: Un héroe fuera del agua</p>
     </div>
 
-    <div class="movie locked" data-titulo="cincuenta sombras de grey" data-genero="romance drama" data-anio="2015" data-html="../View Peliculas/Cincuenta sombras de Grey (2015).html" data-fecha="2025-11-24">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="cincuenta sombras de grey" data-genero="romance drama" data-anio="2015" data-html="../View Peliculas/Cincuenta sombras de Grey (2015).html" data-fecha="2025-11-24">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2015</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/mNZcZOIlTwDKd30xLnRR4p0ZELg.jpg">
       <span class="lock-icon">🔒</span>
       <p>Cincuenta sombras de Grey</p>
     </div>
 
-    <div class="movie locked" data-titulo="capitan America 2 el soldado de invierno" data-genero="accion heroes marvel ciencia ficcion" data-anio="2014" data-html="../View Peliculas/Capitán América 2 El soldado de invierno (2014).html" data-fecha="2025-11-08">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="capitan America 2 el soldado de invierno" data-genero="accion heroes marvel ciencia ficcion" data-anio="2014" data-html="../View Peliculas/Capitán América 2 El soldado de invierno (2014).html" data-fecha="2025-11-08">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2014</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/wP7JcCzpWlX5XeROpf4ox9ZVFT6.jpg">
       <span class="lock-icon">🔒</span>
       <p>Capitán América 2: El soldado de invierno</p>
     </div>
 
-    <div class="movie locked" data-titulo="como entrenar a tu dragon 2" data-genero="animacion aventura fantasia familia" data-anio="2014" data-html="../View Peliculas/Cómo entrenar a tu dragón 2 (2014).html" data-fecha="2025-11-25">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="donde esta el fantasma 2" data-genero="comedia terror" data-anio="2014" data-html="../View Peliculas/Donde esta el fantasma 2 (2014).html" data-fecha="2025-11-30">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2014</span>
+      <span class="year-tegg">HD</span>
+      <img src="https://image.tmdb.org/t/p/w300/vRbDuqlmGPM9wGZ3VwbrjQu16Oa.jpg">
+      <span class="lock-icon">🔒</span>
+      <p>¿Donde esta el fantasma? 2</p>
+    </div>
+
+    <div class="movie locked" data-tipo="pelicula" data-titulo="como entrenar a tu dragon 2" data-genero="animacion aventura fantasia familia" data-anio="2014" data-html="../View Peliculas/Cómo entrenar a tu dragón 2 (2014).html" data-fecha="2025-11-25">
+      <span class="pelicula">Pelicula</span>
+      <span class="year-tag">2014</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/ettHoubPw8byYfpV1vomGnyfBnp.jpg">
       <span class="lock-icon">🔒</span>
       <p>Cómo entrenar a tu dragón 2</p>
     </div>
 
-    <div class="movie locked" data-titulo="annabelle anabel" data-genero="terror" data-anio="2014" data-html="../View Peliculas/Annabelle (2014).html" data-fecha="2025-30-10">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="annabelle anabel" data-genero="terror" data-anio="2014" data-html="../View Peliculas/Annabelle (2014).html" data-fecha="2025-30-10">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2014</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/jNFqmsulwUrhYQW3MvqzfMc7SdS.jpg">
       <span class="lock-icon">🔒</span>
       <p>Annabelle</p>
     </div>
 
-    <div class="movie locked" data-titulo="cars 2" data-genero="animacion disney familia aventura" data-anio="2011" data-html="../View Peliculas/Cars 2 (2011).html" data-fecha="2025-11-16">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="donde esta el fantasma" data-genero="comedia terror" data-anio="2013" data-html="../View Peliculas/Donde esta el fantasma (2013).html" data-fecha="2025-11-30">
+      <span class="pelicula">Pelicula</span>
+      <span class="year-tag">2013</span>
+      <span class="year-tegg">HD</span>
+      <img src="https://image.tmdb.org/t/p/w300/pAVGfrADDvKMgoZnJLSCiLBCCiG.jpg">
+      <span class="lock-icon">🔒</span>
+      <p>¿Donde esta el fantasma?</p>
+    </div>
+
+    <div class="movie locked" data-tipo="pelicula" data-titulo="cars 2" data-genero="animacion disney familia aventura" data-anio="2011" data-html="../View Peliculas/Cars 2 (2011).html" data-fecha="2025-11-16">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2011</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/okIz1HyxeVOMzYwwHUjH2pHi74I.jpg">
       <span class="lock-icon">🔒</span>
       <p>Cars 2</p>
     </div>
 
-    <div class="movie locked" data-titulo="alvin y las ardillas 3" data-genero="animacion comedia aventura musical" data-anio="2011" data-html="../View Peliculas/Alvin y las ardillas 3 (2011).html" data-fecha="2025-10-12">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="alvin y las ardillas 3" data-genero="animacion comedia aventura musical" data-anio="2011" data-html="../View Peliculas/Alvin y las ardillas 3 (2011).html" data-fecha="2025-10-12">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2011</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/a52ebjlDqvrjcKtFGDtQgNQLaGH.jpg">
       <span class="lock-icon">🔒</span>
       <p>Alvin y las ardillas 3</p>
     </div>
     <!--
-    <div class="movie locked" data-titulo="chicas malas 2" data-genero="comedia" data-anio="2011" data-html="../View Peliculas/Chicas Malas 2 (2011).html" data-fecha="2025-11-">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="chicas malas 2" data-genero="comedia" data-anio="2011" data-html="../View Peliculas/Chicas Malas 2 (2011).html" data-fecha="2025-11-">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2011</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/">
       <span class="lock-icon">🔒</span>
       <p>Chicas malas 2</p>
     </div>
     -->
 
-    <div class="movie locked" data-titulo="destino final 5" data-genero="terror" data-anio="2011" data-html="../View Peliculas/Destino final 5 (2011).html" data-fecha="2025-11-26">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="destino final 5" data-genero="terror" data-anio="2011" data-html="../View Peliculas/Destino final 5 (2011).html" data-fecha="2025-11-26">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2011</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/xMBIeENKIZq3V0undgvaZbFdMw2.jpg">
       <span class="lock-icon">🔒</span>
       <p>Destino final 5</p>
     </div>
 
-    <div class="movie locked" data-titulo="capitan america 1 el primer vengador" data-genero="accion heroes marvel" data-anio="2011" data-html="../View Peliculas/Capitán América 1 El primer vengador (2011).html" data-fecha="2025-11-08">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="capitan america 1 el primer vengador" data-genero="accion heroes marvel" data-anio="2011" data-html="../View Peliculas/Capitán América 1 El primer vengador (2011).html" data-fecha="2025-11-08">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2011</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/82ucHZ4ioVGiweT1XMl1mUZaodq.jpg">
       <span class="lock-icon">🔒</span>
       <p>Capitán América: El primer vengador</p>
     </div>
 
-    <div class="movie locked" data-titulo="como entrenar a tu dragon 1" data-genero="animacion aventura ciencia ficcion familia" data-anio="2010" data-html="../View Peliculas/Cómo entrenar a tu dragón (2010).html" data-fecha="2025-11-25">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="como entrenar a tu dragon 1" data-genero="animacion aventura ciencia ficcion familia" data-anio="2010" data-html="../View Peliculas/Cómo entrenar a tu dragón (2010).html" data-fecha="2025-11-25">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2010</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/8ekxsUORMAsfmSc8GzHmG8gWPbp.jpg">
       <span class="lock-icon">🔒</span>
       <p>Cómo entrenar a tu dragón</p>
     </div>
 
-    <div class="movie locked" data-titulo="destino final 4" data-genero="terror" data-anio="2009" data-html="../View Peliculas/Destino final 4 (2009).html" data-fecha="2025-11-26">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="destino final 4" data-genero="terror" data-anio="2009" data-html="../View Peliculas/Destino final 4 (2009).html" data-fecha="2025-11-26">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2009</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/8b1tsUQW8hogJRi6FFHHfO7D1fu.jpg">
       <span class="lock-icon">🔒</span>
       <p>Destino final 4</p>
     </div>
 
-    <div class="movie locked" data-titulo="alvin y las ardillas 2" data-genero="animacion comedia aventura musical" data-anio="2007" data-html="../View Peliculas/Alvin y las ardillas 2 (2009).html" data-fecha="2025-10-12">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="alvin y las ardillas 2" data-genero="animacion comedia aventura musical" data-anio="2007" data-html="../View Peliculas/Alvin y las ardillas 2 (2009).html" data-fecha="2025-10-12">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2009</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/ye1MoMxdW6imx1BdytGxXYvj4BT.jpg">
       <span class="lock-icon">🔒</span>
       <p>Alvin y las ardillas 2</p>
     </div>
 
-    <div class="movie locked" data-titulo="alvin y las ardillas" data-genero="animacion aventura comedia musical" data-anio="2007" data-html="../View Peliculas/Alvin y las ardillas (2007).html" data-fecha="2025-10-12">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="alvin y las ardillas" data-genero="animacion aventura comedia musical" data-anio="2007" data-html="../View Peliculas/Alvin y las ardillas (2007).html" data-fecha="2025-10-12">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2007</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/jgvlT0DhzAQET6nkM6N1BVoGDSj.jpg">
       <span class="lock-icon">🔒</span>
       <p>Alvin y las ardillas</p>
     </div>
 
-    <div class="movie locked" data-titulo="destino final 3" data-genero="terror" data-anio="2006" data-html="../View Peliculas/Destino final 3 (2006).html" data-fecha="2025-11-26">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="destino final 3" data-genero="terror" data-anio="2006" data-html="../View Peliculas/Destino final 3 (2006).html" data-fecha="2025-11-26">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2006</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/5sSZBolbPCxCVXabzmL0bKWLgsv.jpg">
       <span class="lock-icon">🔒</span>
       <p>Destino final 3</p>
     </div>
 
-    <div class="movie locked" data-titulo="cars 1" data-genero="animacion disney familia aventura" data-anio="2006" data-html="../View Peliculas/Cars (2006).html" data-fecha="2025-11-16">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="cars 1" data-genero="animacion disney familia aventura" data-anio="2006" data-html="../View Peliculas/Cars (2006).html" data-fecha="2025-11-16">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2006</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/abW5AzHDaIK1n9C36VdAeOwORRA.jpg">
       <span class="lock-icon">🔒</span>
       <p>Cars</p>
     </div>
 
-    <div class="movie locked" data-titulo="bob esponja 1" data-tipo="pelicula" data-genero="animacion aventura niños infantil familia" data-anio="2004" data-html="../View Peliculas/Bob Esponja 1 La película (2004).html" data-fecha="2025-11-08">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="bob esponja 1" data-tipo="pelicula" data-genero="animacion aventura niños infantil familia" data-anio="2004" data-html="../View Peliculas/Bob Esponja 1 La película (2004).html" data-fecha="2025-11-08">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2004</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/j4Sqs3SKNaJ4chdKXS1qqUlaWyW.jpg">
       <span class="lock-icon">🔒</span>
       <p>Bob Esponja: La película</p>
     </div>
 
-    <div class="movie locked" data-titulo="chicas malas" data-tipo="pelicula" data-genero="drama comedia" data-anio="2003" data-html="../View Peliculas/Chicas malas (2004).html" data-fecha="2025-11-24">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="chicas malas" data-tipo="pelicula" data-genero="drama comedia" data-anio="2003" data-html="../View Peliculas/Chicas malas (2004).html" data-fecha="2025-11-24">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2003</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/7L7wCakqwuoz6S9zRVaAH0NLJ3H.jpg">
       <span class="lock-icon">🔒</span>
       <p>Chicas malas</p>
     </div>
     
-    <div class="movie locked" data-titulo="destino final 2" data-genero="terror" data-anio="2003" data-html="../View Peliculas/Destino final 2 (2003).html" data-fecha="2025-11-26">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="destino final 2" data-genero="terror" data-anio="2003" data-html="../View Peliculas/Destino final 2 (2003).html" data-fecha="2025-11-26">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2003</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/w1dJluO5aKK7Puz7qNXoQeUh4Cb.jpg">
       <span class="lock-icon">🔒</span>
       <p>Destino final 2</p>
     </div>
 
-    <div class="movie locked" data-titulo="bad boys 2 dos policías rebeldes" data-genero="accion crimen comedia" data-anio="2003" data-html="../View Peliculas/Bad boys 2 Dos policías rebeldes II (2003).html" data-fecha="2025-11-02">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="bad boys 2 dos policías rebeldes" data-genero="accion crimen comedia" data-anio="2003" data-html="../View Peliculas/Bad boys 2 Dos policías rebeldes II (2003).html" data-fecha="2025-11-02">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2003</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/qyHDZB87UQF9cu6uuQzhhaKGvuo.jpg">
       <span class="lock-icon">🔒</span>
       <p>Bad boys 2: Dos policías rebeldes</p>
     </div>
 
-    <div class="movie locked" data-titulo="dragon ball dragon ball z una gran aventura mistica" data-genero="animacion anime accion" data-anio="1998" data-html="../View Peliculas/Dragon Ball Gran aventura mística (1988).html" data-fecha="2025-11-26">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="dragon ball dragon ball z una gran aventura mistica" data-genero="animacion anime accion" data-anio="1998" data-html="../View Peliculas/Dragon Ball Gran aventura mística (1988).html" data-fecha="2025-11-26">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">1998</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/f2BipTKswrdpqoCc1xJDyL35rJy.jpg">
       <span class="lock-icon">🔒</span>
       <p>Dragon Ball: Gran aventura mística</p>
     </div>
 
-    <div class="movie locked" data-titulo="aladdin 3 el rey de los ladrones" data-genero="animacion aventura disney romance fantasia " data-anio="1986" data-html="../View Peliculas/Aladdin 3 y el rey de los ladrones (1996).html" data-fecha="2025-10-12">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="aladdin 3 el rey de los ladrones" data-genero="animacion aventura disney romance fantasia " data-anio="1986" data-html="../View Peliculas/Aladdin 3 y el rey de los ladrones (1996).html" data-fecha="2025-10-12">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">1996</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/abWvjyJz4kcp1xDn28RwyXjoIds.jpg">
       <span class="lock-icon">🔒</span>
       <p>Aladdin 3: El rey de los ladrones</p>
     </div>
 
-    <div class="movie locked" data-titulo="dragon ball dragon ball z el camino hacia el poder" data-genero="animacion anime accion" data-anio="1996" data-html="../View Peliculas/Dragon Ball El camino hacia el poder (1996).html" data-fecha="2025-11-26">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="dragon ball dragon ball z el camino hacia el poder" data-genero="animacion anime accion ciencia ficcion fantasia" data-anio="1996" data-html="../View Peliculas/Dragon Ball El camino hacia el poder (1996).html" data-fecha="2025-11-26">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">1996</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/wPkoqtFhDoIbzt61oOYwmLOZdAg.jpg">
       <span class="lock-icon">🔒</span>
       <p>Dragon Ball: El camino hacia el poder</p>
     </div>
 
-    <div class="movie locked" data-titulo="destino final" data-genero="terror" data-anio="2000" data-html="../View Peliculas/Destino final (2000).html" data-fecha="2025-11-26">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="destino final" data-genero="terror" data-anio="2000" data-html="../View Peliculas/Destino final (2000).html" data-fecha="2025-11-26">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2000</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/2g4Jz0Jr54aYCpFLWKYDo5VZvzN.jpg">
       <span class="lock-icon">🔒</span>
       <p>Destino final</p>
     </div>
 
-    <div class="movie locked" data-titulo="bad boys 1 dos policías rebeldes" data-genero="accion crimen comedia" data-anio="1995" data-html="../View Peliculas/Bad boys 1 Dos policías rebeldes (1995).html" data-fecha="2025-07-11">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-titulo="dragon ball dragon ball z  gt 100 años despues" data-tipo="pelicula" data-genero="animacion anime accion ciencia ficcion fantasia" data-anio="1996" data-html="../View Peliculas/Dragon Ball Gt despues de 100 años.html" data-fecha="2025-11-30">
+      <span class="pelicula">Pelicula</span>
+      <span class="year-tag">1996</span>
+      <span class="year-tegg">HD</span>
+      <img src="https://image.tmdb.org/t/p/w300/izZaeWcWDir9PvuSwaITV1E1rA8.jpg">
+      <span class="lock-icon">🔒</span>
+      <p>Dragon Ball GT: 100 años después</p>
+    </div>
+
+    <div class="movie locked" data-tipo="pelicula" data-titulo="bad boys 1 dos policías rebeldes" data-genero="accion crimen comedia" data-anio="1995" data-html="../View Peliculas/Bad boys 1 Dos policías rebeldes (1995).html" data-fecha="2025-07-11">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">1995</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/ZYpSdXaTMFYCGbmVmXOFbdJmSv.jpg">
       <span class="lock-icon">🔒</span>
       <p>Bad boys: Dos policías rebeldes</p>
     </div>
 
-    <div class="movie locked" data-titulo="aladdin 2 el retorno de fafar" data-genero="animacion aventura disney romance fantasia " data-anio="1994" data-html="../View Peliculas/Aladdin 2 El retorno de Jafar (1994).html" data-fecha="2025-10-12">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="aladdin 2 el retorno de fafar" data-genero="animacion aventura disney romance fantasia " data-anio="1994" data-html="../View Peliculas/Aladdin 2 El retorno de Jafar (1994).html" data-fecha="2025-10-12">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">1994</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/tC54XTUu4NVsMeWdSofja2uye9c.jpg">
       <span class="lock-icon">🔒</span>
       <p>Aladdin 2: El retorno de Jafar</p>
     </div>
 
-    <div class="movie locked" data-titulo="aladdin" data-genero="animacion aventura disney fantasia musical familia" data-anio="1993" data-html="../View Peliculas/Aladdin (1993).html" data-fecha="2025-10-12">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="aladdin" data-genero="animacion aventura disney fantasia musical familia" data-anio="1993" data-html="../View Peliculas/Aladdin (1993).html" data-fecha="2025-10-12">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">1993</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/eLFfl7vS8dkeG1hKp5mwbm37V83.jpg">
       <span class="lock-icon">🔒</span>
       <p>Aladdin</p>
     </div>
 
-    <div class="movie locked" data-titulo="blancanieves y los siete enanitos" data-genero="animacion disney princesas" data-anio="1938" data-html="../View Peliculas/Blancanieves y los siete enanitos (1938).html" data-fecha="2025-11-08">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-titulo="dragon ball dragon ball z  la princesa durmiente del castillo del mal" data-tipo="pelicula" data-genero="animacion anime accion ciencia ficcion fantasia" data-anio="1987" data-html="../View Peliculas/Dragon Ball La princesa durmiente del castillo del mal (1987).html" data-fecha="2025-12-01">
+      <span class="pelicula">Pelicula</span>
+      <span class="year-tag">1987</span>
+      <span class="year-tegg">HD</span>
+      <img src="https://image.tmdb.org/t/p/w300/sTTQ3efvJeW4VDheKvyoLgFAgku.jpg">
+      <span class="lock-icon">🔒</span>
+      <p>Dragon Ball: La princesa durmiente del castillo del mal</p>
+    </div>
+
+    <div class="movie locked" data-titulo="dragon ball dragon ball z la leyenda del dragon shenron" data-tipo="pelicula" data-genero="animacion anime accion ciencia ficcion fantasia" data-anio="1986" data-html="../View Peliculas/Dragon Ball La leyenda del dragón Shenron (1986).html" data-fecha="2025-11-30">
+      <span class="pelicula">Pelicula</span>
+      <span class="year-tag">1986</span>
+      <span class="year-tegg">HD</span>
+      <img src="https://image.tmdb.org/t/p/w300/5uvaNiQ1rq08rAJgg5NyXQdBC58.jpg">
+      <span class="lock-icon">🔒</span>
+      <p>Dragon Ball: La leyenda del dragón Shenron</p>
+    </div>
+
+    <div class="movie locked" data-tipo="pelicula" data-titulo="blancanieves y los siete enanitos" data-genero="animacion disney princesas" data-anio="1938" data-html="../View Peliculas/Blancanieves y los siete enanitos (1938).html" data-fecha="2025-11-08">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">1938</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/wdA4lphQwywsPcEKj5sgQ9QSR55.jpg">
       <span class="lock-icon">🔒</span>
       <p>Blancanieves y los siete enanitos</p>
     </div>
 
-    <div class="movie locked" data-titulo="" data-genero="animacion anime" data-anio="2025" data-html="../View Peliculas/" data-fecha="2025-07-11">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="" data-genero="animacion anime" data-anio="2025" data-html="../View Peliculas/" data-fecha="2025-07-11">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2025</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/">
       <span class="lock-icon">🔒</span>
       <p></p>
     </div>
 
-    <div class="movie locked" data-titulo="" data-genero="animacion anime" data-anio="2024" data-html="../View Peliculas/" data-fecha="2025-11-02">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="" data-genero="animacion anime" data-anio="2024" data-html="../View Peliculas/" data-fecha="2025-11-02">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2024</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/">
       <span class="lock-icon">🔒</span>
       <p></p>
     </div>
 
-    <div class="movie locked" data-titulo="" data-genero="animacion anime" data-anio="2023" data-html="../View Peliculas/" data-fecha="2025-07-11">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="" data-genero="animacion anime" data-anio="2023" data-html="../View Peliculas/" data-fecha="2025-07-11">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2023</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/">
       <span class="lock-icon">🔒</span>
       <p></p>
     </div>
 
-    <div class="movie locked" data-titulo="" data-genero="animacion anime" data-anio="2022" data-html="../View Peliculas/" data-fecha="2025-11-108">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="" data-genero="animacion anime" data-anio="2022" data-html="../View Peliculas/" data-fecha="2025-11-108">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2022</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/">
       <span class="lock-icon">🔒</span>
       <p></p>
     </div>
 
-    <div class="movie locked" data-titulo="" data-genero="animacion anime" data-anio="2021" data-html="../View Peliculas/" data-fecha="2025-07-11">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="" data-genero="animacion anime" data-anio="2021" data-html="../View Peliculas/" data-fecha="2025-07-11">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2021</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/">
       <span class="lock-icon">🔒</span>
       <p></p>
     </div>
 
-    <div class="movie locked" data-titulo="" data-genero="animacion anime" data-anio="2020" data-html="../View Peliculas/" data-fecha="2025-07-11">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="" data-genero="animacion anime" data-anio="2020" data-html="../View Peliculas/" data-fecha="2025-07-11">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2020</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/">
       <span class="lock-icon">🔒</span>
       <p></p>
     </div>
 
-    <div class="movie locked" data-titulo="" data-genero="animacion anime" data-anio="2019" data-html="../View Peliculas/" data-fecha="2025-07-11">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-tipo="pelicula" data-titulo="" data-genero="animacion anime" data-anio="2019" data-html="../View Peliculas/" data-fecha="2025-07-11">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">2019</span>
+      <span class="year-tegg">HD</span>
       <img src="https://image.tmdb.org/t/p/w300/">
       <span class="lock-icon">🔒</span>
       <p></p>
     </div>
 
-    <div class="movie locked" data-titulo="" data-tipo="pelicula" data-genero="animacion anime" data-anio="1988"  data-html="../View Peliculas/" data-fecha="2025-07-11">
-      <span class="tag">Pelicula</span>
+    <div class="movie locked" data-titulo="" data-tipo="pelicula" data-genero="animacion anime" data-anio="1988" data-html="../View Peliculas/" data-fecha="2025-07-11">
+      <span class="pelicula">Pelicula</span>
       <span class="year-tag">1988</span>
       <img src="https://image.tmdb.org/t/p/w300/">
       <span class="lock-icon">🔒</span>
