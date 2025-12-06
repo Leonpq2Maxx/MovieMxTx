@@ -4511,6 +4511,7 @@ document.getElementById("confirmAgeBtn").addEventListener("click", function () {
   favoritos.sort((a, b) => a.timestamp - b.timestamp);
 }
     const container = document.getElementById("favoritos-container");
+    /*container.innerHTML = "";*/
     container.replaceChildren(fragment);
 
     favoritos.forEach((item, index) => {
