@@ -734,10 +734,9 @@ document.addEventListener('DOMContentLoaded', () => {
       <p class="player-loading-text">Cargando<span class="dots"></span></p>
     </div>
 
-    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/xvqzAso5RNA09PbMFmyrL2I9VdY.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
-      <source src="https://dl.dropboxusercontent.com/scl/fi/jy535c6e18x0ydikzhniw/Dragon.Ball.Super.Super.Hero.2022.1080P-Dual-Lat.mp4?rlkey=c2634uyll6a1rimri72e2akf9&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
+    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/yIDS5QLvKtgzfu43eUWx5JkGW6p.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+      <source src="https://dn720303.ca.archive.org/0/items/dragon-ball-z-la-batalla-de-los-dioses/Dragon%20Ball%20Z%20la%20Batalla%20de%20los%20Dioses.ia.mp4" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
-</div>
   </div>
   <div id="episodio-actual" style="
   text-align:center;
@@ -748,32 +747,31 @@ document.addEventListener('DOMContentLoaded', () => {
 "></div>
 
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>2022</span>
-    <i class="fal fa-clock"></i><span>1h 40min</span>
-    <i class="fal fa-thumbs-up"></i><span>89%</span>
+    <i class="fal fa-calendar-alt"></i><span>2013</span>
+    <i class="fal fa-clock"></i><span>1h 25min</span>
+    <i class="fal fa-thumbs-up"></i><span>90%</span>
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
         <text x="4" y="17" fill="black" font-size="12" font-family="Arial, sans-serif" font-style="italic" font-weight="bold">HD</text>
       </svg>
-      </div>
       <span>1080P</span>
     </div>
 
   </div>
   
   <div class="info-pelicula">
-    <h1>Dragon Ball Super: Super Hero</h1>
+    <h1>Dragon Ball Z: La batalla de los dioses</h1>
   <span class="genero-badge">Anime • Animacion • Accion • Ciencia Ficcion</span>
   
     <p class="sinopsis">
-      Son Goku destruyó en su momento al Ejército Red Ribbon. Ahora, ciertos individuos han decidido continuar con su legado y han creado a los androides definitivos: Gamma 1 y Gamma 2. Estos dos androides se autoproclaman "superhéroes" y deciden atacar a Piccolo y a Gohan. ¿Cuál es el objetivo del Nuevo Ejército Red Ribbon? Ante un peligro inminente, ¡llega el momento del despertar del Superhéroe!.
+      La historia se sitúa varios años después de la batalla con Majin Buu. Bils, el Dios de la destrucción que mantenía el equilibrio del universo, se ha despertado de un largo sueño. Al escuchar rumores sobre un saiyajin que ha vencido a Freezer, Bills parte a la búsqueda de Goku. Emocionado por el hecho de que haya aparecido un oponente tan poderoso tras tanto tiempo, Goku ignora las advertencias de Kaito y decide enfrentarse a él. 
     </p>
 
     <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
-      <p><strong>Director:</strong> Tetsuro Kodama</p>
-      <p><strong>Reparto:</strong> Luis Manuel Ávila, Carlos Segundo, Víctor Ugarte</p>
-      <p><strong>Estreno:</strong> 11/06/2022 | <strong>Idioma:</strong> Español Latino 🇲🇽</p>
+      <p><strong>Director:</strong> Masahiro Hosoda</p>
+      <p><strong>Reparto:</strong> Mario Castañeda, René García, José Luis Orozco</p>
+      <p><strong>Estreno:</strong> 30/03/2013 | <strong>Idioma:</strong> Español Latino 🇲🇽</p>
     </div>
 
     <br>
@@ -859,7 +857,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const continueInfo = document.getElementById('continue-info');
   const videoElement = document.querySelector('video');
 
-  const MOVIE_KEY = 'Dragon_Ball_Super_Super_Hero'; /*Aca siempre con un _ para guardar su progresos etc...*/
+  const MOVIE_KEY = 'Dragon_Ball_Z_La_Batalla_De_los_Dioses_2013'; /*Aca siempre con un _ para guardar su progresos etc...*/
   const ultimoTiempo = localStorage.getItem(`ultimoTiempo_${MOVIE_KEY}`) || 0;
 
   // 🔹 Mostrar modal si hay progreso guardado
@@ -1017,10 +1015,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 🔹 Botón "Agregar a Favoritos"
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
-      titulo: "Dragon Ball Super: Super hero",
-      imagen: "https://image.tmdb.org/t/p/w300/wFYXVMKWLAoazjWTBNQ4IiQSKJg.jpg",
-      genero: "Anime",
-      archivo: "Dragon Ball Super Super Hero (2022).html",
+      titulo: "Dragon Ball Z: La batalla de los dioses",
+      imagen: "https://image.tmdb.org/t/p/w300/cIyPFIeSKNTiWU9Zny0c0IVPQRY.jpg",
+      genero: "anime",
+      archivo: "Dragon Ball Z La Batalla De Los Dioses.html",
       tipo: "pelicula",
       timestamp: Date.now()
     };
@@ -1126,10 +1124,6 @@ document.addEventListener('DOMContentLoaded', () => {
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
-      <a href="Dragon Ball Z La Batalla De Los Dioses.html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/cIyPFIeSKNTiWU9Zny0c0IVPQRY.jpg" alt="">
-        <p>Dragon Ball Z: La Batalla De Los Dioses</p>
-      </a>
       <a href="Dragon Ball Z La resurreccion de Freezer (2015).html" class="serie">
         <img loading="lazy" src="https://image.tmdb.org/t/p/w300/hasMQTJXgv20EyNUDcNKMhQW6gq.jpg" alt="">
         <p>Dragon Ball Z: La resurreccion de Freezer</p>
@@ -1138,17 +1132,21 @@ document.addEventListener('DOMContentLoaded', () => {
         <img loading="lazy" src="https://image.tmdb.org/t/p/w300/6JilEC1SON8tWIRHcdJzf4uVBpX.jpg" alt="">
         <p>Dragon Ball Super: Broly</p>
       </a>
-      <a href="Dragon Ball Z Los dos guerreros del futuro.html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/x0FCkSSdOGTA3gC99QayGJH0Dqx.jpg" alt="">
-        <p>Dragon Ball Z: Los dos guerraros del futuro</p>
+      <a href="Dragon Ball Super Super Hero (2022).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/o3a2yc2zkmdsq9wZ6Hnyu3jfLcC.jpg" alt="">
+        <p>Dragon Ball Super: Super Hero</p>
       </a>
       <a href="Dragon Ball Z La fusion de goku y vegeta.html" class="serie">
         <img loading="lazy" src="https://image.tmdb.org/t/p/w300/yo9ioIpVLR8AitD9Q9m13Nf3of8.jpg" alt="">
         <p>Dragon Ball Z: La fusion de Goku y Vegeta</p>
       </a>
-      <a class="serie" href="../View Series/Dragon Ball Z (1989).html">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/8PT42NbjTZzYzCnPzg4NZzSW97n.jpg" alt="">
-        <p>Dragon Ball Z</p>
+      <a href="Dragon Ball Z El super guerrero Son Goku.html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/usMb0DzjnMkekizU3ZKkTHQ4x40.jpg" alt="">
+        <p>Dragon Ball Z: El super saiyajin Son Goku</p>
+      </a>
+      <a href="../View Series/Dragon Ball Daima (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/jcNmdE3Rgn6Xld0osZyIgPU6H40.jpg" alt="">
+        <p>Dragon Ball Daima</p>
       </a>
     </div>
   </div>
@@ -1278,9 +1276,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const STORAGE_KEY = 'pos_' + videoSrc;
 
   // DATOS DEL HISTORIAL
-  const historialTitulo = "Dragon Ball Super: Super hero";
-  const historialImagen = "https://image.tmdb.org/t/p/w300/wFYXVMKWLAoazjWTBNQ4IiQSKJg.jpg";
-  const historialArchivo = "Dragon Ball Super Super Hero (2022).html";
+  const historialTitulo = "Dragon Ball Z: La batalla de los dioses";
+  const historialImagen = "https://image.tmdb.org/t/p/w300/cIyPFIeSKNTiWU9Zny0c0IVPQRY.jpg";
+  const historialArchivo = "Dragon Ball Z La Batalla De Los Dioses.html";
 
   let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
   let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
