@@ -734,9 +734,197 @@ document.addEventListener('DOMContentLoaded', () => {
       <p class="player-loading-text">Cargando<span class="dots"></span></p>
     </div>
 
-    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/tKnmfO5lAyu8hpTZMyMaI4lhZpJ.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
-      <source src="https://dl.dropbox.com/scl/fi/b6kovpfj3l9uuncm87tis/Final.destination.2.2003.1080p-dual-lat-cinecalidad.rs.mp4?rlkey=fepv6ygkaezwcfryerpn1cicw&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
+    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/xvqzAso5RNA09PbMFmyrL2I9VdY.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+      <source src="https://dl.dropboxusercontent.com/scl/fi/jy535c6e18x0ydikzhniw/Dragon.Ball.Super.Super.Hero.2022.1080P-Dual-Lat.mp4?rlkey=c2634uyll6a1rimri72e2akf9&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const video = document.querySelector('.vid1');
+  const source = video.querySelector('source');
+  if (!video || !window.Plyr) return;
+
+  const idiomas = {
+    latino: {
+      nombre: "🇲🇽 Latino",
+      src: "https://dl.dropboxusercontent.com/scl/fi/jy535c6e18x0ydikzhniw/Dragon.Ball.Super.Super.Hero.2022.1080P-Dual-Lat.mp4?rlkey=c2634uyll6a1rimri72e2akf9&st="
+    },
+    espanol: {
+      nombre: "🇪🇸 Español",
+      src: "https://dl.dropbox.com/scl/fi/7j3crrxjyup90dc45fu7n/Doctor.strange.2016.1080P-Dual-Lat.mp4?rlkey=uyr3jq0lcx32qt8870r209g2d&st="
+    },
+    japones: {
+      nombre: "🇯🇵 Japonés",
+      src: "https://TU_LINK_JAPONES.mp4"
+    },
+    ingles: {
+      nombre: "🇺🇸 Inglés",
+      src: "https://TU_LINK_INGLES.mp4"
+    }
+  };
+
+  let idiomaActual = "latino";
+  let items = {};
+
+  const controls = document.querySelector('.plyr__controls');
+  if (!controls || document.getElementById('btn-idioma')) return;
+
+  // 🌐 Botón dentro del reproductor
+  const btn = document.createElement('button');
+  btn.className = 'plyr__control';
+  btn.id = 'btn-idioma';
+  btn.innerHTML = '🌐';
+  btn.title = 'Idioma de audio';
+  const volumeContainer = controls.querySelector('.plyr__volume');
+
+if (volumeContainer) {
+  volumeContainer.after(btn); // ✅ QUEDA JUSTO AL LADO DE VOLUME
+} else {
+  controls.appendChild(btn); // respaldo por si Plyr cambia estructura
+}
+
+  // 🌑 Fondo modal
+  const fondo = document.createElement('div');
+  fondo.style.cssText = `
+    position:fixed; inset:0;
+    background:rgba(0,0,0,0.75);
+    backdrop-filter:blur(5px);
+    display:none;
+    z-index:99998;
+  `;
+
+  // 📦 Caja central
+  const modal = document.createElement('div');
+  modal.style.cssText = `
+    position:fixed;
+    top:50%; left:50%;
+    transform:translate(-50%, -50%);
+    background:#121212;
+    border-radius:16px;
+    padding:22px 20px;
+    width:90%;
+    max-width:320px;
+    text-align:center;
+    box-shadow:0 0 30px rgba(255,45,91,0.6);
+    display:none;
+    z-index:99999;
+    color:white;
+  `;
+
+  modal.innerHTML = `
+    <div id="cerrar-idioma" style="position:absolute;top:8px;right:14px;cursor:pointer;font-size:1.1rem;">✖</div>
+    <h3 style="margin-bottom:14px;color:#ff2d5b;">Seleccionar idioma</h3>
+  `;
+
+  function refrescarSeleccion() {
+    Object.keys(items).forEach(id => {
+      const item = items[id];
+
+      if (id === idiomaActual) {
+        item.style.background = "linear-gradient(135deg, #ff2d5b, #ff5e7e)";
+        item.style.color = "#fff";
+        item.innerHTML = idiomas[id].nombre + " ✔";
+        item.style.pointerEvents = "none";
+      } else {
+        item.style.background = "#1f1f1f";
+        item.style.color = "#fff";
+        item.innerHTML = idiomas[id].nombre;
+        item.style.pointerEvents = "auto";
+      }
+    });
+  }
+
+  Object.keys(idiomas).forEach(id => {
+    const item = document.createElement('div');
+    item.style.cssText = `
+      padding:11px;
+      margin:7px 0;
+      border-radius:12px;
+      font-size:0.95rem;
+      cursor:pointer;
+      background:#1f1f1f;
+      transition:0.25s;
+    `;
+
+    item.onclick = () => {
+      if (id === idiomaActual) return;
+
+      const tiempo = video.currentTime;
+      const estabaPlay = !video.paused;
+
+      idiomaActual = id;
+      source.setAttribute('src', idiomas[id].src);
+      video.load();
+
+      video.onloadedmetadata = () => {
+        video.currentTime = tiempo;
+        if (estabaPlay) video.play();
+      };
+
+      refrescarSeleccion();
+      cerrarMenu();
+    };
+
+    items[id] = item;
+    modal.appendChild(item);
+  });
+
+  function moverMenuSegunPantalla() {
+  const plyrContainer = document.querySelector('.plyr');
+  const estaEnFullscreen =
+    document.fullscreenElement ||
+    document.webkitFullscreenElement ||
+    document.mozFullScreenElement ||
+    document.msFullscreenElement;
+
+  if (estaEnFullscreen && plyrContainer) {
+    plyrContainer.appendChild(fondo);
+    plyrContainer.appendChild(modal);
+
+    fondo.style.position = 'absolute';
+    modal.style.position = 'absolute';
+  } else {
+    document.body.appendChild(fondo);
+    document.body.appendChild(modal);
+
+    fondo.style.position = 'fixed';
+    modal.style.position = 'fixed';
+  }
+}
+
+// ✅ Mover al cargar
+moverMenuSegunPantalla();
+
+// ✅ Mover automáticamente al entrar/salir de fullscreen
+[
+  'fullscreenchange',
+  'webkitfullscreenchange',
+  'mozfullscreenchange',
+  'MSFullscreenChange'
+].forEach(evento => {
+  document.addEventListener(evento, moverMenuSegunPantalla);
+});
+
+
+  function abrirMenu() {
+    refrescarSeleccion();
+    fondo.style.display = 'block';
+    modal.style.display = 'block';
+  }
+
+  function cerrarMenu() {
+    fondo.style.display = 'none';
+    modal.style.display = 'none';
+  }
+
+  btn.onclick = abrirMenu;
+  fondo.onclick = cerrarMenu;
+  modal.querySelector('#cerrar-idioma').onclick = cerrarMenu;
+});
+</script>
+
+
+
   </div>
   <div id="episodio-actual" style="
   text-align:center;
@@ -747,30 +935,32 @@ document.addEventListener('DOMContentLoaded', () => {
 "></div>
 
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>2003</span>
-    <i class="fal fa-clock"></i><span>1h 30min</span>
-    <i class="fal fa-thumbs-up"></i><span>63%</span>
+    <i class="fal fa-calendar-alt"></i><span>2022</span>
+    <i class="fal fa-clock"></i><span>1h 40min</span>
+    <i class="fal fa-thumbs-up"></i><span>89%</span>
+    <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
         <text x="4" y="17" fill="black" font-size="12" font-family="Arial, sans-serif" font-style="italic" font-weight="bold">HD</text>
       </svg>
+      </div>
       <span>1080P</span>
     </div>
 
   </div>
   
   <div class="info-pelicula">
-    <h1>Destino final 2</h1>
-  <span class="genero-badge">Terror</span>
+    <h1>Dragon Ball Super: Super Hero</h1>
+  <span class="genero-badge">Anime • Animacion • Accion • Ciencia Ficcion</span>
   
     <p class="sinopsis">
-      Kimberly Corman se va de vacaciones con sus amigos Dano , Shaina y Frankie hacia Daytona Beach. De repente, un camión cargado de troncos pierde el control al reventarse la cadena que los sostiene, cayendo y rodando por la autopista donde se origina un trágico accidente, matando a todos los que se encuentran a su paso.
+      Son Goku destruyó en su momento al Ejército Red Ribbon. Ahora, ciertos individuos han decidido continuar con su legado y han creado a los androides definitivos: Gamma 1 y Gamma 2. Estos dos androides se autoproclaman "superhéroes" y deciden atacar a Piccolo y a Gohan. ¿Cuál es el objetivo del Nuevo Ejército Red Ribbon? Ante un peligro inminente, ¡llega el momento del despertar del Superhéroe!.
     </p>
 
     <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
-      <p><strong>Director:</strong> David R. Ellis</p>
-      <p><strong>Reparto:</strong> Ali Larter, AJ Cook, Michael Landes</p>
-      <p><strong>Estreno:</strong> 31/01/2003 | <strong>Idioma:</strong> Español Latino 🇲🇽</p>
+      <p><strong>Director:</strong> Tetsuro Kodama</p>
+      <p><strong>Reparto:</strong> Luis Manuel Ávila, Carlos Segundo, Víctor Ugarte</p>
+      <p><strong>Estreno:</strong> 11/06/2022 | <strong>Idioma:</strong> Español Latino 🇲🇽</p>
     </div>
 
     <br>
@@ -856,7 +1046,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const continueInfo = document.getElementById('continue-info');
   const videoElement = document.querySelector('video');
 
-  const MOVIE_KEY = 'Destino_Final_2_2003'; /*Aca siempre con un _ para guardar su progresos etc...*/
+  const MOVIE_KEY = 'Dragon_Ball_Super_Super_Hero'; /*Aca siempre con un _ para guardar su progresos etc...*/
   const ultimoTiempo = localStorage.getItem(`ultimoTiempo_${MOVIE_KEY}`) || 0;
 
   // 🔹 Mostrar modal si hay progreso guardado
@@ -1014,10 +1204,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 🔹 Botón "Agregar a Favoritos"
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
-      titulo: "Destino final 2",
-      imagen: "https://image.tmdb.org/t/p/w300/w1dJluO5aKK7Puz7qNXoQeUh4Cb.jpg",
-      genero: "terror",
-      archivo: "Destino final 2 (2003).html",
+      titulo: "Dragon Ball Super: Super hero",
+      imagen: "https://image.tmdb.org/t/p/w300/wFYXVMKWLAoazjWTBNQ4IiQSKJg.jpg",
+      genero: "Anime",
+      archivo: "Dragon Ball Super Super Hero (2022).html",
       tipo: "pelicula",
       timestamp: Date.now()
     };
@@ -1123,29 +1313,29 @@ document.addEventListener('DOMContentLoaded', () => {
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
-      <a href="Destino final (2000).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/6F3MEcGHeMAMxledi7vQfqkZRkc.jpg" alt="">
-        <p>Destino final</p>
+      <a href="Dragon Ball Z La Batalla De Los Dioses.html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/cIyPFIeSKNTiWU9Zny0c0IVPQRY.jpg" alt="">
+        <p>Dragon Ball Z: La Batalla De Los Dioses</p>
       </a>
-      <a href="Destino final 3 (2006).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/p7ARuNKUGPGvkBiDtIDvAzYzonX.jpg" alt="">
-        <p>Destino final 3</p>
+      <a href="Dragon Ball Z La resurreccion de Freezer (2015).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/hasMQTJXgv20EyNUDcNKMhQW6gq.jpg" alt="">
+        <p>Dragon Ball Z: La resurreccion de Freezer</p>
       </a>
-      <a href="Destino final 4 (2009).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/5vxXrr1MqGsT4NNeRITpfDnl4Rq.jpg" alt="">
-        <p>Destino final 4</p>
+      <a href="Dragon Ball Super Broly.html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/6JilEC1SON8tWIRHcdJzf4uVBpX.jpg" alt="">
+        <p>Dragon Ball Super: Broly</p>
       </a>
-      <a href="Destino final 5 (2011).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/Akx1Po4ZLetOWfYJhQf75tbhTtK.jpg" alt="">
-        <p>Destino final 5</p>
+      <a href="Dragon Ball Z Los dos guerreros del futuro.html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/x0FCkSSdOGTA3gC99QayGJH0Dqx.jpg" alt="">
+        <p>Dragon Ball Z: Los dos guerraros del futuro</p>
       </a>
-      <a href="Destino Final Lazos De Sangre (2025).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/f0156SDAw1GfrdZnSbSwkOst9aO.jpg" alt="">
-        <p>Destino final 6: Lazos de sangre</p>
+      <a href="Dragon Ball Z La fusion de goku y vegeta.html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/yo9ioIpVLR8AitD9Q9m13Nf3of8.jpg" alt="">
+        <p>Dragon Ball Z: La fusion de Goku y Vegeta</p>
       </a>
-      <a href="Until Dawn Noche de terror (2025).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/vAYTXSUnQjmTFcm97BhROQav1wF.jpg"," alt="">
-        <p>Until Dawn: Noche de terror</p>
+      <a class="serie" href="View Series/Dragon Ball Z (1989).html">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/8PT42NbjTZzYzCnPzg4NZzSW97n.jpg" alt="">
+        <p>Dragon Ball Z</p>
       </a>
     </div>
   </div>
@@ -1275,9 +1465,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const STORAGE_KEY = 'pos_' + videoSrc;
 
   // DATOS DEL HISTORIAL
-  const historialTitulo = "Destino final 2";
-  const historialImagen = "https://image.tmdb.org/t/p/w300/w1dJluO5aKK7Puz7qNXoQeUh4Cb.jpg";
-  const historialArchivo = "Destino final 2 (2003).html";
+  const historialTitulo = "Dragon Ball Super: Super hero";
+  const historialImagen = "https://image.tmdb.org/t/p/w300/wFYXVMKWLAoazjWTBNQ4IiQSKJg.jpg";
+  const historialArchivo = "Dragon Ball Super Super Hero (2022).html";
 
   let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
   let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
