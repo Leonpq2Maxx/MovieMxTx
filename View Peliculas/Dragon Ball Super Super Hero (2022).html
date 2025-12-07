@@ -847,23 +847,27 @@ if (volumeContainer) {
     `;
 
     item.onclick = () => {
-      if (id === idiomaActual) return;
+  if (id === idiomaActual) return;
 
-      const tiempo = video.currentTime;
-      const estabaPlay = !video.paused;
+  const tiempo = video.currentTime;
+  const estabaPlay = !video.paused;
 
-      idiomaActual = id;
-      source.setAttribute('src', idiomas[id].src);
-      video.load();
+  idiomaActual = id;
 
-      video.onloadedmetadata = () => {
-        video.currentTime = tiempo;
-        if (estabaPlay) video.play();
-      };
+  // ✅ Cambio limpio SIN load()
+  video.src = idiomas[id].src;
 
-      refrescarSeleccion();
-      cerrarMenu();
-    };
+  // ✅ Restaurar tiempo lo antes posible
+  video.addEventListener('canplay', function restaurar() {
+    video.currentTime = tiempo;
+    if (estabaPlay) video.play().catch(()=>{});
+    video.removeEventListener('canplay', restaurar);
+  });
+
+  refrescarSeleccion();
+  // ✅ YA NO SE CIERRA EL MENÚ
+};
+
 
     items[id] = item;
     modal.appendChild(item);
