@@ -734,8 +734,8 @@ document.addEventListener('DOMContentLoaded', () => {
       <p class="player-loading-text">Cargando<span class="dots"></span></p>
     </div>
 
-    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/mTI2iRLkgkqPpy1s3l1dMwthjB6.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
-      <source src="https://dl.dropbox.com/scl/fi/k6jc657iads0r9vqq6rx5/Dragon-Ball-Z-El-poder-invensible.mp4?rlkey=i68x0gs8hleuva7pe25q1edey&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
+    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/un2kba7UHYrydCNL3OkLocU5mG.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+      <source src="https://dl.dropbox.com/scl/fi/8ghvgnjusj64tj9uh4ri7/duro.de.entrenar.dual.2023.mkv?rlkey=4pcuom5psx1lp2smub7o8ntix&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
   <div id="episodio-actual" style="
@@ -747,9 +747,9 @@ document.addEventListener('DOMContentLoaded', () => {
 "></div>
 
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>1993</span>
-    <i class="fal fa-clock"></i><span>46min</span>
-    <i class="fal fa-thumbs-up"></i><span>81%</span>
+    <i class="fal fa-calendar-alt"></i><span>2023</span> <!--Aca va el año de estreno de pelicula-->
+    <i class="fal fa-clock"></i><span>1h 24min</span> <!--aca va cuanto dura-->
+    <i class="fal fa-thumbs-up"></i><span>70%</span> <!--aca va la calificacion-->
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
@@ -761,17 +761,17 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
   
   <div class="info-pelicula">
-    <h1>Dragon Ball Z: El poder invensible</h1>
-  <span class="genero-badge">Anime • Animacion • Accion • Ciencia Ficcion</span>
+    <h1>Duro de entrenar</h1>
+  <span class="genero-badge">Accion • Comedia • Suspenso</span>
   
     <p class="sinopsis">
-      Un desconocido saiyan, Paragus, llega a la Tierra en busca de Vegeta para pedirle que gobierne el nuevo mundo de los saiyan y así reestablecer el antiguo poder de su raza. Trunks, Goku, Piccolo y Gohan acompañan a Vegeta al planeta de los saiyans. Pero el objetivo real de Paragus es que Broly, el súper saiyan legendario, extermine a los últimos saiyans que quedaban en la Tierra.
+      El cómico estadounidense Kevin Hart quiere ser una estrella de acción, pero para conseguir un papel que cambie su vida, primero tiene que aprender a ser un héroe de acción.
     </p>
 
     <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
-      <p><strong>Director:</strong> Shigeyasu Yamauchi</p>
-      <p><strong>Reparto:</strong> Enrique Mederos, René García, Ricardo Brust</p>
-      <p><strong>Estreno:</strong> 05/03/1993 | <strong>Idioma:</strong> Español Latino 🇲🇽</p>
+      <p><strong>Director:</strong> Eric Appel</p>
+      <p><strong>Reparto:</strong> Kevin Hart, John Travolta, Nathalie Emmanuel</p>
+      <p><strong>Estreno:</strong> 24/02/2023 | <strong>Idioma:</strong> Español Latino 🇲🇽</p>
     </div>
 
     <br>
@@ -857,7 +857,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const continueInfo = document.getElementById('continue-info');
   const videoElement = document.querySelector('video');
 
-  const MOVIE_KEY = 'Dragon_Ball_z_El_poder_invensible'; /*Aca siempre con un _ para guardar su progresos etc...*/
+  const MOVIE_KEY = 'Entrenar_duro_2023'; /*Aca siempre con un _ para guardar su progresos etc...*/
   const ultimoTiempo = localStorage.getItem(`ultimoTiempo_${MOVIE_KEY}`) || 0;
 
   // 🔹 Mostrar modal si hay progreso guardado
@@ -1015,11 +1015,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // 🔹 Botón "Agregar a Favoritos"
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
-      titulo: "Dragon Ball Z: El poder invensible",
-      imagen: "https://image.tmdb.org/t/p/w300/qanX5FNg7w7DfjLqwGHZJtiF0Ri.jpg",
-      genero: "anime",
-      archivo: "Dragon Ball Z El poder invensible.html",
+      titulo: "Duro de entrenar",
+      imagen: "https://image.tmdb.org/t/p/w300/lXkS6kSA0W3c0zVr3QrCBseaNgc.jpg",
+      genero: "Genero",
+      archivo: "Duro de entrenar (2023).html",
       tipo: "pelicula",
+      adulto: true,
       timestamp: Date.now()
     };
 
@@ -1124,33 +1125,33 @@ document.addEventListener('DOMContentLoaded', () => {
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
-      <a href="Dragon Ball Super Broly.html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/6JilEC1SON8tWIRHcdJzf4uVBpX.jpg" alt="">
-        <p>Dragon Ball Super: Broly</p>
+      <a href="Uncharted (2022).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/77dlklwA1VJOLCqIhhmkmS39BLH.jpg" alt="">
+        <p>Uncharted: Fuera Del Mapa</p>
       </a>
-      <a href="Dragon Ball Z El regreso del guerrero legendario.html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/iwvMmddNNf6DVLq3CBe8hhpHUgE.jpg" alt="">
-        <p>Dragon Ball Z: El regreso Del guerrero legendario</p>
+      <a href="Beekeeper Sentencia de muerte (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/8hF8krJOG9SGMCwRNfzjsFVRcHE.jpg" alt="">
+        <p>Sentencia de muerte</p>
       </a>
-      <a href="Dragon Ball Z El combate final.html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/gYcZAjYdTUGVf5oyqO2CawwuBla.jpg" alt="">
-        <p>Dragon Ball Z: El combate final</p>
+      <a href="Novocaine (2025).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/6YbTJhN5GJQOlZ1IyRiCyhKSiJE.jpg" alt="">
+        <p>Novocaine: Sin dolor</p>
       </a>
-      <a href="Dragon Ball Z El ataque del dragón (1995).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/7uRu9EA3nie0n2mlVDDLlTI3IzC.jpg" alt="">
-        <p>Dragon Ball Z: El ataque del dragon</p>
+      <a href="La fuente de la eterna juventud (2025).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/nJ9qnZLhmj6wD3NgOe6lKoXJQMx.jpg" alt="">
+        <p>La fuente de la eterna juventud</p>
       </a>
-      <a href="Dragon Ball Z La galaxia corre peligro (1993).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/oAUr61gawC5q4LlxtmfrIwKeGco.jpg" alt="">
-        <p>Dragon Ball Z: La galaxia corre peligro</p>
+      <a href="Godzilla y kong un nuevo imperio (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/rRLqnazAys1CQGNX5BpXN0Gbowy.jpg" alt="">
+        <p>Godzilla y Kong: El nuevo imperio</p>
       </a>
-      <a href="Dragon Ball Z La pelea de bardock vs freezer.html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/mnFEyVcDlSshzl65hEdWoYXtnm3.jpg" alt="">
-        <p>Dragon Ball Z: La pelea de Bardock Vs Freezer</p>
+      <a href="Estragos (2025).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/tbsDLmo2Ej8YFM0HKcOGfNMTlyJ.jpg" alt="">
+        <p>Estragos</p>
       </a>
     </div>
   </div>
-  
+
   <!-- ¡¡¡NO BORRAR ESTE SCRIPT ES DE FAVORITOS Y SI LO BORRAN AFECTARAN EL FUNCIONAMIENTO DE REPRODUCTOR Y FAVORITOS!!! -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/plyr/3.6.7/plyr.min.js">
     document.getElementById('btn-favorito').addEventListener('click', () => {
@@ -1276,9 +1277,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const STORAGE_KEY = 'pos_' + videoSrc;
 
   // DATOS DEL HISTORIAL
-  const historialTitulo = "Dragon Ball Z: El poder invensible";
-  const historialImagen = "https://image.tmdb.org/t/p/w300/qanX5FNg7w7DfjLqwGHZJtiF0Ri.jpg";
-  const historialArchivo = "Dragon Ball Z El poder invensible.html";
+  const historialTitulo = "Duro de entrenar";
+  const historialImagen = "https://image.tmdb.org/t/p/w300/lXkS6kSA0W3c0zVr3QrCBseaNgc.jpg";
+  const historialArchivo = "Duro de entrenar (2023).html";
 
   let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
   let indexHist = historial.findIndex(item => item.titulo === historialTitulo);

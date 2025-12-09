@@ -734,8 +734,8 @@ document.addEventListener('DOMContentLoaded', () => {
       <p class="player-loading-text">Cargando<span class="dots"></span></p>
     </div>
 
-    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/mTI2iRLkgkqPpy1s3l1dMwthjB6.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
-      <source src="https://dl.dropbox.com/scl/fi/k6jc657iads0r9vqq6rx5/Dragon-Ball-Z-El-poder-invensible.mp4?rlkey=i68x0gs8hleuva7pe25q1edey&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
+    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/aQ5nvQGT6mM6TliOM5iSgrKVF4C.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+      <source src="https://dl.dropbox.com/scl/fi/vddnodblow075ik1cixyx/Echo-Valley-2025.mp4?rlkey=0y1b1q9x8vqgibk6de4sswf34&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
   <div id="episodio-actual" style="
@@ -747,9 +747,9 @@ document.addEventListener('DOMContentLoaded', () => {
 "></div>
 
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>1993</span>
-    <i class="fal fa-clock"></i><span>46min</span>
-    <i class="fal fa-thumbs-up"></i><span>81%</span>
+    <i class="fal fa-calendar-alt"></i><span>2025</span> <!--Aca va el año de estreno de pelicula-->
+    <i class="fal fa-clock"></i><span>1h 45min</span> <!--aca va cuanto dura-->
+    <i class="fal fa-thumbs-up"></i><span>65%</span> <!--aca va la calificacion-->
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
@@ -761,17 +761,17 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
   
   <div class="info-pelicula">
-    <h1>Dragon Ball Z: El poder invensible</h1>
-  <span class="genero-badge">Anime • Animacion • Accion • Ciencia Ficcion</span>
+    <h1>Echo Valley</h1>
+  <span class="genero-badge">Suspenso • Drama</span>
   
     <p class="sinopsis">
-      Un desconocido saiyan, Paragus, llega a la Tierra en busca de Vegeta para pedirle que gobierne el nuevo mundo de los saiyan y así reestablecer el antiguo poder de su raza. Trunks, Goku, Piccolo y Gohan acompañan a Vegeta al planeta de los saiyans. Pero el objetivo real de Paragus es que Broly, el súper saiyan legendario, extermine a los últimos saiyans que quedaban en la Tierra.
+      Kate es una madre que trata de reconducir su relación con su problemática hija Claire. La situación se vuelve crítica cuando Claire aparece sin avisar en casa de Kate, histérica y cubierta de la sangre de otra persona. A medida que Kate trata de desvelar la terrible verdad de lo sucedido, descubrirá hasta qué punto puede llegar una madre para tratar de salvar a su hija.
     </p>
 
     <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
-      <p><strong>Director:</strong> Shigeyasu Yamauchi</p>
-      <p><strong>Reparto:</strong> Enrique Mederos, René García, Ricardo Brust</p>
-      <p><strong>Estreno:</strong> 05/03/1993 | <strong>Idioma:</strong> Español Latino 🇲🇽</p>
+      <p><strong>Director:</strong> Michael Pearce</p>
+      <p><strong>Reparto:</strong> Julianne Moore, Sídney Sweeney, Domhnall Gleeson</p>
+      <p><strong>Estreno:</strong> 12/06/2025 | <strong>Idioma:</strong> Español Latino 🇲🇽</p>
     </div>
 
     <br>
@@ -857,7 +857,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const continueInfo = document.getElementById('continue-info');
   const videoElement = document.querySelector('video');
 
-  const MOVIE_KEY = 'Dragon_Ball_z_El_poder_invensible'; /*Aca siempre con un _ para guardar su progresos etc...*/
+  const MOVIE_KEY = 'Echo_vally_2025'; /*Aca siempre con un _ para guardar su progresos etc...*/
   const ultimoTiempo = localStorage.getItem(`ultimoTiempo_${MOVIE_KEY}`) || 0;
 
   // 🔹 Mostrar modal si hay progreso guardado
@@ -1015,10 +1015,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // 🔹 Botón "Agregar a Favoritos"
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
-      titulo: "Dragon Ball Z: El poder invensible",
-      imagen: "https://image.tmdb.org/t/p/w300/qanX5FNg7w7DfjLqwGHZJtiF0Ri.jpg",
-      genero: "anime",
-      archivo: "Dragon Ball Z El poder invensible.html",
+      titulo: "Echo Valley",
+      imagen: "https://image.tmdb.org/t/p/w300/1E4WCgTodyS7zo8pSp1gZlPO0th.jpg",
+      genero: "Drama",
+      archivo: "Echo Valley (2025).html",
       tipo: "pelicula",
       timestamp: Date.now()
     };
@@ -1124,29 +1124,29 @@ document.addEventListener('DOMContentLoaded', () => {
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
-      <a href="Dragon Ball Super Broly.html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/6JilEC1SON8tWIRHcdJzf4uVBpX.jpg" alt="">
-        <p>Dragon Ball Super: Broly</p>
+      <a href="CATO (2021).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/lTCsGvAjqBbqp7T5ziK28SeDfVT.jpg" alt="">
+        <p>CATO</p>
       </a>
-      <a href="Dragon Ball Z El regreso del guerrero legendario.html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/iwvMmddNNf6DVLq3CBe8hhpHUgE.jpg" alt="">
-        <p>Dragon Ball Z: El regreso Del guerrero legendario</p>
+      <a href="Desaparecidos en la noche (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/uyEFqfRezkNrxh9Lg8fj8IcbkHx.jpg" alt="">
+        <p>Desaparecidos en la noche</p>
       </a>
-      <a href="Dragon Ball Z El combate final.html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/gYcZAjYdTUGVf5oyqO2CawwuBla.jpg" alt="">
-        <p>Dragon Ball Z: El combate final</p>
+      <a href="Todo bien (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/mKdRfCpWkcH0wEEg6yO4a8ES4TX.jpg" alt="">
+        <p>¿Todo bien?</p>
       </a>
-      <a href="Dragon Ball Z El ataque del dragón (1995).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/7uRu9EA3nie0n2mlVDDLlTI3IzC.jpg" alt="">
-        <p>Dragon Ball Z: El ataque del dragon</p>
+      <a href="Twisters (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/pjnD08FlMAIXsfOLKQbvmO0f0MD.jpg" alt="">
+        <p>Twisters</p>
       </a>
-      <a href="Dragon Ball Z La galaxia corre peligro (1993).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/oAUr61gawC5q4LlxtmfrIwKeGco.jpg" alt="">
-        <p>Dragon Ball Z: La galaxia corre peligro</p>
+      <a href="Uncharted (2022).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/77dlklwA1VJOLCqIhhmkmS39BLH.jpg" alt="">
+        <p>Uncharted: Fuera Del Mapa</p>
       </a>
-      <a href="Dragon Ball Z La pelea de bardock vs freezer.html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/mnFEyVcDlSshzl65hEdWoYXtnm3.jpg" alt="">
-        <p>Dragon Ball Z: La pelea de Bardock Vs Freezer</p>
+      <a href="Extraterritorial (2025).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/7tWkxxiqraVx1IzYd4DHv6FIvhS.jpg" alt="">
+        <p>Extraterritorial</p>
       </a>
     </div>
   </div>
@@ -1276,9 +1276,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const STORAGE_KEY = 'pos_' + videoSrc;
 
   // DATOS DEL HISTORIAL
-  const historialTitulo = "Dragon Ball Z: El poder invensible";
-  const historialImagen = "https://image.tmdb.org/t/p/w300/qanX5FNg7w7DfjLqwGHZJtiF0Ri.jpg";
-  const historialArchivo = "Dragon Ball Z El poder invensible.html";
+  const historialTitulo = "Echo Valley";
+  const historialImagen = "https://image.tmdb.org/t/p/w300/1E4WCgTodyS7zo8pSp1gZlPO0th.jpg";
+  const historialArchivo = "Echo Valley (2025).html";
 
   let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
   let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
