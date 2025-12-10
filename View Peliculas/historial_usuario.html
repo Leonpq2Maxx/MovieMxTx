@@ -1006,19 +1006,44 @@ cancelSelectBtn.onclick = () => {
 };
 
 
-multiDeleteBtn.onclick=()=>{
-  historial=historial.filter((_,i)=>!seleccionados.includes(i));
-  localStorage.setItem("historial_usuarios",JSON.stringify(historial));
+multiDeleteBtn.onclick = () => {
+  historial.forEach((item, index) => {
+    if (seleccionados.includes(index)) {
+      try {
+        const abs = new URL(item.archivo, location.href).pathname;
+        localStorage.removeItem("progreso_" + abs);
+      } catch(e){}
+    }
+  });
+
+  historial = historial.filter((_, i) => !seleccionados.includes(i));
+  localStorage.setItem("historial_usuarios", JSON.stringify(historial));
   cancelSelectBtn.onclick();
   renderHistorial();
 };
 
+
 function eliminarItem(i){
-  indexAEliminar=i;
-  deleteImg.src=historial[i].imagen;
-  deleteTitle.innerText=historial[i].titulo;
-  deleteModal.style.display="flex";
+  indexAEliminar = i;
+
+  const item = historial[i];
+
+  // ✅ BORRAR PROGRESO
+  try {
+    const absolutePath = new URL(item.archivo, location.href).pathname;
+    const progressKey = "progreso_" + absolutePath;
+    localStorage.removeItem(progressKey);
+    console.log("Progreso borrado:", progressKey);
+  } catch (e) {
+    console.error("Error borrando progreso:", e);
+  }
+
+  // 🔥 Abrir modal normal como siempre
+  document.getElementById("deleteImg").src = item.imagen;
+  document.getElementById("deleteTitle").innerText = item.titulo;
+  deleteModal.style.display = "flex";
 }
+
 
 cancelDelete.onclick=()=>deleteModal.style.display="none";
 
