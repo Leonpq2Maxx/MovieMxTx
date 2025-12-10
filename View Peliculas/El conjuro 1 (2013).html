@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -735,8 +734,8 @@ document.addEventListener('DOMContentLoaded', () => {
       <p class="player-loading-text">Cargando<span class="dots"></span></p>
     </div>
 
-    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/4IrZC1uuaDpGScO4TDyEe4E4bq2.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
-      <source src="https://dl.dropbox.com/scl/fi/b1czcia7ews3wvynxmiso/The.boss.baby.2017.1080p-dual-lat.mp4?rlkey=x7cvmwxi7swrozabuzs3nm51y&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
+    <video class="vid1 js-player" controls loading="lazy"poster="https://image.tmdb.org/t/p/w780/mXndmCbpvlqnD6po0EMfxEZcUSn.jpg" preload="none"> <!--Aca esta la pagina para buscar la imagenes u infomacion "https://www.themoviedb.org/"-->
+      <source src="https://dl.dropbox.com/scl/fi/1z32m2t6koera1vo52cbd/The.Conjuring.2013.1080p-dual-lat.mp4?rlkey=5846lca5ja5sar0tr2b50hb5s&st=" type="video/mp4"> <!--Aca va el link de la pelicula mp4, los MKV no funcionan cuando se trata de subir el html al appcreator ej.-->
     </video>
   </div>
   <div id="episodio-actual" style="
@@ -748,9 +747,9 @@ document.addEventListener('DOMContentLoaded', () => {
 "></div>
 
   <div class="info">
-    <i class="fal fa-calendar-alt"></i><span>2017</span>
-    <i class="fal fa-clock"></i><span>1h 37min</span>
-    <i class="fal fa-thumbs-up"></i><span>68%</span>
+    <i class="fal fa-calendar-alt"></i><span>2013</span>
+    <i class="fal fa-clock"></i><span>1h 52min</span>
+    <i class="fal fa-thumbs-up"></i><span>75%</span>
     <div class="hd-tag">
       <svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <rect width="24" height="24" rx="4" fill="white" />
@@ -762,17 +761,17 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
   
   <div class="info-pelicula">
-    <h1>El bebé jefazo</h1>
-  <span class="genero-badge">Animación • Comedia • Familia • Aventura</span>
+    <h1>El Conjuro: Expediente Warren</h1>
+  <span class="genero-badge">Terror</span>
   
     <p class="sinopsis">
-      La llegada de un hermanito trastoca por completo la idílica vida del pequeño Tim, hasta entonces hijo único de 7 años y el ojito derecho de sus padres. Su nuevo hermano es un peculiar bebé, que viste traje y corbata y lleva maletín. Tim comienza a sospechar de él, hasta que descubre que puede hablar.
+      Basada en una historia real documentada por los reputados demonólogos Ed y Lorraine Warren. Narra los encuentros sobrenaturales que vivió la familia Perron en su casa de Rhode Island a principios de los 70. El matrimonio Warren, investigadores de renombre en el mundo de los fenómenos paranormales, acudieron a la llamada de esta familia aterrorizada por la presencia en su granja de un ser maligno.
     </p>
 
     <div class="ficha-tecnica" style="text-align:center;margin-top:20px;font-size:0.9rem;color:#ccc;">
-      <p><strong>Director:</strong> </p>
-      <p><strong>Reparto:</strong> </p>
-      <p><strong>Estreno:</strong> 00/00/0000 | <strong>Idioma:</strong> Español Latino 🇲🇽</p>
+      <p><strong>Director:</strong> James Wan</p>
+      <p><strong>Reparto:</strong> Vera Farmiga, Patrick Wilson, Lili Taylor</p>
+      <p><strong>Estreno:</strong> 05/09/2013 | <strong>Idioma:</strong> Español Latino 🇲🇽</p>
     </div>
 
     <br>
@@ -858,7 +857,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const continueInfo = document.getElementById('continue-info');
   const videoElement = document.querySelector('video');
 
-  const MOVIE_KEY = 'el_bebe_es_un_jefaso_2017'; /*Aca siempre con un _ para guardar su progresos etc...*/
+  const MOVIE_KEY = 'El_conjuro_1_2013'; /*Aca siempre con un _ para guardar su progresos etc...*/
   const ultimoTiempo = localStorage.getItem(`ultimoTiempo_${MOVIE_KEY}`) || 0;
 
   // 🔹 Mostrar modal si hay progreso guardado
@@ -1016,13 +1015,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // 🔹 Botón "Agregar a Favoritos"
   document.getElementById('btn-favorito').addEventListener('click', () => {
     const nuevaSerie = {
-      titulo: "El bebé jefazo",
-      imagen: "https://image.tmdb.org/t/p/w300/dPiXM1aFbJ9XJGPyf5ZULmEjzkR.jpg",
+      titulo: "El Conjuro: Expediente Warren",
+      imagen: "https://image.tmdb.org/t/p/w300/10ir0eISr3p1MF1mjZwGTx7u4vv.jpg",
       genero: "Drama",
-      archivo: "El bebé jefazo (2017).html",
+      archivo: "El conjuro 1 (2013).html",
       tipo: "pelicula",
       timestamp: Date.now()
-    };
+    }
 
     const btn = document.getElementById('btn-favorito');
     btn.classList.add('animado');
@@ -1125,29 +1124,29 @@ document.addEventListener('DOMContentLoaded', () => {
     <h4>Podría interesarte:</h4>
     <br/>
     <div class="series-grid">
-      <a href="Un Jefe En Pañales 2 Negocios De Familia.html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/kv2Qk9MKFFQo4WQPaYta599HkJP.jpg" alt="">
-        <p>Un jefe en pañales 2</p>
+      <a href="El Conjuro 4  El ultimo rito (2025).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/10ir0eISr3p1MF1mjZwGTx7u4vv.jpg" alt="">
+        <p>El conjuro: Experiente Warren</p>
       </a>
-      <a href="Sonic 3 La Peliculas (2025).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/j1O319PWd4OdrpqPY4uzFNh2JC.jpg" alt="">
-        <p>Sonic 3: La Pelicula</p>
+      <a href="El conjuro 2 (2016).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/x4jUJ0fF60SSOeUUTkaRtmnDvwG.jpg" alt="">
+        <p>El conjuro 2: El caso enfield</p>
       </a>
-      <a href="Spider-Man Cruzando el Multiverso (2023).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/37WcNMgNOMxdhT87MFl7tq7FM1.jpg" alt="">
-        <p>Spider-Man: Cruzando el Multiverso</p>
+      <a href="El conjuro 3 (2021) .html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/79QjdRiT9zTLkrOq9FltoIxClma.jpg" alt="">
+        <p>El conjuro 3: El diablo me obligo hacerlo</p>
       </a>
-      <a href="Super Mario Bros La Película (2023).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/qNBAXBIQlnOThrVvA6mA2B5ggV6.jpg" alt="">
-        <p>Super Mario Bros: La película</p>
+      <a href="Annabelle 2 la creacion 2 (2017).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/x0pekWNy7GS37bm30zuxWNLPXj8.jpg" alt="">
+        <p>Annabelle 2: La creacion</p>
       </a>
-      <a href="Leo (2023).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/pD6sL4vntUOXHmuvJPPZAgvyfd9.jpg" alt="">
-        <p>Leo</p>
+      <a href="Baghead contacto con la muerte (2024).html" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/5ssaCHmqvTZDVZtcNhNZTzfb7Nj.jpg" alt="">
+        <p>Baghead: contacto con la muerte</p>
       </a>
-      <a href="Kung Fu panda 4 (2024).html" class="serie">
-        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/xHeK1mttldtCEyWbPZbo9bSKUqd.jpg" alt="">
-        <p>Kung fu panda 4</p>
+      <a href="" class="serie">
+        <img loading="lazy" src="https://image.tmdb.org/t/p/w300/za4jDcPQ5IV4p27UGcC5uEgsNGG.jpg" alt="">
+        <p>Los extraños: Capitulo uno</p>
       </a>
     </div>
   </div>
@@ -1277,9 +1276,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const STORAGE_KEY = 'pos_' + videoSrc;
 
   // DATOS DEL HISTORIAL
-  const historialTitulo = "El bebé jefazo";
-  const historialImagen = "https://image.tmdb.org/t/p/w300/dPiXM1aFbJ9XJGPyf5ZULmEjzkR.jpg";
-  const historialArchivo = "El bebé jefazo (2017).html";
+  const historialTitulo = "El Conjuro: Expediente Warren";
+  const historialImagen = "https://image.tmdb.org/t/p/w300/10ir0eISr3p1MF1mjZwGTx7u4vv.jpg";
+  const historialArchivo = "El conjuro 1 (2013).html";
 
   let historial = JSON.parse(localStorage.getItem('historial_usuarios') || '[]');
   let indexHist = historial.findIndex(item => item.titulo === historialTitulo);
